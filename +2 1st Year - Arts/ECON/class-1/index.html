@@ -2643,6 +2643,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
 
         sessionData.rollNumber = rollNumber;
         sessionData.loginTime = new Date();
+        docRef.update({ lastLogin: new Date().toISOString() }).catch(e => console.log(e));
 
         setTimeout(() => {
             welcomeOverlay.remove();
@@ -2675,8 +2676,9 @@ function startActivityTracking() {
         if (sessionData.rollNumber && sessionData.loginTime) {
             const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
             db.collection('students').doc(sessionData.rollNumber).update({
-                totalDuration: firebase.firestore.FieldValue.increment(duration),
-                lastActivity: new Date().toISOString()
+               totalDuration: firebase.firestore.FieldValue.increment(duration),
+lastActivity: new Date().toISOString(),
+lastLogout: new Date().toISOString()
             }).catch(e => console.log('Logout error:', e));
         }
     });
