@@ -1,14 +1,12 @@
 {
-  "name": "E-Vidya Academy",
-  "short_name": "ଇ-ବିଦ୍ୟା",
-  "description": "E-Vidya Academy - Digital Study Materials",
-  "start_url": "./index.html",
+  "name": "+2 Com.-I",
+  "short_name": "E-Vidya +2",
+  "description": "Supplementary Study Material for +2 First Year Arts by E-Vidya Academy",
+  "start_url": "./",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#667eea",
   "theme_color": "#667eea",
-  "lang": "en",
-  "scope": "./",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "./icon-192.png",
@@ -24,16 +22,5 @@
     }
   ],
   "categories": ["education"],
-  "shortcuts": [
-    {
-      "name": "School",
-      "url": "./index.html",
-      "description": "School Education"
-    },
-    {
-      "name": "LLB",
-      "url": "./index.html",
-      "description": "LLB Subjects"
-    }
-  ]
+  "lang": "or"
 }
