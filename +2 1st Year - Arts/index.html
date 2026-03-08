@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="or">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Vidya Academy</title>
+    <title>Odisha e-Guru — +2 IInd Year Arts</title>
+
+    <!-- PWA -->
     <link rel="manifest" href="./manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="E-Vidya">
+    <meta name="apple-mobile-web-app-title" content="e-Guru +2">
+    <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="./icon-192.png">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 10px;
+            padding: 12px;
             overflow-x: hidden;
         }
 
@@ -25,143 +34,270 @@
             max-width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            padding: 20px 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 16px 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* ── Disclaimer ── */
-        .disclaimer-bar {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 15px;
+        h1 {
             text-align: center;
-        }
-        .disclaimer-bar p {
-            color: #856404;
-            font-size: 0.7em;
-            font-weight: 600;
-            margin: 0;
-        }
-        .disclaimer-bar a {
-            color: #8B0000;
-            font-weight: 700;
-            text-decoration: underline;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+            font-weight: 900;
+            line-height: 1.4;
         }
 
-        /* ── Header ── */
-        .logo-wrap { text-align: center; margin-bottom: 8px; }
-        .logo-wrap img { width: 220px; max-width: 80%; height: auto; }
-        .subtitle { text-align: center; color: #666; margin-bottom: 8px; font-size: 0.85em; font-weight: 600; }
+        @media (min-width: 600px) {
+            h1 { font-size: 1.1em; }
+        }
+        @media (min-width: 900px) {
+            h1 { font-size: 1.4em; }
+        }
 
-        /* ── Back Button ── */
-        .btn-back {
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+
+        .search-box {
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .search-box input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .clone-container {
+            margin-bottom: 20px;
+            margin-top: 20px;
             display: none;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 25px;
-            padding: 10px 20px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .clone-container.active { display: block; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 20px rgba(245, 158, 11, 0.6), 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            50% { box-shadow: 0 8px 30px rgba(245, 158, 11, 0.8), 0 0 0 15px rgba(245, 158, 11, 0); }
+        }
+
+        .clone-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: center;
+            cursor: pointer;
             text-decoration: none;
             color: white;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-            transition: transform 0.2s;
-            cursor: pointer;
-            border: none;
-            margin: 0 auto 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: pulse 2s infinite, bounce 1.5s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+            border: 3px solid rgba(255, 255, 255, 0.6);
         }
-        .btn-back.visible { display: inline-flex; }
-        .btn-back:active { transform: scale(0.95); }
-        .back-wrap { text-align: center; }
 
+        .clone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
 
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
 
-        /* ── Grid ── */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .clone-card::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 14px;
+            padding: 3px;
+            background: linear-gradient(45deg, #f59e0b, #eab308, #f59e0b, #eab308);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotateBorder 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBorder {
+            to { transform: rotate(360deg); }
+        }
+
+        .clone-card:active { transform: scale(0.98); }
+
+        .clone-card .click-feedback {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .clone-card .click-feedback::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .clone-card .click-feedback::after {
+            content: '';
+            width: 30px;
+            height: 60px;
+            border: solid #10b981;
+            border-width: 0 8px 8px 0;
+            transform: rotate(45deg);
+            display: block;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .clone-card.clicked .click-feedback {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .clone-instruction {
+            font-size: 0.75em;
+            margin-bottom: 8px;
+            font-weight: 600;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .clone-number {
+            font-size: 0.95em;
+            font-weight: 700;
+            margin-bottom: 6px;
+            opacity: 0.95;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .clone-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .clone-prompt {
+            font-size: 0.8em;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-top: 6px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 16px;
         }
 
-        /* ── Wide banner buttons ── */
-        .btn-wide {
-            grid-column: 1 / -1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-size: 1.05em;
-            font-weight: 900;
-            letter-spacing: 0.4px;
-            transition: transform 0.2s;
-        }
-        .btn-wide:active { transform: scale(0.98); }
-        .btn-wide.red {
-            background: linear-gradient(135deg, #d32f2f 0%, #8b0000 100%);
-            color: #fff;
-            box-shadow: 0 6px 20px rgba(211,47,47,0.4);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
-        .btn-wide.gold {
-            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
-            color: #1a1a2e;
-            box-shadow: 0 6px 20px rgba(247,151,30,0.4);
-        }
-
-        /* ── Level Cards ── */
-        .level-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .subject-card {
             border-radius: 16px;
-            padding: 16px 12px;
+            padding: 18px 12px;
             text-align: center;
+            transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             color: white;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100px;
+            min-height: 130px;
             position: relative;
-            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
-            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.4);
             overflow: hidden;
-            transition: all 0.3s;
         }
-        .level-card::before {
+
+        .subject-card[data-subject="POLSCI"] { background: linear-gradient(135deg, #c31432 0%, #240b36 100%); }
+        .subject-card[data-subject="HIST"]   { background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); }
+        .subject-card[data-subject="SOC"]    { background: linear-gradient(135deg, #005c53 0%, #042940 100%); }
+        .subject-card[data-subject="ECON"]   { background: linear-gradient(135deg, #d4a574 0%, #8b6914 100%); }
+        .subject-card[data-subject="LOGIC"]  { background: linear-gradient(135deg, #4a148c 0%, #311b92 100%); }
+        .subject-card[data-subject="EDU"]    { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
+        .subject-card[data-subject="PSY"]    { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+        .subject-card[data-subject="ANTH"]   { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+        .subject-card[data-subject="HOMESC"] { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+
+        .subject-card::before {
             content: '';
             position: absolute;
             top: -50%; right: -10%;
             width: 150px; height: 150px;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .level-card:active { transform: scale(0.97); }
-        .level-card.school   { background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); }
-        .level-card.plus2-arts { background: linear-gradient(135deg, #4E65FF 0%, #92EFFD 100%); }
-        .level-card.plus2-com  { background: linear-gradient(135deg, #11998E 0%, #38EF7D 100%); }
-        .level-card.plus3-arts { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-        .level-card.plus3-com  { background: linear-gradient(135deg, #FD6585 0%, #0D25B9 100%); }
-        .level-card.plus2      { background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%); }
-        .level-card.plus3      { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); }
-        .level-card.special    { background: linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #4c1d95 100%) !important; min-height: 100px; border: 3px solid rgba(255,255,255,0.5); }
 
-        .level-icon   { font-size: 2.1em; margin-bottom: 7px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-        .level-name   { font-size: 1.2em; font-weight: 900; letter-spacing: 0.5px; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .level-sub    { font-size: 0.78em; opacity: 0.95; font-weight: 600; line-height: 1.3; }
+        .subject-card:active { transform: scale(0.96); }
 
-        /* ── Class / Semester Cards ── */
-        .class-card {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        .subject-name      { font-size: 1.2em; font-weight: 900; letter-spacing: 0.3px; margin-bottom: 8px; line-height: 1.2; }
+        .subject-full-name { font-size: 1.2em; opacity: 0.95; font-weight: 700; line-height: 1.3; margin-top: 4px; }
+
+        .unit-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
             border-radius: 14px;
-            padding: 14px 12px;
+            padding: 20px 14px;
             text-align: center;
+            transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             color: white;
@@ -169,787 +305,703 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 90px;
-            box-shadow: 0 6px 20px rgba(30,58,138,0.3);
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s;
+            min-height: 140px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.4);
         }
-        .class-card:active { transform: scale(0.97); }
-        .class-label  { font-size: 0.78em; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .class-title  { font-size: 1.05em; font-weight: 800; color: white; line-height: 1.3; }
 
-        /* Honour card variant */
-        .honour-card { background: linear-gradient(135deg, #3730a3 0%, #6366f1 100%); }
-        .honour-badge { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 4px 9px; margin-top: 6px; font-size: 0.68em; font-weight: 800; color: #e0e7ff; }
+        .unit-card:active { transform: scale(0.96); }
 
+        .unit-number {
+            font-size: 0.75em;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 14px;
+            border-radius: 20px;
+        }
 
+        .unit-title       { font-size: 1.10em; font-weight: 800; letter-spacing: 0.2px; line-height: 1.3; }
+        .unit-class-count { font-size: 0.60em; margin-top: 8px; font-weight: 700; background: rgba(255, 255, 255, 0.25); padding: 4px 10px; border-radius: 13px; }
 
-        /* ── Modal Overlay ── */
-        .modal-overlay {
+        .class-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 110px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .class-card:active  { transform: scale(0.96); }
+        .class-card.locked  { background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%); cursor: default; box-shadow: 0 4px 12px rgba(156, 163, 175, 0.3); }
+        .class-card.selected { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4); }
+
+        .class-number { font-size: 0.85em; font-weight: 700; margin-bottom: 6px; opacity: 0.95; letter-spacing: 0.8px; text-transform: uppercase; }
+        .class-title  { font-size: 1.1em; font-weight: 700; letter-spacing: 0.2px; line-height: 1.25; padding: 0 4px; }
+        .lock-icon    { font-size: 1.3em; margin-bottom: 4px; }
+
+        .scheduled-message { font-size: 0.6em; margin-top: 6px; opacity: 0.95; line-height: 1.2; font-weight: 500; }
+        .countdown { font-size: 0.65em; margin-top: 5px; font-weight: 700; background: rgba(255, 255, 255, 0.25); padding: 3px 8px; border-radius: 5px; display: inline-block; letter-spacing: 0.3px; }
+
+        .no-results { text-align: center; padding: 40px 20px; color: #9ca3af; font-size: 0.95em; display: none; }
+        .checkmark  { font-size: 1em; margin-left: 6px; }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 16px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-button:active { transform: scale(0.95); }
+        .back-icon { font-size: 20px; }
+        .button-container { text-align: center; margin-bottom: 8px; }
+
+        /* ── PWA Install Modal ── */
+        .pwa-overlay {
             display: none;
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-        .modal-overlay.active { display: flex; }
-        .modal-box {
-            background: white;
-            border-radius: 20px;
-            padding: 28px 22px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease;
-        }
-        @keyframes slideIn { from { transform: translateY(-40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        .modal-title { color: #667eea; font-size: 1.35em; font-weight: 900; margin-bottom: 4px; text-align: center; }
-        .modal-detail { color: #888; font-size: 0.88em; text-align: center; margin-bottom: 20px; }
-
-        .modal-btns { display: flex; flex-direction: column; gap: 12px; }
-        .mbtn {
-            padding: 15px 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-        .mbtn:active { transform: scale(0.97); }
-        .mbtn.classroom { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.35); }
-        .mbtn.apply     { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; box-shadow: 0 4px 12px rgba(245,87,108,0.35); }
-        .mbtn.enquiry   { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; box-shadow: 0 4px 12px rgba(17,153,142,0.35); }
-        .mbtn.close-btn { background: #f3f4f6; color: #555; font-size: 14px; }
-
-        /* Application Form (inside modal) */
-        .app-form { display: none; }
-        .app-form.active { display: block; }
-        .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; color: #333; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
-        .form-group input {
-            width: 100%; padding: 12px 15px;
-            border: 2px solid #e5e7eb; border-radius: 10px;
-            font-size: 15px; outline: none; transition: all 0.3s;
-        }
-        .form-group input:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
-        .form-actions { display: flex; gap: 10px; margin-top: 18px; }
-        .btn-submit {
-            flex: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; border: none; padding: 13px;
-            border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer;
-        }
-        .btn-back-form { flex: 0.5; background: #f3f4f6; color: #666; border: none; padding: 13px; border-radius: 10px; font-weight: 600; cursor: pointer; }
-
-        /* ── Info Modal ── */
-        .info-overlay {
-            display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75); z-index: 3000;
-            justify-content: center; align-items: center; padding: 16px;
-        }
-        .info-overlay.active { display: flex; }
-        .info-box {
-            background: white; border-radius: 18px;
-            width: 100%; max-width: 480px; max-height: 82vh;
-            display: flex; flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-            overflow: hidden;
-        }
-        @keyframes popIn { from { transform: scale(0.88); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .info-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 16px 20px;
-            display: flex; align-items: center; justify-content: space-between;
-            flex-shrink: 0;
-        }
-        .info-header h2 { color: white; font-size: 1em; font-weight: 900; margin: 0; line-height: 1.3; }
-        .info-close {
-            background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4);
-            color: white; width: 34px; height: 34px; border-radius: 50%;
-            font-size: 1em; font-weight: 900; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .info-close:active { transform: scale(0.9); }
-        .info-body {
-            padding: 20px; overflow-y: auto;
-            font-size: 0.82em; line-height: 1.75; color: #2d3748; text-align: justify;
-        }
-        .info-body h3 { color: #667eea; font-size: 0.95em; font-weight: 900; margin: 16px 0 6px; border-left: 3px solid #667eea; padding-left: 8px; }
-        .info-body h3:first-child { margin-top: 0; }
-        .info-body .odia { color: #4a5568; background: #f7f8ff; border-radius: 8px; padding: 8px 10px; border-left: 3px solid #764ba2; margin-bottom: 8px; }
-        .info-body .eng { color: #2d3748; margin-bottom: 6px; }
-        .info-body .legal { background: #fff5f5; border: 2px solid #fc8181; border-radius: 10px; padding: 12px; margin-top: 14px; }
-        .info-body .legal p { color: #c53030; font-weight: 700; margin: 0; }
-
-        /* ── PWA Install Modal ── */
-        .pwa-overlay {
-            display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75); z-index: 9000;
-            justify-content: center; align-items: center; padding: 20px;
-        }
         .pwa-overlay.active { display: flex; }
+
         .pwa-box {
-            background: white; border-radius: 24px; padding: 32px 24px;
-            max-width: 340px; width: 100%; text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
-            border: 3px solid rgba(102,126,234,0.3);
+            background: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 340px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid rgba(102, 126, 234, 0.3);
         }
-        .pwa-icon  { font-size: 3em; margin-bottom: 10px; }
-        .pwa-title { color: #667eea; font-size: 1.4em; font-weight: 900; margin-bottom: 8px; }
-        .pwa-sub   { color: #764ba2; font-size: 0.85em; font-weight: 700; margin-bottom: 18px; line-height: 1.5; }
+
+        @keyframes popIn {
+            from { transform: scale(0.88); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+
+        .pwa-icon   { font-size: 3em; margin-bottom: 10px; }
+        .pwa-title  { color: #667eea; font-size: 1.4em; font-weight: 900; margin-bottom: 8px; }
+        .pwa-sub    { color: #764ba2; font-size: 0.85em; font-weight: 700; margin-bottom: 18px; line-height: 1.5; }
+
         .pwa-install {
             display: block; width: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; border: none; padding: 15px; border-radius: 14px;
-            font-size: 1em; font-weight: 800; cursor: pointer; margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.5);
+            color: white; border: none; padding: 15px;
+            border-radius: 14px; font-size: 1em; font-weight: 800;
+            cursor: pointer; margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
         }
+
         .pwa-dismiss { background: none; border: none; color: #aaa; font-size: 0.85em; cursor: pointer; padding: 8px; text-decoration: underline; }
 
-        /* ── PWA floating button ── */
+        /* ── PWA Floating Button ── */
         #pwaBtn {
-            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: none;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; border: none; padding: 14px 28px; border-radius: 25px;
-            font-size: 15px; font-weight: 700; cursor: pointer;
-            box-shadow: 0 6px 20px rgba(102,126,234,0.5); z-index: 9999; white-space: nowrap;
+            color: white; border: none; padding: 14px 28px;
+            border-radius: 25px; font-size: 15px; font-weight: 700;
+            cursor: pointer; box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            z-index: 9999; white-space: nowrap;
         }
 
-        /* ── Footer ── */
-        footer {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: white; padding: 28px 15px 15px;
-            margin-top: 40px; border-radius: 20px;
-        }
-        footer h3 { color: #fff; font-size: 1.1em; margin-bottom: 6px; text-align: center; }
-        footer p  { color: #cbd5e0; font-size: 0.82em; text-align: center; line-height: 1.6; margin-bottom: 12px; }
-        .footer-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px; margin: 12px 0;
-        }
-        .footer-links a:last-child:nth-child(odd) { grid-column: 1 / -1; }
-        .footer-links a {
-            display: block;
-            background: rgba(102,126,234,0.2);
-            padding: 9px 6px; border-radius: 8px;
-            text-decoration: none; color: #90cdf4;
-            font-weight: 600; text-align: center; font-size: 0.78em;
-            border: 1px solid rgba(102,126,234,0.3);
-        }
-        .footer-copy { text-align: center; color: #a0aec0; font-size: 0.73em; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); }
-
-        /* ── Responsive ── */
         @media (min-width: 600px) {
-            .container { padding: 30px 25px; max-width: 700px; margin: 0 auto; }
-            .grid { gap: 15px; }
-            .level-card { min-height: 120px; }
+            .container { padding: 28px 22px; max-width: 700px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .subject-card { min-height: 160px; padding: 28px 20px; }
+            .unit-card    { min-height: 160px; padding: 24px 18px; }
+            .class-card   { min-height: 130px; padding: 20px 16px; }
         }
+
         @media (min-width: 900px) {
-            .container { max-width: 1000px; padding: 40px; }
-            .grid { gap: 18px; }
-            .level-card:hover   { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(102,126,234,0.5); }
-            .class-card:hover   { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-            .mbtn.classroom:hover, .mbtn.apply:hover, .mbtn.enquiry:hover { transform: translateY(-2px); }
+            .container    { max-width: 1000px; padding: 40px; }
+            .grid         { gap: 18px; }
+            .subject-card { min-height: 180px; }
+            .subject-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
+            .unit-card    { min-height: 180px; padding: 28px 20px; }
+            .unit-card:hover    { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5); }
+            .class-card:hover   { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4); }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Disclaimer bar -->
-    <div class="disclaimer-bar">
-        <p>
-            <strong style="color:#8B0000;">⚠️ Private service • Not affiliated with any Board, University or Government •</strong>
-            <a href="#" onclick="openInfo('disclaimer'); return false;">Full Disclaimer</a>
-        </p>
-    </div>
-
-    <!-- Logo -->
-    <div class="logo-wrap">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png" alt="E-Vidya Academy">
-    </div>
-    <p class="subtitle">Empowering Parents to Teach Their Children</p>
-
-    <!-- Back button -->
-    <div class="back-wrap">
-        <button class="btn-back" id="backBtn">← <span id="backLabel">ଏଠାରେ ପଛକୁ ଫେରନ୍ତୁ</span></button>
-    </div>
-
-    <!-- Main grid -->
-    <div class="grid" id="mainGrid"></div>
-
-
-</div><!-- /container -->
-
-<!-- ── Subject / Class Modal ── -->
-<div class="modal-overlay" id="classModal">
-    <div class="modal-box">
-        <div id="modalMainView">
-            <div class="modal-title" id="modalTitle"></div>
-            <div class="modal-detail" id="modalDetail"></div>
-            <div class="modal-btns">
-                <button class="mbtn classroom" onclick="goToClassroom()">
-                    📖 ଏହି ଶ୍ରେଣୀ ପାଇଁ ଉଦ୍ଦିଷ୍ଟ ସ୍ଵତନ୍ତ୍ର ଆପ୍ କୁ ଏଠାରେ ଇନ୍ସଟଲ୍ କରନ୍ତୁ । 
-                </button>
-                <button class="mbtn apply" onclick="showApplyForm()">
-                    🏆 ଆବେଦନ କରିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ ।
-                </button>
-                <button class="mbtn enquiry" onclick="goToEnquiry()">
-                    💬 ଅଧିକ ଜାଣିବାକୁ ଚାହୁଁଛନ୍ତି କି? ଅନୁସନ୍ଧାନ ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ ।
-                </button>
-                <button class="mbtn close-btn" onclick="closeModal()">
-                    ବନ୍ଦ କରିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ ।
-                </button>
-            </div>
-        </div>
-        <div class="app-form" id="applyForm">
-            <form onsubmit="submitApplication(event)">
-                <div class="form-group">
-                    <label>ଆପଣଙ୍କ ନାମ *</label>
-                    <input type="text" id="appName" required placeholder="ନାମ ଲେଖନ୍ତୁ">
-                </div>
-                <div class="form-group">
-                    <label>ଯୋଗାଯୋଗ ନମ୍ବର *</label>
-                    <input type="tel" id="appPhone" required pattern="[0-9]{10}" placeholder="10 ଅଙ୍କ ନମ୍ବର">
-                </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-submit">ପଠାନ୍ତୁ</button>
-                    <button type="button" class="btn-back-form" onclick="hideApplyForm()">ପଛକୁ</button>
-                </div>
-            </form>
+    <!-- PWA Install Modal -->
+    <div class="pwa-overlay" id="pwaModal">
+        <div class="pwa-box">
+            <div class="pwa-icon">📲</div>
+            <h2 class="pwa-title">Install e-Guru App</h2>
+            <p class="pwa-sub">ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।<br>Quickly access all your classes offline!</p>
+            <button class="pwa-install" onclick="doInstall()">⬇️ Install Now — ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ</button>
+            <button class="pwa-dismiss" onclick="dismissPwa()">Not Now — ପରେ କରିବି</button>
         </div>
     </div>
-</div>
 
-<!-- ── Info Modal ── -->
-<div class="info-overlay" id="infoModal" onclick="handleInfoClick(event)">
-    <div class="info-box" id="infoBox">
-        <div class="info-header">
-            <h2 id="infoTitle"></h2>
-            <button class="info-close" onclick="closeInfo()">✕</button>
+    <!-- PWA Floating Install Button -->
+    <button id="pwaBtn" onclick="doInstall()">⬇️ Install App — ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ</button>
+
+    <div class="container">
+
+        <div class="clone-container" id="cloneContainer">
+            <a href="#" class="clone-card" id="cloneCard">
+                <div class="clone-instruction">👆 Click to Enter</div>
+                <div class="clone-number">Class 1</div>
+                <div class="clone-title">Introduction</div>
+                <div class="clone-prompt">Tap here to open classroom →</div>
+            </a>
         </div>
-        <div class="info-body" id="infoBody"></div>
+
+        <h1>📚 Supplementary Material 📚<br>For +2 IInd Year Arts Subjects<br><br>🌹Developed by Odisha e-Guru🌹<br>(A Private Educational Initiative —<br>Offering Online Academic Support)</h1>
+
+        <div class="button-container">
+            <button class="back-button" id="backButton" style="display: none;">
+                <span class="back-icon">←</span>
+                <span id="backButtonText">Back</span>
+            </button>
+        </div>
+
+        <p class="subtitle" id="subtitle">Select a subject to begin</p>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search for a class, unit, or subject..."
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="grid" id="mainGrid"></div>
+
+        <div class="no-results" id="noResults">
+            No results found matching your search.
+        </div>
     </div>
-</div>
 
-<!-- ── PWA Install Modal ── -->
-<div class="pwa-overlay" id="pwaModal">
-    <div class="pwa-box">
-        <div class="pwa-icon">📲</div>
-        <h2 class="pwa-title">Install E-Vidya App</h2>
-        <p class="pwa-sub">ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।</p>
-        <button class="pwa-install" onclick="doInstall()">⬇️ Install Now — ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।</button>
-        <button class="pwa-dismiss" onclick="dismissPwa()">Not Now — ପରେ କରିବି</button>
-    </div>
-</div>
-
-<!-- PWA floating button -->
-<button id="pwaBtn" onclick="doInstall()">⬇️ Install App — ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।</button>
-
-<!-- Footer -->
-<footer>
-    <h3>🌹 E-Vidya Academy 🌹</h3>
-    <p>Private Online Parent Coaching Service<br><strong style="color:#fc8181;">NOT affiliated with Government</strong></p>
-    <div class="footer-links">
-        <a href="#" onclick="openInfo('contact'); return false;">📧 Contact Us</a>
-        <a href="#" onclick="openInfo('about'); return false;">ℹ️ About Us</a>
-        <a href="#" onclick="openInfo('terms'); return false;">📜 Terms &amp; Conditions</a>
-        <a href="#" onclick="openInfo('privacy'); return false;">🔒 Privacy Policy</a>
-        <a href="#" onclick="openInfo('refund'); return false;">💰 Refund Policy</a>
-        <a href="#" onclick="openInfo('disclaimer'); return false;">⚠️ Full Disclaimer</a>
-    </div>
-    <div class="footer-copy">© 2026 E-Vidya Academy. All Rights Reserved.<br>Private educational business under Indian law.</div>
-</footer>
-
-<script>
-/* ═══════════════════════════════════════════════════════════════
+    <script>
+/* ═══════════════════════════════════════
    DATA
-═══════════════════════════════════════════════════════════════ */
-const DEFAULT_URL = 'https://sites.google.com/view/eguruodishastp/cc';
-
-const levels = {
-    SCHOOL: {
-        name: 'ସ୍କୁଲ୍',
-        icon: '🏫',
-        cssClass: 'school',
-        classes: {
-            'CLASS-1':  { name: 'Class 1',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-2':  { name: 'Class 2',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-3':  { name: 'Class 3',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-4':  { name: 'Class 4',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-5':  { name: 'Class 5',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-6':  { name: 'Class 6',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-7':  { name: 'Class 7',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-8':  { name: 'Class 8',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-9':  { name: 'Class 9',  url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'CLASS-10': { name: 'Class 10', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-        }
+═══════════════════════════════════════ */
+const subjects = {
+    POLSCI: {
+        name: 'POLITICAL SCIENCE',
+        fullName: 'ରାଜନୀତି ବିଜ୍ଞାନ',
+        units: [
+            { name: 'ଭାରତରେ ଗଣତନ୍ତ୍ର', classesPerUnit: 8 },
+            { name: 'ଭାରତରେ ଗଣତାନ୍ତ୍ରିକ ପ୍ରକ୍ରିୟା-1', classesPerUnit: 6 },
+            { name: 'ଭାରତରେ ଗଣତାନ୍ତ୍ରିକ ପ୍ରକ୍ରିୟା-2', classesPerUnit: 8 },
+            { name: 'ବିଶ୍ୱ ରାଜନୀତିରେ ଭାରତ', classesPerUnit: 8 },
+            { name: 'ଆନ୍ତର୍ଜାତୀୟ ରାଜନୀତିର ବିଷୟବସ୍ତୁ', classesPerUnit: 9 }
+        ]
     },
-    'PLUS2-ARTS': {
-        name: '+2 Arts',
-        icon: '🎨',
-        cssClass: 'plus2-arts',
-        classes: {
-            'FIRST-YEAR':  { name: '1st Year', url: 'https://special-training.pages.dev/' },
-            'SECOND-YEAR': { name: '2nd Year', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-        }
+    HIST: {
+        name: 'HISTORY',
+        fullName: 'ଇତିହାସ (History)',
+        units: [
+            { name: 'ପ୍ରାଚୀନ ଭାରତର ମୂଳଦୁଆ (Foundation of Ancient India)', classesPerUnit: 10 },
+            { name: 'ପ୍ରାଚୀନ ଭାରତର ଧର୍ମ ଓ ସାମ୍ରାଜ୍ୟ (Ancient Indian Religions & Empires)', classesPerUnit: 10 },
+            { name: 'ମଧ୍ୟଯୁଗୀୟ ଭାରତ (Medieval India)', classesPerUnit: 10 },
+            { name: 'ଉପନିବେଶ ଯୁଗ ଓ ସ୍ୱାଧୀନତା ସଂଗ୍ରାମ (Colonial Era & Freedom Struggle)', classesPerUnit: 10 },
+            { name: 'ଆଧୁନିକ ଭାରତ ଓ ଓଡ଼ିଶା (Modern India & Odisha)', classesPerUnit: 10 }
+        ]
     },
-    'PLUS2-COM': {
-        name: '+2 Commerce',
-        icon: '💼',
-        cssClass: 'plus2-com',
-        classes: {
-            'FIRST-YEAR':  { name: '1st Year', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            'SECOND-YEAR': { name: '2nd Year', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-        }
+    SOC: {
+        name: 'SOCIOLOGY',
+        fullName: 'ସମାଜବିଜ୍ଞାନ',
+        units: [
+            { name: 'ଭାରତୀୟ ସମାଜର ପରିଚୟ', classesPerUnit: 8 },
+            { name: 'ଭାରତୀୟ ସାମାଜିକ ଗଠନ', classesPerUnit: 10 },
+            { name: 'ସାଂସ୍କୃତିକ ବିବିଧତାର ଆହ୍ୱାନ', classesPerUnit: 8 },
+            { name: 'ସାମାଜିକ ଅସମାନତା ଓ ଆନ୍ଦୋଳନ', classesPerUnit: 10 },
+            { name: 'ପରିବର୍ତ୍ତନ ଓ ବିକାଶ', classesPerUnit: 8 }
+        ]
     },
-    'PLUS3-ARTS': {
-        name: '+3 Arts',
-        icon: '📚',
-        cssClass: 'plus3-arts',
-        honours: {
-            'POLITICAL-SCIENCE-HON': {
-                name: 'Political Science Honours', odia: 'ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'HISTORY-HON': {
-                name: 'History Honours', odia: 'ଇତିହାସ (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'SOCIOLOGY-HON': {
-                name: 'Sociology Honours', odia: 'ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'ECONOMICS-HON': {
-                name: 'Economics Honours', odia: 'ଅର୍ଥନୀତି (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'EDUCATION-HON': {
-                name: 'Education Honours', odia: 'ଶିକ୍ଷା (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'PUBLIC-ADMIN-HON': {
-                name: 'Public Administration Honours', odia: 'ଲୋକ ପ୍ରଶାସନ (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            },
-            'PSYCHOLOGY-HON': {
-                name: 'Psychology Honours', odia: 'ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)',
-                semesters: [
-                    { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-                    { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
-                ]
-            }
-        }
+    ECON: {
+        name: 'ECONOMICS',
+        fullName: 'ଅର୍ଥନୀତି',
+        units: [
+            { name: 'ଅର୍ଥନୀତି ପରିଚୟ (Introduction)', classesPerUnit: 5 },
+            { name: 'ଉପଭୋଗ ଓ ଚାହିଦା (Consumption & Demand)', classesPerUnit: 6 },
+            { name: 'ଉତ୍ପାଦନ (Production)', classesPerUnit: 4 },
+            { name: 'ମୂଲ୍ୟ, ରାଜସ୍ୱ ଓ ଯୋଗାଣ (Cost, Revenue & Supply)', classesPerUnit: 5 },
+            { name: 'ବଜାର ସଂରଚନା (Market Structures)', classesPerUnit: 5 },
+            { name: 'ସମଷ୍ଟି ଅର୍ଥନୀତି ପରିଚୟ (Intro to Macro)', classesPerUnit: 3 },
+            { name: 'ଜାତୀୟ ଆୟ (National Income)', classesPerUnit: 6 },
+            { name: 'ମୁଦ୍ରା, ବ୍ୟାଙ୍କିଂ ଓ ସାର୍ବଜନୀନ ଅର୍ଥ (Money, Banking & Public Finance)', classesPerUnit: 6 }
+        ]
     },
-    'PLUS3-COM': {
-        name: '+3 Commerce',
-        icon: '📊',
-        cssClass: 'plus3-com',
-        semesters: [
-            { name: '1st Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '2nd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '3rd Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '4th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '5th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '6th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '7th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' },
-            { name: '8th Semester', url: 'https://sites.google.com/view/eguruodishastp/cc' }
+    LOGIC: {
+        name: 'LOGIC',
+        fullName: 'ତର୍କଶାସ୍ତ୍ର',
+        units: [
+            { name: 'ଅନୁମାନ ସିଦ୍ଧାନ୍ତ ଓ ନ୍ୟାୟବାକ୍ୟ (Theory of Inference & Syllogism)', classesPerUnit: 10 },
+            { name: 'ମିଶ୍ରିତ ନ୍ୟାୟବାକ୍ୟ ଓ ଦ୍ୱନ୍ଦ୍ୱ (Mixed Syllogism & Dilemma)', classesPerUnit: 10 },
+            { name: 'ଦୋଷ ଓ ପ୍ରତୀକାତ୍ମକ ତର୍କ (Fallacies & Symbolic Logic)', classesPerUnit: 10 },
+            { name: 'ବୈଜ୍ଞାନିକ ପଦ୍ଧତି (Scientific Methods)', classesPerUnit: 10 },
+            { name: 'ନ୍ୟାୟ ଦର୍ଶନ ଓ କର୍ମ (Nyaya Philosophy & Karma)', classesPerUnit: 10 }
+        ]
+    },
+    EDU: {
+        name: 'EDUCATION',
+        fullName: 'ଶିକ୍ଷା',
+        units: [
+            { name: 'ଶିକ୍ଷାବିତ୍‌ଙ୍କ ଅବଦାନ (Contribution of Educators)', classesPerUnit: 10 },
+            { name: 'ଶିକ୍ଷଣ ଓ ପ୍ରେରଣା (Learning & Motivation)', classesPerUnit: 10 },
+            { name: 'ଶିକ୍ଷାର ସାମ୍ପ୍ରତିକ ପ୍ରସଙ୍ଗ (Current Issues in Education)', classesPerUnit: 10 },
+            { name: 'ଶିକ୍ଷା ପରିସଂଖ୍ୟାନ (Educational Statistics)', classesPerUnit: 10 }
+        ]
+    },
+    PSY: {
+        name: 'PSYCHOLOGY',
+        fullName: 'ମନୋବିଜ୍ଞାନ',
+        units: [
+            { name: 'ବିକାଶ ଓ ବ୍ୟକ୍ତିତ୍ୱ (Development & Personality)', classesPerUnit: 10 },
+            { name: 'ଚାପ ଓ ପରିବେଶ (Stress & Environment)', classesPerUnit: 10 },
+            { name: 'ଗୋଷ୍ଠୀ ପ୍ରକ୍ରିୟା ଓ ପରାମର୍ଶ (Group Processes & Counselling)', classesPerUnit: 10 },
+            { name: 'ମାନସିକ ବିକୃତି ଓ ଚିକିତ୍ସା (Psychological Disorders & Therapy)', classesPerUnit: 10 },
+            { name: 'ମନୋବିଜ୍ଞାନରେ ପରିସଂଖ୍ୟାନ (Statistics in Psychology)', classesPerUnit: 10 }
+        ]
+    },
+    ANTH: {
+        name: 'ANTHROPOLOGY',
+        fullName: 'ନୃତତ୍ତ୍ଵ',
+        units: [
+            { name: 'Social Organisation (ସାମାଜିକ ସଂଗଠନ)', classesPerUnit: 13 },
+            { name: 'Physical Anthropology (ଶାରୀରିକ ନୃତତ୍ତ୍ୱ)', classesPerUnit: 10 },
+            { name: 'Indian Prehistory (ଭାରତୀୟ ପ୍ରାଗୈତିହାସିକ)', classesPerUnit: 4 }
+        ]
+    },
+    HOMESC: {
+        name: 'HOME SCIENCE',
+        fullName: 'ଗୃହ ବିଜ୍ଞାନ',
+        units: [
+            { name: 'ଶିଶୁ ଯତ୍ନ ଓ କିଶୋର ବିକାଶ (Child Care & Adolescent Development)', classesPerUnit: 10 },
+            { name: 'ପୋଷଣ ଓ ଶରୀର ବିଜ୍ଞାନ (Nutrition & Physiology)', classesPerUnit: 10 },
+            { name: 'ବସ୍ତ୍ର, ଅର୍ଥ ପରିଚାଳନା ଓ ରଙ୍ଗ (Textile, Money Management & Colour)', classesPerUnit: 10 }
         ]
     }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════════════════════ */
-let state = { view: 'levels', level: null, honour: null };
-let currentUrl = DEFAULT_URL;
-let currentTitle = '';
-
-/* ═══════════════════════════════════════════════════════════════
-   MODAL
-═══════════════════════════════════════════════════════════════ */
-function openModal(title, detail, url) {
-    currentTitle = title;
-    currentUrl   = url || DEFAULT_URL;
-    document.getElementById('modalTitle').textContent  = title;
-    document.getElementById('modalDetail').textContent = detail || '';
-    document.getElementById('modalMainView').style.display = 'block';
-    document.getElementById('applyForm').classList.remove('active');
-    document.getElementById('applyForm').querySelector('form').reset();
-    document.getElementById('classModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    document.getElementById('classModal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-function showApplyForm() {
-    document.getElementById('modalMainView').style.display = 'none';
-    document.getElementById('applyForm').classList.add('active');
-}
-
-function hideApplyForm() {
-    document.getElementById('applyForm').classList.remove('active');
-    document.getElementById('modalMainView').style.display = 'block';
-}
-
-function goToClassroom() {
-    closeModal();
-    window.location.href = currentUrl;
-}
-
-function goToEnquiry() {
-    window.open('https://evidya.pages.dev/CONTACT%20US/', '_blank');
-    closeModal();
-}
-
-function submitApplication(e) {
-    e.preventDefault();
-    const name  = document.getElementById('appName').value.trim();
-    const phone = document.getElementById('appPhone').value.trim();
-    if (!name || !phone) { alert('ଦୟାକରି ସମସ୍ତ ଫିଲ୍ଡ ପୂରଣ କରନ୍ତୁ'); return; }
-    if (!/^[0-9]{10}$/.test(phone)) { alert('ଦୟାକରି ସଠିକ୍ 10 ଅଙ୍କ ନମ୍ବର ପ୍ରଦାନ କରନ୍ତୁ'); return; }
-    const msg = `*E-Vidya Academy - Coaching Application*\n\n*ନାମ:* ${name}\n*ଯୋଗାଯୋଗ:* ${phone}\n*ବିଷୟ:* ${currentTitle}\n\nମୁଁ ଏହି ବିଷୟ ପାଇଁ କୋଚିଂ ନେବାକୁ ଇଛୁକ ।`;
-    window.open(`https://wa.me/+916372296357?text=${encodeURIComponent(msg)}`, '_blank');
-    alert('ଆପଣଙ୍କ ଆବେଦନ ପଠାଯାଇଛି!');
-    closeModal();
-}
-
-document.getElementById('classModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-
-/* ═══════════════════════════════════════════════════════════════
-   RENDER HELPERS
-═══════════════════════════════════════════════════════════════ */
-const grid = () => document.getElementById('mainGrid');
-
-function setBack(show) {
-    const btn = document.getElementById('backBtn');
-    btn.classList.toggle('visible', show);
-}
-
-function makeLevelCard(key, label, icon, cssClass, onClick) {
-    const a = document.createElement('a');
-    a.href = '#';
-    a.className = `level-card ${cssClass}`;
-    a.onclick = (e) => { e.preventDefault(); onClick(); };
-    a.innerHTML = `<div class="level-icon">${icon}</div><div class="level-name">${label}</div>`;
-    return a;
-}
-
-function makeClassCard(label, sublabel, cssExtra, onClick) {
-    const a = document.createElement('a');
-    a.href = '#';
-    a.className = `class-card${cssExtra ? ' ' + cssExtra : ''}`;
-    a.onclick = (e) => { e.preventDefault(); onClick(); };
-    a.innerHTML = `<div class="class-label">${sublabel}</div><div class="class-title">${label}</div>`;
-    return a;
-}
-
-function makeWideBtn(text, href, cssClass) {
-    const a = document.createElement('a');
-    a.href = href;
-    a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.className = `btn-wide ${cssClass}`;
-    a.textContent = text;
-    return a;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   VIEWS
-═══════════════════════════════════════════════════════════════ */
-function showLevels() {
-    state = { view: 'levels', level: null, honour: null };
-    setBack(false);
-    const g = grid(); g.innerHTML = '';
-
-    g.appendChild(makeWideBtn('ଏଠାରେ ମୋ ସାଥି ଆପ୍ କୁ ଯାଆନ୍ତୁ ।', 'https://evidya.pages.dev/MO%20SATHI/', 'red'));
-
-  const special = document.createElement('a');
-special.href = 'https://special-training.pages.dev/';
-special.className = 'level-card special';
-special.innerHTML = '<div class="level-icon">🌟</div><div class="level-name">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div></div>';
-g.appendChild(special);
-
-    g.appendChild(makeLevelCard('SCHOOL', 'ସ୍କୁଲ୍', '🏫', 'school', () => showClasses('SCHOOL')));
-
-    const plus2 = makeLevelCard('PLUS2', '+2', '📘', 'plus2', () => showPlus2Choice());
-    g.appendChild(plus2);
-
-    const plus3 = makeLevelCard('PLUS3', '+3', '📘', 'plus3', () => showPlus3Choice());
-    g.appendChild(plus3);
-
-    g.appendChild(makeWideBtn('ଏଠାରେ ପେମେଣ୍ଟ କରନ୍ତୁ ।', 'https://evidya.pages.dev/PAYMENT/', 'gold'));
-}
-
-function showPlus2Choice() {
-    state = { view: 'plus2choice', level: null, honour: null };
-    setBack(true);
-    const g = grid(); g.innerHTML = '';
-    g.appendChild(makeLevelCard('PLUS2-ARTS', '+2 Arts',     '🎨', 'plus2-arts', () => showClasses('PLUS2-ARTS')));
-    g.appendChild(makeLevelCard('PLUS2-COM',  '+2 Commerce', '💼', 'plus2-com',  () => showClasses('PLUS2-COM')));
-}
-
-function showPlus3Choice() {
-    state = { view: 'plus3choice', level: null, honour: null };
-    setBack(true);
-    const g = grid(); g.innerHTML = '';
-    g.appendChild(makeLevelCard('PLUS3-ARTS', '+3 Arts',     '📚', 'plus3-arts', () => showClasses('PLUS3-ARTS')));
-    g.appendChild(makeLevelCard('PLUS3-COM',  '+3 Commerce', '📊', 'plus3-com',  () => showClasses('PLUS3-COM')));
-}
-
-function showClasses(levelKey) {
-    state = { view: 'classes', level: levelKey, honour: null };
-    setBack(true);
-    const lv = levels[levelKey];
-    const g  = grid(); g.innerHTML = '';
-
-    if (levelKey === 'PLUS3-ARTS') {
-        // Show honours list — clicking honour goes to its semesters
-        for (const hk in lv.honours) {
-            const h  = lv.honours[hk];
-            const card = makeClassCard(h.name, lv.name, 'honour-card', () => showSemesters(levelKey, hk));
-            const badge = document.createElement('div');
-            badge.className = 'honour-badge';
-            badge.textContent = h.odia;
-            card.appendChild(badge);
-            g.appendChild(card);
-        }
-    } else if (levelKey === 'PLUS3-COM') {
-        // Each semester has its own url
-        lv.semesters.forEach(sem => {
-            g.appendChild(makeClassCard(sem.name, lv.name, '', () => {
-                openModal(sem.name, lv.name, sem.url);
-            }));
-        });
-    } else {
-        // SCHOOL, PLUS2-ARTS, PLUS2-COM — each class has its own url
-        for (const ck in lv.classes) {
-            const cls = lv.classes[ck];
-            g.appendChild(makeClassCard(cls.name, lv.name, '', () => {
-                openModal(cls.name, lv.name, cls.url);
-            }));
-        }
-    }
-}
-
-function showSemesters(levelKey, honourKey) {
-    state = { view: 'semesters', level: levelKey, honour: honourKey };
-    setBack(true);
-    const hon = levels[levelKey].honours[honourKey];
-    const g   = grid(); g.innerHTML = '';
-    // Each semester has its own url
-    hon.semesters.forEach(sem => {
-        g.appendChild(makeClassCard(sem.name, hon.name, '', () => {
-            openModal(sem.name, hon.name + ' | ' + hon.odia, sem.url);
-        }));
-    });
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   BACK BUTTON
-═══════════════════════════════════════════════════════════════ */
-document.getElementById('backBtn').addEventListener('click', () => {
-    const v = state.view;
-    if (v === 'semesters')  { showClasses(state.level); }
-    else if (v === 'classes') {
-        if (state.level === 'PLUS2-ARTS' || state.level === 'PLUS2-COM') showPlus2Choice();
-        else if (state.level === 'PLUS3-ARTS' || state.level === 'PLUS3-COM') showPlus3Choice();
-        else showLevels();
-    }
-    else showLevels();
-});
-
-/* ═══════════════════════════════════════════════════════════════
-   INFO MODAL CONTENT
-═══════════════════════════════════════════════════════════════ */
-const infoContent = {
-    contact: {
-        title: '📧 Contact Us — ଆମ୍ଭ ସହିତ ଯୋଗାଯୋଗ',
-        body: `
-            <h3>ଯୋଗାଯୋଗ — Contact</h3>
-            <div class="odia">ଯଦି ଆପଣଙ୍କର କୌଣସି ପ୍ରଶ୍ନ, ଅଭିଯୋଗ, କିମ୍ବା ଅନୁସନ୍ଧାନ ଅଛି, ଦୟାକରି ନିମ୍ନ ଚ୍ୟାନେଲ ମାଧ୍ୟମରେ ଆମ୍ଭ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ ।</div>
-            <div class="eng">For any query, complaint, or general enquiry regarding E-Vidya Academy services, please reach us through the following channels. We are committed to responding within 24 hours on working days.</div>
-            <h3>📱 WhatsApp</h3>
-            <div class="eng"><strong>+91 6372296357</strong><br>Monday to Saturday — 9:00 AM to 8:00 PM</div>
-            <div class="odia">ସୋମବାର ଠାରୁ ଶନିବାର — ସକାଳ ୯ ଟାରୁ ସନ୍ଧ୍ୟା ୮ ଟା ।</div>
-            <h3>📍 Business Address</h3>
-            <div class="eng">At-Harasinghpur, Po.-Pirahat, Dist.-Bhadrak, Odisha-756131<br>Email: evidya2026@gmail.com | Phone: 6372296357<br>Grievance Officer: Sangita Behera</div>
-            <div class="legal"><p>⚠️ This is a PRIVATE service. NOT affiliated with any Government body, Board, or University.</p></div>
-        `
-    },
-    about: {
-        title: 'ℹ️ About Us — ଆମ୍ଭ ବିଷୟରେ',
-        body: `
-            <h3>ଆମ୍ଭ ପରିଚୟ — Who We Are</h3>
-            <div class="odia">E-Vidya Academy ଏକ ଅଭିଭାବକ-ଶିକ୍ଷା ଆଧାରିତ ଅନଲାଇନ୍ କୋଚିଂ ସେବା । ଆମ୍ଭର ଲକ୍ଷ୍ୟ ହେଉଛି ଅଭିଭାବକମାନଙ୍କୁ ସକ୍ଷମ କରିବା ଯଦ୍ଦ୍ୱାରା ସେମାନେ ନିଜ ସନ୍ତାନଙ୍କୁ ଘରେ ବସି ପ୍ରଭାବଶାଳୀ ଭାବରେ ପଢ଼ାଇ ପାରିବେ ।</div>
-            <div class="eng">E-Vidya Academy is a privately operated online coaching platform founded to empower parents to become their children's most trusted teachers. We provide structured coaching content for School (Class 1–10), +2 Arts, +2 Commerce, +3 Arts (Honours), and +3 Commerce.</div>
-            <h3>ଆମ୍ଭ ସ୍ଥିତି — Our Standing</h3>
-            <div class="eng">Owned and operated by <strong>Kumudini Rout</strong> as a sole proprietorship under the laws of India.</div>
-            <div class="odia">ଦୟାକରି ଧ୍ୟାନ ଦିଅନ୍ତୁ: ଏହି ଆପ୍ ଏକ ବ୍ୟକ୍ତିଗତ ପ୍ରୟାସ ଅଟେ । ଏହା କୌଣସି ସରକାରୀ ସଂସ୍ଥାକୁ ପ୍ରତିନିଧିତ୍ୱ କରେ ନାହିଁ । ଏହି ଆପ୍ କୁ ବ୍ୟବହାର କରିବା ଦ୍ଵାରା ଆପଣ ଏହି ଆପ୍ ର ସମସ୍ତ ନୀତି, ପ୍ରାଇଭେସୀ ପଲିସି, ସର୍ତ୍ତାବଳୀ ଏବଂ ଅସ୍ବୀକରଣ ରେ ଆପଣଙ୍କ ସହମତି ପ୍ରଦାନ କରୁଛନ୍ତି ।</div>
-            <div class="legal"><p>⚠️ NOT affiliated with, endorsed by, or connected to any Government, Board, or University.</p></div>
-        `
-    },
-    terms: {
-        title: '📜 Terms & Conditions — ସର୍ତ୍ତ ଓ ନିୟମ',
-        body: `
-            <h3>ସ୍ୱୀକୃତି — Acceptance</h3>
-            <div class="odia">ଏହି ସେବା ବ୍ୟବହାର କରି ଆପଣ ଏହି ସର୍ତ୍ତ ଓ ନିୟମ ଗ୍ରହଣ କରୁଛନ୍ତି । ଏହି ଆପ୍ ଏକ ବ୍ୟକ୍ତିଗତ ପ୍ରୟାସ; କୌଣସି ସରକାରୀ ସଂସ୍ଥା ସହ ସଂଯୁକ୍ତ ନୁହେଁ ।</div>
-            <div class="eng">By accessing E-Vidya Academy's services, you unconditionally agree to these Terms. If you do not agree, discontinue use immediately.</div>
-            <h3>ସେବାର ପ୍ରକୃତି — Nature of Service</h3>
-            <div class="eng">This is a private coaching service for parents. No certificate, degree, or official qualification is issued. Content is for guidance only.</div>
-            <h3>ଶୁଳ୍କ — Fee</h3>
-            <div class="odia">ମାସିକ ଶୁଳ୍କ ₹150 ଅଟେ ।</div>
-            <div class="eng">Monthly fee: ₹150, payable in advance. The proprietor reserves the right to revise fees with prior notice.</div>
-            <h3>ଦାୟଭାର ସୀମା — Limitation of Liability</h3>
-            <div class="eng">E-Vidya Academy bears no liability for any academic result or examination outcome. Results depend entirely on the student and parent's effort.</div>
-            <div class="legal"><p>⚠️ These Terms are legally binding under the Indian Contract Act, 1872.</p></div>
-        `
-    },
-    privacy: {
-        title: '🔒 Privacy Policy — ଗୋପନୀୟତା ନୀତି',
-        body: `
-            <h3>ତଥ୍ୟ ସଂଗ୍ରହ — Data Collection</h3>
-            <div class="odia">ଆବେଦନ ସମୟରେ ଆପଣଙ୍କ ନାମ ଓ ଫୋନ ନମ୍ବର ସଂଗ୍ରହ କରାଯାଏ ।</div>
-            <div class="eng">We collect only your name and contact number during enrolment. No sensitive personal data (Aadhaar, financial details, passwords) is collected.</div>
-            <h3>ତଥ୍ୟ ବ୍ୟବହାର — Use of Data</h3>
-            <div class="eng">Your data is used exclusively for service delivery and communication. It is never sold or transferred to any third party without explicit consent.</div>
-            <h3>ଅଧିକାର — Your Rights</h3>
-            <div class="eng">You may request deletion of your data at any time via WhatsApp. We will comply within 7 working days under the Digital Personal Data Protection Act, 2023.</div>
-            <div class="legal"><p>⚠️ Governed by the Digital Personal Data Protection Act, 2023.</p></div>
-        `
-    },
-    refund: {
-        title: '💰 Refund Policy — ଫେରସ୍ତ ନୀତି',
-        body: `
-            <h3>ସ୍ପଷ୍ଟ ଘୋଷଣା — Declaration</h3>
-            <div class="odia">E-Vidya Academy ର ସମସ୍ତ ଶୁଳ୍କ ଅଣ-ଫେରସ୍ତଯୋଗ୍ୟ ।</div>
-            <div class="eng"><strong>ALL FEES PAID TO E-VIDYA ACADEMY ARE STRICTLY NON-REFUNDABLE.</strong> By making payment you have read, understood, and accepted this policy.</div>
-            <h3>ବ୍ୟତିକ୍ରମ — Exception</h3>
-            <div class="eng">A refund may be considered ONLY if E-Vidya Academy permanently ceases operations before the paid period is utilized. Any such refund is at the sole discretion of the proprietor.</div>
-            <h3>ଅଭିଯୋଗ — Dispute</h3>
-            <div class="eng">Disputes are subject to the jurisdiction of courts in Bhadrak, Odisha, governed by the Consumer Protection Act, 2019 and IT Act, 2000.</div>
-            <div class="legal"><p>⚠️ Ignorance of this policy shall not constitute grounds for a refund claim.</p></div>
-        `
-    },
-    disclaimer: {
-        title: '⚠️ Full Disclaimer — ସମ୍ପୂର୍ଣ୍ଣ ଦାବିତ୍ୟାଗ',
-        body: `
-            <h3>ସ୍ୱତନ୍ତ୍ର ଘୋଷଣା</h3>
-            <div class="odia">E-Vidya Academy କୌଣସି ସରକାରୀ ସଂସ୍ଥା, ବୋର୍ଡ, ବିଶ୍ୱବିଦ୍ୟାଳୟ ସହ ସଂଯୁକ୍ତ ନୁହେଁ । ଏହି ଆପ୍ ଏକ ବ୍ୟକ୍ତିଗତ ପ୍ରୟାସ । ଏଥିରେ ଦର୍ଶାଯାଇଥିବା ତଥ୍ୟ କେବଳ ଉପଦେଶାତ୍ମକ । ଏହାକୁ ଅଦାଲତ/ସରକାରୀ ଅଫିସ୍ ରେ ଅଧିକାରିକ ତଥ୍ୟ ଭାବରେ ବ୍ୟବହାର ହୋଇନପାରେ । ଏହି ଆପ୍ ବ୍ୟବହାର କରିବା ଦ୍ଵାରା ଆପଣ ସମସ୍ତ ନୀତି, ପ୍ରାଇଭେସୀ ପଲିସି, ସର୍ତ୍ତାବଳୀ ଓ ଅସ୍ବୀକରଣ ରେ ସହମତ ।</div>
-            <div class="eng"><strong>E-Vidya Academy has absolutely NO affiliation with the Government of India, Government of Odisha, any Board, any University, or any statutory body whatsoever.</strong></div>
-            <h3>ଶିକ୍ଷାଗତ ଫଳ</h3>
-            <div class="eng">No warranty is made regarding any academic result, exam score, or educational outcome. All content is for general guidance only.</div>
-            <h3>ଶୁଳ୍କ</h3>
-            <div class="eng">The ₹150 monthly fee is for coaching guidance access only — NOT an admission fee, exam fee, or registration with any Board or University.</div>
-            <h3>ଆଇନ</h3>
-            <div class="eng">Governed by Indian law. Disputes subject to exclusive jurisdiction of competent courts of Odisha.</div>
-            <div class="legal"><p>⚠️ By using this service you conclusively accept this Full Disclaimer, Privacy Policy, Terms & Conditions, and Refund Policy.</p></div>
-        `
-    }
+const classNames = {
+    'POLSCI-1-1': 'ଗଣତନ୍ତ୍ର: ଅର୍ଥ, ପ୍ରକାର ଓ ବୈଶିଷ୍ଟ୍ୟ (Democracy: Meaning, Types & Features)',
+    'POLSCI-1-2': 'ଭାରତରେ ଗଣତାନ୍ତ୍ରିକ ପ୍ରକ୍ରିୟାର ଆହ୍ୱାନ: ଅସମାନତା (Challenges to Democracy: Inequality)',
+    'POLSCI-1-3': 'ନିରକ୍ଷରତା ଓ ଆଞ୍ଚଳିକତା (Illiteracy & Regionalism)',
+    'POLSCI-1-4': 'ନକ୍ସଲ ସମସ୍ୟା ଓ ଲିଙ୍ଗ ଅସମାନତା (Naxalite Problem & Gender Inequality)',
+    'POLSCI-1-5': 'ଭାରତରେ ଦଳୀୟ ବ୍ୟବସ୍ଥା: ଅର୍ଥ ଓ ପ୍ରକାର (Party System: Meaning & Types)',
+    'POLSCI-1-6': 'ଏକ ଦଳୀୟ ପ୍ରାଧାନ୍ୟତା (One Party Dominance)',
+    'POLSCI-1-7': 'ମିଳିତ ମଞ୍ଚ ରାଜନୀତି (Coalition Politics)',
+    'POLSCI-1-8': 'ଆଞ୍ଚଳିକ ଦଳମାନେ (Regional Parties)',
+    'POLSCI-2-1': 'ଭାରତରେ ସଂଘୀୟତା: ବୈଶିଷ୍ଟ୍ୟ (Federalism in India: Features)',
+    'POLSCI-2-2': 'କେନ୍ଦ୍ର-ରାଜ୍ୟ ସମ୍ପର୍କ (Centre-State Relations)',
+    'POLSCI-2-3': 'ଭାରତୀୟ ସଂଘୀୟତାରେ ସାମ୍ପ୍ରତିକ ଧାରା (Recent Trends in Indian Federalism)',
+    'POLSCI-2-4': 'ଭାରତରେ ସ୍ଥାନୀୟ ଶାସନ (Local Governance in India)',
+    'POLSCI-2-5': 'ଗ୍ରାମୀଣ ସ୍ଥାନୀୟ ସଂସ୍ଥା: ଗଠନ ଓ କାର୍ଯ୍ୟ (Rural Local Bodies: Composition & Functions)',
+    'POLSCI-2-6': 'ସହରୀ ସ୍ଥାନୀୟ ସଂସ୍ଥା: ଗଠନ ଓ କାର୍ଯ୍ୟ (Urban Local Bodies: Composition & Functions)',
+    'POLSCI-3-1': 'ରାଷ୍ଟ୍ର ନିର୍ମାଣର ଆହ୍ୱାନ: ଅର୍ଥ (Challenges to Nation-Building: Meaning)',
+    'POLSCI-3-2': 'ସାମ୍ପ୍ରଦାୟିକତା ଓ ଜାତିଭେଦ (Communalism & Casteism)',
+    'POLSCI-3-3': 'ଆଞ୍ଚଳିକତା ଓ ଆତଙ୍କବାଦ (Regionalism & Terrorism)',
+    'POLSCI-3-4': 'ପ୍ରତିକାର ଉପାୟ (Remedies)',
+    'POLSCI-3-5': 'ଭାରତୀୟ ରାଜନୀତିରେ ସାମ୍ପ୍ରତିକ ବିଷୟ (Contemporary Issues in Indian Politics)',
+    'POLSCI-3-6': 'ଲୋକପ୍ରିୟ ଆନ୍ଦୋଳନ: ମହିଳା ଆନ୍ଦୋଳନ (Popular Movements: Women Movement)',
+    'POLSCI-3-7': 'ପରିବେଶ ସଂରକ୍ଷଣ ଆନ୍ଦୋଳନ (Environment Protection Movements)',
+    'POLSCI-3-8': 'ବିକାଶ-ବିସ୍ଥାପନ ଆନ୍ଦୋଳନ (Development-Displacement Movements)',
+    'POLSCI-4-1': 'ଭାରତୀୟ ବିଦେଶ ନୀତି: ମୌଳିକ ବୈଶିଷ୍ଟ୍ୟ (Indian Foreign Policy: Basic Features)',
+    'POLSCI-4-2': 'ଭାରତ ଓ ପଡ଼ୋଶୀ ଦେଶ: ଚୀନ୍ (India & Neighbours: China)',
+    'POLSCI-4-3': 'ଭାରତ ଓ ପାକିସ୍ତାନ (India & Pakistan)',
+    'POLSCI-4-4': 'ଜାତିସଂଘ: ପ୍ରମୁଖ ଅଙ୍ଗ (UN: Major Organs)',
+    'POLSCI-4-5': 'ସାଧାରଣ ସଭା ଓ ସୁରକ୍ଷା ପରିଷଦ (General Assembly & Security Council)',
+    'POLSCI-4-6': 'ଆନ୍ତର୍ଜାତୀୟ ନ୍ୟାୟାଳୟ (International Court of Justice)',
+    'POLSCI-4-7': 'ଜାତିସଂଘର ସଂସ୍କାର ଓ ଭାରତର ସ୍ଥିତି (UN Reforms & India\'s Position)',
+    'POLSCI-4-8': 'ବିଶ୍ୱ ବ୍ୟାଙ୍କ ଓ ଆଇଏମଏଫ (World Bank & IMF)',
+    'POLSCI-5-1': 'ସମସାମୟିକ ବିଶ୍ୱରେ ସୁରକ୍ଷାର ପରିବର୍ତ୍ତିତ ଆୟାମ (Changing Dimension of Security)',
+    'POLSCI-5-2': 'ପାରମ୍ପରିକ ସୁରକ୍ଷା: ଅସ୍ତ୍ର ପ୍ରତିଯୋଗିତା ଓ ନିରସ୍ତ୍ରୀକରଣ (Traditional Security: Arms Race & Disarmament)',
+    'POLSCI-5-3': 'ଅପାରମ୍ପରିକ ସୁରକ୍ଷା: ମାନବ ସୁରକ୍ଷା (Non-Traditional Security: Human Security)',
+    'POLSCI-5-4': 'ବିଶ୍ୱ ଦାରିଦ୍ର୍ୟ ଓ ଅସମାନତା (Global Poverty & Inequality)',
+    'POLSCI-5-5': 'ସ୍ୱାସ୍ଥ୍ୟ ଓ ଶିକ୍ଷା (Health & Education)',
+    'POLSCI-5-6': 'ପରିବେଶ ଓ ପ୍ରାକୃତିକ ସମ୍ପଦ (Environment & Natural Resources)',
+    'POLSCI-5-7': 'ବିଶ୍ୱ ପରିବେଶ ଚିନ୍ତା (Global Environmental Concerns)',
+    'POLSCI-5-8': 'ବିକାଶ ଓ ପରିବେଶ (Development & Environment)',
+    'POLSCI-5-9': 'ବିଶ୍ୱ ଉଷ୍ମାୟନ ଓ ଜଳବାୟୁ ପରିବର୍ତ୍ତନ (Global Warming & Climate Change)',
+    'HIST-1-1': 'ଭାରତୀୟ ଇତିହାସର ଉତ୍ସ - ପ୍ରତ୍ନତାତ୍ତ୍ୱିକ (Sources - Archaeological)',
+    'HIST-1-2': 'ଇତିହାସର ଉତ୍ସ - ସାହିତ୍ୟିକ ଓ ବିଦେଶୀ ବିବରଣୀ (Sources - Literary & Foreign Accounts)',
+    'HIST-1-3': 'ହରପ୍ପା ସଂସ୍କୃତି - ଆବିଷ୍କାର ଓ ବିସ୍ତାର (Harappan Culture - Discovery & Extent)',
+    'HIST-1-4': 'ହରପ୍ପା - ନଗର ଯୋଜନା ଓ ସ୍ଥାପତ୍ୟ (Harappan - Town Planning & Structures)',
+    'HIST-1-5': 'ହରପ୍ପା - କୃଷି, ପ୍ରଯୁକ୍ତି ଓ ବାଣିଜ୍ୟ (Harappan - Agriculture, Technology & Trade)',
+    'HIST-1-6': 'ହରପ୍ପା - ଲିପି, ଧର୍ମ ଓ ମୋହର (Harappan - Script, Religion & Seals)',
+    'HIST-1-7': 'ଋଗ୍‌ବୈଦିକ ଯୁଗ (Rig Vedic Age)',
+    'HIST-1-8': 'ଉତ୍ତର ବୈଦିକ ଯୁଗ (Later Vedic Age)',
+    'HIST-1-9': 'ବୈଦିକ ଯୁଗରେ ମହିଳାଙ୍କ ସ୍ଥିତି (Position of Women in Vedic Age)',
+    'HIST-1-10': 'ଷୋଳ ମହାଜନପଦ (Sixteen Mahajanapadas)',
+    'HIST-2-1': 'ଷଷ୍ଠ ଶତାବ୍ଦୀର ଧାର୍ମିକ ଆନ୍ଦୋଳନ (Religious Movements of 6th Century BC)',
+    'HIST-2-2': 'ଜୈନ ଧର୍ମର ଶିକ୍ଷା (Teachings of Jainism)',
+    'HIST-2-3': 'ବୌଦ୍ଧ ଧର୍ମର ଶିକ୍ଷା (Teachings of Buddhism)',
+    'HIST-2-4': 'ଜୈନ ଓ ବୌଦ୍ଧ ଧର୍ମର ଅବଦାନ (Contribution of Jainism & Buddhism)',
+    'HIST-2-5': 'କଳିଙ୍ଗ ଯୁଦ୍ଧର କାରଣ (Causes of Kalinga War)',
+    'HIST-2-6': 'କଳିଙ୍ଗ ଯୁଦ୍ଧର ପ୍ରଭାବ (Effects of Kalinga War)',
+    'HIST-2-7': 'ମୌର୍ଯ୍ୟ ପ୍ରଶାସନ (Mauryan Administration)',
+    'HIST-2-8': 'ଗୁପ୍ତ ଯୁଗର ସାଂସ୍କୃତିକ ସଫଳତା - କଳା (Gupta Cultural Attainments - Art)',
+    'HIST-2-9': 'ଗୁପ୍ତ ଯୁଗର ସାହିତ୍ୟ ଓ ବିଜ୍ଞାନ (Gupta Literature & Science)',
+    'HIST-2-10': 'ଗୁପ୍ତ ଯୁଗର ସ୍ଥାପତ୍ୟ ଓ ମୂର୍ତ୍ତିକଳା (Gupta Architecture & Sculpture)',
+    'HIST-3-1': 'ଅଲ-ବିରୁନୀଙ୍କ ବିବରଣୀ (Al-Biruni\'s Account)',
+    'HIST-3-2': 'ଇବନ୍ ବତୁତା ଓ ଫ୍ରାଙ୍କୋଇସ୍ ବର୍ନିୟର୍ (Ibn Battuta & Francois Bernier)',
+    'HIST-3-3': 'ଦିଲ୍ଲୀ ସୁଲତାନୀର ପ୍ରକୃତି (Nature of Delhi Sultanate)',
+    'HIST-3-4': 'ଦିଲ୍ଲୀ ସୁଲତାନୀ - ସାମାଜିକ ଗଠନ (Delhi Sultanate - Social Structure)',
+    'HIST-3-5': 'ମୋଗଲ ଯୁଗର ସଂସ୍କୃତି (Culture of Mughal Age)',
+    'HIST-3-6': 'ମୋଗଲ କଳା, ସ୍ଥାପତ୍ୟ ଓ ଚିତ୍ରକଳା (Mughal Art, Architecture & Paintings)',
+    'HIST-3-7': 'ଦୀନ୍-ଇ-ଇଲାହୀ (Din-i-Ilahi)',
+    'HIST-3-8': 'ସୁଫି ଆନ୍ଦୋଳନ (Sufi Movement)',
+    'HIST-3-9': 'ଭକ୍ତି ଆନ୍ଦୋଳନ (Bhakti Movement)',
+    'HIST-3-10': 'ସୁଫି ଓ ଭକ୍ତିର ପ୍ରଭାବ (Impact of Sufi & Bhakti Movements)',
+    'HIST-4-1': 'ବ୍ରିଟିଶ ଅର୍ଥନୈତିକ ନୀତି (British Economic Policies)',
+    'HIST-4-2': 'ସମ୍ପଦ ନିଷ୍କାସନ ଓ ପରିବହନ (Drain of Wealth & Transport)',
+    'HIST-4-3': 'ସନ୍ୟାସୀ ଓ ଖୁର୍ଦ୍ଦା ବିଦ୍ରୋହ (Sanyasi & Khurda Rebellion)',
+    'HIST-4-4': 'ସାନ୍ତାଲ ବିଦ୍ରୋହ ଓ ୧୮୫୧ର ମହାବିପ୍ଳବ (Santal Rebellion & Revolt of 1857)',
+    'HIST-4-5': 'ମହାତ୍ମା ଗାନ୍ଧୀ ଓ ଜାତୀୟ ସଂଗ୍ରାମ (Mahatma Gandhi & National Struggle)',
+    'HIST-4-6': 'ଅସହଯୋଗ ଆନ୍ଦୋଳନ (Non-Cooperation Movement)',
+    'HIST-4-7': 'ଓଡ଼ିଶାରେ ଅସହଯୋଗ ଆନ୍ଦୋଳନ (Non-Cooperation in Odisha)',
+    'HIST-4-8': 'ସିଭିଲ ଅବଜ୍ଞା ଆନ୍ଦୋଳନ (Civil Disobedience Movement)',
+    'HIST-4-9': 'ଭାରତ ଛାଡ଼ ଆନ୍ଦୋଳନ (Quit India Movement)',
+    'HIST-4-10': 'ଓଡ଼ିଶାରେ ଭାରତ ଛାଡ଼ ଆନ୍ଦୋଳନ (Quit India in Odisha)',
+    'HIST-5-1': 'ଉପନିବେଶିକ ସହର - ନଗରୀକରଣ (Colonial Cities - Urbanisation)',
+    'HIST-5-2': 'ନଗର ଯୋଜନା ଓ ସ୍ଥାପତ୍ୟ (Planning & Architecture)',
+    'HIST-5-3': 'ବନ୍ଦର, ଦୁର୍ଗ ଓ ପାହାଡ଼ ନଗରୀ (Ports, Forts & Hill Stations)',
+    'HIST-5-4': 'କଲିକତା, ବମ୍ବେ ଓ ମାଦ୍ରାଜର ସ୍ଥାପତ୍ୟ (Architecture of Calcutta, Bombay & Madras)',
+    'HIST-5-5': 'ଓଡ଼ିଶା ପ୍ରଦେଶ ଗଠନ ଆନ୍ଦୋଳନ (Formation of Odisha Province)',
+    'HIST-5-6': 'ଭାଷାଭିତ୍ତିକ ପରିଚୟ ଆନ୍ଦୋଳନ (Movement for Linguistic Identity)',
+    'HIST-5-7': 'ମଧୁସୂଦନ, ଗୋପବନ୍ଧୁ ଓ କୃଷ୍ଣଚନ୍ଦ୍ରଙ୍କ ଅବଦାନ (Contributions of Madhusudan, Gopabandhu & Krushna Chandra)',
+    'HIST-5-8': 'ସରଳା, ରମା ଓ ମାଳତୀ ଦେବୀଙ୍କ ଅବଦାନ (Contributions of Sarala, Rama & Malati Devi)',
+    'HIST-5-9': 'ସମ୍ବିଧାନ ସଭା ଗଠନ ଓ ଦୃଷ୍ଟିକୋଣ (Making of Constituent Assembly & Vision)',
+    'HIST-5-10': 'ଭାରତୀୟ ସମ୍ବିଧାନର ବିଶେଷତା (Salient Features of Indian Constitution)',
+    'SOC-1-1': 'ଭାରତୀୟ ସମାଜର ପରିଚୟ (Introduction)', 'SOC-1-2': 'ଜନସଂଖ୍ୟା ଗଠନ (Demographic)', 'SOC-1-3': 'ଭୌଗୋଳିକ ଓ ଜାତିଗତ ଗଠନ (Geographical & Racial)', 'SOC-1-4': 'ଭାଷାଗତ ଗଠନ (Linguistic)', 'SOC-1-5': 'ଧାର୍ମିକ ଗଠନ (Religious)', 'SOC-1-6': 'ଆଦିବାସୀ ଗଠନ (Tribal)', 'SOC-1-7': 'ଏକତା - ଏକତାର କାରଣ (Unity Factors)', 'SOC-1-8': 'ବିବିଧତା - ବିବିଧତାର କାରଣ (Diversity Factors)',
+    'SOC-2-1': 'ଜାତି ପ୍ରଥା - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Caste System)', 'SOC-2-2': 'ଜାତି ପ୍ରଥାର କାର୍ଯ୍ୟ (Functions)', 'SOC-2-3': 'ଜାତି ପ୍ରଥାର ଦୋଷ (Dysfunctions)', 'SOC-2-4': 'ଜାତି ପ୍ରଥାରେ ପରିବର୍ତ୍ତନ (Recent Changes)', 'SOC-2-5': 'ଜାତି ଓ ଶ୍ରେଣୀ (Caste & Class)', 'SOC-2-6': 'ହିନ୍ଦୁ ଯୌଥ ପରିବାର - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Joint Family)', 'SOC-2-7': 'ଯୌଥ ପରିବାରର ଗୁଣ ଓ ଦୋଷ (Merits & Demerits)', 'SOC-2-8': 'ଯୌଥ ପରିବାରେ ପରିବର୍ତ୍ତନ (Recent Changes)', 'SOC-2-9': 'ଗ୍ରାମ ସମାଜ - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Village Community)', 'SOC-2-10': 'ଗ୍ରାମ-ସହର ସମ୍ପର୍କ ଓ ବିଭାଜନ (Rural-Urban)',
+    'SOC-3-1': 'ସାଂସ୍କୃତିକ ବିବିଧତା (Cultural Diversity)', 'SOC-3-2': 'ଜାତୀୟ ଏକୀକରଣ - ସଂକଳ୍ପନା (National Integration)', 'SOC-3-3': 'ଜାତୀୟ ଏକୀକରଣର ବାଧା (Obstacles)', 'SOC-3-4': 'ସାମ୍ପ୍ରଦାୟିକତା (Communalism)', 'SOC-3-5': 'ଆଞ୍ଚଳିକତା (Regionalism)', 'SOC-3-6': 'ଜାତିଭେଦ (Casteism)', 'SOC-3-7': 'ଆତଙ୍କବାଦ (Terrorism)', 'SOC-3-8': 'ଜାତୀୟ ଏକୀକରଣ ପାଇଁ ରଣନୀତି (Strategies)',
+    'SOC-4-1': 'ଜାତି ଓ ସାମାଜିକ ଅସମାନତା (Caste Inequality)', 'SOC-4-2': 'ଶ୍ରେଣୀ ଓ ସାମାଜିକ ଅସମାନତା (Class Inequality)', 'SOC-4-3': 'ଅନୁସୂଚିତ ଜାତି - ସ୍ଥିତି ଓ ସମସ୍ୟା (Scheduled Castes)', 'SOC-4-4': 'ଅନୁସୂଚିତ ଜନଜାତି - ସ୍ଥିତି ଓ ସମସ୍ୟା (Scheduled Tribes)', 'SOC-4-5': 'ସାମ୍ବିଧାନିକ ସୁରକ୍ଷା (Constitutional Safeguards)', 'SOC-4-6': 'ସାମାଜିକ ବହିଷ୍କାର (Social Exclusion)', 'SOC-4-7': 'ଆଦିବାସୀ ଆନ୍ଦୋଳନ (Tribal Movements)', 'SOC-4-8': 'କୃଷକ ଆନ୍ଦୋଳନ (Peasant Movements)', 'SOC-4-9': 'ସାମାଜିକ ସଂସ୍କାର ଆନ୍ଦୋଳନ (Reform Movements)', 'SOC-4-10': 'ସମକାଳୀନ ସାମାଜିକ ଆନ୍ଦୋଳନ (Contemporary Movements)',
+    'SOC-5-1': 'ଶିଳ୍ପାୟନ - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Industrialization)', 'SOC-5-2': 'ଶିଳ୍ପାୟନର ପ୍ରଭାବ (Impact)', 'SOC-5-3': 'ନଗରୀକରଣ - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Urbanization)', 'SOC-5-4': 'ନଗରୀକରଣର ପ୍ରଭାବ (Impact)', 'SOC-5-5': 'ଆଧୁନିକୀକରଣ - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Modernization)', 'SOC-5-6': 'ଆଧୁନିକୀକରଣର ପ୍ରଭାବ (Impact)', 'SOC-5-7': 'ଜଗତୀକରଣ - ଅର୍ଥ ଓ ବୈଶିଷ୍ଟ୍ୟ (Globalization)', 'SOC-5-8': 'ଜଗତୀକରଣର ପ୍ରଭାବ (Impact)',
+    'ECON-1-1': 'ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଓ ପରିସର (Definition & Scope)', 'ECON-1-2': 'ଅର୍ଥନୀତିର ବିଷୟବସ୍ତୁ (Subject Matter)', 'ECON-1-3': 'ଅର୍ଥନୀତିର କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା (Central Problems)', 'ECON-1-4': 'ଅଭାବ ଓ ପସନ୍ଦ (Scarcity & Choice)', 'ECON-1-5': 'ମୌଳିକ ଧାରଣା (Basic Concepts)',
+    'ECON-2-1': 'ଉପଭୋଗର ନିୟମ (Laws of Consumption)', 'ECON-2-2': 'ସୀମାନ୍ତ ଓ ମୋଟ ଉପଯୋଗିତା (Marginal & Total Utility)', 'ECON-2-3': 'ହ୍ରାସମାନ ସୀମାନ୍ତ ଉପଯୋଗିତା ନିୟମ (Law of DMU)', 'ECON-2-4': 'ସମସୀମାନ୍ତ ଉପଯୋଗିତା ଓ ଗ୍ରାହକ ସନ୍ତୁଳନ (Equimarginal Utility)', 'ECON-2-5': 'ଚାହିଦା ଓ ନିର୍ଦ୍ଧାରକ (Demand & Determinants)', 'ECON-2-6': 'ଚାହିଦାର ମୂଲ୍ୟ ସ୍ଥିତିସ୍ଥାପକତା (Price Elasticity)',
+    'ECON-3-1': 'ଉତ୍ପାଦନ ଓ ଉତ୍ପାଦନ କାର୍ଯ୍ୟ (Production Function)', 'ECON-3-2': 'ମୋଟ, ହାରାହାରି ଓ ସୀମାନ୍ତ ଉତ୍ପାଦ (TP, AP & MP)', 'ECON-3-3': 'ପରିବର୍ତ୍ତନଶୀଳ ଅନୁପାତ ନିୟମ (Law of Variable Proportions)', 'ECON-3-4': 'ଉତ୍ପାଦନ ଉପାଦାନର ପ୍ରତିଫଳ (Returns to Factor)',
+    'ECON-4-1': 'ମୂଲ୍ୟ ଧାରଣା (Cost Concepts)', 'ECON-4-2': 'ସ୍ଥିର ଓ ପରିବର୍ତ୍ତନଶୀଳ ମୂଲ୍ୟ (Fixed & Variable Costs)', 'ECON-4-3': 'ମୋଟ, ହାରାହାରି ଓ ସୀମାନ୍ତ ମୂଲ୍ୟ (TC, AC & MC)', 'ECON-4-4': 'ରାଜସ୍ୱ ଧାରଣା ଓ ସମ୍ପର୍କ (Revenue Concepts)', 'ECON-4-5': 'ଯୋଗାଣ ଓ ଯୋଗାଣ ନିୟମ (Supply & Law)',
+    'ECON-5-1': 'ବଜାରର ଅର୍ଥ ଓ ପ୍ରକାର (Market Forms)', 'ECON-5-2': 'ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରତିଯୋଗିତା (Perfect Competition)', 'ECON-5-3': 'ମୂଲ୍ୟ ନିର୍ଦ୍ଧାରଣ (Price Determination)', 'ECON-5-4': 'ଏକଚାଟିଆ ଓ ବୈଶିଷ୍ଟ୍ୟ (Monopoly & Features)', 'ECON-5-5': 'ଏକଚାଟିଆ ପ୍ରତିଯୋଗିତା ଓ ଅଲିଗୋପଲି (Monopolistic & Oligopoly)',
+    'ECON-6-1': 'ସମଷ୍ଟି ଅର୍ଥନୀତିର ଅର୍ଥ (Meaning of Macro)', 'ECON-6-2': 'ସମଷ୍ଟି ଓ ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ପାର୍ଥକ୍ୟ (Macro vs Micro)', 'ECON-6-3': 'ସମଷ୍ଟି ଅର୍ଥନୀତିର ବିଷୟବସ୍ତୁ (Subject Matter)',
+    'ECON-7-1': 'ଜାତୀୟ ଆୟର ଅର୍ଥ (Meaning of NI)', 'ECON-7-2': 'GNP, NNP, GDP ଓ NDP', 'ECON-7-3': 'ବଜାର ମୂଲ୍ୟ ଓ ଉତ୍ପାଦନ ମୂଲ୍ୟ (Market & Factor Cost)', 'ECON-7-4': 'ଜାତୀୟ ବ୍ୟୟଯୋଗ୍ୟ ଆୟ (National Disposable Income)', 'ECON-7-5': 'ବ୍ୟକ୍ତିଗତ ଓ ବ୍ୟୟଯୋଗ୍ୟ ଆୟ (Personal & Disposable Income)', 'ECON-7-6': 'ଆୟ ନିର୍ଦ୍ଧାରଣ - କେନ୍ସୀୟ ସିଦ୍ଧାନ୍ତ (Keynesian Theory)',
+    'ECON-8-1': 'ମୁଦ୍ରାର ଅର୍ଥ ଓ କାର୍ଯ୍ୟ (Money & Functions)', 'ECON-8-2': 'ବାଣିଜ୍ୟିକ ବ୍ୟାଙ୍କ ଓ କାର୍ଯ୍ୟ (Commercial Banks)', 'ECON-8-3': 'କେନ୍ଦ୍ରୀୟ ବ୍ୟାଙ୍କ ଓ କାର୍ଯ୍ୟ (Central Bank)', 'ECON-8-4': 'ସାର୍ବଜନୀନ ଅର୍ଥ ଓ ପାର୍ଥକ୍ୟ (Public Finance)', 'ECON-8-5': 'ସରକାରୀ ବଜେଟ୍ - ଅର୍ଥ ଓ ଉଦ୍ଦେଶ୍ୟ (Budget)', 'ECON-8-6': 'ବଜେଟ୍ ପ୍ରକାର (Types of Budget)',
+    'LOGIC-1-1': 'ଅନୁମାନର ଶ୍ରେଣୀବିଭାଗ (Classification of Inference)', 'LOGIC-1-2': 'ପରିବର୍ତ୍ତନ (Conversion)', 'LOGIC-1-3': 'ବିପରୀତକରଣ (Obversion)', 'LOGIC-1-4': 'ବର୍ଗୀୟ ନ୍ୟାୟବାକ୍ୟ: ଗଠନ (Categorical Syllogism: Structure)', 'LOGIC-1-5': 'ଆକୃତି ଓ ମୁଡ୍ (Figure & Mood)', 'LOGIC-1-6': 'ନ୍ୟାୟବାକ୍ୟର ନିୟମ (Rules of Syllogism)', 'LOGIC-1-7': 'ବୈଧ ମୁଡ୍ ନିର୍ଣ୍ଣୟ - ୧ (Determination of Valid Moods - 1)', 'LOGIC-1-8': 'ବୈଧ ମୁଡ୍ ନିର୍ଣ୍ଣୟ - ୨ (Determination of Valid Moods - 2)', 'LOGIC-1-9': 'ଆକୃତିର ବିଶେଷ ନିୟମ (Special Rules of Figures)', 'LOGIC-1-10': 'ଆରିଷ୍ଟୋଟଲଙ୍କ ନିୟମ (Aristotle Dictum)',
+    'LOGIC-2-1': 'ପ୍ରତ୍ୟକ୍ଷ ଓ ପରୋକ୍ଷ ହ୍ରାସ (Direct & Indirect Reduction)', 'LOGIC-2-2': 'ମିଶ୍ରିତ ନ୍ୟାୟବାକ୍ୟ: ପରିଚୟ (Mixed Syllogism: Introduction)', 'LOGIC-2-3': 'କଳ୍ପନାମୂଳକ-ବର୍ଗୀୟ (Hypothetical-Categorical)', 'LOGIC-2-4': 'ବିକଳ୍ପମୂଳକ-ବର୍ଗୀୟ (Alternative-Categorical)', 'LOGIC-2-5': 'ପୃଥକ୍କାରୀ-ବର୍ଗୀୟ (Disjunctive-Categorical)', 'LOGIC-2-6': 'ଦ୍ୱନ୍ଦ୍ୱ: ପରିଚୟ (Dilemma: Introduction)', 'LOGIC-2-7': 'ଦ୍ୱନ୍ଦ୍ୱର ପ୍ରକାର (Forms of Dilemma)', 'LOGIC-2-8': 'ଦ୍ୱନ୍ଦ୍ୱର ଖଣ୍ଡନ (Refutation of Dilemma)', 'LOGIC-2-9': 'ଦ୍ୱନ୍ଦ୍ୱର ପ୍ରତ୍ୟାଖଣ (Rebuttal of Dilemma)', 'LOGIC-2-10': 'ମିଶ୍ରିତ ନ୍ୟାୟବାକ୍ୟ: ସମୀକ୍ଷା (Mixed Syllogism: Review)',
+    'LOGIC-3-1': 'ଦୋଷର ପ୍ରକୃତି (Nature of Fallacy)', 'LOGIC-3-2': 'ନିଗମନାତ୍ମକ ଦୋଷ (Deductive Fallacies)', 'LOGIC-3-3': 'ଅର୍ଦ୍ଧ-ତାର୍କିକ ଦୋଷ (Semi-Logical Fallacies)', 'LOGIC-3-4': 'ଆଗମନାତ୍ମକ ଦୋଷ (Inductive Fallacies)', 'LOGIC-3-5': 'ପ୍ରସ୍ତାବାତ୍ମକ ତର୍କର ଦୋଷ (Fallacies of Propositional Logic)', 'LOGIC-3-6': 'ପ୍ରତୀକାତ୍ମକ ତର୍କ: ବୈଶିଷ୍ଟ୍ୟ (Symbolic Logic: Characteristics)', 'LOGIC-3-7': 'ପ୍ରସ୍ତାବ ଚଳ ଓ ତାର୍କିକ ସ୍ଥିରାଙ୍କ (Propositional Variables & Logical Constants)', 'LOGIC-3-8': 'ସତ୍ୟ ଫଳନ (Truth Functions)', 'LOGIC-3-9': 'ସତ୍ୟ ସାରଣୀ ନିର୍ମାଣ (Construction of Truth Tables)', 'LOGIC-3-10': 'ବୈଧତା ପରୀକ୍ଷଣ (Testing Validity by Truth Table)',
+    'LOGIC-4-1': 'ପରୀକ୍ଷଣମୂଳକ ଅନୁସନ୍ଧାନ (Experimental Enquiry)', 'LOGIC-4-2': 'ମିଲଙ୍କ ପ୍ରଥମ ପଦ୍ଧତି: ସାଦୃଶ୍ୟ (Mill\'s Method of Agreement)', 'LOGIC-4-3': 'ଦ୍ୱିତୀୟ ପଦ୍ଧତି: ବୈସାଦୃଶ୍ୟ (Method of Difference)', 'LOGIC-4-4': 'ତୃତୀୟ ପଦ୍ଧତି: ମିଶ୍ରିତ (Joint Method)', 'LOGIC-4-5': 'ଚତୁର୍ଥ ପଦ୍ଧତି: ଅବଶିଷ୍ଟ (Method of Residues)', 'LOGIC-4-6': 'ପଞ୍ଚମ ପଦ୍ଧତି: ସହଭେଦ (Method of Concomitant Variations)', 'LOGIC-4-7': 'ବୈଜ୍ଞାନିକ ବ୍ୟାଖ୍ୟା: ପ୍ରକୃତି (Scientific Explanation: Nature)', 'LOGIC-4-8': 'ବୈଜ୍ଞାନିକ ବ୍ୟାଖ୍ୟାର ପ୍ରକାର (Types of Scientific Explanation)', 'LOGIC-4-9': 'ଅନୁମାନ ଓ ପରୀକ୍ଷଣ (Hypothesis & Testing)', 'LOGIC-4-10': 'ବୈଜ୍ଞାନିକ ପଦ୍ଧତି: ସମୀକ୍ଷା (Scientific Methods: Review)',
+    'LOGIC-5-1': 'ନ୍ୟାୟ ଜ୍ଞାନତତ୍ତ୍ୱ (Nyaya Theory of Knowledge)', 'LOGIC-5-2': 'ପ୍ରତ୍ୟକ୍ଷ ପ୍ରମାଣ (Perception)', 'LOGIC-5-3': 'ଅନୁମାନ ପ୍ରମାଣ (Inference in Nyaya)', 'LOGIC-5-4': 'ବ୍ୟାପ୍ତି (Vyapti)', 'LOGIC-5-5': 'ବ୍ୟାପ୍ତି ନିର୍ଣ୍ଣୟ (Ascertainment of Vyapti)', 'LOGIC-5-6': 'କର୍ମ ସିଦ୍ଧାନ୍ତ (Doctrine of Karma)', 'LOGIC-5-7': 'ଭଗବଦ୍‌ଗୀତାର ନିଷ୍କାମ କର୍ମ - ୧ (Niskama Karma of Gita - 1)', 'LOGIC-5-8': 'ଭଗବଦ୍‌ଗୀତାର ନିଷ୍କାମ କର୍ମ - ୨ (Niskama Karma of Gita - 2)', 'LOGIC-5-9': 'ଗାନ୍ଧୀଙ୍କ ଅହିଂସା ଧାରଣା (Gandhian Concept of Non-Violence)', 'LOGIC-5-10': 'ଭାରତୀୟ ତର୍କଶାସ୍ତ୍ର: ସମୀକ୍ଷା (Indian Logic: Review)',
+    'EDU-1-1': 'ମହାନ ଶିକ୍ଷାବିତ୍ - ପରିଚୟ (Great Educators - Intro)', 'EDU-1-2': 'ମହାତ୍ମା ଗାନ୍ଧୀ - ଶିକ୍ଷା ଦର୍ଶନ (Gandhi - Philosophy)', 'EDU-1-3': 'ମହାତ୍ମା ଗାନ୍ଧୀ - ମୌଳିକ ଶିକ୍ଷା (Gandhi - Basic Education)', 'EDU-1-4': 'ପଣ୍ଡିତ ଗୋପବନ୍ଧୁ - ଜୀବନ ଓ ଅବଦାନ (Gopabandhu - Life)', 'EDU-1-5': 'ପଣ୍ଡିତ ଗୋପବନ୍ଧୁ - ସାମାଜିକ ସଂସ୍କାର (Gopabandhu - Reform)', 'EDU-1-6': 'ଶ୍ରୀ ଅରବିନ୍ଦ - ସମଗ୍ର ଶିକ୍ଷା (Aurobindo - Integral Ed.)', 'EDU-1-7': 'ଶ୍ରୀ ଅରବିନ୍ଦ - ଆଧ୍ୟାତ୍ମିକ ଶିକ୍ଷା (Aurobindo - Spiritual)', 'EDU-1-8': 'ରୁସୋ - ପ୍ରାକୃତିକବାଦ (Rousseau - Naturalism)', 'EDU-1-9': 'ଜନ୍ ଡିୱି - ପ୍ରଗତିଶୀଳ ଶିକ୍ଷା (Dewey - Progressive Ed.)', 'EDU-1-10': 'ଶିକ୍ଷା ଦର୍ଶନର ତୁଳନା (Comparative Analysis)',
+    'EDU-2-1': 'ଶିକ୍ଷଣ - ଅର୍ଥ, ପ୍ରକୃତି ଓ କାରକ (Learning - Meaning)', 'EDU-2-2': 'ପରୀକ୍ଷଣ ଓ ଭୁଲ ସିଦ୍ଧାନ୍ତ (Trial & Error Theory)', 'EDU-2-3': 'ଶାସ୍ତ୍ରୀୟ ସଂଯୋଗ ସିଦ୍ଧାନ୍ତ (Classical Conditioning)', 'EDU-2-4': 'ଶାସ୍ତ୍ରୀୟ ସଂଯୋଗର ପ୍ରୟୋଗ (Conditioning Applications)', 'EDU-2-5': 'ଅନ୍ତର୍ଦୃଷ୍ଟିମୂଳକ ଶିକ୍ଷଣ (Insightful Learning)', 'EDU-2-6': 'ପର୍ଯ୍ୟବେକ୍ଷଣମୂଳକ ଶିକ୍ଷଣ (Observational Learning)', 'EDU-2-7': 'ଜ୍ଞାନ ନିର୍ମାଣ ରୂପେ ଶିକ୍ଷଣ (Learning as Construction)', 'EDU-2-8': 'ପ୍ରେରଣା - ଅର୍ଥ ଓ ପ୍ରକାର (Motivation - Types)', 'EDU-2-9': 'ପ୍ରେରଣା କୌଶଳ (Motivation Techniques)', 'EDU-2-10': 'ଶିକ୍ଷଣ ସିଦ୍ଧାନ୍ତର ସମନ୍ୱୟ (Theory Integration)',
+    'EDU-3-1': 'ପ୍ରାଥମିକ ଶିକ୍ଷାର ସର୍ବଜନୀକରଣ (UEE)', 'EDU-3-2': 'ଶିକ୍ଷାର ଅଧିକାର ଆଇନ (RTE Act)', 'EDU-3-3': 'ଜାତୀୟ ଏକତା ପାଇଁ ଶିକ୍ଷା (National Integration)', 'EDU-3-4': 'ଆନ୍ତର୍ଜାତୀୟ ବୁଝାମଣା ପାଇଁ ଶିକ୍ଷା (International Understanding)', 'EDU-3-5': 'ପରିବେଶ ଶିକ୍ଷା - ଧାରଣା (Environmental Ed. - Concept)', 'EDU-3-6': 'ପରିବେଶ ଶିକ୍ଷା - ରଣନୀତି (Environmental Ed. - Strategies)', 'EDU-3-7': 'ମୂଲ୍ୟ ଓ ମାନବାଧିକାର ଶିକ୍ଷା (Value & Human Rights Ed.)', 'EDU-3-8': 'ଶିକ୍ଷାରେ ଆଇସିଟି (ICT in Education)', 'EDU-3-9': 'ଆଇସିଟି ଉପକରଣ ଓ ଡିଜିଟାଲ୍ ସମ୍ବଳ (ICT Tools)', 'EDU-3-10': 'ଜୀବନ କୌଶଳ ଶିକ୍ଷା (Life Skills Education)',
+    'EDU-4-1': 'ପରିସଂଖ୍ୟାନ - ଅର୍ଥ ଓ ଉପଯୋଗ (Statistics - Meaning)', 'EDU-4-2': 'ବାରମ୍ବାରତା ବଣ୍ଟନ (Frequency Distribution)', 'EDU-4-3': 'ଆଲେଖ୍ୟ ଉପସ୍ଥାପନା - ହିଷ୍ଟୋଗ୍ରାମ୍ (Histogram)', 'EDU-4-4': 'ଆଲେଖ୍ୟ ଉପସ୍ଥାପନା - ବହୁଭୁଜ (Frequency Polygon)', 'EDU-4-5': 'ଆଲେଖ୍ୟ ଉପସ୍ଥାପନା - ପାଇ ଚାର୍ଟ (Pie Chart)', 'EDU-4-6': 'କେନ୍ଦ୍ରୀୟ ପ୍ରବୃତ୍ତି - ପରିଚୟ (Central Tendency - Intro)', 'EDU-4-7': 'ଗଣନ ମାଧ୍ୟ - ଗଣନା ଓ ଉପଯୋଗ (Mean - Calculation)', 'EDU-4-8': 'ମଧ୍ୟମା - ଗଣନା ଓ ଉପଯୋଗ (Median - Calculation)', 'EDU-4-9': 'ବହୁଳକ - ଗଣନା ଓ ଉପଯୋଗ (Mode - Calculation)', 'EDU-4-10': 'କେନ୍ଦ୍ରୀୟ ପ୍ରବୃତ୍ତିର ତୁଳନା (Central Tendency Comparison)',
+    'PSY-1-1': 'ଜୀବନକାଳ ବିକାଶ (Life span development)', 'PSY-1-2': 'ବିକାଶର ଅର୍ଥ ଓ ଦୃଷ୍ଟିକୋଣ (Meaning & Perspective of Development)', 'PSY-1-3': 'ବିକାଶର ନୀତି (Principles of Development)', 'PSY-1-4': 'ବିକାଶର ପର୍ଯ୍ୟାୟ (Stages of Development)', 'PSY-1-5': 'ଆତ୍ମ ଓ ବ୍ୟକ୍ତିତ୍ୱ (Self & Personality)', 'PSY-1-6': 'ଆତ୍ମ ଓ ବ୍ୟକ୍ତିତ୍ୱର ଧାରଣା (Concept of Self & Personality)', 'PSY-1-7': 'ବ୍ୟକ୍ତିତ୍ୱର ପ୍ରକାର (Personality Types)', 'PSY-1-8': 'ବ୍ୟକ୍ତିତ୍ୱର ଗୁଣ (Personality Traits)', 'PSY-1-9': 'ବ୍ୟକ୍ତିତ୍ୱର ମୂଲ୍ୟାୟନ (Assessment of Personality)', 'PSY-1-10': 'ବ୍ୟକ୍ତିତ୍ୱ ମୂଲ୍ୟାୟନ ପଦ୍ଧତି (Personality Assessment Methods)',
+    'PSY-2-1': 'ଚାପ: ଜୀବନର ଆହ୍ୱାନ (Stress: Meeting Life Challenges)', 'PSY-2-2': 'ଚାପର ଅର୍ଥ ଓ ପ୍ରକୃତି (Meaning & Nature of Stress)', 'PSY-2-3': 'ଚାପର କାରଣ (Causes of Stress)', 'PSY-2-4': 'ଚାପ ମୁକାବିଲା କୌଶଳ (Coping Strategies for Stress)', 'PSY-2-5': 'ଚାପ ପରିଚାଳନା (Stress Management)', 'PSY-2-6': 'ଭୌତିକ ପରିବେଶ ଓ ଆଚରଣ (Physical Environment & Behaviour)', 'PSY-2-7': 'ପରିବେଶ ଉପରେ ମାନବ ପ୍ରଭାବ (Human Impact on Environment)', 'PSY-2-8': 'ଶବ୍ଦ ପ୍ରଦୂଷଣ ଓ ଭିଡ଼ (Noise Pollution & Crowding)', 'PSY-2-9': 'ପ୍ରାକୃତିକ ବିପର୍ଯ୍ୟୟ (Natural Disaster)', 'PSY-2-10': 'ମାନବ ଆଚରଣ ଉପରେ ପରିବେଶର ପ୍ରଭାବ (Impact of Environment on Human Behaviour)',
+    'PSY-3-1': 'ଗୋଷ୍ଠୀ ପ୍ରକ୍ରିୟା ଓ ନେତୃତ୍ୱ (Group Processes & Leadership)', 'PSY-3-2': 'ଗୋଷ୍ଠୀର ପ୍ରକୃତି (Nature of Groups)', 'PSY-3-3': 'ଗୋଷ୍ଠୀର ପ୍ରକାର (Types of Groups)', 'PSY-3-4': 'ଗୋଷ୍ଠୀ ଗଠନ (Group Formation)', 'PSY-3-5': 'ନେତୃତ୍ୱର ପ୍ରକୃତି (Nature of Leadership)', 'PSY-3-6': 'ନେତୃତ୍ୱର କାର୍ଯ୍ୟ ଓ ଶୈଳୀ (Functions & Styles of Leadership)', 'PSY-3-7': 'ପରାମର୍ଶ ପ୍ରକ୍ରିୟା (Counselling Processes)', 'PSY-3-8': 'ପରାମର୍ଶର ଅର୍ଥ ଓ ଧାରଣା (Meaning & Concept of Counselling)', 'PSY-3-9': 'ପରାମର୍ଶର ଲକ୍ଷ୍ୟ (Goals of Counselling)', 'PSY-3-10': 'ପ୍ରଭାବଶାଳୀ ପରାମର୍ଶଦାତାର ଗୁଣ (Characteristics of Effective Counsellor)',
+    'PSY-4-1': 'ମାନସିକ ବିକୃତି (Psychological Disorder)', 'PSY-4-2': 'ସ୍ୱାଭାବିକତା ଓ ଅସ୍ୱାଭାବିକତା (Normality & Abnormality)', 'PSY-4-3': 'ଅସ୍ୱାଭାବିକ ଆଚରଣର ମାନଦଣ୍ଡ (Criteria of Abnormal Behaviour)', 'PSY-4-4': 'ଅସ୍ୱାଭାବିକ ଆଚରଣର କାରଣ (Causal Factors of Abnormal Behaviour)', 'PSY-4-5': 'ଚିନ୍ତା ବିକୃତି (Anxiety Disorders)', 'PSY-4-6': 'ଶାରୀରିକ ରୂପ ବିକୃତି (Somatoform Disorder)', 'PSY-4-7': 'ମନୋଭାବ ବିକୃତି (Mood Disorders)', 'PSY-4-8': 'ଚିକିତ୍ସା ପଦ୍ଧତି (Therapeutic Approaches)', 'PSY-4-9': 'ଚିକିତ୍ସାର ପ୍ରକାର - ମନୋଚିକିତ୍ସା ଓ ଆଚରଣ ଚିକିତ୍ସା (Psychotherapy & Behaviour Therapy)', 'PSY-4-10': 'ଜ୍ଞାନାତ୍ମକ ଓ ଜୈବିକ ଚିକିତ୍ସା (Cognitive & Biomedical Therapy)',
+    'PSY-5-1': 'ମନୋବିଜ୍ଞାନରେ ପରିସଂଖ୍ୟାନ (Statistics in Psychology)', 'PSY-5-2': 'ପରିସଂଖ୍ୟାନର ମହତ୍ତ୍ୱ (Importance of Statistics)', 'PSY-5-3': 'ବାରମ୍ବାରତା ବଣ୍ଟନ (Frequency Distribution)', 'PSY-5-4': 'ବାରମ୍ବାରତା ସାରଣୀ (Frequency Table)', 'PSY-5-5': 'କେନ୍ଦ୍ରୀୟ ପ୍ରବୃତ୍ତି ମାପ (Measures of Central Tendency)', 'PSY-5-6': 'ଗଡ଼ (Mean)', 'PSY-5-7': 'ମଧ୍ୟମା (Median)', 'PSY-5-8': 'ବହୁଳକ (Mode)', 'PSY-5-9': 'କେନ୍ଦ୍ରୀୟ ପ୍ରବୃତ୍ତିର ଗଣନା (Computation of Central Tendency)', 'PSY-5-10': 'କେନ୍ଦ୍ରୀୟ ପ୍ରବୃତ୍ତିର ବ୍ୟବହାର (Uses of Central Tendency)',
+    'ANTH-1-1': 'ଜନଜାତି - ପରିଭାଷା ଓ ବୈଶିଷ୍ଟ୍ୟ (Tribe - Definition & Features)', 'ANTH-1-2': 'ଅନୁସୂଚିତ ଜନଜାତି (Scheduled Tribes)', 'ANTH-1-3': 'ଓଡ଼ିଶାର ପ୍ରମୁଖ ଜନଜାତି ଓ ବଣ୍ଟନ (Major Tribes of Odisha)', 'ANTH-1-4': 'ଅତି ଦୁର୍ବଳ ଜନଜାତି ଗୋଷ୍ଠୀ (Vulnerable Tribal Groups)', 'ANTH-1-5': 'ପରିବାର - ପରିଭାଷା, ବୈଶିଷ୍ଟ୍ୟ ଓ କାର୍ଯ୍ୟ (Family - Definition, Features & Functions)', 'ANTH-1-6': 'ପରିବାରର ପ୍ରକାର (Types of Family)', 'ANTH-1-7': 'ବିବାହ - ପରିଭାଷା ଓ ପ୍ରକାର (Marriage - Definition & Forms)', 'ANTH-1-8': 'ବିବାହ ନିୟମ (Marriage Rules)', 'ANTH-1-9': 'ସମ୍ପର୍କ - ପରିଭାଷା ଓ ବର୍ଗ (Kinship - Definition & Categories)', 'ANTH-1-10': 'ସମ୍ପର୍କର ଡିଗ୍ରୀ ଓ ନାମକରଣ (Degree of Kinship & Terminology)', 'ANTH-1-11': 'ବଂଶ ଓ ବଂଶ ଗୋଷ୍ଠୀ (Descent & Descent Groups)', 'ANTH-1-12': 'ସମ୍ପର୍କ ବ୍ୟବହାର (Kinship Usages)', 'ANTH-1-13': 'ସଂଗଠନ - ପ୍ରକାର (Associations - Types)',
+    'ANTH-2-1': 'ଜୀବାଶ୍ମ ଅଧ୍ୟୟନ (Study of Fossils)', 'ANTH-2-2': 'ଅଷ୍ଟ୍ରାଲୋପିଥେସିନ୍ (Australopithecine)', 'ANTH-2-3': 'ହୋମୋ ଇରେକ୍ଟସ୍ - ପିଥେକାନଥ୍ରୋପସ୍ (Homo Erectus - Pithecanthropus)', 'ANTH-2-4': 'ସିନାନଥ୍ରୋପସ୍ ପେକିନେସିସ୍ (Sinanthropus Pekinesis)', 'ANTH-2-5': 'ନିଏଣ୍ଡରଥାଲ୍ ମାନବ (Neanderthal Man)', 'ANTH-2-6': 'ହୋମୋ ସାପିଏନ୍ସ - କ୍ରୋମାଗନନ୍ ମାନବ (Homo Sapiens - Cromagnon Man)', 'ANTH-2-7': 'ଜୈବିକ ବିବର୍ତ୍ତନ ସିଦ୍ଧାନ୍ତ (Theories of Organic Evolution)', 'ANTH-2-8': 'ଲାମାର୍କବାଦ (Lamarckism)', 'ANTH-2-9': 'ଡାରୱିନବାଦ (Darwinism)', 'ANTH-2-10': 'ନବ-ଡାରୱିନବାଦ (Neo-Darwinism)',
+    'ANTH-3-1': 'ଭାରତର ପାଲିଓଲିଥିକ୍ ସଂସ୍କୃତି (Paleolithic Culture of India)', 'ANTH-3-2': 'ଭାରତର ମେସୋଲିଥିକ୍ ସଂସ୍କୃତି (Mesolithic Culture of India)', 'ANTH-3-3': 'ଭାରତର ନିଓଲିଥିକ୍ ସଂସ୍କୃତି (Neolithic Culture of India)', 'ANTH-3-4': 'ସିନ୍ଧୁ ଉପତ୍ୟକା ସଭ୍ୟତା (Indus Valley Civilization)',
+    'HOMESC-1-1': 'ଶିଶୁ ଆହାର (Feeding the Baby)', 'HOMESC-1-2': 'ସ୍ତନ୍ୟପାନ ଓ କୃତ୍ରିମ ଆହାର (Breast & Artificial Feeding)', 'HOMESC-1-3': 'ଦୁଗ୍ଧ ତ୍ୟାଗ ଓ ଆହାର ଉପକରଣ (Weaning & Feeding Equipment)', 'HOMESC-1-4': 'ଶିଶୁ ପ୍ରତିରୋଧକ ଟିକା (Immunizations)', 'HOMESC-1-5': 'ଶିଶୁର ସାଧାରଣ ରୋଗ (Common Ailments)', 'HOMESC-1-6': 'ଶିଶୁ ଓ ମାତୃ ମୃତ୍ୟୁ ନିବାରଣ (Infant & Maternal Mortality Prevention)', 'HOMESC-1-7': 'କିଶୋର ବିକାଶ ଅର୍ଥ (Meaning of Adolescent Development)', 'HOMESC-1-8': 'କିଶୋରାବସ୍ଥାର ପରିବର୍ତ୍ତନ (Changes in Adolescence)', 'HOMESC-1-9': 'କିଶୋରାବସ୍ଥାର ସମସ୍ୟା (Problems in Adolescence)', 'HOMESC-1-10': 'କିଶୋର ସମସ୍ୟାରେ ପିତାମାତାଙ୍କ ଭୂମିକା (Role of Parents)',
+    'HOMESC-2-1': 'କାର୍ବୋହାଇଡ୍ରେଟ୍ (Carbohydrate)', 'HOMESC-2-2': 'ପ୍ରୋଟିନ୍ ଓ ଚର୍ବି (Protein & Fat)', 'HOMESC-2-3': 'ଭିଟାମିନ୍ A, D, E, K', 'HOMESC-2-4': 'ବି କମ୍ପ୍ଲେକ୍ସ ଭିଟାମିନ୍ (B Complex Vitamins)', 'HOMESC-2-5': 'ଭିଟାମିନ୍ C ଓ ଖଣିଜ ପଦାର୍ଥ (Vitamin C & Minerals)', 'HOMESC-2-6': 'କୋଷର ଗଠନ ଓ କାର୍ଯ୍ୟ (Cell Structure & Functions)', 'HOMESC-2-7': 'ରକ୍ତର ଗଠନ ଓ କାର୍ଯ୍ୟ (Blood Composition & Functions)', 'HOMESC-2-8': 'ପାଚନ ତନ୍ତ୍ର (Digestive System)', 'HOMESC-2-9': 'ପାଚକ ରସ ଓ ପୋଷକ ପଦାର୍ଥ ପାଚନ (Digestive Juices & Nutrient Digestion)', 'HOMESC-2-10': 'ପାଚନରେ ସହାୟକ ଅଙ୍ଗ (Accessory Organs in Digestion)',
+    'HOMESC-3-1': 'ବସ୍ତ୍ର ଧୋଇବା ପଦ୍ଧତି (Methods of Laundering)', 'HOMESC-3-2': 'ସୂତା, ଲୋମ ଓ ରେଶମ ବସ୍ତ୍ର ଧୋଇବା (Washing Cotton, Wool & Silk)', 'HOMESC-3-3': 'ଦାଗ ଅପସାରଣ (Stain Removal)', 'HOMESC-3-4': 'ପାରିବାରିକ ଆୟର ପ୍ରକାର (Types of Family Income)', 'HOMESC-3-5': 'ପାରିବାରିକ ଆୟ ଉତ୍ସ ଓ ବୃଦ୍ଧି (Sources & Supplementing Family Income)', 'HOMESC-3-6': 'ଗୃହସ୍ଥ ହିସାବ ଓ ସଞ୍ଚୟ (Household Accounts & Savings)', 'HOMESC-3-7': 'ଗୃହରେ ରଙ୍ଗ ବ୍ୟବହାର (Use of Colour in Home)', 'HOMESC-3-8': 'ରଙ୍ଗ ସଂଯୋଜନ ନିୟମ (Principles of Colour Combination)', 'HOMESC-3-9': 'ରଙ୍ଗ ସଂଯୋଜନ ଯୋଜନା (Colour Combination Schemes)', 'HOMESC-3-10': 'ବିଭିନ୍ନ କୋଠରୀରେ ରଙ୍ଗ ବ୍ୟବହାର (Use of Colour in Different Rooms)'
 };
 
-function openInfo(key) {
-    const c = infoContent[key];
-    if (!c) return;
-    document.getElementById('infoTitle').textContent = c.title;
-    document.getElementById('infoBody').innerHTML    = c.body;
-    document.getElementById('infoModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeInfo() {
-    document.getElementById('infoModal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-function handleInfoClick(e) {
-    if (e.target === document.getElementById('infoModal')) closeInfo();
+const classSchedule = {
+    'POLSCI-1-1': { available: true }, 'POLSCI-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'POLSCI-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'POLSCI-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'POLSCI-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'POLSCI-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'POLSCI-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'POLSCI-1-8': { available: false, releaseDate: '2026-01-08 10:00' },
+    'POLSCI-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'POLSCI-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'POLSCI-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'POLSCI-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'POLSCI-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'POLSCI-2-6': { available: false, releaseDate: '2026-01-16 10:00' },
+    'POLSCI-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'POLSCI-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'POLSCI-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'POLSCI-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'POLSCI-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'POLSCI-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'POLSCI-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'POLSCI-3-8': { available: false, releaseDate: '2026-01-28 10:00' },
+    'POLSCI-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'POLSCI-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'POLSCI-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'POLSCI-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'POLSCI-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'POLSCI-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'POLSCI-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'POLSCI-4-8': { available: false, releaseDate: '2026-02-07 10:00' },
+    'POLSCI-5-1': { available: false, releaseDate: '2026-02-11 10:00' }, 'POLSCI-5-2': { available: false, releaseDate: '2026-02-12 10:00' }, 'POLSCI-5-3': { available: false, releaseDate: '2026-02-13 10:00' }, 'POLSCI-5-4': { available: false, releaseDate: '2026-02-14 10:00' }, 'POLSCI-5-5': { available: false, releaseDate: '2026-02-15 10:00' }, 'POLSCI-5-6': { available: false, releaseDate: '2026-02-16 10:00' }, 'POLSCI-5-7': { available: false, releaseDate: '2026-02-17 10:00' }, 'POLSCI-5-8': { available: false, releaseDate: '2026-02-18 10:00' }, 'POLSCI-5-9': { available: false, releaseDate: '2026-02-19 10:00' },
+    'HIST-1-1': { available: true }, 'HIST-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'HIST-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'HIST-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'HIST-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'HIST-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'HIST-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'HIST-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'HIST-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'HIST-1-10': { available: false, releaseDate: '2026-01-10 10:00' },
+    'HIST-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'HIST-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'HIST-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'HIST-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'HIST-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'HIST-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'HIST-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'HIST-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'HIST-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'HIST-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'HIST-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'HIST-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'HIST-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'HIST-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'HIST-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'HIST-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'HIST-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'HIST-3-8': { available: false, releaseDate: '2026-01-28 10:00' }, 'HIST-3-9': { available: false, releaseDate: '2026-01-29 10:00' }, 'HIST-3-10': { available: false, releaseDate: '2026-01-30 10:00' },
+    'HIST-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'HIST-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'HIST-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'HIST-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'HIST-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'HIST-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'HIST-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'HIST-4-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'HIST-4-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'HIST-4-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'HIST-5-1': { available: false, releaseDate: '2026-02-11 10:00' }, 'HIST-5-2': { available: false, releaseDate: '2026-02-12 10:00' }, 'HIST-5-3': { available: false, releaseDate: '2026-02-13 10:00' }, 'HIST-5-4': { available: false, releaseDate: '2026-02-14 10:00' }, 'HIST-5-5': { available: false, releaseDate: '2026-02-15 10:00' }, 'HIST-5-6': { available: false, releaseDate: '2026-02-16 10:00' }, 'HIST-5-7': { available: false, releaseDate: '2026-02-17 10:00' }, 'HIST-5-8': { available: false, releaseDate: '2026-02-18 10:00' }, 'HIST-5-9': { available: false, releaseDate: '2026-02-19 10:00' }, 'HIST-5-10': { available: false, releaseDate: '2026-02-20 10:00' },
+    'SOC-1-1': { available: true }, 'SOC-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'SOC-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'SOC-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'SOC-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'SOC-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'SOC-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'SOC-1-8': { available: false, releaseDate: '2026-01-08 10:00' },
+    'SOC-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'SOC-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'SOC-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'SOC-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'SOC-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'SOC-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'SOC-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'SOC-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'SOC-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'SOC-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'SOC-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'SOC-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'SOC-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'SOC-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'SOC-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'SOC-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'SOC-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'SOC-3-8': { available: false, releaseDate: '2026-01-28 10:00' },
+    'SOC-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'SOC-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'SOC-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'SOC-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'SOC-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'SOC-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'SOC-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'SOC-4-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'SOC-4-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'SOC-4-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'SOC-5-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'SOC-5-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'SOC-5-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'SOC-5-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'SOC-5-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'SOC-5-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'SOC-5-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'SOC-5-8': { available: false, releaseDate: '2026-02-07 10:00' },
+    'ECON-1-1': { available: true }, 'ECON-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'ECON-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'ECON-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'ECON-1-5': { available: false, releaseDate: '2026-01-05 10:00' },
+    'ECON-2-1': { available: false, releaseDate: '2026-01-06 10:00' }, 'ECON-2-2': { available: false, releaseDate: '2026-01-07 10:00' }, 'ECON-2-3': { available: false, releaseDate: '2026-01-08 10:00' }, 'ECON-2-4': { available: false, releaseDate: '2026-01-09 10:00' }, 'ECON-2-5': { available: false, releaseDate: '2026-01-10 10:00' }, 'ECON-2-6': { available: false, releaseDate: '2026-01-11 10:00' },
+    'ECON-3-1': { available: false, releaseDate: '2026-01-12 10:00' }, 'ECON-3-2': { available: false, releaseDate: '2026-01-13 10:00' }, 'ECON-3-3': { available: false, releaseDate: '2026-01-14 10:00' }, 'ECON-3-4': { available: false, releaseDate: '2026-01-15 10:00' },
+    'ECON-4-1': { available: false, releaseDate: '2026-01-16 10:00' }, 'ECON-4-2': { available: false, releaseDate: '2026-01-17 10:00' }, 'ECON-4-3': { available: false, releaseDate: '2026-01-18 10:00' }, 'ECON-4-4': { available: false, releaseDate: '2026-01-19 10:00' }, 'ECON-4-5': { available: false, releaseDate: '2026-01-20 10:00' },
+    'ECON-5-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'ECON-5-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'ECON-5-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'ECON-5-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'ECON-5-5': { available: false, releaseDate: '2026-01-25 10:00' },
+    'ECON-6-1': { available: false, releaseDate: '2026-01-26 10:00' }, 'ECON-6-2': { available: false, releaseDate: '2026-01-27 10:00' }, 'ECON-6-3': { available: false, releaseDate: '2026-01-28 10:00' },
+    'ECON-7-1': { available: false, releaseDate: '2026-01-29 10:00' }, 'ECON-7-2': { available: false, releaseDate: '2026-01-30 10:00' }, 'ECON-7-3': { available: false, releaseDate: '2026-01-31 10:00' }, 'ECON-7-4': { available: false, releaseDate: '2026-02-01 10:00' }, 'ECON-7-5': { available: false, releaseDate: '2026-02-02 10:00' }, 'ECON-7-6': { available: false, releaseDate: '2026-02-03 10:00' },
+    'ECON-8-1': { available: false, releaseDate: '2026-02-04 10:00' }, 'ECON-8-2': { available: false, releaseDate: '2026-02-05 10:00' }, 'ECON-8-3': { available: false, releaseDate: '2026-02-06 10:00' }, 'ECON-8-4': { available: false, releaseDate: '2026-02-07 10:00' }, 'ECON-8-5': { available: false, releaseDate: '2026-02-08 10:00' }, 'ECON-8-6': { available: false, releaseDate: '2026-02-09 10:00' },
+    'LOGIC-1-1': { available: true }, 'LOGIC-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'LOGIC-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'LOGIC-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'LOGIC-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'LOGIC-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'LOGIC-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'LOGIC-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'LOGIC-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'LOGIC-1-10': { available: false, releaseDate: '2026-01-10 10:00' },
+    'LOGIC-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'LOGIC-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'LOGIC-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'LOGIC-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'LOGIC-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'LOGIC-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'LOGIC-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'LOGIC-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'LOGIC-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'LOGIC-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'LOGIC-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'LOGIC-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'LOGIC-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'LOGIC-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'LOGIC-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'LOGIC-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'LOGIC-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'LOGIC-3-8': { available: false, releaseDate: '2026-01-28 10:00' }, 'LOGIC-3-9': { available: false, releaseDate: '2026-01-29 10:00' }, 'LOGIC-3-10': { available: false, releaseDate: '2026-01-30 10:00' },
+    'LOGIC-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'LOGIC-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'LOGIC-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'LOGIC-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'LOGIC-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'LOGIC-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'LOGIC-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'LOGIC-4-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'LOGIC-4-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'LOGIC-4-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'LOGIC-5-1': { available: false, releaseDate: '2026-02-11 10:00' }, 'LOGIC-5-2': { available: false, releaseDate: '2026-02-12 10:00' }, 'LOGIC-5-3': { available: false, releaseDate: '2026-02-13 10:00' }, 'LOGIC-5-4': { available: false, releaseDate: '2026-02-14 10:00' }, 'LOGIC-5-5': { available: false, releaseDate: '2026-02-15 10:00' }, 'LOGIC-5-6': { available: false, releaseDate: '2026-02-16 10:00' }, 'LOGIC-5-7': { available: false, releaseDate: '2026-02-17 10:00' }, 'LOGIC-5-8': { available: false, releaseDate: '2026-02-18 10:00' }, 'LOGIC-5-9': { available: false, releaseDate: '2026-02-19 10:00' }, 'LOGIC-5-10': { available: false, releaseDate: '2026-02-20 10:00' },
+    'EDU-1-1': { available: true }, 'EDU-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'EDU-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'EDU-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'EDU-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'EDU-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'EDU-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'EDU-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'EDU-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'EDU-1-10': { available: false, releaseDate: '2026-01-10 10:00' },
+    'EDU-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'EDU-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'EDU-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'EDU-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'EDU-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'EDU-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'EDU-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'EDU-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'EDU-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'EDU-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'EDU-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'EDU-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'EDU-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'EDU-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'EDU-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'EDU-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'EDU-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'EDU-3-8': { available: false, releaseDate: '2026-01-28 10:00' }, 'EDU-3-9': { available: false, releaseDate: '2026-01-29 10:00' }, 'EDU-3-10': { available: false, releaseDate: '2026-01-30 10:00' },
+    'EDU-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'EDU-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'EDU-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'EDU-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'EDU-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'EDU-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'EDU-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'EDU-4-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'EDU-4-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'EDU-4-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'PSY-1-1': { available: true }, 'PSY-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'PSY-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'PSY-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'PSY-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'PSY-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'PSY-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'PSY-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'PSY-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'PSY-1-10': { available: false, releaseDate: '2026-01-10 10:00' },
+    'PSY-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'PSY-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'PSY-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'PSY-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'PSY-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'PSY-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'PSY-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'PSY-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'PSY-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'PSY-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'PSY-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'PSY-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'PSY-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'PSY-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'PSY-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'PSY-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'PSY-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'PSY-3-8': { available: false, releaseDate: '2026-01-28 10:00' }, 'PSY-3-9': { available: false, releaseDate: '2026-01-29 10:00' }, 'PSY-3-10': { available: false, releaseDate: '2026-01-30 10:00' },
+    'PSY-4-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'PSY-4-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'PSY-4-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'PSY-4-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'PSY-4-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'PSY-4-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'PSY-4-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'PSY-4-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'PSY-4-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'PSY-4-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'PSY-5-1': { available: false, releaseDate: '2026-01-31 10:00' }, 'PSY-5-2': { available: false, releaseDate: '2026-02-01 10:00' }, 'PSY-5-3': { available: false, releaseDate: '2026-02-02 10:00' }, 'PSY-5-4': { available: false, releaseDate: '2026-02-03 10:00' }, 'PSY-5-5': { available: false, releaseDate: '2026-02-04 10:00' }, 'PSY-5-6': { available: false, releaseDate: '2026-02-05 10:00' }, 'PSY-5-7': { available: false, releaseDate: '2026-02-06 10:00' }, 'PSY-5-8': { available: false, releaseDate: '2026-02-07 10:00' }, 'PSY-5-9': { available: false, releaseDate: '2026-02-08 10:00' }, 'PSY-5-10': { available: false, releaseDate: '2026-02-09 10:00' },
+    'ANTH-1-1': { available: true }, 'ANTH-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'ANTH-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'ANTH-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'ANTH-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'ANTH-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'ANTH-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'ANTH-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'ANTH-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'ANTH-1-10': { available: false, releaseDate: '2026-01-10 10:00' }, 'ANTH-1-11': { available: false, releaseDate: '2026-01-11 10:00' }, 'ANTH-1-12': { available: false, releaseDate: '2026-01-12 10:00' }, 'ANTH-1-13': { available: false, releaseDate: '2026-01-13 10:00' },
+    'ANTH-2-1': { available: false, releaseDate: '2026-01-14 10:00' }, 'ANTH-2-2': { available: false, releaseDate: '2026-01-15 10:00' }, 'ANTH-2-3': { available: false, releaseDate: '2026-01-16 10:00' }, 'ANTH-2-4': { available: false, releaseDate: '2026-01-17 10:00' }, 'ANTH-2-5': { available: false, releaseDate: '2026-01-18 10:00' }, 'ANTH-2-6': { available: false, releaseDate: '2026-01-19 10:00' }, 'ANTH-2-7': { available: false, releaseDate: '2026-01-20 10:00' }, 'ANTH-2-8': { available: false, releaseDate: '2026-01-21 10:00' }, 'ANTH-2-9': { available: false, releaseDate: '2026-01-22 10:00' }, 'ANTH-2-10': { available: false, releaseDate: '2026-01-23 10:00' },
+    'ANTH-3-1': { available: false, releaseDate: '2026-01-24 10:00' }, 'ANTH-3-2': { available: false, releaseDate: '2026-01-25 10:00' }, 'ANTH-3-3': { available: false, releaseDate: '2026-01-26 10:00' }, 'ANTH-3-4': { available: false, releaseDate: '2026-01-27 10:00' },
+    'HOMESC-1-1': { available: true }, 'HOMESC-1-2': { available: false, releaseDate: '2026-01-02 10:00' }, 'HOMESC-1-3': { available: false, releaseDate: '2026-01-03 10:00' }, 'HOMESC-1-4': { available: false, releaseDate: '2026-01-04 10:00' }, 'HOMESC-1-5': { available: false, releaseDate: '2026-01-05 10:00' }, 'HOMESC-1-6': { available: false, releaseDate: '2026-01-06 10:00' }, 'HOMESC-1-7': { available: false, releaseDate: '2026-01-07 10:00' }, 'HOMESC-1-8': { available: false, releaseDate: '2026-01-08 10:00' }, 'HOMESC-1-9': { available: false, releaseDate: '2026-01-09 10:00' }, 'HOMESC-1-10': { available: false, releaseDate: '2026-01-10 10:00' },
+    'HOMESC-2-1': { available: false, releaseDate: '2026-01-11 10:00' }, 'HOMESC-2-2': { available: false, releaseDate: '2026-01-12 10:00' }, 'HOMESC-2-3': { available: false, releaseDate: '2026-01-13 10:00' }, 'HOMESC-2-4': { available: false, releaseDate: '2026-01-14 10:00' }, 'HOMESC-2-5': { available: false, releaseDate: '2026-01-15 10:00' }, 'HOMESC-2-6': { available: false, releaseDate: '2026-01-16 10:00' }, 'HOMESC-2-7': { available: false, releaseDate: '2026-01-17 10:00' }, 'HOMESC-2-8': { available: false, releaseDate: '2026-01-18 10:00' }, 'HOMESC-2-9': { available: false, releaseDate: '2026-01-19 10:00' }, 'HOMESC-2-10': { available: false, releaseDate: '2026-01-20 10:00' },
+    'HOMESC-3-1': { available: false, releaseDate: '2026-01-21 10:00' }, 'HOMESC-3-2': { available: false, releaseDate: '2026-01-22 10:00' }, 'HOMESC-3-3': { available: false, releaseDate: '2026-01-23 10:00' }, 'HOMESC-3-4': { available: false, releaseDate: '2026-01-24 10:00' }, 'HOMESC-3-5': { available: false, releaseDate: '2026-01-25 10:00' }, 'HOMESC-3-6': { available: false, releaseDate: '2026-01-26 10:00' }, 'HOMESC-3-7': { available: false, releaseDate: '2026-01-27 10:00' }, 'HOMESC-3-8': { available: false, releaseDate: '2026-01-28 10:00' }, 'HOMESC-3-9': { available: false, releaseDate: '2026-01-29 10:00' }, 'HOMESC-3-10': { available: false, releaseDate: '2026-01-30 10:00' }
+};
+
+/* ═══════════════════════════════════════
+   APP STATE
+═══════════════════════════════════════ */
+let viewMode = 'subjects';
+let selectedSubject = null;
+let selectedUnit = null;
+let selectedClass = null;
+
+/* ═══════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════ */
+function parseDate(dateStr) { return new Date(dateStr.replace(' ', 'T')); }
+
+function getTimeRemaining(releaseDate) {
+    const diff = parseDate(releaseDate) - new Date();
+    if (diff <= 0) return null;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    if (d > 0) return `${d}d ${h}h`;
+    if (h > 0) return `${h}h ${m}m`;
+    return `${m}m`;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PWA
-═══════════════════════════════════════════════════════════════ */
+function formatReleaseDate(dateStr) {
+    return parseDate(dateStr).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+}
+
+function isClassAvailable(classKey) {
+    const s = classSchedule[classKey];
+    if (!s) return true;
+    if (s.available) return true;
+    if (s.releaseDate) return new Date() >= parseDate(s.releaseDate);
+    return true;
+}
+
+/* ═══════════════════════════════════════
+   CARD BUILDERS
+═══════════════════════════════════════ */
+function createSubjectCard(subjectKey) {
+    const subject = subjects[subjectKey];
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.setAttribute('data-subject', subjectKey);
+    card.onclick = () => showUnits(subjectKey);
+    card.innerHTML = `
+        <div class="subject-name">${subject.name}</div>
+        <div class="subject-full-name">(${subject.fullName})</div>
+    `;
+    return card;
+}
+
+function createUnitCard(subjectKey, unitNum) {
+    const unitData = subjects[subjectKey].units[unitNum - 1];
+    const card = document.createElement('div');
+    card.className = 'unit-card';
+    card.onclick = () => showClasses(subjectKey, unitNum);
+    card.innerHTML = `
+        <div class="unit-number">Unit ${unitNum}</div>
+        <div class="unit-title">${unitData.name}</div>
+        <div class="unit-class-count">${unitData.classesPerUnit} Classes</div>
+    `;
+    return card;
+}
+
+function createClassCard(subjectKey, unitNum, classNum) {
+    const classKey = `${subjectKey}-${unitNum}-${classNum}`;
+    const className = classNames[classKey] || `Class ${classNum}`;
+    const schedule = classSchedule[classKey];
+    const available = isClassAvailable(classKey);
+
+    const card = document.createElement('div');
+    card.className = 'class-card';
+    card.setAttribute('data-class', classKey);
+    card.setAttribute('data-name', className);
+
+    if (available) {
+        if (selectedClass === classKey) card.classList.add('selected');
+        card.onclick = () => showCloneCard(subjectKey, unitNum, classNum, className);
+        card.innerHTML = `
+            <div class="class-number">Class ${classNum}</div>
+            <div class="class-title">${className}${selectedClass === classKey ? '<span class="checkmark">✓</span>' : ''}</div>
+        `;
+    } else {
+        card.classList.add('locked');
+        const countdown = getTimeRemaining(schedule.releaseDate);
+        card.innerHTML = `
+            <div class="lock-icon">🔒</div>
+            <div class="class-number">Class ${classNum}</div>
+            <div class="class-title">${className}</div>
+            <div class="scheduled-message">Available on<br>${formatReleaseDate(schedule.releaseDate)}</div>
+            ${countdown ? `<div class="countdown">⏱️ ${countdown}</div>` : ''}
+        `;
+    }
+    return card;
+}
+
+/* ═══════════════════════════════════════
+   VIEWS
+═══════════════════════════════════════ */
+function showSubjects() {
+    viewMode = 'subjects';
+    selectedSubject = selectedUnit = selectedClass = null;
+    document.getElementById('subtitle').textContent = 'Select a subject to begin';
+    document.getElementById('backButton').style.display = 'none';
+    document.getElementById('cloneContainer').classList.remove('active');
+    const grid = document.getElementById('mainGrid');
+    grid.innerHTML = '';
+    for (const k in subjects) grid.appendChild(createSubjectCard(k));
+}
+
+function showUnits(subjectKey) {
+    viewMode = 'units';
+    selectedSubject = subjectKey;
+    selectedUnit = selectedClass = null;
+    const subject = subjects[subjectKey];
+    document.getElementById('subtitle').textContent = `${subject.fullName} — Select a unit`;
+    document.getElementById('backButton').style.display = 'inline-flex';
+    document.getElementById('backButtonText').textContent = 'Back to Subjects';
+    document.getElementById('cloneContainer').classList.remove('active');
+    const grid = document.getElementById('mainGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= subject.units.length; i++) grid.appendChild(createUnitCard(subjectKey, i));
+}
+
+function showClasses(subjectKey, unitNum) {
+    viewMode = 'classes';
+    selectedSubject = subjectKey;
+    selectedUnit = unitNum;
+    const subject = subjects[subjectKey];
+    document.getElementById('subtitle').textContent = `${subject.name} — Unit ${unitNum}`;
+    document.getElementById('backButtonText').textContent = 'Back to Units';
+    const grid = document.getElementById('mainGrid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= subject.units[unitNum - 1].classesPerUnit; i++) {
+        grid.appendChild(createClassCard(subjectKey, unitNum, i));
+    }
+}
+
+function showCloneCard(subjectKey, unitNum, classNum, className) {
+    const classKey = `${subjectKey}-${unitNum}-${classNum}`;
+    selectedClass = classKey;
+
+    const cloneContainer = document.getElementById('cloneContainer');
+    const oldCard = document.getElementById('cloneCard');
+    const newCard = oldCard.cloneNode(false);
+    newCard.id = 'cloneCard';
+    oldCard.parentNode.replaceChild(newCard, oldCard);
+
+    newCard.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.querySelector('.click-feedback')) {
+            const fb = document.createElement('div');
+            fb.className = 'click-feedback';
+            this.appendChild(fb);
+        }
+        this.classList.add('clicked');
+        setTimeout(() => { this.classList.remove('clicked'); window.location.href = this.href; }, 500);
+    });
+
+    newCard.innerHTML = `
+        <div class="clone-instruction">👆 Click to Enter</div>
+        <div class="clone-number">${subjectKey} — Unit ${unitNum} — Class ${classNum}</div>
+        <div class="clone-title">${className}</div>
+        <div class="clone-prompt">Tap here to open classroom →</div>
+    `;
+    newCard.href = `/${subjectKey}/unit-${unitNum}/class-${classNum}/`;
+    cloneContainer.classList.add('active');
+    cloneContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showClasses(subjectKey, unitNum);
+}
+
+/* ═══════════════════════════════════════
+   BACK BUTTON
+═══════════════════════════════════════ */
+document.getElementById('backButton').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (viewMode === 'classes') showUnits(selectedSubject);
+    else if (viewMode === 'units') showSubjects();
+});
+
+/* ═══════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════ */
+document.getElementById('searchInput').addEventListener('input', function() {
+    const filter = this.value.toLowerCase().trim();
+    const noResults = document.getElementById('noResults');
+    if (!filter) { noResults.style.display = 'none'; return; }
+    let hasResults = false;
+    document.querySelectorAll('.subject-card, .unit-card, .class-card').forEach(card => {
+        const match = (card.getAttribute('data-name') || card.textContent).toLowerCase().includes(filter);
+        card.style.display = match ? 'flex' : 'none';
+        if (match) hasResults = true;
+    });
+    noResults.style.display = hasResults ? 'none' : 'block';
+});
+
+/* ═══════════════════════════════════════
+   AUTO-REFRESH COUNTDOWNS
+═══════════════════════════════════════ */
+setInterval(() => {
+    if (viewMode === 'classes') showClasses(selectedSubject, selectedUnit);
+}, 60000);
+
+/* ═══════════════════════════════════════
+   PWA — Install Prompt
+═══════════════════════════════════════ */
 let deferredPrompt;
+
 window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     deferredPrompt = e;
     document.getElementById('pwaBtn').style.display = 'block';
-    setTimeout(() => document.getElementById('pwaModal').classList.add('active'), 2000);
+    setTimeout(() => document.getElementById('pwaModal').classList.add('active'), 2500);
 });
+
 function doInstall() {
     dismissPwa();
     if (deferredPrompt) {
@@ -960,18 +1012,20 @@ function doInstall() {
         });
     }
 }
+
 function dismissPwa() {
     document.getElementById('pwaModal').classList.remove('active');
 }
+
 window.addEventListener('appinstalled', () => {
     document.getElementById('pwaBtn').style.display = 'none';
     dismissPwa();
     deferredPrompt = null;
 });
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    SERVICE WORKER
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════ */
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
@@ -980,10 +1034,11 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════
    INIT
-═══════════════════════════════════════════════════════════════ */
-showLevels();
-</script>
+═══════════════════════════════════════ */
+showSubjects();
+    </script>
+
 </body>
 </html>
