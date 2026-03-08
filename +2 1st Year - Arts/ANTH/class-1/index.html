@@ -2088,6 +2088,384 @@ body > div:first-child {
     color: #000000;
     font-weight: bold;
 }
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;700&family=Tiro+Devanagari+Sanskrit&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --saffron: #FF6B00;
+    --deep: #1a0533;
+    --gold: #FFD700;
+    --cream: #FFF8EE;
+    --green: #138808;
+    --white: #ffffff;
+    --error: #e53e3e;
+    --shadow: 0 8px 32px rgba(255,107,0,0.18);
+  }
+
+  body {
+    font-family: 'Noto Sans Oriya', sans-serif;
+    background: var(--deep);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,107,0,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(19,136,8,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(255,215,0,0.05) 0%, transparent 70%);
+    z-index: 0;
+    animation: bgPulse 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  /* Marquee bar */
+  .marquee-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: linear-gradient(90deg, var(--saffron), #ff9800, var(--saffron));
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 7px 0;
+    z-index: 9999;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(255,107,0,0.4);
+  }
+
+  /* Main card */
+  .login-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,215,0,0.15);
+    border-radius: 24px;
+    padding: 40px 36px 36px;
+    width: 92%;
+    max-width: 440px;
+    margin-top: 52px;
+    margin-bottom: 24px;
+    box-shadow:
+      0 0 0 1px rgba(255,107,0,0.08),
+      0 20px 60px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    animation: cardIn 0.7s cubic-bezier(0.23,1,0.32,1) both;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(32px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Logo / avatar */
+  .avatar-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .avatar-ring {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold), var(--green));
+    padding: 3px;
+    box-shadow: 0 0 24px rgba(255,107,0,0.5);
+    animation: ringPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%,100% { box-shadow: 0 0 24px rgba(255,107,0,0.5); }
+    50%      { box-shadow: 0 0 40px rgba(255,215,0,0.7); }
+  }
+
+  .avatar-ring img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+    background: white;
+    display: block;
+  }
+
+  /* Header text */
+  .brand-name {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 12px rgba(255,215,0,0.3);
+  }
+
+  .brand-sub {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 6px;
+  }
+
+  .class-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--saffron), #ff9800);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 20px;
+    margin: 0 auto 22px;
+    display: block;
+    width: fit-content;
+    letter-spacing: 0.5px;
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+    margin-bottom: 22px;
+  }
+
+  /* Input */
+  .input-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 7px;
+    display: block;
+  }
+
+  .roll-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255,215,0,0.2);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    font-size: 18px;
+    font-family: 'Noto Sans Oriya', sans-serif;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .roll-input::placeholder { color: rgba(255,255,255,0.25); font-size: 13px; }
+
+  .roll-input:focus {
+    border-color: var(--gold);
+    background: rgba(255,215,0,0.07);
+    box-shadow: 0 0 0 3px rgba(255,215,0,0.1);
+  }
+
+  /* Consent */
+  .consent-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .consent-wrap input[type="checkbox"] {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--saffron);
+    cursor: pointer;
+  }
+
+  .consent-wrap label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    cursor: pointer;
+  }
+
+  .consent-wrap label a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* Login button */
+  .login-btn {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, var(--saffron) 0%, #ff9800 100%);
+    color: white;
+    font-size: 14px;
+    font-family: 'Noto Sans Oriya', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .login-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,107,0,0.55);
+  }
+
+  .login-btn:active:not(:disabled) { transform: translateY(0); }
+
+  .login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Roll number lookup button */
+  .lookup-btn {
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255,107,0,0.4);
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    font-family: 'Noto Sans Oriya', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+
+  .lookup-btn:hover {
+    background: rgba(255,107,0,0.1);
+    border-color: var(--saffron);
+    color: white;
+  }
+
+  /* Error */
+  .error-msg {
+    min-height: 20px;
+    font-size: 13px;
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  /* Footer note */
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 8px;
+  }
+
+  /* Loading spinner inside button */
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Success overlay */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--deep);
+    z-index: 99999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .success-overlay.show { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .success-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    animation: bounceIn 0.6s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  @keyframes bounceIn {
+    0%   { transform: scale(0); opacity: 0; }
+    70%  { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .success-text {
+    color: var(--gold);
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .success-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* Classroom container (shown after login) */
+  .classroom {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px 20px;
+    color: white;
+    text-align: center;
+  }
+
+  .classroom.show { display: block; }
+
+  .classroom h2 {
+    color: var(--gold);
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .classroom p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+  }
+
+  /* Tricolor accent line */
+  .tricolor {
+    height: 4px;
+    background: linear-gradient(90deg, var(--saffron) 33%, white 33% 66%, var(--green) 66%);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 400px) {
+    .login-card { padding: 32px 20px 28px; }
+    .brand-name { font-size: 18px; }
+  }
+
+        
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <script>
