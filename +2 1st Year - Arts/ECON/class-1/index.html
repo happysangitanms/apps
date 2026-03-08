@@ -2672,18 +2672,36 @@ function startActivityTracking() {
             }).catch(e => console.log('Heartbeat error:', e));
         }
     }, 120000);
-    window.addEventListener('beforeunload', () => {
-        if (sessionData.rollNumber && sessionData.loginTime) {
-            const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
-            db.collection('students').doc(sessionData.rollNumber).update({
-               totalDuration: firebase.firestore.FieldValue.increment(duration),
-lastActivity: new Date().toISOString(),
-lastLogout: new Date().toISOString()
-            }).catch(e => console.log('Logout error:', e));
-        }
-    });
-}
-    
+window.addEventListener('beforeunload', () => {
+    if (sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        // Use sendBeacon for reliable logout tracking
+        const data = JSON.stringify({
+            rollNumber: sessionData.rollNumber,
+            duration: duration,
+            logoutTime: logoutTime
+        });
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Logout error:', e));
+    }
+});
+
+// Also save logout when page becomes hidden (mobile browsers)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Visibility logout error:', e));
+    }
+});
 // ============================================
 // IMPORTANT: Add your loadSentence() and other
 // app-specific functions below this line
