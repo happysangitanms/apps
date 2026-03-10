@@ -4,36 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg: #f2f5f2;
-            --surface: #ffffff;
-            --green-dark: #1e5c38;
-            --green: #2e7d52;
-            --green-light: #e6f4ec;
-            --saffron: #d4680a;
-            --saffron-light: #fff3e8;
-            --arts: #1a6b8a;
-            --arts-bg: #e3f2f8;
-            --arts-border: #b0d8ee;
-            --commerce: #6a3d8a;
-            --commerce-bg: #f0e8f8;
-            --commerce-border: #c8a8e0;
-            --special1: #b5451b;
-            --special1-bg: #fff0eb;
-            --special1-border: #f0c0a8;
-            --special2: #1a6b50;
-            --special2-bg: #e6f7f0;
-            --special2-border: #a0dcc0;
-            --school: #7a6010;
-            --school-bg: #fef8e0;
-            --school-border: #e8d870;
-            --text: #1a2420;
-            --text-soft: #4a5a52;
-            --muted: #8a9a90;
-            --border: #d8e4d8;
-            --shadow: 0 2px 12px rgba(46,125,82,0.07);
+            --navy:     #0a1628;
+            --navy-mid: #0d1f3c;
+            --gold:     #c8962a;
+            --gold-lt:  #e4b84a;
+            --white:    #ffffff;
+            --bg:       #f0f4f8;
+            --border:   #dde5ef;
+            --slate:    #4a5568;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -42,579 +26,783 @@
             font-family: 'Noto Sans Oriya', sans-serif;
             background: var(--bg);
             min-height: 100vh;
-            color: var(--text);
+            overflow-x: hidden;
         }
 
-        /* ━━━━━━ HEADER ━━━━━━ */
-        .top-bar {
-            background: linear-gradient(140deg, #1a5234 0%, #2e7d52 55%, #3a9467 100%);
-            padding: 28px 20px 44px;
-            position: relative;
-            overflow: hidden;
+        /* ── Ambient navy bg ── */
+        body::before {
+            content:'';
+            position:fixed; top:0; left:0; right:0; height:460px;
+            background: linear-gradient(160deg,#0a1628 0%,#0d1f3c 55%,#102952 100%);
+            z-index:0;
         }
-        .top-bar::before {
-            content:''; position:absolute; top:-60px; right:-60px;
-            width:220px; height:220px; border-radius:50%;
-            background:rgba(255,255,255,0.06);
+        body::after {
+            content:'';
+            position:fixed; top:0; left:0; right:0; height:460px;
+            background:
+                radial-gradient(ellipse at 75% 0%,  rgba(200,150,42,0.13) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 70%,  rgba(50,120,255,0.09) 0%, transparent 55%);
+            z-index:0;
         }
-        .top-bar::after {
-            content:''; position:absolute; bottom:-40px; left:-25px;
-            width:150px; height:150px; border-radius:50%;
-            background:rgba(255,255,255,0.04);
-        }
-        .top-bar-inner { position:relative; z-index:1; max-width:500px; margin:0 auto; }
 
-        .academy-badge {
-            display:inline-flex; align-items:center; gap:6px;
-            background:rgba(255,255,255,0.14);
-            border:1px solid rgba(255,255,255,0.22);
-            border-radius:100px; padding:4px 13px;
-            font-size:11px; color:rgba(255,255,255,0.88);
+        /* ── Page wrapper ── */
+        .page {
+            position:relative; z-index:1;
+            max-width:660px; margin:0 auto;
+            padding:0 15px 70px;
+        }
+
+        /* ═══════════════ HEADER ═══════════════ */
+        header {
+            padding:30px 0 34px; text-align:center;
+            animation:fadeUp 0.5s ease both;
+        }
+        .logo-img {
+            width:200px; max-width:72%;
+            filter:brightness(0) invert(1);
+            margin-bottom:12px;
+            display:block; margin-left:auto; margin-right:auto;
+        }
+        .tagline {
+            color:rgba(255,255,255,0.58);
+            font-size:0.78em; letter-spacing:0.07em; text-transform:uppercase;
+        }
+        .tagline span {
+            display:inline-block; width:24px; height:1px;
+            background:var(--gold); vertical-align:middle;
+            margin:0 9px; opacity:0.7;
+        }
+
+
+        /* ═══════════════ SHELL ═══════════════ */
+        .shell {
+            background:var(--white);
+            border-radius:22px;
+            box-shadow:0 20px 60px rgba(10,22,40,0.18);
+            overflow:hidden;
+            animation:fadeUp 0.45s ease 0.14s both;
+        }
+
+        .sec {
+            padding:20px 18px 20px;
+            border-bottom:1px solid var(--border);
+        }
+        .sec:last-child { border-bottom:none; }
+
+        .sec-hd {
+            display:flex; align-items:center; gap:11px;
             margin-bottom:14px;
-            animation: fadeUp 0.5s ease both;
         }
-        .academy-name {
-            font-size:30px; font-weight:700; color:#fff;
-            line-height:1.2; margin-bottom:7px;
-            animation: fadeUp 0.5s ease 0.08s both;
-        }
-        .academy-name span { color:#ffd970; }
-        .academy-sub {
-            font-size:13.5px; color:rgba(255,255,255,0.76);
-            line-height:1.6;
-            animation: fadeUp 0.5s ease 0.16s both;
-        }
-
-        .wave { display:block; width:100%; line-height:0; margin-top:-1px; }
-        .wave svg { display:block; width:100%; }
-
-        /* ━━━━━━ MAIN ━━━━━━ */
-        .main { max-width:500px; margin:0 auto; padding:14px 15px 60px; }
-
-        /* ━━━━━━ INFO STRIP ━━━━━━ */
-        .info-strip {
-            display:grid; grid-template-columns:repeat(3,1fr);
-            gap:8px; margin-bottom:22px;
-            animation: fadeUp 0.5s ease 0.22s both;
-        }
-        .info-tile {
-            background:var(--surface); border:1.5px solid var(--border);
-            border-radius:12px; padding:11px 8px;
-            text-align:center; box-shadow:var(--shadow);
-        }
-        .info-val { font-size:21px; font-weight:700; color:var(--green); line-height:1; }
-        .info-lbl { font-size:11px; color:var(--muted); margin-top:4px; line-height:1.3; }
-
-        /* ━━━━━━ SECTION BLOCK ━━━━━━ */
-        .section-block {
-            margin-bottom:26px;
-            animation: fadeUp 0.5s ease both;
-        }
-
-        .section-head {
-            display:flex; align-items:center; gap:10px;
-            margin-bottom:11px;
-        }
-        .section-head-icon {
-            width:40px; height:40px; border-radius:11px;
+        .sec-ico {
+            width:42px; height:42px; border-radius:12px;
             display:flex; align-items:center; justify-content:center;
             font-size:19px; flex-shrink:0;
         }
-        .section-head-title { font-size:19px; font-weight:700; }
-        .section-head-line { flex:1; height:1.5px; border-radius:2px; }
+        .sec-eyebrow {
+            font-size:9.5px; font-weight:700; letter-spacing:0.10em;
+            text-transform:uppercase; margin-bottom:2px;
+        }
+        .sec-title {
+            font-family:'Playfair Display',serif;
+            font-size:15px; font-weight:700; color:var(--navy); line-height:1.2;
+        }
 
-        /* color themes */
-        .theme-special1 .section-head-icon  { background:var(--special1-bg); }
-        .theme-special1 .section-head-title { color:var(--special1); }
-        .theme-special1 .section-head-line  { background:linear-gradient(90deg,var(--special1-border),transparent); }
-
-        .theme-special2 .section-head-icon  { background:var(--special2-bg); }
-        .theme-special2 .section-head-title { color:var(--special2); }
-        .theme-special2 .section-head-line  { background:linear-gradient(90deg,var(--special2-border),transparent); }
-
-        .theme-arts .section-head-icon  { background:var(--arts-bg); }
-        .theme-arts .section-head-title { color:var(--arts); }
-        .theme-arts .section-head-line  { background:linear-gradient(90deg,var(--arts-border),transparent); }
-
-        .theme-commerce .section-head-icon  { background:var(--commerce-bg); }
-        .theme-commerce .section-head-title { color:var(--commerce); }
-        .theme-commerce .section-head-line  { background:linear-gradient(90deg,var(--commerce-border),transparent); }
-
-        .theme-school .section-head-icon  { background:var(--school-bg); }
-        .theme-school .section-head-title { color:var(--school); }
-        .theme-school .section-head-line  { background:linear-gradient(90deg,var(--school-border),transparent); }
-
-        /* ━━━━━━ LEVEL LABEL ━━━━━━ */
-        .level-label {
-            font-size:11px; font-weight:600; letter-spacing:0.07em;
-            text-transform:uppercase; color:var(--muted);
-            margin:13px 0 8px 2px;
+        .sub-lbl {
+            font-size:10px; font-weight:700;
+            letter-spacing:0.09em; text-transform:uppercase;
             display:flex; align-items:center; gap:8px;
+            margin:14px 0 10px;
         }
-        .level-label::after { content:''; flex:1; height:1px; background:var(--border); }
-        .level-label.active-arts     { color:var(--arts); }
-        .level-label.active-commerce { color:var(--commerce); }
-        .level-label.active-special1 { color:var(--special1); }
-        .level-label.active-special2 { color:var(--special2); }
-        .level-label.active-school   { color:var(--school); }
+        .sub-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
 
-        /* ━━━━━━ CARD GRID (school uses 2-col) ━━━━━━ */
-        .cards-list { display:flex; flex-direction:column; gap:9px; }
-        .cards-grid {
-            display:grid; grid-template-columns:1fr 1fr;
-            gap:9px;
-        }
+        /* section colour tokens */
+        .t-spl1 .sec-ico     { background:#fff0eb; }
+        .t-spl1 .sec-eyebrow { color:#9a3015; }
+        .t-spl1 .sub-lbl     { color:#9a3015; }
 
-        /* ━━━━━━ ACTIVE CARD ━━━━━━ */
-        .card {
-            display:flex; align-items:center; gap:12px;
-            background:var(--surface);
-            border-radius:13px; padding:14px 12px;
-            text-decoration:none; color:var(--text);
-            border:1.5px solid var(--border);
-            box-shadow:var(--shadow);
-            position:relative; overflow:hidden;
-            transition:transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
-        }
-        .card::before {
-            content:''; position:absolute;
-            left:0; top:50%; transform:translateY(-50%);
-            width:4px; height:52%; border-radius:0 4px 4px 0;
-        }
-        .card-special1::before { background:linear-gradient(180deg,#b5451b,#e87040); }
-        .card-special2::before { background:linear-gradient(180deg,#1a6b50,#40b880); }
-        .card-arts::before     { background:linear-gradient(180deg,#1a6b8a,#4ab0d0); }
-        .card-commerce::before { background:linear-gradient(180deg,#6a3d8a,#a060c8); }
-        .card-school::before   { background:linear-gradient(180deg,#7a6010,#c0a030); }
+        .t-spl2 .sec-ico     { background:#e6f7f0; }
+        .t-spl2 .sec-eyebrow { color:#065f46; }
+        .t-spl2 .sub-lbl     { color:#065f46; }
 
-        @media (hover:hover) {
-            .card:hover { transform:translateY(-2px); box-shadow:0 6px 22px rgba(0,0,0,0.1); }
-            .card-special1:hover { border-color:var(--special1-border); }
-            .card-special2:hover { border-color:var(--special2-border); }
-            .card-arts:hover     { border-color:var(--arts-border); }
-            .card-commerce:hover { border-color:var(--commerce-border); }
-            .card-school:hover   { border-color:var(--school-border); }
-        }
-        .card:active { transform:scale(0.97); }
+        .t-arts .sec-ico     { background:#eff6ff; }
+        .t-arts .sec-eyebrow { color:#1d4ed8; }
+        .t-arts .sub-lbl     { color:#1d4ed8; }
 
-        .card-num {
-            width:46px; height:46px; border-radius:11px;
-            display:flex; align-items:center; justify-content:center;
-            font-size:19px; font-weight:700; flex-shrink:0;
-        }
-        .card-special1 .card-num { background:var(--special1-bg); color:var(--special1); }
-        .card-special2 .card-num { background:var(--special2-bg); color:var(--special2); }
-        .card-arts .card-num     { background:var(--arts-bg);     color:var(--arts);     }
-        .card-commerce .card-num { background:var(--commerce-bg); color:var(--commerce); }
-        .card-school .card-num   { background:var(--school-bg);   color:var(--school);   }
+        .t-com .sec-ico      { background:#f5f3ff; }
+        .t-com .sec-eyebrow  { color:#5b21b6; }
+        .t-com .sub-lbl      { color:#5b21b6; }
 
-        .card-body { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
-        .card-tag  { font-size:10px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
-        .card-special1 .card-tag { color:#e08060; }
-        .card-special2 .card-tag { color:#40b880; }
-        .card-arts .card-tag     { color:#4ab0d0; }
-        .card-commerce .card-tag { color:#a060c8; }
-        .card-school .card-tag   { color:#c0a030; }
+        .t-school .sec-ico     { background:#fffbeb; }
+        .t-school .sec-eyebrow { color:#b45309; }
+        .t-school .sub-lbl     { color:#b45309; }
 
-        .card-title { font-size:15px; font-weight:700; color:var(--text); line-height:1.3; }
-        .card-desc  { font-size:11.5px; color:var(--muted); line-height:1.4; margin-top:2px; }
+        /* ═══════════════ GRADIENT LEVEL CARDS ═══════════════ */
+        .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .grid1 { display:flex; flex-direction:column; gap:10px; }
+        .grid4 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 
-        .card-arrow {
-            width:30px; height:30px; border-radius:50%;
-            display:flex; align-items:center; justify-content:center; flex-shrink:0;
-        }
-        .card-special1 .card-arrow { background:var(--special1-bg); }
-        .card-special2 .card-arrow { background:var(--special2-bg); }
-        .card-arts .card-arrow     { background:var(--arts-bg); }
-        .card-commerce .card-arrow { background:var(--commerce-bg); }
-        .card-school .card-arrow   { background:var(--school-bg); }
-        .card-arrow svg { width:13px; height:13px; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; fill:none; }
-        .card-special1 .card-arrow svg { stroke:var(--special1); }
-        .card-special2 .card-arrow svg { stroke:var(--special2); }
-        .card-arts .card-arrow svg     { stroke:var(--arts); }
-        .card-commerce .card-arrow svg { stroke:var(--commerce); }
-        .card-school .card-arrow svg   { stroke:var(--school); }
-
-        /* ━━━━━━ GRID CARD (compact, for school) ━━━━━━ */
-        .grid-card {
+        .lv-card {
+            position:relative; border-radius:15px;
+            padding:18px 14px 15px; text-align:center;
+            cursor:pointer; text-decoration:none; color:white;
             display:flex; flex-direction:column; align-items:center;
-            justify-content:center; gap:7px;
-            background:var(--surface);
-            border-radius:13px; padding:16px 10px;
-            text-decoration:none; color:var(--text);
+            min-height:115px; overflow:hidden;
+            transition:transform 0.22s, box-shadow 0.22s;
+            border:1px solid rgba(255,255,255,0.10);
+        }
+        .lv-card::before {
+            content:''; position:absolute; top:-35%; right:-12%;
+            width:130px; height:130px; border-radius:50%;
+            background:radial-gradient(circle,rgba(255,255,255,0.13) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .lv-card::after {
+            content:''; position:absolute; bottom:-20px; left:-10px;
+            width:80px; height:80px; border-radius:50%;
+            background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .lv-card:active { transform:scale(0.97); }
+        @media(hover:hover){ .lv-card:hover { transform:translateY(-4px); } }
+
+        .lv-icon { font-size:1.9em; margin-bottom:9px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.25)); line-height:1; }
+        .lv-name {
+            font-family:'Playfair Display',serif;
+            font-size:0.95em; font-weight:700;
+            line-height:1.25; text-shadow:0 2px 6px rgba(0,0,0,0.25);
+        }
+        .lv-sub { font-size:0.67em; opacity:0.78; margin-top:5px; font-weight:500; line-height:1.3; }
+        .lv-bar {
+            position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+            width:28px; height:3px; border-radius:2px;
+            background:rgba(255,255,255,0.38);
+        }
+
+        /* colour palettes */
+        .lv-spl1  { background:linear-gradient(145deg,#7b1a0a 0%,#b22222 100%); box-shadow:0 8px 28px rgba(123,26,10,0.40); }
+        .lv-spl2  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 8px 28px rgba(6,95,70,0.38); }
+        .lv-arts1 { background:linear-gradient(145deg,#1e3a8a 0%,#2563eb 100%); box-shadow:0 8px 28px rgba(30,58,138,0.40); }
+        .lv-arts2 { background:linear-gradient(145deg,#1e40af 0%,#3b82f6 100%); box-shadow:0 8px 28px rgba(30,64,175,0.38); }
+        .lv-com1  { background:linear-gradient(145deg,#3b0764 0%,#6d28d9 100%); box-shadow:0 8px 28px rgba(59,7,100,0.40); }
+        .lv-com2  { background:linear-gradient(145deg,#4c1d95 0%,#7c3aed 100%); box-shadow:0 8px 28px rgba(76,29,149,0.38); }
+        /* +3 Commerce sem cards — 4 unique colours cycling */
+        .lv-sem1  { background:linear-gradient(145deg,#1e3a8a 0%,#2563eb 100%); box-shadow:0 7px 22px rgba(30,58,138,0.38); }
+        .lv-sem2  { background:linear-gradient(145deg,#0369a1 0%,#0ea5e9 100%); box-shadow:0 7px 22px rgba(3,105,161,0.38); }
+        .lv-sem3  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 7px 22px rgba(6,95,70,0.38); }
+        .lv-sem4  { background:linear-gradient(145deg,#3b0764 0%,#6d28d9 100%); box-shadow:0 7px 22px rgba(59,7,100,0.38); }
+        /* school */
+        .lv-s1  { background:linear-gradient(145deg,#b45309 0%,#d97706 100%); box-shadow:0 7px 22px rgba(180,83,9,0.38); }
+        .lv-s2  { background:linear-gradient(145deg,#92400e 0%,#b45309 100%); box-shadow:0 7px 22px rgba(146,64,14,0.38); }
+        .lv-s3  { background:linear-gradient(145deg,#0369a1 0%,#0ea5e9 100%); box-shadow:0 7px 22px rgba(3,105,161,0.38); }
+        .lv-s4  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 7px 22px rgba(6,95,70,0.35); }
+        .lv-s5  { background:linear-gradient(145deg,#1d4ed8 0%,#3b82f6 100%); box-shadow:0 7px 22px rgba(29,78,216,0.38); }
+
+        /* ═══════════════ COMPACT SEM CARD (for inside dropdown) ═══════════════ */
+        .sem-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:4px 0 8px; }
+
+        .sm-card {
+            position:relative; border-radius:12px;
+            padding:13px 10px 11px; text-align:center;
+            cursor:pointer; text-decoration:none; color:white;
+            display:flex; flex-direction:column; align-items:center;
+            min-height:88px; overflow:hidden;
+            transition:transform 0.20s, box-shadow 0.20s;
+            border:1px solid rgba(255,255,255,0.10);
+        }
+        .sm-card::before {
+            content:''; position:absolute; top:-25%; right:-10%;
+            width:90px; height:90px; border-radius:50%;
+            background:radial-gradient(circle,rgba(255,255,255,0.12) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .sm-card:active { transform:scale(0.96); }
+        @media(hover:hover){ .sm-card:hover { transform:translateY(-3px); } }
+
+        .sm-num {
+            font-family:'Playfair Display',serif;
+            font-size:1.5em; font-weight:800;
+            line-height:1; margin-bottom:5px;
+            text-shadow:0 2px 6px rgba(0,0,0,0.25);
+        }
+        .sm-lbl { font-size:0.68em; font-weight:600; opacity:0.85; line-height:1.25; }
+        .sm-bar {
+            position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+            width:20px; height:2.5px; border-radius:2px;
+            background:rgba(255,255,255,0.40);
+        }
+
+        /* sem colour palette — cycles per subject */
+        .sm-1 { background:linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow:0 5px 16px rgba(30,58,138,0.40); }
+        .sm-2 { background:linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow:0 5px 16px rgba(3,105,161,0.38); }
+        .sm-3 { background:linear-gradient(145deg,#065f46,#059669); box-shadow:0 5px 16px rgba(6,95,70,0.38); }
+        .sm-4 { background:linear-gradient(145deg,#3b0764,#6d28d9); box-shadow:0 5px 16px rgba(59,7,100,0.38); }
+        .sm-5 { background:linear-gradient(145deg,#7b1a0a,#b22222); box-shadow:0 5px 16px rgba(123,26,10,0.38); }
+        .sm-6 { background:linear-gradient(145deg,#1e40af,#3b82f6); box-shadow:0 5px 16px rgba(30,64,175,0.38); }
+        .sm-7 { background:linear-gradient(145deg,#4c1d95,#7c3aed); box-shadow:0 5px 16px rgba(76,29,149,0.38); }
+        .sm-8 { background:linear-gradient(145deg,#b45309,#d97706); box-shadow:0 5px 16px rgba(180,83,9,0.38); }
+
+        /* ═══════════════ DROPDOWN / ACCORDION ═══════════════ */
+        .accordion { display:flex; flex-direction:column; gap:10px; }
+
+        .acc-item {
+            border-radius:15px; overflow:hidden;
             border:1.5px solid var(--border);
-            box-shadow:var(--shadow);
-            position:relative; overflow:hidden;
-            transition:transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
-            text-align:center;
+            box-shadow:0 3px 14px rgba(10,22,40,0.08);
         }
-        .grid-card::after {
-            content:''; position:absolute;
-            top:0; left:0; right:0; height:3px;
-            border-radius:12px 12px 0 0;
-        }
-        .grid-school::after { background:linear-gradient(90deg,#7a6010,#c0a030); }
 
-        @media (hover:hover) {
-            .grid-card:hover { transform:translateY(-2px); box-shadow:0 6px 22px rgba(0,0,0,0.1); }
-            .grid-school:hover { border-color:var(--school-border); }
+        .acc-trigger {
+            display:flex; align-items:center; gap:12px;
+            padding:14px 14px;
+            cursor:pointer; user-select:none;
+            transition:background 0.2s;
+            position:relative;
         }
-        .grid-card:active { transform:scale(0.96); }
+        .acc-trigger:active { opacity:0.9; }
 
-        .grid-num {
-            width:44px; height:44px; border-radius:12px;
+        /* subject colour headers */
+        .acc-polsci  { background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%); }
+        .acc-history { background:linear-gradient(135deg,#065f46 0%,#059669 100%); }
+        .acc-educ    { background:linear-gradient(135deg,#0369a1 0%,#0ea5e9 100%); }
+        .acc-psych   { background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 100%); }
+        .acc-econ    { background:linear-gradient(135deg,#b45309 0%,#d97706 100%); }
+        .acc-socio   { background:linear-gradient(135deg,#7b1a0a 0%,#b22222 100%); }
+
+        .acc-ico {
+            width:38px; height:38px; border-radius:10px;
+            background:rgba(255,255,255,0.15);
             display:flex; align-items:center; justify-content:center;
-            font-size:18px; font-weight:700;
+            font-size:17px; flex-shrink:0;
         }
-        .grid-school .grid-num { background:var(--school-bg); color:var(--school); }
+        .acc-label { flex:1; }
+        .acc-eyebrow {
+            font-size:9px; font-weight:700; letter-spacing:0.10em;
+            text-transform:uppercase; color:rgba(255,255,255,0.68);
+            margin-bottom:2px;
+        }
+        .acc-name {
+            font-family:'Playfair Display',serif;
+            font-size:13.5px; font-weight:700; color:white;
+            line-height:1.2;
+        }
+        .acc-odia {
+            font-size:10.5px; color:rgba(255,255,255,0.72);
+            margin-top:2px; font-weight:500;
+        }
+        .acc-chevron {
+            width:28px; height:28px; border-radius:50%;
+            background:rgba(255,255,255,0.15);
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink:0;
+            transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .acc-chevron svg {
+            width:13px; height:13px; fill:none;
+            stroke:white; stroke-width:2.5;
+            stroke-linecap:round; stroke-linejoin:round;
+            transition:transform 0.3s;
+        }
+        .acc-item.open .acc-chevron { transform:rotate(180deg); }
 
-        .grid-label { font-size:13px; font-weight:700; color:var(--text); line-height:1.3; }
-        .grid-sub   { font-size:10.5px; color:var(--muted); }
-
-        /* ━━━━━━ DIVIDER ━━━━━━ */
-        .divider {
-            height:1px; background:var(--border);
-            margin:8px 0 20px; border-radius:2px;
+        .acc-body {
+            max-height:0; overflow:hidden;
+            transition:max-height 0.38s cubic-bezier(0.4,0,0.2,1),
+                        padding 0.25s ease;
+            background: #f8f9fe;
+            padding:0 12px;
+        }
+        .acc-item.open .acc-body {
+            max-height:900px;
+            padding:10px 12px 14px;
         }
 
-        /* ━━━━━━ FOOTER ━━━━━━ */
-        .footer {
-            text-align:center; padding-top:10px;
-            animation: fadeUp 0.5s ease 0.6s both;
+        /* ═══════════════ FOOTER ═══════════════ */
+        footer {
+            background:var(--navy);
+            border-radius:20px;
+            padding:26px 20px 20px;
+            margin-top:22px;
+            border:1px solid rgba(200,150,42,0.15);
+            animation:fadeUp 0.5s ease 0.5s both;
         }
-        .footer-line {
-            width:40px; height:3px;
-            background:linear-gradient(90deg,var(--green),var(--saffron));
-            border-radius:10px; margin:0 auto 10px;
+        .footer-brand { text-align:center; margin-bottom:16px; }
+        .footer-brand h3 {
+            font-family:'Playfair Display',serif;
+            font-size:1.15em; color:var(--gold-lt);
+            font-weight:700; margin-bottom:5px;
         }
-        .footer-name { font-size:13px; font-weight:600; color:var(--text-soft); }
-        .footer-copy { font-size:11px; color:var(--muted); margin-top:3px; }
+        .footer-brand p { font-size:0.75em; color:rgba(255,255,255,0.45); line-height:1.5; }
+        .footer-div { height:1px; background:rgba(200,150,42,0.12); margin-bottom:14px; }
+        .footer-copy { text-align:center; color:rgba(255,255,255,0.28); font-size:0.68em; }
+
+        /* ── Legal Policies Button ── */
+        .legal-btn-wrap {
+            padding: 16px 18px 4px;
+        }
+        .legal-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #0a1628 0%, #102952 100%);
+            border: 1.5px solid rgba(200,150,42,0.35);
+            border-radius: 14px;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 6px 22px rgba(10,22,40,0.22);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .legal-btn::before {
+            content: '';
+            position: absolute; top: -40%; right: -5%;
+            width: 110px; height: 110px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(200,150,42,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .legal-btn:active  { transform: scale(0.98); }
+        @media(hover:hover){ .legal-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(10,22,40,0.28); } }
+
+        .legal-btn-left { display: flex; align-items: center; gap: 12px; }
+        .legal-btn-ico {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: rgba(200,150,42,0.18);
+            border: 1px solid rgba(200,150,42,0.28);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+        .legal-btn-eyebrow {
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--gold-lt); margin-bottom: 2px;
+        }
+        .legal-btn-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 13.5px; font-weight: 700;
+            color: white; line-height: 1.2;
+        }
+        .legal-btn-arrow {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: rgba(200,150,42,0.18);
+            border: 1px solid rgba(200,150,42,0.25);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .legal-btn-arrow svg {
+            width: 12px; height: 12px; fill: none;
+            stroke: var(--gold-lt); stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* Footer legal link */
+        .footer-legal-link {
+            display: flex; align-items: center; justify-content: center; gap: 7px;
+            color: var(--gold-lt); font-size: 0.76em; font-weight: 600;
+            text-decoration: none; margin-bottom: 12px;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .footer-legal-link:hover { opacity: 1; }
+        .footer-legal-link span { text-decoration: underline; text-underline-offset: 2px; }
 
         @keyframes fadeUp {
-            from { opacity:0; transform:translateY(16px); }
+            from { opacity:0; transform:translateY(14px); }
             to   { opacity:1; transform:translateY(0); }
         }
-
-        /* animation delays for sections */
-        .section-block:nth-child(1) { animation-delay:0.28s; }
-        .section-block:nth-child(2) { animation-delay:0.34s; }
-        .section-block:nth-child(3) { animation-delay:0.40s; }
-        .section-block:nth-child(4) { animation-delay:0.46s; }
-        .section-block:nth-child(5) { animation-delay:0.50s; }
+        .shell .sec:nth-child(1) { animation:fadeUp 0.4s ease 0.18s both; }
+        .shell .sec:nth-child(2) { animation:fadeUp 0.4s ease 0.24s both; }
+        .shell .sec:nth-child(3) { animation:fadeUp 0.4s ease 0.30s both; }
+        .shell .sec:nth-child(4) { animation:fadeUp 0.4s ease 0.36s both; }
+        .shell .sec:nth-child(5) { animation:fadeUp 0.4s ease 0.42s both; }
 
         @supports (padding:max(0px)) {
-            .main {
-                padding-left:  max(15px, env(safe-area-inset-left));
-                padding-right: max(15px, env(safe-area-inset-right));
-                padding-bottom:max(60px, env(safe-area-inset-bottom));
-            }
+            .page { padding-bottom:max(70px,env(safe-area-inset-bottom)); }
         }
     </style>
 </head>
 <body>
 
-<!-- ━━━━━━━━━━ HEADER ━━━━━━━━━━ -->
-<div class="top-bar">
-    <div class="top-bar-inner">
-        <div class="academy-badge">🎓 ଏକ ବ୍ୟକ୍ତିଗତ ଉଦ୍ୟୋଗ</div>
-        <div class="academy-name">ଇ-<span>ବିଦ୍ୟା</span> ଏକାଡେମୀ</div>
-        <div class="academy-sub">ଆପଣଙ୍କ ଧାରା ଓ ଶ୍ରେଣୀ ବାଛନ୍ତୁ ଏବଂ ଶିକ୍ଷା ଆରମ୍ଭ କରନ୍ତୁ।</div>
-    </div>
-</div>
-<div class="wave">
-    <svg viewBox="0 0 500 30" preserveAspectRatio="none" height="30" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,20 C125,35 375,5 500,20 L500,0 L0,0 Z" fill="#2e7d52"/>
-    </svg>
-</div>
+<div class="page">
 
-<div class="main">
+    <!-- ══ HEADER ══ -->
+    <header>
+        <img class="logo-img" src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png" alt="E-Vidya Academy">
+        <p class="tagline"><span></span>ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ :<span></span></p>
 
-    <!-- ━━━━━━ INFO STRIP ━━━━━━ -->
-    <div class="info-strip">
-        <div class="info-tile">
-            <div class="info-val">୨</div>
-            <div class="info-lbl">ସ୍ୱତନ୍ତ୍ର ଆପ୍</div>
-        </div>
-        <div class="info-tile">
-            <div class="info-val">୨୪</div>
-            <div class="info-lbl">ଶ୍ରେଣୀ ପ୍ରସ୍ତୁତ</div>
-        </div>
-        <div class="info-tile">
-            <div class="info-val">∞</div>
-            <div class="info-lbl">ଅଧ୍ୟୟନ ସାମଗ୍ରୀ</div>
-        </div>
-    </div>
+    </header>
 
+    <div class="shell">
 
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!--  1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ              -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="section-block theme-special1">
-        <div class="section-head">
-            <div class="section-head-icon">🌟</div>
-            <div class="section-head-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
-            <div class="section-head-line"></div>
-        </div>
-        <div class="cards-list">
-            <a href="./special-training/index.html" class="card card-special1">
-                <div class="card-num">🌟</div>
-                <div class="card-body">
-                    <div class="card-tag">ବିଶେଷ ପ୍ରଶିକ୍ଷଣ</div>
-                    <div class="card-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
-                    <div class="card-desc">ଶିକ୍ଷାର୍ଥୀଙ୍କ ସର୍ବାଙ୍ଗୀନ ବିକାଶ ପାଇଁ</div>
+        <!-- ══ LEGAL POLICIES WEBSITE BUTTON ══ -->
+        <div class="legal-btn-wrap">
+            <a href="https://e-vidya-legal-policies.pages.dev/" target="_blank" rel="noopener noreferrer" class="legal-btn">
+                <div class="legal-btn-left">
+                    <div class="legal-btn-ico">🌹</div>
+                    <div>
+                        <div class="legal-btn-eyebrow">Official Website</div>
+                        <div class="legal-btn-title">ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍</div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-        </div>
-    </div>
-
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!--  2. ମୋ ସାଥି ଆପ୍                   -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="section-block theme-special2">
-        <div class="section-head">
-            <div class="section-head-icon">🤝</div>
-            <div class="section-head-title">ମୋ ସାଥି ଆପ୍</div>
-            <div class="section-head-line"></div>
-        </div>
-        <div class="cards-list">
-            <a href="./mo-sathi/index.html" class="card card-special2">
-                <div class="card-num">🤝</div>
-                <div class="card-body">
-                    <div class="card-tag">ମାର୍ଗଦର୍ଶନ</div>
-                    <div class="card-title">ମୋ ସାଥି ଆପ୍</div>
-                    <div class="card-desc">ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶକ</div>
+                <div class="legal-btn-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-        </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!--  3. +2 – ARTS                     -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="section-block theme-arts">
-        <div class="section-head">
-            <div class="section-head-icon">🎨</div>
-            <div class="section-head-title">କଳା ବିଭାଗ</div>
-            <div class="section-head-line"></div>
-        </div>
-
-        <!-- +2 active -->
-        <div class="level-label active-arts">+୨ ଶ୍ରେଣୀ</div>
-        <div class="cards-list">
-            <a href="./+2 1st Year - Arts/index.html" class="card card-arts">
-                <div class="card-num">୧</div>
-                <div class="card-body">
-                    <div class="card-tag">ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="card-title">+୨ ପ୍ରଥମ ବର୍ଷ — କଳା</div>
-                    <div class="card-desc">ମାନବ ବିଜ୍ଞାନ · ଭାଷା · ସାମାଜିକ ଅଧ୍ୟୟନ</div>
-                </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+2 2nd Year - Arts/index.html" class="card card-arts">
-                <div class="card-num">୨</div>
-                <div class="card-body">
-                    <div class="card-tag">ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="card-title">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — କଳା</div>
-                    <div class="card-desc">ମାନବ ବିଜ୍ଞାନ · ଭାଷା · ସାମାଜିକ ଅଧ୍ୟୟନ</div>
-                </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
             </a>
         </div>
 
-
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!--  4. +2 – COMMERCE                 -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="section-block theme-commerce">
-        <div class="section-head">
-            <div class="section-head-icon">📊</div>
-            <div class="section-head-title">ବାଣିଜ୍ୟ ବିଭାଗ</div>
-            <div class="section-head-line"></div>
+        <!-- ══ 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ══ -->
+        <div class="sec t-spl1">
+            <div class="sec-hd">
+                <div class="sec-ico">🌟</div>
+                <div class="sec-text">
+                    <div class="sec-eyebrow">ବିଶେଷ ପ୍ରଶିକ୍ଷଣ</div>
+                    <div class="sec-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
+                </div>
+            </div>
+            <div class="grid1">
+                <a href="./special-training/index.html" class="lv-card lv-spl1">
+                    <div class="lv-icon">🌟</div>
+                    <div class="lv-name">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
+                    <div class="lv-sub">ଶିକ୍ଷାର୍ଥୀଙ୍କ ସର୍ବାଙ୍ଗୀନ ବିକାଶ ପାଇଁ</div>
+                    <div class="lv-bar"></div>
+                </a>
+            </div>
         </div>
 
-        <!-- +2 active -->
-        <div class="level-label active-commerce">+୨ ଶ୍ରେଣୀ</div>
-        <div class="cards-list">
-            <a href="./+2 1st Year - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୧</div>
-                <div class="card-body">
-                    <div class="card-tag">ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="card-title">+୨ ପ୍ରଥମ ବର୍ଷ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ହିସାବ · ବ୍ୟବସାୟ · ଅର୍ଥନୀତି</div>
+        <!-- ══ 2. ମୋ ସାଥି ══ -->
+        <div class="sec t-spl2">
+            <div class="sec-hd">
+                <div class="sec-ico">🤝</div>
+                <div class="sec-text">
+                    <div class="sec-eyebrow">ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶନ</div>
+                    <div class="sec-title">ମୋ ସାଥି ଆପ୍</div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+2 2nd Year - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୨</div>
-                <div class="card-body">
-                    <div class="card-tag">ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="card-title">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ହିସାବ · ବ୍ୟବସାୟ · ଅର୍ଥନୀତି</div>
-                </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
+            </div>
+            <div class="grid1">
+                <a href="./mo-sathi/index.html" class="lv-card lv-spl2">
+                    <div class="lv-icon">🤝</div>
+                    <div class="lv-name">ମୋ ସାଥି ଆପ୍</div>
+                    <div class="lv-sub">ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶକ</div>
+                    <div class="lv-bar"></div>
+                </a>
+            </div>
         </div>
 
-        <!-- +3 Commerce active -->
-        <div class="level-label active-commerce">+୩ ସେମିଷ୍ଟାର</div>
-        <div class="cards-list">
-            <a href="./+3 Sem-1 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୧</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୧</div>
-                    <div class="card-title">+୩ ସେମ-୧ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ପ୍ରଥମ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+        <!-- ══ 3. କଳା ବିଭାଗ ══ -->
+        <div class="sec t-arts">
+            <div class="sec-hd">
+                <div class="sec-ico">🎨</div>
+                <div class="sec-text">
+                    <div class="sec-eyebrow">Arts Stream</div>
+                    <div class="sec-title">କଳା ବିଭାଗ</div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-2 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୨</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୨</div>
-                    <div class="card-title">+୩ ସେମ-୨ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ଦ୍ୱିତୀୟ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+            </div>
+
+            <!-- +2 Arts -->
+            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
+            <div class="grid2">
+                <a href="./%2B2%201st%20Year%20-%20Arts/index.html" class="lv-card lv-arts1">
+                    <div class="lv-icon">📘</div>
+                    <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
+                    <div class="lv-sub">କଳା</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B2%202nd%20Year%20-%20Arts/index.html" class="lv-card lv-arts2">
+                    <div class="lv-icon">📗</div>
+                    <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
+                    <div class="lv-sub">କଳା</div>
+                    <div class="lv-bar"></div>
+                </a>
+            </div>
+
+            <!-- +3 Arts Honours — Accordion -->
+            <div class="sub-lbl">+3 Honours Subjects</div>
+            <div class="accordion">
+
+                <!-- Political Science -->
+                <div class="acc-item" id="acc-polsci">
+                    <div class="acc-trigger acc-polsci" onclick="toggleAcc('acc-polsci')">
+                        <div class="acc-ico">🏛️</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Political Science</div>
+                            <div class="acc-odia">ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/polsci/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/polsci/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-3 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୩</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୩</div>
-                    <div class="card-title">+୩ ସେମ-୩ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ତୃତୀୟ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+                <!-- History -->
+                <div class="acc-item" id="acc-history">
+                    <div class="acc-trigger acc-history" onclick="toggleAcc('acc-history')">
+                        <div class="acc-ico">📜</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">History</div>
+                            <div class="acc-odia">ଇତିହାସ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/history/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/history/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-4 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୪</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୪</div>
-                    <div class="card-title">+୩ ସେମ-୪ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ଚତୁର୍ଥ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+                <!-- Education -->
+                <div class="acc-item" id="acc-educ">
+                    <div class="acc-trigger acc-educ" onclick="toggleAcc('acc-educ')">
+                        <div class="acc-ico">🎓</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Education</div>
+                            <div class="acc-odia">ଶିକ୍ଷା (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/education/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/education/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-5 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୫</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୫</div>
-                    <div class="card-title">+୩ ସେମ-୫ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ପଞ୍ଚମ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+                <!-- Psychology -->
+                <div class="acc-item" id="acc-psych">
+                    <div class="acc-trigger acc-psych" onclick="toggleAcc('acc-psych')">
+                        <div class="acc-ico">🧠</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Psychology</div>
+                            <div class="acc-odia">ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/psychology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/psychology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-6 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୬</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୬</div>
-                    <div class="card-title">+୩ ସେମ-୬ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ଷଷ୍ଠ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+                <!-- Economics -->
+                <div class="acc-item" id="acc-econ">
+                    <div class="acc-trigger acc-econ" onclick="toggleAcc('acc-econ')">
+                        <div class="acc-ico">📈</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Economics</div>
+                            <div class="acc-odia">ଅର୍ଥନୀତି (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/economics/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/economics/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-7 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୭</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୭</div>
-                    <div class="card-title">+୩ ସେମ-୭ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ସପ୍ତମ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+                <!-- Sociology -->
+                <div class="acc-item" id="acc-socio">
+                    <div class="acc-trigger acc-socio" onclick="toggleAcc('acc-socio')">
+                        <div class="acc-ico">👥</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Sociology</div>
+                            <div class="acc-odia">ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body">
+                        <div class="grid2">
+                            <a href="./+3-arts/sociology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                            <a href="./+3-arts/sociology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
-            <a href="./+3 Sem-8 - Commerce/index.html" class="card card-commerce">
-                <div class="card-num">୮</div>
-                <div class="card-body">
-                    <div class="card-tag">ସେମିଷ୍ଟାର ୮</div>
-                    <div class="card-title">+୩ ସେମ-୮ — ବାଣିଜ୍ୟ</div>
-                    <div class="card-desc">ଅଷ୍ଟମ ସେମିଷ୍ଟାର ପାଠ୍ୟକ୍ରମ</div>
+
+            </div><!-- /accordion -->
+        </div><!-- /arts sec -->
+
+        <!-- ══ 4. ବାଣିଜ୍ୟ ══ -->
+        <div class="sec t-com">
+            <div class="sec-hd">
+                <div class="sec-ico">📊</div>
+                <div class="sec-text">
+                    <div class="sec-eyebrow">Commerce Stream</div>
+                    <div class="sec-title">ବାଣିଜ୍ୟ ବିଭାଗ</div>
                 </div>
-                <div class="card-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-            </a>
+            </div>
+
+            <!-- +2 -->
+            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
+            <div class="grid2">
+                <a href="./%2B2%201st%20Year%20-%20Commerce/index.html" class="lv-card lv-com1">
+                    <div class="lv-icon">💼</div>
+                    <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
+                    <div class="lv-sub">ବାଣିଜ୍ୟ</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B2%202nd%20Year%20-%20Commerce/index.html" class="lv-card lv-com2">
+                    <div class="lv-icon">📋</div>
+                    <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
+                    <div class="lv-sub">ବାଣିଜ୍ୟ</div>
+                    <div class="lv-bar"></div>
+                </a>
+            </div>
+
+            <!-- +3 Semesters — gradient cards 2-col -->
+            <div class="sub-lbl">+3 Semesters</div>
+            <div class="grid2">
+                <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1">
+                    <div class="lv-icon">📘</div>
+                    <div class="lv-name">Sem-1</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2">
+                    <div class="lv-icon">📗</div>
+                    <div class="lv-name">Sem-2</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-3%20-%20Commerce/index.html" class="lv-card lv-sem3">
+                    <div class="lv-icon">📙</div>
+                    <div class="lv-name">Sem-3</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-4%20-%20Commerce/index.html" class="lv-card lv-sem4">
+                    <div class="lv-icon">📕</div>
+                    <div class="lv-name">Sem-4</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-5%20-%20Commerce/index.html" class="lv-card lv-sem1">
+                    <div class="lv-icon">📓</div>
+                    <div class="lv-name">Sem-5</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-6%20-%20Commerce/index.html" class="lv-card lv-sem2">
+                    <div class="lv-icon">📔</div>
+                    <div class="lv-name">Sem-6</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-7%20-%20Commerce/index.html" class="lv-card lv-sem3">
+                    <div class="lv-icon">📒</div>
+                    <div class="lv-name">Sem-7</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+                <a href="./%2B3%20Sem-8%20-%20Commerce/index.html" class="lv-card lv-sem4">
+                    <div class="lv-icon">🎓</div>
+                    <div class="lv-name">Sem-8</div>
+                    <div class="lv-sub">+3 Commerce</div>
+                    <div class="lv-bar"></div>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <div class="divider"></div>
-
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!--  5. SCHOOL Class 1–10             -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="section-block theme-school">
-        <div class="section-head">
-            <div class="section-head-icon">🏫</div>
-            <div class="section-head-title">ବିଦ୍ୟାଳୟ ବିଭାଗ</div>
-            <div class="section-head-line"></div>
+        <!-- ══ 5. ବିଦ୍ୟାଳୟ ══ -->
+        <div class="sec t-school">
+            <div class="sec-hd">
+                <div class="sec-ico">🏫</div>
+                <div class="sec-text">
+                    <div class="sec-eyebrow">School Section</div>
+                    <div class="sec-title">ବିଦ୍ୟାଳୟ ବିଭାଗ</div>
+                </div>
+            </div>
+            <div class="sub-lbl">ଶ୍ରେଣୀ ୧ ରୁ ୧୦</div>
+            <div class="grid2">
+                <a href="./school/class-1/index.html"  class="lv-card lv-s1"><div class="lv-icon">✏️</div><div class="lv-name">ଶ୍ରେଣୀ ୧</div><div class="lv-sub">ପ୍ରଥମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-2/index.html"  class="lv-card lv-s2"><div class="lv-icon">📝</div><div class="lv-name">ଶ୍ରେଣୀ ୨</div><div class="lv-sub">ଦ୍ୱିତୀୟ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-3/index.html"  class="lv-card lv-s3"><div class="lv-icon">📖</div><div class="lv-name">ଶ୍ରେଣୀ ୩</div><div class="lv-sub">ତୃତୀୟ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-4/index.html"  class="lv-card lv-s4"><div class="lv-icon">📚</div><div class="lv-name">ଶ୍ରେଣୀ ୪</div><div class="lv-sub">ଚତୁର୍ଥ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-5/index.html"  class="lv-card lv-s5"><div class="lv-icon">🔭</div><div class="lv-name">ଶ୍ରେଣୀ ୫</div><div class="lv-sub">ପଞ୍ଚମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-6/index.html"  class="lv-card lv-arts1"><div class="lv-icon">🔬</div><div class="lv-name">ଶ୍ରେଣୀ ୬</div><div class="lv-sub">ଷଷ୍ଠ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-7/index.html"  class="lv-card lv-com1"><div class="lv-icon">📐</div><div class="lv-name">ଶ୍ରେଣୀ ୭</div><div class="lv-sub">ସପ୍ତମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-8/index.html"  class="lv-card lv-com2"><div class="lv-icon">🧮</div><div class="lv-name">ଶ୍ରେଣୀ ୮</div><div class="lv-sub">ଅଷ୍ଟମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-9/index.html"  class="lv-card lv-spl1"><div class="lv-icon">🏆</div><div class="lv-name">ଶ୍ରେଣୀ ୯</div><div class="lv-sub">ନବମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+                <a href="./school/class-10/index.html" class="lv-card lv-spl2"><div class="lv-icon">🎓</div><div class="lv-name">ଶ୍ରେଣୀ ୧୦</div><div class="lv-sub">ଦଶମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+            </div>
         </div>
 
-        <div class="level-label active-school">ଶ୍ରେଣୀ ୧ ରୁ ୧୦</div>
-        <div class="cards-grid">
-            <a href="./school/class-1/index.html" class="grid-card grid-school">
-                <div class="grid-num">୧</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୧</div>
-                <div class="grid-sub">ପ୍ରଥମ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-2/index.html" class="grid-card grid-school">
-                <div class="grid-num">୨</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୨</div>
-                <div class="grid-sub">ଦ୍ୱିତୀୟ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-3/index.html" class="grid-card grid-school">
-                <div class="grid-num">୩</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୩</div>
-                <div class="grid-sub">ତୃତୀୟ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-4/index.html" class="grid-card grid-school">
-                <div class="grid-num">୪</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୪</div>
-                <div class="grid-sub">ଚତୁର୍ଥ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-5/index.html" class="grid-card grid-school">
-                <div class="grid-num">୫</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୫</div>
-                <div class="grid-sub">ପଞ୍ଚମ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-6/index.html" class="grid-card grid-school">
-                <div class="grid-num">୬</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୬</div>
-                <div class="grid-sub">ଷଷ୍ଠ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-7/index.html" class="grid-card grid-school">
-                <div class="grid-num">୭</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୭</div>
-                <div class="grid-sub">ସପ୍ତମ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-8/index.html" class="grid-card grid-school">
-                <div class="grid-num">୮</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୮</div>
-                <div class="grid-sub">ଅଷ୍ଟମ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-9/index.html" class="grid-card grid-school">
-                <div class="grid-num">୯</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୯</div>
-                <div class="grid-sub">ନବମ ଶ୍ରେଣୀ</div>
-            </a>
-            <a href="./school/class-10/index.html" class="grid-card grid-school">
-                <div class="grid-num">୧୦</div>
-                <div class="grid-label">ଶ୍ରେଣୀ ୧୦</div>
-                <div class="grid-sub">ଦଶମ ଶ୍ରେଣୀ</div>
-            </a>
+    </div><!-- /shell -->
+
+    <footer>
+        <div class="footer-brand">
+            <h3>🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ 🌹</h3>
+            <p>Private Online Parent Coaching Service</p>
         </div>
-    </div>
+        <div class="footer-div"></div>
+        <a href="https://e-vidya-legal-policies.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-legal-link">
+            ⚖️ <span>Legal Policies & Information →</span>
+        </a>
+        <div class="footer-copy">© ୨୦୨୬ ଇ-ବିଦ୍ୟା ଏକାଡେମୀ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
+    </footer>
 
-    <!-- ━━━━━━ FOOTER ━━━━━━ -->
-    <div class="footer">
-        <div class="footer-line"></div>
-        <div class="footer-name">ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</div>
-        <div class="footer-copy">© ୨୦୨୬ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
-    </div>
+</div><!-- /page -->
 
-</div><!-- /main -->
+<script>
+function toggleAcc(id) {
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
+    // open clicked if it was closed
+    if (!isOpen) item.classList.add('open');
+}
+</script>
 </body>
 </html>
