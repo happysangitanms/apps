@@ -129,7 +129,11 @@
             background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .subject-card:active { transform: scale(0.96); }
+        .subject-card:active {
+    transform: scale(0.96);
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+    box-shadow: 0 6px 20px rgba(29,78,216,0.5);
+}
 
         .subject-card[data-subject="POLSCI"] { background: linear-gradient(135deg, #c31432 0%, #240b36 100%); }
         .subject-card[data-subject="HIST"]   { background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); }
@@ -173,7 +177,11 @@
             background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .class-card:active { transform: scale(0.96); }
+    .class-card:active {
+    transform: scale(0.96);
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+    box-shadow: 0 6px 20px rgba(29,78,216,0.5);
+}
 
         .class-num   { font-size: 0.72em; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; background: rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; }
         .class-title { font-size: 1.0em; font-weight: 700; line-height: 1.3; padding: 0 4px; }
