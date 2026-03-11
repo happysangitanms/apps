@@ -1,952 +1,769 @@
 <!DOCTYPE html>
 <html lang="or">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #07111f;
+  --gold:    #c8962a;
+  --gold-lt: #e4b84a;
+  --white:   #ffffff;
+  --bg:      #f0f4f8;
+  --border:  #e2e8f2;
+  --slate:   #4a5568;
+  --text:    #1a2438;
+}
 
-    <style>
-        :root {
-            --navy:      #07111f;
-            --navy-mid:  #0c1c35;
-            --navy-lt:   #112244;
-            --gold:      #c8962a;
-            --gold-lt:   #e4b84a;
-            --gold-pale: rgba(200,150,42,0.18);
-            --white:     #ffffff;
-            --off-white: #f7f9fc;
-            --border:    #e2e8f2;
-            --slate:     #4a5568;
-            --text:      #1a2438;
-        }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 
-        *, *::before, *::after {
-            margin: 0; padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+body {
+  font-family: 'Noto Sans Oriya', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-        body {
-            font-family: 'Noto Sans Oriya', sans-serif;
-            background: var(--off-white);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+/* ── Dark header bg ── */
+body::before {
+  content:''; position:fixed; top:0; left:0; right:0; height:620px;
+  background: linear-gradient(170deg,#07111f 0%,#0c1c35 45%,#0f2548 75%,#07111f 100%);
+  z-index:0;
+}
+body::after {
+  content:''; position:fixed; top:0; left:0; right:0; height:620px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(26,58,110,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 15%, rgba(200,150,42,0.13) 0%, transparent 50%);
+  z-index:0;
+}
 
-        /* ══ STARFIELD BACKGROUND ══ */
-        body::before {
-            content: '';
-            position: fixed; inset: 0;
-            background:
-                radial-gradient(ellipse at 20% 0%, #1a3a6e 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 10%, rgba(200,150,42,0.15) 0%, transparent 45%),
-                linear-gradient(170deg, #07111f 0%, #0c1c35 40%, #0f2548 70%, #07111f 100%);
-            height: 580px;
-            z-index: 0;
-        }
+/* ── Page ── */
+.page {
+  position:relative; z-index:1;
+  max-width:640px; margin:0 auto;
+  padding:0 14px 90px;
+}
 
-        /* ══ PAGE WRAPPER ══ */
-        .page {
-            position: relative; z-index: 1;
-            max-width: 640px; margin: 0 auto;
-            padding: 0 14px 80px;
-        }
+/* ══════════════════ HEADER ══════════════════ */
+header {
+  padding:28px 0 24px;
+  text-align:center;
+  animation: fadeUp 0.55s ease both;
+}
+.logo-wrap {
+  margin:0 auto 16px;
+  width:100%; max-width:360px;
+}
+.logo-wrap img {
+  display:block; width:100%; height:auto;
+  border-radius:18px; mix-blend-mode:screen;
+}
+.academy-name {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(1.7em, 7vw, 2.1em);
+  font-weight:800; color:#fff;
+  letter-spacing:0.03em;
+  text-shadow:0 3px 16px rgba(0,0,0,0.5);
+  margin-bottom:14px; line-height:1.2;
+}
+.website-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 26px;
+  background:rgba(200,150,42,0.15);
+  border:1.5px solid rgba(200,150,42,0.6);
+  border-radius:50px;
+  text-decoration:none; color:var(--gold-lt);
+  font-size: clamp(1em,4vw,1.1em);
+  font-weight:700; letter-spacing:0.03em;
+  transition:background 0.2s,transform 0.2s;
+}
+.website-btn:active { transform:scale(0.97); background:rgba(200,150,42,0.28); }
 
-        /* ════════════════════════════════
-           HEADER
-        ════════════════════════════════ */
-        header {
-            padding: 28px 0 0;
-            text-align: center;
-            animation: fadeUp 0.6s ease both;
-        }
+.welcome-gif {
+  margin:16px auto 0;
+  width:100%; max-width:300px;
+  border-radius:16px; overflow:hidden;
+  border:2px solid rgba(200,150,42,0.45);
+  box-shadow:0 12px 40px rgba(0,0,0,0.45);
+}
+.welcome-gif img { display:block; width:100%; height:auto; }
 
-        /* Logo */
-        .logo-wrap {
-            margin: 0 auto 16px;
-            width: 100%;
-            max-width: 360px;
-        }
-        .logo-wrap img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 18px;
-            mix-blend-mode: screen;
-        }
+.choose-heading {
+  font-size: clamp(1.05em,4.5vw,1.3em);
+  font-weight:800; color:#fff;
+  letter-spacing:0.04em;
+  margin:20px 0 24px;
+  text-shadow:0 2px 10px rgba(0,0,0,0.5);
+}
+.choose-heading span { color:var(--gold-lt); }
 
-        /* Academy name */
-        .academy-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8em, 7vw, 2.2em);
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.03em;
-            text-shadow: 0 3px 16px rgba(0,0,0,0.5);
-            margin-bottom: 14px;
-            line-height: 1.2;
-        }
+/* ══════════════════ SECTIONS ══════════════════ */
+.sections { display:flex; flex-direction:column; gap:14px; }
 
-        /* Website pill button */
-        .website-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: rgba(200,150,42,0.15);
-            border: 1.5px solid rgba(200,150,42,0.6);
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--gold-lt);
-            font-size: clamp(1em, 4vw, 1.15em);
-            font-weight: 700;
-            letter-spacing: 0.03em;
-            transition: background 0.2s, transform 0.2s;
-            backdrop-filter: blur(4px);
-        }
-        .website-btn:active { transform: scale(0.97); background: rgba(200,150,42,0.25); }
-        @media(hover:hover){ .website-btn:hover { background: rgba(200,150,42,0.25); transform: translateY(-2px); } }
+.sec {
+  background:#fff;
+  border-radius:20px;
+  padding:18px 16px 20px;
+  box-shadow:0 6px 28px rgba(7,17,31,0.11);
+  border:1px solid var(--border);
+}
+.sec:nth-child(1){animation:fadeUp 0.45s ease 0.10s both;}
+.sec:nth-child(2){animation:fadeUp 0.45s ease 0.17s both;}
+.sec:nth-child(3){animation:fadeUp 0.45s ease 0.22s both;}
+.sec:nth-child(4){animation:fadeUp 0.45s ease 0.27s both;}
+.sec:nth-child(5){animation:fadeUp 0.45s ease 0.32s both;}
+.sec:nth-child(6){animation:fadeUp 0.45s ease 0.37s both;}
+.sec:nth-child(7){animation:fadeUp 0.45s ease 0.42s both;}
 
-        /* Welcome GIF */
-        .welcome-gif {
-            margin: 14px auto 0;
-            width: 100%;
-            max-width: 300px;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid rgba(200,150,42,0.4);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-        }
-        .welcome-gif img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+/* Section header */
+.sec-hd {
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:16px; padding-bottom:14px;
+  border-bottom:1.5px solid var(--border);
+}
+.sec-ico {
+  width:48px; height:48px; border-radius:13px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.sec-eyebrow {
+  font-size: clamp(10px,2.8vw,12px);
+  font-weight:700; letter-spacing:0.10em;
+  text-transform:uppercase; margin-bottom:3px;
+}
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(16px,5vw,20px);
+  font-weight:700; color:var(--text); line-height:1.2;
+}
 
-        /* Choose app heading */
-        .choose-heading {
-            font-size: clamp(1.15em, 5vw, 1.35em);
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.04em;
-            margin: 18px 0 22px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        .choose-heading span {
-            color: var(--gold-lt);
-        }
+/* Sub-label — big heading style */
+.sub-lbl {
+  font-family:'Noto Sans Oriya',sans-serif;
+  font-size: clamp(15px,4.8vw,19px);
+  font-weight:800;
+  display:flex; align-items:center; gap:10px;
+  margin:20px 0 12px;
+  padding:11px 14px;
+  border-radius:12px;
+  background:rgba(0,0,0,0.055);
+  line-height:1.3;
+}
+.sub-lbl::after {
+  content:''; flex:1; height:2px;
+  background:linear-gradient(to right,currentColor,transparent);
+  opacity:0.18;
+}
 
-        /* ════════════════════════════════
-           SECTION CARDS
-        ════════════════════════════════ */
-        .sections {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
+/* ── Section colour tokens ── */
+.t-spl1 .sec-ico    {background:#fff0eb;}
+.t-spl1 .sec-eyebrow{color:#9a3015;}
+.t-spl1 .sub-lbl    {color:#9a3015;}
 
-        .sec {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 20px 16px;
-            box-shadow: 0 6px 28px rgba(7,17,31,0.12);
-            border: 1px solid rgba(226,232,242,0.8);
-            animation: fadeUp 0.5s ease both;
-        }
-        .sec:nth-child(1) { animation-delay: 0.10s; }
-        .sec:nth-child(2) { animation-delay: 0.17s; }
-        .sec:nth-child(3) { animation-delay: 0.24s; }
-        .sec:nth-child(4) { animation-delay: 0.31s; }
-        .sec:nth-child(5) { animation-delay: 0.38s; }
+.t-spl2 .sec-ico    {background:#e6f7f0;}
+.t-spl2 .sec-eyebrow{color:#065f46;}
+.t-spl2 .sub-lbl    {color:#065f46;}
 
-        /* Section header row */
-        .sec-hd {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 14px;
-            border-bottom: 1.5px solid var(--border);
-        }
-        .sec-ico {
-            width: 50px; height: 50px;
-            border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; flex-shrink: 0;
-        }
-        .sec-eyebrow {
-            font-size: clamp(11px, 3vw, 12px); font-weight: 700;
-            letter-spacing: 0.10em; text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        .sec-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(17px, 5vw, 20px);
-            font-weight: 700; color: var(--text);
-            line-height: 1.2;
-        }
+.t-arts .sec-ico    {background:#eff6ff;}
+.t-arts .sec-eyebrow{color:#1d4ed8;}
+.t-arts .sub-lbl    {color:#1d4ed8;}
 
-        /* Sub-label divider */
-        .sub-lbl {
-            font-family: 'Noto Sans Oriya', 'Playfair Display', sans-serif;
-            font-size: clamp(17px, 5.5vw, 22px);
-            font-weight: 800;
-            letter-spacing: 0.01em;
-            display: flex; align-items: center; gap: 10px;
-            margin: 22px 0 14px;
-            padding: 12px 16px;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.06);
-            color: var(--text);
-            line-height: 1.3;
-        }
-        .sub-lbl::after {
-            content: ''; flex: 1; height: 2.5px;
-            background: linear-gradient(to right, currentColor, transparent);
-            opacity: 0.20;
-        }
+.t-com .sec-ico     {background:#f5f3ff;}
+.t-com .sec-eyebrow {color:#5b21b6;}
+.t-com .sub-lbl     {color:#5b21b6;}
 
-        /* ── colour tokens per section ── */
-        .t-spl1 .sec-ico     { background: #fff0eb; }
-        .t-spl1 .sec-eyebrow { color: #9a3015; }
-        .t-spl1 .sub-lbl     { color: #9a3015; }
+.t-legal .sec-ico    {background:#fef2f2;}
+.t-legal .sec-eyebrow{color:#991b1b;}
+.t-legal .sub-lbl    {color:#991b1b;}
 
-        .t-spl2 .sec-ico     { background: #e6f7f0; }
-        .t-spl2 .sec-eyebrow { color: #065f46; }
-        .t-spl2 .sub-lbl     { color: #065f46; }
+/* ══════════════════ GRADIENT CARDS ══════════════════ */
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid1 { display:flex; flex-direction:column; gap:10px; }
 
-        .t-arts .sec-ico     { background: #eff6ff; }
-        .t-arts .sec-eyebrow { color: #1d4ed8; }
-        .t-arts .sub-lbl     { color: #1d4ed8; }
+.lv-card {
+  position:relative; border-radius:15px;
+  padding:18px 12px 16px;
+  text-align:center; cursor:pointer;
+  text-decoration:none; color:#fff;
+  display:flex; flex-direction:column; align-items:center;
+  min-height:118px; overflow:hidden;
+  transition:transform 0.2s;
+  border:1px solid rgba(255,255,255,0.12);
+}
+.lv-card::before {
+  content:''; position:absolute; top:-40%; right:-15%;
+  width:110px; height:110px; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,0.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+.lv-card:active { transform:scale(0.96); }
 
-        .t-com .sec-ico      { background: #f5f3ff; }
-        .t-com .sec-eyebrow  { color: #5b21b6; }
-        .t-com .sub-lbl      { color: #5b21b6; }
+.lv-icon {
+  font-size: clamp(1.9em,6.5vw,2.3em);
+  margin-bottom:9px; line-height:1;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,0.28));
+}
+.lv-name {
+  font-family:'Noto Sans Oriya','Playfair Display',sans-serif;
+  font-size: clamp(0.95em,4vw,1.1em);
+  font-weight:700; line-height:1.25;
+  text-shadow:0 1px 6px rgba(0,0,0,0.25);
+}
+.lv-sub {
+  font-size: clamp(0.75em,3vw,0.85em);
+  opacity:0.85; margin-top:5px;
+  font-weight:500; line-height:1.3;
+}
+.lv-bar {
+  position:absolute; bottom:0;
+  left:50%; transform:translateX(-50%);
+  width:26px; height:3px; border-radius:2px;
+  background:rgba(255,255,255,0.38);
+}
 
-        .t-school .sec-ico     { background: #fffbeb; }
-        .t-school .sec-eyebrow { color: #b45309; }
-        .t-school .sub-lbl     { color: #b45309; }
+/* Card gradients */
+.lv-spl1 {background:linear-gradient(145deg,#7b1a0a,#b22222);box-shadow:0 7px 24px rgba(123,26,10,0.38);}
+.lv-spl2 {background:linear-gradient(145deg,#065f46,#059669);box-shadow:0 7px 24px rgba(6,95,70,0.36);}
+.lv-arts1{background:linear-gradient(145deg,#1e3a8a,#2563eb);box-shadow:0 7px 24px rgba(30,58,138,0.38);}
+.lv-arts2{background:linear-gradient(145deg,#1e40af,#3b82f6);box-shadow:0 7px 24px rgba(30,64,175,0.36);}
+.lv-com1 {background:linear-gradient(145deg,#3b0764,#6d28d9);box-shadow:0 7px 24px rgba(59,7,100,0.38);}
+.lv-com2 {background:linear-gradient(145deg,#4c1d95,#7c3aed);box-shadow:0 7px 24px rgba(76,29,149,0.36);}
+.lv-sem1 {background:linear-gradient(145deg,#1e3a8a,#2563eb);box-shadow:0 6px 20px rgba(30,58,138,0.36);}
+.lv-sem2 {background:linear-gradient(145deg,#0369a1,#0ea5e9);box-shadow:0 6px 20px rgba(3,105,161,0.36);}
+.lv-sem3 {background:linear-gradient(145deg,#065f46,#059669);box-shadow:0 6px 20px rgba(6,95,70,0.36);}
+.lv-sem4 {background:linear-gradient(145deg,#3b0764,#6d28d9);box-shadow:0 6px 20px rgba(59,7,100,0.36);}
+.lv-legal{background:linear-gradient(145deg,#7f1d1d,#b91c1c);box-shadow:0 7px 24px rgba(127,29,29,0.38);}
 
-        .t-legal .sec-ico      { background: #f0fdf4; }
-        .t-legal .sec-eyebrow  { color: #14532d; }
-        .t-legal .sub-lbl      { color: #14532d; }
+/* ══════════════════ ACCORDION ══════════════════ */
+.accordion { display:flex; flex-direction:column; gap:10px; }
 
-        /* Legal card palettes */
-        .lv-law1 { background: linear-gradient(145deg,#14532d,#16a34a); box-shadow: 0 7px 22px rgba(20,83,45,0.38); }
-        .lv-law2 { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.38); }
-        .lv-law3 { background: linear-gradient(145deg,#7c2d12,#c2410c); box-shadow: 0 7px 22px rgba(124,45,18,0.38); }
-        .lv-law4 { background: linear-gradient(145deg,#4a1d96,#7c3aed); box-shadow: 0 7px 22px rgba(74,29,150,0.38); }
+.acc-item {
+  border-radius:15px; overflow:hidden;
+  border:1.5px solid var(--border);
+  box-shadow:0 3px 12px rgba(7,17,31,0.08);
+}
+.acc-trigger {
+  display:flex; align-items:center; gap:12px;
+  padding:15px 14px;
+  cursor:pointer; user-select:none;
+}
+.acc-trigger:active { opacity:0.88; }
 
-        /* ════════════════════════════════
-           GRADIENT CARDS
-        ════════════════════════════════ */
-        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .grid1 { display: flex; flex-direction: column; gap: 10px; }
+.acc-polsci {background:linear-gradient(135deg,#1e3a8a,#2563eb);}
+.acc-history{background:linear-gradient(135deg,#065f46,#059669);}
+.acc-educ   {background:linear-gradient(135deg,#0369a1,#0ea5e9);}
+.acc-psych  {background:linear-gradient(135deg,#4c1d95,#7c3aed);}
+.acc-econ   {background:linear-gradient(135deg,#b45309,#d97706);}
+.acc-socio  {background:linear-gradient(135deg,#7b1a0a,#b22222);}
 
-        .lv-card {
-            position: relative;
-            border-radius: 16px;
-            padding: 20px 14px 18px;
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 125px; overflow: hidden;
-            transition: transform 0.22s, box-shadow 0.22s;
-            border: 1px solid rgba(255,255,255,0.12);
-        }
-        .lv-card::before {
-            content: '';
-            position: absolute; top: -40%; right: -15%;
-            width: 120px; height: 120px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .lv-card::after {
-            content: '';
-            position: absolute; bottom: -18px; left: -8px;
-            width: 70px; height: 70px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .lv-card:active  { transform: scale(0.96); }
-        @media(hover:hover){ .lv-card:hover { transform: translateY(-4px); } }
+.acc-ico {
+  width:44px; height:44px; border-radius:11px;
+  background:rgba(255,255,255,0.18);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; flex-shrink:0;
+}
+.acc-label { flex:1; min-width:0; }
+.acc-eyebrow {
+  font-size: clamp(10px,2.8vw,11.5px);
+  font-weight:700; letter-spacing:0.09em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.72); margin-bottom:2px;
+}
+.acc-name {
+  font-family:'Noto Sans Oriya',sans-serif;
+  font-size: clamp(15px,4.5vw,17px);
+  font-weight:700; color:#fff; line-height:1.2;
+}
+.acc-odia {
+  font-size: clamp(12px,3.5vw,13.5px);
+  color:rgba(255,255,255,0.8);
+  margin-top:3px; font-weight:500;
+}
+.acc-chevron {
+  width:30px; height:30px; border-radius:50%;
+  background:rgba(255,255,255,0.18);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.acc-chevron svg {
+  width:14px; height:14px; fill:none;
+  stroke:#fff; stroke-width:2.5;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.acc-item.open .acc-chevron { transform:rotate(180deg); }
 
-        .lv-icon {
-            font-size: clamp(2.2em, 7vw, 2.6em);
-            margin-bottom: 10px;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-            line-height: 1;
-        }
-        .lv-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.05em, 4.5vw, 1.2em);
-            font-weight: 700; line-height: 1.25;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .lv-sub {
-            font-size: clamp(0.80em, 3.2vw, 0.90em);
-            opacity: 0.88; margin-top: 6px;
-            font-weight: 500; line-height: 1.3;
-        }
-        .lv-bar {
-            position: absolute; bottom: 0;
-            left: 50%; transform: translateX(-50%);
-            width: 28px; height: 3px; border-radius: 2px;
-            background: rgba(255,255,255,0.4);
-        }
+.acc-body {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.25s;
+  background:#f4f6fb; padding:0 12px;
+}
+.acc-item.open .acc-body {
+  max-height:1000px;
+  padding:12px 12px 14px;
+}
 
-        /* Card colour palettes */
-        .lv-spl1  { background: linear-gradient(145deg,#7b1a0a,#b22222); box-shadow: 0 8px 28px rgba(123,26,10,0.38); }
-        .lv-spl2  { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 8px 28px rgba(6,95,70,0.36); }
-        .lv-arts1 { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 8px 28px rgba(30,58,138,0.38); }
-        .lv-arts2 { background: linear-gradient(145deg,#1e40af,#3b82f6); box-shadow: 0 8px 28px rgba(30,64,175,0.36); }
-        .lv-com1  { background: linear-gradient(145deg,#3b0764,#6d28d9); box-shadow: 0 8px 28px rgba(59,7,100,0.38); }
-        .lv-com2  { background: linear-gradient(145deg,#4c1d95,#7c3aed); box-shadow: 0 8px 28px rgba(76,29,149,0.36); }
-        .lv-sem1  { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.36); }
-        .lv-sem2  { background: linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow: 0 7px 22px rgba(3,105,161,0.36); }
-        .lv-sem3  { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 7px 22px rgba(6,95,70,0.36); }
-        .lv-sem4  { background: linear-gradient(145deg,#3b0764,#6d28d9); box-shadow: 0 7px 22px rgba(59,7,100,0.36); }
-        .lv-s1    { background: linear-gradient(145deg,#b45309,#d97706); box-shadow: 0 7px 22px rgba(180,83,9,0.36); }
-        .lv-s2    { background: linear-gradient(145deg,#92400e,#b45309); box-shadow: 0 7px 22px rgba(146,64,14,0.36); }
-        .lv-s3    { background: linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow: 0 7px 22px rgba(3,105,161,0.36); }
-        .lv-s4    { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 7px 22px rgba(6,95,70,0.34); }
-        .lv-s5    { background: linear-gradient(145deg,#1d4ed8,#3b82f6); box-shadow: 0 7px 22px rgba(29,78,216,0.36); }
+/* ══════════════════ FOOTER ══════════════════ */
+footer {
+  background:var(--navy);
+  border-radius:20px;
+  padding:26px 20px 22px;
+  margin-top:18px;
+  border:1px solid rgba(200,150,42,0.18);
+  box-shadow:0 8px 32px rgba(7,17,31,0.3);
+  text-align:center;
+  animation:fadeUp 0.5s ease 0.5s both;
+}
+.footer-brand h3 {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(1em,4.5vw,1.2em);
+  color:var(--gold-lt); font-weight:700; margin-bottom:6px;
+}
+.footer-brand p {
+  font-size: clamp(0.72em,2.5vw,0.78em);
+  color:rgba(255,255,255,0.45); line-height:1.5;
+}
+.footer-div { height:1px; background:rgba(200,150,42,0.14); margin:16px 0; }
+.footer-link {
+  display:inline-flex; align-items:center; gap:6px;
+  color:var(--gold-lt);
+  font-size: clamp(0.78em,3vw,0.85em);
+  font-weight:600; text-decoration:none;
+  opacity:0.85; margin-bottom:12px;
+}
+.footer-link span { text-decoration:underline; text-underline-offset:3px; }
+.footer-copy {
+  font-size: clamp(0.65em,2.2vw,0.72em);
+  color:rgba(255,255,255,0.28);
+}
 
-        /* ════════════════════════════════
-           ACCORDION (Honours subjects)
-        ════════════════════════════════ */
-        .accordion {
-            display: flex; flex-direction: column; gap: 10px;
-        }
+/* ══════════════════ MODAL ══════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(7,17,31,0.68);
+  display:flex; align-items:flex-end; justify-content:center;
+  padding:0 0 0;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s ease;
+}
+.modal-overlay.active { opacity:1; pointer-events:all; }
 
-        .acc-item {
-            border-radius: 16px; overflow: hidden;
-            border: 1.5px solid var(--border);
-            box-shadow: 0 3px 14px rgba(7,17,31,0.08);
-        }
+.modal-box {
+  background:#fff;
+  border-radius:24px 24px 0 0;
+  padding:24px 20px 40px;
+  width:100%; max-width:600px;
+  max-height:85vh; overflow-y:auto;
+  transform:translateY(50px);
+  transition:transform 0.32s cubic-bezier(0.34,1.1,0.64,1);
+  -webkit-overflow-scrolling:touch;
+}
+.modal-overlay.active .modal-box { transform:translateY(0); }
 
-        .acc-trigger {
-            display: flex; align-items: center; gap: 12px;
-            padding: 16px 14px;
-            cursor: pointer; user-select: none;
-            transition: filter 0.2s;
-        }
-        .acc-trigger:active { filter: brightness(0.93); }
+.modal-pill {
+  width:38px; height:4px; border-radius:4px;
+  background:#dde5ef; margin:0 auto 20px;
+}
+.modal-icon { font-size:2.6em; text-align:center; margin-bottom:8px; line-height:1; }
+.modal-title {
+  font-family:'Noto Sans Oriya','Playfair Display',sans-serif;
+  font-size: clamp(17px,5vw,22px);
+  font-weight:800; color:var(--text);
+  text-align:center; margin-bottom:6px; line-height:1.3;
+}
+.modal-subtitle {
+  font-size: clamp(12px,3.5vw,14px);
+  color:var(--slate); text-align:center;
+  margin-bottom:18px; line-height:1.5;
+}
+.modal-notice {
+  background:#f7f9fc;
+  border:1.5px solid var(--border);
+  border-radius:14px; padding:14px 16px;
+  margin-bottom:18px;
+}
+.modal-notice-title {
+  font-size: clamp(11px,3vw,13px);
+  font-weight:700; letter-spacing:0.07em;
+  text-transform:uppercase; color:var(--slate);
+  margin-bottom:10px;
+}
+.modal-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px; }
+.modal-list li {
+  font-size: clamp(13px,3.8vw,15px);
+  color:var(--text); font-weight:500;
+  display:flex; align-items:flex-start; gap:9px; line-height:1.45;
+}
+.modal-list li::before {
+  content:'✦'; font-size:9px; color:var(--gold);
+  flex-shrink:0; margin-top:5px;
+}
+.modal-divider { height:1px; background:var(--border); margin:12px 0; }
+.modal-list-heading {
+  font-size: clamp(11px,3vw,13px);
+  font-weight:700; color:var(--slate);
+  margin:10px 0 6px;
+  text-transform:uppercase; letter-spacing:0.07em;
+}
+.modal-btn-row {
+  display:flex; gap:10px; margin-top:20px;
+}
+.modal-btn-cancel {
+  flex:1; padding:14px;
+  border:1.5px solid var(--border);
+  border-radius:14px; background:transparent;
+  font-family:'Noto Sans Oriya',sans-serif;
+  font-size: clamp(13px,4vw,15px);
+  font-weight:600; color:var(--slate);
+  cursor:pointer;
+}
+.modal-btn-cancel:active { background:#f0f4f8; }
+.modal-btn-go {
+  flex:2; padding:14px;
+  border:none; border-radius:14px;
+  font-family:'Noto Sans Oriya',sans-serif;
+  font-size: clamp(13px,4vw,15px);
+  font-weight:700; color:#fff;
+  cursor:pointer; text-decoration:none;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  transition:transform 0.18s;
+}
+.modal-btn-go:active { transform:scale(0.97); }
 
-        .acc-polsci  { background: linear-gradient(135deg,#1e3a8a,#2563eb); }
-        .acc-history { background: linear-gradient(135deg,#065f46,#059669); }
-        .acc-educ    { background: linear-gradient(135deg,#0369a1,#0ea5e9); }
-        .acc-psych   { background: linear-gradient(135deg,#4c1d95,#7c3aed); }
-        .acc-econ    { background: linear-gradient(135deg,#b45309,#d97706); }
-        .acc-socio   { background: linear-gradient(135deg,#7b1a0a,#b22222); }
-
-        .acc-ico {
-            width: 46px; height: 46px; border-radius: 13px;
-            background: rgba(255,255,255,0.18);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; flex-shrink: 0;
-        }
-        .acc-label { flex: 1; min-width: 0; }
-        .acc-eyebrow {
-            font-size: clamp(11px, 3vw, 12px);
-            font-weight: 700; letter-spacing: 0.10em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.72);
-            margin-bottom: 3px;
-        }
-        .acc-name {
-            font-family: 'Noto Sans Oriya', 'Playfair Display', sans-serif;
-            font-size: clamp(16px, 5vw, 18px);
-            font-weight: 700; color: white; line-height: 1.2;
-        }
-        .acc-odia {
-            font-size: clamp(13px, 3.8vw, 14.5px);
-            color: rgba(255,255,255,0.82);
-            margin-top: 3px; font-weight: 500;
-        }
-        .acc-chevron {
-            width: 30px; height: 30px; border-radius: 50%;
-            background: rgba(255,255,255,0.18);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
-        }
-        .acc-chevron svg {
-            width: 14px; height: 14px; fill: none;
-            stroke: white; stroke-width: 2.5;
-            stroke-linecap: round; stroke-linejoin: round;
-        }
-        .acc-item.open .acc-chevron { transform: rotate(180deg); }
-
-        .acc-body {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.25s ease;
-            background: #f4f6fb;
-            padding: 0 12px;
-        }
-        .acc-item.open .acc-body {
-            max-height: 1000px;
-            padding: 12px 12px 14px;
-        }
-
-        /* ════════════════════════════════
-           LEGAL AWARENESS
-        ════════════════════════════════ */
-        .t-legal .sec-ico      { background: #fef2f2; }
-        .t-legal .sec-eyebrow  { color: #7f1d1d; }
-        .t-legal .sub-lbl      { color: #7f1d1d; }
-
-        .lv-law1  { background: linear-gradient(145deg,#7f1d1d,#b91c1c); box-shadow: 0 7px 22px rgba(127,29,29,0.38); }
-        .lv-law2  { background: linear-gradient(145deg,#78350f,#b45309); box-shadow: 0 7px 22px rgba(120,53,15,0.38); }
-        .lv-law3  { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.36); }
-        .lv-law4  { background: linear-gradient(145deg,#064e3b,#059669); box-shadow: 0 7px 22px rgba(6,78,59,0.36); }
-        .lv-law5  { background: linear-gradient(145deg,#3b0764,#7c3aed); box-shadow: 0 7px 22px rgba(59,7,100,0.36); }
-        .lv-law6  { background: linear-gradient(145deg,#0c4a6e,#0ea5e9); box-shadow: 0 7px 22px rgba(12,74,110,0.36); }
-
-        /* ════════════════════════════════
-           FOOTER
-        ════════════════════════════════ */
-        footer {
-            background: var(--navy);
-            border-radius: 20px;
-            padding: 26px 20px 22px;
-            margin-top: 18px;
-            border: 1px solid rgba(200,150,42,0.18);
-            box-shadow: 0 8px 32px rgba(7,17,31,0.3);
-            animation: fadeUp 0.5s ease 0.5s both;
-            text-align: center;
-        }
-        .footer-brand h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.15em, 5vw, 1.35em);
-            color: var(--gold-lt); font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .footer-brand p {
-            font-size: clamp(0.72em, 2.5vw, 0.78em);
-            color: rgba(255,255,255,0.45); line-height: 1.5;
-        }
-        .footer-div {
-            height: 1px;
-            background: rgba(200,150,42,0.14);
-            margin: 16px 0;
-        }
-        .footer-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            color: var(--gold-lt);
-            font-size: clamp(0.75em, 3vw, 0.82em);
-            font-weight: 600; text-decoration: none;
-            opacity: 0.85; transition: opacity 0.2s;
-            margin-bottom: 12px;
-        }
-        .footer-link:hover { opacity: 1; }
-        .footer-link span { text-decoration: underline; text-underline-offset: 3px; }
-        .footer-copy {
-            font-size: clamp(0.65em, 2.2vw, 0.72em);
-            color: rgba(255,255,255,0.28);
-        }
-
-        /* ════════════════════════════════
-           ANIMATIONS
-        ════════════════════════════════ */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @supports (padding: max(0px)) {
-            .page { padding-bottom: max(80px, env(safe-area-inset-bottom)); }
-        }
-
-        /* ════════════════════════════════
-           MODAL
-        ════════════════════════════════ */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 999;
-            background: rgba(7,17,31,0.72);
-            backdrop-filter: blur(4px);
-            display: flex; align-items: flex-end; justify-content: center;
-            padding: 0 12px 0;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.28s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1; pointer-events: all;
-        }
-        .modal-box {
-            background: #ffffff;
-            border-radius: 24px 24px 0 0;
-            padding: 28px 20px 36px;
-            width: 100%; max-width: 600px;
-            max-height: 82vh; overflow-y: auto;
-            transform: translateY(40px);
-            transition: transform 0.32s cubic-bezier(0.34,1.2,0.64,1);
-            position: relative;
-        }
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
-        .modal-pill {
-            width: 40px; height: 4px; border-radius: 4px;
-            background: #dde5ef; margin: 0 auto 20px;
-        }
-        .modal-icon {
-            font-size: 2.8em; text-align: center;
-            margin-bottom: 10px; line-height: 1;
-        }
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(18px, 5.5vw, 22px);
-            font-weight: 800; color: var(--text);
-            text-align: center; margin-bottom: 6px;
-            line-height: 1.25;
-        }
-        .modal-subtitle {
-            font-size: clamp(12px, 3.5vw, 14px);
-            color: var(--slate); text-align: center;
-            margin-bottom: 18px; line-height: 1.5;
-        }
-        .modal-notice {
-            background: #f7f9fc;
-            border: 1.5px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-        }
-        .modal-notice-title {
-            font-size: clamp(11px, 3vw, 12.5px);
-            font-weight: 700; letter-spacing: 0.08em;
-            text-transform: uppercase; color: var(--slate);
-            margin-bottom: 10px;
-        }
-        .modal-list {
-            list-style: none; padding: 0; margin: 0;
-            display: flex; flex-direction: column; gap: 7px;
-        }
-        .modal-list li {
-            font-size: clamp(13px, 3.8vw, 15px);
-            color: var(--text); font-weight: 500;
-            display: flex; align-items: flex-start; gap: 10px;
-            line-height: 1.4;
-        }
-        .modal-list li::before {
-            content: '✦'; font-size: 10px;
-            color: var(--gold); flex-shrink: 0;
-            margin-top: 4px;
-        }
-        .modal-divider {
-            height: 1px; background: var(--border);
-            margin: 14px 0;
-        }
-        .modal-list-heading {
-            font-size: clamp(12px, 3.5vw, 13.5px);
-            font-weight: 700; color: var(--slate);
-            margin: 12px 0 6px;
-            text-transform: uppercase; letter-spacing: 0.07em;
-        }
-        .modal-btn-row {
-            display: flex; gap: 10px; margin-top: 18px;
-        }
-        .modal-btn-cancel {
-            flex: 1; padding: 14px;
-            border: 1.5px solid var(--border);
-            border-radius: 14px; background: transparent;
-            font-family: 'Noto Sans Oriya', sans-serif;
-            font-size: clamp(13px, 4vw, 15px);
-            font-weight: 600; color: var(--slate);
-            cursor: pointer; transition: background 0.2s;
-        }
-        .modal-btn-cancel:active { background: #f0f4f8; }
-        .modal-btn-go {
-            flex: 2; padding: 14px;
-            border: none; border-radius: 14px;
-            font-family: 'Noto Sans Oriya', sans-serif;
-            font-size: clamp(13px, 4vw, 15px);
-            font-weight: 700; color: white;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex; align-items: center;
-            justify-content: center; gap: 8px;
-        }
-        .modal-btn-go:active { transform: scale(0.97); }
-    </style>
+/* ══════════════════ ANIMATIONS ══════════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@supports (padding:max(0px)) {
+  .page { padding-bottom:max(90px,env(safe-area-inset-bottom)); }
+}
+</style>
 </head>
 <body>
-
 <div class="page">
 
-    <!-- ══════════════════════════════════
-         HEADER
-    ══════════════════════════════════ -->
-    <header>
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="logo-wrap">
+    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png" alt="E-Vidya Academy Logo">
+  </div>
+  <h1 class="academy-name">ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</h1>
+  <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="website-btn">
+    🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →
+  </a>
+  <div class="welcome-gif">
+    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif" alt="Welcome">
+  </div>
+  <p class="choose-heading">🌹 <span>ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ</span> 🌹</p>
+</header>
 
-        <!-- Logo -->
-        <div class="logo-wrap">
-            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png"
-                 alt="E-Vidya Academy Logo">
+<!-- ══ SECTIONS ══ -->
+<div class="sections">
+
+  <!-- 1. Special Training -->
+  <div class="sec t-spl1">
+    <div class="sec-hd">
+      <div class="sec-ico">🌟</div>
+      <div>
+        <div class="sec-eyebrow">ବିଶେଷ ପ୍ରଶିକ୍ଷଣ</div>
+        <div class="sec-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
+      </div>
+    </div>
+    <div class="grid1">
+      <a href="./special-training/index.html" class="lv-card lv-spl1" onclick="openModal(event,'modal-special')">
+        <div class="lv-icon">🌟</div>
+        <div class="lv-name">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
+        <div class="lv-sub">ଶିକ୍ଷାର୍ଥୀଙ୍କ ସର୍ବାଙ୍ଗୀନ ବିକାଶ ପାଇଁ</div>
+        <div class="lv-bar"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. Mo Sathi -->
+  <div class="sec t-spl2">
+    <div class="sec-hd">
+      <div class="sec-ico">🤝</div>
+      <div>
+        <div class="sec-eyebrow">ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶନ</div>
+        <div class="sec-title">ମୋ ସାଥି ଆପ୍</div>
+      </div>
+    </div>
+    <div class="grid1">
+      <a href="./mosathi/index.html" class="lv-card lv-spl2" onclick="openModal(event,'modal-mosathi')">
+        <div class="lv-icon">🤝</div>
+        <div class="lv-name">ମୋ ସାଥି ଆପ୍</div>
+        <div class="lv-sub">ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶକ</div>
+        <div class="lv-bar"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 3. +2 Arts -->
+  <div class="sec t-arts">
+    <div class="sec-hd">
+      <div class="sec-ico">🎨</div>
+      <div>
+        <div class="sec-eyebrow">Arts Stream · +2</div>
+        <div class="sec-title">+୨ କଳା ବିଭାଗ</div>
+      </div>
+    </div>
+    <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — କଳା</div>
+    <div class="grid2">
+      <a href="./%2B2%201st%20Year%20-%20Arts/index.html" class="lv-card lv-arts1" onclick="openModal(event,'modal-p2a1')">
+        <div class="lv-icon">📘</div><div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div><div class="lv-sub">କଳା ବିଭାଗ</div><div class="lv-bar"></div>
+      </a>
+      <a href="./%2B2%202nd%20Year%20-%20Arts/index.html" class="lv-card lv-arts2" onclick="openModal(event,'modal-p2a2')">
+        <div class="lv-icon">📗</div><div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div><div class="lv-sub">କଳା ବିଭାଗ</div><div class="lv-bar"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 4. +2 Commerce -->
+  <div class="sec t-com">
+    <div class="sec-hd">
+      <div class="sec-ico">💼</div>
+      <div>
+        <div class="sec-eyebrow">Commerce Stream · +2</div>
+        <div class="sec-title">+୨ ବାଣିଜ୍ୟ ବିଭାଗ</div>
+      </div>
+    </div>
+    <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — ବାଣିଜ୍ୟ</div>
+    <div class="grid2">
+      <a href="./%2B2%201st%20Year%20-%20Commerce/index.html" class="lv-card lv-com1" onclick="openModal(event,'modal-p2c1')">
+        <div class="lv-icon">💼</div><div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div><div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div><div class="lv-bar"></div>
+      </a>
+      <a href="./%2B2%202nd%20Year%20-%20Commerce/index.html" class="lv-card lv-com2" onclick="openModal(event,'modal-p2c2')">
+        <div class="lv-icon">📋</div><div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div><div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div><div class="lv-bar"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 5. +3 Commerce -->
+  <div class="sec t-com">
+    <div class="sec-hd">
+      <div class="sec-ico">📊</div>
+      <div>
+        <div class="sec-eyebrow">Commerce Stream · +3</div>
+        <div class="sec-title">+3 ବାଣିଜ୍ୟ ବିଭାଗ</div>
+      </div>
+    </div>
+    <div class="sub-lbl">+3 Semesters — Commerce</div>
+    <div class="grid2">
+      <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-p3c1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-p3c2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-3%20-%20Commerce/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-p3c3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-4%20-%20Commerce/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-p3c4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-5%20-%20Commerce/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-p3c5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-6%20-%20Commerce/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-p3c6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-7%20-%20Commerce/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-p3c7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+      <a href="./%2B3%20Sem-8%20-%20Commerce/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-p3c8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+    </div>
+  </div>
+
+  <!-- 6. +3 Arts -->
+  <div class="sec t-arts">
+    <div class="sec-hd">
+      <div class="sec-ico">🎨</div>
+      <div>
+        <div class="sec-eyebrow">Arts Stream · +3</div>
+        <div class="sec-title">+3 କଳା ବିଭାଗ</div>
+      </div>
+    </div>
+    <div class="sub-lbl">+3 Honours Subjects</div>
+    <div class="accordion">
+
+      <div class="acc-item" id="acc-polsci">
+        <div class="acc-trigger acc-polsci" onclick="toggleAcc('acc-polsci')">
+          <div class="acc-ico">🏛️</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">Political Science</div>
+            <div class="acc-odia">ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-
-        <!-- Academy Name -->
-        <h1 class="academy-name">ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</h1>
-
-        <!-- Website Button -->
-        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="website-btn">
-            🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →
-        </a>
-
-        <!-- Welcome GIF -->
-        <div class="welcome-gif">
-            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif"
-                 alt="Welcome">
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/polsci/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ps1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ps2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ps3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ps4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ps5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ps6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ps7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/polsci/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ps8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Pol. Science</div><div class="lv-bar"></div></a>
+          </div>
         </div>
+      </div>
 
-        <!-- Choose Heading -->
-        <p class="choose-heading">🌹 <span>ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ</span> 🌹</p>
-
-    </header>
-
-    <!-- ══════════════════════════════════
-         ALL SECTIONS
-    ══════════════════════════════════ -->
-    <!-- ── Legal colour tokens ── -->
-
-    <div class="sections">
-
-        <!-- ══ 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ══ -->
-        <div class="sec t-spl1">
-            <div class="sec-hd">
-                <div class="sec-ico">🌟</div>
-                <div>
-                    <div class="sec-eyebrow">ବିଶେଷ ପ୍ରଶିକ୍ଷଣ</div>
-                    <div class="sec-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
-                </div>
-            </div>
-            <div class="grid1">
-                <a href="./special-training/index.html" class="lv-card lv-spl1"
-                   onclick="showModal(event,'modal-special')">
-                    <div class="lv-icon">🌟</div>
-                    <div class="lv-name">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
-                    <div class="lv-sub">ଶିକ୍ଷାର୍ଥୀଙ୍କ ସର୍ବାଙ୍ଗୀନ ବିକାଶ ପାଇଁ</div>
-                    <div class="lv-bar"></div>
-                </a>
-            </div>
+      <div class="acc-item" id="acc-history">
+        <div class="acc-trigger acc-history" onclick="toggleAcc('acc-history')">
+          <div class="acc-ico">📜</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">History</div>
+            <div class="acc-odia">ଇତିହାସ (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-
-        <!-- ══ 2. ମୋ ସାଥି ══ -->
-        <div class="sec t-spl2">
-            <div class="sec-hd">
-                <div class="sec-ico">🤝</div>
-                <div>
-                    <div class="sec-eyebrow">ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶନ</div>
-                    <div class="sec-title">ମୋ ସାଥି ଆପ୍</div>
-                </div>
-            </div>
-            <div class="grid1">
-                <a href="./mosathi/index.html" class="lv-card lv-spl2"
-                   onclick="showModal(event,'modal-mosathi')">
-                    <div class="lv-icon">🤝</div>
-                    <div class="lv-name">ମୋ ସାଥି ଆପ୍</div>
-                    <div class="lv-sub">ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶକ</div>
-                    <div class="lv-bar"></div>
-                </a>
-            </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/history/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-hi1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-hi2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-hi3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-hi4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-hi5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-hi6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-hi7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/history/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-hi8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+          </div>
         </div>
+      </div>
 
-        <!-- ══ 3. +2 Arts ══ -->
-        <div class="sec t-arts">
-            <div class="sec-hd">
-                <div class="sec-ico">🎨</div>
-                <div>
-                    <div class="sec-eyebrow">Arts Stream · +2</div>
-                    <div class="sec-title">+୨ କଳା ବିଭାଗ</div>
-                </div>
-            </div>
-            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — କଳା</div>
-            <div class="grid2">
-                <a href="./%2B2%201st%20Year%20-%20Arts/index.html" class="lv-card lv-arts1"
-                   onclick="showModal(event,'modal-p2arts1')">
-                    <div class="lv-icon">📘</div>
-                    <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="lv-sub">କଳା ବିଭାଗ</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B2%202nd%20Year%20-%20Arts/index.html" class="lv-card lv-arts2"
-                   onclick="showModal(event,'modal-p2arts2')">
-                    <div class="lv-icon">📗</div>
-                    <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="lv-sub">କଳା ବିଭାଗ</div>
-                    <div class="lv-bar"></div>
-                </a>
-            </div>
+      <div class="acc-item" id="acc-educ">
+        <div class="acc-trigger acc-educ" onclick="toggleAcc('acc-educ')">
+          <div class="acc-ico">🎓</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">Education</div>
+            <div class="acc-odia">ଶିକ୍ଷା (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-
-        <!-- ══ 4. +2 Commerce ══ -->
-        <div class="sec t-com">
-            <div class="sec-hd">
-                <div class="sec-ico">💼</div>
-                <div>
-                    <div class="sec-eyebrow">Commerce Stream · +2</div>
-                    <div class="sec-title">+୨ ବାଣିଜ୍ୟ ବିଭାଗ</div>
-                </div>
-            </div>
-            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — ବାଣିଜ୍ୟ</div>
-            <div class="grid2">
-                <a href="./%2B2%201st%20Year%20-%20Commerce/index.html" class="lv-card lv-com1"
-                   onclick="showModal(event,'modal-p2com1')">
-                    <div class="lv-icon">💼</div>
-                    <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B2%202nd%20Year%20-%20Commerce/index.html" class="lv-card lv-com2"
-                   onclick="showModal(event,'modal-p2com2')">
-                    <div class="lv-icon">📋</div>
-                    <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div>
-                    <div class="lv-bar"></div>
-                </a>
-            </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/education/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ed1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ed2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ed3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ed4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ed5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ed6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ed7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/education/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ed8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+          </div>
         </div>
+      </div>
 
-        <!-- ══ 5. +3 Commerce ══ -->
-        <div class="sec t-com">
-            <div class="sec-hd">
-                <div class="sec-ico">📊</div>
-                <div>
-                    <div class="sec-eyebrow">Commerce Stream · +3</div>
-                    <div class="sec-title">+3 ବାଣିଜ୍ୟ ବିଭାଗ</div>
-                </div>
-            </div>
-            <div class="sub-lbl">+3 Semesters — Commerce</div>
-            <div class="grid2">
-                <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-p3com1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-p3com2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-3%20-%20Commerce/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-p3com3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-4%20-%20Commerce/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-p3com4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-5%20-%20Commerce/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-p3com5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-6%20-%20Commerce/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-p3com6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-7%20-%20Commerce/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-p3com7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-                <a href="./%2B3%20Sem-8%20-%20Commerce/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-p3com8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
-            </div>
+      <div class="acc-item" id="acc-psych">
+        <div class="acc-trigger acc-psych" onclick="toggleAcc('acc-psych')">
+          <div class="acc-ico">🧠</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">Psychology</div>
+            <div class="acc-odia">ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-
-        <!-- ══ 6. +3 Arts Honours ══ -->
-        <div class="sec t-arts">
-            <div class="sec-hd">
-                <div class="sec-ico">🎨</div>
-                <div>
-                    <div class="sec-eyebrow">Arts Stream · +3</div>
-                    <div class="sec-title">+3 କଳା ବିଭାଗ</div>
-                </div>
-            </div>
-            <div class="sub-lbl">+3 Honours Subjects</div>
-            <div class="accordion">
-
-                <!-- Political Science -->
-                <div class="acc-item" id="acc-polsci">
-                    <div class="acc-trigger acc-polsci" onclick="toggleAcc('acc-polsci')">
-                        <div class="acc-ico">🏛️</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Political Science</div>
-                            <div class="acc-odia">ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/polsci/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-polsci1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-polsci2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-polsci3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-polsci4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-polsci5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-polsci6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-polsci7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-polsci8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- History -->
-                <div class="acc-item" id="acc-history">
-                    <div class="acc-trigger acc-history" onclick="toggleAcc('acc-history')">
-                        <div class="acc-ico">📜</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">History</div>
-                            <div class="acc-odia">ଇତିହାସ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/history/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-hist1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-hist2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-hist3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-hist4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-hist5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-hist6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-hist7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-hist8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="acc-item" id="acc-educ">
-                    <div class="acc-trigger acc-educ" onclick="toggleAcc('acc-educ')">
-                        <div class="acc-ico">🎓</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Education</div>
-                            <div class="acc-odia">ଶିକ୍ଷା (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/education/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-educ1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-educ2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-educ3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-educ4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-educ5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-educ6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-educ7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-educ8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Psychology -->
-                <div class="acc-item" id="acc-psych">
-                    <div class="acc-trigger acc-psych" onclick="toggleAcc('acc-psych')">
-                        <div class="acc-ico">🧠</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Psychology</div>
-                            <div class="acc-odia">ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/psychology/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-psych1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-psych2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-psych3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-psych4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-psych5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-psych6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-psych7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-psych8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Economics -->
-                <div class="acc-item" id="acc-econ">
-                    <div class="acc-trigger acc-econ" onclick="toggleAcc('acc-econ')">
-                        <div class="acc-ico">📈</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Economics</div>
-                            <div class="acc-odia">ଅର୍ଥନୀତି (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/economics/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-econ1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-econ2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-econ3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-econ4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-econ5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-econ6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-econ7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-econ8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sociology -->
-                <div class="acc-item" id="acc-socio">
-                    <div class="acc-trigger acc-socio" onclick="toggleAcc('acc-socio')">
-                        <div class="acc-ico">👥</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Sociology</div>
-                            <div class="acc-odia">ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/sociology/sem1/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-socio1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem2/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-socio2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem3/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-socio3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem4/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-socio4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem5/index.html" class="lv-card lv-sem1" onclick="showModal(event,'modal-socio5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem6/index.html" class="lv-card lv-sem2" onclick="showModal(event,'modal-socio6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem7/index.html" class="lv-card lv-sem3" onclick="showModal(event,'modal-socio7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem8/index.html" class="lv-card lv-sem4" onclick="showModal(event,'modal-socio8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /accordion -->
-        </div><!-- /+3 arts -->
-
-        <!-- ══ 7. Legal Awareness ══ -->
-        <div class="sec t-legal">
-            <div class="sec-hd">
-                <div class="sec-ico">⚖️</div>
-                <div>
-                    <div class="sec-eyebrow">Law &amp; Rights</div>
-                    <div class="sec-title">Legal Awareness</div>
-                </div>
-            </div>
-            <div class="grid1">
-                <a href="./legal/index.html" class="lv-card lv-law1"
-                   onclick="showModal(event,'modal-legal')">
-                    <div class="lv-icon">⚖️</div>
-                    <div class="lv-name">Legal Awareness</div>
-                    <div class="lv-sub">ଆଇନ ସଚେତନତା ପ୍ରଶିକ୍ଷଣ</div>
-                    <div class="lv-bar"></div>
-                </a>
-            </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/psychology/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-py1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-py2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-py3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-py4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-py5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-py6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-py7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/psychology/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-py8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+          </div>
         </div>
+      </div>
 
-    </div><!-- /sections -->
-
-    <!-- ══════════════════════════════════
-         FOOTER
-    ══════════════════════════════════ -->
-    <footer>
-        <div class="footer-brand">
-            <h3>🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ 🌹</h3>
-            <p>Private initiative · Providing Supplementary Digital Classes</p>
+      <div class="acc-item" id="acc-econ">
+        <div class="acc-trigger acc-econ" onclick="toggleAcc('acc-econ')">
+          <div class="acc-ico">📈</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">Economics</div>
+            <div class="acc-odia">ଅର୍ଥନୀତି (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
         </div>
-        <div class="footer-div"></div>
-        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-link">
-            🌹 <span>ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →</span>
-        </a>
-        <div class="footer-copy">© ୨୦୨୬ ଇ-ବିଦ୍ୟା ଏକାଡେମୀ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
-    </footer>
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/economics/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ec1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ec2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ec3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ec4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-ec5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-ec6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-ec7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/economics/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-ec8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc-socio">
+        <div class="acc-trigger acc-socio" onclick="toggleAcc('acc-socio')">
+          <div class="acc-ico">👥</div>
+          <div class="acc-label">
+            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+            <div class="acc-name">Sociology</div>
+            <div class="acc-odia">ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+          </div>
+          <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div class="acc-body">
+          <div class="grid2">
+            <a href="./+3-arts/sociology/sem1/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-so1')"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem2/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-so2')"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem3/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-so3')"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem4/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-so4')"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem5/index.html" class="lv-card lv-sem1" onclick="openModal(event,'modal-so5')"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem6/index.html" class="lv-card lv-sem2" onclick="openModal(event,'modal-so6')"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem7/index.html" class="lv-card lv-sem3" onclick="openModal(event,'modal-so7')"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+            <a href="./+3-arts/sociology/sem8/index.html" class="lv-card lv-sem4" onclick="openModal(event,'modal-so8')"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div><!-- /+3 arts -->
+
+  <!-- 7. Legal Awareness -->
+  <div class="sec t-legal">
+    <div class="sec-hd">
+      <div class="sec-ico">⚖️</div>
+      <div>
+        <div class="sec-eyebrow">Law &amp; Rights</div>
+        <div class="sec-title">Legal Awareness</div>
+      </div>
+    </div>
+    <div class="grid1">
+      <a href="./legal/index.html" class="lv-card lv-legal" onclick="openModal(event,'modal-legal')">
+        <div class="lv-icon">⚖️</div>
+        <div class="lv-name">Legal Awareness</div>
+        <div class="lv-sub">ଆଇନ ସଚେତନତା ପ୍ରଶିକ୍ଷଣ</div>
+        <div class="lv-bar"></div>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /sections -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <h3>🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ 🌹</h3>
+    <p>Private initiative · Providing Supplementary Digital Classes</p>
+  </div>
+  <div class="footer-div"></div>
+  <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-link">
+    🌹 <span>ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →</span>
+  </a>
+  <div class="footer-copy">© ୨୦୨୬ ଇ-ବିଦ୍ୟା ଏକାଡେମୀ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
+</footer>
 
 </div><!-- /page -->
 
-
-<!-- ══════════════════════════════════════════════════════════
-     ALL MODALS
-══════════════════════════════════════════════════════════ -->
-
-<!-- Helper function to build generic class modals dynamically via JS -->
-
-<!-- MODAL: Special Training -->
+<!-- ══════════════════════════════════
+     MODALS — Special Training
+══════════════════════════════════ -->
 <div class="modal-overlay" id="modal-special">
   <div class="modal-box">
     <div class="modal-pill"></div>
@@ -954,7 +771,7 @@
     <div class="modal-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
     <div class="modal-subtitle">Special Training — ସ୍ଵତନ୍ତ୍ର ପ୍ରଶିକ୍ଷଣ ଆପ</div>
     <div class="modal-notice">
-      <div class="modal-notice-title">📋 ଏହି ଆପ୍‌ରେ ଉପଲବ୍ଧ ପ୍ରଶିକ୍ଷଣ</div>
+      <div class="modal-notice-title">📋 ଏହି ଆପ୍‌ରେ ଉପଲବ୍ଧ ପ୍ରଶିକ୍ଷଣ ସମୂହ</div>
       <ul class="modal-list">
         <li>Basic English Language Learning — ମୌଳିକ ଇଂରାଜୀ ଭାଷା ଶିକ୍ଷା</li>
         <li>Basic Mathematics — ମୌଳିକ ଗଣିତ</li>
@@ -966,14 +783,12 @@
     </div>
     <div class="modal-btn-row">
       <button class="modal-btn-cancel" onclick="closeModal('modal-special')">ବାତିଲ</button>
-      <a href="./special-training/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#7b1a0a,#b22222);box-shadow:0 6px 20px rgba(123,26,10,0.35);">
-        ଆଗକୁ ଯାଆନ୍ତୁ →
-      </a>
+      <a href="./special-training/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#7b1a0a,#b22222);">ଆଗକୁ ଯାଆନ୍ତୁ →</a>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Mo Sathi -->
+<!-- Modal: Mo Sathi -->
 <div class="modal-overlay" id="modal-mosathi">
   <div class="modal-box">
     <div class="modal-pill"></div>
@@ -984,27 +799,25 @@
       <div class="modal-notice-title">📋 ଏହି ଆପ ବିଷୟରେ</div>
       <ul class="modal-list">
         <li>ଏହି ଆପ ନାଗରିକମାନଙ୍କ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସରକାରୀ ୱେବ୍‌ସାଇଟ୍ ଲିଙ୍କ ଉପଲବ୍ଧ କରାଏ।</li>
-        <li>ଆପଣ ଯେ କୌଣସି ଅଭିଯୋଗ ବା ସମସ୍ୟା ପାଇଁ ସଠିକ ସରକାରୀ ପ୍ଲାଟଫର୍ମ ଖୋଜି ପାଇବେ।</li>
+        <li>ଯେ କୌଣସି ଅଭିଯୋଗ ବା ସମସ୍ୟା ପାଇଁ ସଠିକ ସରକାରୀ ପ୍ଲାଟଫର୍ମ ଖୋଜି ପାଇବେ।</li>
         <li>Grievance Redressal — ଅଭିଯୋଗ ନିବାରଣ ଲିଙ୍କ ସହ ସଂଯୁକ୍ତ।</li>
         <li>ଏହା ଏକ ନିଃଶୁଳ୍କ ଡିଜିଟାଲ ନାଗରିକ ସେବା।</li>
       </ul>
     </div>
     <div class="modal-btn-row">
       <button class="modal-btn-cancel" onclick="closeModal('modal-mosathi')">ବାତିଲ</button>
-      <a href="./mosathi/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#065f46,#059669);box-shadow:0 6px 20px rgba(6,95,70,0.35);">
-        ଆଗକୁ ଯାଆନ୍ତୁ →
-      </a>
+      <a href="./mosathi/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#065f46,#059669);">ଆଗକୁ ଯାଆନ୍ତୁ →</a>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Legal Awareness -->
+<!-- Modal: Legal Awareness -->
 <div class="modal-overlay" id="modal-legal">
   <div class="modal-box">
     <div class="modal-pill"></div>
     <div class="modal-icon">⚖️</div>
     <div class="modal-title">Legal Awareness</div>
-    <div class="modal-subtitle">ଆଇନ ସଚେତନତା ପ୍ରଶିକ୍ଷଣ — ଉପଲବ୍ଧ ବିଷୟ ତାଲିକା</div>
+    <div class="modal-subtitle">ଆଇନ ସଚେତନତା ପ୍ରଶିକ୍ଷଣ — ଉପଲବ୍ଧ ଆଇନ ତାଲିକା</div>
     <div class="modal-notice">
       <div class="modal-notice-title">⚖️ Core Laws &amp; Codes</div>
       <ul class="modal-list">
@@ -1040,110 +853,96 @@
     </div>
     <div class="modal-btn-row">
       <button class="modal-btn-cancel" onclick="closeModal('modal-legal')">ବାତିଲ</button>
-      <a href="./legal/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#14532d,#16a34a);box-shadow:0 6px 20px rgba(20,83,45,0.35);">
-        ଆଗକୁ ଯାଆନ୍ତୁ →
-      </a>
+      <a href="./legal/index.html" class="modal-btn-go" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);">ଆଗକୁ ଯାଆନ୍ତୁ →</a>
     </div>
   </div>
 </div>
 
-<!-- SCRIPT: Modal engine + dynamic class/sem modals -->
+<!-- Dynamic modals built by JS -->
 <script>
-// ── Core modal functions ──
-function showModal(e, id) {
-    e.preventDefault();
-    document.getElementById(id).classList.add('active');
-    document.body.style.overflow = 'hidden';
+// ── Accordion ──
+function toggleAcc(id){
+  const item=document.getElementById(id);
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.acc-item.open').forEach(el=>el.classList.remove('open'));
+  if(!open) item.classList.add('open');
 }
-function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-    document.body.style.overflow = '';
+
+// ── Modal open/close ──
+function openModal(e,id){
+  e.preventDefault();
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow='hidden';
 }
-// Close on overlay click
-document.querySelectorAll('.modal-overlay').forEach(ov => {
-    ov.addEventListener('click', function(e) {
-        if (e.target === this) closeModal(this.id);
-    });
+function closeModal(id){
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click',function(e){if(e.target===this)closeModal(this.id);});
 });
 
-// ── Dynamic modal builder for class/sem cards ──
-const MODAL_DATA = {
-    // +2 Arts
-    'modal-p2arts1': { icon:'📘', title:'+୨ ପ୍ରଥମ ବର୍ଷ — କଳା', sub:'+2 First Year Arts', color:'linear-gradient(135deg,#1e3a8a,#2563eb)', shadow:'rgba(30,58,138,0.35)', href:'./%2B2%201st%20Year%20-%20Arts/index.html', note:'ଏହି ଆପ +2 ପ୍ରଥମ ବର୍ଷ (Arts) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।' },
-    'modal-p2arts2': { icon:'📗', title:'+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — କଳା', sub:'+2 Second Year Arts', color:'linear-gradient(135deg,#1e40af,#3b82f6)', shadow:'rgba(30,64,175,0.35)', href:'./%2B2%202nd%20Year%20-%20Arts/index.html', note:'ଏହି ଆପ +2 ଦ୍ୱିତୀୟ ବର୍ଷ (Arts) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।' },
-    // +2 Commerce
-    'modal-p2com1':  { icon:'💼', title:'+୨ ପ୍ରଥମ ବର୍ଷ — ବାଣିଜ୍ୟ', sub:'+2 First Year Commerce', color:'linear-gradient(135deg,#3b0764,#6d28d9)', shadow:'rgba(59,7,100,0.35)', href:'./%2B2%201st%20Year%20-%20Commerce/index.html', note:'ଏହି ଆପ +2 ପ୍ରଥମ ବର୍ଷ (Commerce) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।' },
-    'modal-p2com2':  { icon:'📋', title:'+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — ବାଣିଜ୍ୟ', sub:'+2 Second Year Commerce', color:'linear-gradient(135deg,#4c1d95,#7c3aed)', shadow:'rgba(76,29,149,0.35)', href:'./%2B2%202nd%20Year%20-%20Commerce/index.html', note:'ଏହି ଆପ +2 ଦ୍ୱିତୀୟ ବର୍ଷ (Commerce) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।' },
-};
+// ── Dynamic modal data ──
+const COLS=['linear-gradient(135deg,#1e3a8a,#2563eb)','linear-gradient(135deg,#0369a1,#0ea5e9)','linear-gradient(135deg,#065f46,#059669)','linear-gradient(135deg,#3b0764,#6d28d9)'];
+const ICONS=['📘','📗','📙','📕','📓','📔','📒','🎓'];
 
-// +3 Commerce sems
-[1,2,3,4,5,6,7,8].forEach(s => {
-    const colors = ['linear-gradient(135deg,#1e3a8a,#2563eb)','linear-gradient(135deg,#0369a1,#0ea5e9)','linear-gradient(135deg,#065f46,#059669)','linear-gradient(135deg,#3b0764,#6d28d9)'];
-    const shadows = ['rgba(30,58,138,0.35)','rgba(3,105,161,0.35)','rgba(6,95,70,0.35)','rgba(59,7,100,0.35)'];
-    const icons = ['📘','📗','📙','📕','📓','📔','📒','🎓'];
-    MODAL_DATA[`modal-p3com${s}`] = { icon: icons[s-1], title:`+3 Commerce — Sem-${s}`, sub:`Semester ${s} · Commerce`, color: colors[(s-1)%4], shadow: shadows[(s-1)%4], href:`./%2B3%20Sem-${s}%20-%20Commerce/index.html`, note:`ଏହି ଆପ +3 Commerce Sem-${s} ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।` };
+const DYNA = [];
+
+// +2 cards
+DYNA.push({id:'modal-p2a1',icon:'📘',title:'+୨ ପ୍ରଥମ ବର୍ଷ — କଳା',sub:'+2 First Year Arts',note:'ଏହି ଆପ +2 ପ୍ରଥମ ବର୍ଷ (Arts) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।',col:COLS[0],href:'./%2B2%201st%20Year%20-%20Arts/index.html'});
+DYNA.push({id:'modal-p2a2',icon:'📗',title:'+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — କଳା',sub:'+2 Second Year Arts',note:'ଏହି ଆପ +2 ଦ୍ୱିତୀୟ ବର୍ଷ (Arts) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।',col:COLS[1],href:'./%2B2%202nd%20Year%20-%20Arts/index.html'});
+DYNA.push({id:'modal-p2c1',icon:'💼',title:'+୨ ପ୍ରଥମ ବର୍ଷ — ବାଣିଜ୍ୟ',sub:'+2 First Year Commerce',note:'ଏହି ଆପ +2 ପ୍ରଥମ ବର୍ଷ (Commerce) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।',col:COLS[2],href:'./%2B2%201st%20Year%20-%20Commerce/index.html'});
+DYNA.push({id:'modal-p2c2',icon:'📋',title:'+୨ ଦ୍ୱିତୀୟ ବର୍ଷ — ବାଣିଜ୍ୟ',sub:'+2 Second Year Commerce',note:'ଏହି ଆପ +2 ଦ୍ୱିତୀୟ ବର୍ଷ (Commerce) ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।',col:COLS[3],href:'./%2B2%202nd%20Year%20-%20Commerce/index.html'});
+
+// +3 Commerce
+[1,2,3,4,5,6,7,8].forEach(s=>{
+  DYNA.push({id:`modal-p3c${s}`,icon:ICONS[s-1],title:`+3 Commerce — Sem-${s}`,sub:`Semester ${s} · Commerce`,note:`ଏହି ଆପ +3 Commerce Sem-${s} ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।`,col:COLS[(s-1)%4],href:`./%2B3%20Sem-${s}%20-%20Commerce/index.html`});
 });
 
 // +3 Arts subjects
-const artsSubs = {
-    polsci: { name:'Political Science', odia:'ରାଜନୀତି ବିଜ୍ଞାନ', path:'polsci' },
-    hist:   { name:'History', odia:'ଇତିହାସ', path:'history' },
-    educ:   { name:'Education', odia:'ଶିକ୍ଷା', path:'education' },
-    psych:  { name:'Psychology', odia:'ମନୋ ବିଜ୍ଞାନ', path:'psychology' },
-    econ:   { name:'Economics', odia:'ଅର୍ଥନୀତି', path:'economics' },
-    socio:  { name:'Sociology', odia:'ସମାଜ ବିଜ୍ଞାନ', path:'sociology' },
-};
-const icons = ['📘','📗','📙','📕','📓','📔','📒','🎓'];
-const colors = ['linear-gradient(135deg,#1e3a8a,#2563eb)','linear-gradient(135deg,#0369a1,#0ea5e9)','linear-gradient(135deg,#065f46,#059669)','linear-gradient(135deg,#3b0764,#6d28d9)'];
-const shadows = ['rgba(30,58,138,0.35)','rgba(3,105,161,0.35)','rgba(6,95,70,0.35)','rgba(59,7,100,0.35)'];
-Object.entries(artsSubs).forEach(([key, sub]) => {
-    [1,2,3,4,5,6,7,8].forEach(s => {
-        MODAL_DATA[`modal-${key}${s}`] = {
-            icon: icons[s-1],
-            title: `${sub.name} — Sem-${s}`,
-            sub: `${sub.odia} (ଅନର୍ସ) · Semester ${s}`,
-            color: colors[(s-1)%4],
-            shadow: shadows[(s-1)%4],
-            href: `./+3-arts/${sub.path}/sem${s}/index.html`,
-            note: `ଏହି ଆପ +3 ${sub.name} (ଅନର୍ସ) Sem-${s} ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।`
-        };
-    });
+const ARTS=[
+  {key:'ps',name:'Political Science',odia:'ରାଜନୀତି ବିଜ୍ଞାନ',path:'polsci'},
+  {key:'hi',name:'History',odia:'ଇତିହାସ',path:'history'},
+  {key:'ed',name:'Education',odia:'ଶିକ୍ଷା',path:'education'},
+  {key:'py',name:'Psychology',odia:'ମନୋ ବିଜ୍ଞାନ',path:'psychology'},
+  {key:'ec',name:'Economics',odia:'ଅର୍ଥନୀତି',path:'economics'},
+  {key:'so',name:'Sociology',odia:'ସମାଜ ବିଜ୍ଞାନ',path:'sociology'},
+];
+ARTS.forEach(a=>{
+  [1,2,3,4,5,6,7,8].forEach(s=>{
+    DYNA.push({id:`modal-${a.key}${s}`,icon:ICONS[s-1],title:`${a.name} — Sem-${s}`,sub:`${a.odia} (ଅନର୍ସ) · Semester ${s}`,note:`ଏହି ଆପ +3 ${a.name} (ଅନର୍ସ) Sem-${s} ର ସମସ୍ତ ବିଷୟ ପାଇଁ ସୁପ୍ଲିମେଣ୍ଟାରୀ ଡିଜିଟାଲ କ୍ଲାସ ଉପଲବ୍ଧ କରାଏ।`,col:COLS[(s-1)%4],href:`./+3-arts/${a.path}/sem${s}/index.html`});
+  });
 });
 
-// ── Create dynamic modals from MODAL_DATA ──
-Object.entries(MODAL_DATA).forEach(([id, d]) => {
-    const el = document.createElement('div');
-    el.className = 'modal-overlay';
-    el.id = id;
-    el.innerHTML = `
-      <div class="modal-box">
-        <div class="modal-pill"></div>
-        <div class="modal-icon">${d.icon}</div>
-        <div class="modal-title">${d.title}</div>
-        <div class="modal-subtitle">${d.sub}</div>
-        <div class="modal-notice">
-          <div class="modal-notice-title">📋 ଏହି ଆପ ବିଷୟରେ</div>
-          <ul class="modal-list"><li>${d.note}</li>
-          <li>ଏହା ଏକ ଅତିରିକ୍ত ଡିଜିଟାଲ ଶ୍ରେଣୀ ଆପ — ଯାହା ଆପଣଙ୍କ ମୂଳ ପଠ୍ୟକ୍ରମ ବ୍ୟତୀତ ଅଧିକ ଅଭ୍ୟାସ ଓ ସ୍ପଷ୍ଟୀକରଣ ଦେଇଥାଏ।</li></ul>
-        </div>
-        <div class="modal-btn-row">
-          <button class="modal-btn-cancel" onclick="closeModal('${id}')">ବାତିଲ</button>
-          <a href="${d.href}" class="modal-btn-go" style="background:${d.color};box-shadow:0 6px 20px ${d.shadow};">
-            ଆଗକୁ ଯାଆନ୍ତୁ →
-          </a>
-        </div>
-      </div>`;
-    el.addEventListener('click', function(e) { if (e.target === this) closeModal(id); });
-    document.body.appendChild(el);
+// Build and insert dynamic modals
+DYNA.forEach(d=>{
+  const div=document.createElement('div');
+  div.className='modal-overlay'; div.id=d.id;
+  div.innerHTML=`<div class="modal-box">
+    <div class="modal-pill"></div>
+    <div class="modal-icon">${d.icon}</div>
+    <div class="modal-title">${d.title}</div>
+    <div class="modal-subtitle">${d.sub}</div>
+    <div class="modal-notice">
+      <div class="modal-notice-title">📋 ଏହି ଆପ ବିଷୟରେ</div>
+      <ul class="modal-list">
+        <li>${d.note}</li>
+        <li>ଏହା ଏକ ଅତିରିକ୍ତ ଡିଜିଟାଲ ଶ୍ରେଣୀ ଆପ — ଯାହା ଆପଣଙ୍କ ମୂଳ ପଠ୍ୟକ୍ରମ ବ୍ୟତୀତ ଅଧିକ ଅଭ୍ୟାସ ଓ ସ୍ପଷ୍ଟୀକରଣ ଦେଇଥାଏ।</li>
+      </ul>
+    </div>
+    <div class="modal-btn-row">
+      <button class="modal-btn-cancel" onclick="closeModal('${d.id}')">ବାତିଲ</button>
+      <a href="${d.href}" class="modal-btn-go" style="background:${d.col};">ଆଗକୁ ଯାଆନ୍ତୁ →</a>
+    </div>
+  </div>`;
+  div.addEventListener('click',function(e){if(e.target===this)closeModal(this.id);});
+  document.body.appendChild(div);
 });
 
-function toggleAcc(id) {
-    const item = document.getElementById(id);
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-}
+// Re-bind static modals overlay close
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click',function(e){if(e.target===this)closeModal(this.id);});
+});
 </script>
-
 </body>
 </html>
