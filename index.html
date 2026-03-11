@@ -191,19 +191,22 @@
 
         /* Sub-label divider */
         .sub-lbl {
-            font-family: 'Noto Sans Oriya', sans-serif;
-            font-size: clamp(13px, 4vw, 15px);
-            font-weight: 700; letter-spacing: 0.04em;
+            font-family: 'Noto Sans Oriya', 'Playfair Display', sans-serif;
+            font-size: clamp(17px, 5.5vw, 22px);
+            font-weight: 800;
+            letter-spacing: 0.01em;
             display: flex; align-items: center; gap: 10px;
-            margin: 18px 0 12px;
-            padding: 6px 10px;
-            border-radius: 8px;
-            background: rgba(0,0,0,0.04);
+            margin: 22px 0 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.06);
+            color: var(--text);
+            line-height: 1.3;
         }
         .sub-lbl::after {
-            content: ''; flex: 1; height: 2px;
+            content: ''; flex: 1; height: 2.5px;
             background: linear-gradient(to right, currentColor, transparent);
-            opacity: 0.2;
+            opacity: 0.20;
         }
 
         /* ── colour tokens per section ── */
@@ -226,6 +229,16 @@
         .t-school .sec-ico     { background: #fffbeb; }
         .t-school .sec-eyebrow { color: #b45309; }
         .t-school .sub-lbl     { color: #b45309; }
+
+        .t-legal .sec-ico      { background: #f0fdf4; }
+        .t-legal .sec-eyebrow  { color: #14532d; }
+        .t-legal .sub-lbl      { color: #14532d; }
+
+        /* Legal card palettes */
+        .lv-law1 { background: linear-gradient(145deg,#14532d,#16a34a); box-shadow: 0 7px 22px rgba(20,83,45,0.38); }
+        .lv-law2 { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.38); }
+        .lv-law3 { background: linear-gradient(145deg,#7c2d12,#c2410c); box-shadow: 0 7px 22px rgba(124,45,18,0.38); }
+        .lv-law4 { background: linear-gradient(145deg,#4a1d96,#7c3aed); box-shadow: 0 7px 22px rgba(74,29,150,0.38); }
 
         /* ════════════════════════════════
            GRADIENT CARDS
@@ -382,6 +395,20 @@
         }
 
         /* ════════════════════════════════
+           LEGAL AWARENESS
+        ════════════════════════════════ */
+        .t-legal .sec-ico      { background: #fef2f2; }
+        .t-legal .sec-eyebrow  { color: #7f1d1d; }
+        .t-legal .sub-lbl      { color: #7f1d1d; }
+
+        .lv-law1  { background: linear-gradient(145deg,#7f1d1d,#b91c1c); box-shadow: 0 7px 22px rgba(127,29,29,0.38); }
+        .lv-law2  { background: linear-gradient(145deg,#78350f,#b45309); box-shadow: 0 7px 22px rgba(120,53,15,0.38); }
+        .lv-law3  { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.36); }
+        .lv-law4  { background: linear-gradient(145deg,#064e3b,#059669); box-shadow: 0 7px 22px rgba(6,78,59,0.36); }
+        .lv-law5  { background: linear-gradient(145deg,#3b0764,#7c3aed); box-shadow: 0 7px 22px rgba(59,7,100,0.36); }
+        .lv-law6  { background: linear-gradient(145deg,#0c4a6e,#0ea5e9); box-shadow: 0 7px 22px rgba(12,74,110,0.36); }
+
+        /* ════════════════════════════════
            FOOTER
         ════════════════════════════════ */
         footer {
@@ -474,9 +501,11 @@
     <!-- ══════════════════════════════════
          ALL SECTIONS
     ══════════════════════════════════ -->
+    <!-- ── Legal colour tokens ── -->
+
     <div class="sections">
 
-        <!-- ── 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ── -->
+        <!-- ══ 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ══ -->
         <div class="sec t-spl1">
             <div class="sec-hd">
                 <div class="sec-ico">🌟</div>
@@ -514,215 +543,68 @@
             </div>
         </div>
 
-        <!-- ── 3. କଳା ବିଭାଗ ── -->
+        <!-- ── 3. +2 Arts ── -->
         <div class="sec t-arts">
             <div class="sec-hd">
                 <div class="sec-ico">🎨</div>
                 <div>
-                    <div class="sec-eyebrow">Arts Stream</div>
-                    <div class="sec-title">କଳା ବିଭାଗ</div>
+                    <div class="sec-eyebrow">Arts Stream · +2</div>
+                    <div class="sec-title">+୨ କଳା ବିଭାଗ</div>
                 </div>
             </div>
-
-            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
+            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — କଳା</div>
             <div class="grid2">
                 <a href="./%2B2%201st%20Year%20-%20Arts/index.html" class="lv-card lv-arts1">
                     <div class="lv-icon">📘</div>
                     <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="lv-sub">କଳା</div>
+                    <div class="lv-sub">କଳା ବିଭାଗ</div>
                     <div class="lv-bar"></div>
                 </a>
                 <a href="./%2B2%202nd%20Year%20-%20Arts/index.html" class="lv-card lv-arts2">
                     <div class="lv-icon">📗</div>
                     <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="lv-sub">କଳା</div>
+                    <div class="lv-sub">କଳା ବିଭାଗ</div>
                     <div class="lv-bar"></div>
                 </a>
             </div>
+        </div>
 
-            <div class="sub-lbl">+3 Honours Subjects</div>
-            <div class="accordion">
-
-                <!-- Political Science -->
-                <div class="acc-item" id="acc-polsci">
-                    <div class="acc-trigger acc-polsci" onclick="toggleAcc('acc-polsci')">
-                        <div class="acc-ico">🏛️</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Political Science</div>
-                            <div class="acc-odia">ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/polsci/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/polsci/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- History -->
-                <div class="acc-item" id="acc-history">
-                    <div class="acc-trigger acc-history" onclick="toggleAcc('acc-history')">
-                        <div class="acc-ico">📜</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">History</div>
-                            <div class="acc-odia">ଇତିହାସ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/history/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/history/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="acc-item" id="acc-educ">
-                    <div class="acc-trigger acc-educ" onclick="toggleAcc('acc-educ')">
-                        <div class="acc-ico">🎓</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Education</div>
-                            <div class="acc-odia">ଶିକ୍ଷା (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/education/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/education/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Psychology -->
-                <div class="acc-item" id="acc-psych">
-                    <div class="acc-trigger acc-psych" onclick="toggleAcc('acc-psych')">
-                        <div class="acc-ico">🧠</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Psychology</div>
-                            <div class="acc-odia">ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/psychology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/psychology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Economics -->
-                <div class="acc-item" id="acc-econ">
-                    <div class="acc-trigger acc-econ" onclick="toggleAcc('acc-econ')">
-                        <div class="acc-ico">📈</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Economics</div>
-                            <div class="acc-odia">ଅର୍ଥନୀତି (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/economics/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/economics/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sociology -->
-                <div class="acc-item" id="acc-socio">
-                    <div class="acc-trigger acc-socio" onclick="toggleAcc('acc-socio')">
-                        <div class="acc-ico">👥</div>
-                        <div class="acc-label">
-                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
-                            <div class="acc-name">Sociology</div>
-                            <div class="acc-odia">ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
-                        </div>
-                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-                    </div>
-                    <div class="acc-body">
-                        <div class="grid2">
-                            <a href="./+3-arts/sociology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                            <a href="./+3-arts/sociology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /accordion -->
-        </div><!-- /arts -->
-
-        <!-- ── 4. ବାଣିଜ୍ୟ ── -->
+        <!-- ── 4. +2 Commerce ── -->
         <div class="sec t-com">
             <div class="sec-hd">
                 <div class="sec-ico">📊</div>
                 <div>
-                    <div class="sec-eyebrow">Commerce Stream</div>
-                    <div class="sec-title">ବାଣିଜ୍ୟ ବିଭାଗ</div>
+                    <div class="sec-eyebrow">Commerce Stream · +2</div>
+                    <div class="sec-title">+୨ ବାଣିଜ୍ୟ ବିଭାଗ</div>
                 </div>
             </div>
-
-            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
+            <div class="sub-lbl">+୨ ଶ୍ରେଣୀ — ବାଣିଜ୍ୟ</div>
             <div class="grid2">
                 <a href="./%2B2%201st%20Year%20-%20Commerce/index.html" class="lv-card lv-com1">
                     <div class="lv-icon">💼</div>
                     <div class="lv-name">+୨ ପ୍ରଥମ ବର୍ଷ</div>
-                    <div class="lv-sub">ବାଣିଜ୍ୟ</div>
+                    <div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div>
                     <div class="lv-bar"></div>
                 </a>
                 <a href="./%2B2%202nd%20Year%20-%20Commerce/index.html" class="lv-card lv-com2">
                     <div class="lv-icon">📋</div>
                     <div class="lv-name">+୨ ଦ୍ୱିତୀୟ ବର୍ଷ</div>
-                    <div class="lv-sub">ବାଣିଜ୍ୟ</div>
+                    <div class="lv-sub">ବାଣିଜ୍ୟ ବିଭାଗ</div>
                     <div class="lv-bar"></div>
                 </a>
             </div>
+        </div>
 
-            <div class="sub-lbl">+3 Semesters</div>
+        <!-- ── 5. +3 Commerce ── -->
+        <div class="sec t-com">
+            <div class="sec-hd">
+                <div class="sec-ico">🏦</div>
+                <div>
+                    <div class="sec-eyebrow">Commerce Stream · +3</div>
+                    <div class="sec-title">+3 ବାଣିଜ୍ୟ ବିଭାଗ</div>
+                </div>
+            </div>
+            <div class="sub-lbl">+3 Semesters — Commerce</div>
             <div class="grid2">
                 <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
                 <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
@@ -735,7 +617,155 @@
             </div>
         </div>
 
-        <!-- ── 5. ବିଦ୍ୟାଳୟ ── -->
+        <!-- ── 6. +3 Arts Honours ── -->
+        <div class="sec t-arts">
+            <div class="sec-hd">
+                <div class="sec-ico">🎓</div>
+                <div>
+                    <div class="sec-eyebrow">Arts Stream · +3 Honours</div>
+                    <div class="sec-title">+3 କଳା ବିଭାଗ (Honours)</div>
+                </div>
+            </div>
+
+            <div class="sub-lbl">+3 Honours Subjects</div>
+            <div class="accordion">
+
+                <div class="acc-item" id="acc-polsci">
+                    <div class="acc-trigger acc-polsci" onclick="toggleAcc('acc-polsci')">
+                        <div class="acc-ico">🏛️</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Political Science</div>
+                            <div class="acc-odia">ରାଜନୀତି ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/polsci/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/polsci/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Political Science</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+                <div class="acc-item" id="acc-history">
+                    <div class="acc-trigger acc-history" onclick="toggleAcc('acc-history')">
+                        <div class="acc-ico">📜</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">History</div>
+                            <div class="acc-odia">ଇତିହାସ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/history/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/history/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">History</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+                <div class="acc-item" id="acc-educ">
+                    <div class="acc-trigger acc-educ" onclick="toggleAcc('acc-educ')">
+                        <div class="acc-ico">📚</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Education</div>
+                            <div class="acc-odia">ଶିକ୍ଷା (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/education/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/education/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Education</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+                <div class="acc-item" id="acc-psych">
+                    <div class="acc-trigger acc-psych" onclick="toggleAcc('acc-psych')">
+                        <div class="acc-ico">🧠</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Psychology</div>
+                            <div class="acc-odia">ମନୋ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/psychology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/psychology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Psychology</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+                <div class="acc-item" id="acc-econ">
+                    <div class="acc-trigger acc-econ" onclick="toggleAcc('acc-econ')">
+                        <div class="acc-ico">📈</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Economics</div>
+                            <div class="acc-odia">ଅର୍ଥନୀତି (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/economics/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/economics/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Economics</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+                <div class="acc-item" id="acc-socio">
+                    <div class="acc-trigger acc-socio" onclick="toggleAcc('acc-socio')">
+                        <div class="acc-ico">👥</div>
+                        <div class="acc-label">
+                            <div class="acc-eyebrow">+3 Honours · 8 Semesters</div>
+                            <div class="acc-name">Sociology</div>
+                            <div class="acc-odia">ସମାଜ ବିଜ୍ଞାନ (ଅନର୍ସ)</div>
+                        </div>
+                        <div class="acc-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+                    </div>
+                    <div class="acc-body"><div class="grid2">
+                        <a href="./+3-arts/sociology/sem1/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem2/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem3/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem4/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem5/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem6/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem7/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                        <a href="./+3-arts/sociology/sem8/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">Sociology</div><div class="lv-bar"></div></a>
+                    </div></div>
+                </div>
+
+            </div><!-- /accordion -->
+        </div><!-- /+3 arts -->
+
+        <!-- ══ School ══ -->
         <div class="sec t-school">
             <div class="sec-hd">
                 <div class="sec-ico">🏫</div>
@@ -744,7 +774,7 @@
                     <div class="sec-title">ବିଦ୍ୟାଳୟ ବିଭାଗ</div>
                 </div>
             </div>
-            <div class="sub-lbl">ଶ୍ରେଣୀ ୧ ରୁ ୧୦</div>
+            <div class="sub-lbl">ଶ୍ରେଣୀ ବାଛନ୍ତୁ — ୧ ରୁ ୧୦</div>
             <div class="grid2">
                 <a href="./school/class-1/index.html"  class="lv-card lv-s1"><div class="lv-icon">✏️</div><div class="lv-name">ଶ୍ରେଣୀ ୧</div><div class="lv-sub">ପ୍ରଥମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
                 <a href="./school/class-2/index.html"  class="lv-card lv-s2"><div class="lv-icon">📝</div><div class="lv-name">ଶ୍ରେଣୀ ୨</div><div class="lv-sub">ଦ୍ୱିତୀୟ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
@@ -756,6 +786,49 @@
                 <a href="./school/class-8/index.html"  class="lv-card lv-com2"><div class="lv-icon">🧮</div><div class="lv-name">ଶ୍ରେଣୀ ୮</div><div class="lv-sub">ଅଷ୍ଟମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
                 <a href="./school/class-9/index.html"  class="lv-card lv-spl1"><div class="lv-icon">🏆</div><div class="lv-name">ଶ୍ରେଣୀ ୯</div><div class="lv-sub">ନବମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
                 <a href="./school/class-10/index.html" class="lv-card lv-spl2"><div class="lv-icon">🎓</div><div class="lv-name">ଶ୍ରେଣୀ ୧୦</div><div class="lv-sub">ଦଶମ ଶ୍ରେଣୀ</div><div class="lv-bar"></div></a>
+            </div>
+        </div>
+
+        <!-- ══ 7. Legal Awareness ══ -->
+        <div class="sec t-legal">
+            <div class="sec-hd">
+                <div class="sec-ico">⚖️</div>
+                <div>
+                    <div class="sec-eyebrow">Law &amp; Rights</div>
+                    <div class="sec-title">Legal Awareness</div>
+                </div>
+            </div>
+
+            <div class="sub-lbl">Core Laws &amp; Codes</div>
+            <div class="grid2">
+                <a href="./legal/constitutional-law/index.html" class="lv-card lv-law1"><div class="lv-icon">🏛️</div><div class="lv-name">Constitutional Law</div><div class="lv-sub">ସଂବିଧାନ ଆଇନ</div><div class="lv-bar"></div></a>
+                <a href="./legal/cpc/index.html" class="lv-card lv-law2"><div class="lv-icon">📋</div><div class="lv-name">CPC</div><div class="lv-sub">Civil Procedure Code</div><div class="lv-bar"></div></a>
+                <a href="./legal/bnss/index.html" class="lv-card lv-law3"><div class="lv-icon">🔒</div><div class="lv-name">BNSS</div><div class="lv-sub">Bharatiya Nagarik Suraksha</div><div class="lv-bar"></div></a>
+                <a href="./legal/bns/index.html" class="lv-card lv-law4"><div class="lv-icon">⚖️</div><div class="lv-name">BNS</div><div class="lv-sub">Bharatiya Nyaya Sanhita</div><div class="lv-bar"></div></a>
+                <a href="./legal/bsa/index.html" class="lv-card lv-law1"><div class="lv-icon">📜</div><div class="lv-name">BSA</div><div class="lv-sub">Bharatiya Sakshya Adhiniyam</div><div class="lv-bar"></div></a>
+                <a href="./legal/scst-act/index.html" class="lv-card lv-law2"><div class="lv-icon">🛡️</div><div class="lv-name">SC/ST Act</div><div class="lv-sub">Prevention of Atrocities</div><div class="lv-bar"></div></a>
+            </div>
+
+            <div class="sub-lbl">Special Acts</div>
+            <div class="grid2">
+                <a href="./legal/specific-relief/index.html" class="lv-card lv-law3"><div class="lv-icon">🤝</div><div class="lv-name">Specific Relief Act</div><div class="lv-sub">1963</div><div class="lv-bar"></div></a>
+                <a href="./legal/limitation-act/index.html" class="lv-card lv-law4"><div class="lv-icon">⏳</div><div class="lv-name">Limitation Act</div><div class="lv-sub">1963</div><div class="lv-bar"></div></a>
+                <a href="./legal/it-act/index.html" class="lv-card lv-law1"><div class="lv-icon">💻</div><div class="lv-name">IT Act</div><div class="lv-sub">2000</div><div class="lv-bar"></div></a>
+                <a href="./legal/consumer-protection/index.html" class="lv-card lv-law2"><div class="lv-icon">🛒</div><div class="lv-name">Consumer Protection</div><div class="lv-sub">Act 2019</div><div class="lv-bar"></div></a>
+                <a href="./legal/arbitration/index.html" class="lv-card lv-law3"><div class="lv-icon">🏅</div><div class="lv-name">Arbitration Act</div><div class="lv-sub">1996</div><div class="lv-bar"></div></a>
+                <a href="./legal/contract-act/index.html" class="lv-card lv-law4"><div class="lv-icon">📝</div><div class="lv-name">Contract Act</div><div class="lv-sub">1872</div><div class="lv-bar"></div></a>
+            </div>
+
+            <div class="sub-lbl">Family Laws</div>
+            <div class="grid2">
+                <a href="./legal/hindu-marriage/index.html" class="lv-card lv-law1"><div class="lv-icon">🪷</div><div class="lv-name">Hindu Marriage Act</div><div class="lv-sub">1955</div><div class="lv-bar"></div></a>
+                <a href="./legal/muslim-law/index.html" class="lv-card lv-law2"><div class="lv-icon">🌙</div><div class="lv-name">Muslim Law</div><div class="lv-sub">Personal Law</div><div class="lv-bar"></div></a>
+                <a href="./legal/pwdva/index.html" class="lv-card lv-law3"><div class="lv-icon">🛡️</div><div class="lv-name">PWDVA</div><div class="lv-sub">Protection of Women from DV</div><div class="lv-bar"></div></a>
+            </div>
+
+            <div class="sub-lbl">Professional Law</div>
+            <div class="grid2">
+                <a href="./legal/advocates-act/index.html" class="lv-card lv-law3"><div class="lv-icon">👨‍⚖️</div><div class="lv-name">Advocates Act</div><div class="lv-sub">1961</div><div class="lv-bar"></div></a>
             </div>
         </div>
 
