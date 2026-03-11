@@ -420,6 +420,42 @@
         @supports (padding:max(0px)) {
             .page { padding-bottom:max(70px,env(safe-area-inset-bottom)); }
         }
+
+/* ── Mobile Font Size Fixes ── */
+@media (max-width: 480px) {
+
+    /* Header */
+    header h1 {
+        font-size: 1.75em !important;
+    }
+
+    /* Section headers */
+    .sec-title { font-size: 17px; }
+    .sec-eyebrow { font-size: 11px; }
+
+    /* Level cards */
+    .lv-name { font-size: 1.05em; }
+    .lv-sub  { font-size: 0.76em; }
+    .lv-icon { font-size: 2.1em; }
+
+    /* Accordion trigger text */
+    .acc-name    { font-size: 15.5px; }
+    .acc-eyebrow { font-size: 10.5px; }
+    .acc-odia    { font-size: 12px; }
+
+    /* Sub-labels */
+    .sub-lbl { font-size: 11.5px; }
+
+    /* Legal button */
+    .legal-btn-title   { font-size: 15px; }
+    .legal-btn-eyebrow { font-size: 10.5px; }
+
+    /* Footer */
+    footer h3          { font-size: 1.25em; }
+    .footer-legal-link { font-size: 0.85em; }
+    .footer-copy       { font-size: 0.75em; }
+}
+        
     </style>
 </head>
 <body>
