@@ -6,544 +6,481 @@
     <title>ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --navy:     #0a1628;
-            --navy-mid: #0d1f3c;
-            --gold:     #c8962a;
-            --gold-lt:  #e4b84a;
-            --white:    #ffffff;
-            --bg:       #f0f4f8;
-            --border:   #dde5ef;
-            --slate:    #4a5568;
+            --navy:      #07111f;
+            --navy-mid:  #0c1c35;
+            --navy-lt:   #112244;
+            --gold:      #c8962a;
+            --gold-lt:   #e4b84a;
+            --gold-pale: rgba(200,150,42,0.18);
+            --white:     #ffffff;
+            --off-white: #f7f9fc;
+            --border:    #e2e8f2;
+            --slate:     #4a5568;
+            --text:      #1a2438;
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        *, *::before, *::after {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             font-family: 'Noto Sans Oriya', sans-serif;
-            background: var(--bg);
+            background: var(--off-white);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* ── Ambient navy bg ── */
+        /* ══ STARFIELD BACKGROUND ══ */
         body::before {
-            content:'';
-            position:fixed; top:0; left:0; right:0; height:460px;
-            background: linear-gradient(160deg,#0a1628 0%,#0d1f3c 55%,#102952 100%);
-            z-index:0;
-        }
-        body::after {
-            content:'';
-            position:fixed; top:0; left:0; right:0; height:460px;
+            content: '';
+            position: fixed; inset: 0;
             background:
-                radial-gradient(ellipse at 75% 0%,  rgba(200,150,42,0.13) 0%, transparent 60%),
-                radial-gradient(ellipse at 10% 70%,  rgba(50,120,255,0.09) 0%, transparent 55%);
-            z-index:0;
+                radial-gradient(ellipse at 20% 0%, #1a3a6e 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 10%, rgba(200,150,42,0.15) 0%, transparent 45%),
+                linear-gradient(170deg, #07111f 0%, #0c1c35 40%, #0f2548 70%, #07111f 100%);
+            height: 580px;
+            z-index: 0;
         }
 
-        /* ── Page wrapper ── */
+        /* ══ PAGE WRAPPER ══ */
         .page {
-            position:relative; z-index:1;
-            max-width:660px; margin:0 auto;
-            padding:0 15px 70px;
+            position: relative; z-index: 1;
+            max-width: 640px; margin: 0 auto;
+            padding: 0 14px 80px;
         }
 
-        /* ═══════════════ HEADER ═══════════════ */
+        /* ════════════════════════════════
+           HEADER
+        ════════════════════════════════ */
         header {
-            padding:30px 0 34px; text-align:center;
-            animation:fadeUp 0.5s ease both;
-        }
-        .logo-img {
-            width:200px; max-width:72%;
-            filter:brightness(0) invert(1);
-            margin-bottom:12px;
-            display:block; margin-left:auto; margin-right:auto;
-        }
-        .tagline {
-            color:rgba(255,255,255,0.58);
-            font-size:0.78em; letter-spacing:0.07em; text-transform:uppercase;
-        }
-        .tagline span {
-            display:inline-block; width:24px; height:1px;
-            background:var(--gold); vertical-align:middle;
-            margin:0 9px; opacity:0.7;
+            padding: 28px 0 0;
+            text-align: center;
+            animation: fadeUp 0.6s ease both;
         }
 
+        /* Logo */
+        .logo-wrap {
+            margin: 0 auto 16px;
+            width: 100%;
+            max-width: 360px;
+        }
+        .logo-wrap img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            mix-blend-mode: screen;
+        }
 
-        /* ═══════════════ SHELL ═══════════════ */
-       .shell {
-    background: transparent;
-    border-radius: 22px;
-    overflow: hidden;
-    animation: fadeUp 0.45s ease 0.14s both;
-}
+        /* Academy name */
+        .academy-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6em, 6vw, 2em);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.03em;
+            text-shadow: 0 3px 16px rgba(0,0,0,0.5);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
 
-       .sec {
-    padding: 20px 18px 20px;
-    border-bottom: none;
-    background: rgba(255,255,255,0.92);
-    border-radius: 18px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 20px rgba(10,22,40,0.10);
-    backdrop-filter: blur(6px);
-}
-        .sec:last-child { border-bottom:none; }
+        /* Website pill button */
+        .website-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: rgba(200,150,42,0.15);
+            border: 1.5px solid rgba(200,150,42,0.6);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--gold-lt);
+            font-size: clamp(0.88em, 3.5vw, 1em);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .website-btn:active { transform: scale(0.97); background: rgba(200,150,42,0.25); }
+        @media(hover:hover){ .website-btn:hover { background: rgba(200,150,42,0.25); transform: translateY(-2px); } }
 
+        /* Welcome GIF */
+        .welcome-gif {
+            margin: 14px auto 0;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(200,150,42,0.4);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+        }
+        .welcome-gif img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Choose app heading */
+        .choose-heading {
+            font-size: clamp(1em, 4vw, 1.2em);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            margin: 18px 0 22px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .choose-heading span {
+            color: var(--gold-lt);
+        }
+
+        /* ════════════════════════════════
+           SECTION CARDS
+        ════════════════════════════════ */
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .sec {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px 16px;
+            box-shadow: 0 6px 28px rgba(7,17,31,0.12);
+            border: 1px solid rgba(226,232,242,0.8);
+            animation: fadeUp 0.5s ease both;
+        }
+        .sec:nth-child(1) { animation-delay: 0.10s; }
+        .sec:nth-child(2) { animation-delay: 0.17s; }
+        .sec:nth-child(3) { animation-delay: 0.24s; }
+        .sec:nth-child(4) { animation-delay: 0.31s; }
+        .sec:nth-child(5) { animation-delay: 0.38s; }
+
+        /* Section header row */
         .sec-hd {
-            display:flex; align-items:center; gap:11px;
-            margin-bottom:14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1.5px solid var(--border);
         }
         .sec-ico {
-            width:42px; height:42px; border-radius:12px;
-            display:flex; align-items:center; justify-content:center;
-            font-size:19px; flex-shrink:0;
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 21px; flex-shrink: 0;
         }
         .sec-eyebrow {
-            font-size:9.5px; font-weight:700; letter-spacing:0.10em;
-            text-transform:uppercase; margin-bottom:2px;
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            margin-bottom: 3px;
         }
         .sec-title {
-            font-family:'Playfair Display',serif;
-            font-size:15px; font-weight:700; color:var(--navy); line-height:1.2;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(15px, 4vw, 17px);
+            font-weight: 700; color: var(--text);
+            line-height: 1.2;
         }
 
+        /* Sub-label divider */
         .sub-lbl {
-            font-size:10px; font-weight:700;
-            letter-spacing:0.09em; text-transform:uppercase;
-            display:flex; align-items:center; gap:8px;
-            margin:14px 0 10px;
+            font-family: 'Noto Sans Oriya', sans-serif;
+            font-size: clamp(13px, 4vw, 15px);
+            font-weight: 700; letter-spacing: 0.04em;
+            display: flex; align-items: center; gap: 10px;
+            margin: 18px 0 12px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.04);
         }
-        .sub-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
+        .sub-lbl::after {
+            content: ''; flex: 1; height: 2px;
+            background: linear-gradient(to right, currentColor, transparent);
+            opacity: 0.2;
+        }
 
-        /* section colour tokens */
-        .t-spl1 .sec-ico     { background:#fff0eb; }
-        .t-spl1 .sec-eyebrow { color:#9a3015; }
-        .t-spl1 .sub-lbl     { color:#9a3015; }
+        /* ── colour tokens per section ── */
+        .t-spl1 .sec-ico     { background: #fff0eb; }
+        .t-spl1 .sec-eyebrow { color: #9a3015; }
+        .t-spl1 .sub-lbl     { color: #9a3015; }
 
-        .t-spl2 .sec-ico     { background:#e6f7f0; }
-        .t-spl2 .sec-eyebrow { color:#065f46; }
-        .t-spl2 .sub-lbl     { color:#065f46; }
+        .t-spl2 .sec-ico     { background: #e6f7f0; }
+        .t-spl2 .sec-eyebrow { color: #065f46; }
+        .t-spl2 .sub-lbl     { color: #065f46; }
 
-        .t-arts .sec-ico     { background:#eff6ff; }
-        .t-arts .sec-eyebrow { color:#1d4ed8; }
-        .t-arts .sub-lbl     { color:#1d4ed8; }
+        .t-arts .sec-ico     { background: #eff6ff; }
+        .t-arts .sec-eyebrow { color: #1d4ed8; }
+        .t-arts .sub-lbl     { color: #1d4ed8; }
 
-        .t-com .sec-ico      { background:#f5f3ff; }
-        .t-com .sec-eyebrow  { color:#5b21b6; }
-        .t-com .sub-lbl      { color:#5b21b6; }
+        .t-com .sec-ico      { background: #f5f3ff; }
+        .t-com .sec-eyebrow  { color: #5b21b6; }
+        .t-com .sub-lbl      { color: #5b21b6; }
 
-        .t-school .sec-ico     { background:#fffbeb; }
-        .t-school .sec-eyebrow { color:#b45309; }
-        .t-school .sub-lbl     { color:#b45309; }
+        .t-school .sec-ico     { background: #fffbeb; }
+        .t-school .sec-eyebrow { color: #b45309; }
+        .t-school .sub-lbl     { color: #b45309; }
 
-        /* ═══════════════ GRADIENT LEVEL CARDS ═══════════════ */
-        .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-        .grid1 { display:flex; flex-direction:column; gap:10px; }
-        .grid4 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        /* ════════════════════════════════
+           GRADIENT CARDS
+        ════════════════════════════════ */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .grid1 { display: flex; flex-direction: column; gap: 10px; }
 
         .lv-card {
-            position:relative; border-radius:15px;
-            padding:18px 14px 15px; text-align:center;
-            cursor:pointer; text-decoration:none; color:white;
-            display:flex; flex-direction:column; align-items:center;
-            min-height:115px; overflow:hidden;
-            transition:transform 0.22s, box-shadow 0.22s;
-            border:1px solid rgba(255,255,255,0.10);
+            position: relative;
+            border-radius: 16px;
+            padding: 18px 12px 16px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 110px; overflow: hidden;
+            transition: transform 0.22s, box-shadow 0.22s;
+            border: 1px solid rgba(255,255,255,0.12);
         }
         .lv-card::before {
-            content:''; position:absolute; top:-35%; right:-12%;
-            width:130px; height:130px; border-radius:50%;
-            background:radial-gradient(circle,rgba(255,255,255,0.13) 0%,transparent 70%);
-            pointer-events:none;
+            content: '';
+            position: absolute; top: -40%; right: -15%;
+            width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
         .lv-card::after {
-            content:''; position:absolute; bottom:-20px; left:-10px;
-            width:80px; height:80px; border-radius:50%;
-            background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);
-            pointer-events:none;
+            content: '';
+            position: absolute; bottom: -18px; left: -8px;
+            width: 70px; height: 70px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+            pointer-events: none;
         }
-        .lv-card:active { transform:scale(0.97); }
-        @media(hover:hover){ .lv-card:hover { transform:translateY(-4px); } }
+        .lv-card:active  { transform: scale(0.96); }
+        @media(hover:hover){ .lv-card:hover { transform: translateY(-4px); } }
 
-        .lv-icon { font-size:1.9em; margin-bottom:9px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.25)); line-height:1; }
+        .lv-icon {
+            font-size: clamp(1.8em, 5vw, 2.1em);
+            margin-bottom: 9px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+            line-height: 1;
+        }
         .lv-name {
-            font-family:'Playfair Display',serif;
-            font-size:0.95em; font-weight:700;
-            line-height:1.25; text-shadow:0 2px 6px rgba(0,0,0,0.25);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.92em, 3.5vw, 1.05em);
+            font-weight: 700; line-height: 1.25;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
-        .lv-sub { font-size:0.67em; opacity:0.78; margin-top:5px; font-weight:500; line-height:1.3; }
+        .lv-sub {
+            font-size: clamp(0.68em, 2.5vw, 0.76em);
+            opacity: 0.82; margin-top: 5px;
+            font-weight: 500; line-height: 1.3;
+        }
         .lv-bar {
-            position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-            width:28px; height:3px; border-radius:2px;
-            background:rgba(255,255,255,0.38);
+            position: absolute; bottom: 0;
+            left: 50%; transform: translateX(-50%);
+            width: 28px; height: 3px; border-radius: 2px;
+            background: rgba(255,255,255,0.4);
         }
 
-        /* colour palettes */
-        .lv-spl1  { background:linear-gradient(145deg,#7b1a0a 0%,#b22222 100%); box-shadow:0 8px 28px rgba(123,26,10,0.40); }
-        .lv-spl2  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 8px 28px rgba(6,95,70,0.38); }
-        .lv-arts1 { background:linear-gradient(145deg,#1e3a8a 0%,#2563eb 100%); box-shadow:0 8px 28px rgba(30,58,138,0.40); }
-        .lv-arts2 { background:linear-gradient(145deg,#1e40af 0%,#3b82f6 100%); box-shadow:0 8px 28px rgba(30,64,175,0.38); }
-        .lv-com1  { background:linear-gradient(145deg,#3b0764 0%,#6d28d9 100%); box-shadow:0 8px 28px rgba(59,7,100,0.40); }
-        .lv-com2  { background:linear-gradient(145deg,#4c1d95 0%,#7c3aed 100%); box-shadow:0 8px 28px rgba(76,29,149,0.38); }
-        /* +3 Commerce sem cards — 4 unique colours cycling */
-        .lv-sem1  { background:linear-gradient(145deg,#1e3a8a 0%,#2563eb 100%); box-shadow:0 7px 22px rgba(30,58,138,0.38); }
-        .lv-sem2  { background:linear-gradient(145deg,#0369a1 0%,#0ea5e9 100%); box-shadow:0 7px 22px rgba(3,105,161,0.38); }
-        .lv-sem3  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 7px 22px rgba(6,95,70,0.38); }
-        .lv-sem4  { background:linear-gradient(145deg,#3b0764 0%,#6d28d9 100%); box-shadow:0 7px 22px rgba(59,7,100,0.38); }
-        /* school */
-        .lv-s1  { background:linear-gradient(145deg,#b45309 0%,#d97706 100%); box-shadow:0 7px 22px rgba(180,83,9,0.38); }
-        .lv-s2  { background:linear-gradient(145deg,#92400e 0%,#b45309 100%); box-shadow:0 7px 22px rgba(146,64,14,0.38); }
-        .lv-s3  { background:linear-gradient(145deg,#0369a1 0%,#0ea5e9 100%); box-shadow:0 7px 22px rgba(3,105,161,0.38); }
-        .lv-s4  { background:linear-gradient(145deg,#065f46 0%,#059669 100%); box-shadow:0 7px 22px rgba(6,95,70,0.35); }
-        .lv-s5  { background:linear-gradient(145deg,#1d4ed8 0%,#3b82f6 100%); box-shadow:0 7px 22px rgba(29,78,216,0.38); }
+        /* Card colour palettes */
+        .lv-spl1  { background: linear-gradient(145deg,#7b1a0a,#b22222); box-shadow: 0 8px 28px rgba(123,26,10,0.38); }
+        .lv-spl2  { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 8px 28px rgba(6,95,70,0.36); }
+        .lv-arts1 { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 8px 28px rgba(30,58,138,0.38); }
+        .lv-arts2 { background: linear-gradient(145deg,#1e40af,#3b82f6); box-shadow: 0 8px 28px rgba(30,64,175,0.36); }
+        .lv-com1  { background: linear-gradient(145deg,#3b0764,#6d28d9); box-shadow: 0 8px 28px rgba(59,7,100,0.38); }
+        .lv-com2  { background: linear-gradient(145deg,#4c1d95,#7c3aed); box-shadow: 0 8px 28px rgba(76,29,149,0.36); }
+        .lv-sem1  { background: linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow: 0 7px 22px rgba(30,58,138,0.36); }
+        .lv-sem2  { background: linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow: 0 7px 22px rgba(3,105,161,0.36); }
+        .lv-sem3  { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 7px 22px rgba(6,95,70,0.36); }
+        .lv-sem4  { background: linear-gradient(145deg,#3b0764,#6d28d9); box-shadow: 0 7px 22px rgba(59,7,100,0.36); }
+        .lv-s1    { background: linear-gradient(145deg,#b45309,#d97706); box-shadow: 0 7px 22px rgba(180,83,9,0.36); }
+        .lv-s2    { background: linear-gradient(145deg,#92400e,#b45309); box-shadow: 0 7px 22px rgba(146,64,14,0.36); }
+        .lv-s3    { background: linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow: 0 7px 22px rgba(3,105,161,0.36); }
+        .lv-s4    { background: linear-gradient(145deg,#065f46,#059669); box-shadow: 0 7px 22px rgba(6,95,70,0.34); }
+        .lv-s5    { background: linear-gradient(145deg,#1d4ed8,#3b82f6); box-shadow: 0 7px 22px rgba(29,78,216,0.36); }
 
-        /* ═══════════════ COMPACT SEM CARD (for inside dropdown) ═══════════════ */
-        .sem-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:4px 0 8px; }
-
-        .sm-card {
-            position:relative; border-radius:12px;
-            padding:13px 10px 11px; text-align:center;
-            cursor:pointer; text-decoration:none; color:white;
-            display:flex; flex-direction:column; align-items:center;
-            min-height:88px; overflow:hidden;
-            transition:transform 0.20s, box-shadow 0.20s;
-            border:1px solid rgba(255,255,255,0.10);
+        /* ════════════════════════════════
+           ACCORDION (Honours subjects)
+        ════════════════════════════════ */
+        .accordion {
+            display: flex; flex-direction: column; gap: 10px;
         }
-        .sm-card::before {
-            content:''; position:absolute; top:-25%; right:-10%;
-            width:90px; height:90px; border-radius:50%;
-            background:radial-gradient(circle,rgba(255,255,255,0.12) 0%,transparent 70%);
-            pointer-events:none;
-        }
-        .sm-card:active { transform:scale(0.96); }
-        @media(hover:hover){ .sm-card:hover { transform:translateY(-3px); } }
-
-        .sm-num {
-            font-family:'Playfair Display',serif;
-            font-size:1.5em; font-weight:800;
-            line-height:1; margin-bottom:5px;
-            text-shadow:0 2px 6px rgba(0,0,0,0.25);
-        }
-        .sm-lbl { font-size:0.68em; font-weight:600; opacity:0.85; line-height:1.25; }
-        .sm-bar {
-            position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-            width:20px; height:2.5px; border-radius:2px;
-            background:rgba(255,255,255,0.40);
-        }
-
-        /* sem colour palette — cycles per subject */
-        .sm-1 { background:linear-gradient(145deg,#1e3a8a,#2563eb); box-shadow:0 5px 16px rgba(30,58,138,0.40); }
-        .sm-2 { background:linear-gradient(145deg,#0369a1,#0ea5e9); box-shadow:0 5px 16px rgba(3,105,161,0.38); }
-        .sm-3 { background:linear-gradient(145deg,#065f46,#059669); box-shadow:0 5px 16px rgba(6,95,70,0.38); }
-        .sm-4 { background:linear-gradient(145deg,#3b0764,#6d28d9); box-shadow:0 5px 16px rgba(59,7,100,0.38); }
-        .sm-5 { background:linear-gradient(145deg,#7b1a0a,#b22222); box-shadow:0 5px 16px rgba(123,26,10,0.38); }
-        .sm-6 { background:linear-gradient(145deg,#1e40af,#3b82f6); box-shadow:0 5px 16px rgba(30,64,175,0.38); }
-        .sm-7 { background:linear-gradient(145deg,#4c1d95,#7c3aed); box-shadow:0 5px 16px rgba(76,29,149,0.38); }
-        .sm-8 { background:linear-gradient(145deg,#b45309,#d97706); box-shadow:0 5px 16px rgba(180,83,9,0.38); }
-
-        /* ═══════════════ DROPDOWN / ACCORDION ═══════════════ */
-        .accordion { display:flex; flex-direction:column; gap:10px; }
 
         .acc-item {
-            border-radius:15px; overflow:hidden;
-            border:1.5px solid var(--border);
-            box-shadow:0 3px 14px rgba(10,22,40,0.08);
+            border-radius: 16px; overflow: hidden;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 3px 14px rgba(7,17,31,0.08);
         }
 
         .acc-trigger {
-            display:flex; align-items:center; gap:12px;
-            padding:14px 14px;
-            cursor:pointer; user-select:none;
-            transition:background 0.2s;
-            position:relative;
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 14px;
+            cursor: pointer; user-select: none;
+            transition: filter 0.2s;
         }
-        .acc-trigger:active { opacity:0.9; }
+        .acc-trigger:active { filter: brightness(0.93); }
 
-        /* subject colour headers */
-        .acc-polsci  { background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%); }
-        .acc-history { background:linear-gradient(135deg,#065f46 0%,#059669 100%); }
-        .acc-educ    { background:linear-gradient(135deg,#0369a1 0%,#0ea5e9 100%); }
-        .acc-psych   { background:linear-gradient(135deg,#4c1d95 0%,#7c3aed 100%); }
-        .acc-econ    { background:linear-gradient(135deg,#b45309 0%,#d97706 100%); }
-        .acc-socio   { background:linear-gradient(135deg,#7b1a0a 0%,#b22222 100%); }
+        .acc-polsci  { background: linear-gradient(135deg,#1e3a8a,#2563eb); }
+        .acc-history { background: linear-gradient(135deg,#065f46,#059669); }
+        .acc-educ    { background: linear-gradient(135deg,#0369a1,#0ea5e9); }
+        .acc-psych   { background: linear-gradient(135deg,#4c1d95,#7c3aed); }
+        .acc-econ    { background: linear-gradient(135deg,#b45309,#d97706); }
+        .acc-socio   { background: linear-gradient(135deg,#7b1a0a,#b22222); }
 
         .acc-ico {
-            width:38px; height:38px; border-radius:10px;
-            background:rgba(255,255,255,0.15);
-            display:flex; align-items:center; justify-content:center;
-            font-size:17px; flex-shrink:0;
-        }
-        .acc-label { flex:1; }
-        .acc-eyebrow {
-            font-size:9px; font-weight:700; letter-spacing:0.10em;
-            text-transform:uppercase; color:rgba(255,255,255,0.68);
-            margin-bottom:2px;
-        }
-        .acc-name {
-            font-family:'Playfair Display',serif;
-            font-size:13.5px; font-weight:700; color:white;
-            line-height:1.2;
-        }
-        .acc-odia {
-            font-size:10.5px; color:rgba(255,255,255,0.72);
-            margin-top:2px; font-weight:500;
-        }
-        .acc-chevron {
-            width:28px; height:28px; border-radius:50%;
-            background:rgba(255,255,255,0.15);
-            display:flex; align-items:center; justify-content:center;
-            flex-shrink:0;
-            transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        .acc-chevron svg {
-            width:13px; height:13px; fill:none;
-            stroke:white; stroke-width:2.5;
-            stroke-linecap:round; stroke-linejoin:round;
-            transition:transform 0.3s;
-        }
-        .acc-item.open .acc-chevron { transform:rotate(180deg); }
-
-        .acc-body {
-            max-height:0; overflow:hidden;
-            transition:max-height 0.38s cubic-bezier(0.4,0,0.2,1),
-                        padding 0.25s ease;
-            background: #f8f9fe;
-            padding:0 12px;
-        }
-        .acc-item.open .acc-body {
-            max-height:900px;
-            padding:10px 12px 14px;
-        }
-
-        /* ═══════════════ FOOTER ═══════════════ */
-        footer {
-            background:var(--navy);
-            border-radius:20px;
-            padding:26px 20px 20px;
-            margin-top:22px;
-            border:1px solid rgba(200,150,42,0.15);
-            animation:fadeUp 0.5s ease 0.5s both;
-        }
-        .footer-brand { text-align:center; margin-bottom:16px; }
-        .footer-brand h3 {
-            font-family:'Playfair Display',serif;
-            font-size:1.15em; color:var(--gold-lt);
-            font-weight:700; margin-bottom:5px;
-        }
-        .footer-brand p { font-size:0.75em; color:rgba(255,255,255,0.45); line-height:1.5; }
-        .footer-div { height:1px; background:rgba(200,150,42,0.12); margin-bottom:14px; }
-        .footer-copy { text-align:center; color:rgba(255,255,255,0.28); font-size:0.68em; }
-
-        /* ── Legal Policies Button ── */
-        .legal-btn-wrap {
-            padding: 16px 18px 4px;
-        }
-        .legal-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            width: 100%;
-            padding: 14px 16px;
-            background: linear-gradient(135deg, #0a1628 0%, #102952 100%);
-            border: 1.5px solid rgba(200,150,42,0.35);
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            box-shadow: 0 6px 22px rgba(10,22,40,0.22);
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        .legal-btn::before {
-            content: '';
-            position: absolute; top: -40%; right: -5%;
-            width: 110px; height: 110px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(200,150,42,0.12) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .legal-btn:active  { transform: scale(0.98); }
-        @media(hover:hover){ .legal-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(10,22,40,0.28); } }
-
-        .legal-btn-left { display: flex; align-items: center; gap: 12px; }
-        .legal-btn-ico {
-            width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(200,150,42,0.18);
-            border: 1px solid rgba(200,150,42,0.28);
+            width: 40px; height: 40px; border-radius: 11px;
+            background: rgba(255,255,255,0.18);
             display: flex; align-items: center; justify-content: center;
             font-size: 18px; flex-shrink: 0;
         }
-        .legal-btn-eyebrow {
-            font-size: 9px; font-weight: 700;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--gold-lt); margin-bottom: 2px;
+        .acc-label { flex: 1; min-width: 0; }
+        .acc-eyebrow {
+            font-size: clamp(9px, 2.5vw, 10.5px);
+            font-weight: 700; letter-spacing: 0.10em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 2px;
         }
-        .legal-btn-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 13.5px; font-weight: 700;
-            color: white; line-height: 1.2;
+        .acc-name {
+            font-family: 'Noto Sans Oriya', 'Playfair Display', sans-serif;
+            font-size: clamp(14px, 4vw, 16px);
+            font-weight: 700; color: white; line-height: 1.2;
         }
-        .legal-btn-arrow {
+        .acc-odia {
+            font-size: clamp(11px, 3vw, 12.5px);
+            color: rgba(255,255,255,0.78);
+            margin-top: 2px; font-weight: 500;
+        }
+        .acc-chevron {
             width: 30px; height: 30px; border-radius: 50%;
-            background: rgba(200,150,42,0.18);
-            border: 1px solid rgba(200,150,42,0.25);
+            background: rgba(255,255,255,0.18);
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
+            transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
         }
-        .legal-btn-arrow svg {
-            width: 12px; height: 12px; fill: none;
-            stroke: var(--gold-lt); stroke-width: 2.5;
+        .acc-chevron svg {
+            width: 14px; height: 14px; fill: none;
+            stroke: white; stroke-width: 2.5;
             stroke-linecap: round; stroke-linejoin: round;
         }
+        .acc-item.open .acc-chevron { transform: rotate(180deg); }
 
-        /* Footer legal link */
-        .footer-legal-link {
-            display: flex; align-items: center; justify-content: center; gap: 7px;
-            color: var(--gold-lt); font-size: 0.76em; font-weight: 600;
-            text-decoration: none; margin-bottom: 12px;
-            opacity: 0.85;
-            transition: opacity 0.2s;
+        .acc-body {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.25s ease;
+            background: #f4f6fb;
+            padding: 0 12px;
         }
-        .footer-legal-link:hover { opacity: 1; }
-        .footer-legal-link span { text-decoration: underline; text-underline-offset: 2px; }
+        .acc-item.open .acc-body {
+            max-height: 1000px;
+            padding: 12px 12px 14px;
+        }
 
+        /* ════════════════════════════════
+           FOOTER
+        ════════════════════════════════ */
+        footer {
+            background: var(--navy);
+            border-radius: 20px;
+            padding: 26px 20px 22px;
+            margin-top: 18px;
+            border: 1px solid rgba(200,150,42,0.18);
+            box-shadow: 0 8px 32px rgba(7,17,31,0.3);
+            animation: fadeUp 0.5s ease 0.5s both;
+            text-align: center;
+        }
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1em, 4vw, 1.2em);
+            color: var(--gold-lt); font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .footer-brand p {
+            font-size: clamp(0.72em, 2.5vw, 0.78em);
+            color: rgba(255,255,255,0.45); line-height: 1.5;
+        }
+        .footer-div {
+            height: 1px;
+            background: rgba(200,150,42,0.14);
+            margin: 16px 0;
+        }
+        .footer-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--gold-lt);
+            font-size: clamp(0.75em, 3vw, 0.82em);
+            font-weight: 600; text-decoration: none;
+            opacity: 0.85; transition: opacity 0.2s;
+            margin-bottom: 12px;
+        }
+        .footer-link:hover { opacity: 1; }
+        .footer-link span { text-decoration: underline; text-underline-offset: 3px; }
+        .footer-copy {
+            font-size: clamp(0.65em, 2.2vw, 0.72em);
+            color: rgba(255,255,255,0.28);
+        }
+
+        /* ════════════════════════════════
+           ANIMATIONS
+        ════════════════════════════════ */
         @keyframes fadeUp {
-            from { opacity:0; transform:translateY(14px); }
-            to   { opacity:1; transform:translateY(0); }
-        }
-        .shell .sec:nth-child(1) { animation:fadeUp 0.4s ease 0.18s both; }
-        .shell .sec:nth-child(2) { animation:fadeUp 0.4s ease 0.24s both; }
-        .shell .sec:nth-child(3) { animation:fadeUp 0.4s ease 0.30s both; }
-        .shell .sec:nth-child(4) { animation:fadeUp 0.4s ease 0.36s both; }
-        .shell .sec:nth-child(5) { animation:fadeUp 0.4s ease 0.42s both; }
-
-        @supports (padding:max(0px)) {
-            .page { padding-bottom:max(70px,env(safe-area-inset-bottom)); }
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-/* ── Mobile Font Size Fixes ── */
-@media (max-width: 480px) {
-
-    /* Header */
-    header h1 {
-        font-size: 1.75em !important;
-    }
-
-    /* Section headers */
-    .sec-title { font-size: 17px; }
-    .sec-eyebrow { font-size: 11px; }
-
-    /* Level cards */
-    .lv-name { font-size: 1.05em; }
-    .lv-sub  { font-size: 0.76em; }
-    .lv-icon { font-size: 2.1em; }
-
-    /* Accordion trigger text */
-    .acc-name    { font-size: 15.5px; }
-    .acc-eyebrow { font-size: 10.5px; }
-    .acc-odia    { font-size: 12px; }
-
-    /* Sub-labels */
-    .sub-lbl { font-size: 11.5px; }
-
-    /* Legal button */
-    .legal-btn-title   { font-size: 15px; }
-    .legal-btn-eyebrow { font-size: 10.5px; }
-
-    /* Footer */
-    footer h3          { font-size: 1.25em; }
-    .footer-legal-link { font-size: 0.85em; }
-    .footer-copy       { font-size: 0.75em; }
-}
-        
+        @supports (padding: max(0px)) {
+            .page { padding-bottom: max(80px, env(safe-area-inset-bottom)); }
+        }
     </style>
 </head>
 <body>
 
 <div class="page">
 
- <header>
-    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png" 
-         alt="Welcome" 
-         style="display:block; margin:0 auto 14px; width:100%; max-width:420px; border-radius:16px; mix-blend-mode:screen;">
+    <!-- ══════════════════════════════════
+         HEADER
+    ══════════════════════════════════ -->
+    <header>
 
-    <h1 style="color:#ffffff; font-family:'Playfair Display',serif; font-size:1.5em; font-weight:800; letter-spacing:0.04em; margin-bottom:8px; text-shadow:0 2px 12px rgba(0,0,0,0.4);">
-        ଇ-ବିଦ୍ୟା ଏକାଡେମୀ
-    </h1>
+        <!-- Logo -->
+        <div class="logo-wrap">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO.png"
+                 alt="E-Vidya Academy Logo">
+        </div>
 
+        <!-- Academy Name -->
+        <h1 class="academy-name">ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</h1>
 
-     
-<a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" style="
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
-    padding: 9px 22px;
-    background: rgba(200,150,42,0.18);
-    border: 1.5px solid rgba(200,150,42,0.55);
-    border-radius: 50px;
-    text-decoration: none;
-    color: var(--gold-lt);
-    font-size: 1em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-">🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →</a>
-     <div style="
-    margin: 10px auto 0;
-    width: 100%;
-    max-width: 320px;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-    border: 1.5px solid rgba(200,150,42,0.35);
-">
-    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif" 
-         alt="Welcome" 
-         style="display:block; width:100%; height:auto;">
-</div>
-     
-<div style="
-    margin: 10px auto 14px;
-    width: 100%;
-    max-width: 280px;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-    border: 1.5px solid rgba(200,150,42,0.35);
-">
-    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif" 
-         alt="Welcome" 
-         style="
-             display: block;
-             width: 100%;
-             height: auto;
-             border-radius: 14px;
-         ">
-</div>
-     
-<p style="
-    color: #ffffff;
-    font-size: 1.1em;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    margin-top: 16px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-">🌹 ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ 🌹</p>
+        <!-- Website Button -->
+        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="website-btn">
+            🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →
+        </a>
 
-</header>
+        <!-- Welcome GIF -->
+        <div class="welcome-gif">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif"
+                 alt="Welcome">
+        </div>
 
-    <div class="shell">
-      
+        <!-- Choose Heading -->
+        <p class="choose-heading">🌹 <span>ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ</span> 🌹</p>
 
-        <!-- ══ 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ══ -->
+    </header>
+
+    <!-- ══════════════════════════════════
+         ALL SECTIONS
+    ══════════════════════════════════ -->
+    <div class="sections">
+
+        <!-- ── 1. ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ ── -->
         <div class="sec t-spl1">
             <div class="sec-hd">
                 <div class="sec-ico">🌟</div>
-                <div class="sec-text">
+                <div>
                     <div class="sec-eyebrow">ବିଶେଷ ପ୍ରଶିକ୍ଷଣ</div>
                     <div class="sec-title">ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ</div>
                 </div>
@@ -558,11 +495,11 @@
             </div>
         </div>
 
-        <!-- ══ 2. ମୋ ସାଥି ══ -->
+        <!-- ── 2. ମୋ ସାଥି ── -->
         <div class="sec t-spl2">
             <div class="sec-hd">
                 <div class="sec-ico">🤝</div>
-                <div class="sec-text">
+                <div>
                     <div class="sec-eyebrow">ବ୍ୟକ୍ତିଗତ ମାର୍ଗଦର୍ଶନ</div>
                     <div class="sec-title">ମୋ ସାଥି ଆପ୍</div>
                 </div>
@@ -577,17 +514,16 @@
             </div>
         </div>
 
-        <!-- ══ 3. କଳା ବିଭାଗ ══ -->
+        <!-- ── 3. କଳା ବିଭାଗ ── -->
         <div class="sec t-arts">
             <div class="sec-hd">
                 <div class="sec-ico">🎨</div>
-                <div class="sec-text">
+                <div>
                     <div class="sec-eyebrow">Arts Stream</div>
                     <div class="sec-title">କଳା ବିଭାଗ</div>
                 </div>
             </div>
 
-            <!-- +2 Arts -->
             <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
             <div class="grid2">
                 <a href="./%2B2%201st%20Year%20-%20Arts/index.html" class="lv-card lv-arts1">
@@ -604,7 +540,6 @@
                 </a>
             </div>
 
-            <!-- +3 Arts Honours — Accordion -->
             <div class="sub-lbl">+3 Honours Subjects</div>
             <div class="accordion">
 
@@ -759,19 +694,18 @@
                 </div>
 
             </div><!-- /accordion -->
-        </div><!-- /arts sec -->
+        </div><!-- /arts -->
 
-        <!-- ══ 4. ବାଣିଜ୍ୟ ══ -->
+        <!-- ── 4. ବାଣିଜ୍ୟ ── -->
         <div class="sec t-com">
             <div class="sec-hd">
                 <div class="sec-ico">📊</div>
-                <div class="sec-text">
+                <div>
                     <div class="sec-eyebrow">Commerce Stream</div>
                     <div class="sec-title">ବାଣିଜ୍ୟ ବିଭାଗ</div>
                 </div>
             </div>
 
-            <!-- +2 -->
             <div class="sub-lbl">+୨ ଶ୍ରେଣୀ</div>
             <div class="grid2">
                 <a href="./%2B2%201st%20Year%20-%20Commerce/index.html" class="lv-card lv-com1">
@@ -788,65 +722,24 @@
                 </a>
             </div>
 
-            <!-- +3 Semesters — gradient cards 2-col -->
             <div class="sub-lbl">+3 Semesters</div>
             <div class="grid2">
-                <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1">
-                    <div class="lv-icon">📘</div>
-                    <div class="lv-name">Sem-1</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2">
-                    <div class="lv-icon">📗</div>
-                    <div class="lv-name">Sem-2</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-3%20-%20Commerce/index.html" class="lv-card lv-sem3">
-                    <div class="lv-icon">📙</div>
-                    <div class="lv-name">Sem-3</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-4%20-%20Commerce/index.html" class="lv-card lv-sem4">
-                    <div class="lv-icon">📕</div>
-                    <div class="lv-name">Sem-4</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-5%20-%20Commerce/index.html" class="lv-card lv-sem1">
-                    <div class="lv-icon">📓</div>
-                    <div class="lv-name">Sem-5</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-6%20-%20Commerce/index.html" class="lv-card lv-sem2">
-                    <div class="lv-icon">📔</div>
-                    <div class="lv-name">Sem-6</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-7%20-%20Commerce/index.html" class="lv-card lv-sem3">
-                    <div class="lv-icon">📒</div>
-                    <div class="lv-name">Sem-7</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
-                <a href="./%2B3%20Sem-8%20-%20Commerce/index.html" class="lv-card lv-sem4">
-                    <div class="lv-icon">🎓</div>
-                    <div class="lv-name">Sem-8</div>
-                    <div class="lv-sub">+3 Commerce</div>
-                    <div class="lv-bar"></div>
-                </a>
+                <a href="./%2B3%20Sem-1%20-%20Commerce/index.html" class="lv-card lv-sem1"><div class="lv-icon">📘</div><div class="lv-name">Sem-1</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-2%20-%20Commerce/index.html" class="lv-card lv-sem2"><div class="lv-icon">📗</div><div class="lv-name">Sem-2</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-3%20-%20Commerce/index.html" class="lv-card lv-sem3"><div class="lv-icon">📙</div><div class="lv-name">Sem-3</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-4%20-%20Commerce/index.html" class="lv-card lv-sem4"><div class="lv-icon">📕</div><div class="lv-name">Sem-4</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-5%20-%20Commerce/index.html" class="lv-card lv-sem1"><div class="lv-icon">📓</div><div class="lv-name">Sem-5</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-6%20-%20Commerce/index.html" class="lv-card lv-sem2"><div class="lv-icon">📔</div><div class="lv-name">Sem-6</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-7%20-%20Commerce/index.html" class="lv-card lv-sem3"><div class="lv-icon">📒</div><div class="lv-name">Sem-7</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
+                <a href="./%2B3%20Sem-8%20-%20Commerce/index.html" class="lv-card lv-sem4"><div class="lv-icon">🎓</div><div class="lv-name">Sem-8</div><div class="lv-sub">+3 Commerce</div><div class="lv-bar"></div></a>
             </div>
         </div>
 
-        <!-- ══ 5. ବିଦ୍ୟାଳୟ ══ -->
+        <!-- ── 5. ବିଦ୍ୟାଳୟ ── -->
         <div class="sec t-school">
             <div class="sec-hd">
                 <div class="sec-ico">🏫</div>
-                <div class="sec-text">
+                <div>
                     <div class="sec-eyebrow">School Section</div>
                     <div class="sec-title">ବିଦ୍ୟାଳୟ ବିଭାଗ</div>
                 </div>
@@ -866,15 +759,18 @@
             </div>
         </div>
 
-    </div><!-- /shell -->
+    </div><!-- /sections -->
 
+    <!-- ══════════════════════════════════
+         FOOTER
+    ══════════════════════════════════ -->
     <footer>
         <div class="footer-brand">
             <h3>🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ 🌹</h3>
-            <p>Private initiative - Providing Supplementary Digital Classes</p>
+            <p>Private initiative · Providing Supplementary Digital Classes</p>
         </div>
         <div class="footer-div"></div>
-        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-legal-link">
+        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="footer-link">
             🌹 <span>ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →</span>
         </a>
         <div class="footer-copy">© ୨୦୨୬ ଇ-ବିଦ୍ୟା ଏକାଡେମୀ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
@@ -886,9 +782,7 @@
 function toggleAcc(id) {
     const item = document.getElementById(id);
     const isOpen = item.classList.contains('open');
-    // close all
     document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
-    // open clicked if it was closed
     if (!isOpen) item.classList.add('open');
 }
 </script>
