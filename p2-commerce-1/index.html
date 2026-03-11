@@ -9,28 +9,27 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
+/* KEY FIX: body scrolls, not centered with flex */
 body {
   font-family:'Noto Sans Oriya',sans-serif;
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:24px 16px;
   background:linear-gradient(160deg,#07111f 0%,#0c1c35 50%,#07111f 100%);
-  overflow:hidden;
+  padding:32px 16px 60px; /* big bottom padding */
+  overflow-y:auto; /* allow scrolling */
+  overflow-x:hidden;
 }
+
 body::before {
   content:''; position:fixed; top:-100px; left:-100px;
   width:400px; height:400px; border-radius:50%;
   background:radial-gradient(circle,rgba(200,150,42,0.12),transparent 70%);
-  pointer-events:none;
+  pointer-events:none; z-index:0;
 }
 body::after {
   content:''; position:fixed; bottom:-80px; right:-80px;
   width:350px; height:350px; border-radius:50%;
   background:radial-gradient(circle,rgba(30,58,138,0.25),transparent 70%);
-  pointer-events:none;
+  pointer-events:none; z-index:0;
 }
 
 .card {
@@ -38,8 +37,9 @@ body::after {
   background:rgba(255,255,255,0.04);
   border:1.5px solid rgba(200,150,42,0.25);
   border-radius:28px;
-  padding:40px 28px 36px;
+  padding:40px 24px 40px;
   max-width:420px; width:100%;
+  margin:0 auto; /* center horizontally */
   text-align:center;
   box-shadow:0 24px 60px rgba(0,0,0,0.5);
   animation:popIn 0.5s cubic-bezier(0.34,1.2,0.64,1) both;
@@ -94,7 +94,7 @@ body::after {
 .msg-box {
   background:rgba(200,150,42,0.08);
   border:1.5px solid rgba(200,150,42,0.22);
-  border-radius:18px; padding:22px 20px; margin-bottom:22px;
+  border-radius:18px; padding:22px 18px; margin-bottom:22px;
 }
 .msg-icon { font-size:2.2em; margin-bottom:10px; display:block; }
 .msg-main {
@@ -106,7 +106,7 @@ body::after {
   color:rgba(255,255,255,0.6); line-height:1.6;
 }
 
-/* Phone number display */
+/* Phone number */
 .phone-number {
   font-size:clamp(1.2em,5.5vw,1.45em);
   font-weight:800; color:#fff;
@@ -123,7 +123,7 @@ body::after {
   text-transform:uppercase;
 }
 
-/* Call & WhatsApp buttons */
+/* Buttons */
 .btn-row {
   display:grid; grid-template-columns:1fr 1fr;
   gap:12px; margin-bottom:20px;
@@ -139,10 +139,10 @@ body::after {
   font-weight:700; color:#fff;
   cursor:pointer; text-decoration:none;
   box-shadow:0 6px 22px rgba(22,163,74,0.38);
-  transition:transform 0.18s,box-shadow 0.18s;
+  transition:transform 0.18s;
   -webkit-tap-highlight-color:transparent;
 }
-.btn-call:active{transform:scale(0.96);box-shadow:0 3px 10px rgba(22,163,74,0.2);}
+.btn-call:active{transform:scale(0.96);}
 
 .btn-whatsapp {
   display:flex; align-items:center; justify-content:center; gap:8px;
@@ -154,10 +154,10 @@ body::after {
   font-weight:700; color:#fff;
   cursor:pointer; text-decoration:none;
   box-shadow:0 6px 22px rgba(37,211,102,0.38);
-  transition:transform 0.18s,box-shadow 0.18s;
+  transition:transform 0.18s;
   -webkit-tap-highlight-color:transparent;
 }
-.btn-whatsapp:active{transform:scale(0.96);box-shadow:0 3px 10px rgba(37,211,102,0.2);}
+.btn-whatsapp:active{transform:scale(0.96);}
 
 .btn-icon { font-size:1.3em; line-height:1; flex-shrink:0; pointer-events:none; }
 .wa-svg { width:22px; height:22px; fill:#fff; flex-shrink:0; pointer-events:none; }
@@ -166,13 +166,14 @@ body::after {
 .contact-box {
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.1);
-  border-radius:14px; padding:14px 18px; margin-bottom:22px; text-align:left;
+  border-radius:14px; padding:14px 18px;
+  margin-bottom:22px; text-align:left;
 }
 .contact-row {
   display:flex; align-items:center; gap:10px;
   font-size:clamp(0.82em,3.5vw,0.92em);
   color:rgba(255,255,255,0.7);
-  padding:7px 0;
+  padding:8px 0;
   border-bottom:1px solid rgba(255,255,255,0.07);
 }
 .contact-row:last-child{border-bottom:none;}
@@ -181,7 +182,7 @@ body::after {
 
 .back-btn {
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  width:100%; padding:14px 32px;
+  width:100%; padding:15px 32px;
   background:rgba(255,255,255,0.07);
   border:1.5px solid rgba(255,255,255,0.15);
   border-radius:50px;
@@ -191,11 +192,11 @@ body::after {
   cursor:pointer; text-decoration:none;
   transition:transform 0.18s,background 0.18s;
   -webkit-tap-highlight-color:transparent;
+  margin-bottom:20px;
 }
 .back-btn:active{transform:scale(0.97);background:rgba(255,255,255,0.12);}
 
 .footer-note {
-  margin-top:20px;
   font-size:clamp(0.65em,2.5vw,0.72em);
   color:rgba(255,255,255,0.2);
 }
@@ -208,25 +209,24 @@ body::after {
   <div class="badge">🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</div>
 
   <div class="title">ଶୀଘ୍ର ଆସୁଛି…</div>
-  <div class="subtitle">Coming Soon — ଏହି ବିଭାଗ ଶୀଘ୍ର ଉପଲବ୍ଧ ହେବ । </div>
+  <div class="subtitle">Coming Soon — ଏହି ବିଭାଗ ଶୀଘ୍ର ଉପଲବ୍ଧ ହେବ</div>
 
   <div class="divider"></div>
 
   <div class="msg-box">
     <span class="msg-icon">🏫</span>
-    <div class="msg-main">ଡିଜିଟାଲ କ୍ଲାସ୍ ପାଇଁ ଅଫିସ୍‌ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ । </div>
+    <div class="msg-main">ଡିଜିଟାଲ କ୍ଲାସ ପାଇଁ ଅଫିସ୍‌ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ</div>
     <div class="msg-sub">
-      ଏହି ବିଭାଗର ସ୍ଵତନ୍ତ୍ର ଡିଜିଟାଲ କ୍ଲାସ୍ ପାଇଁ ଦୟାକରି ଆମ ଅଫିସ୍ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ ।<br><br>
+      ଏହି ବିଭାଗର ସ୍ଵତନ୍ତ୍ର ଡିଜିଟାଲ କ୍ଲାସ ପାଇଁ ଦୟାକରି ଆମ ଅଫିସ୍ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ ।<br><br>
+      For special digital classes, please contact our office directly.
     </div>
   </div>
 
-  <!-- Phone number -->
   <div class="phone-number">
     <span class="ph-label">📞 ଅଫିସ୍ ନମ୍ବର · Office Number</span>
     6372296357
   </div>
 
-  <!-- Call & WhatsApp buttons -->
   <div class="btn-row">
     <a href="tel:+916372296357" class="btn-call">
       <span class="btn-icon">📞</span>
@@ -241,7 +241,6 @@ body::after {
     </a>
   </div>
 
-  <!-- Contact info -->
   <div class="contact-box">
     <div class="contact-row">
       <span class="ci">🌐</span>
@@ -249,7 +248,7 @@ body::after {
     </div>
     <div class="contact-row">
       <span class="ci">📍</span>
-      <span>ଅଫିସ୍ ସମୟ: ସୋମ – ଶନି · 10am – 8pm</span>
+      <span>ଅଫିସ୍ ସମୟ: ସୋମ – ଶନି · ୧୦am – ୫pm</span>
     </div>
   </div>
 
