@@ -75,18 +75,22 @@
 
 
         /* ═══════════════ SHELL ═══════════════ */
-        .shell {
-            background:var(--white);
-            border-radius:22px;
-            box-shadow:0 20px 60px rgba(10,22,40,0.18);
-            overflow:hidden;
-            animation:fadeUp 0.45s ease 0.14s both;
-        }
+       .shell {
+    background: transparent;
+    border-radius: 22px;
+    overflow: hidden;
+    animation: fadeUp 0.45s ease 0.14s both;
+}
 
-        .sec {
-            padding:20px 18px 20px;
-            border-bottom:1px solid var(--border);
-        }
+       .sec {
+    padding: 20px 18px 20px;
+    border-bottom: none;
+    background: rgba(255,255,255,0.92);
+    border-radius: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 20px rgba(10,22,40,0.10);
+    backdrop-filter: blur(6px);
+}
         .sec:last-child { border-bottom:none; }
 
         .sec-hd {
@@ -473,21 +477,35 @@
 
 
      
-    <div class="legal-btn-wrap" style="padding: 14px 0 0;">
-        <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="legal-btn">
-            <div class="legal-btn-left">
-                <div class="legal-btn-ico">🌹</div>
-                <div>
-                    <div class="legal-btn-eyebrow">Official Website</div>
-                    <div class="legal-btn-title">ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍</div>
-                </div>
-            </div>
-            <div class="legal-btn-arrow">
-                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-            </div>
-        </a>
-    </div>
-
+<a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    padding: 9px 22px;
+    background: rgba(200,150,42,0.18);
+    border: 1.5px solid rgba(200,150,42,0.55);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--gold-lt);
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+">🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →</a>
+     <div style="
+    margin: 10px auto 0;
+    width: 100%;
+    max-width: 320px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+    border: 1.5px solid rgba(200,150,42,0.35);
+">
+    <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif" 
+         alt="Welcome" 
+         style="display:block; width:100%; height:auto;">
+</div>
+     
 <div style="
     margin: 10px auto 14px;
     width: 100%;
@@ -507,14 +525,14 @@
          ">
 </div>
      
-    <p style="
-        color: #ffffff;
-        font-size: 1.15em;
-        font-weight: 800;
-        letter-spacing: 0.04em;
-        margin-top: 18px;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    ">ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ :</p>
+<p style="
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-top: 16px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+">🌹 ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ 🌹</p>
 
 </header>
 
