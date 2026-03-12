@@ -1,261 +1,772 @@
 <!DOCTYPE html>
-<html lang="or">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Classes - Index (Manual Activation)</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Special Training">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* KEY FIX: body scrolls, not centered with flex */
-body {
-  font-family:'Noto Sans Oriya',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(160deg,#07111f 0%,#0c1c35 50%,#07111f 100%);
-  padding:32px 16px 60px; /* big bottom padding */
-  overflow-y:auto; /* allow scrolling */
-  overflow-x:hidden;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 12px;
+            overflow-x: hidden;
+        }
 
-body::before {
-  content:''; position:fixed; top:-100px; left:-100px;
-  width:400px; height:400px; border-radius:50%;
-  background:radial-gradient(circle,rgba(200,150,42,0.12),transparent 70%);
-  pointer-events:none; z-index:0;
-}
-body::after {
-  content:''; position:fixed; bottom:-80px; right:-80px;
-  width:350px; height:350px; border-radius:50%;
-  background:radial-gradient(circle,rgba(30,58,138,0.25),transparent 70%);
-  pointer-events:none; z-index:0;
-}
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 16px 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
 
-.card {
-  position:relative; z-index:1;
-  background:rgba(255,255,255,0.04);
-  border:1.5px solid rgba(200,150,42,0.25);
-  border-radius:28px;
-  padding:40px 24px 40px;
-  max-width:420px; width:100%;
-  margin:0 auto; /* center horizontally */
-  text-align:center;
-  box-shadow:0 24px 60px rgba(0,0,0,0.5);
-  animation:popIn 0.5s cubic-bezier(0.34,1.2,0.64,1) both;
-}
-@keyframes popIn {
-  from{opacity:0;transform:scale(0.88) translateY(20px)}
-  to  {opacity:1;transform:scale(1) translateY(0)}
-}
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 0.90em;
+            font-weight: 900;
+        }
 
-.logo {
-  width:90px; height:90px; border-radius:22px;
-  margin:0 auto 20px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:42px;
-  background:rgba(200,150,42,0.12);
-  border:1.5px solid rgba(200,150,42,0.3);
-  animation:pulse 2.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100%{box-shadow:0 0 0 0 rgba(200,150,42,0.25)}
-  50%    {box-shadow:0 0 0 14px rgba(200,150,42,0)}
-}
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
 
-.badge {
-  display:inline-block;
-  background:rgba(200,150,42,0.15);
-  border:1px solid rgba(200,150,42,0.4);
-  border-radius:50px; padding:5px 16px;
-  font-size:11px; font-weight:700;
-  letter-spacing:0.10em; text-transform:uppercase;
-  color:#e4b84a; margin-bottom:16px;
-}
+        .search-box {
+            margin-bottom: 16px;
+        }
 
-.title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.4em,6vw,1.8em);
-  font-weight:800; color:#fff;
-  line-height:1.25; margin-bottom:8px;
-  text-shadow:0 2px 12px rgba(0,0,0,0.4);
-}
-.subtitle {
-  font-size:clamp(0.85em,3.5vw,0.95em);
-  color:rgba(255,255,255,0.55);
-  margin-bottom:28px; line-height:1.5;
-}
-.divider {
-  height:1px;
-  background:linear-gradient(to right,transparent,rgba(200,150,42,0.35),transparent);
-  margin-bottom:28px;
-}
+        .search-box input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
 
-.msg-box {
-  background:rgba(200,150,42,0.08);
-  border:1.5px solid rgba(200,150,42,0.22);
-  border-radius:18px; padding:22px 18px; margin-bottom:22px;
-}
-.msg-icon { font-size:2.2em; margin-bottom:10px; display:block; }
-.msg-main {
-  font-size:clamp(1em,4.5vw,1.15em); font-weight:700;
-  color:#e4b84a; margin-bottom:8px; line-height:1.35;
-}
-.msg-sub {
-  font-size:clamp(0.82em,3.5vw,0.9em);
-  color:rgba(255,255,255,0.6); line-height:1.6;
-}
+        .search-box input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
 
-/* Phone number */
-.phone-number {
-  font-size:clamp(1.2em,5.5vw,1.45em);
-  font-weight:800; color:#fff;
-  letter-spacing:0.06em; text-align:center;
-  margin-bottom:18px; padding:16px 14px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.13);
-  border-radius:16px;
-}
-.phone-number .ph-label {
-  color:#e4b84a; font-size:0.6em;
-  display:block; font-weight:700;
-  letter-spacing:0.1em; margin-bottom:5px;
-  text-transform:uppercase;
-}
+        .clone-container {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            display: none;
+            animation: slideDown 0.4s ease-out;
+        }
 
-/* Buttons */
-.btn-row {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:12px; margin-bottom:20px;
-}
+        .clone-container.active {
+            display: block;
+        }
 
-.btn-call {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:16px 10px;
-  background:linear-gradient(135deg,#166534,#16a34a);
-  border:none; border-radius:16px;
-  font-family:'Noto Sans Oriya',sans-serif;
-  font-size:clamp(0.88em,4vw,1em);
-  font-weight:700; color:#fff;
-  cursor:pointer; text-decoration:none;
-  box-shadow:0 6px 22px rgba(22,163,74,0.38);
-  transition:transform 0.18s;
-  -webkit-tap-highlight-color:transparent;
-}
-.btn-call:active{transform:scale(0.96);}
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-.btn-whatsapp {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:16px 10px;
-  background:linear-gradient(135deg,#075e54,#25d366);
-  border:none; border-radius:16px;
-  font-family:'Noto Sans Oriya',sans-serif;
-  font-size:clamp(0.88em,4vw,1em);
-  font-weight:700; color:#fff;
-  cursor:pointer; text-decoration:none;
-  box-shadow:0 6px 22px rgba(37,211,102,0.38);
-  transition:transform 0.18s;
-  -webkit-tap-highlight-color:transparent;
-}
-.btn-whatsapp:active{transform:scale(0.96);}
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 20px rgba(245,158,11,0.6), 0 0 0 0 rgba(245,158,11,0.7); }
+            50%       { box-shadow: 0 8px 30px rgba(245,158,11,0.8), 0 0 0 15px rgba(245,158,11,0); }
+        }
 
-.btn-icon { font-size:1.3em; line-height:1; flex-shrink:0; pointer-events:none; }
-.wa-svg { width:22px; height:22px; fill:#fff; flex-shrink:0; pointer-events:none; }
+        .clone-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: pulse 2s infinite, bounce 1.5s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(59,130,246,0.6);
+        }
 
-/* Contact info */
-.contact-box {
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:14px; padding:14px 18px;
-  margin-bottom:22px; text-align:left;
-}
-.contact-row {
-  display:flex; align-items:center; gap:10px;
-  font-size:clamp(0.82em,3.5vw,0.92em);
-  color:rgba(255,255,255,0.7);
-  padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,0.07);
-}
-.contact-row:last-child{border-bottom:none;}
-.contact-row .ci{font-size:1.2em;flex-shrink:0;}
-.contact-row a{color:#e4b84a;text-decoration:none;font-weight:600;}
+        .clone-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
 
-.back-btn {
-  display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  width:100%; padding:15px 32px;
-  background:rgba(255,255,255,0.07);
-  border:1.5px solid rgba(255,255,255,0.15);
-  border-radius:50px;
-  font-family:'Noto Sans Oriya',sans-serif;
-  font-size:clamp(0.88em,3.8vw,0.95em);
-  font-weight:700; color:rgba(255,255,255,0.8);
-  cursor:pointer; text-decoration:none;
-  transition:transform 0.18s,background 0.18s;
-  -webkit-tap-highlight-color:transparent;
-  margin-bottom:20px;
-}
-.back-btn:active{transform:scale(0.97);background:rgba(255,255,255,0.12);}
+        @keyframes shimmer {
+            0%   { left: -100%; }
+            100% { left: 100%; }
+        }
 
-.footer-note {
-  font-size:clamp(0.65em,2.5vw,0.72em);
-  color:rgba(255,255,255,0.2);
-}
-</style>
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-8px); }
+        }
+
+        .clone-card::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 14px;
+            padding: 3px;
+            background: linear-gradient(45deg, #f59e0b, #eab308, #f59e0b, #eab308);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotateBorder 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBorder { to { transform: rotate(360deg); } }
+
+        .clone-card:active { transform: scale(0.98); }
+
+        .clone-instruction {
+            font-size: 0.75em; margin-bottom: 8px; font-weight: 600;
+            opacity: 0.95; letter-spacing: 0.5px; text-transform: uppercase;
+            background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px;
+        }
+        .clone-number  { font-size: 0.95em; font-weight: 700; margin-bottom: 6px; opacity: 0.95; letter-spacing: 0.8px; text-transform: uppercase; }
+        .clone-title   { font-size: 1.4em; font-weight: 700; letter-spacing: 0.2px; line-height: 1.25; margin-bottom: 8px; }
+        .clone-prompt  { font-size: 0.8em; font-weight: 500; opacity: 0.95; margin-top: 6px; padding: 6px 14px; background: rgba(255,255,255,0.25); border-radius: 8px; display: inline-block; }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .class-grid.units-view {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .class-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 110px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+
+        .unit-card {
+            border-radius: 60px;
+            padding: 20px 16px;
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #ffffff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.4);
+            overflow: hidden;
+        }
+
+        .subject-card {
+            border-radius: 60px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.4);
+            overflow: hidden;
+        }
+
+        .subject-card[data-subject="english"]   { background: linear-gradient(135deg, #a41e11 0%, #7a1810 100%); }
+        .subject-card[data-subject="math"]       { background: linear-gradient(135deg, #1a5490 0%, #0d3a6b 100%); }
+        .subject-card[data-subject="gk"]         { background: linear-gradient(135deg, #1e7e34 0%, #155724 100%); }
+        .subject-card[data-subject="law"]        { background: linear-gradient(135deg, #b8751e 0%, #8b5a16 100%); }
+        .subject-card[data-subject="mindpower"]  { background: linear-gradient(135deg, #6c3483 0%, #512e5f 100%); }
+        .subject-card[data-subject="reasoning"]  { background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); }
+
+        .unit-card[data-unit="1"] { background: linear-gradient(135deg, #a41e11 0%, #7a1810 100%); }
+        .unit-card[data-unit="2"] { background: linear-gradient(135deg, #1a5490 0%, #0d3a6b 100%); }
+        .unit-card[data-unit="3"] { background: linear-gradient(135deg, #1e7e34 0%, #155724 100%); }
+        .unit-card[data-unit="4"] { background: linear-gradient(135deg, #b8751e 0%, #8b5a16 100%); }
+        .unit-card[data-unit="5"] { background: linear-gradient(135deg, #6c3483 0%, #512e5f 100%); }
+        .unit-card[data-unit="6"] { background: linear-gradient(135deg, #117a65 0%, #0e6251 100%); }
+        .unit-card[data-unit="7"] { background: linear-gradient(135deg, #ad1457 0%, #880e4f 100%); }
+        .unit-card[data-unit="8"] { background: linear-gradient(135deg, #1c2833 0%, #17202a 100%); }
+
+        .unit-card::before, .subject-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -10%;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .subject-icon  { font-size: 2.5em; margin-bottom: 8px; }
+        .subject-title { font-size: 0.95em; font-weight: 800; letter-spacing: 0.3px; line-height: 1.3; margin: 8px 0; }
+        .subject-subtitle { font-size: 0.75em; opacity: 0.9; font-weight: 600; }
+
+        .unit-content     { flex: 1; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .unit-number      { font-size: 0.7em; font-weight: 900; opacity: 1; letter-spacing: 1.5px; text-transform: uppercase; background: rgba(255,255,255,0.3); padding: 4px 14px; border-radius: 25px; display: inline-block; }
+        .unit-title       { font-size: 1em; font-weight: 800; letter-spacing: 0.3px; line-height: 1.3; padding: 0; margin: 0; text-align: center; }
+        .unit-class-count { font-size: 0.65em; margin-top: 0; opacity: 1; font-weight: 700; background: rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 15px; display: inline-block; }
+
+        .class-card:active  { transform: scale(0.96); }
+        .class-card.locked  { background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%); cursor: default; box-shadow: 0 4px 12px rgba(156,163,175,0.3); }
+        .class-card.selected { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 6px 16px rgba(16,185,129,0.4); }
+
+        .class-number { font-size: 0.85em; font-weight: 700; margin-bottom: 6px; opacity: 0.95; letter-spacing: 0.8px; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .class-title  { font-size: 1.1em; font-weight: 700; letter-spacing: 0.2px; line-height: 1.25; padding: 0 4px; }
+        .lock-icon    { font-size: 1.3em; margin-bottom: 4px; }
+        .scheduled-message { font-size: 0.7em; margin-top: 6px; opacity: 0.95; line-height: 1.2; font-weight: 500; }
+
+        .no-results { text-align: center; padding: 40px 20px; color: #9ca3af; font-size: 0.95em; display: none; }
+        .checkmark  { font-size: 1em; margin-left: 6px; }
+
+        .home-button {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px; padding: 12px 24px; text-decoration: none; color: white;
+            font-weight: 700; font-size: 16px; box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+            transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 16px;
+        }
+        .home-button:hover   { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(102,126,234,0.5); }
+        .home-button:active  { transform: scale(0.95); }
+        .home-icon { font-size: 20px; }
+        .button-container { text-align: center; margin-bottom: 8px; }
+
+        /* ── PWA Install Modal ── */
+        .pwa-overlay {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75); z-index: 9000;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .pwa-overlay.active { display: flex; }
+
+        @keyframes popIn {
+            from { transform: scale(0.88); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+
+        .pwa-box {
+            background: white; border-radius: 24px; padding: 32px 24px;
+            max-width: 340px; width: 100%; text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            border: 3px solid rgba(102,126,234,0.3);
+        }
+        .pwa-icon  { font-size: 3em; margin-bottom: 10px; }
+        .pwa-title { color: #667eea; font-size: 1.4em; font-weight: 900; margin-bottom: 8px; }
+        .pwa-sub   { color: #764ba2; font-size: 0.85em; font-weight: 700; margin-bottom: 18px; line-height: 1.5; }
+        .pwa-install {
+            display: block; width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; padding: 15px; border-radius: 14px;
+            font-size: 1em; font-weight: 800; cursor: pointer; margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.5);
+        }
+        .pwa-dismiss { background: none; border: none; color: #aaa; font-size: 0.85em; cursor: pointer; padding: 8px; text-decoration: underline; }
+
+        /* ── PWA floating button ── */
+        #pwaBtn {
+            display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; padding: 14px 28px; border-radius: 25px;
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(102,126,234,0.5); z-index: 9999; white-space: nowrap;
+        }
+
+        @media (max-width: 360px) {
+            .class-grid { grid-template-columns: 1fr; gap: 8px; }
+            .class-card { min-height: 100px; }
+            .class-title { font-size: 1.05em; }
+        }
+
+        @media (min-width: 400px) {
+            body { padding: 14px; }
+            .container { padding: 18px 14px; border-radius: 18px; }
+            .class-card { padding: 18px 14px; min-height: 120px; border-radius: 14px; }
+            .class-number { font-size: 0.72em; }
+            .class-title  { font-size: 1.2em; }
+            .clone-card   { padding: 24px 18px; }
+            .clone-title  { font-size: 1.5em; }
+        }
+
+        @media (min-width: 600px) {
+            body { padding: 20px; }
+            .container { padding: 28px 22px; max-width: 700px; }
+            h1 { font-size: 1.8em; margin-bottom: 6px; }
+            .subtitle { font-size: 0.95em; margin-bottom: 20px; }
+            .class-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .class-card { padding: 22px 16px; min-height: 140px; border-radius: 16px; }
+            .class-number { font-size: 0.75em; margin-bottom: 8px; }
+            .class-title  { font-size: 1.35em; }
+            .scheduled-message { font-size: 0.75em; margin-top: 8px; }
+            .clone-card  { padding: 28px 22px; }
+            .clone-title { font-size: 1.8em; }
+        }
+
+        @media (min-width: 900px) {
+            body { padding: 40px; }
+            .container { max-width: 1000px; padding: 40px; }
+            h1 { font-size: 2.3em; }
+            .class-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+            .class-card { padding: 30px 20px; min-height: 180px; }
+            .class-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(102,126,234,0.4); }
+            .class-number { font-size: 0.9em; }
+            .class-title  { font-size: 1.6em; }
+            .class-grid.units-view { grid-template-columns: 1fr; gap: 18px; }
+            .unit-card, .subject-card { padding: 32px 36px; min-height: 110px; border-radius: 70px; }
+            .unit-card:hover, .subject-card:hover { transform: translateX(8px); box-shadow: 0 12px 40px rgba(37,99,235,0.6); border-color: rgba(255,255,255,0.6); }
+            .unit-number  { font-size: 0.85em; }
+            .unit-title   { font-size: 1.25em; }
+            .unit-class-count { font-size: 0.8em; }
+            .clone-card  { padding: 32px 26px; }
+            .clone-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(245,158,11,0.7); }
+            .clone-title { font-size: 2em; }
+        }
+    </style>
 </head>
 <body>
-<div class="card">
 
-  <div class="logo">📚</div>
-  <div class="badge">🌹 ଇ-ବିଦ୍ୟା ଏକାଡେମୀ</div>
+    <div class="container">
 
-  <div class="title">ଶୀଘ୍ର ଆସୁଛି…</div>
-  <div class="subtitle">Coming Soon — ଏହି ବିଭାଗ ଶୀଘ୍ର ଉପଲବ୍ଧ ହେବ । </div>
+        <div class="clone-container" id="cloneContainer">
+            <a href="#" class="clone-card" id="cloneCard">
+                <div class="clone-instruction">👆 Click to Enter</div>
+                <div class="clone-number">Class 1</div>
+                <div class="clone-title">Introduction</div>
+                <div class="clone-prompt">Tap here to open classroom →</div>
+            </a>
+        </div>
 
-  <div class="divider"></div>
+        <div class="button-container">
+            <a href="#" class="home-button" id="backToUnits" style="display: none;">
+                <span class="home-icon">←</span>
+                <span>Back to Units</span>
+            </a>
+            <a href="#" class="home-button" id="backToSubjects" style="display: none;">
+                <span class="home-icon">←</span>
+                <span>Back to Subjects</span>
+            </a>
+        </div>
 
-  <div class="msg-box">
-    <span class="msg-icon">🏫</span>
-    <div class="msg-main">ଡିଜିଟାଲ କ୍ଲାସ୍ ପାଇଁ ଅଫିସ୍‌ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ । </div>
-    <div class="msg-sub">
-      ଏହି ବିଭାଗର ସ୍ଵତନ୍ତ୍ର ଡିଜିଟାଲ କ୍ଲାସ୍ ପାଇଁ ଦୟାକରି ଆମ ଅଫିସ୍ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ ।
+        <p class="subtitle">Select a subject to begin</p>
 
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search for a class, unit, or subject..."
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="class-grid" id="classGrid"></div>
+
+        <div class="no-results" id="noResults">
+            No classes found matching your search.
+        </div>
     </div>
-  </div>
 
-  <div class="phone-number">
-    <span class="ph-label">📞 ଅଫିସ୍ ନମ୍ବର · Office Number</span>
-    6372296357
-  </div>
-
-  <div class="btn-row">
-    <a href="tel:+916372296357" class="btn-call">
-      <span class="btn-icon">📞</span>
-      କଲ୍ କରନ୍ତୁ । 
-    </a>
-    <a href="https://wa.me/916372296357?text=ନମସ୍କାର%2C%20ମୁଁ%20ଇ-ବିଦ୍ୟା%20ଏକାଡେମୀର%20ଡିଜିଟାଲ%20କ୍ଲାସ%20ବିଷୟରେ%20ଜାଣିବାକୁ%20ଚାହୁଁଛି%20।"
-       target="_blank" class="btn-whatsapp">
-      <svg class="wa-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      WhatsApp
-    </a>
-  </div>
-
-  <div class="contact-box">
-    <div class="contact-row">
-      <span class="ci">🌐</span>
-      <span>ୱେବ୍‌ସାଇଟ୍: <a href="https://evidya.pages.dev/" target="_blank">evidya.pages.dev</a></span>
+    <!-- ── PWA Install Modal ── -->
+    <div class="pwa-overlay" id="pwaModal">
+        <div class="pwa-box">
+            <div class="pwa-icon">📲</div>
+            <h2 class="pwa-title">Install App</h2>
+            <p class="pwa-sub">ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।<br>Install for offline access!</p>
+            <button class="pwa-install" onclick="doInstall()">⬇️ Install Now — ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।</button>
+            <button class="pwa-dismiss" onclick="dismissPwa()">Not Now — ପରେ କରିବି</button>
+        </div>
     </div>
-    <div class="contact-row">
-      <span class="ci">📍</span>
-      <span>ଅଫିସ୍ ସମୟ: ସୋମ – ଶନି · 10 am – 5 pm</span>
-    </div>
-  </div>
 
-  <a href="../index.html" class="back-btn">← ମୁଖ୍ୟ ପୃଷ୍ଠାକୁ ଫେରନ୍ତୁ</a>
+    <!-- PWA floating button -->
+    <button id="pwaBtn" onclick="doInstall()">⬇️ Install App — ଆପ୍ ଇନ୍‌ସ୍ଟଲ୍ କରନ୍ତୁ ।</button>
 
-  <div class="footer-note">© ୨୦୨୬ ଇ-ବିଦ୍ୟା ଏକାଡେମୀ · ସର୍ବସ୍ୱତ୍ୱ ସଂରକ୍ଷିତ</div>
+    <script>
+        // ============================================
+        // MANUAL CLASS ACTIVATION SYSTEM
+        // ============================================
+        const manualClassActivation = {
+            'english-1-1': true,
+            'english-2-1': true,
+            'english-3-1': true,
+            'english-4-1': true,
+            'english-5-1': true,
+            'english-6-1': true,
+            'english-7-1': true,
+            'english-8-1': true,
+            'math-1': false,
+            'gk-1': false,
+            'reasoning-1': false,
+            'law-1': false,
+            'mindpower-1': false,
+        };
 
-</div>
+        function isClassAvailable(classKey) {
+            return manualClassActivation[classKey] === true;
+        }
+
+        const subjects = {
+            english:    { name: 'ଇଂରାଜୀ ଭାଷା ଶିକ୍ଷା ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ', odia: 'English',          icon: '📖', hasUnits: true,  units: 8  },
+            math:       { name: 'ଗଣିତ ଜ୍ଞାନ ବୃଦ୍ଧି ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ',   odia: 'Mathematics',      icon: '🔢', hasUnits: false, classes: 30 },
+            gk:         { name: 'ସାଧାରଣ ଜ୍ଞାନ(GK) ବୃଦ୍ଧି ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ', odia: 'General Knowledge', icon: '🌍', hasUnits: false, classes: 30 },
+            reasoning:  { name: 'ବିଚାରଶକ୍ତି ବିକାଶ ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ',    odia: 'Reasoning',         icon: '🧩', hasUnits: false, classes: 30 },
+            law:        { name: 'ଆଇନ ସଚେତନତା ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ',         odia: 'Legal Awareness',   icon: '⚖️', hasUnits: false, classes: 30 },
+            mindpower:  { name: 'ମାନସିକ ଶକ୍ତି ବୃଦ୍ଧି ପାଇଁ ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ',  odia: 'Mind Power',        icon: '🧠', hasUnits: false, classes: 30 }
+        };
+
+        const units = {
+            1: { name: 'ଇଂରାଜୀ ଅକ୍ଷର ଶିଖିବା',       classes: 30 },
+            2: { name: 'ଇଂରାଜୀ ଶବ୍ଦ ଶିଖିବା',         classes: 30 },
+            3: { name: 'ଇଂରାଜୀ ବାକ୍ୟ ଶିଖିବା',        classes: 30 },
+            4: { name: 'ଇଂରାଜୀ ବ୍ୟାକରଣ ଶିଖିବା',      classes: 30 },
+            5: { name: 'ଇଂରାଜୀ ରଚନା ଶିଖିବା',         classes: 30 },
+            6: { name: 'ଇଂରାଜୀ ପତ୍ର-ଲିଖନ ଶିଖିବା',   classes: 30 },
+            7: { name: 'ଇଂରାଜୀ ଦରଖାସ୍ତ ଶିଖିବା',     classes: 30 },
+            8: { name: 'ଇଂରାଜୀ କଥାବାର୍ତ୍ତା ଶିଖିବା', classes: 30 }
+        };
+
+        const classNames = {
+            'english-1-1': 'ଇଂରାଜୀ ଅକ୍ଷର - A-F',
+            'english-2-1': 'ଇଂରାଜୀ ଶବ୍ଦ - ସକାଳେ ବିଛଣାରୁ ଉଠିବା ସମ୍ବନ୍ଧୀୟ',
+            'english-3-1': 'ଇଂରାଜୀ ବାକ୍ୟ - ସକାଳେ ବିଛଣାରୁ ଉଠିବା ସମ୍ବନ୍ଧୀୟ',
+            'english-4-1': 'ଇଂରାଜୀ ବ୍ୟାକରଣ - କର୍ତ୍ତା, କ୍ରିୟା ଏବଂ ବିଶେଷ୍ୟ',
+            'english-5-1': 'ଇଂରାଜୀ ରଚନା - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'english-6-1': 'ଇଂରାଜୀ ପତ୍ରଲିଖନ  - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'english-7-1': 'ଇଂରାଜୀ ଦରଖାସ୍ତ - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'english-8-1': 'ଇଂରାଜୀ କଥାବାର୍ତ୍ତା - ସକାଳେ ବିଛଣାରୁ ଉଠିବା ସମ୍ବନ୍ଧୀୟ',
+            'math-1':      'ଗଣିତ - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'gk-1':        'ସାଧାରଣ ଜ୍ଞାନ - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'reasoning-1': 'ବିଚାର ଶକ୍ତି - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'law-1':       'ଆଇନ ସଚେତନତା - ପ୍ରାରମ୍ଭିକ ଧାରଣା',
+            'mindpower-1': 'ମାନସିକ ଶକ୍ତି - ପ୍ରାରମ୍ଭିକ ଧାରଣା'
+        };
+
+        let selectedClass   = null;
+        let selectedUnit    = null;
+        let selectedSubject = null;
+        let viewMode        = 'subjects';
+
+        function showCloneCard(subject, unit, classNum, className) {
+            const classKey = unit ? `${subject}-${unit}-${classNum}` : `${subject}-${classNum}`;
+            selectedClass  = classKey;
+            const cloneContainer = document.getElementById('cloneContainer');
+            const cloneCard      = document.getElementById('cloneCard');
+
+            const displayText = unit
+                ? `${subjects[subject].name} - Unit ${unit} - Class ${classNum}`
+                : `${subjects[subject].name} - Class ${classNum}`;
+
+            cloneCard.innerHTML = `
+                <div class="clone-instruction">👆 Click to Enter</div>
+                <div class="clone-number">${displayText}</div>
+                <div class="clone-title">${className}</div>
+                <div class="clone-prompt">Tap here to open classroom →</div>
+            `;
+
+            cloneCard.href = unit
+                ? `/${subject}/unit-${unit}/class-${classNum}/`
+                : `/${subject}/class-${classNum}/`;
+            cloneContainer.classList.add('active');
+            cloneContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            const cards = document.getElementsByClassName('class-card');
+            for (let card of cards) card.classList.remove('selected');
+            const selectedCard = document.querySelector(`[data-class="${classKey}"]`);
+            if (selectedCard) selectedCard.classList.add('selected');
+        }
+
+        function createSubjectCard(subjectKey) {
+            const card    = document.createElement('div');
+            const subject = subjects[subjectKey];
+            card.className = 'subject-card';
+            card.setAttribute('data-subject', subjectKey);
+            card.setAttribute('data-name', subject.name + ' ' + subject.odia);
+            card.style.cursor = 'pointer';
+            card.onclick = () => {
+                selectedSubject = subjectKey;
+                if (subject.hasUnits) {
+                    viewMode = 'units';
+                    document.querySelector('.subtitle').textContent = `${subject.name} - Select a unit`;
+                    document.getElementById('backToSubjects').style.display = 'inline-flex';
+                    renderUnits();
+                } else {
+                    viewMode = 'classes';
+                    document.querySelector('.subtitle').textContent = `${subject.name}`;
+                    document.getElementById('backToSubjects').style.display = 'inline-flex';
+                    renderClasses();
+                }
+                filterClasses();
+            };
+            card.innerHTML = `
+                <div class="subject-icon">${subject.icon}</div>
+                <div class="subject-title">${subject.name}</div>
+                <div class="subject-subtitle">${subject.odia}</div>
+            `;
+            return card;
+        }
+
+        function createUnitCard(unitNum) {
+            const card = document.createElement('div');
+            const unit = units[unitNum];
+            card.className = 'unit-card';
+            card.setAttribute('data-unit', unitNum);
+            card.setAttribute('data-name', unit.name);
+            card.style.cursor = 'pointer';
+            card.onclick = () => {
+                selectedUnit = unitNum;
+                viewMode = 'classes';
+                document.querySelector('.subtitle').textContent = `${subjects[selectedSubject].name} - ${unit.name}`;
+                document.getElementById('backToUnits').style.display = 'inline-flex';
+                document.getElementById('backToSubjects').style.display = 'none';
+                renderClasses();
+                filterClasses();
+            };
+            card.innerHTML = `
+                <div class="unit-content">
+                    <div class="unit-number">Unit ${unitNum}</div>
+                    <div class="unit-title">${unit.name}</div>
+                    <div class="unit-class-count">${unit.classes} Classes</div>
+                </div>
+            `;
+            return card;
+        }
+
+        function createClassCard(subject, unit, classNum) {
+            const card     = document.createElement('div');
+            const classKey = unit ? `${subject}-${unit}-${classNum}` : `${subject}-${classNum}`;
+            const className = classNames[classKey] || `Class ${classNum}`;
+            card.className = 'class-card';
+            card.setAttribute('data-class', classKey);
+            card.setAttribute('data-name', className);
+            card.style.cursor = 'pointer';
+            card.onclick = () => { showCloneCard(subject, unit, classNum, className); };
+            const isSelected = selectedClass === classKey;
+            if (isSelected) card.classList.add('selected');
+            card.innerHTML = `
+                <div class="class-number">Class ${classNum}</div>
+                <div class="class-title">${className}${isSelected ? '<span class="checkmark">✓</span>' : ''}</div>
+            `;
+            return card;
+        }
+
+        function renderSubjects() {
+            const grid = document.getElementById('classGrid');
+            grid.innerHTML = '';
+            grid.classList.add('units-view');
+            ['english', 'math', 'gk', 'reasoning', 'law', 'mindpower'].forEach(key => {
+                grid.appendChild(createSubjectCard(key));
+            });
+        }
+
+        function renderUnits() {
+            const grid = document.getElementById('classGrid');
+            grid.innerHTML = '';
+            grid.classList.add('units-view');
+            for (let unitNum = 1; unitNum <= 8; unitNum++) {
+                grid.appendChild(createUnitCard(unitNum));
+            }
+        }
+
+        function renderClasses() {
+            const grid = document.getElementById('classGrid');
+            grid.innerHTML = '';
+            grid.classList.remove('units-view');
+
+            if (selectedSubject === 'english' && selectedUnit) {
+                for (let classNum = 1; classNum <= 30; classNum++) {
+                    const classKey = `${selectedSubject}-${selectedUnit}-${classNum}`;
+                    if (isClassAvailable(classKey)) grid.appendChild(createClassCard(selectedSubject, selectedUnit, classNum));
+                }
+            } else if (selectedSubject && !subjects[selectedSubject].hasUnits) {
+                for (let classNum = 1; classNum <= 30; classNum++) {
+                    const classKey = `${selectedSubject}-${classNum}`;
+                    if (isClassAvailable(classKey)) grid.appendChild(createClassCard(selectedSubject, null, classNum));
+                }
+            }
+
+            if (grid.children.length === 0) {
+                grid.innerHTML = '<div style="text-align:center;padding:40px;color:#9ca3af;">This class will be activated from 1st March, 2026</div>';
+            }
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', filterClasses);
+
+        document.getElementById('backToSubjects').addEventListener('click', (e) => {
+            e.preventDefault();
+            viewMode = 'subjects'; selectedSubject = null; selectedUnit = null; selectedClass = null;
+            document.querySelector('.subtitle').textContent = 'Select a subject to begin';
+            document.getElementById('backToSubjects').style.display = 'none';
+            document.getElementById('backToUnits').style.display = 'none';
+            document.getElementById('cloneContainer').classList.remove('active');
+            renderSubjects();
+            searchInput.value = '';
+            filterClasses();
+        });
+
+        document.getElementById('backToUnits').addEventListener('click', (e) => {
+            e.preventDefault();
+            viewMode = 'units'; selectedUnit = null; selectedClass = null;
+            document.querySelector('.subtitle').textContent = `${subjects[selectedSubject].name} - Select a unit`;
+            document.getElementById('backToUnits').style.display = 'none';
+            document.getElementById('backToSubjects').style.display = 'inline-flex';
+            document.getElementById('cloneContainer').classList.remove('active');
+            renderUnits();
+            searchInput.value = '';
+            filterClasses();
+        });
+
+        function filterClasses() {
+            const filter   = searchInput.value.toLowerCase().trim();
+            const noResults = document.getElementById('noResults');
+            const grid      = document.getElementById('classGrid');
+
+            if (filter.length === 0) {
+                if (viewMode === 'subjects') renderSubjects();
+                else if (viewMode === 'units') renderUnits();
+                else renderClasses();
+                noResults.style.display = 'none';
+                return;
+            }
+
+            grid.innerHTML = '';
+            grid.classList.remove('units-view');
+            let hasResults = false;
+
+            for (let subjectKey in subjects) {
+                const subject     = subjects[subjectKey];
+                const subjectName = (subject.name + ' ' + subject.odia).toLowerCase();
+
+                if (subject.hasUnits) {
+                    for (let unitNum = 1; unitNum <= 8; unitNum++) {
+                        const unitName = units[unitNum].name.toLowerCase();
+                        if (unitName.indexOf(filter) > -1 || subjectName.indexOf(filter) > -1) {
+                            for (let classNum = 1; classNum <= 30; classNum++) {
+                                const classKey = `${subjectKey}-${unitNum}-${classNum}`;
+                                if (isClassAvailable(classKey)) { grid.appendChild(createClassCard(subjectKey, unitNum, classNum)); hasResults = true; }
+                            }
+                        } else {
+                            for (let classNum = 1; classNum <= 30; classNum++) {
+                                const classKey  = `${subjectKey}-${unitNum}-${classNum}`;
+                                const className = (classNames[classKey] || `Class ${classNum}`).toLowerCase();
+                                if (isClassAvailable(classKey) && (className.indexOf(filter) > -1 || `class ${classNum}`.indexOf(filter) > -1 || `unit ${unitNum}`.indexOf(filter) > -1)) {
+                                    grid.appendChild(createClassCard(subjectKey, unitNum, classNum)); hasResults = true;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (subjectName.indexOf(filter) > -1) {
+                        for (let classNum = 1; classNum <= 30; classNum++) {
+                            const classKey = `${subjectKey}-${classNum}`;
+                            if (isClassAvailable(classKey)) { grid.appendChild(createClassCard(subjectKey, null, classNum)); hasResults = true; }
+                        }
+                    } else {
+                        for (let classNum = 1; classNum <= 30; classNum++) {
+                            const classKey  = `${subjectKey}-${classNum}`;
+                            const className = (classNames[classKey] || `Class ${classNum}`).toLowerCase();
+                            if (isClassAvailable(classKey) && (className.indexOf(filter) > -1 || `class ${classNum}`.indexOf(filter) > -1)) {
+                                grid.appendChild(createClassCard(subjectKey, null, classNum)); hasResults = true;
+                            }
+                        }
+                    }
+                }
+            }
+            noResults.style.display = hasResults ? 'none' : 'block';
+        }
+
+        // ── PWA ──
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', e => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwaBtn').style.display = 'block';
+            setTimeout(() => document.getElementById('pwaModal').classList.add('active'), 1000);
+        });
+
+        function doInstall() {
+            dismissPwa();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(r => {
+                    if (r.outcome === 'accepted') document.getElementById('pwaBtn').style.display = 'none';
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        function dismissPwa() {
+            document.getElementById('pwaModal').classList.remove('active');
+        }
+
+        window.addEventListener('appinstalled', () => {
+            document.getElementById('pwaBtn').style.display = 'none';
+            dismissPwa();
+            deferredPrompt = null;
+        });
+
+        // ── Service Worker ──
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(r  => console.log('SW registered:', r.scope))
+                    .catch(er => console.log('SW error:', er));
+            });
+        }
+
+        // ── Init ──
+        renderSubjects();
+    </script>
+
 </body>
 </html>
