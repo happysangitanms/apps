@@ -2360,41 +2360,106 @@ body > div:first-child {
 </div>               
             <div id="testContainer"></div>
 
-     <div class="image-container" style="
-    margin-top: 0px;
-    text-align: center;
-">
-    <div style="
+    <div style="margin-top: 0px; padding: 0 12px;">
+
+    <!-- Two small buttons side by side -->
+    <div style="display: flex; justify-content: space-between; 
+                margin-bottom: 8px;">
+        
+        <!-- Audio Button LEFT -->
+        <button id="audioToggleBtn" 
+            onclick="toggleMedia('audio')"
+            style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 20px; font-size: 13px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);">
+            🎧 Audio
+        </button>
+        
+        <!-- Video Button RIGHT -->
+        <button id="videoToggleBtn" 
+            onclick="toggleMedia('video')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 20px; font-size: 13px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);">
+            🎥 Video
+        </button>
+    </div>
+
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
         display: inline-block;
-        padding: 8px;
+        padding: 10px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         width: 320px;
+        position: relative;
+        overflow: hidden;
     ">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
-             alt="Logo" 
-             class="assistant-image"
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
+
+        <!-- AUDIO PLAYER - Hidden by default -->
+        <div id="audioDisplay" style="display: none;">
+            <iframe
+                id="audioIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/U9xbRsQwBjg?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/2rimJYGU5iI?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
+
     <p class="info-text" style="
         margin-top: 15px;
         font-size: 14px;
         color: #000000;
         font-weight: bold;
-    ">
-    </p>
-</div>       
-              
+    "></p>
+</div>
 
           <!-- Add this after the Mermaid button section -->
 <button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
@@ -2674,7 +2739,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Arts XI କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -6440,6 +6505,76 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
+
+// ===== AUDIO / VIDEO TOGGLE ON LOGO PLACEHOLDER =====
+function toggleMedia(type) {
+    const logoDisplay  = document.getElementById('logoDisplay');
+    const audioDisplay = document.getElementById('audioDisplay');
+    const videoDisplay = document.getElementById('videoDisplay');
+    const audioIframe  = document.getElementById('audioIframe');
+    const videoIframe  = document.getElementById('videoIframe');
+    const audioBtn     = document.getElementById('audioToggleBtn');
+    const videoBtn     = document.getElementById('videoToggleBtn');
+
+    if (type === 'audio') {
+
+        // If audio is already showing, close it and show logo
+        if (audioDisplay.style.display === 'block') {
+            audioIframe.src = '';
+            audioDisplay.style.display = 'none';
+            logoDisplay.style.display  = 'block';
+            audioBtn.textContent = '🎧 Audio';
+            audioBtn.style.background = 
+                'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+            return;
+        }
+
+        // Stop video if playing
+        videoIframe.src = '';
+        videoDisplay.style.display = 'none';
+        videoBtn.textContent = '🎥 Video';
+        videoBtn.style.background = 
+            'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+
+        // Show audio
+        logoDisplay.style.display  = 'none';
+        audioDisplay.style.display = 'block';
+        audioIframe.src = audioIframe.dataset.src;
+        audioBtn.textContent = '✖️ Audio';
+        audioBtn.style.background = 
+            'linear-gradient(135deg, #92400e 0%, #78350f 100%)';
+    }
+
+    if (type === 'video') {
+
+        // If video is already showing, close it and show logo
+        if (videoDisplay.style.display === 'block') {
+            videoIframe.src = '';
+            videoDisplay.style.display = 'none';
+            logoDisplay.style.display  = 'block';
+            videoBtn.textContent = '🎥 Video';
+            videoBtn.style.background = 
+                'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+            return;
+        }
+
+        // Stop audio if playing
+        audioIframe.src = '';
+        audioDisplay.style.display = 'none';
+        audioBtn.textContent = '🎧 Audio';
+        audioBtn.style.background = 
+            'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+
+        // Show video
+        logoDisplay.style.display  = 'none';
+        videoDisplay.style.display = 'block';
+        videoIframe.src = videoIframe.dataset.src;
+        videoBtn.textContent = '✖️ Video';
+        videoBtn.style.background = 
+            'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+    }
+}
+    
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
     const savedRoll = localStorage.getItem('userRollNumber');
