@@ -135,15 +135,13 @@
     box-shadow: 0 6px 20px rgba(29,78,216,0.5);
 }
 
-        .subject-card[data-subject="POLSCI"] { background: linear-gradient(135deg, #c31432 0%, #240b36 100%); }
-        .subject-card[data-subject="HIST"]   { background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); }
-        .subject-card[data-subject="SOC"]    { background: linear-gradient(135deg, #005c53 0%, #042940 100%); }
-        .subject-card[data-subject="ECON"]   { background: linear-gradient(135deg, #d4a574 0%, #8b6914 100%); }
-        .subject-card[data-subject="LOGIC"]  { background: linear-gradient(135deg, #4a148c 0%, #311b92 100%); }
-        .subject-card[data-subject="EDU"]    { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
-        .subject-card[data-subject="PSY"]    { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
-        .subject-card[data-subject="ANTH"]   { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
-        .subject-card[data-subject="HOMESC"] { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+        .subject-card[data-subject="english"] { background: linear-gradient(135deg, #c31432 0%, #240b36 100%); }
+        .subject-card[data-subject="gk"]   { background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); }
+        .subject-card[data-subject="law"]    { background: linear-gradient(135deg, #005c53 0%, #042940 100%); }
+        .subject-card[data-subject="math"]   { background: linear-gradient(135deg, #d4a574 0%, #8b6914 100%); }
+        .subject-card[data-subject="mindpower"]  { background: linear-gradient(135deg, #4a148c 0%, #311b92 100%); }
+        .subject-card[data-subject="reasoning"]    { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
+
 
         .subject-name  { font-size: 1.15em; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
         .subject-odia  { font-size: 0.82em; font-weight: 700; opacity: 0.92; line-height: 1.3; }
@@ -309,15 +307,12 @@
    key, name and odia fields.
 ═══════════════════════════════════════════════════════ */
 const subjects = {
-    POLSCI: { name: 'POLITICAL SCIENCE', odia: 'ରାଜନୀତି ବିଜ୍ଞାନ' },
-    HIST:   { name: 'HISTORY',           odia: 'ଇତିହାସ' },
-    SOC:    { name: 'SOCIOLOGY',         odia: 'ସମାଜ ବିଜ୍ଞାନ' },
-    ECON:   { name: 'ECONOMICS',         odia: 'ଅର୍ଥନୀତି' },
-    LOGIC:  { name: 'LOGIC',             odia: 'ତର୍କଶାସ୍ତ୍ର' },
-    EDU:    { name: 'EDUCATION',         odia: 'ଶିକ୍ଷା' },
-    PSY:    { name: 'PSYCHOLOGY',        odia: 'ମନୋ ବିଜ୍ଞାନ' },
-    ANTH:   { name: 'ANTHROPOLOGY',      odia: 'ନୃତତ୍ତ୍ୱ' },
-    HOMESC: { name: 'HOME SCIENCE',      odia: 'ଗୃହ ବିଜ୍ଞାନ' }
+    english: { name: 'ENGLISH', odia: 'ଇଂରାଜୀ ଭାଷା' },
+    gk:   { name: 'General Knowledge',           odia: 'ସାଧାରଣ ଜ୍ଞାନ' },
+    law:    { name: 'Legal Awareness',         odia: 'ଆଇନ ସଚେତନତା' },
+    math:   { name: 'Mathematics',         odia: 'ସାଧାରଣ ଗଣିତ' },
+    mindpower:  { name: 'Mind Power',             odia: 'ମାନସିକ ଶକ୍ତିର ବିକାଶ' },
+    reasoning:    { name: 'Reasoning',         odia: 'ବିଚାର ଶକ୍ତିର ବିକାଶ' }
 };
 
 /* ═══════════════════════════════════════════════════════
