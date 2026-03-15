@@ -1,7 +1,7 @@
 {
   "name": "ସ୍ଵତନ୍ତ୍ର ଟ୍ରେନିଂ",
-  "short_name": "E-Vidya +2",
-  "description": "Supplementary Study Material for +2 First Year Arts by E-Vidya Academy",
+  "short_name": "ST",
+  "description": "SPECIAL TRAINING",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#667eea",
