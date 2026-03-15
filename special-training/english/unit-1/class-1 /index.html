@@ -2052,6 +2052,8 @@ body > div:first-child {
     }
 }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <script>
     mermaid.initialize({ startOnLoad: false, theme: 'default' });
@@ -2060,28 +2062,52 @@ body > div:first-child {
 <body>
 <div style="background: #ff9800; padding: 8px; color: white; font-weight: bold; position: fixed; top: 0; left: 0; right: 0; z-index: 99999; overflow: hidden; margin: 0;">
     <marquee behavior="scroll" direction="left" style="margin: 0;">
-        © 2025 • This is the property of Odisha e-Guru,Mayurbhanj,Odisha • For Educational Use Only • Copying & Distribution Prohibited • All Rights Reserved
+        © 2026 • This is the property of E-Vidya Academy, Bhadrak, Odisha • For Educational Use Only • Copying & Distribution Prohibited • All Rights Reserved
     </marquee>
 </div>
  
 <div id="loginScreen" class="login-screen">
     <div class="login-container">
-        <h1 class="welcome-title" style="text-align: center;">ଓଡିଶା ଇ-ଗୁରୁ ଦ୍ଵାରା ପ୍ରସ୍ତୁତ</h1>
+      <h1 class="welcome-title" style="text-align: center; font-size: clamp(1.2rem, 4vw, 1.6rem);">
+    ଇ-ବିଦ୍ୟା ଏକାଡେମି ଦ୍ଵାରା ପ୍ରସ୍ତୁତ
+</h1>
        <p class="welcome-subtitle" style="text-align: center;"><b>🌹ଏହି ସ୍ଵତନ୍ତ୍ର ମଞ୍ଚରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ🌹</b></p>  
         
      <input type="tel" id="rollNumberInput" placeholder="ଦୟାକରି ଏଠାରେ ଆପଣଙ୍କ ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ..." class="login-input" inputmode="numeric" pattern="[0-9]*">
         
         <div class="consent-box">
             <input type="checkbox" id="consentCheck">
-            <label for="consentCheck">I agree to device tracking, usage monitoring, audio playback, internet access, data storage, and all <a href="https://sites.google.com/view/eguruodishastp/terms-and-conditions" target="_blank">terms & conditions</a> of Odisha e-Guru.</label>
+            <label for="consentCheck">I agree to device tracking, usage monitoring, audio playback, internet access, data storage, and all <a href="https://e-vidya-legal-policies.pages.dev/" target="_blank">terms & conditions</a> of E-Vidya Academy.</label>
         </div>
        <button id="loginBtn" class="login-btn">ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।</button>
         <div id="loginError" class="login-error"></div>
 
             <!-- Know Your Roll Number Button -->
-        <button onclick="window.open('https://llb-registration.pages.dev/stelm/', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
+        <button onclick="window.open('https://evidya-admin.pages.dev/artsxi/', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
             📋 ଆପଣଙ୍କ ରୋଲ୍ ନମ୍ବର ଜାଣିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । 
         </button>  
+
+        <div style="text-align: center; margin-top: 12px;">
+    <a href="https://evidya-admin.pages.dev/payment/" target="_blank" rel="noopener noreferrer"
+       style="
+           display: inline-block;
+           padding: 12px 28px;
+           background: linear-gradient(135deg, #c8962a, #e4b84a);
+           color: #0a1628;
+           font-family: 'Noto Sans Oriya', sans-serif;
+           font-size: clamp(0.8rem, 3.5vw, 1rem);
+           font-weight: 700;
+           text-decoration: none;
+           border-radius: 50px;
+           box-shadow: 0 6px 20px rgba(200,150,42,0.35);
+           transition: transform 0.2s, box-shadow 0.2s;
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 26px rgba(200,150,42,0.45)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(200,150,42,0.35)'"
+    >
+        🌹 ପେମେଣ୍ଟ କରିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । →
+    </a>
+</div>
         
         <!-- Small Round Image Container -->
         <div class="image-container" style="
@@ -2095,7 +2121,7 @@ body > div:first-child {
                 border-radius: 50%;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             ">
-                <img src="https://raw.githubusercontent.com/eguruOdisha/ASSETS/main/bot%20image-1.gif" 
+                <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/bot%20image-2.gif" 
                      alt="AI Assistant" 
                      class="assistant-image"
                      style="
@@ -2116,6 +2142,29 @@ body > div:first-child {
                 📚 ଶିକ୍ଷାରେ ଡିଜିଟାଲ ଯୁଗର ଆରମ୍ଭ – ଆପଣଙ୍କ ସହିତ ।
             </p>
         </div>
+
+       <div style="text-align: center; margin-top: 12px;">
+    <a href="https://evidya-admin.pages.dev/contact/" target="_blank" rel="noopener noreferrer"
+       style="
+           display: inline-block;
+           padding: 12px 28px;
+           background: linear-gradient(135deg, #1e3a8a, #2563eb);
+           color: #ffffff;
+           font-family: 'Noto Sans Oriya', sans-serif;
+           font-size: clamp(0.8rem, 3.5vw, 1rem);
+           font-weight: 700;
+           text-decoration: none;
+           border-radius: 50px;
+           box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+           transition: transform 0.2s, box-shadow 0.2s;
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 26px rgba(37,99,235,0.55)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(37,99,235,0.35)'"
+    >
+        🌹 ଆମ୍ଭ ସହିତ ଯୋଗାଯୋଗ ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । →
+    </a>
+</div>
+        
     </div>
 </div>
     <div class="container">
@@ -2484,201 +2533,177 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-// Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybvLwaI-v0f3DpdICMHodtGeGSyUGbb5kKmRWhFwAW9iV_Il6w-U9o_Ous7AX0JCGP6g/exec';
-    // Fallback audio URL for when primary audio is not found
-const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/eguruOdisha/AUDIO-PSC-XII/main/New%20recording%208.amr";
-
-// CRITICAL: This must match CLASS_SHEET_NAME in your registration script
-const CLASS_NAME = "stelm";  
 
 
-// Generate unique device ID based on browser fingerprint
+
+// =============================================
+// FIREBASE CONFIGURATION - e-Vidya Academy
+// =============================================
+const firebaseConfig = {
+    apiKey: "AIzaSyA3-rvQJ1g9K-1l8-_PXX8IffG8W4qU7AE",
+    authDomain: "evidya-academy.firebaseapp.com",
+    projectId: "evidya-academy",
+    storageBucket: "evidya-academy.firebasestorage.app",
+    messagingSenderId: "86172698431",
+    appId: "1:86172698431:web:eb3bd5b2887cda88eb358a"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/happysangitanms/assets/main/fallback%20audio.m4a";
+const CLASS_NAME = "artsxi";
+
 function getDeviceId() {
-    let deviceId = localStorage.getItem('deviceId');
+    let deviceId = localStorage.getItem('deviceId_evidya');
     if (!deviceId) {
-        const nav = navigator;
-        const screen = window.screen;
-        const fingerprint = [
-            nav.userAgent,
-            nav.language,
-            screen.colorDepth,
-            screen.width + 'x' + screen.height,
-            new Date().getTimezoneOffset(),
-            !!window.sessionStorage,
-            !!window.localStorage
-        ].join('|');
-        
-        let hash = 0;
-        for (let i = 0; i < fingerprint.length; i++) {
-            const char = fingerprint.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash;
-        }
-        
-        deviceId = 'DEV_' + Math.abs(hash).toString(36);
-        localStorage.setItem('deviceId', deviceId);
+        deviceId = 'DEV_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('deviceId_evidya', deviceId);
     }
     return deviceId;
 }
 
-// Session tracking
 let sessionData = {
     rollNumber: null,
     deviceId: getDeviceId(),
-    className: CLASS_NAME,  // ADD THIS
-    loginTime: null,
-    logoutTime: null,
-    lastActivity: null
+    className: CLASS_NAME,
+    loginTime: null
 };
 
-// Login handler - COMPLETE REPLACEMENT
 document.getElementById('loginBtn').addEventListener('click', async function() {
     const rollNumber = document.getElementById('rollNumberInput').value.trim();
     const consent = document.getElementById('consentCheck').checked;
     const errorDiv = document.getElementById('loginError');
-    
     errorDiv.textContent = '';
-    
+
     if (!rollNumber) {
         errorDiv.textContent = 'ଦୟାକରି ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ ।';
         return;
     }
-    
     if (!consent) {
         errorDiv.textContent = 'ଦୟାକରି ସର୍ତ୍ତାବଳୀରେ ସହମତି ଜଣାଇବା ପାଇଁ ଛୋଟ ଚେକ୍-ବାକ୍ସ ରେ କ୍ଲିକ୍ କରନ୍ତୁ ।';
         return;
     }
-    
+
     this.disabled = true;
-    const originalText = this.textContent;
-    this.innerHTML = '⏳ ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଆପଣଙ୍କର ପରିଚୟପତ୍ର ଯାଞ୍ଚ କରାଯାଉଛି । ଏଥିରେ କିଛି ସମୟ ଲାଗିପାରେ (ପ୍ରାୟ 10 ସେକେଣ୍ଡ)...';
-    
+    this.innerHTML = '⏳ ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ...';
+
     try {
-        // Verify user credentials
-        const response = await fetch(
-            `${GOOGLE_SCRIPT_URL}?action=verify&rollNumber=${rollNumber}&deviceId=${sessionData.deviceId}&className=${CLASS_NAME}`,
-            {
-                method: 'GET',
-                cache: 'no-cache'  // ← ADD THIS to prevent caching issues
-            }
-        );
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        const docRef = db.collection('students').doc(rollNumber);
+        const doc = await docRef.get();
+
+        if (!doc.exists) {
+            errorDiv.textContent = 'ରୋଲ୍ ନମ୍ବର ମିଳିଲା ନାହିଁ । ଦୟାକରି ସଠିକ୍ ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
         }
-        
-        const result = await response.json();
-        
-        // ✅ CRITICAL: Only proceed if explicitly successful
-        if (result.success === true) {
-            // Only proceed if explicitly successful
+
+        const data = doc.data();
+
+        if (data.className !== CLASS_NAME) {
+            errorDiv.textContent = 'ଏହି ରୋଲ୍ ନମ୍ବର ଏହି କ୍ଲାସ୍ ପାଇଁ ନୁହେଁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        if (data.status === 'BLOCKED') {
+            errorDiv.textContent = 'ଆପଣଙ୍କ ଆକ୍ସେସ୍ ବ୍ଲକ୍ ହୋଇଛି । ଶିକ୍ଷକଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        const currentDevice = sessionData.deviceId;
+        if (data.deviceId && data.deviceId !== '' && data.deviceId !== currentDevice) {
+            errorDiv.textContent = 'ଏହି ରୋଲ୍ ନମ୍ବର ଅନ୍ୟ ଡିଭାଇସ୍ ରେ ବ୍ୟବହୃତ ହୋଇଛି । ଆପଣ ଏହାକୁ ଏଠାରୁ ଖୋଲି ପାରିବେ ନାହିଁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        // SUCCESS - show welcome message
+        const studentName = data.name || rollNumber;
+        const welcomeOverlay = document.createElement('div');
+        welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
+        welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
+            + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Arts XI କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
+        document.body.appendChild(welcomeOverlay);
+
+        const updateData = {
+            lastActivity: new Date().toISOString(),
+            totalSessions: firebase.firestore.FieldValue.increment(1)
+        };
+        if (!data.deviceId || data.deviceId === '') {
+            updateData.deviceId = currentDevice;
+            updateData.firstLogin = new Date().toISOString();
+        }
+        docRef.update(updateData).catch(e => console.log('Update error:', e));
+
+        sessionData.rollNumber = rollNumber;
+        sessionData.loginTime = new Date();
+        docRef.update({ lastLogin: new Date().toISOString() }).catch(e => console.log(e));
+
+        setTimeout(() => {
+            welcomeOverlay.remove();
             document.getElementById('loginScreen').style.display = 'none';
             document.querySelector('.container').classList.add('authenticated');
-            
-            // Load content in background
-            setTimeout(() => {
-                sessionData.rollNumber = rollNumber;
-                sessionData.loginTime = new Date();
-                loadSentence(0);
-                startActivityTracking();
-            }, 100);
-            
-            // Send login tracking in background (non-blocking)
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'login',
-                    rollNumber,
-                    deviceId: sessionData.deviceId,
-                    className: CLASS_NAME,
-                    timestamp: new Date().toISOString()
-                })
-            }).catch(err => console.log('Login tracking error:', err));
-            
-        } else {
-            // ✅ BLOCKED or any other failure - Show error prominently
-            errorDiv.innerHTML = `<strong style="color: #ff0000; font-size: 16px;">⚠️ ${result.message || 'Login failed. Please contact administrator.'}</strong>`;
-            errorDiv.style.display = 'block';
-            errorDiv.style.padding = '15px';
-            errorDiv.style.background = '#ffe6e6';
-            errorDiv.style.border = '2px solid #ff0000';
-            errorDiv.style.borderRadius = '8px';
-            errorDiv.style.marginTop = '15px';
-            
-            this.disabled = false;
-            this.textContent = originalText;
-        }
+            loadSentence(0);
+            startActivityTracking();
+        }, 2400);
+
     } catch (error) {
-        errorDiv.textContent = 'Connection error. Please retry.';
-        errorDiv.style.color = '#ff4444';
-        errorDiv.style.fontWeight = 'bold';
+        errorDiv.textContent = 'ସଂଯୋଗ ସମସ୍ୟା । ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ ।';
         console.error('Login error:', error);
         this.disabled = false;
-        this.textContent = originalText;
+        this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
     }
 });
-// Activity tracking
+
 function startActivityTracking() {
     ['click', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-        document.addEventListener(event, () => {
-            sessionData.lastActivity = new Date();
-        });
+        document.addEventListener(event, () => { sessionData.lastActivity = new Date(); });
     });
-    
-    setInterval(sendHeartbeat, 120000);
-    window.addEventListener('beforeunload', handleLogout);
-}
-
-async function sendHeartbeat() {
-    try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'heartbeat',
-                rollNumber: sessionData.rollNumber,
-                deviceId: sessionData.deviceId,
-                className: CLASS_NAME,  // ADD THIS
-                timestamp: new Date().toISOString()
-            })
+    setInterval(() => {
+        if (sessionData.rollNumber) {
+            db.collection('students').doc(sessionData.rollNumber).update({
+                lastActivity: new Date().toISOString()
+            }).catch(e => console.log('Heartbeat error:', e));
+        }
+    }, 120000);
+window.addEventListener('beforeunload', () => {
+    if (sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        // Use sendBeacon for reliable logout tracking
+        const data = JSON.stringify({
+            rollNumber: sessionData.rollNumber,
+            duration: duration,
+            logoutTime: logoutTime
         });
-    } catch (error) {
-        console.error('Heartbeat error:', error);
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Logout error:', e));
     }
-}
+});
 
-async function handleLogout() {
-    sessionData.logoutTime = new Date();
-    const duration = Math.floor((sessionData.logoutTime - sessionData.loginTime) / 1000);
-    
-    try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            keepalive: true,
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'logout',
-                rollNumber: sessionData.rollNumber,
-                deviceId: sessionData.deviceId,
-                className: CLASS_NAME,  // ADD THIS
-                timestamp: new Date().toISOString(),
-                duration: duration
-            })
-        });
-    } catch (error) {
-        console.error('Logout error:', error);
+// Also save logout when page becomes hidden (mobile browsers)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Visibility logout error:', e));
     }
-}
-
+});
+    }
 
     
 // ============================================
