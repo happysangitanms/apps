@@ -1,486 +1,670 @@
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
-
-#chat-root {
-  max-width: 420px;
-  margin: 0 auto;
-  background: var(--color-background-tertiary);
-  min-height: 600px;
-  border-radius: var(--border-radius-lg);
-  border: 0.5px solid var(--color-border-tertiary);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.chat-header {
-  background: #1D9E75;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: #E1F5EE;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
-}
-
-.header-text { flex: 1; }
-.header-name { font-size: 15px; font-weight: 500; color: #fff; }
-.header-sub { font-size: 12px; color: #9FE1CB; }
-
-.status-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #5DCAA5; border: 2px solid #1D9E75;
-}
-
-.messages {
-  flex: 1; overflow-y: auto; padding: 16px 12px;
-  display: flex; flex-direction: column; gap: 10px;
-  min-height: 400px; max-height: 500px;
-}
-
-.bubble-row {
-  display: flex; align-items: flex-end; gap: 8px;
-  animation: fadeUp 0.35s ease;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.bubble-row.teacher { flex-direction: row; }
-.bubble-row.student { flex-direction: row-reverse; }
-
-.mini-avatar {
-  width: 30px; height: 30px; border-radius: 50%;
-  background: #E1F5EE; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 15px; flex-shrink: 0;
-}
-
-.bubble {
-  max-width: 78%; padding: 10px 14px;
-  border-radius: 18px; font-size: 14px; line-height: 1.55;
-  color: var(--color-text-primary);
-}
-
-.bubble.teacher {
-  background: var(--color-background-primary);
-  border: 0.5px solid var(--color-border-tertiary);
-  border-bottom-left-radius: 4px;
-}
-
-.bubble.student {
-  background: #1D9E75; color: #fff;
-  border-bottom-right-radius: 4px;
-}
-
-.bubble.correct-bubble {
-  background: #EAF3DE;
-  border: 0.5px solid #97C459;
-  color: #3B6D11;
-}
-
-.bubble.wrong-bubble {
-  background: #FCEBEB;
-  border: 0.5px solid #F09595;
-  color: #A32D2D;
-}
-
-.bubble.encourage-bubble {
-  background: #FAEEDA;
-  border: 0.5px solid #FAC775;
-  color: #854F0B;
-}
-
-.odia-text {
-  font-size: 13px; color: var(--color-text-secondary);
-  margin-top: 4px;
-}
-
-.options-area {
-  padding: 10px 12px 14px;
-  display: flex; flex-direction: column; gap: 8px;
-  border-top: 0.5px solid var(--color-border-tertiary);
-  background: var(--color-background-primary);
-}
-
-.opt-btn {
-  width: 100%; padding: 11px 16px;
-  background: var(--color-background-primary);
-  border: 0.5px solid var(--color-border-secondary);
-  border-radius: var(--border-radius-md);
-  font-size: 14px; cursor: pointer;
-  text-align: left; color: var(--color-text-primary);
-  transition: background 0.15s, border-color 0.15s;
-  font-family: var(--font-sans);
-  display: flex; align-items: center; gap: 10px;
-}
-
-.opt-btn:hover { background: var(--color-background-secondary); border-color: var(--color-border-primary); }
-.opt-btn:active { transform: scale(0.98); }
-
-.opt-btn .opt-icon {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--color-background-secondary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; flex-shrink: 0;
-}
-
-.opt-btn.correct-btn { background: #EAF3DE; border-color: #97C459; }
-.opt-btn.wrong-btn { background: #FCEBEB; border-color: #F09595; }
-
-.progress-bar {
-  height: 3px; background: var(--color-border-tertiary);
-  margin: 0 12px 0;
-}
-.progress-fill {
-  height: 100%; background: #1D9E75;
-  border-radius: 2px; transition: width 0.5s ease;
-}
-
-.score-badge {
-  font-size: 12px; color: #9FE1CB;
-  padding: 3px 10px;
-  background: rgba(29,158,117,0.3);
-  border-radius: 20px;
-}
-
-.typing-indicator {
-  display: flex; gap: 4px; padding: 12px 14px;
-  background: var(--color-background-primary);
-  border: 0.5px solid var(--color-border-tertiary);
-  border-radius: 18px; border-bottom-left-radius: 4px;
-  width: fit-content;
-}
-.typing-indicator span {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #5DCAA5; animation: bounce 1.2s infinite;
-}
-.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes bounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
-}
-
-.confetti-text { font-size: 18px; }
-.stars { color: #EF9F27; }
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;display:flex;justify-content:center;background:transparent;}
+.phone{width:100%;max-width:390px;min-height:720px;background:#ECE5DD;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.2);margin:0 auto;}
+.sbar{background:#075E54;padding:5px 16px 3px;display:flex;justify-content:space-between;align-items:center;}
+.sbar-time{color:#fff;font-size:11px;font-weight:700;}
+.sbar-right{color:#fff;font-size:11px;}
+.hdr{background:#075E54;padding:8px 12px 10px;display:flex;align-items:center;gap:10px;}
+.hdr-back{color:#fff;font-size:22px;cursor:pointer;}
+.hdr-av{width:40px;height:40px;border-radius:50%;background:#128C7E;display:flex;align-items:center;justify-content:center;font-size:21px;border:2px solid rgba(255,255,255,0.25);flex-shrink:0;}
+.hdr-info{flex:1;}
+.hdr-name{color:#fff;font-size:15px;font-weight:700;}
+.hdr-sub{color:#B2DFDB;font-size:11px;}
+.hdr-icons{color:#fff;font-size:17px;display:flex;gap:14px;cursor:pointer;}
+.pstrip{background:#128C7E;padding:5px 14px;display:flex;align-items:center;gap:10px;}
+.ptrack{flex:1;height:4px;background:rgba(255,255,255,0.25);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:#25D366;border-radius:2px;transition:width 0.6s ease;}
+.plabel{color:#fff;font-size:11px;font-weight:700;white-space:nowrap;}
+.chat{flex:1;background:#ECE5DD;background-image:url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c5b8ae' fill-opacity='0.12'%3E%3Cpath d='M10 10h4v4h-4zm8 0h4v4h-4zm8 0h4v4h-4zm-24 8h4v4h-4zm8 0h4v4h-4zm8 0h4v4h-4z'/%3E%3C/g%3E%3C/svg%3E");overflow-y:auto;padding:10px 10px 6px;display:flex;flex-direction:column;gap:4px;min-height:400px;max-height:470px;scroll-behavior:smooth;}
+.date-chip{text-align:center;margin:6px 0;}
+.date-chip span{background:rgba(255,255,255,0.82);color:#6B7280;font-size:10px;padding:3px 10px;border-radius:8px;font-weight:600;}
+.lesson-chip{text-align:center;margin:8px 0;}
+.lesson-chip span{background:#075E54;color:#fff;font-size:11px;padding:4px 14px;border-radius:20px;font-weight:700;}
+.mrow{display:flex;margin:2px 0;animation:popIn 0.28s cubic-bezier(0.175,0.885,0.32,1.275);}
+@keyframes popIn{from{opacity:0;transform:scale(0.82) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.mrow.t{justify-content:flex-start;}
+.mrow.s{justify-content:flex-end;}
+.bub{max-width:84%;padding:8px 11px 4px;border-radius:8px;font-size:13px;line-height:1.6;position:relative;word-wrap:break-word;}
+.bub.t{background:#fff;color:#111;border-top-left-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,0.1);}
+.bub.t::before{content:'';position:absolute;top:0;left:-7px;border:7px solid transparent;border-top-color:#fff;border-left:0;}
+.bub.s{background:#DCF8C6;color:#111;border-top-right-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,0.1);}
+.bub.s::after{content:'';position:absolute;top:0;right:-7px;border:7px solid transparent;border-top-color:#DCF8C6;border-right:0;}
+.bub.praise{background:#E8F5E9;} .bub.praise::before{border-top-color:#E8F5E9;}
+.bub.wrong{background:#FFEBEE;} .bub.wrong::before{border-top-color:#FFEBEE;}
+.bub.idk{background:#FFF8E1;} .bub.idk::before{border-top-color:#FFF8E1;}
+.bub.info{background:#E3F2FD;} .bub.info::before{border-top-color:#E3F2FD;}
+.btime{font-size:10px;color:#999;text-align:right;margin-top:3px;display:flex;justify-content:flex-end;align-items:center;gap:2px;}
+.tick{color:#53BDEB;font-size:12px;}
+/* VOICE BUBBLE */
+.vbub{display:flex;align-items:center;gap:8px;padding:5px 8px;min-width:190px;}
+.vplay{width:34px;height:34px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:transform 0.15s,background 0.15s;}
+.vplay:hover{background:#1EB85A;} .vplay:active{transform:scale(0.9);} .vplay.playing{background:#128C7E;}
+.vwave{flex:1;height:26px;overflow:hidden;}
+.vwave canvas{width:100%;height:100%;display:block;}
+.vdur{font-size:11px;color:#888;min-width:28px;text-align:right;}
+/* TEXT+VOICE COMBINED */
+.combo-text{font-size:13px;line-height:1.6;padding:0 2px;margin-bottom:4px;}
+.combo-text strong{color:#075E54;}
+.combo-text .odia{color:#555;font-size:12px;display:block;margin-top:2px;border-top:0.5px solid rgba(0,0,0,0.07);padding-top:3px;}
+/* TYPING */
+.typing-row{display:flex;align-items:flex-end;margin:4px 0;}
+.tbub{background:#fff;border-radius:8px;border-top-left-radius:2px;padding:10px 14px;box-shadow:0 1px 2px rgba(0,0,0,0.1);display:flex;gap:4px;align-items:center;}
+.tbub span{width:7px;height:7px;border-radius:50%;background:#aaa;animation:tb 1.2s infinite;display:block;}
+.tbub span:nth-child(2){animation-delay:0.2s;} .tbub span:nth-child(3){animation-delay:0.4s;}
+@keyframes tb{0%,60%,100%{transform:translateY(0);background:#bbb;}30%{transform:translateY(-5px);background:#777;}}
+/* OPTIONS PANEL */
+.opanel{background:#F0F2F5;border-top:0.5px solid #ddd;padding:10px 12px;display:flex;flex-direction:column;gap:7px;min-height:58px;}
+.obtn{width:100%;background:#fff;border:1.5px solid #E0E0E0;border-radius:14px;padding:10px 16px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:#333;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;text-align:left;}
+.obtn:hover{background:#F5F5F5;border-color:#BDBDBD;transform:scale(1.01);}
+.obtn:active{transform:scale(0.97);}
+.obtn .onum{width:28px;height:28px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;}
+.obtn .otxt{flex:1;font-size:13px;}
+.obtn .osub{font-size:11px;color:#888;font-weight:400;display:block;margin-top:1px;}
+.obtn.got{background:#E8F5E9;border-color:#66BB6A;} .obtn.got .onum{background:#43A047;}
+.obtn.notgot{background:#FFEBEE;border-color:#EF9A9A;} .obtn.notgot .onum{background:#EF5350;}
+.obtn.opt-a .onum{background:#1976D2;} .obtn.opt-b .onum{background:#7B1FA2;} .obtn.opt-c .onum{background:#E64A19;}
+.obtn.sel-c{background:#E8F5E9;border-color:#66BB6A;} .obtn.sel-c .onum{background:#43A047;}
+.obtn.sel-w{background:#FFEBEE;border-color:#EF9A9A;} .obtn.sel-w .onum{background:#EF5350;}
+.obtn.sel-i{background:#FFF8E1;border-color:#FFD54F;} .obtn.sel-i .onum{background:#FFA726;}
+.obtn.disabled{pointer-events:none;opacity:0.55;}
+/* FILL IN BLANK */
+.fib-box{background:#fff;border-radius:12px;border:1.5px solid #25D366;padding:12px 14px;display:flex;flex-direction:column;gap:8px;}
+.fib-q{font-size:13px;color:#333;font-weight:600;line-height:1.6;}
+.fib-q span{background:#FFF9C4;border-bottom:2px solid #FBC02D;padding:0 4px;font-style:italic;color:#777;}
+.fib-row{display:flex;gap:8px;align-items:center;}
+.fib-input{flex:1;border:1.5px solid #B0BEC5;border-radius:8px;padding:9px 12px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#333;outline:none;transition:border-color 0.2s;}
+.fib-input:focus{border-color:#25D366;}
+.fib-input.correct{border-color:#43A047;background:#E8F5E9;color:#2E7D32;}
+.fib-input.wrong{border-color:#EF5350;background:#FFEBEE;color:#C62828;}
+.fib-submit{background:#25D366;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:background 0.15s,transform 0.1s;}
+.fib-submit:hover{background:#1EB85A;} .fib-submit:active{transform:scale(0.95);}
+.fib-hint{font-size:11px;color:#888;text-align:center;}
+/* STUDENT WRITTEN BUBBLE */
+.bub.s-write{background:#E3F2FD;} .bub.s-write::after{border-top-color:#E3F2FD;}
 </style>
 
-<div id="chat-root">
-  <div class="chat-header">
-    <div class="avatar">👩‍🏫</div>
-    <div class="header-text">
-      <div class="header-name">Teacher Priya</div>
-      <div class="header-sub">English for Beginners — Day 1</div>
+<div class="phone">
+  <div class="sbar">
+    <span class="sbar-time" id="clk">9:41</span>
+    <div class="sbar-right">WiFi 🔋</div>
+  </div>
+  <div class="hdr">
+    <div class="hdr-back">‹</div>
+    <div class="hdr-av">👩‍🏫</div>
+    <div class="hdr-info">
+      <div class="hdr-name">Teacher Priya</div>
+      <div class="hdr-sub" id="hstatus">online</div>
     </div>
-    <div class="score-badge" id="score-badge">0 / 0</div>
+    <div class="hdr-icons"><span>📞</span><span>⋮</span></div>
   </div>
-
-  <div class="progress-bar">
-    <div class="progress-fill" id="progress" style="width:0%"></div>
+  <div class="pstrip">
+    <span class="plabel">🌅 WAKE UP — Day 1</span>
+    <div class="ptrack"><div class="pfill" id="pfill" style="width:0%"></div></div>
+    <span class="plabel" id="slabel">Lesson 0/4</span>
   </div>
-
-  <div class="messages" id="messages"></div>
-
-  <div class="options-area" id="options-area"></div>
+  <div class="chat" id="chat">
+    <div class="date-chip"><span>TODAY</span></div>
+  </div>
+  <div class="opanel" id="opanel"></div>
 </div>
 
 <script>
-const M = document.getElementById('messages');
-const OA = document.getElementById('options-area');
-const PB = document.getElementById('progress');
-const SB = document.getElementById('score-badge');
+const chat=document.getElementById('chat'),opanel=document.getElementById('opanel'),pfill=document.getElementById('pfill'),slabel=document.getElementById('slabel'),hstatus=document.getElementById('hstatus'),clkEl=document.getElementById('clk');
+function tick(){const d=new Date();clkEl.textContent=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');}
+tick();setInterval(tick,30000);
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
-let score = 0;
-let total = 0;
-let currentQ = 0;
+/* ── SPEECH ── */
+function speak(text,onEnd){
+  window.speechSynthesis&&window.speechSynthesis.cancel();
+  const voices=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];
+  const v=voices.find(x=>(x.name.includes('Samantha')||x.name.includes('Karen')||x.name.includes('Victoria')||x.name.includes('Zira'))&&x.lang.startsWith('en'))
+    ||voices.find(x=>x.lang.startsWith('en-'))||voices[0];
+  const u=new SpeechSynthesisUtterance(text);
+  if(v)u.voice=v;u.rate=0.87;u.pitch=1.1;u.volume=1;
+  u.onend=()=>{hstatus.textContent='online';if(onEnd)onEnd();};
+  u.onerror=()=>{hstatus.textContent='online';if(onEnd)onEnd();};
+  hstatus.textContent='speaking...';
+  window.speechSynthesis&&window.speechSynthesis.speak(u);
+  return u;
+}
 
-const questions = [
-  {
-    q: "I ___ up early.",
-    odia: "ମୁଁ _____ ସକାଳୁ ଉଠେ ।",
-    opts: [
-      { text: "wake", odia: "wake (ଠିକ୍)", type: "correct" },
-      { text: "wakes", odia: "wakes (ଭୁଲ)", type: "wrong" },
-      { text: "I don't know", odia: "ମୁଁ ଜାଣେ ନାହିଁ", type: "idk" }
-    ],
-    correct: "wake",
-    praise: "🌟 Excellent! Perfect answer!\nI = WAKE ✅\nRemember: I, We, You, Boys → WAKE (no S!)\n\nଶାବାସ! ତୁମେ ଠିକ୍ ଉତ୍ତର ଦେଲ!",
-    wrongExp: "❌ Not quite!\n'wakes' is used only with He/She.\nI, We, You, Boys → use WAKE (no S)\n\nCorrect: I wake up early.\nମୁଁ ସକାଳୁ ଉଠେ ।",
-    idkExp: "💛 That's okay! Let me help you!\nThe rule is simple:\nI → WAKE (no S needed)\n\nSo we say: I wake up early!\nମୁଁ ସକାଳୁ ଉଠେ । Try to remember this! 😊"
-  },
-  {
-    q: "He ___ up at 5 daily.",
-    odia: "ସେ (ପୁଅ) _____ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ ।",
-    opts: [
-      { text: "wake", odia: "wake (ଭୁଲ)", type: "wrong" },
-      { text: "wakes", odia: "wakes (ଠିକ୍)", type: "correct" },
-      { text: "I don't know", odia: "ମୁଁ ଜାଣେ ନାହିଁ", type: "idk" }
-    ],
-    correct: "wakes",
-    praise: "🎉 Brilliant! You got it!\nHe = WAKES ✅\nHe/She → always add S at the end!\n\nବହୁ ଭଲ! ତୁମେ ଜ୍ଞାନୀ ଛାତ୍ର!",
-    wrongExp: "❌ Not correct!\n'wake' is used with I, We, You, Boys.\nBut He/She → always WAKES (add S!)\n\nCorrect: He wakes up at 5 daily.\nସେ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ ।",
-    idkExp: "💛 No worries at all!\nHe and She are special!\nAlways add S → He WAKES, She WAKES\n\nCorrect: He wakes up at 5 daily.\nସେ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ । You can do it! 🌸"
-  },
-  {
-    q: "Boys ___ up at sunrise.",
-    odia: "ବାଳକମାନେ _____ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।",
-    opts: [
-      { text: "wakes", odia: "wakes (ଭୁଲ)", type: "wrong" },
-      { text: "wake", odia: "wake (ଠିକ୍)", type: "correct" },
-      { text: "I don't know", odia: "ମୁଁ ଜାଣେ ନାହିଁ", type: "idk" }
-    ],
-    correct: "wake",
-    praise: "⭐ Amazing! You are learning fast!\nBoys = WAKE ✅\nPlural words → WAKE (no S)\n\nତୁମେ ଅସ୍ଥି! ଚାଲୁ ରଖ!",
-    wrongExp: "❌ Try again next time!\n'wakes' only with He/She.\nBoys is plural → use WAKE (no S!)\n\nCorrect: Boys wake up at sunrise.\nବାଳକମାନେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।",
-    idkExp: "💛 Let me make it easy!\nBoys = many people = Plural\nPlural → always WAKE (no S!)\n\nCorrect: Boys wake up at sunrise.\nବାଳକମାନେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି । Great effort! 💪"
-  },
-  {
-    q: "She ___ up feeling very happy.",
-    odia: "ସେ (ଝିଅ) _____ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠେ ।",
-    opts: [
-      { text: "wakes", odia: "wakes (ଠିକ୍)", type: "correct" },
-      { text: "wake", odia: "wake (ଭୁଲ)", type: "wrong" },
-      { text: "I don't know", odia: "ମୁଁ ଜାଣେ ନାହିଁ", type: "idk" }
-    ],
-    correct: "wakes",
-    praise: "🌺 Wonderful! You remembered!\nShe = WAKES ✅\nShe/He → S at the end, always!\n\nବହୁ ସୁନ୍ଦର! ତୁମ ଶ୍ରଦ୍ଧା ଦେଖ!",
-    wrongExp: "❌ So close! Keep trying!\n'wake' is for I, We, You, Boys.\nShe → always WAKES (don't forget S!)\n\nCorrect: She wakes up feeling very happy.\nସେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠେ ।",
-    idkExp: "💛 You are doing great!\nShe = special rule = add S\nShe WAKES → always!\n\nCorrect: She wakes up feeling very happy.\nସେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠେ । Keep going! 🌟"
-  },
-  {
-    q: "We ___ up every morning.",
-    odia: "ଆମେ _____ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ ।",
-    opts: [
-      { text: "wakes", odia: "wakes (ଭୁଲ)", type: "wrong" },
-      { text: "wake", odia: "wake (ଠିକ୍)", type: "correct" },
-      { text: "I don't know", odia: "ମୁଁ ଜାଣେ ନାହିଁ", type: "idk" }
-    ],
-    correct: "wake",
-    praise: "🏆 Superstar! Perfect!\nWe = WAKE ✅\nWe, You, They, Boys → WAKE (no S)\n\nତୁମେ ଚ୍ୟାମ୍ପିଅନ! ଶାବାସ!",
-    wrongExp: "❌ Almost there!\n'wakes' is only for He/She.\nWe is plural → use WAKE (no S!)\n\nCorrect: We wake up every morning.\nଆମେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ ।",
-    idkExp: "💛 You are trying so well!\nWe = group of people = Plural\nPlural → WAKE (no S needed!)\n\nCorrect: We wake up every morning.\nଆମେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ । Well done for trying! 🌻"
+/* ── WAVE ── */
+function drawWave(cvs,active){
+  const W=cvs.width=cvs.offsetWidth||130,H=cvs.height=26;
+  const ctx=cvs.getContext('2d');ctx.clearRect(0,0,W,H);
+  for(let i=0;i<22;i++){
+    const h=active?4+Math.abs(Math.sin(i*0.7+Date.now()*0.009))*14:2+Math.abs(Math.sin(i*0.9))*8;
+    ctx.fillStyle=active?'#25D366':'#B0BEC5';
+    const x=i*5.5,y=(H-h)/2;
+    ctx.beginPath();ctx.roundRect?ctx.roundRect(x,y,3,h,2):ctx.rect(x,y,3,h);ctx.fill();
   }
-];
-
-function addMessage(html, side, type = '') {
-  const row = document.createElement('div');
-  row.className = `bubble-row ${side}`;
-  const av = document.createElement('div');
-  av.className = 'mini-avatar';
-  av.textContent = side === 'teacher' ? '👩‍🏫' : '🧑';
-  const bub = document.createElement('div');
-  bub.className = `bubble ${side} ${type}`;
-  bub.innerHTML = html.replace(/\n/g, '<br>');
-  if (side === 'teacher') row.append(av, bub);
-  else row.append(bub, av);
-  M.appendChild(row);
-  M.scrollTop = M.scrollHeight;
-  return row;
+}
+function animWave(cvs,btn,secs){
+  const start=Date.now();
+  function f(){if(!btn.classList.contains('playing')||(Date.now()-start)/1000>=secs){drawWave(cvs,false);return;}drawWave(cvs,true);requestAnimationFrame(f);}
+  requestAnimationFrame(f);
 }
 
-function addTyping() {
-  const row = document.createElement('div');
-  row.className = 'bubble-row teacher';
-  row.id = 'typing-row';
-  const av = document.createElement('div');
-  av.className = 'mini-avatar';
-  av.textContent = '👩‍🏫';
-  const t = document.createElement('div');
-  t.className = 'typing-indicator';
-  t.innerHTML = '<span></span><span></span><span></span>';
-  row.append(av, t);
-  M.appendChild(row);
-  M.scrollTop = M.scrollHeight;
-  return row;
+/* ── COMBINED TEXT+VOICE BUBBLE ── */
+function addComboMsg(htmlText,speechText,cls=''){
+  const row=document.createElement('div');row.className='mrow t';
+  const bub=document.createElement('div');bub.className='bub t '+(cls||'');
+  const txt=document.createElement('div');txt.className='combo-text';txt.innerHTML=htmlText;
+  const vb=document.createElement('div');vb.className='vbub';
+  const btn=document.createElement('button');btn.className='vplay';btn.textContent='▶';
+  const wd=document.createElement('div');wd.className='vwave';
+  const cvs=document.createElement('canvas');wd.appendChild(cvs);
+  const secs=Math.max(2,Math.round(speechText.split(' ').length/2.0));
+  const dur=document.createElement('span');dur.className='vdur';dur.textContent='0:'+String(secs).padStart(2,'0');
+  vb.append(btn,wd,dur);
+  const tm=document.createElement('div');tm.className='btime';
+  const d=new Date();tm.textContent=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');
+  bub.append(txt,vb,tm);row.appendChild(bub);chat.appendChild(row);
+  chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>drawWave(cvs,false),80);
+  btn.onclick=()=>{
+    if(btn.classList.contains('playing')){window.speechSynthesis&&window.speechSynthesis.cancel();btn.textContent='▶';btn.classList.remove('playing');drawWave(cvs,false);}
+    else{btn.textContent='⏸';btn.classList.add('playing');animWave(cvs,btn,secs);speak(speechText,()=>{btn.textContent='▶';btn.classList.remove('playing');drawWave(cvs,false);});}
+  };
+  return{btn,cvs,secs};
 }
 
-function removeTyping() {
-  const t = document.getElementById('typing-row');
-  if (t) t.remove();
+/* ── STUDENT TEXT BUBBLE ── */
+function addStudentBub(text,isWrite=false){
+  const row=document.createElement('div');row.className='mrow s';
+  const bub=document.createElement('div');bub.className='bub s'+(isWrite?' s-write':'');
+  bub.innerHTML=text;
+  const tm=document.createElement('div');tm.className='btime';
+  const d=new Date();tm.innerHTML=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')+' <span class="tick">✓✓</span>';
+  bub.appendChild(tm);row.appendChild(bub);chat.appendChild(row);chat.scrollTop=chat.scrollHeight;
 }
 
-function setOptions(opts) {
-  OA.innerHTML = '';
-  opts.forEach(o => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    const ico = document.createElement('div');
-    ico.className = 'opt-icon';
-    ico.textContent = o.icon || '❓';
-    btn.append(ico);
-    const span = document.createElement('span');
-    span.innerHTML = `<strong>${o.label}</strong>${o.sub ? `<br><span style="font-size:12px;color:var(--color-text-secondary)">${o.sub}</span>` : ''}`;
-    btn.append(span);
-    btn.onclick = o.action;
-    OA.appendChild(btn);
+/* ── LESSON CHIP ── */
+function addLessonChip(t){const d=document.createElement('div');d.className='lesson-chip';d.innerHTML='<span>'+t+'</span>';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+
+/* ── TYPING ── */
+function showTyping(){
+  const row=document.createElement('div');row.className='typing-row';row.id='typing';
+  const tb=document.createElement('div');tb.className='tbub';tb.innerHTML='<span></span><span></span><span></span>';
+  row.appendChild(tb);chat.appendChild(row);chat.scrollTop=chat.scrollHeight;
+  hstatus.textContent='typing...';
+}
+function hideTyping(){const t=document.getElementById('typing');if(t)t.remove();hstatus.textContent='online';}
+
+/* ── TEACHER SAYS (text+audio autoplay) ── */
+async function teacherSay(htmlText,speechText,cls='',waitBefore=500){
+  await delay(waitBefore);showTyping();await delay(700);hideTyping();
+  const {btn,cvs,secs}=addComboMsg(htmlText,speechText,cls);
+  btn.textContent='⏸';btn.classList.add('playing');animWave(cvs,btn,secs);
+  return new Promise(res=>speak(speechText,()=>{btn.textContent='▶';btn.classList.remove('playing');drawWave(cvs,false);res();}));
+}
+
+/* ── SET OPTIONS ── */
+function setOpts(opts){
+  opanel.innerHTML='';
+  opts.forEach((o,i)=>{
+    const btn=document.createElement('button');btn.className='obtn '+(o.cls||'');
+    btn.innerHTML=`<div class="onum">${i+1}</div><div class="otxt">${o.text}<span class="osub">${o.sub||''}</span></div>`;
+    btn.onclick=()=>{document.querySelectorAll('.obtn').forEach(b=>b.classList.add('disabled'));o.fn(btn);};
+    opanel.appendChild(btn);
   });
 }
+function clearOpts(){opanel.innerHTML='';}
 
-function clearOptions() { OA.innerHTML = ''; }
-
-function updateScore() {
-  SB.textContent = `${score} / ${total}`;
-  PB.style.width = `${(currentQ / questions.length) * 100}%`;
-}
-
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-async function teacherSay(html, type = '', wait = 900) {
-  const t = addTyping();
-  await delay(wait);
-  removeTyping();
-  addMessage(html, 'teacher', type);
-  M.scrollTop = M.scrollHeight;
-}
-
-async function askQuestion(idx) {
-  if (idx >= questions.length) {
-    await endLesson();
-    return;
+/* ── FILL IN BLANK ── */
+function showFIB(qHTML,odiaHint,correctAnswers,onCorrect,onWrong){
+  opanel.innerHTML='';
+  const box=document.createElement('div');box.className='fib-box';
+  const q=document.createElement('div');q.className='fib-q';q.innerHTML=qHTML;
+  const hint=document.createElement('div');hint.className='fib-hint';hint.textContent=odiaHint;
+  const row=document.createElement('div');row.className='fib-row';
+  const inp=document.createElement('input');inp.className='fib-input';inp.placeholder='Type your answer here...';inp.autocomplete='off';inp.autocorrect='off';inp.autocapitalize='off';inp.spellcheck=false;
+  const sub=document.createElement('button');sub.className='fib-submit';sub.textContent='Submit ➤';
+  row.append(inp,sub);
+  box.append(q,hint,row);
+  opanel.appendChild(box);
+  inp.focus();
+  function check(){
+    const val=inp.value.trim().toLowerCase().replace(/[^a-z]/g,'');
+    const correct=correctAnswers.some(a=>a.toLowerCase()===val);
+    if(!val) return;
+    inp.disabled=true;sub.disabled=true;
+    if(correct){inp.classList.add('correct');addStudentBub('✍️ '+inp.value.trim(),true);setTimeout(()=>{clearOpts();onCorrect();},600);}
+    else{inp.classList.add('wrong');setTimeout(()=>{clearOpts();onWrong(inp.value.trim());},600);}
   }
-  currentQ = idx + 1;
-  updateScore();
-  const q = questions[idx];
-  await teacherSay(
-    `<strong>Question ${idx + 1} of ${questions.length}</strong><br><br>Fill in the blank:<br><span style="font-size:16px;font-weight:500">${q.q}</span><br><span class="odia-text">${q.odia}</span>`,
-    '', 1000
-  );
-  await delay(200);
-  setOptions(q.opts.map(o => ({
-    icon: o.type === 'correct' ? '🔵' : o.type === 'idk' ? '🤷' : '🔵',
-    label: o.text,
-    sub: o.odia,
-    action: () => handleAnswer(o, q, idx)
-  })));
+  sub.onclick=check;
+  inp.onkeydown=e=>{if(e.key==='Enter')check();};
 }
 
-async function handleAnswer(opt, q, idx) {
-  clearOptions();
-  total++;
-  addMessage(opt.text, 'student');
-  await delay(400);
-  if (opt.type === 'correct') {
-    score++;
-    updateScore();
-    await teacherSay(q.praise, 'correct-bubble', 800);
-    await delay(600);
-    await teacherSay('Ready for the next question? 😊<br><span class="odia-text">ପ୍ରସ୍ତୁତ? ଆଗକୁ ଯିବା!</span>', '', 600);
-    await delay(300);
-    setOptions([{
-      icon: '➡️', label: 'Yes! Next question →',
-      sub: 'ହଁ! ଆଗକୁ ଯିବା',
-      action: () => { clearOptions(); askQuestion(idx + 1); }
-    }]);
-  } else if (opt.type === 'wrong') {
-    updateScore();
-    await teacherSay(q.wrongExp, 'wrong-bubble', 900);
-    await delay(500);
-    await teacherSay("Don't worry! Mistakes help us learn. Let's continue! 💪<br><span class='odia-text'>ଚିନ୍ତା କର ନାହିଁ! ଆଗକୁ ଯିବା!</span>", '', 700);
-    await delay(300);
-    setOptions([{
-      icon: '➡️', label: 'Continue →',
-      sub: 'ଆଗକୁ ଯିବା',
-      action: () => { clearOptions(); askQuestion(idx + 1); }
-    }]);
-  } else {
-    updateScore();
-    await teacherSay(q.idkExp, 'encourage-bubble', 900);
-    await delay(500);
-    await teacherSay("That's perfectly fine! Learning takes time. You are doing great! 🌸<br><span class='odia-text'>ଏହା ଏକଦମ ଠିକ ଅଛି! ତୁମେ ଭଲ ଶିଖୁଛ!</span>", '', 700);
-    await delay(300);
-    setOptions([{
-      icon: '➡️', label: 'I understand! Next →',
-      sub: 'ବୁଝି ଗଲି! ଆଗକୁ',
-      action: () => { clearOptions(); askQuestion(idx + 1); }
-    }]);
-  }
-}
+function updateProgress(n){pfill.style.width=(n/4*100)+'%';slabel.textContent='Lesson '+n+'/4';}
 
-async function endLesson() {
-  PB.style.width = '100%';
-  const pct = Math.round((score / questions.length) * 100);
-  let msg, type;
-  if (pct >= 80) {
-    msg = `🏆 Outstanding! You scored ${score} out of ${questions.length}!\n\nYou are a champion student! 🌟\nWAKE/WAKES rule is now yours!\n\nଶାବାସ! ତୁମେ ଆଜି ବହୁ ଭଲ ଶିଖିଲ!`;
-    type = 'correct-bubble';
-  } else if (pct >= 50) {
-    msg = `🌻 Good effort! You scored ${score} out of ${questions.length}!\n\nYou are improving! Practice once more! 💪\n\nଭଲ ପ୍ରୟାସ! ଆଉ ଥରେ ଅଭ୍ୟାସ କର!`;
-    type = 'encourage-bubble';
-  } else {
-    msg = `💛 Don't worry! You scored ${score} out of ${questions.length}.\n\nEvery expert was once a beginner!\nLet's practice again together! 🌸\n\nଚିନ୍ତା ନ କର! ଆଉ ଥରେ ଅଭ୍ୟାସ କରିବା!`;
-    type = 'encourage-bubble';
-  }
-  await teacherSay(msg, type, 1000);
-  await delay(600);
-  await teacherSay("📚 Today's big lesson:\n<strong>He/She → WAKES</strong> (add S!)\n<strong>I/We/You/Boys → WAKE</strong> (no S!)\n\nSee you in Day 2 — Brushing Teeth! 🪥\n<span class='odia-text'>ଆସ, ଆଗକୁ ଶିଖିବା!</span>", '', 800);
-  await delay(400);
-  setOptions([{
-    icon: '🔄', label: 'Practice again!',
-    sub: 'ଆଉ ଥରେ ଖେଳ',
-    action: () => {
-      score = 0; total = 0; currentQ = 0;
-      M.innerHTML = ''; OA.innerHTML = '';
-      PB.style.width = '0%';
-      updateScore();
-      startLesson();
-    }
-  }]);
-}
-
-async function startLesson() {
-  await teacherSay("🙏 Namaste! Welcome to English Class!\n<span class='odia-text'>ନମସ୍କାର! ଇଂରାଜୀ ଶ୍ରେଣୀକୁ ସ୍ୱାଗତ!</span>", '', 600);
-  await teacherSay("I am Teacher Priya. Today we learn <strong>WAKE UP</strong>! 🌅\n<span class='odia-text'>ଆଜି ଆମେ WAKE UP ଶିଖିବା ।</span>", '', 1000);
-  await teacherSay("The big rule:\n<strong>He/She → WAKES</strong> (S ଲାଗେ)\n<strong>I/We/You/Boys → WAKE</strong> (S ଲାଗେ ନାହିଁ)\n<span class='odia-text'>ଏହା ମନେ ରଖ!</span>", '', 1200);
-  await teacherSay("Are you ready to learn with me? 😊\n<span class='odia-text'>ଆମ ସହ ଶିଖିବ?</span>", '', 800);
-  setOptions([
+/* ════════════════════════════
+   LESSON DATA
+   ════════════════════════════ */
+const LESSONS=[
+{
+  num:1,chip:"📖 Lesson 1 — WAKE UP ର ଅର୍ଥ",
+  teach:{
+    html:`<strong>📖 Lesson 1 — WAKE UP ର ଅର୍ଥ</strong><br><br>
+ସକାଳୁ ନିଦରରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ <strong>WAKE UP</strong> କହନ୍ତି ।<br>
+<span class="odia">For example:<br>
+• The farmer wakes up at 5 — କୃଷକ ୫ ଟାରେ ଉଠନ୍ତି<br>
+• I wake up every morning — ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ<br>
+• The child wakes up late — ପିଲା ଦେରୀରେ ଉଠେ</span>`,
+    speech:"Lesson 1. When we get up from sleep in the morning, we call it wake up in English. Wake up means getting up from sleep. For example: The farmer wakes up at 5. I wake up every morning. The child wakes up late. So whenever someone rises from sleep, that action is called wake up. Remember this well."
+  },
+  understandQ:{
+    html:`ତୁମେ Lesson 1 ବୁଝିଲ କି? 😊<br><span class="odia">Did you understand what WAKE UP means?</span>`,
+    speech:"Did you understand Lesson 1? What does wake up mean? Tap yes if you understood, tap no if you want to hear it again."
+  },
+  checkQ:{
+    html:`✏️ <strong>Quick Check!</strong><br><br>WAKE UP ର ଓଡ଼ିଆ ଅର୍ଥ କ'ଣ?<br><span class="odia">What is the meaning of WAKE UP?</span>`,
+    speech:"Quick check! What does wake up mean? Option 1: ଘୁମ ଯିବା — to go to sleep. Option 2: ନିଦରରୁ ଉଠିବା — to get up from sleep. Option 3: I do not know."
+  },
+  checkOpts:[
+    {text:"ଘୁମ ଯିବା",sub:"to go to sleep",type:'wrong'},
+    {text:"ନିଦରରୁ ଉଠିବା",sub:"to get up from sleep ✅",type:'correct'},
+    {text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}
+  ],
+  praise:{html:`🌟 <strong>Excellent!</strong><br>WAKE UP = ନିଦରରୁ ଉଠିବା ✅<br><span class="odia">You understood Lesson 1 perfectly!</span>`,speech:"Excellent! Wake up means getting up from sleep. You understood Lesson 1 perfectly. Now let us go to the example questions!"},
+  wrongFb:{html:`❌ <strong>ଠିକ ନୁହେଁ!</strong><br>WAKE UP = <strong>ନିଦରରୁ ଉଠିବା</strong><br><span class="odia">Getting up from sleep in the morning</span>`,speech:"Not correct. Wake up means getting up from sleep in the morning. It does not mean going to sleep. Let me explain Lesson 1 once more."},
+  idkFb:{html:`💛 <strong>ଠିକ ଅଛି!</strong><br>WAKE UP = <strong>ନିଦରରୁ ଉଠିବା</strong><br><span class="odia">When you open your eyes in the morning — that is WAKE UP!</span>`,speech:"No problem! Wake up simply means getting up from sleep in the morning. Listen to Lesson 1 once more carefully."},
+  fibQ:{
+    html:`✍️ <strong>Spelling Test!</strong><br><br>ନିଦରରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କ'ଣ କହନ୍ତି?<br><span class="odia">Type the English word: _ _ _ _   _ _</span>`,
+    speech:"Now spell it! What is the English word for getting up from sleep? Type the two words. W A K E space U P. Type it in the box below!",
+    correct:["wakeup","wake up","wakes up"],
+    hint:"Hint: ୨ ଟି ଶବ୍ଦ ଅଛି — Two words"
+  },
+  fibPraise:{html:`✅ <strong>Perfect Spelling!</strong> WAKE UP 🌟<br><span class="odia">ତୁମ ହାତ ଲେଖା ଠିକ ଅଛି!</span>`,speech:"Perfect spelling! You wrote wake up correctly. You are a brilliant student!"},
+  fibWrong:{html:`✏️ <strong>Correct Spelling:</strong> <strong>WAKE UP</strong><br><span class="odia">W-A-K-E space U-P — ମନେ ରଖ!</span>`,speech:"The correct spelling is WAKE UP. W A K E, space, U P. Practice writing it. Wake up. You will remember it next time!"},
+  exQs:[
     {
-      icon: '✅', label: "Yes! I am ready!",
-      sub: 'ହଁ! ମୁଁ ପ୍ରସ୍ତୁତ!',
-      action: async () => {
-        clearOptions();
-        addMessage("Yes! I am ready! ✅", 'student');
-        await delay(300);
-        await teacherSay("Wonderful! Let's start! 🎉\n<span class='odia-text'>ଶୁଭ ହେଉ! ଆରମ୍ଭ କରିବା!</span>", 'correct-bubble', 700);
-        await delay(400);
-        askQuestion(0);
-      }
+      html:`❓ <strong>Example 1/3</strong><br><br>The farmer gets up from sleep at 5 AM.<br><span class="odia">Which sentence is correct?</span>`,
+      speech:"Example question 1. The farmer gets up from sleep at 5 in the morning. Which sentence is correct? Option 1: The farmer wakes up at 5. Option 2: The farmer sleeps at 5. Option 3: I do not know.",
+      opts:[{text:"The farmer wakes up at 5",sub:"",type:'correct'},{text:"The farmer sleeps at 5",sub:"",type:'wrong'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>The farmer wakes up at 5</strong> ✅`,speech:"Well done! The farmer wakes up at 5. That is the correct use of wake up. Excellent!"},
+      wrongFb:{html:`❌ Correct answer: <strong>The farmer wakes up at 5</strong><br><span class="odia">ଉଠିବା = wake up, ଘୁମ = sleep</span>`,speech:"Not correct! Wakes up means getting up from sleep. The correct answer is The farmer wakes up at 5."},
+      idkFb:{html:`💛 Answer: <strong>The farmer wakes up at 5</strong><br><span class="odia">Getting up from sleep = wake up !</span>`,speech:"The answer is The farmer wakes up at 5. Getting up from sleep equals wake up. Remember this!"}
     },
     {
-      icon: '⏳', label: "Wait, not yet...",
-      sub: 'ଅଲ୍ପ ଅପେକ୍ଷା',
-      action: async () => {
-        clearOptions();
-        addMessage("Wait, not yet...", 'student');
-        await delay(300);
-        await teacherSay("That's okay! Take your time. 🌸\nI will wait for you!\n<span class='odia-text'>ଠିକ ଅଛି! ମୁଁ ଅପେକ୍ଷା କରୁଛି!</span>", 'encourage-bubble', 700);
-        await delay(400);
-        await teacherSay("Ready now? Let's begin! 😊\n<span class='odia-text'>ଏବେ ପ୍ରସ୍ତୁତ?</span>", '', 800);
-        setOptions([{
-          icon: '✅', label: "Yes! Let's go!",
-          sub: 'ଚଲ! ଆରମ୍ଭ କରିବା!',
-          action: async () => {
-            clearOptions();
-            addMessage("Yes! Let's go! ✅", 'student');
-            await delay(300);
-            await teacherSay("Great! Here we go! 🚀\n<span class='odia-text'>ଶୁଭ ହେଉ!</span>", 'correct-bubble', 700);
-            await delay(400);
-            askQuestion(0);
-          }
-        }]);
-      }
+      html:`❓ <strong>Example 2/3</strong><br><br>My mother gets up from sleep very early.<br><span class="odia">Which sentence is correct?</span>`,
+      speech:"Example question 2. My mother gets up from sleep very early. Which sentence is correct? Option 1: My mother wakes up very early. Option 2: My mother goes to sleep early. Option 3: I do not know.",
+      opts:[{text:"My mother wakes up very early",sub:"",type:'correct'},{text:"My mother goes to sleep early",sub:"",type:'wrong'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>My mother wakes up very early</strong> ✅`,speech:"Perfect! My mother wakes up very early. That is the correct meaning of wake up!"},
+      wrongFb:{html:`❌ Correct: <strong>My mother wakes up very early</strong><br><span class="odia">ଉଠିବା = wake up !</span>`,speech:"Not correct. Going to sleep is opposite of waking up. The correct answer is My mother wakes up very early."},
+      idkFb:{html:`💛 Answer: <strong>My mother wakes up very early</strong>`,speech:"Answer is My mother wakes up very early. Getting up from sleep equals wake up. Now you know!"}
+    },
+    {
+      html:`❓ <strong>Example 3/3</strong><br><br>The child gets up from sleep late every day.<br><span class="odia">Which sentence is correct?</span>`,
+      speech:"Example question 3. The child gets up from sleep late every day. Which sentence is correct? Option 1: The child wakes up late every day. Option 2: The child sleep late every day. Option 3: I do not know.",
+      opts:[{text:"The child wakes up late every day",sub:"",type:'correct'},{text:"The child sleep late every day",sub:"",type:'wrong'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>The child wakes up late every day</strong> ✅<br><span class="odia">Lesson 1 ସଂପୂର୍ଣ୍ଣ! ଶାବାସ!</span>`,speech:"Excellent! The child wakes up late every day. You have understood Lesson 1 completely! Moving to Lesson 2 now!"},
+      wrongFb:{html:`❌ Correct: <strong>The child wakes up late every day</strong>`,speech:"Not correct. Wake up means getting up from sleep. The child wakes up late every day is correct."},
+      idkFb:{html:`💛 Answer: <strong>The child wakes up late every day</strong>`,speech:"Answer is The child wakes up late every day. Getting up from sleep is wake up. Now you know!"}
     }
-  ]);
+  ]
+},
+{
+  num:2,chip:"📖 Lesson 2 — Subject + Wake Up",
+  teach:{
+    html:`<strong>📖 Lesson 2 — Sentence Structure</strong><br><br>
+WAKE UP ଥିବା ବାକ୍ୟ ଲେଖିବା ପାଇଁ:<br>
+<strong>① ପ୍ରଥମେ Subject</strong> (ଯିଏ ଉଠେ)<br>
+<strong>② ତା ପରେ Wake Up</strong> (କ୍ରିୟା)<br><br>
+<span class="odia">• <strong>I</strong> wake up — ମୁଁ ଉଠେ<br>
+• <strong>You</strong> wake up — ତୁମେ ଉଠ<br>
+• <strong>The farmer</strong> wakes up — କୃଷକ ଉଠନ୍ତି</span>`,
+    speech:"Lesson 2. To make a wake up sentence, we follow two steps. Step one: write the subject first. Subject means the person who wakes up. Step two: then write wake up after the subject. For example: I wake up. I is subject first, wake up comes after. You wake up. You is subject, wake up comes after. The farmer wakes up. The farmer is subject, wakes up comes after. Remember: Subject first, then wake up."
+  },
+  understandQ:{
+    html:`Lesson 2 ବୁଝିଲ କି? 😊<br><span class="odia">Subject ପ୍ରଥମେ, ତା'ପରେ wake up?</span>`,
+    speech:"Did you understand? Subject first, then wake up. Tap yes if you understood, tap no to hear again."
+  },
+  checkQ:{
+    html:`✏️ <strong>Quick Check!</strong><br><br>ବାକ୍ୟ ଗଢ଼ିବার ସଠିକ ନିୟମ କ'ଣ?<br><span class="odia">What is the correct sentence structure?</span>`,
+    speech:"Quick check! What is the correct order? Option 1: Wake up first, then subject. Option 2: Subject first, then wake up. Option 3: I do not know."
+  },
+  checkOpts:[
+    {text:"Wake up ପ୍ରଥମ, ତା'ପରେ Subject",sub:"wrong order",type:'wrong'},
+    {text:"Subject ପ୍ରଥମ, ତା'ପରେ Wake Up",sub:"correct order ✅",type:'correct'},
+    {text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}
+  ],
+  praise:{html:`🌟 <strong>Correct!</strong><br>Subject → Wake Up ✅<br><span class="odia">I wake up. You wake up. The boy wakes up.</span>`,speech:"Wonderful! Subject first, then wake up. That is exactly right. You are learning beautifully!"},
+  wrongFb:{html:`❌ ସଠିକ ନିୟମ: <strong>Subject → Wake Up</strong><br><span class="odia">ପ୍ରଥମ ଯିଏ ଉଠେ, ତା'ପରେ wake up</span>`,speech:"Not correct. Subject always comes first. Then wake up follows. Let me explain Lesson 2 once more."},
+  idkFb:{html:`💛 ନିୟମ: <strong>Subject → Wake Up</strong><br><span class="odia">I wake up / You wake up / Boys wake up</span>`,speech:"No worry! Subject first, then wake up. I wake up. You wake up. Boys wake up. Listen to Lesson 2 again."},
+  fibQ:{
+    html:`✍️ <strong>Write a sentence!</strong><br><br>"ମୁଁ ଉଠେ" — ଇଂରାଜୀରେ ଲେଖ<br><span class="odia">Hint: Subject = I, Verb = wake up</span>`,
+    speech:"Now write it! Translate this sentence into English. Mu n uthé means I wake up. Type the English sentence in the box. Capital I, space, wake, space, up.",
+    correct:["iwakeup","i wake up"],
+    hint:"Hint: I + wake + up = 3 words"
+  },
+  fibPraise:{html:`✅ <strong>Perfect!</strong> "I wake up" 🌟<br><span class="odia">Subject I ପ୍ରଥମ, ତା'ପରେ wake up — ଶାବାସ!</span>`,speech:"Perfect! I wake up. Subject I comes first, then wake up follows. You wrote it correctly!"},
+  fibWrong:{html:`✏️ Correct sentence: <strong>I wake up</strong><br><span class="odia">I = Subject ପ୍ରଥମ, wake up = ପରେ</span>`,speech:"The correct answer is I wake up. I is the subject and comes first. Wake up comes after. Practice writing this sentence!"},
+  exQs:[
+    {
+      html:`❓ <strong>Example 1/3</strong><br><br>Which has the correct structure?<br><span class="odia">ଠିକ structure ଟି ବାଛ</span>`,
+      speech:"Which sentence has correct structure? Option 1: Wake up I early. Option 2: I wake up early. Option 3: I do not know.",
+      opts:[{text:"Wake up I early",sub:"ଭୁଲ structure",type:'wrong'},{text:"I wake up early",sub:"ଠିକ ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>I wake up early</strong> ✅<br><span class="odia">I = subject ପ୍ରଥମ!</span>`,speech:"Perfect! I wake up early. I is the subject first, then wake up. Correct structure!"},
+      wrongFb:{html:`❌ Correct: <strong>I wake up early</strong><br><span class="odia">Subject ସବୁବେଳ ପ୍ରଥମ!</span>`,speech:"Not correct! Subject must come first. I wake up early is correct. I comes first, then wake up."},
+      idkFb:{html:`💛 Answer: <strong>I wake up early</strong><br><span class="odia">I = subject ପ୍ରଥମ</span>`,speech:"Answer is I wake up early. I is subject and comes first. Wake up comes after. Subject first always!"}
+    },
+    {
+      html:`❓ <strong>Example 2/3</strong><br><br>Which is correct?<br><span class="odia">ଠିକ ବାକ୍ୟ ଟି ବାଛ</span>`,
+      speech:"Which is correct? Option 1: Boys wake up at sunrise. Option 2: Wake up boys at sunrise. Option 3: I do not know.",
+      opts:[{text:"Boys wake up at sunrise",sub:"ଠିକ ✅",type:'correct'},{text:"Wake up boys at sunrise",sub:"ଭୁଲ structure",type:'wrong'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>Boys wake up at sunrise</strong> ✅`,speech:"Excellent! Boys wake up at sunrise. Boys is subject first, then wake up. Perfect structure!"},
+      wrongFb:{html:`❌ Correct: <strong>Boys wake up at sunrise</strong><br><span class="odia">Boys = subject ପ୍ରଥମ</span>`,speech:"Not correct. Boys is the subject and must come first. Boys wake up at sunrise is correct."},
+      idkFb:{html:`💛 Answer: <strong>Boys wake up at sunrise</strong>`,speech:"Answer is Boys wake up at sunrise. Boys comes first as subject. Wake up comes after."}
+    },
+    {
+      html:`❓ <strong>Example 3/3</strong><br><br>"ମୋ ମା ସକାଳୁ ଉଠନ୍ତି" — Which is correct?`,
+      speech:"Which is correct English for my mother wakes up early? Option 1: Early wake up my mother. Option 2: My mother wakes up early. Option 3: I do not know.",
+      opts:[{text:"Early wake up my mother",sub:"ଭୁଲ",type:'wrong'},{text:"My mother wakes up early",sub:"ଠିକ ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 Correct! <strong>My mother wakes up early</strong> ✅<br><span class="odia">Lesson 2 ସଂପୂର୍ଣ୍ଣ! ଶାବାସ!</span>`,speech:"Brilliant! My mother wakes up early. My mother is subject first, then wakes up. You have learned Lesson 2 perfectly! Moving to Lesson 3!"},
+      wrongFb:{html:`❌ Correct: <strong>My mother wakes up early</strong>`,speech:"Not correct. My mother is subject and comes first. My mother wakes up early is correct."},
+      idkFb:{html:`💛 Answer: <strong>My mother wakes up early</strong>`,speech:"Answer is My mother wakes up early. Subject first, then wake up. That is Lesson 2 rule!"}
+    }
+  ]
+},
+{
+  num:3,chip:"📖 Lesson 3 — WAKE vs WAKES",
+  teach:{
+    html:`<strong>📖 Lesson 3 — WAKE vs WAKES</strong><br><br>
+Subject ଯଦି <strong>I</strong> ବା <strong>You</strong> → <strong>WAKE</strong> (S ନ)<br>
+Subject ଯଦି ଅନ୍ୟ ଯେ କୌଣସି <strong>ଏକବଚନ</strong> → <strong>WAKES</strong> (S ଲାଗ)<br>
+Subject ଯଦି <strong>ବହୁବଚନ</strong> → <strong>WAKE</strong> (S ନ)<br><br>
+<span class="odia">• <strong>I</strong> wake up ✅ | <strong>You</strong> wake up ✅<br>
+• <strong>He</strong> wak<u>es</u> up ✅ | <strong>She</strong> wak<u>es</u> up ✅<br>
+• <strong>Boys</strong> wake up ✅ | <strong>They</strong> wake up ✅</span>`,
+    speech:"Lesson 3. This is the most important rule! If the subject is I or You, we use wake without S. For example: I wake up, You wake up. But if the subject is any other single person, not I, not You, but any one other person, we add S and use wakes. For example: He wakes up, She wakes up, The boy wakes up, The farmer wakes up. But if there are many people, no S again. Boys wake up. They wake up. So remember: single person other than I and You gets S. Wakes with S."
+  },
+  understandQ:{
+    html:`Lesson 3 ବୁଝିଲ କି? 😊<br><span class="odia">He/She → WAKES | I/You/Boys → WAKE</span>`,
+    speech:"Did you understand the wake and wakes rule? He and She use wakes with S. I, You and Boys use wake without S. Tap yes or no."
+  },
+  checkQ:{
+    html:`✏️ <strong>Quick Check!</strong><br><br>"She ___ up early" — ଶୂନ୍ୟ ସ୍ଥାନ ପୂରଣ କର`,
+    speech:"Quick check. She gets up from sleep early. Which word? Option 1: She wake up early. Option 2: She wakes up early. Option 3: I do not know."
+  },
+  checkOpts:[
+    {text:"She wake up early",sub:"S ଲାଗ ନ — ଭୁଲ",type:'wrong'},
+    {text:"She wakes up early",sub:"S ଲଗା — ଠିକ ✅",type:'correct'},
+    {text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}
+  ],
+  praise:{html:`🌟 <strong>Correct!</strong> She wak<u>es</u> up ✅<br><span class="odia">She = ଏକବଚନ (I/You ନୁହେଁ) → S ଲାଗ!</span>`,speech:"Excellent! She wakes up early. She is one single person, not I and not You, so we add S. You understood the rule perfectly!"},
+  wrongFb:{html:`❌ Correct: <strong>She wakes up</strong> (S ଲାଗ!)<br><span class="odia">She = single, not I/You → WAKES</span>`,speech:"Not correct. She is one single person, not I and not You, so we must add S. She wakes up, not She wake up. Let me explain Lesson 3 again."},
+  idkFb:{html:`💛 Rule: She = single (not I/You) → <strong>WAKES</strong><br><span class="odia">He wakes / She wakes / The boy wakes</span>`,speech:"No worry! She is one single person, not I and not You. Single person other than I and You needs S. She wakes up. Listen to Lesson 3 once more."},
+  fibQ:{
+    html:`✍️ <strong>Spelling Test!</strong><br><br>"The farmer _____ up at sunrise"<br><span class="odia">ଶୂନ୍ୟ ସ୍ଥାନରେ wake ନ wakes ଲେଖ</span>`,
+    speech:"Spelling test! The farmer gets up at sunrise. Write the correct form. Wake or Wakes? Type your answer in the box. Remember the rule: The farmer is one person, not I, not You. What will you write?",
+    correct:["wakes"],
+    hint:"Hint: The farmer = ଜଣ (I/You ନୁହେଁ) → ?"
+  },
+  fibPraise:{html:`✅ <strong>wakes</strong> — Perfect! 🌟<br><span class="odia">The farmer = ଏକ ବ୍ୟକ୍ତି (I/You ନୁହେଁ) → WAKES ✅</span>`,speech:"Perfect! Wakes is correct. The farmer is one single person, not I and not You. So we add S. Wakes. You wrote it correctly!"},
+  fibWrong:{html:`✏️ Correct answer: <strong>wakes</strong><br><span class="odia">The farmer = single (not I/You) → S ଲାଗ</span>`,speech:"The correct answer is wakes with S. The farmer is one single person, not I and not You. So S must be added. The farmer wakes up. Practice this!"},
+  exQs:[
+    {
+      html:`❓ <strong>Example 1/3</strong><br><br>"The boy ___ up at 5"<br><span class="odia">wake ନ wakes?</span>`,
+      speech:"The boy gets up at 5. Which is correct? Option 1: The boy wake up at 5. Option 2: The boy wakes up at 5. Option 3: I do not know.",
+      opts:[{text:"The boy wake up at 5",sub:"S ଲାଗ ନ — ଭୁଲ",type:'wrong'},{text:"The boy wakes up at 5",sub:"S ଲଗା — ଠିକ ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 <strong>The boy wakes up at 5</strong> ✅<br><span class="odia">The boy = single (not I/You) → S!</span>`,speech:"Perfect! The boy wakes up at 5. The boy is one single person, not I and not You. So S is added. Wakes!"},
+      wrongFb:{html:`❌ Correct: <strong>The boy wakes up at 5</strong><br><span class="odia">Single person (not I/You) → S ଲାଗ</span>`,speech:"Not correct. The boy is one person, not I and not You. So S is added. The boy wakes up at 5."},
+      idkFb:{html:`💛 Answer: <strong>The boy wakes up at 5</strong>`,speech:"Answer is The boy wakes up at 5. The boy is single, not I and not You. So S. Wakes!"}
+    },
+    {
+      html:`❓ <strong>Example 2/3</strong><br><br>"Many girls ___ up early"<br><span class="odia">wake ନ wakes?</span>`,
+      speech:"Many girls get up early. Which is correct? Option 1: Many girls wakes up early. Option 2: Many girls wake up early. Option 3: I do not know.",
+      opts:[{text:"Many girls wakes up early",sub:"ଭୁଲ — plural ରେ S ନ",type:'wrong'},{text:"Many girls wake up early",sub:"ଠିକ — plural = no S ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 <strong>Many girls wake up early</strong> ✅<br><span class="odia">Many = ବହୁବଚନ → S ନ!</span>`,speech:"Excellent! Many girls wake up early. Many girls means plural, many people. Plural does not need S. Wake without S. You remembered!"},
+      wrongFb:{html:`❌ Correct: <strong>Many girls wake up early</strong><br><span class="odia">Many = plural → S ଲାଗ ନ!</span>`,speech:"Not correct. Many girls means plural. Plural does not need S. Many girls wake up early. No S for plural!"},
+      idkFb:{html:`💛 Answer: <strong>Many girls wake up early</strong><br><span class="odia">Many = plural → no S</span>`,speech:"Answer is Many girls wake up early. Many girls is plural. Plural uses wake without S. Only single person other than I and You uses wakes!"}
+    },
+    {
+      html:`❓ <strong>Example 3/3</strong><br><br>"I ___ up at sunrise"<br><span class="odia">wake ନ wakes?</span>`,
+      speech:"I get up at sunrise. Which is correct? Option 1: I wakes up at sunrise. Option 2: I wake up at sunrise. Option 3: I do not know.",
+      opts:[{text:"I wakes up at sunrise",sub:"ଭୁଲ — I ସହ S ନ",type:'wrong'},{text:"I wake up at sunrise",sub:"ଠିକ — I = no S ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 <strong>I wake up at sunrise</strong> ✅<br><span class="odia">Lesson 3 ସଂପୂର୍ଣ୍ଣ! ଶାବାସ Champion!</span>`,speech:"Superstar! I wake up at sunrise. I never takes S. I wake up, never I wakes up. You have mastered Lesson 3! Moving to the final lesson!"},
+      wrongFb:{html:`❌ Correct: <strong>I wake up</strong> — I ସହ S ଲାଗ ନ!`,speech:"Not correct. I never takes S. We say I wake up, never I wakes up. I is an exception. I and You never take S!"},
+      idkFb:{html:`💛 Answer: <strong>I wake up at sunrise</strong><br><span class="odia">I = exception → S ଲାଗ ନ!</span>`,speech:"Answer is I wake up at sunrise. I never takes S. I is special. I wake up, You wake up, no S. Only other single persons take S!"}
+    }
+  ]
+},
+{
+  num:4,chip:"📖 Lesson 4 — ବାକ୍ୟ ବଢ଼ାଇବା",
+  teach:{
+    html:`<strong>📖 Lesson 4 — ବାକ୍ୟ ବଢ଼ାଇବା</strong><br><br>
+Subject + Wake Up ପରେ ଆବଶ୍ୟକ ଶବ୍ଦ ଯୋଡ଼ →<br><br>
+<span class="odia"><strong>+1 word:</strong> I wake up <u>early</u> | He wakes up <u>late</u><br>
+<strong>+2 words:</strong> I wake up <u>every morning</u> | She wakes up <u>at 5</u><br>
+<strong>+3 words:</strong> I wake up <u>very early today</u> | Boys wake up <u>at sunrise daily</u></span>`,
+    speech:"Lesson 4 and final lesson! We can make longer sentences. How? After writing the subject and wake up, we add more words at the end. For example: I wake up. Short sentence. Add one word: I wake up early. I wake up late. I wake up quickly. Add two words: I wake up every morning. I wake up very early. He wakes up at 5. Add three words: I wake up very early today. Boys wake up at sunrise daily. She wakes up feeling very happy. So always add extra words after subject and wake up, never before!"
+  },
+  understandQ:{
+    html:`Lesson 4 ବୁଝିଲ କି? 😊<br><span class="odia">Extra words come AFTER subject + wake up?</span>`,
+    speech:"Did you understand? We add extra words after subject and wake up. Tap yes if you got it, tap no to hear again."
+  },
+  checkQ:{
+    html:`✏️ <strong>Quick Check!</strong><br><br>ଲମ୍ବା ବାକ୍ୟ ପାଇଁ extra words କେଉଁଠି ଯାଆନ୍ତି?<br><span class="odia">Where do extra words go in a longer sentence?</span>`,
+    speech:"Where do extra words go? Option 1: Before the subject. Option 2: After subject and wake up. Option 3: I do not know."
+  },
+  checkOpts:[
+    {text:"Subject ଆଗରୁ ଯାଆନ୍ତି",sub:"before subject — ଭୁଲ",type:'wrong'},
+    {text:"Subject + Wake Up ପରେ ଯାଆନ୍ତି",sub:"after — ଠିକ ✅",type:'correct'},
+    {text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}
+  ],
+  praise:{html:`🌟 <strong>Correct!</strong> Extra words come AFTER! ✅<br><span class="odia">I wake up + <u>early</u> / <u>every morning</u> / <u>very early today</u></span>`,speech:"Wonderful! Extra words always come after subject and wake up. Subject first, wake up second, extra words at the end. You understood perfectly!"},
+  wrongFb:{html:`❌ Extra words → <strong>Subject + Wake Up ପରେ</strong><br><span class="odia">I wake up <u>early today</u> ✅ (not: <u>early today</u> I wake up ❌)</span>`,speech:"Not correct. Extra words never go before the subject. They always come after subject and wake up. Let me explain Lesson 4 once more."},
+  idkFb:{html:`💛 Rule: Subject → Wake Up → <strong>Extra Words</strong><br><span class="odia">I wake up <u>very early today</u></span>`,speech:"No worry! Subject first, wake up second, then extra words at the end. I wake up very early today. Listen to Lesson 4 once more."},
+  fibQ:{
+    html:`✍️ <strong>Write a sentence!</strong><br><br>"ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ବହୁ ସକାଳୁ ଉଠ"<br><span class="odia">He wakes up ___ ___ ___ (3 extra words)</span>`,
+    speech:"Write this sentence in English. He wakes up very early daily. Three extra words after wakes up. Very, early, daily. Type the full sentence in the box!",
+    correct:["hewakesupveryearlydaily","he wakes up very early daily","he wakes up early daily","hewakesupEarlyDaily"],
+    hint:"Hint: He + wakes up + very + early + daily"
+  },
+  fibPraise:{html:`✅ <strong>Excellent sentence!</strong> 🌟<br><span class="odia">Subject + wakes up + 3 extra words — Perfect!</span>`,speech:"Excellent! You wrote a perfect long sentence with three extra words after wakes up. You have mastered sentence building!"},
+  fibWrong:{html:`✏️ Correct: <strong>He wakes up very early daily</strong><br><span class="odia">Subject → wakes up → extra words at the end</span>`,speech:"The correct sentence is He wakes up very early daily. He is subject, wakes up is verb, then very early daily comes at the end. Practice this structure!"},
+  exQs:[
+    {
+      html:`❓ <strong>Example 1/3</strong><br><br>Which longer sentence is correct?<br><span class="odia">ଠିକ ଲମ୍ବା ବାକ୍ୟ ଟି ବାଛ</span>`,
+      speech:"Which is the correct longer sentence? Option 1: Very early today I wake up. Option 2: I wake up very early today. Option 3: I do not know.",
+      opts:[{text:"Very early today I wake up",sub:"ଭୁଲ structure",type:'wrong'},{text:"I wake up very early today",sub:"ଠିକ ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 <strong>I wake up very early today</strong> ✅`,speech:"Perfect! I wake up very early today. Subject I first, wake up second, then very early today at the end. Excellent!"},
+      wrongFb:{html:`❌ Correct: <strong>I wake up very early today</strong>`,speech:"Not correct. Extra words go at the end. I wake up very early today is correct. Subject first, then wake up, then extra words at end."},
+      idkFb:{html:`💛 Answer: <strong>I wake up very early today</strong>`,speech:"Answer is I wake up very early today. I is subject. Wake up is verb. Then very early today at the end. Extra words always at end!"}
+    },
+    {
+      html:`❓ <strong>Example 2/3</strong><br><br>"The farmer _____ up at sunrise daily"<br><span class="odia">wake ନ wakes? (Lesson 3 + 4 combined!)</span>`,
+      speech:"Combined question! The farmer gets up at sunrise daily. Which is correct? Option 1: The farmer wake up at sunrise daily. Option 2: The farmer wakes up at sunrise daily. Option 3: I do not know.",
+      opts:[{text:"The farmer wake up at sunrise daily",sub:"S ଲାଗ ନ — ଭୁଲ",type:'wrong'},{text:"The farmer wakes up at sunrise daily",sub:"S ଲଗା + extra words ✅",type:'correct'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🌟 <strong>The farmer wakes up at sunrise daily</strong> ✅<br><span class="odia">Single (not I/You) → S ✅ + extra words at end ✅</span>`,speech:"Brilliant! The farmer wakes up at sunrise daily. The farmer is single, not I and not You, so wakes with S. Then at sunrise daily comes at the end. Perfect combination of Lesson 3 and Lesson 4!"},
+      wrongFb:{html:`❌ Correct: <strong>The farmer wakes up at sunrise daily</strong>`,speech:"Not correct. The farmer is single, not I and not You, so S is needed. Wakes. Then at sunrise daily at end. The farmer wakes up at sunrise daily."},
+      idkFb:{html:`💛 Answer: <strong>The farmer wakes up at sunrise daily</strong>`,speech:"Answer is The farmer wakes up at sunrise daily. Single person, not I and not You, so wakes with S. Extra words at sunrise daily at the end!"}
+    },
+    {
+      html:`❓ <strong>Example 3/3</strong><br><br>"ସେ ବହୁ ଖୁସି ଅନୁଭବ କରି ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠ"<br><span class="odia">Which is the correct full sentence?</span>`,
+      speech:"Final example! She wakes up feeling very happy every morning. Which is correct? Option 1: She wakes up feeling very happy every morning. Option 2: Feeling very happy she wakes every morning up. Option 3: I do not know.",
+      opts:[{text:"She wakes up feeling very happy every morning",sub:"ଠିକ long sentence ✅",type:'correct'},{text:"Feeling very happy she wakes every morning up",sub:"ଭୁଲ structure",type:'wrong'},{text:"I don't know",sub:"ମୁଁ ଜାଣ ନାହିଁ",type:'idk'}],
+      praise:{html:`🏆 <strong>Champion!</strong> 🎊<br><em>She wakes up feeling very happy every morning</em> ✅<br><span class="odia">ସମସ୍ତ 4 Lesson ସଂପୂର୍ଣ୍ଣ! ଶ୍ରେଷ୍ଠ ଛାତ୍ର!</span>`,speech:"Outstanding! She wakes up feeling very happy every morning. She is subject first, wakes up second, then feeling very happy every morning at the end. You have completed all 4 lessons perfectly! You are a champion student! I am extremely proud of you today!"},
+      wrongFb:{html:`❌ Correct: <strong>She wakes up feeling very happy every morning</strong>`,speech:"Not correct. She is subject first. Wakes up follows. Then extra words feeling very happy every morning at the end. She wakes up feeling very happy every morning."},
+      idkFb:{html:`💛 Answer: <strong>She wakes up feeling very happy every morning</strong>`,speech:"Answer is She wakes up feeling very happy every morning. She is subject. Wakes up is verb with S. Then extra words at the end. Now you have finished all 4 lessons!"}
+    }
+  ]
+}
+];
+
+/* ════════════════════════
+   ENGINE
+   ════════════════════════ */
+async function runExQs(exQs,afterFn){
+  for(let i=0;i<exQs.length;i++){
+    const q=exQs[i];
+    await teacherSay(q.html,q.speech,'',400);
+    await delay(200);
+    await new Promise(res=>{
+      setOpts(q.opts.map((o,idx)=>({
+        text:o.text,sub:o.sub,
+        cls:'opt-'+(idx===0?'a':idx===1?'b':'c'),
+        fn:async()=>{
+          addStudentBub(o.text+' 👆');clearOpts();
+          if(o.type==='correct') await teacherSay(q.praise.html,q.praise.speech,'praise',400);
+          else if(o.type==='wrong') await teacherSay(q.wrongFb.html,q.wrongFb.speech,'wrong',400);
+          else await teacherSay(q.idkFb.html,q.idkFb.speech,'idk',400);
+          await delay(300);
+          if(i<exQs.length-1){setOpts([{text:'Next Example →',sub:'',cls:'got',fn:()=>{clearOpts();res();}}]);}
+          else res();
+        }
+      })));
+    });
+  }
+  await delay(200);afterFn();
 }
 
-startLesson();
+async function runLesson(idx){
+  if(idx>=LESSONS.length){finalEnd();return;}
+  const L=LESSONS[idx];
+  pfill.style.width=((idx+1)/4*100)+'%';
+  slabel.textContent='Lesson '+(idx+1)+'/4';
+  addLessonChip(L.chip);
+
+  /* TEACH */
+  await teacherSay(L.teach.html,L.teach.speech,'info',400);
+  await delay(300);
+
+  /* UNDERSTOOD? */
+  await teacherSay(L.understandQ.html,L.understandQ.speech,'',400);
+  await delay(200);
+
+  const understood=await new Promise(res=>{
+    setOpts([
+      {text:'✅  ହଁ, ବୁଝ ଗଲି!',sub:'Yes, I understood!',cls:'got',fn:async()=>{addStudentBub('✅ ହଁ, ବୁଝ ଗଲି!');clearOpts();res(true);}},
+      {text:'❌  ଆଉ ଥରେ ବୁଝାଅ',sub:'Please explain again',cls:'notgot',fn:async()=>{
+        addStudentBub('❌ ଆଉ ଥରେ ବୁଝାଅ');clearOpts();
+        await teacherSay('💛 <strong>ଠିକ ଅଛି! ଆଉ ଥରେ ଶୁଣ:</strong>','No problem at all! Let me explain once more very carefully.','idk',400);
+        await delay(200);
+        await teacherSay(L.teach.html,L.teach.speech,'info',300);
+        await delay(300);
+        setOpts([{text:'✅  ଏବେ ବୁଝ ଗଲି!',sub:'Got it now!',cls:'got',fn:async()=>{addStudentBub('✅ ଏବେ ବୁଝ ଗଲି!');clearOpts();res(true);}}]);
+      }}
+    ]);
+  });
+
+  /* QUICK CHECK */
+  await teacherSay(L.checkQ.html,L.checkQ.speech,'',400);
+  await delay(200);
+
+  await new Promise(res=>{
+    const doCheck=()=>{
+      setOpts(L.checkOpts.map((o,i)=>({
+        text:o.text,sub:o.sub,
+        cls:'opt-'+(i===0?'a':i===1?'b':'c'),
+        fn:async()=>{
+          addStudentBub(o.text+' 👆');clearOpts();
+          if(o.type==='correct'){
+            await teacherSay(L.praise.html,L.praise.speech,'praise',400);
+            await delay(300);
+            setOpts([{text:'Continue →',sub:'',cls:'got',fn:()=>{clearOpts();res();}}]);
+          } else if(o.type==='wrong'){
+            await teacherSay(L.wrongFb.html,L.wrongFb.speech,'wrong',400);
+            await delay(200);
+            await teacherSay(L.teach.html,L.teach.speech,'info',300);
+            await delay(300);
+            await teacherSay('🔄 <strong>ଆଉ ଥରେ ଚେଷ୍ଟା କର!</strong>','Try the check question one more time!','',400);
+            await delay(200);
+            await teacherSay(L.checkQ.html,L.checkQ.speech,'',400);
+            await delay(200);
+            doCheck();
+          } else {
+            await teacherSay(L.idkFb.html,L.idkFb.speech,'idk',400);
+            await delay(300);
+            setOpts([{text:'Continue →',sub:'',cls:'got',fn:()=>{clearOpts();res();}}]);
+          }
+        }
+      })));
+    };
+    doCheck();
+  });
+
+  /* FILL IN BLANK */
+  await teacherSay(L.fibQ.html,L.fibQ.speech,'',400);
+  await delay(300);
+  await new Promise(res=>{
+    showFIB(L.fibQ.html,L.fibQ.hint,L.fibQ.correct,
+      async()=>{await teacherSay(L.fibPraise.html,L.fibPraise.speech,'praise',400);await delay(300);setOpts([{text:'Next →',sub:'',cls:'got',fn:()=>{clearOpts();res();}}]);},
+      async(written)=>{await teacherSay(L.fibWrong.html,L.fibWrong.speech,'wrong',400);await delay(300);setOpts([{text:'Continue →',sub:'',cls:'got',fn:()=>{clearOpts();res();}}]);}
+    );
+  });
+
+  /* EXAMPLE QUESTIONS */
+  await teacherSay('🎯 <strong>ଏবে 3 ଟି Example Questions!</strong><br><span class="odia">Let me test your understanding with examples!</span>','Great! Now I will ask you 3 example questions. Ready?','',400);
+  await delay(200);
+  await new Promise(res=>{
+    setOpts([{text:'✅  Ready! Ask me!',sub:'ହଁ, ପ୍ରଶ୍ନ କର',cls:'got',
+      fn:async()=>{addStudentBub('✅ Ready! Ask me!');clearOpts();
+        await runExQs(L.exQs,res);
+      }}]);
+  });
+
+  /* NEXT LESSON */
+  if(idx<LESSONS.length-1){
+    await delay(300);
+    setOpts([{text:'▶ Next Lesson →',sub:'ଆଗ ପାଠ',cls:'got',fn:()=>{clearOpts();runLesson(idx+1);}}]);
+  } else {finalEnd();}
+}
+
+async function finalEnd(){
+  pfill.style.width='100%';
+  addLessonChip('🎓 All 4 Lessons Complete!');
+  await teacherSay(
+    `🏆 <strong>Congratulations Champion!</strong><br><br>
+ଆଜ ତୁମେ ଶିଖିଲ:<br>
+<span class="odia">✅ WAKE UP = ନିଦରରୁ ଉଠିବା<br>
+✅ Subject ପ୍ରଥମ, ତା'ପରେ Wake Up<br>
+✅ He/She/Single → WAKES (S) | I/You/Plural → WAKE<br>
+✅ Extra words → Subject + Wake Up ପରେ</span>`,
+    "Congratulations my dear champion student! You have successfully completed all 4 lessons on wake up today! You learned what wake up means. You learned subject first then wake up. You learned when to use wake and wakes. And you learned how to make longer sentences. I am extremely proud of you! See you in the next class on brushing teeth! Goodbye!",
+    'praise',400
+  );
+  await delay(400);
+  setOpts([{text:'🔄 Start Again from Lesson 1',sub:'ଆଉ ଥରେ ଅଭ୍ୟାସ',cls:'got',
+    fn:()=>{
+      chat.innerHTML='<div class="date-chip"><span>TODAY</span></div>';
+      clearOpts();pfill.style.width='0%';slabel.textContent='Lesson 0/4';startAll();
+    }}]);
+}
+
+async function startAll(){
+  await teacherSay(
+    `🙏 <strong>Namaste! English Class ରେ ସ୍ୱାଗତ!</strong><br><br>
+ମୁଁ Teacher Priya । ଆଜ ଆମ ପାଠ: <strong>WAKE UP 🌅</strong><br>
+<span class="odia">• ଶିକ୍ଷକ: Text + Voice ଦ୍ୱାରା ପଢ଼ାଇବ<br>
+• ଛାତ୍ର: Option ବାଛ ବା ଉତ୍ତର ଲେଖ<br>
+• 4 ଟି Lesson + Spelling Test + Examples</span>`,
+    "Namaste! Welcome to English Class! I am Teacher Priya. Today we will learn about wake up together. There are 4 lessons. I will teach using both text and voice. After each lesson, you will answer questions by tapping options. And you will also write answers in fill in the blank tests. Are you ready to begin?",
+    '',500
+  );
+  await delay(300);
+  setOpts([
+    {text:'✅  ହଁ, ପ୍ରସ୍ତୁତ!',sub:'Yes, I am ready!',cls:'got',fn:async()=>{
+      addStudentBub('✅ ହଁ, ପ୍ରସ୍ତୁତ!');clearOpts();
+      await teacherSay('🚀 <strong>Let us begin Lesson 1!</strong>','Wonderful! Starting Lesson 1 right now!','praise',400);
+      await delay(300);runLesson(0);
+    }},
+    {text:'⏳  ଟିକେ ଅପେକ୍ଷା',sub:'Wait a moment',cls:'notgot',fn:async()=>{
+      addStudentBub('⏳ ଟିକେ ଅପେକ୍ଷା');clearOpts();
+      await teacherSay('💛 <strong>ଠିକ ଅଛି! ଅପେକ୍ଷା କରୁଛି!</strong>','Of course! Take your time. I will wait patiently.','idk',400);
+      await delay(300);
+      setOpts([{text:'✅  ଏବେ ପ୍ରସ୍ତୁତ!',sub:'Ready now!',cls:'got',fn:async()=>{
+        addStudentBub('✅ ଏବେ ପ୍ରସ୍ତୁତ!');clearOpts();
+        await teacherSay('🚀 <strong>Here we go!</strong>','Fantastic! Starting now!','praise',400);
+        await delay(200);runLesson(0);
+      }}]);
+    }}
+  ]);
+}
+startAll();
 </script>
