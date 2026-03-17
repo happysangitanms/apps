@@ -6706,35 +6706,27 @@ function setRevisionScreen(html) {
 function rvTypewrite(elementId, text, speed, onDone) {
     const el = document.getElementById(elementId);
     if (!el) { if (onDone) onDone(); return; }
-    
-    el.textContent = '';
-    el.style.whiteSpace = 'pre-wrap';
-    el.style.wordBreak = 'break-word';
-    el.style.overflowWrap = 'break-word';
-    
+
+    el.innerHTML = '';
+
     const chars = Array.from(text);
     let i = 0;
-    
-    // Use a span to hold typed text - prevents reflow
-    const span = document.createElement('span');
-    span.style.whiteSpace = 'pre-wrap';
-    span.style.wordBreak = 'break-word';
-    span.style.overflowWrap = 'break-word';
-    span.style.display = 'inline';
-    el.appendChild(span);
-    
+    let current = '';
+
     function next() {
         if (i < chars.length) {
-            span.textContent += chars[i];
+            current += chars[i];
+            el.innerHTML = current;
             i++;
             setTimeout(next, speed || 35);
         } else {
             if (onDone) onDone();
         }
     }
+
     next();
 }
-
+    
 function toggleMedia(type) {
     const logoDisplay  = document.getElementById('logoDisplay');
     const audioDisplay = document.getElementById('audioDisplay');
@@ -6816,7 +6808,16 @@ function startRevisionLesson() {
                 <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
             </div>
             <div style="flex:1;overflow:hidden;display:flex;align-items:flex-start;justify-content:flex-start;">
-             <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;white-space:pre-wrap;word-break:break-word;overflow-wrap:break-word;width:100%;"></p>
+             <p id="rvLessonText" style="
+    font-size: 15px;
+    font-weight: bold;
+    color: #111;
+    line-height: 1.7;
+    margin: 0;
+    width: 100%;
+    display: block;
+    text-align: left;
+"></p>
             </div>
         </div>
     `);
@@ -6925,7 +6926,16 @@ function rvAnswer(optionIndex) {
         setRevisionScreen(`
             <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
                 <div style="font-size:34px;">🌟</div>
-               <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;line-height:1.5;white-space:pre-wrap;word-break:break-word;overflow-wrap:break-word;width:100%;"></p>
+               <p id="rvCorrectText" style="
+    font-size: 15px;
+    font-weight: bold;
+    color: #059669;
+    line-height: 1.5;
+    margin: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+"></p>
             </div>
         `);
         setTimeout(() => {
@@ -6950,8 +6960,16 @@ function rvAnswer(optionIndex) {
                 <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
             </div>
             <div style="flex:1;overflow:hidden;">
-               <p id="rvFeedbackText" style="font-size:13px;font-weight:bold;color:#111;line-height:1.6;margin:0;white-space:pre-wrap;word-break:break-word;overflow-wrap:break-word;width:100%;"></p>
-            </div>
+              <p id="rvFeedbackText" style="
+    font-size: 13px;
+    font-weight: bold;
+    color: #111;
+    line-height: 1.6;
+    margin: 0;
+    width: 100%;
+    display: block;
+    text-align: left;
+"></p>
             <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
         </div>
     `);
