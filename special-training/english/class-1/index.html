@@ -6946,31 +6946,7 @@ function rvAnswer(optionIndex) {
         rvTypewrite('rvFeedbackText', feedbackText, 30, null);
     }, 200);
 }
-    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
-    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
-    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
-    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
-    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା — ଶୁଣନ୍ତୁ:';
-
-    playRevisionAudio(feedbackAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
-            </div>
-            <div style="flex:1;overflow:hidden;">
-                <p id="rvFeedbackText" style="font-size:13px;font-weight:bold;color:#111;line-height:1.6;margin:0;"></p>
-            </div>
-            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:4px;">🔄 ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</button>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
-    }, 200);
-}
-
+   
 function advanceMCQ() {
     const lesson = revisionLessons[revisionState.lessonIndex];
     revisionState.mcqIndex++;
