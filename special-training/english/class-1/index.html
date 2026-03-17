@@ -2360,44 +2360,44 @@ body > div:first-child {
 </div>               
             <div id="testContainer"></div>
 
- <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
+<div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Two small buttons side by side -->
+    <!-- Three buttons side by side - FIXED -->
     <div style="display: flex; justify-content: space-between; 
-                margin-bottom: 8px;">
+                align-items: center; margin-bottom: 8px; 
+                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
         
-       <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-    
-    <!-- Audio Button LEFT -->
-    <button id="audioToggleBtn" 
-        onclick="toggleMedia('audio')"
-        style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-               color: white; border: none; border-radius: 8px;
-               padding: 8px 12px; font-size: 13px; font-weight: bold;
-               cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2); flex: 1; margin-right: 4px;">
-        ଆଲୋଚନା
-    </button>
+        <button id="audioToggleBtn" 
+            onclick="toggleMedia('audio')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଆଲୋଚନା
+        </button>
 
-    <!-- Revision Button MIDDLE -->
-    <button id="revisionToggleBtn"
-        onclick="toggleMedia('revision')"
-        style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-               color: white; border: none; border-radius: 8px;
-               padding: 8px 12px; font-size: 13px; font-weight: bold;
-               cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2); flex: 1; margin-right: 4px;">
-        ରିଭିଜନ୍
-    </button>
-    
-    <!-- Video Button RIGHT -->
-    <button id="videoToggleBtn" 
-        onclick="toggleMedia('video')"
-        style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-               color: white; border: none; border-radius: 8px;
-               padding: 8px 12px; font-size: 13px; font-weight: bold;
-               cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2); flex: 1;">
-        ଭିଡିଓ
-    </button>
-</div>
+        <button id="revisionToggleBtn"
+            onclick="toggleMedia('revision')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ରିଭିଜନ୍
+        </button>
+
+        <button id="videoToggleBtn" 
+            onclick="toggleMedia('video')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଭିଡିଓ
+        </button>
+
+    </div>
 
     <!-- Media Placeholder - same size as logo -->
 <div id="mediaPlaceholder" style="
