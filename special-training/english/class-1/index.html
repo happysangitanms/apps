@@ -6775,38 +6775,34 @@ function startRevisionLesson() {
                 <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
                 <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
             </div>
-           <div style="flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:flex-start;">
-             <p id="rvLessonText" style="
-    font-size: 15px;
-    font-weight: bold;
-    color: #111;
-    line-height: 1.7;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
+            <div style="flex:1;overflow-y:auto;margin-bottom:8px;">
+                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
+            </div>
+            <div id="rvUnderstandButtons" style="display:none;flex-shrink:0;display:flex;flex-direction:column;gap:6px;">
+                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
+                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
+                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
             </div>
         </div>
     `);
 
-    // Track completion of BOTH text and audio independently
     let textDone = false;
     let audioDone = false;
 
     function checkBothDone() {
         if (textDone && audioDone) {
-            setTimeout(showUnderstandPrompt, 500);
+            // Reveal the understand buttons at the bottom of the same screen
+            const btns = document.getElementById('rvUnderstandButtons');
+            if (btns) btns.style.display = 'flex';
+            playRevisionAudio(lesson.understandAudio, null);
         }
     }
 
-    // Start audio — mark done when audio ends
     playRevisionAudio(lesson.lessonAudio, () => {
         audioDone = true;
         checkBothDone();
     });
 
-    // Start typewriting — mark done when text ends
     setTimeout(() => {
         rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
             textDone = true;
@@ -6815,20 +6811,6 @@ function startRevisionLesson() {
     }, 300);
 }
     
-function showUnderstandPrompt() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const current = revisionState.lessonIndex + 1;
-
-    playRevisionAudio(lesson.understandAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:8px;">
-            <p style="font-size:16px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;line-height:1.5;">ପାଠ ${current} — ଆପଣ ବୁଝିଲେ କି?</p>
-            <button onclick="rvUnderstood(true)" style="width:92%;padding:10px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-            <button onclick="rvUnderstood(false)" style="width:92%;padding:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
-        </div>
-    `);
-}
 
 function rvUnderstood(yes) {
     if (!yes) {
@@ -6889,30 +6871,42 @@ function rvAnswer(optionIndex) {
     const isIDontKnow = (optionIndex === mcq.options.length - 1);
     const isCorrect = (optionIndex === mcq.correct);
 
-    if (isCorrect) {
-        playRevisionAudio(mcq.correctAudio, null);
-        setRevisionScreen(`
-            <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-                <div style="font-size:34px;">🌟</div>
-               <p id="rvCorrectText" style="
-    font-size: 15px;
-    font-weight: bold;
-    color: #059669;
-    line-height: 1.5;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
-            </div>
-        `);
-        setTimeout(() => {
-            rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
-                setTimeout(advanceMCQ, 1400);
-            });
-        }, 200);
-        return;
+   if (isCorrect) {
+    playRevisionAudio(mcq.correctAudio, null);
+    
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
+    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
+    
+    // Decide what the forward button says and does
+    let forwardBtn = '';
+    if (isLastMCQ && isLastLesson) {
+        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
+    } else if (isLastMCQ) {
+        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
+    } else {
+        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
     }
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
+            <div style="font-size:34px;">🌟</div>
+            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
+            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
+                ${forwardBtn}
+            </div>
+        </div>
+    `);
+
+    setTimeout(() => {
+        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
+            // Show the forward button only after text finishes typing
+            const fwd = document.getElementById('rvForwardBtn');
+            if (fwd) fwd.style.display = 'block';
+        });
+    }, 200);
+    return;
+}
 
     const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
     const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
