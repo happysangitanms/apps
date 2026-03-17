@@ -6537,7 +6537,7 @@ const revisionLessons = [
         id: 1,
         lessonAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-.mp3",
         lessonText: "ପାଠ ୧: WAKE UP ମାନେ ଜାଗିବା ବା ଉଠିବା । ମନେରଖ — I ଓ You ସହ WAKE, ଯେକୌଣସି ବହୁବଚନ କର୍ତ୍ତା (ଯଥା - We, Boys, You all) ସହ ମଧ୍ୟ WAKE, କିନ୍ତୁ I ଓ You କୁ ଛାଡି ଅନ୍ୟକୌଣସି ଏକବଚନ କର୍ତ୍ତା ସହ WAKES — ଶେଷରେ S ଲାଗେ !",
-        understandAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+        understandAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-.mp3",
         mcq: [
             {
                 questionAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-.mp3",
@@ -6807,7 +6807,7 @@ function startRevisionLesson() {
                 <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
                 <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
             </div>
-            <div style="flex:1;overflow:hidden;display:flex;align-items:flex-start;justify-content:flex-start;">
+           <div style="flex:1;overflow-y:auto;display:flex;align-items:flex-start;justify-content:flex-start;">
              <p id="rvLessonText" style="
     font-size: 15px;
     font-weight: bold;
@@ -6816,7 +6816,7 @@ function startRevisionLesson() {
     margin: 0;
     width: 100%;
     display: block;
-    text-align: left;
+    text-align: justify;
 "></p>
             </div>
         </div>
@@ -6934,7 +6934,7 @@ function rvAnswer(optionIndex) {
     margin: 0;
     width: 100%;
     display: block;
-    text-align: center;
+    text-align: justify;
 "></p>
             </div>
         `);
@@ -6959,7 +6959,7 @@ function rvAnswer(optionIndex) {
             <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
                 <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
             </div>
-            <div style="flex:1;overflow:hidden;">
+            <div style="flex:1;overflow-y:auto;">
               <p id="rvFeedbackText" style="
     font-size: 13px;
     font-weight: bold;
@@ -6968,7 +6968,7 @@ function rvAnswer(optionIndex) {
     margin: 0;
     width: 100%;
     display: block;
-    text-align: left;
+    text-align: justify;
 "></p>
             <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
         </div>
