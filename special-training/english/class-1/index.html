@@ -6798,24 +6798,40 @@ function startRevisionLesson() {
     setRevisionScreen(`
         <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:11px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
-                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕ ବନ୍ଦ</button>
+                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
+                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
             </div>
             <div style="flex:1;overflow:hidden;display:flex;align-items:flex-start;justify-content:flex-start;">
-                <p id="rvLessonText" style="font-size:14px;font-weight:bold;color:#111;line-height:1.6;margin:0;"></p>
+                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;"></p>
             </div>
         </div>
     `);
 
-    playRevisionAudio(lesson.lessonAudio, null);
+    // Track completion of BOTH text and audio independently
+    let textDone = false;
+    let audioDone = false;
 
+    function checkBothDone() {
+        if (textDone && audioDone) {
+            setTimeout(showUnderstandPrompt, 500);
+        }
+    }
+
+    // Start audio — mark done when audio ends
+    playRevisionAudio(lesson.lessonAudio, () => {
+        audioDone = true;
+        checkBothDone();
+    });
+
+    // Start typewriting — mark done when text ends
     setTimeout(() => {
         rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
-            setTimeout(showUnderstandPrompt, 800);
+            textDone = true;
+            checkBothDone();
         });
     }, 300);
 }
-
+    
 function showUnderstandPrompt() {
     const lesson = revisionLessons[revisionState.lessonIndex];
     const current = revisionState.lessonIndex + 1;
@@ -6824,9 +6840,9 @@ function showUnderstandPrompt() {
 
     setRevisionScreen(`
         <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:8px;">
-            <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ପାଠ ${current} — ଆପଣ ବୁଝିଲେ କି?</p>
-            <button onclick="rvUnderstood(true)" style="width:92%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-            <button onclick="rvUnderstood(false)" style="width:92%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
+            <p style="font-size:16px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;line-height:1.5;">ପାଠ ${current} — ଆପଣ ବୁଝିଲେ କି?</p>
+            <button onclick="rvUnderstood(true)" style="width:92%;padding:10px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
+            <button onclick="rvUnderstood(false)" style="width:92%;padding:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
         </div>
     `);
 }
@@ -6857,71 +6873,27 @@ function showRevisionMCQ() {
 
     const optBtns = mcq.options.map((opt, i) =>
         `<button onclick="rvAnswer(${i})" style="
-            width: 100%;
-            padding: 6px 4px;
-            background: ${optColors[i]};
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 2px 0;
-            display: block;
-            box-sizing: border-box;
+            width:100%;
+            padding:7px 4px;
+            background:${optColors[i]};
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:13px;
+            font-weight:bold;
+            cursor:pointer;
+            display:block;
+            box-sizing:border-box;
         ">${opt}</button>`
     ).join('');
 
     setRevisionScreen(`
-        <div style="
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            background: white;
-            padding: 6px;
-            box-sizing: border-box;
-            overflow: hidden;
-        ">
-            <!-- Badge row -->
-            <div style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 4px;
-                flex-shrink: 0;
-            ">
-                <span style="
-                    font-size: 9px;
-                    font-weight: bold;
-                    color: white;
-                    background: #667eea;
-                    padding: 2px 6px;
-                    border-radius: 8px;
-                    white-space: nowrap;
-                ">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:6px;box-sizing:border-box;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-shrink:0;">
+                <span style="font-size:11px;font-weight:bold;color:white;background:#667eea;padding:2px 7px;border-radius:8px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
             </div>
-
-            <!-- Question text -->
-            <p style="
-                font-size: 11px;
-                font-weight: bold;
-                color: #111;
-                text-align: center;
-                margin: 0 0 4px 0;
-                line-height: 1.4;
-                flex-shrink: 0;
-            ">${mcq.q}</p>
-
-            <!-- Options -->
-            <div style="
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: 3px;
-                overflow: hidden;
-            ">
+            <p style="font-size:13px;font-weight:bold;color:#111;text-align:center;margin:0 0 5px 0;line-height:1.4;flex-shrink:0;">${mcq.q}</p>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;overflow:hidden;">
                 ${optBtns}
             </div>
         </div>
@@ -6938,8 +6910,8 @@ function rvAnswer(optionIndex) {
         playRevisionAudio(mcq.correctAudio, null);
         setRevisionScreen(`
             <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-                <div style="font-size:30px;">🌟</div>
-                <p id="rvCorrectText" style="font-size:14px;font-weight:bold;color:#059669;text-align:center;margin:0;"></p>
+                <div style="font-size:34px;">🌟</div>
+                <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;line-height:1.5;"></p>
             </div>
         `);
         setTimeout(() => {
@@ -6950,6 +6922,30 @@ function rvAnswer(optionIndex) {
         return;
     }
 
+    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
+    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
+    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
+    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
+    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
+
+    playRevisionAudio(feedbackAudio, null);
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
+            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
+                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
+            </div>
+            <div style="flex:1;overflow:hidden;">
+                <p id="rvFeedbackText" style="font-size:13px;font-weight:bold;color:#111;line-height:1.6;margin:0;"></p>
+            </div>
+            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
+        </div>
+    `);
+
+    setTimeout(() => {
+        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
+    }, 200);
+}
     const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
     const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
     const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
@@ -6993,20 +6989,20 @@ function showLessonCompletePrompt() {
     playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
 
     setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:8px;">
-            <div style="font-size:26px;">${isLast ? '🏆' : '🎉'}</div>
-            <p style="font-size:14px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
+            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
+            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
             ${isLast
-                ? `<p style="font-size:13px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
-                : `<p style="font-size:12px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
-                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:12px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
+                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
+                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
+                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
+                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
+                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
             }
         </div>
     `);
 }
-
+    
 function goNextLesson() {
     revisionState.lessonIndex++;
     revisionState.mcqIndex = 0;
