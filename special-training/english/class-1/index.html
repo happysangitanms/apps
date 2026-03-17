@@ -2433,7 +2433,7 @@ style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
             </iframe>
         </div>
 
-        <!-- VIDEO PLAYER - Hidden by default -->
+<!-- VIDEO PLAYER - Hidden by default -->
         <div id="videoDisplay" style="display: none;">
             <iframe
                 id="videoIframe"
@@ -2451,8 +2451,30 @@ style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
                 allowfullscreen>
             </iframe>
         </div>
+
+        <!-- REVISION WHITEBOARD - Hidden by default -->
+        <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden; flex-direction: column;">
+            <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden;">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+
     </div>
 
+
+<!-- REVISION BUTTON -->
+<div style="display: flex; justify-content: center; margin-top: 8px;">
+    <button id="revisionToggleBtn"
+        onclick="toggleRevision()"
+        style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+               color: white; border: none; border-radius: 8px;
+               padding: 8px 20px; font-size: 13px; font-weight: bold;
+               cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+               width: 320px;">
+        ଆସନ୍ତୁ ରିଭିଜନ୍ କରିବା
+    </button>
+</div>
+     
     <p class="info-text" style="
         margin-top: 15px;
         font-size: 14px;
@@ -6578,6 +6600,380 @@ function toggleMedia(type) {
             'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
     }
 }
+
+
+// ==========================================
+// REVISION SYSTEM
+// ==========================================
+
+const revisionLessons = [
+    {
+        id: 1,
+        text: "WAKE UP ମାନେ ଜାଗିବା ବା ଉଠିବା । I, We, You, Boys ସହ WAKE ବ୍ୟବହାର ହୁଏ । He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ — ଶେଷରେ S ଲାଗେ ।",
+        audio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3",
+        mcq: [
+            {
+                q: "He ସହ କେଉଁ ରୂପ ସଠିକ୍?",
+                options: ["WAKE", "WAKES", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ । ଶେଷରେ S ଲାଗିବା ଇଂରାଜୀ ନିୟମ ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "WAKE ଭୁଲ । He/She ସହ ଶେଷରେ S ଲାଗେ — WAKES ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            },
+            {
+                q: "I ସହ କେଉଁ ରୂପ ସଠିକ୍?",
+                options: ["WAKES", "WAKE", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "I ସହ WAKE ବ୍ୟବହାର ହୁଏ । I ସହ S ଲାଗେ ନାହିଁ ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "WAKES ଭୁଲ । I ସହ S ଲାଗେ ନାହିଁ — WAKE ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            }
+        ]
+    },
+    {
+        id: 2,
+        text: "ଏକ ଶବ୍ଦ ଯୋଡ଼ି ବାକ୍ୟ: I wake up early. He wakes up late. She wakes up quickly. We wake up daily. Boys wake up happily.",
+        audio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3",
+        mcq: [
+            {
+                q: "'ସେ ସକାଳୁ ଉଠେ (ଝିଅ)' ଇଂରାଜୀ?",
+                options: ["She wake up early", "She wakes up early", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "She wakes up early — She ସହ WAKES ବ୍ୟବହାର ହୁଏ ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "She wake up ଭୁଲ — She ସହ WAKES ହେବ ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            },
+            {
+                q: "'ଆମେ ଖୁସିରେ ଉଠୁ' ଇଂରାଜୀ?",
+                options: ["We wakes up happily", "We wake up happily", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "We wake up happily — We ସହ WAKE ବ୍ୟବହାର ହୁଏ, S ଲାଗେ ନାହିଁ ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "We wakes ଭୁଲ — We ସହ S ଲାଗେ ନାହିଁ ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            }
+        ]
+    },
+    {
+        id: 3,
+        text: "ଦୁଇ ଶବ୍ଦ ଯୋଡ଼ି ବାକ୍ୟ: I wake up every morning. He wakes up very early. She wakes up at sunrise. We wake up feeling fresh. Boys wake up feeling happy.",
+        audio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3",
+        mcq: [
+            {
+                q: "'ସେ ବହୁତ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀ?",
+                options: ["He wake up very early", "He wakes up very early", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "He wakes up very early — He ସହ WAKES ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "He wake ଭୁଲ — He ସହ WAKES ହେବ ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            },
+            {
+                q: "'ଆମେ ତାଜା ଅନୁଭବ କରି ଉଠୁ' ଇଂରାଜୀ?",
+                options: ["We wakes up feeling fresh", "We wake up feeling fresh", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "We wake up feeling fresh — We ସହ WAKE ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "We wakes ଭୁଲ — We ସହ S ଲାଗେ ନାହିଁ ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            }
+        ]
+    },
+    {
+        id: 4,
+        text: "ତିନି ଶବ୍ଦ ଯୋଡ଼ି ବାକ୍ୟ: I wake up very early today. He wakes up at 5 daily. Boys wake up at sunrise daily. We wake up feeling very happy. She wakes up early every morning.",
+        audio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3",
+        mcq: [
+            {
+                q: "'ସେ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ (ପୁଅ)' ଇଂରାଜୀ?",
+                options: ["He wake up at 5 daily", "He wakes up at 5 daily", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "He wakes up at 5 daily — He ସହ WAKES ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "He wake ଭୁଲ — He ସହ WAKES ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            },
+            {
+                q: "'ଆମେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠୁ' ଇଂରାଜୀ?",
+                options: ["We wakes up feeling very happy", "We wake up feeling very happy", "ମୁଁ ଜାଣୁ ନାହିଁ"],
+                correct: 1,
+                explanation: "We wake up feeling very happy — We ସହ WAKE ।",
+                explanationAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-2.mp3",
+                wrongExplanation: "We wakes ଭୁଲ — We ସହ S ଲାଗେ ନାହିଁ ।",
+                wrongAudio: "https://audio-engine.happysangitanms.workers.dev/day1-class-1.mp3"
+            }
+        ]
+    }
+];
+
+let revisionState = {
+    active: false,
+    lessonIndex: 0,
+    mcqIndex: 0,
+    phase: 'lesson', // 'lesson' | 'understand' | 'mcq' | 'feedback' | 'next' | 'complete'
+    audio: null
+};
+
+function toggleRevision() {
+    const btn = document.getElementById('revisionToggleBtn');
+    const board = document.getElementById('revisionBoard');
+    const logoDisplay = document.getElementById('logoDisplay');
+    const audioDisplay = document.getElementById('audioDisplay');
+    const videoDisplay = document.getElementById('videoDisplay');
+    const audioIframe = document.getElementById('audioIframe');
+    const videoIframe = document.getElementById('videoIframe');
+
+    if (revisionState.active) {
+        stopRevisionAudio();
+        board.style.display = 'none';
+        logoDisplay.style.display = 'block';
+        revisionState.active = false;
+        btn.textContent = 'ଆସନ୍ତୁ ରିଭିଜନ୍ କରିବା';
+        btn.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+    } else {
+        audioIframe.src = '';
+        videoIframe.src = '';
+        audioDisplay.style.display = 'none';
+        videoDisplay.style.display = 'none';
+        logoDisplay.style.display = 'none';
+        board.style.display = 'flex';
+        revisionState.active = true;
+        revisionState.lessonIndex = 0;
+        revisionState.mcqIndex = 0;
+        revisionState.phase = 'lesson';
+        btn.textContent = '✕ ରିଭିଜନ୍ ବନ୍ଦ କରନ୍ତୁ';
+        btn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        startRevisionLesson();
+    }
+}
+
+function stopRevisionAudio() {
+    if (revisionState.audio) {
+        revisionState.audio.pause();
+        revisionState.audio = null;
+    }
+}
+
+function playRevisionAudio(url, onEnd) {
+    stopRevisionAudio();
+    if (!url || !isValidAudioUrl(url)) {
+        if (onEnd) onEnd();
+        return;
+    }
+    revisionState.audio = new Audio(url);
+    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
+    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
+    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
+}
+
+function revisionTypewrite(text, speed, onDone) {
+    const screen = document.getElementById('revisionScreen');
+    if (!screen) return;
+    
+    let idx = 0;
+    const chars = Array.from(text);
+    const span = screen.querySelector('.rv-typing');
+    if (!span) return;
+
+    function next() {
+        if (idx < chars.length) {
+            span.textContent += chars[idx];
+            idx++;
+            setTimeout(next, speed || 30);
+        } else {
+            if (onDone) onDone();
+        }
+    }
+    next();
+}
+
+function setRevisionScreen(html) {
+    const screen = document.getElementById('revisionScreen');
+    if (screen) screen.innerHTML = html;
+}
+
+function startRevisionLesson() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    revisionState.phase = 'lesson';
+
+    const totalLessons = revisionLessons.length;
+    const current = revisionState.lessonIndex + 1;
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;padding:6px;box-sizing:border-box;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                <span style="font-size:9px;font-weight:bold;color:#1d4ed8;background:#dbeafe;padding:2px 6px;border-radius:10px;">Lesson ${current}/${totalLessons}</span>
+                <button onclick="stopRevisionAudio()" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:1px 5px;font-size:9px;cursor:pointer;">⏹</button>
+            </div>
+            <div style="flex:1;background:#1a2332;border-radius:8px;border:2px solid #8b4513;padding:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;position:relative;">
+                <div style="font-size:10px;color:#fbbf24;font-weight:bold;margin-bottom:3px;">📖 ପାଠ ${current}:</div>
+                <div class="rv-typing" style="font-size:10px;color:#f0f0f0;line-height:1.5;"></div>
+            </div>
+        </div>
+    `);
+
+    playRevisionAudio(lesson.audio, null);
+
+    setTimeout(() => {
+        revisionTypewrite(lesson.text, 25, () => {
+            setTimeout(showRevisionUnderstandPrompt, 600);
+        });
+    }, 200);
+}
+
+function showRevisionUnderstandPrompt() {
+    revisionState.phase = 'understand';
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const current = revisionState.lessonIndex + 1;
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-sizing:border-box;gap:8px;">
+            <div style="font-size:11px;font-weight:bold;color:#1d4ed8;text-align:center;">Lesson ${current} — ଆପଣ ବୁଝିଲେ କି?</div>
+            <button onclick="revisionUnderstood(true)" style="width:90%;padding:7px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:11px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି — ପ୍ରଶ୍ନ ଦିଅ</button>
+            <button onclick="revisionUnderstood(false)" style="width:90%;padding:7px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:11px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
+        </div>
+    `);
+}
+
+function revisionUnderstood(yes) {
+    if (!yes) {
+        startRevisionLesson();
+        return;
+    }
+    revisionState.mcqIndex = 0;
+    showRevisionMCQ();
+}
+
+function showRevisionMCQ() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const mcq = lesson.mcq[revisionState.mcqIndex];
+    const current = revisionState.lessonIndex + 1;
+    const qNum = revisionState.mcqIndex + 1;
+    const total = lesson.mcq.length;
+
+    revisionState.phase = 'mcq';
+
+    const optionButtons = mcq.options.map((opt, i) => {
+        let bg = '#667eea';
+        if (i === 2) bg = '#6b7280';
+        return `<button onclick="revisionAnswer(${i})" style="width:90%;padding:5px 8px;background:${bg};color:white;border:none;border-radius:6px;font-size:10px;font-weight:bold;cursor:pointer;margin:2px 0;">${opt}</button>`;
+    }).join('');
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:6px;box-sizing:border-box;overflow:hidden;gap:4px;">
+            <div style="font-size:9px;font-weight:bold;color:#1d4ed8;background:#dbeafe;padding:2px 6px;border-radius:10px;">Lesson ${current} — ପ୍ରଶ୍ନ ${qNum}/${total}</div>
+            <div style="font-size:10px;color:#111;font-weight:bold;text-align:center;padding:0 4px;">${mcq.q}</div>
+            ${optionButtons}
+        </div>
+    `);
+}
+
+function revisionAnswer(optionIndex) {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const mcq = lesson.mcq[revisionState.mcqIndex];
+
+    if (optionIndex === mcq.options.length - 1) {
+        showRevisionFeedback('idk', mcq.explanation, mcq.explanationAudio);
+        return;
+    }
+
+    if (optionIndex === mcq.correct) {
+        showRevisionFeedback('correct', null, null);
+    } else {
+        showRevisionFeedback('wrong', mcq.wrongExplanation, mcq.wrongAudio);
+    }
+}
+
+function showRevisionFeedback(type, text, audioUrl) {
+    revisionState.phase = 'feedback';
+
+    if (type === 'correct') {
+        setRevisionScreen(`
+            <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-sizing:border-box;gap:6px;">
+                <div style="font-size:24px;">🌟</div>
+                <div style="font-size:12px;font-weight:bold;color:#059669;text-align:center;">ବହୁତ ଭଲ! ସଠିକ୍ ଉତ୍ତର!</div>
+            </div>
+        `);
+        setTimeout(() => advanceRevisionMCQ(), 1200);
+        return;
+    }
+
+    const icon = type === 'idk' ? '💡' : '❌';
+    const titleColor = type === 'idk' ? '#1d4ed8' : '#dc2626';
+    const title = type === 'idk' ? 'ଉତ୍ତର ଦେଖନ୍ତୁ:' : 'ଭୁଲ ହେଲା! ବ୍ୟାଖ୍ୟା:';
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;padding:6px;box-sizing:border-box;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
+                <span style="font-size:12px;">${icon}</span>
+                <span style="font-size:10px;font-weight:bold;color:${titleColor};">${title}</span>
+            </div>
+            <div style="flex:1;background:#1a2332;border-radius:8px;border:2px solid #8b4513;padding:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;">
+                <div class="rv-typing" style="font-size:10px;color:#f0f0f0;line-height:1.5;"></div>
+            </div>
+            <div style="margin-top:4px;text-align:center;">
+                <button onclick="showRevisionMCQ()" style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;padding:4px 12px;font-size:10px;font-weight:bold;cursor:pointer;">ପୁଣି ଚେଷ୍ଟା</button>
+            </div>
+        </div>
+    `);
+
+    playRevisionAudio(audioUrl, null);
+
+    setTimeout(() => {
+        revisionTypewrite(text, 25, null);
+    }, 200);
+}
+
+function advanceRevisionMCQ() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    revisionState.mcqIndex++;
+
+    if (revisionState.mcqIndex < lesson.mcq.length) {
+        showRevisionMCQ();
+    } else {
+        showRevisionNextPrompt();
+    }
+}
+
+function showRevisionNextPrompt() {
+    const current = revisionState.lessonIndex + 1;
+    const total = revisionLessons.length;
+    const isLast = (current === total);
+
+    revisionState.phase = 'next';
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-sizing:border-box;gap:6px;">
+            <div style="font-size:18px;">🎉</div>
+            <div style="font-size:11px;font-weight:bold;color:#059669;text-align:center;">Lesson ${current} ସଫଳ!</div>
+            ${isLast
+                ? `<button onclick="showRevisionComplete()" style="width:90%;padding:7px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:11px;font-weight:bold;cursor:pointer;">🏆 ସମ୍ପୂର୍ଣ୍ଣ!</button>`
+                : `<button onclick="goToNextRevisionLesson()" style="width:90%;padding:7px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:11px;font-weight:bold;cursor:pointer;">➡️ Lesson ${current + 1} ଆରମ୍ଭ</button>`
+            }
+        </div>
+    `);
+}
+
+function goToNextRevisionLesson() {
+    revisionState.lessonIndex++;
+    revisionState.mcqIndex = 0;
+    startRevisionLesson();
+}
+
+function showRevisionComplete() {
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-sizing:border-box;gap:6px;">
+            <div style="font-size:22px;">🏆</div>
+            <div style="font-size:12px;font-weight:bold;color:#059669;text-align:center;">ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</div>
+            <div style="font-size:10px;color:#666;text-align:center;">ସମସ୍ତ ${revisionLessons.length}ଟି ପାଠ ଶেষ ।</div>
+            <button onclick="toggleRevision()" style="width:90%;padding:7px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:11px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>
+        </div>
+    `);
+}
+    
     
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
