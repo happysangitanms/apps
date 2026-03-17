@@ -6693,6 +6693,12 @@ function setRevisionScreen(html) {
     const screen = document.getElementById('revisionScreen');
     if (screen) {
         screen.style.background = 'white';
+        screen.style.overflow = 'hidden';
+        screen.style.display = 'flex';
+        screen.style.flexDirection = 'column';
+        screen.style.alignItems = 'stretch';
+        screen.style.justifyContent = 'flex-start';
+        screen.style.padding = '0';
         screen.innerHTML = html;
     }
 }
@@ -6850,20 +6856,78 @@ function showRevisionMCQ() {
     ];
 
     const optBtns = mcq.options.map((opt, i) =>
-        `<button onclick="rvAnswer(${i})" style="width:92%;padding:8px;background:${optColors[i]};color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;margin:3px 0;">${opt}</button>`
+        `<button onclick="rvAnswer(${i})" style="
+            width: 100%;
+            padding: 6px 4px;
+            background: ${optColors[i]};
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 2px 0;
+            display: block;
+            box-sizing: border-box;
+        ">${opt}</button>`
     ).join('');
 
     setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:11px;font-weight:bold;color:white;background:#667eea;padding:3px 8px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
+        <div style="
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            padding: 6px;
+            box-sizing: border-box;
+            overflow: hidden;
+        ">
+            <!-- Badge row -->
+            <div style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 4px;
+                flex-shrink: 0;
+            ">
+                <span style="
+                    font-size: 9px;
+                    font-weight: bold;
+                    color: white;
+                    background: #667eea;
+                    padding: 2px 6px;
+                    border-radius: 8px;
+                    white-space: nowrap;
+                ">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
             </div>
-            <p style="font-size:13px;font-weight:bold;color:#111;text-align:center;margin:0 0 6px 0;line-height:1.5;">${mcq.q}</p>
-            ${optBtns}
+
+            <!-- Question text -->
+            <p style="
+                font-size: 11px;
+                font-weight: bold;
+                color: #111;
+                text-align: center;
+                margin: 0 0 4px 0;
+                line-height: 1.4;
+                flex-shrink: 0;
+            ">${mcq.q}</p>
+
+            <!-- Options -->
+            <div style="
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 3px;
+                overflow: hidden;
+            ">
+                ${optBtns}
+            </div>
         </div>
     `);
 }
-
+    
 function rvAnswer(optionIndex) {
     const lesson = revisionLessons[revisionState.lessonIndex];
     const mcq = lesson.mcq[revisionState.mcqIndex];
