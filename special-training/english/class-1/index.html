@@ -2679,7 +2679,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/happysangitanms/assets/main/fallback%20audio.m4a";
+
 const CLASS_NAME = "special";
 
 function getDeviceId() {
@@ -3351,447 +3351,7 @@ let currentSentence = 0;
 let scores = { mcq: 0, tf: 0, fib: 0, matching: 0, arrange: 0 };
 
 
-// ==========================================
-// SEQUENTIAL AUDIO PLAYBACK SYSTEM
-// ==========================================
 
-let sequentialAudioState = {
-    isPlaying: false,
-    currentPointIndex: 0,
-    totalPoints: 0,
-    audioQueue: [],
-    currentTopicAudio: null
-};
-
-function startSequentialAudio(topic) {
-    stopAudioCompletely();
-    
-    sequentialAudioState = {
-        isPlaying: true,
-        currentPointIndex: 0,
-        totalPoints: topic.audioPoints.length,
-        audioQueue: topic.audioPoints,
-        currentTopicAudio: null
-    };
-    
-    const explanationDiv = document.getElementById('topicExplanation');
-    if (!explanationDiv) return;
-    
-    explanationDiv.className = 'answer-section';
-    explanationDiv.innerHTML = '';
-    
-    playNextPoint();
-}
-
-function playNextPoint() {
-    const { currentPointIndex, audioQueue, totalPoints } = sequentialAudioState;
-    
-    if (currentPointIndex >= totalPoints) {
-        sequentialAudioState.isPlaying = false;
-        updateAudioButtonState('stopped');
-        return;
-    }
-    
-    const point = audioQueue[currentPointIndex];
-    const explanationDiv = document.getElementById('topicExplanation');
-    
-    if (!point || !explanationDiv) {
-        console.error('Missing point or explanation div');
-        sequentialAudioState.isPlaying = false;
-        updateAudioButtonState('stopped');
-        return;
-    }
-    
-    // ✅ VALIDATE POINT DATA FIRST
-    if (!point.text || typeof point.text !== 'string' || point.text.trim() === '') {
-        console.error('Invalid point text:', point);
-        sequentialAudioState.currentPointIndex++;
-        setTimeout(playNextPoint, 100);
-        return;
-    }
-    
-    updateAudioButtonState('playing', currentPointIndex + 1, totalPoints);
-    
-    // ✅ Use fallback if URL is invalid
-    let audioUrl = point.audio;
-    const isAlreadyFallback = (audioUrl === FALLBACK_AUDIO_URL);
-    
-    if (!isValidAudioUrl(audioUrl)) {
-        console.warn('Invalid audio URL, using fallback');
-        audioUrl = FALLBACK_AUDIO_URL;
-    }
-    
-    // ✅ STOP AND CLEANUP any existing audio FIRST
-    if (sequentialAudioState.currentTopicAudio) {
-        sequentialAudioState.currentTopicAudio.pause();
-        sequentialAudioState.currentTopicAudio.currentTime = 0;
-        sequentialAudioState.currentTopicAudio.src = '';
-        sequentialAudioState.currentTopicAudio = null;
-    }
-    
-    const audio = new Audio();
-    sequentialAudioState.currentTopicAudio = audio;
-    
-    let hasTriedFallback = false;
-    let hasMovedToNext = false;
-    let isHandwritingComplete = false;
-    let isAudioComplete = false;
-    let audioStartedPlaying = false; // ✅ NEW: Track if audio actually started
-    
-    // ✅ FIXED: Function to check if we can move to next point
-    function checkIfReadyForNext() {
-        // ⚠️ KEY FIX: Only proceed if audio actually started playing OR handwriting is done
-        // This prevents premature progression when audio fails to load
-        const canProceed = isHandwritingComplete && (isAudioComplete || !audioStartedPlaying);
-        
-        if (canProceed && !hasMovedToNext) {
-            hasMovedToNext = true;
-            sequentialAudioState.currentPointIndex++;
-            setTimeout(playNextPoint, 300);
-        }
-    }
-    
-    // ✅ Start handwriting with completion callback
-    try {
-        appendPointToExplanation(point.text, () => {
-            isHandwritingComplete = true;
-            checkIfReadyForNext();
-        });
-    } catch (error) {
-        console.error('Error in handwriting animation:', error);
-        isHandwritingComplete = true;
-        checkIfReadyForNext();
-    }
-    
-    // ✅ FIXED: Error handler - wait for audio to actually play before giving up
-    const handleSequentialError = () => {
-        if (hasMovedToNext) return;
-        
-        console.error('Sequential audio load error:', audioUrl);
-        
-        if (!hasTriedFallback && !isAlreadyFallback && audioUrl !== FALLBACK_AUDIO_URL) {
-            hasTriedFallback = true;
-            console.log('Trying fallback for sequential audio...');
-            
-            audio.pause();
-            audio.src = '';
-            
-            audio.src = FALLBACK_AUDIO_URL;
-            audio.play().then(() => {
-                audioStartedPlaying = true; // ✅ Mark as started
-            }).catch(err => {
-                console.error('Fallback sequential audio failed:', err);
-                // ✅ FIXED: Don't immediately move to next - let handwriting finish
-                if (!hasMovedToNext) {
-                    console.warn('Audio failed, will wait for handwriting to complete');
-                    isAudioComplete = true;
-                    // Only move forward if handwriting is already done
-                    if (isHandwritingComplete) {
-                        checkIfReadyForNext();
-                    }
-                }
-            });
-        } else {
-            // Already tried fallback or this IS fallback - wait for handwriting
-            if (!hasMovedToNext) {
-                console.error('Audio completely failed, waiting for handwriting');
-                isAudioComplete = true;
-                // Only move forward if handwriting is already done
-                if (isHandwritingComplete) {
-                    checkIfReadyForNext();
-                }
-            }
-        }
-    };
-    
-    // Audio ended handler
-    function handleAudioEnded() {
-        if (!hasMovedToNext) {
-            isAudioComplete = true;
-            checkIfReadyForNext();
-        }
-    }
-    
-    // ✅ NEW: Track when audio actually starts playing
-    function handleAudioPlay() {
-        audioStartedPlaying = true;
-        console.log('Audio started playing successfully');
-    }
-    
-    audio.removeEventListener('error', handleSequentialError);
-    audio.removeEventListener('ended', handleAudioEnded);
-    audio.removeEventListener('play', handleAudioPlay);
-    
-    audio.addEventListener('error', handleSequentialError, { once: true });
-    audio.addEventListener('ended', handleAudioEnded, { once: true });
-    audio.addEventListener('play', handleAudioPlay, { once: true });
-    
-    audio.src = audioUrl;
-    audio.play().then(() => {
-        audioStartedPlaying = true;
-    }).catch(err => {
-        console.error('Sequential audio play failed:', err);
-        handleSequentialError();
-    });
-}
-    
-function appendPointToExplanation(pointText, onComplete) {
-    // ✅ ADD VALIDATION
-    if (!pointText || typeof pointText !== 'string' || pointText.trim() === '') {
-        console.error('Invalid text provided to appendPointToExplanation:', pointText);
-        if (onComplete) onComplete(); // ✅ Call completion even on error
-        return;
-    }
-    
-    // ✅ CLEAR ANY EXISTING TIMEOUT TO PREVENT OVERLAPPING ANIMATIONS
-    if (typingTimeout) {
-        clearTimeout(typingTimeout);
-        typingTimeout = null;
-    }
-    
-    const explanationDiv = document.getElementById('topicExplanation');
-    if (!explanationDiv) {
-        if (onComplete) onComplete();
-        return;
-    }
-    
-    // Check if this is the first point
-    const isFirstPoint = explanationDiv.children.length === 0 || !explanationDiv.querySelector('.typing-text');
-    
-    if (isFirstPoint) {
-        // First point - setup blackboard with hand
-        explanationDiv.innerHTML = `
-            <div class="typing-text"></div>
-            <div class="writing-hand writing">✍️</div>
-            <div class="chalk-piece"></div>
-        `;
-    } else {
-        // Re-add hand and chalk for new point
-        const existingHand = explanationDiv.querySelector('.writing-hand');
-        const existingChalk = explanationDiv.querySelector('.chalk-piece');
-        
-        if (existingHand) existingHand.remove();
-        if (existingChalk) existingChalk.remove();
-        
-        const hand = document.createElement('div');
-        hand.className = 'writing-hand writing';
-        hand.textContent = '✍️';
-        
-        const chalk = document.createElement('div');
-        chalk.className = 'chalk-piece';
-        
-        explanationDiv.appendChild(hand);
-        explanationDiv.appendChild(chalk);
-    }
-    
-    const typingDiv = explanationDiv.querySelector('.typing-text');
-    if (!typingDiv) {
-        if (onComplete) onComplete();
-        return;
-    }
-    
-    // Add line break if not first point
-    if (!isFirstPoint) {
-        typingDiv.appendChild(document.createElement('br'));
-    }
-    
-    const hand = explanationDiv.querySelector('.writing-hand');
-    const chalk = explanationDiv.querySelector('.chalk-piece');
-    
-    // Type the text character by character
-    let charIndex = 0;
-    
-    function createChalkDust(x, y) {
-        const dust = document.createElement('div');
-        dust.className = 'chalk-dust';
-        dust.style.left = x + 'px';
-        dust.style.top = y + 'px';
-        explanationDiv.appendChild(dust);
-        setTimeout(() => dust.remove(), 600);
-    }
-    
-    function moveHandToCursor() {
-        if (!hand || !chalk || !typingDiv) return;
-        
-        const sectionRect = explanationDiv.getBoundingClientRect();
-        const range = document.createRange();
-        
-        const walker = document.createTreeWalker(
-            typingDiv,
-            NodeFilter.SHOW_TEXT,
-            null,
-            false
-        );
-        
-        let lastTextNode = null;
-        let node;
-        while (node = walker.nextNode()) {
-            lastTextNode = node;
-        }
-        
-        if (lastTextNode && lastTextNode.length > 0) {
-            try {
-                range.setStart(lastTextNode, lastTextNode.length);
-                range.setEnd(lastTextNode, lastTextNode.length);
-            } catch(e) {
-                range.selectNodeContents(typingDiv);
-                range.collapse(false);
-            }
-        } else {
-            range.selectNodeContents(typingDiv);
-            range.collapse(false);
-        }
-        
-        const rangeRect = range.getBoundingClientRect();
-        const targetX = rangeRect.left - sectionRect.left;
-        const targetY = rangeRect.top - sectionRect.top;
-        
-        hand.style.left = (targetX - 25) + 'px';
-        hand.style.top = (targetY - 35) + 'px';
-        chalk.style.left = (targetX - 3) + 'px';
-        chalk.style.top = (targetY - 5) + 'px';
-    }
-    
-   function typeNextChar() {
-    // ✅ SAFETY CHECK: Stop if animation was cancelled
-    if (!hand || !chalk || !typingDiv) {
-        typingTimeout = null;
-        if (onComplete) onComplete();
-        return;
-    }
-    
-    if (charIndex < pointText.length) {
-        // ✅ CHECK FOR <br> TAG FIRST
-        if (pointText.substr(charIndex, 4) === '<br>') {
-            typingDiv.appendChild(document.createElement('br'));
-            charIndex += 4;
-            
-            requestAnimationFrame(() => {
-                moveHandToCursor();
-            });
-            
-            typingTimeout = setTimeout(typeNextChar, 100);
-            return;
-        }
-        
-        // ✅ CHECK FOR OTHER HTML TAGS (skip them)
-        if (pointText.charAt(charIndex) === '<') {
-            const tagEnd = pointText.indexOf('>', charIndex);
-            if (tagEnd !== -1) {
-                // Skip the entire tag
-                charIndex = tagEnd + 1;
-                typingTimeout = setTimeout(typeNextChar, 0);
-                return;
-            }
-        }
-        
-        // Type regular characters
-        const chars = Array.from(pointText);
-        const actualIndex = Array.from(pointText.substring(0, charIndex)).length;
-        
-        if (actualIndex < chars.length) {
-            const char = chars[actualIndex];
-            const textNode = document.createTextNode(char);
-            typingDiv.appendChild(textNode);
-            
-            charIndex += char.length;
-            
-            requestAnimationFrame(() => {
-                moveHandToCursor();
-                if (char.trim() !== '' && Math.random() > 0.7) {
-                    const sectionRect = explanationDiv.getBoundingClientRect();
-                    const handRect = hand.getBoundingClientRect();
-                    createChalkDust(
-                        handRect.left - sectionRect.left + 20,
-                        handRect.top - sectionRect.top + 35
-                    );
-                }
-            });
-            
-            let speed;
-            if (char === '.') speed = 40;
-            else if (char === ',') speed = 40;
-            else if (char === ' ') speed = 40;
-            else speed = 40;
-            
-            typingTimeout = setTimeout(typeNextChar, speed);
-        } else {
-            finishWritingPoint();
-        }
-    } else {
-        finishWritingPoint();
-    }
-}
-    
-    function finishWritingPoint() {
-        if (hand) {
-            hand.classList.remove('writing');
-            hand.style.transition = 'all 0.2s ease-out';
-            hand.style.transform = 'translateY(15px) scale(0.9)';
-            hand.style.opacity = '0';
-        }
-        if (chalk) {
-            chalk.style.transition = 'all 0.2s ease-out';
-            chalk.style.opacity = '0';
-        }
-        
-        setTimeout(() => {
-            if (hand && hand.parentNode) hand.remove();
-            if (chalk && chalk.parentNode) chalk.remove();
-        }, 200);
-        
-        typingTimeout = null;
-        
-        // Scroll into view
-        if (typingDiv) {
-            typingDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-        
-        // ✅ CALL COMPLETION CALLBACK
-        if (onComplete) onComplete();
-    }
-    
-    // ✅ START IMMEDIATELY
-    moveHandToCursor();
-    setTimeout(typeNextChar, 50);
-}
-   
-function updateAudioButtonState(state, currentPoint = 0, totalPoints = 0) {
-    const counterWrapper = document.querySelector('.topic-counter-wrapper');
-    if (!counterWrapper) return;
-    
-    const audioBtn = counterWrapper.querySelector('.audio-control-btn');
-    if (!audioBtn) return;
-    
-    switch(state) {
-        case 'playing':
-            audioBtn.textContent = `${currentPoint}/${totalPoints}`;
-            audioBtn.classList.add('playing');
-            audioBtn.classList.remove('paused', 'error');
-            audioBtn.style.fontSize = '14px';
-            break;
-        case 'stopped':
-            audioBtn.textContent = '🔊';
-            audioBtn.classList.remove('playing', 'paused', 'error');
-            audioBtn.style.fontSize = '18px';
-            break;
-        case 'error':
-            audioBtn.textContent = '❌';
-            audioBtn.classList.add('error');
-            audioBtn.classList.remove('playing', 'paused');
-            break;
-    }
-}
-
-function stopSequentialAudio() {
-    if (sequentialAudioState.currentTopicAudio) {
-        sequentialAudioState.currentTopicAudio.pause();
-        sequentialAudioState.currentTopicAudio.currentTime = 0;
-        sequentialAudioState.currentTopicAudio = null;
-    }
-    sequentialAudioState.isPlaying = false;
-    updateAudioButtonState('stopped');
-}
 
 
     
@@ -3799,221 +3359,7 @@ function stopSequentialAudio() {
 // SIMPLE AUDIO SYSTEM - COMPLETE REWRITE
 // ==========================================
 
-let currentAudio = null;
-let currentAudioButton = null;
-
 // Create audio button HTML
-function createAudioButton(audioUrl, containerId = null) {
-    if (!audioUrl || audioUrl.includes('example.com') || audioUrl.includes('YOUR_')) {
-        return '';
-    }
-    
-    const buttonId = containerId ? `audio-btn-${containerId}` : `audio-btn-${Date.now()}`;
-    const buttonHtml = `<button class="audio-control-btn" id="${buttonId}" data-audio="${audioUrl}" data-initialized="false">
-        🔊
-    </button>`;
-    
-    // Attach event listener after button is added to DOM
-    setTimeout(() => {
-        const btn = document.getElementById(buttonId);
-        if (btn && btn.dataset.initialized === 'false') {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                handleAudioClick(buttonId, audioUrl);
-            });
-            btn.dataset.initialized = 'true';
-        }
-    }, 100);
-     
-    return buttonHtml;
-}
-
-// Handle audio button click
-function handleAudioClick(buttonId, audioUrl) {
-    const button = document.getElementById(buttonId);
-    
-    if (!button || !audioUrl) return;
-    
-    // Add click animation
-    button.style.transform = 'scale(0.9)';
-    setTimeout(() => {
-        button.style.transform = '';
-    }, 100);
-    
-  // If clicking same button and audio is playing
-    if (currentAudio && currentAudioButton === buttonId) {
-        if (!currentAudio.paused) {
-            // Stop the audio but DON'T hide button
-            resetButtonToNormal(button);
-            return;
-        }
-    }
-    
-    // Stop any existing audio first
-    stopAudioCompletely();
-    
-    // Start new audio
-    playAudio(buttonId, audioUrl, button);
-}
-    
-// NEW FUNCTION: Reset button without hiding
-function resetButtonToNormal(button) {
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio.src = '';
-        currentAudio.load();
-        currentAudio = null;
-    }
-    
-    if (button) {
-        button.textContent = '🔊';
-        button.classList.remove('playing', 'paused', 'error');
-        button.style.display = 'inline-flex';
-        button.style.opacity = '1';
-        button.disabled = false;
-        button.title = 'ଶୁଣନ୍ତୁ (Listen)';
-    }
-    
-    currentAudioButton = null;
-}
-
-    
-// Play audio with fallback
-function playAudio(buttonId, audioUrl, button) {
-    // Track if we've already tried fallback to prevent infinite loop
-    const isAlreadyFallback = (audioUrl === FALLBACK_AUDIO_URL);
-    
-    // Validate URL first
-    if (!isValidAudioUrl(audioUrl)) {
-        console.warn('Invalid audio URL, trying fallback');
-        if (!isAlreadyFallback) {
-            audioUrl = FALLBACK_AUDIO_URL;
-        } else {
-            // Even fallback URL is invalid, just reset button
-            resetButtonToNormal(button);
-            return;
-        }
-    }
-    
-    try {
-        currentAudio = new Audio();
-        currentAudioButton = buttonId;
-        
-        // Update button to pause icon
-        button.textContent = '⏸️';
-        button.classList.add('playing');
-        button.classList.remove('paused', 'error');
-        button.style.display = '';
-        button.disabled = false;
-        
-        // Error handler with fallback logic (ONE TIME ONLY)
-        const handleAudioError = () => {
-            console.error('Audio load error for:', audioUrl);
-            
-            // Only try fallback ONCE
-            if (!isAlreadyFallback && audioUrl !== FALLBACK_AUDIO_URL) {
-                console.log('Trying fallback audio...');
-                
-                // Clean up old audio
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.src = '';
-                    currentAudio.load();
-                }
-                
-                // Retry with fallback (recursive call with fallback URL)
-                playAudio(buttonId, FALLBACK_AUDIO_URL, button);
-            } else {
-                // We already tried fallback or this IS the fallback - give up
-                console.error('Fallback audio also failed');
-                resetButtonToNormal(button);
-            }
-        };
-        
-        // Set source
-        currentAudio.src = audioUrl;
-        
-        // When audio ends naturally
-        currentAudio.addEventListener('ended', () => {
-            resetButtonToNormal(button);
-        }, { once: true }); // ← IMPORTANT: Fire only once
-        
-        // If audio fails to load, try fallback
-        currentAudio.addEventListener('error', handleAudioError, { once: true }); // ← IMPORTANT: Fire only once
-        
-        // Play audio
-        const playPromise = currentAudio.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                console.log('Audio playing successfully');
-            }).catch(error => {
-                console.error('Play failed:', error);
-                handleAudioError();
-            });
-        }
-        
-    } catch (error) {
-        console.error('Audio creation error:', error);
-        // Try fallback as last resort (but only once)
-        if (!isAlreadyFallback && audioUrl !== FALLBACK_AUDIO_URL) {
-            playAudio(buttonId, FALLBACK_AUDIO_URL, button);
-        } else {
-            resetButtonToNormal(button);
-        }
-    }
-}
-
-function stopAudioCompletely() {
-    if (currentAudioButton) {
-        const button = document.getElementById(currentAudioButton);
-        if (button) {
-            resetButtonToNormal(button);
-        }
-    } else if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio.src = '';
-        currentAudio.load();
-        currentAudio = null;
-    }
-}
-    
-function handleAudioError(button) {
-    // DON'T call stopAudioCompletely - just reset the button
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio.src = '';
-        currentAudio.load();
-        currentAudio = null;
-    }
-    
-    if (button) {
-        // Just reset to normal instead of showing error
-        button.textContent = '🔊';
-        button.classList.remove('playing', 'paused', 'error');
-        button.style.display = 'inline-flex';
-        button.style.opacity = '1';
-        button.disabled = false;
-        button.title = 'ଶୁଣନ୍ତୁ (Listen)';
-    }
-    
-    currentAudioButton = null;
-}
-
-// Validate audio URL
-function isValidAudioUrl(url) {
-    if (!url) return false;
-    if (url.includes('example.com')) return false;
-    if (url.includes('YOUR_USERNAME')) return false;
-    if (url.includes('YOUR_REPO')) return false;
-    if (!url.startsWith('http')) return false;
-    return true;
-}
-
     
 let maxScores = { mcq: 0, tf: 0, fib: 0, matching: 0, arrange: 0 };
 let completedTests = { mcq: false, tf: false, fib: false, matching: false, arrange: false, stq: false };
@@ -4845,10 +4191,7 @@ function updateProgress() {
     scoreDisplay.style.display = 'block';
 }
     
-function cleanupAudio() {
-    stopAudioCompletely();
-    stopSequentialAudio();  // ADD THIS LINE
-}
+
     
     
 // Configuration object for all assistants - EASY TO MANAGE
@@ -5200,39 +4543,12 @@ let currentTopicIndex = 0;
 function loadTopic(index, autoPlay = false) {
     const topic = topicsData[index];
     
-    stopAudioCompletely();
-    stopSequentialAudio();
-    
     const counterSpan = document.getElementById('topicCounter');
     if (counterSpan) {
         counterSpan.textContent = `Topic ${index + 1} of ${topicsData.length}`;
     }
     
-    const oldAudio = document.querySelector('.topic-counter-wrapper .audio-control-btn');
-    if (oldAudio) oldAudio.remove();
-    
-    const audioBtn = document.createElement('button');
-    audioBtn.className = 'audio-control-btn';
-    audioBtn.textContent = '🔊';
-    audioBtn.id = `topic-audio-${index}`;
-    audioBtn.style.fontSize = '18px';
-    audioBtn.title = 'Click to start teaching';
-    
-    audioBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        if (sequentialAudioState.isPlaying) {
-            stopSequentialAudio();
-        } else {
-            startSequentialAudio(topic);
-        }
-    });
-    
-    const counterWrapper = document.querySelector('.topic-counter-wrapper');
-    const nextBtn = document.getElementById('nextBtn');
-    if (nextBtn && counterWrapper) {
-        counterWrapper.insertBefore(audioBtn, nextBtn);
-    }
+  
     
     const heading = document.getElementById('topicHeading');
     if (heading) heading.textContent = topic.heading;
@@ -5268,13 +4584,7 @@ function loadTopic(index, autoPlay = false) {
         nextBtnNav.style.opacity = isLast ? '0.5' : '1';
     }
     
-    // ✅ Auto-play if requested (when navigating)
-    if (autoPlay) {
-        setTimeout(() => {
-            startSequentialAudio(topic);
-        }, 500);
-    }
-}
+  
     
 function triggerHandwritingForWelcome(welcomeText) {
     const explanationDiv = document.getElementById('welcomeExplanation');
@@ -5609,8 +4919,6 @@ function startLearning() {
 }
     
 function navigateTopic(direction) {
-    stopAudioCompletely();
-    stopSequentialAudio();
     
     currentTopicIndex += direction;
     
@@ -5618,7 +4926,7 @@ function navigateTopic(direction) {
     if (currentTopicIndex >= topicsData.length) currentTopicIndex = topicsData.length - 1;
     
     setTimeout(() => {
-        loadTopic(currentTopicIndex, true);  // ← CHANGED: Pass true to auto-play
+      loadTopic(currentTopicIndex, false); // ← CHANGED: Pass true to auto-play
     }, 50);
 }
     
@@ -5660,7 +4968,7 @@ let wordAudio = null;
 
 // Open Word Learning
 function startWordLearning() {
-    stopAudioCompletely();
+   
     
     const container = document.getElementById('wordContainer');
     container.style.display = 'block';
@@ -5705,11 +5013,7 @@ function showWordCard() {
     // Hide feedback
     document.getElementById('wordFeedback').style.display = 'none';
     
-    // Play intro audio
-    playWordAudio(word.audio.intro, () => {
-        playWordAudio(word.audio.encourage);
-        enableWordDrawing();
-    });
+enableWordDrawing();
 }
 
 // Enable Drawing
@@ -5824,7 +5128,7 @@ function wordDone() {
     if (pixelCount >= range.min && pixelCount <= range.max) {
         // ✅ LOOKS REASONABLE
         showWordFeedback(`🌟🌟🌟 ଅଭ୍ଯାସ ଜାରି ରଖନ୍ତୁ ।`, () => {
-            playWordAudio(word.audio.praise);
+            
         });
         createConfetti();
     } else if (pixelCount < range.min) {
@@ -5904,29 +5208,6 @@ function updateWordNavButtons() {
         forwardBtn.style.opacity = '1';
         forwardBtn.style.cursor = 'pointer';
     }
-}
-
-// Play Audio
-function playWordAudio(url, callback) {
-    if (wordAudio) {
-        wordAudio.pause();
-    }
-    
-    wordAudio = new Audio(url);
-    
-    wordAudio.onended = () => {
-        if (callback) callback();
-    };
-    
-    wordAudio.onerror = () => {
-        console.error('Audio failed');
-        if (callback) callback();
-    };
-    
-    wordAudio.play().catch(err => {
-        console.error('Play failed:', err);
-        if (callback) callback();
-    });
 }
 
 
@@ -6604,23 +5885,10 @@ let revisionState = {
 };
 
 function stopRevisionAudio() {
-    if (revisionState.audio) {
-        revisionState.audio.pause();
-        revisionState.audio = null;
-    }
+    // audio removed
 }
 
-function playRevisionAudio(url, onEnd) {
-    stopRevisionAudio();
-    if (!url || !isValidAudioUrl(url)) {
-        if (onEnd) setTimeout(onEnd, 100);
-        return;
-    }
-    revisionState.audio = new Audio(url);
-    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
-    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
-    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
-}
+
 
 function setRevisionScreen(html) {
     const screen = document.getElementById('revisionScreen');
@@ -6684,7 +5952,7 @@ function toggleMedia(type) {
         videoDisplay.style.display = 'none';
         revisionBoard.style.display = 'none';
         logoDisplay.style.display = 'block';
-        stopRevisionAudio();
+      
         revisionState.active = false;
         resetAllBtnStyles();
     };
@@ -6973,19 +6241,19 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 
 // Cleanup audio when leaving page
 window.addEventListener('beforeunload', () => {
-    stopAudioCompletely();
+   
 });
 
 // Cleanup audio when page becomes hidden
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        stopAudioCompletely();
+       
     }
 });
 
 // Cleanup audio on page navigation
 window.addEventListener('pagehide', () => {
-    stopAudioCompletely();
+   
 });
     </script>
 </body>
