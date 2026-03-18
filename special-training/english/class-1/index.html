@@ -4579,13 +4579,13 @@ function loadTopic(index, autoPlay = false) {
         prevBtn.style.opacity = isFirst ? '0.5' : '1';
     }
     
-    if (nextBtnNav) {
+if (nextBtnNav) {
         nextBtnNav.disabled = isLast;
         nextBtnNav.style.opacity = isLast ? '0.5' : '1';
     }
     
-  
-    
+} 
+
 function triggerHandwritingForWelcome(welcomeText) {
     const explanationDiv = document.getElementById('welcomeExplanation');
     
@@ -6046,6 +6046,9 @@ function startRevisionLesson() {
     }, 300);
 }
     
+function playRevisionAudio(url, onEnd) {
+    if (onEnd) setTimeout(onEnd, 100);
+}
 
 function rvUnderstood(yes) {
     if (!yes) {
