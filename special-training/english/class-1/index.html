@@ -3461,14 +3461,30 @@ function loadMermaidDiagram() {
             </div>
         `;
         
-        // Render diagram after brief delay (allows UI to update)
+        // Render diagram after brief delay
         setTimeout(() => {
             container.innerHTML = `
                 <h3>📊 ଏହି ଚିତ୍ର ମାଧ୍ୟମରେ ମନେରଖିବାକୁ ଚେଷ୍ଟା କରନ୍ତୁ : </h3>
-                <div id="${diagramId}" class="mermaid">
-                    ${sentence.mermaid}
+                <div style="width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;">
+                    <div id="${diagramId}" class="mermaid" style="
+                        min-width: 600px;
+                        width: 100%;
+                        font-size: 14px;
+                        text-align: center;
+                    ">
+                        ${sentence.mermaid}
+                    </div>
                 </div>
             `;
+            
+            mermaid.initialize({ 
+                startOnLoad: false, 
+                theme: 'default',
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true
+                }
+            });
             
             mermaid.run({
                 nodes: document.querySelectorAll(`#${diagramId}`)
@@ -4558,7 +4574,10 @@ function loadTopic(index, autoPlay = false) {
         explanationDiv.className = 'answer-section';
         // ✅ CHANGED: Only show instruction message if NOT auto-playing
         if (!autoPlay) {
-            explanationDiv.innerHTML = '<div style="text-align: center; padding: 20px; color: #f0f0f0;">👆 ଆରମ୍ଭ କରିବା ପାଇଁ ଉପରେ ଥିବା ଅଡିଓ ବଟନ୍ ରେ କ୍ଲିକ୍ କରନ୍ତୁ । </div>';
+          explanationDiv.innerHTML = '';
+setTimeout(() => {
+    triggerHandwritingForMainCard(topic.audioPoints[0].text);
+}, 300);
         } else {
             // Clear the div - audio will start immediately
             explanationDiv.innerHTML = '';
