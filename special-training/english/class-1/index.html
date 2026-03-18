@@ -3452,7 +3452,6 @@ function loadMermaidDiagram() {
     if (sentence.mermaid) {
         const diagramId = `mermaid-diagram-${currentSentence}`;
         
-        // Show loading indicator immediately
         container.innerHTML = `
             <h3>📊 ଏହି ଚିତ୍ର ମାଧ୍ୟମରେ ମନେରଖିବାକୁ ଚେଷ୍ଟା କରନ୍ତୁ : </h3>
             <div style="text-align: center; padding: 40px;">
@@ -3461,41 +3460,13 @@ function loadMermaidDiagram() {
             </div>
         `;
         
-        // Render diagram after brief delay
         setTimeout(() => {
             container.innerHTML = `
                 <h3>📊 ଏହି ଚିତ୍ର ମାଧ୍ୟମରେ ମନେରଖିବାକୁ ଚେଷ୍ଟା କରନ୍ତୁ : </h3>
-               <div style="
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-">
-    <div id="${diagramId}" class="mermaid" style="
-        min-width: 500px;
-        max-width: 100%;
-        font-size: 12px;
-        text-align: center;
-        display: block;
-    ">
-                        ${sentence.mermaid}
-                    </div>
+                <div id="${diagramId}" class="mermaid">
+                    ${sentence.mermaid}
                 </div>
             `;
-            
-         mermaid.initialize({ 
-    startOnLoad: false, 
-    theme: 'default',
-    flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-        curve: 'basis'
-    },
-    fontSize: 12
-});
             
             mermaid.run({
                 nodes: document.querySelectorAll(`#${diagramId}`)
