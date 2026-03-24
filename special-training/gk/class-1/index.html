@@ -2360,21 +2360,60 @@ body > div:first-child {
 </div>               
             <div id="testContainer"></div>
 
-     <div class="image-container" style="
-    margin-top: 0px;
-    text-align: center;
+<div style="margin-top: 0px; padding: 0 12px; text-align: center;">
+
+    <!-- Three buttons side by side - FIXED -->
+    <div style="display: flex; justify-content: space-between; 
+                align-items: center; margin-bottom: 8px; 
+                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+        
+        <button id="audioToggleBtn" 
+            onclick="toggleMedia('audio')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଆଲୋଚନା
+        </button>
+
+        <button id="revisionToggleBtn"
+            onclick="toggleMedia('revision')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ରିଭିଜନ୍
+        </button>
+
+        <button id="videoToggleBtn" 
+            onclick="toggleMedia('video')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଭିଡିଓ
+        </button>
+
+    </div>
+
+    <!-- Media Placeholder - same size as logo -->
+<div id="mediaPlaceholder" style="
+    display: inline-block;
+    padding: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    position: relative;
+    overflow: hidden;
 ">
-    <div style="
-        display: inline-block;
-        padding: 8px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        width: 320px;
-    ">
+    <!-- DEFAULT: Logo Image -->
+    <div id="logoDisplay">
         <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
              alt="Logo" 
-             class="assistant-image"
              style="
                 display: block;
                 width: 100%;
@@ -2386,15 +2425,60 @@ body > div:first-child {
                 padding: 5px;
              ">
     </div>
+
+    <!-- AUDIO PLAYER - Hidden by default -->
+    <div id="audioDisplay" style="display: none;">
+        <iframe
+            id="audioIframe"
+            src=""
+            data-src="https://www.youtube.com/embed/RLHqx-JdayI?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+            style="
+                display: block;
+                width: 100%;
+                height: 180px;
+                border-radius: 15px;
+                border: 3px solid white;
+            "
+            allow="accelerometer; autoplay; clipboard-write; 
+                   encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- VIDEO PLAYER - Hidden by default -->
+    <div id="videoDisplay" style="display: none;">
+        <iframe
+            id="videoIframe"
+            src=""
+            data-src="https://www.youtube.com/embed/kzcHUJIlhAQ?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+            style="
+                display: block;
+                width: 100%;
+                height: 180px;
+                border-radius: 15px;
+                border: 3px solid white;
+            "
+            allow="accelerometer; autoplay; clipboard-write; 
+                   encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- REVISION WHITEBOARD - sibling of audio/video, same level -->
+    <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden;">
+        <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden; background: white;">
+        </div>
+    </div>
+
+</div>
+     
     <p class="info-text" style="
         margin-top: 15px;
         font-size: 14px;
         color: #000000;
         font-weight: bold;
-    ">
-    </p>
-</div>       
-              
+    "></p>
+</div>
 
           <!-- Add this after the Mermaid button section -->
 <button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
@@ -2500,7 +2584,6 @@ body > div:first-child {
     </div>
 </div>
  
-<!-- E-Guru Assistant Container -->
 <div id="eGuruContainer" class="assistant-container">
     <div class="assistant-header">
         <h3>👨‍🏫 ଇ-ବିଦ୍ୟା ସହାୟକ - Teacher Connect</h3>
@@ -2674,7 +2757,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Arts XI କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2759,166 +2842,177 @@ const wordData = {
     currentWord: 0,
     words: [
         {
-            word: "ECONOMICS",
-            odia: "ଅର୍ଥନୀତି",
-            emoji: "💰",
-            odiaUse: "ଏକ ସାମାଜିକ ବିଜ୍ଞାନ ଯାହା ସୀମିତ ସମ୍ପଦ ଓ ଅସୀମ ଆବଶ୍ୟକତା ଅଧ୍ୟୟନ କରେ । <br> ଉଦାହରଣ: ଉତ୍ପାଦନ, ବଣ୍ଟନ, ଉପଭୋଗ ଅର୍ଥନୀତିର ବିଷୟ ।",
+            word: "WAKE UP",
+            odia: "ନିଦରୁ ଜାଗିବା / ଉଠିବା",
+            emoji: "⏰",
+            odiaUse: "ନିଦରୁ ଜାଗିବା ବା ଉଠିବା । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । He wakes up daily. ସେ ପ୍ରତିଦିନ ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W1.m4a",
+                intro: "https://audio.evidya.de/SE1W1.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "SCARCITY",
-            odia: "ଅଭାବ",
-            emoji: "⚠️",
-            odiaUse: "ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା ଯେଉଁଥିରେ ସମ୍ପଦ ସୀମିତ କିନ୍ତୁ ଆବଶ୍ୟକତା ଅସୀମ । <br> ଉଦାହରଣ: କୃଷକଙ୍କ ପାଖରେ ସୀମିତ ଜମି, ଗୃହିଣୀଙ୍କ ପାଖରେ ସୀମିତ ଆୟ ।",
+            word: "EARLY",
+            odia: "ସକାଳୁ / ଆଗୁଆ",
+            emoji: "🌄",
+            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପୂର୍ବରୁ । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । Boys wake up early. ବାଳକମାନେ ସକାଳୁ ଉଠନ୍ତି ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W2.m4a",
+                intro: "https://audio.evidya.de/SE1W2.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "CHOICE",
-            odia: "ପସନ୍ଦ",
-            emoji: "🤔",
-            odiaUse: "ବିକଳ୍ପ ମଧ୍ୟରୁ ଗୋଟିଏ ବାଛିବାର ପ୍ରକ୍ରିୟା । <br> ଉଦାହରଣ: ଛାତ୍ର ବହି କିମ୍ବା ଖେଳନା କିଣିବାର ପସନ୍ଦ କରେ, କୃଷକ ଧାନ କିମ୍ବା ଗହମ ଚାଷର ପସନ୍ଦ କରେ ।",
+            word: "LATE",
+            odia: "ଡେରିରେ",
+            emoji: "🌙",
+            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପରେ । <br> ଉଦାହରଣ: I wake up late. ମୁଁ ଡେରିରେ ଉଠେ । She wakes up late. ସେ ଡେରିରେ ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W3.m4a",
+                intro: "https://audio.evidya.de/SE1W3.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "OPPORTUNITY COST",
-            odia: "ଅବସର ମୂଲ୍ୟ",
-            emoji: "↔️",
-            odiaUse: "ପସନ୍ଦ କରିବା ସମୟରେ ଛାଡ଼ିଥିବା ସର୍ବୋତ୍ତମ ବିକଳ୍ପର ମୂଲ୍ୟ । <br> ଉଦାହରଣ: ଯଦି ବହି କିଣ, ତେବେ ଖେଳନା ହେଉଛି ଅବସର ମୂଲ୍ୟ ।",
+            word: "DAILY",
+            odia: "ପ୍ରତିଦିନ",
+            emoji: "📅",
+            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ । <br> ଉଦାହରଣ: I wake up daily. ମୁଁ ପ୍ରତିଦିନ ଉଠେ । We wake up at sunrise daily. ଆମେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠୁ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W4.m4a",
+                intro: "https://audio.evidya.de/SE1W4.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "WANTS",
-            odia: "ଆବଶ୍ୟକତା",
-            emoji: "🎯",
-            odiaUse: "ମଣିଷର ଇଚ୍ଛା ଯାହା ଅସୀମ । <br> ଉଦାହରଣ: ଭୋକ, ତୃଷା, ବସ୍ତ୍ର, ବାସଗୃହ, ମୋବାଇଲ୍ ମଣିଷର ଆବଶ୍ୟକତା ।",
+            word: "QUICKLY",
+            odia: "ଜଲ୍ଦି",
+            emoji: "⚡",
+            odiaUse: "ଦ୍ରୁତ ଗତିରେ । <br> ଉଦାହରଣ: I wake up quickly. ମୁଁ ଜଲ୍ଦି ଉଠେ । You all wake up quickly. ତୁମେମାନେ ଜଲ୍ଦି ଉଠ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W5.m4a",
+                intro: "https://audio.evidya.de/SE1W5.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "UTILITY",
-            odia: "ଉପଯୋଗିତା",
-            emoji: "✨",
-            odiaUse: "ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣ କରିବାର ଶକ୍ତି । <br> ଉଦାହରଣ: ଖାଦ୍ୟର ଭୋକ ମେଣ୍ଟାଇବା ଶକ୍ତି, ପାଣିର ତୃଷା ମେଣ୍ଟାଇବା ଶକ୍ତି ।",
+            word: "SLOWLY",
+            odia: "ଧୀରେ",
+            emoji: "🐢",
+            odiaUse: "ଧୀର ଗତିରେ । <br> ଉଦାହରଣ: I wake up slowly. ମୁଁ ଧୀରେ ଉଠେ । He wakes up slowly. ସେ ଧୀରେ ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W6.m4a",
+                intro: "https://audio.evidya.de/SE1W6.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "GOODS",
-            odia: "ଦ୍ରବ୍ୟ",
-            emoji: "📦",
-            odiaUse: "ଆବଶ୍ୟକତା ପୂରଣ କରୁଥିବା ବସ୍ତୁ । <br> ଉଦାହରଣ: ଚାଉଳ, ରୋଟୀ, କପଡ଼ା, ବହି, ମୋବାଇଲ୍ ହେଉଛି ଦ୍ରବ୍ୟ ।",
+            word: "HAPPILY",
+            odia: "ଖୁସିରେ",
+            emoji: "😊",
+            odiaUse: "ଖୁସି ସହ । <br> ଉଦାହରଣ: I wake up happily. ମୁଁ ଖୁସିରେ ଉଠେ । She wakes up happily. ସେ ଖୁସିରେ ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W7.m4a",
+                intro: "https://audio.evidya.de/SE1W7.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "PRICE",
-            odia: "ମୂଲ୍ୟ",
-            emoji: "💵",
-            odiaUse: "ଦ୍ରବ୍ୟର ବିନିମୟ ମୂଲ୍ୟ ଯାହା ଟଙ୍କାରେ ମପାଯାଏ । <br> ଉଦାହରଣ: ଏକ କିଲୋ ଚାଉଳର ମୂଲ୍ୟ 50 ଟଙ୍କା, ଗୋଟିଏ ବହିର ମୂଲ୍ୟ 100 ଟଙ୍କା ।",
+            word: "TODAY",
+            odia: "ଆଜି",
+            emoji: "📆",
+            odiaUse: "ଏହି ଦିନ । <br> ଉଦାହରଣ: I wake up today. ମୁଁ ଆଜି ଉଠେ । Boys wake up very early today. ବାଳକମାନେ ଆଜି ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W8.m4a",
+                intro: "https://audio.evidya.de/SE1W8.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "WEALTH",
-            odia: "ସମ୍ପଦ",
-            emoji: "💎",
-            odiaUse: "ଉପଯୋଗୀ, ସୀମିତ ଓ ହସ୍ତାନ୍ତରଣୀୟ ବସ୍ତୁ । <br> ଉଦାହରଣ: ଜମି, ସୁନା, ଟଙ୍କା, ଘର, ଗାଡ଼ି ହେଉଛି ସମ୍ପଦ ।",
+            word: "NOW",
+            odia: "ଏବେ",
+            emoji: "👆",
+            odiaUse: "ଏହି ମୁହୂର୍ତ୍ତରେ । <br> ଉଦାହରଣ: I wake up now. ମୁଁ ଏବେ ଉଠେ । You wake up now. ତୁମେ ଏବେ ଉଠ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W9.m4a",
+                intro: "https://audio.evidya.de/SE1W9.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "PRODUCTION",
-            odia: "ଉତ୍ପାଦନ",
-            emoji: "🏭",
-            odiaUse: "ଦ୍ରବ୍ୟ ଓ ସେବା ସୃଷ୍ଟି କରିବାର ପ୍ରକ୍ରିୟା । <br> ଉଦାହରଣ: କୃଷକ ଫସଲ ଉତ୍ପାଦନ କରନ୍ତି, କାରଖାନା ଗାଡ଼ି ଉତ୍ପାଦନ କରେ ।",
+            word: "EVERY MORNING",
+            odia: "ପ୍ରତ୍ୟେକ ସକାଳ",
+            emoji: "🌅",
+            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ ସକାଳ ସମୟ । <br> ଉଦାହରଣ: I wake up every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ । We wake up every morning. ଆମେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W10.m4a",
+                intro: "https://audio.evidya.de/SE1W10.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "CONSUMPTION",
-            odia: "ଉପଭୋଗ",
-            emoji: "🍽️",
-            odiaUse: "ଦ୍ରବ୍ୟ ଓ ସେବା ବ୍ୟବହାର କରିବା । <br> ଉଦାହରଣ: ଖାଦ୍ୟ ଖାଇବା, କପଡ଼ା ପିନ୍ଧିବା, ମୋବାଇଲ୍ ବ୍ୟବହାର କରିବା ହେଉଛି ଉପଭୋଗ ।",
+            word: "VERY EARLY",
+            odia: "ବହୁତ ସକାଳୁ",
+            emoji: "⭐",
+            odiaUse: "ଅତ୍ୟନ୍ତ ଆଗୁଆ ସମୟ । <br> ଉଦାହରଣ: I wake up very early. ମୁଁ ବହୁତ ସକାଳୁ ଉଠେ । Boys wake up very early. ବାଳକମାନେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W11.m4a",
+                intro: "https://audio.evidya.de/SE1W11.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "MICROECONOMICS",
-            odia: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି",
-            emoji: "👤",
-            odiaUse: "ବ୍ୟକ୍ତିଗତ ଏକକ ଯଥା ପରିବାର ଓ କାରଖାନା ଅଧ୍ୟୟନ କରେ । <br> ଉଦାହରଣ: ଗୋଟିଏ ପରିବାରର ଆୟ, ଗୋଟିଏ କାରଖାନାର ଉତ୍ପାଦନ ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତିର ବିଷୟ ।",
+            word: "VERY LATE",
+            odia: "ବହୁତ ଡେରିରେ",
+            emoji: "😴",
+            odiaUse: "ଅତ୍ୟନ୍ତ ବିଳମ୍ବ ସମୟ । <br> ଉଦାହରଣ: I wake up very late. ମୁଁ ବହୁତ ଡେରିରେ ଉଠେ । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W12.m4a",
+                intro: "https://audio.evidya.de/SE1W12.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "MACROECONOMICS",
-            odia: "ସମଷ୍ଟି ଅର୍ଥନୀତି",
-            emoji: "🌍",
-            odiaUse: "ସମଗ୍ର ଅର୍ଥନୀତି ଯଥା ଦେଶର ଆୟ ଓ ବେକାରୀ ଅଧ୍ୟୟନ କରେ । <br> ଉଦାହରଣ: ଭାରତର ଜାତୀୟ ଆୟ, ମୁଦ୍ରାସ୍ଫୀତି, ବେକାରୀ ସମଷ୍ଟି ଅର୍ଥନୀତିର ବିଷୟ ।",
+            word: "AT SUNRISE",
+            odia: "ସୂର୍ଯ୍ୟ ଉଦୟରେ",
+            emoji: "🌞",
+            odiaUse: "ସୂର୍ଯ୍ୟ ଉଠିବା ସମୟ । <br> ଉଦାହରଣ: I wake up at sunrise. ମୁଁ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠେ । Boys wake up at sunrise daily. ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W13.m4a",
+                intro: "https://audio.evidya.de/SE1W13.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "CENTRAL PROBLEMS",
-            odia: "କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା",
-            emoji: "❓",
-            odiaUse: "ପ୍ରତ୍ୟେକ ଅର୍ଥନୀତିର ତିନୋଟି ମୂଳ ପ୍ରଶ୍ନ । <br> ଉଦାହରଣ: କ'ଣ ଉତ୍ପାଦନ କରିବା, କିପରି ଉତ୍ପାଦନ କରିବା, କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା ।",
+            word: "FEELING FRESH",
+            odia: "ତାଜା ଅନୁଭବ କରି",
+            emoji: "💚",
+            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଭଲ ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling fresh. ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ । She wakes up feeling fresh. ସେ ତାଜା ଅନୁଭବ କରି ଉଠେ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W14.m4a",
+                intro: "https://audio.evidya.de/SE1W14.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "RESOURCES",
-            odia: "ସମ୍ପଦ",
-            emoji: "⛏️",
-            odiaUse: "ଉତ୍ପାଦନ ପାଇଁ ଆବଶ୍ୟକ ସାଧନ ଯାହା ସୀମିତ । <br> ଉଦାହରଣ: ଜମି, ଶ୍ରମିକ, ପୁଞ୍ଜି, ପ୍ରାକୃତିକ ସମ୍ପଦ ଉତ୍ପାଦନର ସାଧନ ।",
+            word: "FEELING TIRED",
+            odia: "ଥକା ଅନୁଭବ କରି",
+            emoji: "😩",
+            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଥକା ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling tired. ମୁଁ ଥକା ଅନୁଭବ କରି ଉଠେ । We wake up feeling tired. ଆମେ ଥକା ଅନୁଭବ କରି ଉଠୁ ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1W15.m4a",
+                intro: "https://audio.evidya.de/SE1W15.m4a",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "FEELING HAPPY",
+            odia: "ଖୁସି ଅନୁଭବ କରି",
+            emoji: "😄",
+            odiaUse: "ଉଠିବା ପରେ ମନ ଖୁସି ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling happy. ମୁଁ ଖୁସି ଅନୁଭବ କରି ଉଠେ । Boys wake up feeling happy. ବାଳକମାନେ ଖୁସି ଅନୁଭବ କରି ଉଠନ୍ତି ।",
+            audio: {
+                intro: "https://audio.evidya.de/SE1W16.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
@@ -2994,90 +3088,84 @@ const courseData = {
   `, 
     audio: "",
 mermaid: `graph LR
-A["ଅର୍ଥନୀତି<br/>ECONOMICS"]
-A --> B["ଅର୍ଥ"]
-B --> C["ସାମାଜିକ ବିଜ୍ଞାନ ଯାହା<br/>ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର<br/>ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ"]
+A["⏰ WAKE UP<br/>ଜାଗିବା / ଉଠିବା"]
 
-A --> D["ଅଭାବ ଓ ପସନ୍ଦ"]
-D --> E["ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ<br/>ତେଣୁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ<br/>ଉଦାହରଣ: ବହି କି ଖେଳନା କିଣିବା"]
+A --> B["ନିୟମ"]
+B --> C["ଯଦି ବାକ୍ୟଟି - କର୍ତ୍ତା କରେ - ଏପରି ଅର୍ଥ ସୂଚାଉଥିବ, <br/> ତେବେ ନିମ୍ନଲିଖିତ ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ :"]
 
-A --> F["କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା"]
-F --> G["କ'ଣ ଉତ୍ପାଦନ କରିବା<br/>କିପରି ଉତ୍ପାଦନ କରିବା<br/>କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା"]
+A --> D["ନିୟମ-1"]
+D --> E["ଉକ୍ତ କର୍ତ୍ତା ଟି ଯଦି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇନଥିବ<br/> ତେବେ କ୍ରିୟା ସହିତ s ଯୋଡିକରି  ଲେଖାଯିବ ।"]
 
-A --> H["ମୌଳିକ ଧାରଣା"]
-H --> I["ଆବଶ୍ୟକତା, ଉପଯୋଗିତା, ଦ୍ରବ୍ୟ<br/>ମୂଲ୍ୟ ଓ ସମ୍ପଦର ଧାରଣା<br/>ଉଦାହରଣ: ଚାଉଳର ଉପଯୋଗିତା ଓ ମୂଲ୍ୟ"]
+A --> F["ନିୟମ-2"]
+F --> G["କିନ୍ତୁ ଯଦି  କର୍ତ୍ତା ଟି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇଥିବ, <br/>ତେବେ କେବଳ କ୍ରିୟା ଶବ୍ଦଟି ଖାଲି ଲେଖିଦିଆଯିବ।<br/>ଆଉ s ଯୋଡା ଯିବ ନାହିଁ ।"]
 
-A --> J["ପରିସର"]
-J --> K["ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି - ବ୍ୟକ୍ତିଗତ ଏକକ<br/>ସମଷ୍ଟି ଅର୍ଥନୀତି - ସମଗ୍ର ଅର୍ଥନୀତି<br/>ଉଦାହରଣ: ପରିବାର ଆୟ ଓ ଜାତୀୟ ଆୟ"]
+A --> H["ଉଦାହରଣ-1"]
+H --> I["ସେ ଉଠେ ।<br/> He wakes up.<br/> କାରଣ He ଟି I ନୁହେଁ କିମ୍ବା You ନୁହେଁ କିମ୍ବା ବହୁବଚନ ବି ନୁହେଁ ।"]
 
-A --> L["ଗୁରୁତ୍ୱ"]
-L --> M["ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ<br/>ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନେବାରେ ସାହାଯ୍ୟ କରେ<br/>ଉଦାହରଣ: ସଞ୍ଚୟ ଓ ବିନିଯୋଗ ନିଷ୍ପତ୍ତି"]
+A --> J["ଉଦାହରଣ-2"]
+J --> K["ଆମେ ଉଠୁ ।<br/> We wake up.<br/> କାରଣ ଆମେ ହେଉଛି ବହୁବଚନ ।"]
 
 style A fill:#3b82f6,stroke:#1e40af,color:#fff
-
 style B fill:#dbeafe,stroke:#3b82f6
 style D fill:#10b981,stroke:#059669,color:#fff
 style F fill:#f59e0b,stroke:#d97706,color:#fff
 style H fill:#ec4899,stroke:#be185d,color:#fff
 style J fill:#8b5cf6,stroke:#6d28d9,color:#fff
-style L fill:#14b8a6,stroke:#0f766e,color:#fff
-
 style C fill:#dbeafe,stroke:#3b82f6
 style E fill:#d1fae5,stroke:#10b981
 style G fill:#fef3c7,stroke:#f59e0b
 style I fill:#fce7f3,stroke:#ec4899
-style K fill:#ede9fe,stroke:#8b5cf6
-style M fill:#ccfbf1,stroke:#14b8a6`,
+style K fill:#ede9fe,stroke:#8b5cf6`,
 
 mcq: {
     questions: [
         {
-            question: "ଅର୍ଥନୀତି କ'ଣ?",
+            question: "I, We, You, Boys ସହ କେଉଁ ରୂପ ବ୍ୟବହାର ହୁଏ?",
             options: [
-                "ଏକ ପ୍ରାକୃତିକ ବିଜ୍ଞାନ",
-                "ଏକ ସାମାଜିକ ବିଜ୍ଞାନ ଯାହା ସୀମିତ ସମ୍ପଦ ଓ ଅସୀମ ଆବଶ୍ୟକତା ଅଧ୍ୟୟନ କରେ",
-                "ଏକ ଗଣିତ ବିଜ୍ଞାନ",
-                "ଏକ ଭୌତିକ ବିଜ୍ଞାନ"
+                "WAKES",
+                "WAKE",
+                "WAKED",
+                "WAKING"
             ],
             correct: 1
         },
         {
-            question: "ଅର୍ଥନୀତିର କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା କେତୋଟି?",
+            question: "He ଓ She ସହ କେଉଁ ରୂପ ବ୍ୟବହାର ହୁଏ?",
             options: [
-                "ଦୁଇଟି",
-                "ତିନୋଟି",
-                "ଚାରିଟି",
-                "ପାଞ୍ଚଟି"
-            ],
-            correct: 1
-        },
-        {
-            question: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି କ'ଣ ଅଧ୍ୟୟନ କରେ?",
-            options: [
-                "ସମଗ୍ର ଦେଶର ଅର୍ଥନୀତି",
-                "ବ୍ୟକ୍ତିଗତ ଏକକ ଯଥା ପରିବାର ଓ କାରଖାନା",
-                "ଆନ୍ତର୍ଜାତୀୟ ବାଣିଜ୍ୟ",
-                "ସରକାରୀ ନୀତି"
-            ],
-            correct: 1
-        },
-        {
-            question: "ଅବସର ମୂଲ୍ୟ କ'ଣ?",
-            options: [
-                "ଦ୍ରବ୍ୟର ବଜାର ମୂଲ୍ୟ",
-                "ଉତ୍ପାଦନ ମୂଲ୍ୟ",
-                "ପସନ୍ଦ କରିବା ସମୟରେ ଛାଡ଼ିଥିବା ସର୍ବୋତ୍ତମ ବିକଳ୍ପର ମୂଲ୍ୟ",
-                "କ୍ରୟ ମୂଲ୍ୟ"
+                "WAKE",
+                "WAKING",
+                "WAKES",
+                "WAKED"
             ],
             correct: 2
         },
         {
-            question: "ଜାତୀୟ ଆୟ କେଉଁ ଅର୍ଥନୀତିର ବିଷୟ?",
+            question: "'ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀରେ କ'ଣ?",
             options: [
-                "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି",
-                "ସମଷ୍ଟି ଅର୍ଥନୀତି",
-                "ବାଣିଜ୍ୟିକ ଅର୍ଥନୀତି",
-                "କୃଷି ଅର୍ଥନୀତି"
+                "He wake up every morning.",
+                "He wakes up every morning.",
+                "He waking up every morning.",
+                "He waked up every morning."
+            ],
+            correct: 1
+        },
+        {
+            question: "'ଆମେ ବହୁତ ତାଜା ଅନୁଭବ କରି ଉଠୁ' ଇଂରାଜୀରେ କ'ଣ?",
+            options: [
+                "We wakes up feeling very fresh.",
+                "We wake up feeling very tired.",
+                "We wake up feeling very fresh.",
+                "We waking up feeling very fresh."
+            ],
+            correct: 2
+        },
+        {
+            question: "'ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି' ଇଂରାଜୀରେ କ'ଣ?",
+            options: [
+                "Boys wakes up at sunrise daily.",
+                "Boys wake up at sunrise daily.",
+                "Boys wake up at sunset daily.",
+                "Boys waking up at sunrise daily."
             ],
             correct: 1
         }
@@ -3087,24 +3175,24 @@ mcq: {
 trueFalse: {
     questions: [
         {
-            question: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ।",
+            question: "He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ ।",
             correct: true
         },
         {
-            question: "ମଣିଷର ଆବଶ୍ୟକତା ସୀମିତ କିନ୍ତୁ ସମ୍ପଦ ଅସୀମ।",
+            question: "I ସହ WAKES ବ୍ୟବହାର ହୁଏ ।",
             correct: false
         },
         {
-            question: "ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି।",
+            question: "Boys wake up — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
             correct: true
         },
         {
-            question: "ଉପଯୋଗିତା ହେଉଛି ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣର ଶକ୍ତି।",
-            correct: true
-        },
-        {
-            question: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ।",
+            question: "She wake up early — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
             correct: false
+        },
+        {
+            question: "We wake up every morning — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
+            correct: true
         }
     ]
 },
@@ -3112,64 +3200,64 @@ trueFalse: {
 fillBlanks: {
     questions: [
         {
-            question: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ___ ବିଜ୍ଞାନ।",
-            answer: "ସାମାଜିକ"
+            question: "I ___ up early. (wake/wakes)",
+            answer: "wake"
         },
         {
-            question: "ଅର୍ଥନୀତିର ___ କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି।",
-            answer: "ତିନୋଟି"
+            question: "He ___ up at 5 daily. (wake/wakes)",
+            answer: "wakes"
         },
         {
-            question: "ଉପଯୋଗିତା ହେଉଛି ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣର ___।",
-            answer: "ଶକ୍ତି"
+            question: "She ___ up feeling very fresh. (wake/wakes)",
+            answer: "wakes"
         },
         {
-            question: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ___ ଏକକ ଅଧ୍ୟୟନ କରେ।",
-            answer: "ବ୍ୟକ୍ତିଗତ"
+            question: "Boys ___ up at sunrise. (wake/wakes)",
+            answer: "wake"
         },
         {
-            question: "ସମଷ୍ଟି ଅର୍ଥନୀତି ___ ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ।",
-            answer: "ସମଗ୍ର"
+            question: "We ___ up every morning. (wake/wakes)",
+            answer: "wake"
         }
     ]
 },
 
 matching: {
     pairs: [
-        { left: "ଅର୍ଥନୀତି", right: "ସାମାଜିକ ବିଜ୍ଞାନ" },
-        { left: "ଅଭାବ", right: "ସୀମିତ ସମ୍ପଦ" },
-        { left: "ପସନ୍ଦ", right: "ବିକଳ୍ପ ମଧ୍ୟରୁ ବାଛିବା" },
-        { left: "ଉପଯୋଗିତା", right: "ଆବଶ୍ୟକତା ପୂରଣର ଶକ୍ତି" },
-        { left: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି", right: "ବ୍ୟକ୍ତିଗତ ଏକକ" },
-        { left: "ସମଷ୍ଟି ଅର୍ଥନୀତି", right: "ଜାତୀୟ ଆୟ" },
-        { left: "କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା", right: "କ'ଣ, କିପରି, କାହା ପାଇଁ" },
-        { left: "ଅବସର ମୂଲ୍ୟ", right: "ଛାଡ଼ିଥିବା ବିକଳ୍ପର ମୂଲ୍ୟ" },
-        { left: "ସମ୍ପଦ", right: "ଉପଯୋଗୀ ଓ ସୀମିତ ବସ୍ତୁ" },
-        { left: "ମୂଲ୍ୟ", right: "ଦ୍ରବ୍ୟର ବିନିମୟ ମୂଲ୍ୟ" }
+        { left: "I wake up early.", right: "ମୁଁ ସକାଳୁ ଉଠେ ।" },
+        { left: "He wakes up slowly.", right: "ସେ ଧୀରେ ଉଠେ ।" },
+        { left: "She wakes up happily.", right: "ସେ ଖୁସିରେ ଉଠେ ।" },
+        { left: "We wake up daily.", right: "ଆମେ ପ୍ରତିଦିନ ଉଠୁ ।" },
+        { left: "Boys wake up at sunrise.", right: "ବାଳକମାନେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।" },
+        { left: "You all wake up now.", right: "ତୁମେମାନେ ଏବେ ଉଠ ।" },
+        { left: "I wake up feeling fresh.", right: "ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ ।" },
+        { left: "He wakes up very early.", right: "ସେ ବହୁତ ସକାଳୁ ଉଠେ ।" },
+        { left: "She wakes up at 5 today.", right: "ସେ ଆଜି ୫ ଟାରେ ଉଠେ ।" },
+        { left: "We wake up feeling very happy.", right: "ଆମେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠୁ ।" }
     ]
 },
 
 arrange: {
     questions: [
         {
-            words: ["ଅର୍ଥନୀତି", "ଏକ", "ହେଉଛି", "ସାମାଜିକ", "ବିଜ୍ଞାନ"],
-            correct: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ"
+            words: ["wake", "I", "early", "up"],
+            correct: "I wake up early"
         },
         {
-            words: ["ଆବଶ୍ୟକତା", "ଅସୀମ", "କିନ୍ତୁ", "ସମ୍ପଦ", "ସୀମିତ"],
-            correct: "ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ"
+            words: ["wakes", "He", "daily", "up", "5", "at"],
+            correct: "He wakes up at 5 daily"
         },
         {
-            words: ["କେନ୍ଦ୍ରୀୟ", "ତିନୋଟି", "ସମସ୍ୟା", "ଅର୍ଥନୀତିର", "ଅଛି"],
-            correct: "ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି"
+            words: ["morning", "wake", "every", "We", "up"],
+            correct: "We wake up every morning"
         },
         {
-            words: ["ବ୍ୟଷ୍ଟି", "ବ୍ୟକ୍ତିଗତ", "ଅର୍ଥନୀତି", "ଏକକ", "ଅଧ୍ୟୟନ", "କରେ"],
-            correct: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଏକକ ଅଧ୍ୟୟନ କରେ"
+            words: ["sunrise", "Boys", "at", "wake", "up"],
+            correct: "Boys wake up at sunrise"
         },
         {
-            words: ["ସମଷ୍ଟି", "ସମଗ୍ର", "ଅର୍ଥନୀତି", "ଅଧ୍ୟୟନ", "କରେ"],
-            correct: "ସମଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ"
+            words: ["very", "She", "today", "wakes", "early", "up"],
+            correct: "She wakes up very early today"
         }
     ]
 },
@@ -3177,20 +3265,20 @@ arrange: {
 stq: {
     questions: [
         {
-            question: "ଅର୍ଥନୀତିର ଅର୍ଥ କ'ଣ?",
-            answer: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ। ଏହା ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ। ଏହା ସମ୍ପଦର ଉତ୍ପାଦନ, ବଣ୍ଟନ ଓ ଉପଭୋଗ ବିଷୟରେ ଜ୍ଞାନ ଦିଏ। ଏହା ମାନବ କଲ୍ୟାଣ ପାଇଁ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ।"
+            question: "WAKE ଓ WAKES ର ନିୟମ କ'ଣ?",
+            answer: "I, We, You, Boys ସହ WAKE ବ୍ୟବହାର ହୁଏ । He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ । He ଓ She ସହ ଶେଷରେ S ଲାଗେ । ଏହା ଇଂରାଜୀ ର ଏକ ମୁଖ୍ୟ ନିୟମ ।"
         },
         {
-            question: "ଅଭାବ ଓ ପସନ୍ଦ କ'ଣ?",
-            answer: "ଅଭାବ ହେଉଛି ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା। ମଣିଷର ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ। ତେଣୁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ। ପସନ୍ଦ ହେଉଛି ବିକଳ୍ପ ମଧ୍ୟରୁ ଗୋଟିଏ ବାଛିବା।"
+            question: "WAKE UP ସହ ଏକ ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
+            answer: "I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । He wakes up late. ସେ ଦେରିରେ ଉଠେ । She wakes up quickly. ସେ ଜଲ୍ଦି ଉଠେ । We wake up daily. ଆମେ ପ୍ରତିଦିନ ଉଠୁ ।"
         },
         {
-            question: "ଅର୍ଥନୀତିର କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା କ'ଣ?",
-            answer: "ପ୍ରତ୍ୟେକ ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି। ପ୍ରଥମ ହେଉଛି କ'ଣ ଉତ୍ପାଦନ କରିବା। ଦ୍ୱିତୀୟ ହେଉଛି କିପରି ଉତ୍ପାଦନ କରିବା। ତୃତୀୟ ହେଉଛି କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା।"
+            question: "WAKE UP ସହ ଦୁଇ ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
+            answer: "I wake up every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠେ । She wakes up at sunrise. ସେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠେ । We wake up feeling fresh. ଆମେ ତାଜା ଅନୁଭବ କରି ଉଠୁ ।"
         },
         {
-            question: "ବ୍ୟଷ୍ଟି ଓ ସମଷ୍ଟି ଅର୍ଥନୀତି କ'ଣ?",
-            answer: "ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଏକକ ଅଧ୍ୟୟନ କରେ। ସମଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ। ପରିବାରର ଆୟ ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତିର ଅଂଶ। ଜାତୀୟ ଆୟ ସମଷ୍ଟି ଅର୍ଥନୀତିର ଅଂଶ।"
+            question: "WAKE UP ସହ ତିନି ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
+            answer: "I wake up very early today. ମୁଁ ଆଜି ବହୁତ ସକାଳୁ ଉଠେ । He wakes up at 5 daily. ସେ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ । Boys wake up at sunrise daily. ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି । We wake up feeling very happy. ଆମେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠୁ ।"
         }
     ]
 }
@@ -3201,52 +3289,62 @@ summary: {
     audio: "",
     
     content: {
-        introduction: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସାମାଜିକ ବିଜ୍ଞାନ। ଏହା ମାନବ ଜୀବନର ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ ପ୍ରଯୁଜ୍ୟ। ନିମ୍ନଲିଖିତ ବିନ୍ଦୁଗୁଡ଼ିକ ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଏବଂ ପରିସରକୁ ସ୍ପଷ୍ଟ କରେ:",
+        introduction: "WAKE UP ମାନେ ନିଦରୁ ଉଠିବା । ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଓ ଭିନ୍ନ ଭିନ୍ନ ଢଙ୍ଗରେ ଉଠନ୍ତି । ଆସନ୍ତୁ, ଆମେ ଆମ ପରିବାରର ସମସ୍ତଙ୍କ ବିଷୟରେ ଇଂରାଜୀରେ ଜାଣିବା :",
         sentences: [
             {
-                heading: "ଅର୍ଥନୀତିର ଅର୍ଥ",
-                text: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ। ଏହା ମଣିଷର ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର ମଧ୍ୟରେ ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ। ଏହା ସମ୍ପଦର ଉତ୍ପାଦନ, ବଣ୍ଟନ ଓ ଉପଭୋଗ ବିଷୟରେ ଜ୍ଞାନ ଦିଏ। ଅର୍ଥନୀତି ମାନବ କଲ୍ୟାଣ ପାଇଁ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ।"
+                heading: "ମୁଁ — I",
+                text: "I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । I wake up at 6 AM. ମୁଁ ସକାଳ ୬ ଟାରେ ଉଠେ । I wake up quickly. ମୁଁ ଶୀଘ୍ର ଉଠେ । I wake up very early every day. ମୁଁ ପ୍ରତିଦିନ ବହୁତ ସକାଳୁ ଉଠେ ।"
             },
             {
-                heading: "ଅଭାବ ଓ ପସନ୍ଦ",
-                text: "ଅଭାବ ହେଉଛି ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା। ମଣିଷର ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ। ଏଥିପାଇଁ ବିକଳ୍ପ ମଧ୍ୟରୁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ। ପ୍ରତ୍ୟେକ ପସନ୍ଦରେ ଅବସର ମୂଲ୍ୟ ରହିଥାଏ।"
+                heading: "ବାପା — Father",
+                text: "My father wakes up early. ମୋ ବାପା ସକାଳୁ ଉଠନ୍ତି । He wakes up at 5 AM. ସେ ସକାଳ ୫ ଟାରେ ଉଠନ୍ତି । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି । He wakes up very early every day. ସେ ପ୍ରତିଦିନ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।"
             },
             {
-                heading: "କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା",
-                text: "ପ୍ରତ୍ୟେକ ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି। ପ୍ରଥମ ସମସ୍ୟା ହେଉଛି କ'ଣ ଉତ୍ପାଦନ କରିବା। ଦ୍ୱିତୀୟ ସମସ୍ୟା ହେଉଛି କିପରି ଉତ୍ପାଦନ କରିବା। ତୃତୀୟ ସମସ୍ୟା ହେଉଛି କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା।"
+                heading: "ମା — Mother",
+                text: "My mother wakes up early. ମୋ ମା ସକାଳୁ ଉଠନ୍ତି । She wakes up at 5:30 AM. ସେ ସକାଳ ୫:୩୦ ରେ ଉଠନ୍ତି । She wakes up happily. ସେ ଖୁସିରେ ଉଠନ୍ତି । She wakes up very happily every day. ସେ ପ୍ରତିଦିନ ବହୁତ ଖୁସିରେ ଉଠନ୍ତି ।"
             },
             {
-                heading: "ମୌଳିକ ଧାରଣା",
-                text: "ଅର୍ଥନୀତିରେ କିଛି ମୌଳିକ ଧାରଣା ଅଛି। ଆବଶ୍ୟକତା ହେଉଛି ମଣିଷର ଇଚ୍ଛା। ଉପଯୋଗିତା ହେଉଛି ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣର ଶକ୍ତି। ଦ୍ରବ୍ୟ, ମୂଲ୍ୟ ଓ ସମ୍ପଦ ଅର୍ଥନୀତିର ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଧାରଣା।"
+                heading: "ଦାଦା — Elder Brother",
+                text: "My elder brother wakes up late. ମୋ ବଡ ଭାଇ ଡେରିରେ ଉଠନ୍ତି । He wakes up at 7 AM. ସେ ସକାଳ ୭ ଟାରେ ଉଠନ୍ତି । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠନ୍ତି । He wakes up very late on Sundays. ସେ ରବିବାରରେ ବହୁତ ଦେରିରେ ଉଠନ୍ତି ।"
             },
             {
-                heading: "ଅର୍ଥନୀତିର ପରିସର",
-                text: "ଅର୍ଥନୀତିର ପରିସର ବହୁତ ବିସ୍ତୃତ। ଏହା ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ଓ ସମଷ୍ଟି ଅର୍ଥନୀତିରେ ବିଭକ୍ତ। ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଏକକ ଅଧ୍ୟୟନ କରେ। ସମଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ।"
+                heading: "ଦିଦି — Elder Sister",
+                text: "My elder sister wakes up quietly. ମୋ ଦିଦି ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି । She wakes up at 6:30 AM. ସେ ସକାଳ ୬:୩୦ ରେ ଉଠନ୍ତି । She wakes up very quietly. ସେ ବହୁତ ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି । She wakes up very quietly every morning. ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ବହୁତ ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି ।"
             },
             {
-                heading: "ଅର୍ଥନୀତିର ଗୁରୁତ୍ୱ",
-                text: "ଅର୍ଥନୀତି ଆମ ଜୀବନରେ ଅତ୍ୟନ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ଏହା ସୀମିତ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ। ଏହା ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନେବାରେ ସାହାଯ୍ୟ କରେ। ଅର୍ଥନୀତି ଦେଶର ବିକାଶ ଓ ଦାରିଦ୍ର୍ୟ ଦୂରୀକରଣରେ ସାହାଯ୍ୟ କରେ।"
+                heading: "ଛୋଟ ଭାଇ — Younger Brother",
+                text: "My younger brother wakes up late. ମୋ ଛୋଟ ଭାଇ ଡେରିରେ ଉଠେ । He wakes up at 8 AM. ସେ ସକାଳ ୮ ଟାରେ ଉଠେ । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠେ । He wakes up very late every day. ସେ ପ୍ରତିଦିନ ବହୁତ ଦେରିରେ ଉଠେ ।"
+            },
+            {
+                heading: "ଜେଜେ ବାପା — Grandfather",
+                text: "My grandfather wakes up the earliest. ମୋ ଜେଜେ ବାପା ସବୁଠୁ ଆଗରୁ ଉଠନ୍ତି । He wakes up at 4:30 AM. ସେ ୪:୩୦ ରେ ଉଠନ୍ତି । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି । He wakes up very early every single day. ସେ ପ୍ରତ୍ୟେକ ଦିନ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।"
+            },
+            {
+                heading: "ଜେଜେ ମା — Grandmother",
+                text: "My grandmother wakes up slowly. ମୋ ଜେଜେ ମା ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି । She wakes up at 5 AM. ସେ ୫ ଟାରେ ଉଠନ୍ତି । She wakes up very slowly. ସେ ବହୁତ ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି । She wakes up very slowly every morning. ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ବହୁତ ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି ।"
+            },
+            {
+                heading: "ଆମେ ସମସ୍ତେ — We All",
+                text: "We all wake up daily. ଆମେ ସମସ୍ତେ ପ୍ରତିଦିନ ଉଠୁ । We wake up at different times. ଆମେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠୁ । We all wake up every morning. ଆମେ ସମସ୍ତେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ । We all wake up happily every morning. ଆମେ ସମସ୍ତେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଖୁସିରେ ଉଠୁ ।"
             }
         ],
-        conclusion: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଜ୍ଞାନ। ଏହା ସୀମିତ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ। ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଓ ସାମାଜିକ କଲ୍ୟାଣ ପାଇଁ ଅତ୍ୟନ୍ତ ଆବଶ୍ୟକ।"
+        conclusion: "ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠନ୍ତି । ଜେଜେ ବାପା ସବୁଠୁ ଆଗରୁ ଓ ଛୋଟ ଭାଇ ସବୁଠୁ ଦେରିରେ ଉଠେ । He ଓ She ସହ WAKES ଓ I, You, We ସହ WAKE ବ୍ୟବହାର ହୁଏ — ଏହି ଏକ ନିୟମ ଜାଣିଲେ ଇଂରାଜୀ ବାକ୍ୟ ଗଢ଼ିବା ବହୁତ ସହଜ ହୋଇଯାଏ ।"
     },
-    
+
     question: {
         audio: "",
-        question: "ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଓ ପରିସର ସଂକ୍ଷେପରେ ବ୍ୟାଖ୍ୟା କର ।",
-        introduction: "ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ। ଏହା ମାନବ ଜୀବନର ସବୁ କ୍ଷେତ୍ରରେ ପ୍ରଯୁଜ୍ୟ। ନିମ୍ନଲିଖିତ ବିନ୍ଦୁଗୁଡ଼ିକ ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଓ ପରିସରକୁ ସଂକ୍ଷେପରେ ବ୍ୟାଖ୍ୟା କରେ:",
+        question: "ଆପଣଙ୍କ ପରିବାରରେ କିଏ କେତେବେଳେ ଓ କିପରି ଉଠନ୍ତି — WAKE UP ବ୍ୟବହାର କରି ଲେଖନ୍ତୁ ।",
+        introduction: "ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠନ୍ତି । ନିମ୍ନ ବିନ୍ଦୁଗୁଡ଼ିକ ଏହା ଦର୍ଶାଏ :",
         points: [
-            "ଅର୍ଥନୀତି ହେଉଛି ସାମାଜିକ ବିଜ୍ଞାନ ଯାହା ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ।",
-            "ଅଭାବ ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା ଏବଂ ଏଥିପାଇଁ ବିକଳ୍ପ ମଧ୍ୟରୁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ।",
-            "ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ହେଉଛି କ'ଣ, କିପରି ଏବଂ କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା।",
-            "ଆବଶ୍ୟକତା, ଉପଯୋଗିତା, ଦ୍ରବ୍ୟ, ମୂଲ୍ୟ ଓ ସମ୍ପଦ ହେଉଛି ଅର୍ଥନୀତିର ମୌଳିକ ଧାରଣା।",
-            "ଅର୍ଥନୀତି ବ୍ୟଷ୍ଟି ଓ ସମଷ୍ଟି ଅର୍ଥନୀତିରେ ବିଭକ୍ତ ଏବଂ ଉଭୟ ମିଶି ସମ୍ପୂର୍ଣ୍ଣ ଅର୍ଥନୀତି ବୁଝାଏ।",
-            "ଅର୍ଥନୀତି ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ ଏବଂ ଦେଶର ବିକାଶରେ ସାହାଯ୍ୟ କରେ।"
+            "My grandfather wakes up at 4:30 AM. ଜେଜେ ବାପା ୪:୩୦ ରେ ଉଠନ୍ତି — ସେ ସବୁଠୁ ଆଗରୁ ଉଠନ୍ତି ।",
+            "My father wakes up at 5 AM every day. ବାପା ପ୍ରତିଦିନ ସକାଳ ୫ ଟାରେ ଉଠନ୍ତି ।",
+            "My mother wakes up at 5:30 AM happily. ମା ସକାଳ ୫:୩୦ ରେ ଖୁସିରେ ଉଠନ୍ତି ।",
+            "I wake up at 6 AM every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ୬ ଟାରେ ଉଠେ ।",
+            "My younger brother wakes up at 8 AM very late. ଛୋଟ ଭାଇ ବହୁତ ଡେରିରେ ସକାଳ ୮ ଟାରେ ଉଠେ ।"
         ],
-        conclusion: "ଅର୍ଥନୀତି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସାମାଜିକ ବିଜ୍ଞାନ। ଏହା ବ୍ୟକ୍ତିଗତ ଓ ସାମାଜିକ କଲ୍ୟାଣ ପାଇଁ ଆବଶ୍ୟକ। ଅର୍ଥନୀତି ମାନବ ସମୃଦ୍ଧି ଓ ବିକାଶର ମାଧ୍ୟମ।"
+        conclusion: "ଆମ ପରିବାରରେ ସମସ୍ତଙ୍କ ଉଠିବାର ସମୟ ଓ ଢଙ୍ଗ ଅଲଗା । He, She ସହ WAKES ଓ I, You, We ସହ WAKE — ଏହି ନିୟମ ଜାଣିଲେ ପରିବାର ବିଷୟରେ ଇଂରାଜୀ ବାକ୍ୟ ଲେଖିବା ବହୁତ ସହଜ ।"
     }
 }
-
 };
     
 let currentSentence = 0;
@@ -3727,7 +3825,7 @@ function createAudioButton(audioUrl, containerId = null) {
             btn.dataset.initialized = 'true';
         }
     }, 100);
-    
+     
     return buttonHtml;
 }
 
@@ -4669,7 +4767,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଓ ପରିସର ବ୍ୟାଖ୍ୟା କର ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - WAKE UP ଶବ୍ଦ କୁ ବ୍ୟବହାର କରି ନିଜ ପରିବାର ସମ୍ବନ୍ଧୀୟ ଏକ ରଚନା ଲେଖ ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4759,14 +4857,14 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-BEDO',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-XF60',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
         container: 'passageContainer',
         iframe: 'passageIframe',
         loading: 'passageLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-OCQS',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-PFYK',
         loadedFlag: 'passageLoaded'
     },
     translator: {
@@ -4780,7 +4878,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://students-doubt-clearer.pages.dev/management/',
+        url: 'https://student-care.pages.dev/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -4877,7 +4975,7 @@ window.addEventListener('beforeunload', () => {
 // Writ Practice Functions
 function openWritPractice() {
     // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://2-arts-scenario.pages.dev/ECON/unit-1/class-1/";
+    const writExamURL = "https://st-practicals.pages.dev/english/class-1/";
     
     const container = document.getElementById('writPracticeContainer');
     const iframe = document.getElementById('writPracticeIframe');
@@ -4998,148 +5096,106 @@ function showAnswerInBox(boxId, answerText) {
     const answerBox = document.getElementById(boxId);
     typeWriter(answerBox, answerText, 40);
 }
-
+    
  // ==========================================
 // NAVIGATION SYSTEM FOR MAIN CARD
 // ==========================================
+
 const topicsData = [
     {
-        heading: "ଅର୍ଥନୀତିର ଅର୍ଥ (Meaning of Economics)",
+        heading: "ପାଠ-1: କ୍ରିୟା ଚିହ୍ନିବା:",
         audioPoints: [
             {
-                text: "👉 ଅର୍ଥନୀତିର ଅର୍ଥ: ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ । ଏହା ମଣିଷର ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର ମଧ୍ୟରେ ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ । ଅର୍ଥନୀତି ସମ୍ପଦର ଉତ୍ପାଦନ, ବଣ୍ଟନ ଓ ଉପଭୋଗ ବିଷୟରେ ଜ୍ଞାନ ଦିଏ । ଏହା ମାନବ କଲ୍ୟାଣ ପାଇଁ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S1.m4a"
-            },
-            {
-                text: "👉 ଉଦାହରଣ - ଜଣେ କୃଷକ ସୀମିତ ଜମିରେ ଧାନ ବା ଗହମ ଚାଷ କରିବାର ନିଷ୍ପତ୍ତି ନିଅନ୍ତି । ଏହା ଅର୍ଥନୀତିର ଏକ ଉଦାହରଣ । ଜଣେ ଗୃହିଣୀ ସୀମିତ ଆୟରେ ପରିବାରର ଆବଶ୍ୟକତା ପୂରଣ କରନ୍ତି । ଏହା ମଧ୍ୟ ଅର୍ଥନୀତିର ପ୍ରୟୋଗ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S2.m4a"
+                text: "👉 ପ୍ରତ୍ଯେକ ବାକ୍ୟରେ ନିଶ୍ଚିତ ଭାବେ ଏକ କ୍ରିୟା ଶବ୍ଦ ରହି ଥାଏ । କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି, ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବା, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।<br>",
+                audio: "https://audio.evidya.de/SE1T1.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଅର୍ଥନୀତି କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ହେଉଛି ଏକ ସାମାଜିକ ବିଜ୍ଞାନ । ଏହା ମଣିଷର ଅସୀମ ଆବଶ୍ୟକତା ଓ ସୀମିତ ସମ୍ପଦର ମଧ୍ୟରେ ସମ୍ପର୍କ ଅଧ୍ୟୟନ କରେ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଅର୍ଥନୀତି କେଉଁ ବିଷୟ ଅଧ୍ୟୟନ କରେ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ସମ୍ପଦର ଉତ୍ପାଦନ, ବଣ୍ଟନ ଓ ଉପଭୋଗ ବିଷୟରେ ଅଧ୍ୟୟନ କରେ । ଏହା ମାନବ କଲ୍ୟାଣ ପାଇଁ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଅର୍ଥନୀତି କାହିଁକି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ କାରଣ ଏହା ସୀମିତ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ । ଏହା ମାନବ କଲ୍ୟାଣ ଓ ସମୃଦ୍ଧି ପାଇଁ ସାହାଯ୍ୟ କରେ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଦୈନନ୍ଦିନ ଜୀବନରେ ଅର୍ଥନୀତିର ଉଦାହରଣ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜଣେ ଗୃହିଣୀ ସୀମିତ ଆୟରେ ପରିବାରର ଆବଶ୍ୟକତା ପୂରଣ କରିବା ଅର୍ଥନୀତିର ଉଦାହରଣ । କୃଷକ ସୀମିତ ଜମିରେ ଫସଲ ଚୟନ କରିବା ମଧ୍ୟ ଏକ ଉଦାହରଣ ।"
-        ]
-    },
-    
-    {
-        heading: "ବିଷୟବସ୍ତୁ-1: ଅଭାବ ଓ ପସନ୍ଦ (Scarcity & Choice)",
-        audioPoints: [
-            {
-                text: "👉 ବ୍ୟାଖ୍ୟା: ଅଭାବ ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା । ମଣିଷର ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ । ଏଥିପାଇଁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ । ପସନ୍ଦ ହେଉଛି ବିକଳ୍ପ ମଧ୍ୟରୁ ଗୋଟିଏ ବାଛିବା । ପ୍ରତ୍ୟେକ ପସନ୍ଦରେ ଅବସର ମୂଲ୍ୟ ରହିଛି ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S3.m4a"
-            },
-            {
-                text: "👉 ଉଦାହରଣ - ଜଣେ ଛାତ୍ରଙ୍କ ପାଖରେ 100 ଟଙ୍କା ଅଛି । ସେ ବହି କିମ୍ବା ଖେଳନା କିଣି ପାରିବ । ଯଦି ସେ ବହି କିଣେ ତେବେ ଖେଳନା ଛାଡ଼ିବାକୁ ପଡ଼ିବ । ଏହା ଅଭାବ ଓ ପସନ୍ଦର ଉଦାହରଣ । କୃଷକ ଧାନ କିମ୍ବା ଗହମ ଚାଷର ପସନ୍ଦ କରନ୍ତି ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S4.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଅଭାବ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅଭାବ ହେଉଛି ଅର୍ଥନୀତିର ମୂଳ ସମସ୍ୟା । ମଣିଷର ଆବଶ୍ୟକତା ଅସୀମ କିନ୍ତୁ ସମ୍ପଦ ସୀମିତ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ପସନ୍ଦ କାହିଁକି ଆବଶ୍ୟକ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସମ୍ପଦ ସୀମିତ ହେତୁ ପସନ୍ଦ କରିବାକୁ ପଡ଼େ । ପସନ୍ଦ ହେଉଛି ବିକଳ୍ପ ମଧ୍ୟରୁ ଗୋଟିଏ ବାଛିବା ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଅବସର ମୂଲ୍ୟ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅବସର ମୂଲ୍ୟ ହେଉଛି ପସନ୍ଦ କରିବା ସମୟରେ ଛାଡ଼ିଥିବା ସର୍ବୋତ୍ତମ ବିକଳ୍ପର ମୂଲ୍ୟ । ପ୍ରତ୍ୟେକ ପସନ୍ଦରେ ଅବସର ମୂଲ୍ୟ ରହିଛି ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଅଭାବ ଓ ପସନ୍ଦର ଉଦାହରଣ ଦିଅ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜଣେ ଛାତ୍ର 100 ଟଙ୍କାରେ ବହି କିମ୍ବା ଖେଳନା କିଣିବାର ପସନ୍ଦ କରେ । ଗୋଟିଏ ବାଛିଲେ ଅନ୍ୟଟି ଛାଡ଼ିବାକୁ ପଡ଼େ ।"
-        ]
-    },
-    
-    {
-        heading: "ବିଷୟବସ୍ତୁ-2: କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା (Central Problems)",
-        audioPoints: [
-            {
-                text: "👉 ବ୍ୟାଖ୍ୟା: ପ୍ରତ୍ୟେକ ଅର୍ଥନୀତିର ତିନୋଟି କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ଅଛି । ପ୍ରଥମ ସମସ୍ୟା ହେଉଛି କ'ଣ ଉତ୍ପାଦନ କରିବା । ଦ୍ୱିତୀୟ ସମସ୍ୟା ହେଉଛି କିପରି ଉତ୍ପାଦନ କରିବା । ତୃତୀୟ ସମସ୍ୟା ହେଉଛି କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା । ଏହି ସମସ୍ୟାଗୁଡ଼ିକ ସମସ୍ତ ଅର୍ଥନୀତିରେ ସାଧାରଣ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S5.m4a"
-            },
-            {
-                text: "👉 ଉଦାହରଣ - ଭାରତ ସରକାର ନିଷ୍ପତ୍ତି ନିଅନ୍ତି ଅଧିକ ଖାଦ୍ୟ କି ଯନ୍ତ୍ର ଉତ୍ପାଦନ କରିବା । କାରଖାନା ମାଲିକ ନିଷ୍ପତ୍ତି ନିଅନ୍ତି ହସ୍ତଚାଳିତ କି ଯନ୍ତ୍ର ଦ୍ୱାରା ଉତ୍ପାଦନ କରିବା । ସରକାର ନିଷ୍ପତ୍ତି ନିଅନ୍ତି ଗରିବ କି ଧନୀ ପାଇଁ ଅଧିକ ସୁବିଧା ଦେବା ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S6.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା କେତେ ପ୍ରକାର?<br><br><span style='color: green;'>ଉତ୍ତର:</span> କେନ୍ଦ୍ରୀୟ ସମସ୍ୟା ତିନି ପ୍ରକାର । କ'ଣ ଉତ୍ପାଦନ କରିବା, କିପରି ଉତ୍ପାଦନ କରିବା ଏବଂ କାହା ପାଇଁ ଉତ୍ପାଦନ କରିବା ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'କ'ଣ ଉତ୍ପାଦନ କରିବା' ସମସ୍ୟା କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହା ହେଉଛି କେଉଁ ଦ୍ରବ୍ୟ ଓ ସେବା କେତେ ପରିମାଣରେ ଉତ୍ପାଦନ କରିବା ସେହି ନିଷ୍ପତ୍ତି । ସମସ୍ତ ଅର୍ଥନୀତିରେ ଏହି ସମସ୍ୟା ସାଧାରଣ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'କିପରି ଉତ୍ପାଦନ କରିବା' ସମସ୍ୟା କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହା ହେଉଛି ଉତ୍ପାଦନ ପାଇଁ କେଉଁ ପଦ୍ଧତି ବ୍ୟବହାର କରିବା ସେହି ନିଷ୍ପତ୍ତି । ହସ୍ତଚାଳିତ କି ଯନ୍ତ୍ର ଦ୍ୱାରା ଉତ୍ପାଦନ କରିବା ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'କାହା ପାଇଁ ଉତ୍ପାଦନ' ସମସ୍ୟା କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହା ହେଉଛି ଉତ୍ପାଦିତ ଦ୍ରବ୍ୟ ଓ ସେବା କିଏ ପାଇବ ସେହି ନିଷ୍ପତ୍ତି । ଗରିବ କି ଧନୀ ପାଇଁ ଅଧିକ ଉତ୍ପାଦନ କରିବା ।"
-        ]
-    },
-    
-    {
-        heading: "ବିଷୟବସ୍ତୁ-3: ମୌଳିକ ଧାରଣା (Basic Concepts)",
-        audioPoints: [
-            {
-                text: "👉 ବ୍ୟାଖ୍ୟା: ଅର୍ଥନୀତିରେ କିଛି ମୌଳିକ ଧାରଣା ଅଛି । ଆବଶ୍ୟକତା ହେଉଛି ମଣିଷର ଇଚ୍ଛା । ଉପଯୋଗିତା ହେଉଛି ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣର ଶକ୍ତି । ଦ୍ରବ୍ୟ ହେଉଛି ଆବଶ୍ୟକତା ପୂରଣ କରୁଥିବା ବସ୍ତୁ । ମୂଲ୍ୟ ହେଉଛି ଦ୍ରବ୍ୟର ବିନିମୟ ମୂଲ୍ୟ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S7.m4a"
-            },
-            {
-                text: "👉 ଉଦାହରଣ - ଭୋକ ହେଉଛି ଏକ ଆବଶ୍ୟକତା । ଖାଦ୍ୟର ଭୋକ ମେଣ୍ଟାଇବା ଶକ୍ତି ହେଉଛି ଉପଯୋଗିତା । ଚାଉଳ, ରୋଟୀ ହେଉଛି ଦ୍ରବ୍ୟ । ଏକ କିଲୋ ଚାଉଳର 50 ଟଙ୍କା ହେଉଛି ମୂଲ୍ୟ । ସମ୍ପଦ ହେଉଛି ଉପଯୋଗୀ, ସୀମିତ ଓ ହସ୍ତାନ୍ତରଣୀୟ ବସ୍ତୁ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S8.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆବଶ୍ୟକତା କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆବଶ୍ୟକତା ହେଉଛି ମଣିଷର ଇଚ୍ଛା । ଭୋକ, ତୃଷା, ବସ୍ତ୍ର, ବାସଗୃହ ହେଉଛି ଆବଶ୍ୟକତାର ଉଦାହରଣ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଉପଯୋଗିତା କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉପଯୋଗିତା ହେଉଛି ଦ୍ରବ୍ୟର ଆବଶ୍ୟକତା ପୂରଣର ଶକ୍ତି । ଖାଦ୍ୟର ଭୋକ ମେଣ୍ଟାଇବା ଶକ୍ତି ହେଉଛି ଉପଯୋଗିତା ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଦ୍ରବ୍ୟ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦ୍ରବ୍ୟ ହେଉଛି ଆବଶ୍ୟକତା ପୂରଣ କରୁଥିବା ବସ୍ତୁ । ଚାଉଳ, ରୋଟୀ, କପଡ଼ା ହେଉଛି ଦ୍ରବ୍ୟର ଉଦାହରଣ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ସମ୍ପଦର ବୈଶିଷ୍ଟ୍ୟ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସମ୍ପଦ ହେଉଛି ଉପଯୋଗୀ, ସୀମିତ ଓ ହସ୍ତାନ୍ତରଣୀୟ ବସ୍ତୁ । ଏହା ମୂଲ୍ୟରେ ମପାଯାଇପାରେ ।"
-        ]
-    },
-    
-    {
-        heading: "ବିଷୟବସ୍ତୁ-4: ଅର୍ଥନୀତିର ପରିସର (Scope of Economics)",
-        audioPoints: [
-            {
-                text: "👉 ବ୍ୟାଖ୍ୟା: ଅର୍ଥନୀତିର ପରିସର ବହୁତ ବିସ୍ତୃତ । ଏହା ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ଓ ସମଷ୍ଟି ଅର୍ଥନୀତିରେ ବିଭକ୍ତ । ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଏକକ ଅଧ୍ୟୟନ କରେ । ସମଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ । ଉଭୟ ମିଶି ସମ୍ପୂର୍ଣ୍ଣ ଅର୍ଥନୀତି ବୁଝାଏ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S9.m4a"
-            },
-            {
-                text: "👉 ଉଦାହରଣ - ଗୋଟିଏ ପରିବାରର ଆୟ ଓ ଖର୍ଚ୍ଚ ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତିର ଅଂଶ । ଗୋଟିଏ କାରଖାନାର ଉତ୍ପାଦନ ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି । ଦେଶର ମୋଟ ଜାତୀୟ ଆୟ ସମଷ୍ଟି ଅର୍ଥନୀତିର ଅଂଶ । ଭାରତର ମୁଦ୍ରାସ୍ଫୀତି ସମଷ୍ଟି ଅର୍ଥନୀତିର ବିଷୟ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S10.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଅର୍ଥନୀତି କେତେ ଭାଗରେ ବିଭକ୍ତ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ଦୁଇ ଭାଗରେ ବିଭକ୍ତ । ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ଓ ସମଷ୍ଟି ଅର୍ଥନୀତି ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି କ'ଣ ଅଧ୍ୟୟନ କରେ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବ୍ୟଷ୍ଟି ଅର୍ଥନୀତି ବ୍ୟକ୍ତିଗତ ଏକକ ଅଧ୍ୟୟନ କରେ । ଯଥା ଗୋଟିଏ ପରିବାର, ଗୋଟିଏ କାରଖାନାର ଉତ୍ପାଦନ ।",
-            
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ସମଷ୍ଟି ଅର୍ଥନୀତି କ'ଣ ଅଧ୍ୟୟନ କରେ?<br><br<span style='color: green;'>ଉତ୍ତର:</span> ସମଷ୍ଟି ଅର୍ଥନୀତି ସମଗ୍ର ଅର୍ଥନୀତି ଅଧ୍ୟୟନ କରେ । ଯଥା ଜାତୀୟ ଆୟ, ମୁଦ୍ରାସ୍ଫୀତି, ବେକାରୀ ।",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କ୍ରିୟା ର ଅର୍ଥ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି , ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବ, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।",
 
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଜାତୀୟ ଆୟ କେଉଁ ଅର୍ଥନୀତିର ବିଷୟ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜାତୀୟ ଆୟ ସମଷ୍ଟି ଅର୍ଥନୀତିର ବିଷୟ । ଏହା ସମଗ୍ର ଦେଶର ଆୟକୁ ମପାଏ ।"
-    ]
-},
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କଣ କହନ୍ତି ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କହନ୍ତି - Wake up ।",
 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ମୁଁ ସକାଳ 6 ଟା ରେ ଉଠେ - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉଠିବା ବା wake up ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଆପଣମାନେ ସକାଳ 6 ଟା ରେ ଯାଆନ୍ତି - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯିବା ବା go ।"
+        ]
+    },
+
+ {
+        heading: "ପାଠ-2: କର୍ତ୍ତା ଚିହ୍ନିବା:",
+        audioPoints: [
+            {
+                text: "👉 କ୍ରିୟା କୁ ଯିଏ କରେ ତାକୁ କର୍ତ୍ତା କୁହାଯାଏ । ଉଦାହରଣ ସ୍ୱରୂପ, ରାମ ଖାଏ । - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖାଇବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ରାମ । ଠିକ ସେହିପରି, ସେ ଖେଳନ୍ତି - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖେଳିବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ସେ । <br>",
+                audio: "https://audio.evidya.de/SE1T2.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ଯିଏ କ୍ରିୟା କୁ କରେ, ତାକୁ କର୍ତ୍ତା କହନ୍ତି ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସେମାନେ ପଢନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ଏବଂ କ୍ରିୟା କିଏ ବୁଝାଅ ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ ପ୍ରଥମେ କ୍ରିୟା କୁ ଚିହ୍ନିବା । କ୍ରିୟାର ଅର୍ଥ ହେଉଛି ହେଉଛି କାର୍ଯ୍ୟ ବା କାମ । ଏହି ବାକ୍ୟରେ ପଢିବା କାମ ହେଉଛି । ତେଣୁ କ୍ରିୟା ହେଉଛି ପଢିବା । କର୍ତ୍ତାର ଅର୍ଥ ହେଉଛି ସିଏ ଯିଏ କ୍ରିୟାକୁ କରେ । ଏଠାରେ ପଢିବା କାମ କିଏ କରୁଛି ବୋଲି ମନକୁ ପ୍ରଶ୍ନ ପଚାର । ନିଶ୍ଚିତ ଭାବେ ଉତ୍ତର ହେବ ସେମାନେ । ତେଣୁ କର୍ତ୍ତା ହେଉଛି ସେମାନେ ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ହରି ଖେଳେ - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି ହରି ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ହରି ଏବଂ ରାମ ଲେଖନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି - ହରି ଏବଂ ରାମ ।</span>"
+        ]
+    },
+    
 {
-    heading: "ବିଷୟବସ୍ତୁ-5: ଅର୍ଥନୀତିର ଗୁରୁତ୍ୱ (Importance of Economics)",
+    heading: "ପାଠ-3: ଏକବଚନ କର୍ତ୍ତା ଏବଂ ବହୁବଚନ କର୍ତ୍ତା :",
     audioPoints: [
         {
-            text: "👉 ବ୍ୟାଖ୍ୟା: ଅର୍ଥନୀତି ଆମ ଜୀବନରେ ଅତ୍ୟନ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ । ଏହା ସୀମିତ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ । ଏହା ଦାରିଦ୍ର୍ୟ ଦୂରୀକରଣରେ ସାହାଯ୍ୟ କରେ । ଏହା ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନେବାରେ ସାହାଯ୍ୟ କରେ । ଅର୍ଥନୀତି ଦେଶର ବିକାଶ ପାଇଁ ଜରୁରୀ ।<br>",
-            audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S11.m4a"
-        },
-        {
-            text: "👉 ଉଦାହରଣ - ଅର୍ଥନୀତି ଜ୍ଞାନ ଥିଲେ ସଞ୍ଚୟ ଓ ବିନିଯୋଗ ସଠିକ୍ ହୁଏ । କୃଷକ ଫସଲ ଚୟନରେ ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନିଏ । ସରକାର ନୀତି ପ୍ରସ୍ତୁତିରେ ଅର୍ଥନୀତି ବ୍ୟବହାର କରେ । ବ୍ୟବସାୟୀ ବଜାର ବିଶ୍ଳେଷଣରେ ଅର୍ଥନୀତି ପ୍ରୟୋଗ କରେ ।<br>",
-            audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-ARTS-XII/main/EU1C1S12.m4a"
+            text: "👉 ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ଯାରେ ଏକ ବା ଜଣେ ବା ଗୋଟିଏ ହୋଇଥାଏ, ତେବେ ସେହି କର୍ତ୍ତାକୁ ଏକବଚନ କର୍ତ୍ତା କହନ୍ତି । କିନ୍ତୁ ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ୟା ରେ ଏକ ରୁ ଅଧିକ ହୋଇଥାଏ ତେବେ ସେହି କର୍ତ୍ତା କୁ ବହୁବଚନ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ - ରାମ ଖାଏ - ବାକ୍ୟରେ ରାମ ଜଣେ ହୋଇଥିବାରୁ ରାମକୁ ଆମେ ଏକବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । କିନ୍ତୁ ରାମ ଏବଂ ହରି ଖାଆନ୍ତି - ବାକ୍ୟରେ କର୍ତ୍ତା ରାମ ଏବଂ ହରି ଦୁଇଜଣ ଅଟନ୍ତି । ତେଣୁ ଏଠାରେ \"ରାମ ଏବଂ ହରି\" କୁ ବହୁବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । <br>",
+            audio: "https://audio.evidya.de/SE1T3.m4a"
         }
     ],
     questions: [
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଅର୍ଥନୀତି କାହିଁକି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ସୀମିତ ସମ୍ପଦର ସଠିକ୍ ବ୍ୟବହାର ଶିଖାଏ । ଏହା ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନେବାରେ ସାହାଯ୍ୟ କରେ ।",
-        
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଅର୍ଥନୀତି କିପରି ଦାରିଦ୍ର୍ୟ ଦୂର କରେ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ସମ୍ପଦର ସଠିକ୍ ବଣ୍ଟନ ଓ ଉତ୍ପାଦନ ବୃଦ୍ଧି ଶିଖାଏ । ଏହା ଦାରିଦ୍ର୍ୟ ଦୂରୀକରଣରେ ସାହାଯ୍ୟ କରେ ।",
-        
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଦୈନନ୍ଦିନ ଜୀବନରେ ଅର୍ଥନୀତିର ବ୍ୟବହାର କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଅର୍ଥନୀତି ଜ୍ଞାନ ସଞ୍ଚୟ, ବିନିଯୋଗ ଓ ଖର୍ଚ୍ଚରେ ବୁଦ୍ଧିମାନ ନିଷ୍ପତ୍ତି ନେବାରେ ସାହାଯ୍ୟ କରେ । କୃଷକ ଫସଲ ଚୟନରେ ବ୍ୟବହାର କରେ ।",
-        
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ସରକାରୀ ନୀତିରେ ଅର୍ଥନୀତିର ଭୂମିକା କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସରକାର ନୀତି ପ୍ରସ୍ତୁତିରେ ଅର୍ଥନୀତି ବ୍ୟବହାର କରେ । ଏହା ଦେଶର ବିକାଶ ଓ ସମୃଦ୍ଧି ପାଇଁ ଜରୁରୀ ।"
+        "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ମୁଁ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ।</span>",
+
+        "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ଆମେ ଉଠୁ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆମେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ।</span>",
+
+        "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ଆପଣମାନେ ଉଠନ୍ତି' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ଅଟେ ।</span>",
+
+        "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ସେ' ଜଣେ ବା ଏକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ଅଟେ ।</span>"
     ]
-}
+},
+
+    {
+        heading: "ପାଠ-4: କର୍ତ୍ତା କରେ - ଏପରି ସୂଚାଉଥିବା ବାକ୍ୟ ତିଆରି କରିବା :",
+        audioPoints: [
+            {
+                text: "👉 କର୍ତ୍ତା କରେ - ଯଥା ରାମ ଖାଏ, ମୁଁ ଯାଏ, ତୁମେ ପଢ, ସେମାନେ ଖେଳନ୍ତି, ଇତ୍ୟାଦି - ଏପରି ବାକ୍ୟ ତିଆରି ପାଇଁ ଆମକୁ ଦୁଇଟି ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ । ନିୟମ-1 : କର୍ତ୍ତା ଯଦି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇଥାଏ ତେବେ, ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ନିୟମ-2: ଅନ୍ୟ କୌଣସି କର୍ତ୍ତା ପାଇଁ, ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା ।<br>",
+                audio: "https://audio.evidya.de/SE1T4.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା ଯଦି I ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ଉଠେ - I wake up । ",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> କର୍ତ୍ତା ଯଦି You ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ତୁମେ ଉଠ - You wake up । ",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> କର୍ତ୍ତା ଯଦି ବହୁବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେମାନେ ଉଠନ୍ତି - They wake up । ",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> କର୍ତ୍ତା ଯଦି I ଏବଂ You ବ୍ଯତୀତ ଅନ୍ୟ କୌଣସି ଏକବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେ ଉଠେ - He wakes up, ରାମ ଉଠେ - Ram wakes up , ଇତ୍ୟାଦି ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-5: ଟିକେ ବଡ ବାକ୍ୟ ତିଆରି କରିବା:",
+        audioPoints: [
+            {
+                text: "👉 କର୍ତ୍ତା କିପରି/କେତେବେଳେ ଉଠେ - ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ , ତୁମେ ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରେ ଉଠ, ଇତ୍ୟାଦି । ଏହିପରି ବାକ୍ୟ ଲେଖିବା ପାଇଁ ଆମେ ପ୍ରଥମେ କର୍ତ୍ତା (ମୁଁ କିମ୍ବା ତୁମେ କିମ୍ବା ସେ, ଇତ୍ୟାଦି) ଲେଖନ୍ତି, ତାହାପରେ କ୍ରିୟା (wake up କିମ୍ବା wakes up) ଲେଖନ୍ତି , ଏବଂ ଶେଷରେ ଅନ୍ୟ ଶବ୍ଦ ଯାହାସବୁ ରହିଗଲା (ଯଥା- ସକାଳ 6 ଟା ବେଳେ, ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରର, ଇତ୍ୟାଦି) ଲେଖନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ = I wake up at 6 AM.<br>",
+                audio: "https://audio.evidya.de/SE1T5.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up every morning.",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ସେ ବହୁତ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> He wakes up very early.",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up feeling fresh.",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ୫ ଟାରେ ଉଠେ (ଝିଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> She wakes up at 5."
+        ]
+    }
 ];
 
 let currentTopicIndex = 0;
@@ -5885,7 +5941,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'Economics-XII Unit-1 Class-1: <br> ଅର୍ଥନୀତିର ସଂଜ୍ଞା ଓ ପରିସର (Definition & Scope)',
+    className: 'SPECIAL TRAINING (ENGLISH) CLASS-1 : WAKE UP',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -6440,6 +6496,545 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
+
+
+  // ===== UNIFIED MEDIA + REVISION TOGGLE =====
+
+const revisionLessons = [
+    {
+        id: 1,
+        lessonAudio: "https://audio.evidya.de/SE1R1.mp3",
+        lessonText: "ପାଠ ୧: କ୍ରିୟା ଚିହ୍ନିବା — ପ୍ରତ୍ୟେକ ବାକ୍ୟରେ ନିଶ୍ଚିତ ଭାବେ ଏକ କ୍ରିୟା ଶବ୍ଦ ରହି ଥାଏ । କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ଉଦାହରଣ ସ୍ୱରୂପ, ଉଠିବା, ଖାଇବା, ପଢିବା, ଖେଳିବା — ଏସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।",
+        understandAudio: "https://audio.evidya.de/U.m4a",
+        mcq: [
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "📖 'ରାମ ପଢ଼େ' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା କିଏ ?",
+                options: ["ରାମ", "ପଢ଼ିବା", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଯାହା ଶବ୍ଦ କୌଣସି କାମ ସୁଚାଏ, ତାହା ହେଉଛି କ୍ରିୟା । ଏଠାରେ 'ପଢ଼ିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ 'ପଢ଼ିବା' ହେଉଛି କ୍ରିୟା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଯାହା ଶବ୍ଦ କୌଣସି କାମ ସୁଚାଏ, ତାହା ହେଉଛି କ୍ରିୟା । ଏଠାରେ 'ପଢ଼ିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ 'ପଢ଼ିବା' ହେଉଛି କ୍ରିୟା ।"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "⚽ 'ହରି ଖେଳେ' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା କିଏ ?",
+                options: ["ହରି", "ଖେଳିବା", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ଖେଳିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ ଏହା କ୍ରିୟା । 'ହରି' ହେଉଛି ସେ ଯିଏ ଖେଳୁଛି, ତେଣୁ ହରି ହେଉଛି କର୍ତ୍ତା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ଖେଳିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ ଏହା କ୍ରିୟା । 'ହରି' ହେଉଛି ସେ ଯିଏ ଖେଳୁଛି, ତେଣୁ ହରି ହେଉଛି କର୍ତ୍ତା ।"
+            }
+        ]
+    },
+    {
+        id: 2,
+        lessonAudio: "https://audio.evidya.de/SE1R2.mp3",
+        lessonText: "ପାଠ ୨: କର୍ତ୍ତା ଚିହ୍ନିବା — ବାକ୍ୟରେ ଯିଏ କ୍ରିୟା କୁ କରେ, ତାକୁ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ, 'ରାମ ଖାଏ' — ଏଠାରେ ଖାଇବା କାମ ରାମ କରୁଛି, ତେଣୁ ରାମ ହେଉଛି କର୍ତ୍ତା । 'ସେମାନେ ଖେଳନ୍ତି' — ଏଠାରେ ଖେଳିବା କାମ ସେମାନେ କରୁଛନ୍ତି, ତେଣୁ ସେମାନେ ହେଉଛି କର୍ତ୍ତା ।",
+        understandAudio: "https://audio.evidya.de/U.m4a",
+        mcq: [
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "✏️ 'ହରି ଏବଂ ରାମ ଲେଖନ୍ତି' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ?",
+                options: ["ଲେଖିବା", "ହରି ଏବଂ ରାମ", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଏଠାରେ ଲେଖିବା ଏକ କ୍ରିୟା । ଏହି ଲେଖିବା କାମ କିଏ କରୁଛି ? ହରି ଏବଂ ରାମ । ତେଣୁ ହରି ଏବଂ ରାମ ହେଉଛି କର୍ତ୍ତା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଏଠାରେ ଲେଖିବା ଏକ ଆ ।ଏହି ଲେଖିବା କାମ କିଏ କରୁଛି ? ହରି ଏବଂ ରାମ । ତେଣୁ ହରି ଏବଂ ରାମ ହେଉଛି କର୍ତ୍ତା ।"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "🏃 'ସେମାନେ ପଢ଼ନ୍ତି' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା ଏବଂ କର୍ତ୍ତା ଚିହ୍ନ କର । କ୍ରିୟା କିଏ ?",
+                options: ["ସେମାନେ", "ପଢ଼ିବା", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ପଢ଼ିବା' ଏଠାରେ ଏକ କାମ, ତେଣୁ ଏହା ହେଉଛି କ୍ରିୟା । ଏବଂ ଏହି ପଢ଼ିବା କାମ 'ସେମାନେ' କରୁଛନ୍ତି, ତେଣୁ 'ସେମାନେ' ହେଉଛି କର୍ତ୍ତା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ପଢ଼ିବା' ଏଠାରେ ଏକ କାମ, ତେଣୁ ଏହା ହେଉଛି କ୍ରିୟା । ଏବଂ ଏହି ପଢ଼ିବା କାମ 'ସେମାନେ' କରୁଛନ୍ତି, ତେଣୁ 'ସେମାନେ' ହେଉଛି କର୍ତ୍ତା ।"
+            }
+        ]
+    },
+    {
+        id: 3,
+        lessonAudio: "https://audio.evidya.de/SE1R3.mp3",
+        lessonText: "ପାଠ ୩: ଏକବଚନ ଏବଂ ବହୁବଚନ କର୍ତ୍ତା — ଯଦି କର୍ତ୍ତା ସଂଖ୍ୟାରେ ଜଣେ ବା ଗୋଟିଏ ହୋଇଥାଏ, ତାହାକୁ ଏକବଚନ କର୍ତ୍ତା କହନ୍ତି । ଯଦି କର୍ତ୍ତା ଏକ ରୁ ଅଧିକ ହୋଇଥାଏ, ତାହାକୁ ବହୁବଚନ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ — 'ରାମ ଖାଏ' ରେ ରାମ ଏକବଚନ । 'ରାମ ଏବଂ ହରି ଖାଆନ୍ତି' ରେ 'ରାମ ଏବଂ ହରି' ବହୁବଚନ ।",
+        understandAudio: "https://audio.evidya.de/U.m4a",
+        mcq: [
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "🧒 'ସେ ଉଠେ' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?",
+                options: ["ଏକବଚନ", "ବହୁବଚନ", "ଜାଣିନାହିଁ"],
+                correct: 0,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ସେ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହା ଏକବଚନ କର୍ତ୍ତା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ସେ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହା ଏକବଚନ କର୍ତ୍ତା ।"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "👨‍👩‍👦 'ଆପଣମାନେ ଉଠନ୍ତି' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?",
+                options: ["ଏକବଚନ", "ବହୁବଚନ", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହା ବହୁବଚନ କର୍ତ୍ତା ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହା ବହୁବଚନ କର୍ତ୍ତା ।"
+            }
+        ]
+    },
+    {
+        id: 4,
+        lessonAudio: "https://audio.evidya.de/SE1R4.mp3",
+        lessonText: "ପାଠ ୪: କର୍ତ୍ତା କରେ — ଏପରି ବାକ୍ୟ ତିଆରି । ନିୟମ-1: କର୍ତ୍ତା ଯଦି I, You, ବା ବହୁବଚନ ହୋଇଥାଏ — ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖ, ତାପରେ ସିଧା କ୍ରିୟା ଲେଖ । ଉଦାହରଣ — I wake up, You wake up, They wake up । ନିୟମ-2: ଅନ୍ୟ ଯେ କୌଣସି ଏକବଚନ କର୍ତ୍ତା ପାଇଁ — ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖ, ତାପରେ କ୍ରିୟା ସହ s ଲଗାଇ ଲେଖ । ଉଦାହରଣ — He wakes up, Ram wakes up ।",
+        understandAudio: "https://audio.evidya.de/U.m4a",
+        mcq: [
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "🧒 'ରାଜୁ ଉଠେ' — 'Raju _____ up.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
+                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
+                correct: 0,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — Raju ଜଣେ ଏକବଚନ କର୍ତ୍ତା, I ଓ You ନୁହଁ । ତେଣୁ କ୍ରିୟା ସହ s ଲାଗି WAKES ହବ — Raju wakes up !",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । Raju ଜଣେ ଏକବଚନ କର୍ତ୍ତା, I ଓ You ନୁହଁ । ତେଣୁ କ୍ରିୟା ସହ s ଲାଗି WAKES ହବ — Raju wakes up !"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "👦👦 'ଆମ୍ଭେମାନେ ଉଠୁ' — 'We _____ up.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
+                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — We ଏକ ବହୁବଚନ କର୍ତ୍ତା, ତେଣୁ s ଲାଗେ ନାହିଁ — WAKE ହବ — We wake up !",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । We ଏକ ବହୁବଚନ କର୍ତ୍ତା, ତେଣୁ s ଲାଗେ ନାହିଁ — WAKE ହବ — We wake up !"
+            }
+        ]
+    },
+    {
+        id: 5,
+        lessonAudio: "https://audio.evidya.de/SE1R5.mp3",
+        lessonText: "ପାଠ ୫: ଟିକେ ବଡ ବାକ୍ୟ ତିଆରି — ଉଦାହରଣ ସ୍ୱରୂପ, 'ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ' = I wake up at 6 AM । ଏହିପରି ବାକ୍ୟ ଲେଖିବା ପାଇଁ ପ୍ରଥମେ କର୍ତ୍ତା (I/He/She/They ଇତ୍ୟାଦି) ଲେଖ, ତାପରେ କ୍ରିୟା (wake up ବା wakes up) ଲେଖ, ଏବଂ ଶେଷରେ ଅବଶିଷ୍ଟ ଶବ୍ଦ (ଯଥା at 6 AM, every morning, feeling fresh ଇତ୍ୟାଦି) ଲେଖ ।",
+        understandAudio: "https://audio.evidya.de/U.m4a",
+        mcq: [
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "🌅 'ସେ(ଝିଅ) ବହୁତ ସକାଳୁ ଉଠେ' — ଇଂରାଜୀ ବାକ୍ୟ ଟି କ'ଣ ହବ ?",
+                options: ["He wakes up very early", "She wakes up very early", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ସେ(ଝିଅ)' ପାଇଁ She ବସିବ, ତାପରେ wakes up, ଏବଂ ଶେଷରେ very early — She wakes up very early !",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ସେ(ଝିଅ)' ପାଇଁ She ବସିବ, ତାପରେ wakes up, ଏବଂ ଶେଷରେ very early — She wakes up very early !"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "💚 'ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ' — 'I _____ up feeling fresh.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
+                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — I ସହ ସବୁ ସମୟରେ WAKE ହେବ, s ଲାଗେ ନାହିଁ — I wake up feeling fresh !",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । I ସହ ସବୁ ସମୟରେ WAKE ହେବ, s ଲାଗେ ନାହିଁ — I wake up feeling fresh !"
+            }
+        ]
+    }
+];
+    
+let revisionState = {
+    active: false,
+    lessonIndex: 0,
+    mcqIndex: 0,
+    audio: null
+};
+
+function stopRevisionAudio() {
+    if (revisionState.audio) {
+        revisionState.audio.pause();
+        revisionState.audio = null;
+    }
+}
+
+function playRevisionAudio(url, onEnd) {
+    stopRevisionAudio();
+    if (!url || !isValidAudioUrl(url)) {
+        if (onEnd) setTimeout(onEnd, 100);
+        return;
+    }
+    revisionState.audio = new Audio(url);
+    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
+    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
+    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
+}
+
+function setRevisionScreen(html) {
+    const screen = document.getElementById('revisionScreen');
+    if (screen) {
+        screen.style.background = 'white';
+        screen.style.overflow = 'hidden';
+        screen.style.display = 'flex';
+        screen.style.flexDirection = 'column';
+        screen.style.alignItems = 'stretch';
+        screen.style.justifyContent = 'flex-start';
+        screen.style.padding = '0';
+        screen.innerHTML = html;
+    }
+}
+
+function rvTypewrite(elementId, text, speed, onDone) {
+    const el = document.getElementById(elementId);
+    if (!el) { if (onDone) onDone(); return; }
+
+    el.innerHTML = '';
+
+    const chars = Array.from(text);
+    let i = 0;
+    let current = '';
+
+    function next() {
+        if (i < chars.length) {
+            current += chars[i];
+            el.innerHTML = current;
+            i++;
+            setTimeout(next, speed || 35);
+        } else {
+            if (onDone) onDone();
+        }
+    }
+
+    next();
+}
+    
+function toggleMedia(type) {
+    const logoDisplay  = document.getElementById('logoDisplay');
+    const audioDisplay = document.getElementById('audioDisplay');
+    const videoDisplay = document.getElementById('videoDisplay');
+    const revisionBoard = document.getElementById('revisionBoard');
+    const audioIframe  = document.getElementById('audioIframe');
+    const videoIframe  = document.getElementById('videoIframe');
+    const audioBtn     = document.getElementById('audioToggleBtn');
+    const videoBtn     = document.getElementById('videoToggleBtn');
+    const revBtn       = document.getElementById('revisionToggleBtn');
+
+    const resetAllBtnStyles = () => {
+        [audioBtn, videoBtn, revBtn].forEach(b => {
+            if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+        });
+    };
+
+    const hideAll = () => {
+        audioIframe.src = '';
+        videoIframe.src = '';
+        audioDisplay.style.display = 'none';
+        videoDisplay.style.display = 'none';
+        revisionBoard.style.display = 'none';
+        logoDisplay.style.display = 'block';
+        stopRevisionAudio();
+        revisionState.active = false;
+        resetAllBtnStyles();
+    };
+
+    if (type === 'audio') {
+        if (audioDisplay.style.display === 'block') {
+            hideAll();
+            return;
+        }
+        hideAll();
+        logoDisplay.style.display = 'none';
+        audioDisplay.style.display = 'block';
+        audioIframe.src = audioIframe.dataset.src;
+        audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+    }
+
+    if (type === 'video') {
+        if (videoDisplay.style.display === 'block') {
+            hideAll();
+            return;
+        }
+        hideAll();
+        logoDisplay.style.display = 'none';
+        videoDisplay.style.display = 'block';
+        videoIframe.src = videoIframe.dataset.src;
+        videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+    }
+
+    if (type === 'revision') {
+        if (revisionState.active) {
+            hideAll();
+            return;
+        }
+        hideAll();
+        logoDisplay.style.display = 'none';
+        revisionBoard.style.display = 'block';
+        revisionState.active = true;
+        revisionState.lessonIndex = 0;
+        revisionState.mcqIndex = 0;
+        revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        startRevisionLesson();
+    }
+}
+
+function startRevisionLesson() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const current = revisionState.lessonIndex + 1;
+    const total = revisionLessons.length;
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
+                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
+                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
+            </div>
+
+            <div id="rvLessonTextDiv" style="flex:1;overflow-y:auto;min-height:0;margin-bottom:6px;">
+                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
+            </div>
+
+            <div id="rvUnderstandButtons" style="display:none;flex-direction:column;gap:6px;flex-shrink:0;">
+                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
+                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
+                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
+            </div>
+        </div>
+    `);
+
+    let textDone = false;
+    let audioDone = false;
+
+    function checkBothDone() {
+        if (textDone && audioDone) {
+            const textDiv = document.getElementById('rvLessonTextDiv');
+            if (textDiv) textDiv.style.display = 'none';
+
+            const btns = document.getElementById('rvUnderstandButtons');
+            if (btns) {
+                btns.style.display = 'flex';
+                btns.style.flexDirection = 'column';
+            }
+            playRevisionAudio(lesson.understandAudio, null);
+        }
+    }
+
+    playRevisionAudio(lesson.lessonAudio, () => {
+        audioDone = true;
+        checkBothDone();
+    });
+
+    setTimeout(() => {
+        rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
+            textDone = true;
+            checkBothDone();
+        });
+    }, 300);
+}
+    
+function rvUnderstood(yes) {
+    if (!yes) {
+        startRevisionLesson();
+        return;
+    }
+    revisionState.mcqIndex = 0;
+    showRevisionMCQ();
+}
+
+function showRevisionMCQ() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const mcq = lesson.mcq[revisionState.mcqIndex];
+    const qNum = revisionState.mcqIndex + 1;
+    const total = lesson.mcq.length;
+    const current = revisionState.lessonIndex + 1;
+
+    playRevisionAudio(mcq.questionAudio, null);
+
+    const optColors = [
+        'linear-gradient(135deg,#667eea,#764ba2)',
+        'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
+        'linear-gradient(135deg,#6b7280,#4b5563)'
+    ];
+
+   setRevisionScreen(`
+    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
+            
+            <!-- Header badge -->
+            <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
+                <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
+            </div>
+
+<div style="margin-bottom:12px;">
+    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
+        ${mcq.q}
+    </p>
+</div>
+
+      <div style="margin-top:10px;">
+    <select onchange="rvAnswer(parseInt(this.value))" style="
+        width:100%;
+        padding:12px;
+        font-size:15px;
+        font-weight:bold;
+        border:2px solid #667eea;
+        border-radius:10px;
+        background:white;
+        color:#111;
+        cursor:pointer;
+        appearance:auto;
+    ">
+        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
+        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
+    </select>
+</div>
+        </div>
+    `);
+}
+
+
+function rvSubmitAnswer() {
+    const sel = document.getElementById('rvSelect');
+    if (!sel || sel.value === '') {
+        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
+        return;
+    }
+    rvAnswer(parseInt(sel.value));
+}
+
+    
+function rvAnswer(optionIndex) {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const mcq = lesson.mcq[revisionState.mcqIndex];
+    const isIDontKnow = (optionIndex === mcq.options.length - 1);
+    const isCorrect = (optionIndex === mcq.correct);
+
+   if (isCorrect) {
+    playRevisionAudio(mcq.correctAudio, null);
+    
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
+    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
+    
+    // Decide what the forward button says and does
+    let forwardBtn = '';
+    if (isLastMCQ && isLastLesson) {
+        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
+    } else if (isLastMCQ) {
+        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
+    } else {
+        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
+    }
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
+            <div style="font-size:34px;">🌟</div>
+            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
+            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
+                ${forwardBtn}
+            </div>
+        </div>
+    `);
+
+    setTimeout(() => {
+        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
+            // Show the forward button only after text finishes typing
+            const fwd = document.getElementById('rvForwardBtn');
+            if (fwd) fwd.style.display = 'block';
+        });
+    }, 200);
+    return;
+}
+
+    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
+    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
+    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
+    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
+    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
+
+    playRevisionAudio(feedbackAudio, null);
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
+            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
+                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
+            </div>
+            <div style="flex:1;overflow-y:auto;">
+              <p id="rvFeedbackText" style="
+    font-size: 13px;
+    font-weight: bold;
+    color: #111;
+    line-height: 1.6;
+    margin: 0;
+    width: 100%;
+    display: block;
+    text-align: justify;
+"></p>
+            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
+        </div>
+    `);
+
+    setTimeout(() => {
+        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
+    }, 200);
+}
+   
+function advanceMCQ() {
+    const lesson = revisionLessons[revisionState.lessonIndex];
+    revisionState.mcqIndex++;
+    if (revisionState.mcqIndex < lesson.mcq.length) {
+        showRevisionMCQ();
+    } else {
+        showLessonCompletePrompt();
+    }
+}
+
+function showLessonCompletePrompt() {
+    const current = revisionState.lessonIndex + 1;
+    const total = revisionLessons.length;
+    const isLast = (current === total);
+
+    playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
+
+    setRevisionScreen(`
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
+            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
+            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
+            ${isLast
+                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
+                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
+                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
+                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
+                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
+            }
+        </div>
+    `);
+}
+    
+function goNextLesson() {
+    revisionState.lessonIndex++;
+    revisionState.mcqIndex = 0;
+    startRevisionLesson();
+}  
+    
+    
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
     const savedRoll = localStorage.getItem('userRollNumber');
@@ -6456,7 +7051,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
     
 // Initialize welcome screen with handwriting animation
     setTimeout(() => {
-        const welcomeText = "🌹ଓଡିଶା ଇ-ଗୁରୁ ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।";
+        const welcomeText = "🌹ଇ-ବିଦ୍ୟା ଏକାଡେମି ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।";
         const welcomeDiv = document.getElementById('welcomeExplanation');
         if (welcomeDiv) {
             triggerHandwritingForWelcome(welcomeText);
