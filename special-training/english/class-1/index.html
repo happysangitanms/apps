@@ -6824,8 +6824,8 @@ function showRevisionMCQ() {
     </p>
 </div>
 
-       <div style="margin-top:10px;">
-    <select id="rvSelect" style="
+      <div style="margin-top:10px;">
+    <select onchange="rvAnswer(parseInt(this.value))" style="
         width:100%;
         padding:12px;
         font-size:15px;
@@ -6840,20 +6840,7 @@ function showRevisionMCQ() {
         <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
         ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
     </select>
-    <button onclick="rvSubmitAnswer()" style="
-        width:100%;
-        margin-top:8px;
-        padding:12px;
-        background:linear-gradient(135deg,#667eea,#764ba2);
-        color:white;
-        border:none;
-        border-radius:10px;
-        font-size:15px;
-        font-weight:bold;
-        cursor:pointer;
-    ">✅ ଉତ୍ତର ଦିଅନ୍ତୁ</button>
 </div>
-
         </div>
     `);
 }
