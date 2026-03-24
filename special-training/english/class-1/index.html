@@ -6818,12 +6818,12 @@ function showRevisionMCQ() {
                 <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
             </div>
 
-            <!-- Question text — big and centred, takes up most space -->
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:12px;">
-                <p style="font-size:18px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;">
-                    ${mcq.q}
-                </p>
-            </div>
+<!-- Question text — scrollable if needed -->
+<div style="flex:1;display:flex;align-items:center;justify-content:center;overflow-y:auto;margin-bottom:12px;min-height:0;">
+    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
+        ${mcq.q}
+    </p>
+</div>
 
             <!-- Options: first two side by side, third full width below -->
             <div style="flex-shrink:0;">
