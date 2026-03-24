@@ -2840,73 +2840,127 @@ document.addEventListener('visibilitychange', () => {
 
 const wordData = {
     currentWord: 0,
-    numbers: [
+    words: [
         {
             word: "SAME",
             odia: "ଏକା",
             emoji: "🟰",
-            odiaUse: "ଏକା ମାନେ — ଦୁଇଟି ଜିନିଷ ଦେଖିବାରେ, ଆକୃତିରେ ବା ରଙ୍ଗରେ ଏକ ରକମ ।<br> ଉଦାହରଣ: ଦୁଇଟି ଲାଲ ଗୋଲ ବଲ ଏକା ଦେଖାଯାଏ । ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧିଲେ ସେ ଦୁଇ ଜଣ ଏକା ଦେଖାଯାଆନ୍ତି ।"
+            odiaUse: "ଏକା ମାନେ — ଦୁଇଟି ଜିନିଷ ଦେଖିବାରେ, ଆକୃତିରେ ବା ରଙ୍ଗରେ ଏକ ରକମ । ଦୁଇଟି ଲାଲ ଗୋଲ ବଲ ଏକା ଦେଖାଯାଏ । ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧିଲେ ସେ ଦୁଇ ଜଣ ଏକା ଦେଖାଯାଆନ୍ତି ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "DIFFERENT",
             odia: "ଭିନ୍ନ",
             emoji: "🔀",
-            odiaUse: "ଭିନ୍ନ ମାନେ — ଦୁଇଟି ଜିନିଷ ଏକ ରକମ ନୁହେଁ, ଅଲଗା ।<br> ଉଦାହରଣ: ଏକ ରଙ୍ଗିନ ବଲ ଓ ଏକ ଚୌକ ବାକ୍ସ ଭିନ୍ନ ଆକୃତିର । ଆମ ଘଉଡ ଓ ଆମ ବ୍ୟାଗ ଭିନ୍ନ ଜିନିଷ ।"
+            odiaUse: "ଭିନ୍ନ ମାନେ — ଦୁଇଟି ଜିନିଷ ଏକ ରକମ ନୁହେଁ, ଅଲଗା । ଏକ ରଙ୍ଗିନ ବଲ ଓ ଏକ ଚୌକ ବାକ୍ସ ଭିନ୍ନ ଆକୃତିର । ଆମ ଘଉଡ ଓ ଆମ ବ୍ୟାଗ ଭିନ୍ନ ଜିନିଷ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "BIG",
             odia: "ବଡ",
             emoji: "🐘",
-            odiaUse: "ବଡ ମାନେ — ଆକାରରେ ଯାହା ଅଧିକ ।<br> ଉଦାହରଣ: ହାତୀ ଏକ ବଡ ଜୀବ । ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ ।"
+            odiaUse: "ବଡ ମାନେ — ଆକାରରେ ଯାହା ଅଧିକ । ହାତୀ ଏକ ବଡ ଜୀବ । ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "SMALL",
             odia: "ଛୋଟ",
             emoji: "🐜",
-            odiaUse: "ଛୋଟ ମାନେ — ଆକାରରେ ଯାହା କମ ।<br> ଉଦାହରଣ: ପିମ୍ପୁଡ଼ି ଏକ ଛୋଟ ଜୀବ । ଅଞ୍ଚଳ ଟି ଆମ ବ୍ୟାଗ ଠାରୁ ଛୋଟ ।"
+            odiaUse: "ଛୋଟ ମାନେ — ଆକାରରେ ଯାହା କମ । ପିମ୍ପୁଡ଼ି ଏକ ଛୋଟ ଜୀବ । ଅଞ୍ଚଳ ଟି ଆମ ବ୍ୟାଗ ଠାରୁ ଛୋଟ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "HEAVY",
             odia: "ଭାରି",
             emoji: "🪨",
-            odiaUse: "ଭାରି ମାନେ — ଉଠାଇବାରେ ଯାହା ଅଧିକ ଭାର ଲାଗେ ।<br> ଉଦାହରଣ: ପଥର ଭାରି ଜିନିଷ । ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି, ସହଜରେ ଉଠାଯାଏ ନାହିଁ ।"
+            odiaUse: "ଭାରି ମାନେ — ଉଠାଇବାରେ ଯାହା ଅଧିକ ଭାର ଲାଗେ । ପଥର ଭାରି ଜିନିଷ । ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି, ସହଜରେ ଉଠାଯାଏ ନାହିଁ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "LIGHT",
             odia: "ହାଲୁକା",
             emoji: "🪶",
-            odiaUse: "ହାଲୁକା ମାନେ — ଉଠାଇବାରେ ଯାହା ଭାର କମ ।<br> ଉଦାହରଣ: ପକ୍ଷୀ ର ପালক ହାଲୁକା । ଏକ ଖଣ୍ଡ ଶୁଖିଲ ପତ୍ର ଉଠାଇଲେ ଆମେ ଅନୁଭବ କରୁ ଏ ଜିନିଷ ହାଲୁକା ।"
+            odiaUse: "ହାଲୁକା ମାନେ — ଉଠାଇବାରେ ଯାହା ଭାର କମ । ପକ୍ଷୀ ର ପାଲକ ହାଲୁକା । ଏକ ଖଣ୍ଡ ଶୁଖିଲ ପତ୍ର ଉଠାଇଲେ ଆମେ ଅନୁଭବ କରୁ ଏ ଜିନିଷ ହାଲୁକା ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "ABOVE",
             odia: "ଉପର",
             emoji: "⬆️",
-            odiaUse: "ଉପର ମାନେ — ଯାହା ଅଧିକ ଉଚ୍ଚ ସ୍ଥାନରେ ଅଛି ।<br> ଉଦାହରଣ: ଆକାଶ ଆମ ଉପରରେ ଅଛି । ଟେବୁଲ ଉପରରେ ଆମ ବହି ରଖାଯାଏ ।"
+            odiaUse: "ଉପର ମାନେ — ଯାହା ଅଧିକ ଉଚ୍ଚ ସ୍ଥାନରେ ଅଛି । ଆକାଶ ଆମ ଉପରରେ ଅଛି । ଟେବୁଲ ଉପରରେ ଆମ ବହି ରଖାଯାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "BELOW",
             odia: "ତଳ",
             emoji: "⬇️",
-            odiaUse: "ତଳ ମାନେ — ଯାହା ନୀଚ ସ୍ଥାନରେ ଅଛି ।<br> ଉଦାହରଣ: ମାଟି ଆମ ପାଦ ତଳେ ଅଛି । ଚୌକି ଟେବୁଲ ତଳରେ ଥାଏ ।"
+            odiaUse: "ତଳ ମାନେ — ଯାହା ନୀଚ ସ୍ଥାନରେ ଅଛି । ମାଟି ଆମ ପାଦ ତଳେ ଅଛି । ଚୌକି ଟେବୁଲ ତଳରେ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "INSIDE",
             odia: "ଭିତର",
             emoji: "📦",
-            odiaUse: "ଭିତର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ଅନ୍ଦରରେ ।<br> ଉଦାହରଣ: ବହି ଥଳି ଭିତରରେ ଅଛି । ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋ ଅଛି ।"
+            odiaUse: "ଭିତର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ଅନ୍ଦରରେ । ବହି ଥଳି ଭିତରରେ ଅଛି । ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋ ଅଛି ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "OUTSIDE",
             odia: "ବାହାର",
             emoji: "🚪",
-            odiaUse: "ବାହାର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ବାହ୍ୟ ଅଂଶରେ ।<br> ଉଦାହରଣ: ଗଛ ଘର ବାହାରରେ ଅଛି । ଆମ ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ରହେ ।"
+            odiaUse: "ବାହାର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ବାହ୍ୟ ଅଂଶରେ । ଗଛ ଘର ବାହାରରେ ଅଛି । ଆମ ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ରହେ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
             word: "ORDER",
             odia: "କ୍ରମ",
             emoji: "1️⃣2️⃣3️⃣",
-            odiaUse: "କ୍ରମ ମାନେ — ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ ସଜ ଭାବରେ ଏକ ପଛ ଏକ ସଜାଇ ରଖିବା ।<br> ଉଦାହରଣ: ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ଯିଏ ଆଗ ପହଞ୍ଚେ ସେ ପ୍ରଥମ, ତା ପଛ ଜଣ ଦ୍ୱିତୀୟ । ଦୋକାନରେ ସଂଖ୍ୟା ଅନୁଯାୟୀ ଲାଇନ ରେ ଠିଆ ହୁଅ ।"
-        }
+            odiaUse: "କ୍ରମ ମାନେ — ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ ସଜ ଭାବରେ ଏକ ପଛ ଏକ ସଜାଇ ରଖିବା । ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ଯିଏ ଆଗ ପହଞ୍ଚେ ସେ ପ୍ରଥମ, ତା ପଛ ଜଣ ଦ୍ୱିତୀୟ । ଦୋକାନରେ ସଂଖ୍ୟା ଅନୁଯାୟୀ ଲାଇନ ରେ ଠିଆ ହୁଅ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         }
     ]
 };
