@@ -2843,89 +2843,131 @@ document.addEventListener('visibilitychange', () => {
 // ==========================================
 
 const wordData = {
-    currentNumber: 0,
-    numbers: [
+    currentWord: 0,
+    words: [
         {
-            numeral: "0",
             word: "ZERO",
             odia: "ଶୂନ୍ୟ",
             emoji: "0️⃣",
-            odiaUse: "ଖାଲି ବା କିଛି ନ ଥିବା ।<br> ଉଦାହରଣ: ଯଦି ତୁମ ଥାଳିରେ କୌଣସି ଭାତ ନାହିଁ, ତେବେ ଥାଳିରେ ଶୂନ୍ୟ ଭାତ ଅଛି । ଯଦି ତୁମ ପକେଟ୍‌ରେ କୌଣସି ଟଙ୍କା ନାହିଁ, ତେବେ ତୁମ ପକେଟ୍‌ରେ ଶୂନ୍ୟ ଟଙ୍କା ଅଛି ।"
+            odiaUse: "ଖାଲି ବା କିଛି ନ ଥିବା । ଯଦି ତୁମ ଥାଳିରେ କୌଣସି ଭାତ ନାହିଁ, ତେବେ ଥାଳିରେ ଶୂନ୍ୟ ଭାତ ଅଛି । ଯଦି ତୁମ ପକେଟ୍‌ରେ କୌଣସି ଟଙ୍କା ନାହିଁ, ତେବେ ତୁମ ପକେଟ୍‌ରେ ଶୂନ୍ୟ ଟଙ୍କା ଅଛି ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "1",
             word: "ONE",
             odia: "ଏକ",
             emoji: "1️⃣",
-            odiaUse: "ଗୋଟିଏ ।<br> ଉଦାହରଣ: ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ଅଛି ଯିଏ ଆମକୁ ଆଲୋ ଦିଏ । ଆମ ଘରେ ଗୋଟିଏ ଦରଜା ଅଛି ଯାହା ଦେଇ ଆମେ ଭିତରକୁ ଯାଉ ।"
+            odiaUse: "ଗୋଟିଏ । ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ଅଛି ଯିଏ ଆମକୁ ଆଲୋ ଦିଏ । ଆମ ଘରେ ଗୋଟିଏ ଦରଜା ଅଛି ଯାହା ଦେଇ ଆମେ ଭିତରକୁ ଯାଉ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "2",
             word: "TWO",
             odia: "ଦୁଇ",
             emoji: "2️⃣",
-            odiaUse: "ଦୁଇଟା ।<br> ଉଦାହରଣ: ଆମ ଶରୀରରେ ଦୁଇଟା ଆଖି ଅଛି ଯାହାଦ୍ୱାରା ଆମେ ଦେଖୁ । ସାଇକେଲ୍‌ରେ ଦୁଇଟା ଚକ ଥାଏ ।"
+            odiaUse: "ଦୁଇଟା । ଆମ ଶରୀରରେ ଦୁଇଟା ଆଖି ଅଛି ଯାହାଦ୍ୱାରା ଆମେ ଦେଖୁ । ସାଇକେଲ୍‌ରେ ଦୁଇଟା ଚକ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "3",
             word: "THREE",
             odia: "ତିନି",
             emoji: "3️⃣",
-            odiaUse: "ତିନି ଟା ।<br> ଉଦାହରଣ: ଟ୍ରାଫିକ ସିଗ୍ନାଲ୍‌ରେ ତିନିଟା ରଙ୍ଗ ଅଛି — ଲାଲ, ହଳଦିଆ ଏବଂ ସବୁଜ । ଏକ ତ୍ରିଭୁଜ ଆକୃତିରେ ତିନିଟା କୋଣ ଥାଏ ।"
+            odiaUse: "ତିନି ଟା । ଟ୍ରାଫିକ ସିଗ୍ନାଲ୍‌ରେ ତିନିଟା ରଙ୍ଗ ଅଛି — ଲାଲ, ହଳଦିଆ ଏବଂ ସବୁଜ । ଏକ ତ୍ରିଭୁଜ ଆକୃତିରେ ତିନିଟା କୋଣ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "4",
             word: "FOUR",
             odia: "ଚାରି",
             emoji: "4️⃣",
-            odiaUse: "ଚାରି ଟା ।<br> ଉଦାହରଣ: ଗାଡ଼ିରେ ଚାରିଟା ଚକ ଥାଏ । ଏକ ଚୌକ ଆକୃତିରେ ଚାରିଟା ବାହୁ ଥାଏ ।"
+            odiaUse: "ଚାରି ଟା । ଗାଡ଼ିରେ ଚାରିଟା ଚକ ଥାଏ । ଏକ ଚୌକ ଆକୃତିରେ ଚାରିଟା ବାହୁ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "5",
             word: "FIVE",
             odia: "ପାଞ୍ଚ",
             emoji: "5️⃣",
-            odiaUse: "ପାଞ୍ଚ ଟା ।<br> ଉଦାହରଣ: ଆମ ଗୋଟିଏ ହାତରେ ପାଞ୍ଚଟା ଆଙ୍ଗୁଠି ଥାଏ । ଏକ ସପ୍ତାହରେ ପାଞ୍ଚ ଟା ବିଦ୍ୟାଳୟ ଦିନ ଅଛି ।"
+            odiaUse: "ପାଞ୍ଚ ଟା । ଆମ ଗୋଟିଏ ହାତରେ ପାଞ୍ଚଟା ଆଙ୍ଗୁଠି ଥାଏ । ଏକ ସପ୍ତାହରେ ପାଞ୍ଚ ଟା ବିଦ୍ୟାଳୟ ଦିନ ଅଛି ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "6",
             word: "SIX",
             odia: "ଛଅ",
             emoji: "6️⃣",
-            odiaUse: "ଛଅ ଟା ।<br> ଉଦାହରଣ: ଏକ ମହୁ ଛତାରେ ଛଅ ଟା କୋଣ ବିଶିଷ୍ଟ ଘର ଥାଏ । ପୋକ ଜୀବ ଗୁଡ଼ିକର ଛଅଟା ଗୋଡ ଥାଏ ।"
+            odiaUse: "ଛଅ ଟା । ଏକ ମହୁ ଛତାରେ ଛଅ ଟା କୋଣ ବିଶିଷ୍ଟ ଘର ଥାଏ । ପୋକ ଜୀବ ଗୁଡ଼ିକର ଛଅଟା ଗୋଡ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "7",
             word: "SEVEN",
             odia: "ସାତ",
             emoji: "7️⃣",
-            odiaUse: "ସାତ ଟା ।<br> ଉଦାହରଣ: ଏକ ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଅଛି । ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ ଥାଏ ।"
+            odiaUse: "ସାତ ଟା । ଏକ ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଅଛି । ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "8",
             word: "EIGHT",
             odia: "ଆଠ",
             emoji: "8️⃣",
-            odiaUse: "ଆଠ ଟା ।<br> ଉଦାହରଣ: ଅକ୍ଟୋପସ୍‌ ଜୀବର ଆଠ ଟା ହାତ ଥାଏ । ଏକ ମକ୍ କ'ଣ୍ଡ ଝୁଡ଼ିରେ ସାଧାରଣତଃ ଆଠ ଟା ମକ ଥାଏ ।"
+            odiaUse: "ଆଠ ଟା । ଅକ୍ଟୋପସ୍‌ ଜୀବର ଆଠ ଟା ହାତ ଥାଏ । ଏକ ମକ୍ କ'ଣ୍ଡ ଝୁଡ଼ିରେ ସାଧାରଣତଃ ଆଠ ଟା ମକ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "9",
             word: "NINE",
             odia: "ନଅ",
             emoji: "9️⃣",
-            odiaUse: "ନଅ ଟା ।<br> ଉଦାହରଣ: ବ୍ୟାଟ୍‌ ବଲ ଖେଳରେ ଗୋଟିଏ ଦଳରେ ନଅ ଜଣ ଖେଳାଳି ଥାନ୍ତି । ଗୋଟିଏ ଗ୍ରାସ ହପ ଇଂ ରୁ ନଅ ଟା ଗୋଡ ଥାଏ ।"
+            odiaUse: "ନଅ ଟା । ବ୍ୟାଟ୍‌ ବଲ ଖେଳରେ ଗୋଟିଏ ଦଳରେ ନଅ ଜଣ ଖେଳାଳି ଥାନ୍ତି । ଏକ ଗ୍ରାସ ହପ ଇଂ ର ନଅ ଟା ଗୋଡ ଥାଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            numeral: "10",
             word: "TEN",
             odia: "ଦଶ",
             emoji: "🔟",
-            odiaUse: "ଦଶ ଟା ।<br> ଉଦାହରଣ: ଆମ ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ଅଛି । ଦଶ ପଇସା ମିଶାଇ ଗୋଟିଏ ଆଣା ହୁଏ ।"
-        }
+            odiaUse: "ଦଶ ଟା । ଆମ ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ଅଛି । ଦଶ ପଇସା ମିଶାଇ ଗୋଟିଏ ଆଣା ହୁଏ ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         }
     ]
 };
-
 
 
     
