@@ -2838,187 +2838,149 @@ document.addEventListener('visibilitychange', () => {
 // app-specific functions below this line
 // ============================================
 
+// ==========================================
+// MATH CLASS 1 — numberData (like wordData)
+// ==========================================
+
 const wordData = {
-    currentWord: 0,
-    words: [
+    currentNumber: 0,
+    numbers: [
         {
-            word: "WAKE UP",
-            odia: "ନିଦରୁ ଜାଗିବା / ଉଠିବା",
-            emoji: "⏰",
-            odiaUse: "ନିଦରୁ ଜାଗିବା ବା ଉଠିବା । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । He wakes up daily. ସେ ପ୍ରତିଦିନ ଉଠେ ।",
+            numeral: "0",
+            word: "ZERO",
+            odia: "ଶୂନ୍ୟ",
+            emoji: "0️⃣",
+            odiaUse: "ଖାଲି ବା କିଛି ନ ଥିବା ।<br> ଉଦାହରଣ: There are zero apples. ଏଠାରେ ଶୂନ୍ୟ ଆପଲ ଅଛି । I have zero pencils. ମୋ ପାଖରେ ଶୂନ୍ୟ ଟା ପେନ୍ସିଲ ଅଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W1.m4a",
+                intro: "https://audio.evidya.de/SM1N0.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "EARLY",
-            odia: "ସକାଳୁ / ଆଗୁଆ",
-            emoji: "🌄",
-            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପୂର୍ବରୁ । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । Boys wake up early. ବାଳକମାନେ ସକାଳୁ ଉଠନ୍ତି ।",
+            numeral: "1",
+            word: "ONE",
+            odia: "ଏକ",
+            emoji: "1️⃣",
+            odiaUse: "ଗୋଟିଏ ।<br> ଉଦାହରଣ: I have one book. ମୋ ପାଖରେ ଏକ ଟା ବହି ଅଛି । There is one sun. ଆକାଶରେ ଏକ ଟା ସୂର୍ଯ୍ୟ ଅଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W2.m4a",
+                intro: "https://audio.evidya.de/SM1N1.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "LATE",
-            odia: "ଡେରିରେ",
-            emoji: "🌙",
-            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପରେ । <br> ଉଦାହରଣ: I wake up late. ମୁଁ ଡେରିରେ ଉଠେ । She wakes up late. ସେ ଡେରିରେ ଉଠେ ।",
+            numeral: "2",
+            word: "TWO",
+            odia: "ଦୁଇ",
+            emoji: "2️⃣",
+            odiaUse: "ଦୁଇଟା ।<br> ଉଦାହରଣ: I have two eyes. ମୋର ଦୁଇ ଟା ଆଖି ଅଛି । There are two birds. ଦୁଇ ଟା ପକ୍ଷୀ ଅଛନ୍ତି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W3.m4a",
+                intro: "https://audio.evidya.de/SM1N2.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "DAILY",
-            odia: "ପ୍ରତିଦିନ",
-            emoji: "📅",
-            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ । <br> ଉଦାହରଣ: I wake up daily. ମୁଁ ପ୍ରତିଦିନ ଉଠେ । We wake up at sunrise daily. ଆମେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠୁ ।",
+            numeral: "3",
+            word: "THREE",
+            odia: "ତିନି",
+            emoji: "3️⃣",
+            odiaUse: "ତିନି ଟା ।<br> ଉଦାହରଣ: I have three pencils. ମୋ ପାଖରେ ତିନି ଟା ପେନ୍ସିଲ ଅଛି । There are three cats. ତିନି ଟା ବିଲେଇ ଅଛନ୍ତି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W4.m4a",
+                intro: "https://audio.evidya.de/SM1N3.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "QUICKLY",
-            odia: "ଜଲ୍ଦି",
-            emoji: "⚡",
-            odiaUse: "ଦ୍ରୁତ ଗତିରେ । <br> ଉଦାହରଣ: I wake up quickly. ମୁଁ ଜଲ୍ଦି ଉଠେ । You all wake up quickly. ତୁମେମାନେ ଜଲ୍ଦି ଉଠ ।",
+            numeral: "4",
+            word: "FOUR",
+            odia: "ଚାରି",
+            emoji: "4️⃣",
+            odiaUse: "ଚାରି ଟା ।<br> ଉଦାହରଣ: I have four fingers. ମୋର ଚାରି ଟା ଆଙ୍ଗୁଠି ଅଛି । There are four wheels. ଚାରି ଟା ଚକ ଅଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W5.m4a",
+                intro: "https://audio.evidya.de/SM1N4.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "SLOWLY",
-            odia: "ଧୀରେ",
-            emoji: "🐢",
-            odiaUse: "ଧୀର ଗତିରେ । <br> ଉଦାହରଣ: I wake up slowly. ମୁଁ ଧୀରେ ଉଠେ । He wakes up slowly. ସେ ଧୀରେ ଉଠେ ।",
+            numeral: "5",
+            word: "FIVE",
+            odia: "ପାଞ୍ଚ",
+            emoji: "5️⃣",
+            odiaUse: "ପାଞ୍ଚ ଟା ।<br> ଉଦାହରଣ: I have five fingers. ମୋ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି ଅଛି । I see five stars. ମୁଁ ପାଞ୍ଚ ଟା ତାରା ଦେଖୁଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W6.m4a",
+                intro: "https://audio.evidya.de/SM1N5.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "HAPPILY",
-            odia: "ଖୁସିରେ",
-            emoji: "😊",
-            odiaUse: "ଖୁସି ସହ । <br> ଉଦାହରଣ: I wake up happily. ମୁଁ ଖୁସିରେ ଉଠେ । She wakes up happily. ସେ ଖୁସିରେ ଉଠେ ।",
+            numeral: "6",
+            word: "SIX",
+            odia: "ଛଅ",
+            emoji: "6️⃣",
+            odiaUse: "ଛଅ ଟା ।<br> ଉଦାହରଣ: There are six eggs. ଛଅ ଟା ଅଣ୍ଡା ଅଛି । I have six books. ମୋ ପାଖରେ ଛଅ ଟା ବହି ଅଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W7.m4a",
+                intro: "https://audio.evidya.de/SM1N6.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "TODAY",
-            odia: "ଆଜି",
-            emoji: "📆",
-            odiaUse: "ଏହି ଦିନ । <br> ଉଦାହରଣ: I wake up today. ମୁଁ ଆଜି ଉଠେ । Boys wake up very early today. ବାଳକମାନେ ଆଜି ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
+            numeral: "7",
+            word: "SEVEN",
+            odia: "ସାତ",
+            emoji: "7️⃣",
+            odiaUse: "ସାତ ଟା ।<br> ଉଦାହରଣ: There are seven days in a week. ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଅଛି । I see seven flowers. ମୁଁ ସାତ ଟା ଫୁଲ ଦେଖୁଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W8.m4a",
+                intro: "https://audio.evidya.de/SM1N7.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "NOW",
-            odia: "ଏବେ",
-            emoji: "👆",
-            odiaUse: "ଏହି ମୁହୂର୍ତ୍ତରେ । <br> ଉଦାହରଣ: I wake up now. ମୁଁ ଏବେ ଉଠେ । You wake up now. ତୁମେ ଏବେ ଉଠ ।",
+            numeral: "8",
+            word: "EIGHT",
+            odia: "ଆଠ",
+            emoji: "8️⃣",
+            odiaUse: "ଆଠ ଟା ।<br> ଉଦାହରଣ: I have eight crayons. ମୋ ପାଖରେ ଆଠ ଟା ରଙ୍ଗ ପେନ୍ସିଲ ଅଛି । There are eight birds. ଆଠ ଟା ପକ୍ଷୀ ଅଛନ୍ତି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W9.m4a",
+                intro: "https://audio.evidya.de/SM1N8.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "EVERY MORNING",
-            odia: "ପ୍ରତ୍ୟେକ ସକାଳ",
-            emoji: "🌅",
-            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ ସକାଳ ସମୟ । <br> ଉଦାହରଣ: I wake up every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ । We wake up every morning. ଆମେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ ।",
+            numeral: "9",
+            word: "NINE",
+            odia: "ନଅ",
+            emoji: "9️⃣",
+            odiaUse: "ନଅ ଟା ।<br> ଉଦାହରଣ: I have nine marbles. ମୋ ପାଖରେ ନଅ ଟା ଗୁଲ୍ ଗୁଲ ଅଛି । There are nine students. ନଅ ଜଣ ଛାତ୍ର ଅଛନ୍ତି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W10.m4a",
+                intro: "https://audio.evidya.de/SM1N9.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "VERY EARLY",
-            odia: "ବହୁତ ସକାଳୁ",
-            emoji: "⭐",
-            odiaUse: "ଅତ୍ୟନ୍ତ ଆଗୁଆ ସମୟ । <br> ଉଦାହରଣ: I wake up very early. ମୁଁ ବହୁତ ସକାଳୁ ଉଠେ । Boys wake up very early. ବାଳକମାନେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
+            numeral: "10",
+            word: "TEN",
+            odia: "ଦଶ",
+            emoji: "🔟",
+            odiaUse: "ଦଶ ଟା ।<br> ଉଦାହରଣ: I have ten fingers. ମୋ ଦୁଇ ହାତରେ ଦଶ ଟା ଆଙ୍ଗୁଠି ଅଛି । There are ten houses. ଦଶ ଟା ଘର ଅଛି ।",
             audio: {
-                intro: "https://audio.evidya.de/SE1W11.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "VERY LATE",
-            odia: "ବହୁତ ଡେରିରେ",
-            emoji: "😴",
-            odiaUse: "ଅତ୍ୟନ୍ତ ବିଳମ୍ବ ସମୟ । <br> ଉଦାହରଣ: I wake up very late. ମୁଁ ବହୁତ ଡେରିରେ ଉଠେ । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W12.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "AT SUNRISE",
-            odia: "ସୂର୍ଯ୍ୟ ଉଦୟରେ",
-            emoji: "🌞",
-            odiaUse: "ସୂର୍ଯ୍ୟ ଉଠିବା ସମୟ । <br> ଉଦାହରଣ: I wake up at sunrise. ମୁଁ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠେ । Boys wake up at sunrise daily. ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W13.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING FRESH",
-            odia: "ତାଜା ଅନୁଭବ କରି",
-            emoji: "💚",
-            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଭଲ ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling fresh. ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ । She wakes up feeling fresh. ସେ ତାଜା ଅନୁଭବ କରି ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W14.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING TIRED",
-            odia: "ଥକା ଅନୁଭବ କରି",
-            emoji: "😩",
-            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଥକା ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling tired. ମୁଁ ଥକା ଅନୁଭବ କରି ଉଠେ । We wake up feeling tired. ଆମେ ଥକା ଅନୁଭବ କରି ଉଠୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W15.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING HAPPY",
-            odia: "ଖୁସି ଅନୁଭବ କରି",
-            emoji: "😄",
-            odiaUse: "ଉଠିବା ପରେ ମନ ଖୁସି ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling happy. ମୁଁ ଖୁସି ଅନୁଭବ କରି ଉଠେ । Boys wake up feeling happy. ବାଳକମାନେ ଖୁସି ଅନୁଭବ କରି ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W16.m4a",
+                intro: "https://audio.evidya.de/SM1N10.m4a",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         }
     ]
 };
+
+
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -5103,101 +5065,101 @@ function showAnswerInBox(boxId, answerText) {
 
 const topicsData = [
     {
-        heading: "ପାଠ-1: କ୍ରିୟା ଚିହ୍ନିବା:",
+        heading: "ପାଠ-1: ସଂଖ୍ୟା କ'ଣ ? (What is a Number?)",
         audioPoints: [
             {
-                text: "👉 ପ୍ରତ୍ଯେକ ବାକ୍ୟରେ ନିଶ୍ଚିତ ଭାବେ ଏକ କ୍ରିୟା ଶବ୍ଦ ରହି ଥାଏ । କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି, ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବା, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।<br>",
-                audio: "https://audio.evidya.de/SE1T1.m4a"
+                text: "👉 ଆମ ଚାରିଆଡ଼େ ଯାହା କିଛି ଅଛି — ଗଛ, ଫୁଲ, ପୁସ୍ତକ, ଛାତ୍ର — ସେଗୁଡ଼ିକୁ ଗଣିବା ପାଇଁ ଆମେ ସଂଖ୍ୟା ବ୍ୟବହାର କରୁ । ଯଥା — ଗୋଟିଏ ଗଛ, ଦୁଇ ଟା ଫୁଲ, ତିନି ଟା ବହି । ଏହି ଗୋଟିଏ, ଦୁଇ, ତିନି — ଏଗୁଡ଼ିକ ସଂଖ୍ୟା । ଇଂରାଜୀରେ ଏଗୁଡ଼ିକୁ Number (ନମ୍ବର) କହନ୍ତି ।<br>",
+                audio: "https://audio.evidya.de/SM1T1.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କ୍ରିୟା ର ଅର୍ଥ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି , ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବ, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ସଂଖ୍ୟା (Number) କ'ଣ ପାଇଁ ଦରକାର ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚାରିଆଡ଼ରେ ଥିବା ଜିନିଷ ଗଣିବା ପାଇଁ ସଂଖ୍ୟା ଦରକାର ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କଣ କହନ୍ତି ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କହନ୍ତି - Wake up ।",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଦୁଇ ଟା ଫୁଲ — ଏଠାରେ 'ଦୁଇ' ଟି କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 'ଦୁଇ' ଟି ଏକ ସଂଖ୍ୟା (Number) ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ମୁଁ ସକାଳ 6 ଟା ରେ ଉଠେ - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉଠିବା ବା wake up ।",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'Five' ର ଓଡ଼ିଆ ଅର୍ଥ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 'Five' ର ଓଡ଼ିଆ ଅର୍ଥ — ପାଞ୍ଚ ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଆପଣମାନେ ସକାଳ 6 ଟା ରେ ଯାଆନ୍ତି - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯିବା ବା go ।"
-        ]
-    },
-
- {
-        heading: "ପାଠ-2: କର୍ତ୍ତା ଚିହ୍ନିବା:",
-        audioPoints: [
-            {
-                text: "👉 କ୍ରିୟା କୁ ଯିଏ କରେ ତାକୁ କର୍ତ୍ତା କୁହାଯାଏ । ଉଦାହରଣ ସ୍ୱରୂପ, ରାମ ଖାଏ । - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖାଇବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ରାମ । ଠିକ ସେହିପରି, ସେ ଖେଳନ୍ତି - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖେଳିବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ସେ । <br>",
-                audio: "https://audio.evidya.de/SE1T2.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ଯିଏ କ୍ରିୟା କୁ କରେ, ତାକୁ କର୍ତ୍ତା କହନ୍ତି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସେମାନେ ପଢନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ଏବଂ କ୍ରିୟା କିଏ ବୁଝାଅ ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ ପ୍ରଥମେ କ୍ରିୟା କୁ ଚିହ୍ନିବା । କ୍ରିୟାର ଅର୍ଥ ହେଉଛି ହେଉଛି କାର୍ଯ୍ୟ ବା କାମ । ଏହି ବାକ୍ୟରେ ପଢିବା କାମ ହେଉଛି । ତେଣୁ କ୍ରିୟା ହେଉଛି ପଢିବା । କର୍ତ୍ତାର ଅର୍ଥ ହେଉଛି ସିଏ ଯିଏ କ୍ରିୟାକୁ କରେ । ଏଠାରେ ପଢିବା କାମ କିଏ କରୁଛି ବୋଲି ମନକୁ ପ୍ରଶ୍ନ ପଚାର । ନିଶ୍ଚିତ ଭାବେ ଉତ୍ତର ହେବ ସେମାନେ । ତେଣୁ କର୍ତ୍ତା ହେଉଛି ସେମାନେ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ହରି ଖେଳେ - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି ହରି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ହରି ଏବଂ ରାମ ଲେଖନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି - ହରି ଏବଂ ରାମ ।</span>"
-        ]
-    },
-    
-{
-    heading: "ପାଠ-3: ଏକବଚନ କର୍ତ୍ତା ଏବଂ ବହୁବଚନ କର୍ତ୍ତା :",
-    audioPoints: [
-        {
-            text: "👉 ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ଯାରେ ଏକ ବା ଜଣେ ବା ଗୋଟିଏ ହୋଇଥାଏ, ତେବେ ସେହି କର୍ତ୍ତାକୁ ଏକବଚନ କର୍ତ୍ତା କହନ୍ତି । କିନ୍ତୁ ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ୟା ରେ ଏକ ରୁ ଅଧିକ ହୋଇଥାଏ ତେବେ ସେହି କର୍ତ୍ତା କୁ ବହୁବଚନ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ - ରାମ ଖାଏ - ବାକ୍ୟରେ ରାମ ଜଣେ ହୋଇଥିବାରୁ ରାମକୁ ଆମେ ଏକବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । କିନ୍ତୁ ରାମ ଏବଂ ହରି ଖାଆନ୍ତି - ବାକ୍ୟରେ କର୍ତ୍ତା ରାମ ଏବଂ ହରି ଦୁଇଜଣ ଅଟନ୍ତି । ତେଣୁ ଏଠାରେ \"ରାମ ଏବଂ ହରି\" କୁ ବହୁବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । <br>",
-            audio: "https://audio.evidya.de/SE1T3.m4a"
-        }
-    ],
-    questions: [
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ମୁଁ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ଆମେ ଉଠୁ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆମେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ଆପଣମାନେ ଉଠନ୍ତି' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ଅଟେ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ସେ' ଜଣେ ବା ଏକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ଅଟେ ।</span>"
-    ]
-},
-
-    {
-        heading: "ପାଠ-4: କର୍ତ୍ତା କରେ - ଏପରି ସୂଚାଉଥିବା ବାକ୍ୟ ତିଆରି କରିବା :",
-        audioPoints: [
-            {
-                text: "👉 କର୍ତ୍ତା କରେ - ଯଥା ରାମ ଖାଏ, ମୁଁ ଯାଏ, ତୁମେ ପଢ, ସେମାନେ ଖେଳନ୍ତି, ଇତ୍ୟାଦି - ଏପରି ବାକ୍ୟ ତିଆରି ପାଇଁ ଆମକୁ ଦୁଇଟି ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ । ନିୟମ-1 : କର୍ତ୍ତା ଯଦି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇଥାଏ ତେବେ, ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ନିୟମ-2: ଅନ୍ୟ କୌଣସି କର୍ତ୍ତା ପାଇଁ, ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା ।<br>",
-                audio: "https://audio.evidya.de/SE1T4.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା ଯଦି I ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ଉଠେ - I wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> କର୍ତ୍ତା ଯଦି You ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ତୁମେ ଉଠ - You wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> କର୍ତ୍ତା ଯଦି ବହୁବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେମାନେ ଉଠନ୍ତି - They wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> କର୍ତ୍ତା ଯଦି I ଏବଂ You ବ୍ଯତୀତ ଅନ୍ୟ କୌଣସି ଏକବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେ ଉଠେ - He wakes up, ରାମ ଉଠେ - Ram wakes up , ଇତ୍ୟାଦି ।"
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ସପ୍ତାହରେ କେତୋଟି ଦିନ ଥାଏ ? ଇଂରାଜୀ ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସପ୍ତାହରେ 7 ଟି ଦିନ ଥାଏ । ଇଂରାଜୀରେ — Seven ।"
         ]
     },
 
     {
-        heading: "ପାଠ-5: ଟିକେ ବଡ ବାକ୍ୟ ତିଆରି କରିବା:",
+        heading: "ପାଠ-2: ଗଣିବା (Counting — 1 to 10)",
         audioPoints: [
             {
-                text: "👉 କର୍ତ୍ତା କିପରି/କେତେବେଳେ ଉଠେ - ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ , ତୁମେ ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରେ ଉଠ, ଇତ୍ୟାଦି । ଏହିପରି ବାକ୍ୟ ଲେଖିବା ପାଇଁ ଆମେ ପ୍ରଥମେ କର୍ତ୍ତା (ମୁଁ କିମ୍ବା ତୁମେ କିମ୍ବା ସେ, ଇତ୍ୟାଦି) ଲେଖନ୍ତି, ତାହାପରେ କ୍ରିୟା (wake up କିମ୍ବା wakes up) ଲେଖନ୍ତି , ଏବଂ ଶେଷରେ ଅନ୍ୟ ଶବ୍ଦ ଯାହାସବୁ ରହିଗଲା (ଯଥା- ସକାଳ 6 ଟା ବେଳେ, ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରର, ଇତ୍ୟାଦି) ଲେଖନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ = I wake up at 6 AM.<br>",
-                audio: "https://audio.evidya.de/SE1T5.m4a"
+                text: "👉 ଗଣିବା ମାନେ ଜିନିଷ ଗୁଡ଼ିକୁ ଏକ ଏକ କରି ସଂଖ୍ୟା ଦ୍ୱାରା ଚିହ୍ନିତ କରିବା । ଆମେ ଛୋଟ ଅଙ୍କ ଗଣୁ 1 ରୁ ଆରମ୍ଭ କରି — 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 । ଇଂରାଜୀରେ — One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten । ଉଦାହରଣ — ତୁମ ବ୍ୟାଗ ରେ ୩ ଟା ବହି ଅଛି — I have three books in my bag ।<br>",
+                audio: "https://audio.evidya.de/SM1T2.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up every morning.",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 1 ରୁ 5 ପର୍ଯ୍ୟନ୍ତ ଇଂରାଜୀ ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> One, Two, Three, Four, Five ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ସେ ବହୁତ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> He wakes up very early.",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 6 ରୁ 10 ପର୍ଯ୍ୟନ୍ତ ଇଂରାଜୀ ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> Six, Seven, Eight, Nine, Ten ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up feeling fresh.",
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ମୋ ପାଖରେ ୪ ଟା ଆମ୍ବ ଅଛି' — ଇଂରାଜୀରେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I have four mangoes.",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ୫ ଟାରେ ଉଠେ (ଝିଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> She wakes up at 5."
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'Eight' ର ଓଡ଼ିଆ ଅର୍ଥ ଏବଂ ଅଙ୍କ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> Eight = ଆଠ = 8 ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-3: ଅଧିକ ଏବଂ କମ (More and Less)",
+        audioPoints: [
+            {
+                text: "👉 ଦୁଇ ଟି ସଂଖ୍ୟାକୁ ତୁଳନା କଲେ ଆମେ ଜାଣିପାରୁ କେଉଁ ଟି ଅଧିକ (More) ଏବଂ କେଉଁ ଟି କମ (Less) । ଯଦି ଗୋଟିଏ ଟୋକରୀ ରେ 3 ଟା ଆମ୍ବ ଏବଂ ଅନ୍ୟ ଟୋକରୀ ରେ 7 ଟା ଆମ୍ବ ଥାଏ — ତେବେ 7 ଅଧିକ (more) ଏବଂ 3 କମ (less) । ବଡ ସଂଖ୍ୟା = More, ଛୋଟ ସଂଖ୍ୟା = Less ।<br>",
+                audio: "https://audio.evidya.de/SM1T3.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 5 ଏବଂ 8 ମଧ୍ୟରୁ କେଉଁ ଟି More (ଅଧିକ) ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 8 ଟି More (ଅଧିକ), କାରଣ 8 > 5 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 3 ଏବଂ 9 ମଧ୍ୟରୁ କେଉଁ ଟି Less (କମ) ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 3 ଟି Less (କମ), କାରଣ 3 < 9 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ରାମ ପାଖରେ 6 ଟା ଚକଲେଟ, ହରି ପାଖରେ 4 ଟା ଚକଲେଟ — କାହା ପାଖରେ More (ଅଧିକ) ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ରାମ ପାଖରେ More ଅଛି, କାରଣ 6 > 4 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> '2 is less than 7' — ଏହାର ଓଡ଼ିଆ ଅର୍ଥ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 2 ହେଉଛି 7 ଠାରୁ କମ ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-4: ଯୋଗ ର ଅର୍ଥ (Meaning of Addition)",
+        audioPoints: [
+            {
+                text: "👉 ଦୁଇ ଟି ବା ଅଧିକ ସଂଖ୍ୟାକୁ ଏକ ସଙ୍ଗେ ମିଳାଇ ବଡ ସଂଖ୍ୟା ବାହାର କଲେ ତାହାକୁ ଯୋଗ (Addition) କହନ୍ତି । ଯୋଗ ର ଚିହ୍ନ ହେଉଛି (+) । ଉଦାହରଣ — ତୁମ ପାଖରେ 2 ଟା ଆମ୍ବ ଅଛି, ମୁଁ ଆଉ 3 ଟା ଦେଲି — ଏବେ ତୁମ ପାଖରେ ମୋଟ 5 ଟା ଆମ୍ବ ହେଲା । ଏହା ହେଉଛି 2 + 3 = 5 ।<br>",
+                audio: "https://audio.evidya.de/SM1T4.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଯୋଗ (Addition) ର ଚିହ୍ନ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯୋଗ ର ଚିହ୍ନ ହେଉଛି + (Plus) ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 2 + 3 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 2 + 3 = 5 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ସୀତା ପାଖରେ 4 ଟା ଫୁଲ ଅଛି, ଗୀତା ଆଉ 3 ଟା ଦେଲା — ଏବେ ସୀତା ପାଖରେ ମୋଟ କେତୋଟି ଫୁଲ ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 4 + 3 = 7 । ସୀତା ପାଖରେ ଏବେ 7 ଟା ଫୁଲ ଅଛି ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 1 + 1 = ? ଏବଂ 5 + 5 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 1 + 1 = 2 ଏବଂ 5 + 5 = 10 ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-5: ଯୋଗ ର ଛୋଟ ଛୋଟ ସୁମ (Simple Addition Sums 1–10)",
+        audioPoints: [
+            {
+                text: "👉 ଏବେ ଆମେ 1 ରୁ 10 ସଂଖ୍ୟା ଭିତରେ ଛୋଟ ଛୋଟ ଯୋଗ ଅଙ୍କ ଶିଖିବା । ମନେ ରଖ — ଯୋଗ ମାନେ ଦୁଇ ଟା ସଂଖ୍ୟାକୁ ମିଳାଇ ଦେବା । ଉଦାହରଣ: 1+2=3, 2+4=6, 3+3=6, 4+6=10 । ଉତ୍ତର ବାହାର କରିବା ସହଜ ଉପାୟ — ଆଙ୍ଗୁଠିରେ ଗଣ, କିମ୍ବା ଗୋଟି ଗୋଟି ଜିନିଷ ଧରି ଗଣ ।<br>",
+                audio: "https://audio.evidya.de/SM1T5.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 3 + 4 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 3 + 4 = 7 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 2 + 6 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 2 + 6 = 8 ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ରାମ ର 5 ଟି ବିସ୍କୁଟ ଅଛି, ଆଉ 5 ଟି ପାଇଲା — ମୋଟ କେତୋଟି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 5 + 5 = 10 ଟି ବିସ୍କୁଟ ।",
+
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 1 + 9 = ? ଏବଂ 4 + 4 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 1 + 9 = 10 ଏବଂ 4 + 4 = 8 ।"
         ]
     }
 ];
-
+    
 let currentTopicIndex = 0;
 
 function loadTopic(index, autoPlay = false) {
