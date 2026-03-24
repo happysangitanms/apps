@@ -2840,182 +2840,73 @@ document.addEventListener('visibilitychange', () => {
 
 const wordData = {
     currentWord: 0,
-    words: [
+    numbers: [
         {
-            word: "WAKE UP",
-            odia: "ନିଦରୁ ଜାଗିବା / ଉଠିବା",
-            emoji: "⏰",
-            odiaUse: "ନିଦରୁ ଜାଗିବା ବା ଉଠିବା । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । He wakes up daily. ସେ ପ୍ରତିଦିନ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W1.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "SAME",
+            odia: "ଏକା",
+            emoji: "🟰",
+            odiaUse: "ଏକା ମାନେ — ଦୁଇଟି ଜିନିଷ ଦେଖିବାରେ, ଆକୃତିରେ ବା ରଙ୍ଗରେ ଏକ ରକମ ।<br> ଉଦାହରଣ: ଦୁଇଟି ଲାଲ ଗୋଲ ବଲ ଏକା ଦେଖାଯାଏ । ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧିଲେ ସେ ଦୁଇ ଜଣ ଏକା ଦେଖାଯାଆନ୍ତି ।"
         },
         {
-            word: "EARLY",
-            odia: "ସକାଳୁ / ଆଗୁଆ",
-            emoji: "🌄",
-            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପୂର୍ବରୁ । <br> ଉଦାହରଣ: I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । Boys wake up early. ବାଳକମାନେ ସକାଳୁ ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W2.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "DIFFERENT",
+            odia: "ଭିନ୍ନ",
+            emoji: "🔀",
+            odiaUse: "ଭିନ୍ନ ମାନେ — ଦୁଇଟି ଜିନିଷ ଏକ ରକମ ନୁହେଁ, ଅଲଗା ।<br> ଉଦାହରଣ: ଏକ ରଙ୍ଗିନ ବଲ ଓ ଏକ ଚୌକ ବାକ୍ସ ଭିନ୍ନ ଆକୃତିର । ଆମ ଘଉଡ ଓ ଆମ ବ୍ୟାଗ ଭିନ୍ନ ଜିନିଷ ।"
         },
         {
-            word: "LATE",
-            odia: "ଡେରିରେ",
-            emoji: "🌙",
-            odiaUse: "ନିର୍ଦ୍ଧାରିତ ସମୟ ପରେ । <br> ଉଦାହରଣ: I wake up late. ମୁଁ ଡେରିରେ ଉଠେ । She wakes up late. ସେ ଡେରିରେ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W3.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "BIG",
+            odia: "ବଡ",
+            emoji: "🐘",
+            odiaUse: "ବଡ ମାନେ — ଆକାରରେ ଯାହା ଅଧିକ ।<br> ଉଦାହରଣ: ହାତୀ ଏକ ବଡ ଜୀବ । ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ ।"
         },
         {
-            word: "DAILY",
-            odia: "ପ୍ରତିଦିନ",
-            emoji: "📅",
-            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ । <br> ଉଦାହରଣ: I wake up daily. ମୁଁ ପ୍ରତିଦିନ ଉଠେ । We wake up at sunrise daily. ଆମେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W4.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "SMALL",
+            odia: "ଛୋଟ",
+            emoji: "🐜",
+            odiaUse: "ଛୋଟ ମାନେ — ଆକାରରେ ଯାହା କମ ।<br> ଉଦାହରଣ: ପିମ୍ପୁଡ଼ି ଏକ ଛୋଟ ଜୀବ । ଅଞ୍ଚଳ ଟି ଆମ ବ୍ୟାଗ ଠାରୁ ଛୋଟ ।"
         },
         {
-            word: "QUICKLY",
-            odia: "ଜଲ୍ଦି",
-            emoji: "⚡",
-            odiaUse: "ଦ୍ରୁତ ଗତିରେ । <br> ଉଦାହରଣ: I wake up quickly. ମୁଁ ଜଲ୍ଦି ଉଠେ । You all wake up quickly. ତୁମେମାନେ ଜଲ୍ଦି ଉଠ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W5.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "HEAVY",
+            odia: "ଭାରି",
+            emoji: "🪨",
+            odiaUse: "ଭାରି ମାନେ — ଉଠାଇବାରେ ଯାହା ଅଧିକ ଭାର ଲାଗେ ।<br> ଉଦାହରଣ: ପଥର ଭାରି ଜିନିଷ । ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି, ସହଜରେ ଉଠାଯାଏ ନାହିଁ ।"
         },
         {
-            word: "SLOWLY",
-            odia: "ଧୀରେ",
-            emoji: "🐢",
-            odiaUse: "ଧୀର ଗତିରେ । <br> ଉଦାହରଣ: I wake up slowly. ମୁଁ ଧୀରେ ଉଠେ । He wakes up slowly. ସେ ଧୀରେ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W6.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "LIGHT",
+            odia: "ହାଲୁକା",
+            emoji: "🪶",
+            odiaUse: "ହାଲୁକା ମାନେ — ଉଠାଇବାରେ ଯାହା ଭାର କମ ।<br> ଉଦାହରଣ: ପକ୍ଷୀ ର ପালক ହାଲୁକା । ଏକ ଖଣ୍ଡ ଶୁଖିଲ ପତ୍ର ଉଠାଇଲେ ଆମେ ଅନୁଭବ କରୁ ଏ ଜିନିଷ ହାଲୁକା ।"
         },
         {
-            word: "HAPPILY",
-            odia: "ଖୁସିରେ",
-            emoji: "😊",
-            odiaUse: "ଖୁସି ସହ । <br> ଉଦାହରଣ: I wake up happily. ମୁଁ ଖୁସିରେ ଉଠେ । She wakes up happily. ସେ ଖୁସିରେ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W7.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "ABOVE",
+            odia: "ଉପର",
+            emoji: "⬆️",
+            odiaUse: "ଉପର ମାନେ — ଯାହା ଅଧିକ ଉଚ୍ଚ ସ୍ଥାନରେ ଅଛି ।<br> ଉଦାହରଣ: ଆକାଶ ଆମ ଉପରରେ ଅଛି । ଟେବୁଲ ଉପରରେ ଆମ ବହି ରଖାଯାଏ ।"
         },
         {
-            word: "TODAY",
-            odia: "ଆଜି",
-            emoji: "📆",
-            odiaUse: "ଏହି ଦିନ । <br> ଉଦାହରଣ: I wake up today. ମୁଁ ଆଜି ଉଠେ । Boys wake up very early today. ବାଳକମାନେ ଆଜି ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W8.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "BELOW",
+            odia: "ତଳ",
+            emoji: "⬇️",
+            odiaUse: "ତଳ ମାନେ — ଯାହା ନୀଚ ସ୍ଥାନରେ ଅଛି ।<br> ଉଦାହରଣ: ମାଟି ଆମ ପାଦ ତଳେ ଅଛି । ଚୌକି ଟେବୁଲ ତଳରେ ଥାଏ ।"
         },
         {
-            word: "NOW",
-            odia: "ଏବେ",
-            emoji: "👆",
-            odiaUse: "ଏହି ମୁହୂର୍ତ୍ତରେ । <br> ଉଦାହରଣ: I wake up now. ମୁଁ ଏବେ ଉଠେ । You wake up now. ତୁମେ ଏବେ ଉଠ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W9.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "INSIDE",
+            odia: "ଭିତର",
+            emoji: "📦",
+            odiaUse: "ଭିତର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ଅନ୍ଦରରେ ।<br> ଉଦାହରଣ: ବହି ଥଳି ଭିତରରେ ଅଛି । ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋ ଅଛି ।"
         },
         {
-            word: "EVERY MORNING",
-            odia: "ପ୍ରତ୍ୟେକ ସକାଳ",
-            emoji: "🌅",
-            odiaUse: "ପ୍ରତ୍ୟେକ ଦିନ ସକାଳ ସମୟ । <br> ଉଦାହରଣ: I wake up every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ । We wake up every morning. ଆମେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W10.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "OUTSIDE",
+            odia: "ବାହାର",
+            emoji: "🚪",
+            odiaUse: "ବାହାର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ବାହ୍ୟ ଅଂଶରେ ।<br> ଉଦାହରଣ: ଗଛ ଘର ବାହାରରେ ଅଛି । ଆମ ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ରହେ ।"
         },
         {
-            word: "VERY EARLY",
-            odia: "ବହୁତ ସକାଳୁ",
-            emoji: "⭐",
-            odiaUse: "ଅତ୍ୟନ୍ତ ଆଗୁଆ ସମୟ । <br> ଉଦାହରଣ: I wake up very early. ମୁଁ ବହୁତ ସକାଳୁ ଉଠେ । Boys wake up very early. ବାଳକମାନେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W11.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "VERY LATE",
-            odia: "ବହୁତ ଡେରିରେ",
-            emoji: "😴",
-            odiaUse: "ଅତ୍ୟନ୍ତ ବିଳମ୍ବ ସମୟ । <br> ଉଦାହରଣ: I wake up very late. ମୁଁ ବହୁତ ଡେରିରେ ଉଠେ । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W12.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "AT SUNRISE",
-            odia: "ସୂର୍ଯ୍ୟ ଉଦୟରେ",
-            emoji: "🌞",
-            odiaUse: "ସୂର୍ଯ୍ୟ ଉଠିବା ସମୟ । <br> ଉଦାହରଣ: I wake up at sunrise. ମୁଁ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠେ । Boys wake up at sunrise daily. ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W13.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING FRESH",
-            odia: "ତାଜା ଅନୁଭବ କରି",
-            emoji: "💚",
-            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଭଲ ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling fresh. ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ । She wakes up feeling fresh. ସେ ତାଜା ଅନୁଭବ କରି ଉଠେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W14.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING TIRED",
-            odia: "ଥକା ଅନୁଭବ କରି",
-            emoji: "😩",
-            odiaUse: "ଉଠିବା ପରେ ଶରୀର ଥକା ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling tired. ମୁଁ ଥକା ଅନୁଭବ କରି ଉଠେ । We wake up feeling tired. ଆମେ ଥକା ଅନୁଭବ କରି ଉଠୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W15.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEELING HAPPY",
-            odia: "ଖୁସି ଅନୁଭବ କରି",
-            emoji: "😄",
-            odiaUse: "ଉଠିବା ପରେ ମନ ଖୁସି ଲାଗିବା । <br> ଉଦାହରଣ: I wake up feeling happy. ମୁଁ ଖୁସି ଅନୁଭବ କରି ଉଠେ । Boys wake up feeling happy. ବାଳକମାନେ ଖୁସି ଅନୁଭବ କରି ଉଠନ୍ତି ।",
-            audio: {
-                intro: "https://audio.evidya.de/SE1W16.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "ORDER",
+            odia: "କ୍ରମ",
+            emoji: "1️⃣2️⃣3️⃣",
+            odiaUse: "କ୍ରମ ମାନେ — ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ ସଜ ଭାବରେ ଏକ ପଛ ଏକ ସଜାଇ ରଖିବା ।<br> ଉଦାହରଣ: ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ଯିଏ ଆଗ ପହଞ୍ଚେ ସେ ପ୍ରଥମ, ତା ପଛ ଜଣ ଦ୍ୱିତୀୟ । ଦୋକାନରେ ସଂଖ୍ୟା ଅନୁଯାୟୀ ଲାଇନ ରେ ଠିଆ ହୁଅ ।"
+        }
         }
     ]
 };
@@ -3087,264 +2978,284 @@ const courseData = {
 </div>
   `, 
     audio: "",
-mermaid: `graph LR
-A["⏰ WAKE UP<br/>ଜାଗିବା / ଉଠିବା"]
-
+    mermaid: `graph LR
+A["🧠 ଚିନ୍ତା ଶକ୍ତି<br/>REASONING"]
+ 
 A --> B["ନିୟମ"]
-B --> C["ଯଦି ବାକ୍ୟଟି - କର୍ତ୍ତା କରେ - ଏପରି ଅର୍ଥ ସୂଚାଉଥିବ, <br/> ତେବେ ନିମ୍ନଲିଖିତ ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ :"]
-
+B --> C["ଯଦି ଆମେ ଜିନିଷ ଦେଖି ଚିନ୍ତା କରୁ,<br/>ତେବେ ନିମ୍ନଲିଖିତ ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ :"]
+ 
 A --> D["ନିୟମ-1"]
-D --> E["ଉକ୍ତ କର୍ତ୍ତା ଟି ଯଦି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇନଥିବ<br/> ତେବେ କ୍ରିୟା ସହିତ s ଯୋଡିକରି  ଲେଖାଯିବ ।"]
-
+D --> E["ଯଦି ଦୁଇ ଟି ଜିନିଷ ଏକ ରକମ ଦେଖାଯାଏ,<br/>ତେବେ SAME (ଏକା) ।<br/>ଯଥା — 🔴 🔴 ଦୁଇ ଟି ଏକା ।"]
+ 
 A --> F["ନିୟମ-2"]
-F --> G["କିନ୍ତୁ ଯଦି  କର୍ତ୍ତା ଟି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇଥିବ, <br/>ତେବେ କେବଳ କ୍ରିୟା ଶବ୍ଦଟି ଖାଲି ଲେଖିଦିଆଯିବ।<br/>ଆଉ s ଯୋଡା ଯିବ ନାହିଁ ।"]
-
-A --> H["ଉଦାହରଣ-1"]
-H --> I["ସେ ଉଠେ ।<br/> He wakes up.<br/> କାରଣ He ଟି I ନୁହେଁ କିମ୍ବା You ନୁହେଁ କିମ୍ବା ବହୁବଚନ ବି ନୁହେଁ ।"]
-
-A --> J["ଉଦାହରଣ-2"]
-J --> K["ଆମେ ଉଠୁ ।<br/> We wake up.<br/> କାରଣ ଆମେ ହେଉଛି ବହୁବଚନ ।"]
-
+F --> G["ଯଦି ଦୁଇ ଟି ଜିନିଷ ଅଲଗା ଦେଖାଯାଏ,<br/>ତେବେ DIFFERENT (ଭିନ୍ନ) ।<br/>ଯଥା — 🐱 🐶 ଭିନ୍ନ ।"]
+ 
+A --> H["ନିୟମ-3"]
+H --> I["ଯଦି ଆକାରରେ ଅଧିକ ଥାଏ,<br/>ତେବେ BIG (ବଡ) ।<br/>ଯଥା — 🐘 ହାତୀ ବଡ ।"]
+ 
+A --> J["ନିୟମ-4"]
+J --> K["ଯଦି ଆକାରରେ କମ ଥାଏ,<br/>ତେବେ SMALL (ଛୋଟ) ।<br/>ଯଥା — 🐭 ମୂଷା ଛୋଟ ।"]
+ 
+A --> L["ନିୟମ-5"]
+L --> M["ଜିନିଷ ର ସ୍ଥାନ ଅନୁଯାୟୀ<br/>INSIDE/OUTSIDE/ABOVE/BELOW<br/>ଶବ୍ଦ ବ୍ୟବହାର ହୁଏ ।"]
+ 
+A --> N["ନିୟମ-6"]
+N --> O["ଧାଡ଼ି ଅନୁଯାୟୀ ସ୍ଥାନ —<br/>FIRST, SECOND, THIRD (କ୍ରମ) ।<br/>ଯଥା — 🥇🥈🥉 ।"]
+ 
 style A fill:#3b82f6,stroke:#1e40af,color:#fff
 style B fill:#dbeafe,stroke:#3b82f6
 style D fill:#10b981,stroke:#059669,color:#fff
 style F fill:#f59e0b,stroke:#d97706,color:#fff
-style H fill:#ec4899,stroke:#be185d,color:#fff
-style J fill:#8b5cf6,stroke:#6d28d9,color:#fff
+style H fill:#ef4444,stroke:#b91c1c,color:#fff
+style J fill:#ec4899,stroke:#be185d,color:#fff
+style L fill:#8b5cf6,stroke:#6d28d9,color:#fff
+style N fill:#14b8a6,stroke:#0f766e,color:#fff
 style C fill:#dbeafe,stroke:#3b82f6
 style E fill:#d1fae5,stroke:#10b981
 style G fill:#fef3c7,stroke:#f59e0b
-style I fill:#fce7f3,stroke:#ec4899
-style K fill:#ede9fe,stroke:#8b5cf6`,
-
-mcq: {
-    questions: [
-        {
-            question: "I, We, You, Boys ସହ କେଉଁ ରୂପ ବ୍ୟବହାର ହୁଏ?",
-            options: [
-                "WAKES",
-                "WAKE",
-                "WAKED",
-                "WAKING"
-            ],
-            correct: 1
-        },
-        {
-            question: "He ଓ She ସହ କେଉଁ ରୂପ ବ୍ୟବହାର ହୁଏ?",
-            options: [
-                "WAKE",
-                "WAKING",
-                "WAKES",
-                "WAKED"
-            ],
-            correct: 2
-        },
-        {
-            question: "'ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀରେ କ'ଣ?",
-            options: [
-                "He wake up every morning.",
-                "He wakes up every morning.",
-                "He waking up every morning.",
-                "He waked up every morning."
-            ],
-            correct: 1
-        },
-        {
-            question: "'ଆମେ ବହୁତ ତାଜା ଅନୁଭବ କରି ଉଠୁ' ଇଂରାଜୀରେ କ'ଣ?",
-            options: [
-                "We wakes up feeling very fresh.",
-                "We wake up feeling very tired.",
-                "We wake up feeling very fresh.",
-                "We waking up feeling very fresh."
-            ],
-            correct: 2
-        },
-        {
-            question: "'ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି' ଇଂରାଜୀରେ କ'ଣ?",
-            options: [
-                "Boys wakes up at sunrise daily.",
-                "Boys wake up at sunrise daily.",
-                "Boys wake up at sunset daily.",
-                "Boys waking up at sunrise daily."
-            ],
-            correct: 1
-        }
-    ]
-},
-
-trueFalse: {
-    questions: [
-        {
-            question: "He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ ।",
-            correct: true
-        },
-        {
-            question: "I ସହ WAKES ବ୍ୟବହାର ହୁଏ ।",
-            correct: false
-        },
-        {
-            question: "Boys wake up — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
-            correct: true
-        },
-        {
-            question: "She wake up early — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
-            correct: false
-        },
-        {
-            question: "We wake up every morning — ଏହା ସଠିକ୍ ବାକ୍ୟ ।",
-            correct: true
-        }
-    ]
-},
-
-fillBlanks: {
-    questions: [
-        {
-            question: "I ___ up early. (wake/wakes)",
-            answer: "wake"
-        },
-        {
-            question: "He ___ up at 5 daily. (wake/wakes)",
-            answer: "wakes"
-        },
-        {
-            question: "She ___ up feeling very fresh. (wake/wakes)",
-            answer: "wakes"
-        },
-        {
-            question: "Boys ___ up at sunrise. (wake/wakes)",
-            answer: "wake"
-        },
-        {
-            question: "We ___ up every morning. (wake/wakes)",
-            answer: "wake"
-        }
-    ]
-},
-
-matching: {
-    pairs: [
-        { left: "I wake up early.", right: "ମୁଁ ସକାଳୁ ଉଠେ ।" },
-        { left: "He wakes up slowly.", right: "ସେ ଧୀରେ ଉଠେ ।" },
-        { left: "She wakes up happily.", right: "ସେ ଖୁସିରେ ଉଠେ ।" },
-        { left: "We wake up daily.", right: "ଆମେ ପ୍ରତିଦିନ ଉଠୁ ।" },
-        { left: "Boys wake up at sunrise.", right: "ବାଳକମାନେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି ।" },
-        { left: "You all wake up now.", right: "ତୁମେମାନେ ଏବେ ଉଠ ।" },
-        { left: "I wake up feeling fresh.", right: "ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ ।" },
-        { left: "He wakes up very early.", right: "ସେ ବହୁତ ସକାଳୁ ଉଠେ ।" },
-        { left: "She wakes up at 5 today.", right: "ସେ ଆଜି ୫ ଟାରେ ଉଠେ ।" },
-        { left: "We wake up feeling very happy.", right: "ଆମେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠୁ ।" }
-    ]
-},
-
-arrange: {
-    questions: [
-        {
-            words: ["wake", "I", "early", "up"],
-            correct: "I wake up early"
-        },
-        {
-            words: ["wakes", "He", "daily", "up", "5", "at"],
-            correct: "He wakes up at 5 daily"
-        },
-        {
-            words: ["morning", "wake", "every", "We", "up"],
-            correct: "We wake up every morning"
-        },
-        {
-            words: ["sunrise", "Boys", "at", "wake", "up"],
-            correct: "Boys wake up at sunrise"
-        },
-        {
-            words: ["very", "She", "today", "wakes", "early", "up"],
-            correct: "She wakes up very early today"
-        }
-    ]
-},
-
-stq: {
-    questions: [
-        {
-            question: "WAKE ଓ WAKES ର ନିୟମ କ'ଣ?",
-            answer: "I, We, You, Boys ସହ WAKE ବ୍ୟବହାର ହୁଏ । He ଓ She ସହ WAKES ବ୍ୟବହାର ହୁଏ । He ଓ She ସହ ଶେଷରେ S ଲାଗେ । ଏହା ଇଂରାଜୀ ର ଏକ ମୁଖ୍ୟ ନିୟମ ।"
-        },
-        {
-            question: "WAKE UP ସହ ଏକ ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-            answer: "I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । He wakes up late. ସେ ଦେରିରେ ଉଠେ । She wakes up quickly. ସେ ଜଲ୍ଦି ଉଠେ । We wake up daily. ଆମେ ପ୍ରତିଦିନ ଉଠୁ ।"
-        },
-        {
-            question: "WAKE UP ସହ ଦୁଇ ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-            answer: "I wake up every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠେ । She wakes up at sunrise. ସେ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠେ । We wake up feeling fresh. ଆମେ ତାଜା ଅନୁଭବ କରି ଉଠୁ ।"
-        },
-        {
-            question: "WAKE UP ସହ ତିନି ଶବ୍ଦ ଯୋଡ଼ି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-            answer: "I wake up very early today. ମୁଁ ଆଜି ବହୁତ ସକାଳୁ ଉଠେ । He wakes up at 5 daily. ସେ ପ୍ରତିଦିନ ୫ ଟାରେ ଉଠେ । Boys wake up at sunrise daily. ବାଳକମାନେ ପ୍ରତିଦିନ ସୂର୍ଯ୍ୟ ଉଦୟରେ ଉଠନ୍ତି । We wake up feeling very happy. ଆମେ ବହୁତ ଖୁସି ଅନୁଭବ କରି ଉଠୁ ।"
-        }
-    ]
-}
+style I fill:#fee2e2,stroke:#ef4444
+style K fill:#fce7f3,stroke:#ec4899
+style M fill:#ede9fe,stroke:#8b5cf6
+style O fill:#ccfbf1,stroke:#14b8a6`,
+ 
+    mcq: {
+        questions: [
+            {
+                question: "ଦୁଇ ଟି ଜିନିଷ ଏକ ରକମ ଦେଖାଗଲେ ଆମେ କ'ଣ କହୁ ?",
+                options: [
+                    "DIFFERENT",
+                    "BIG",
+                    "SAME",
+                    "ORDER"
+                ],
+                correct: 2
+            },
+            {
+                question: "🐘 ହାତୀ ଓ 🐭 ମୂଷା — ହାତୀ ଟି କ'ଣ ?",
+                options: [
+                    "SMALL",
+                    "LIGHT",
+                    "BELOW",
+                    "BIG"
+                ],
+                correct: 3
+            },
+            {
+                question: "ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି — ସଠିକ ଇଂରାଜୀ ଶବ୍ଦ ଟି କ'ଣ ?",
+                options: [
+                    "OUTSIDE",
+                    "ABOVE",
+                    "INSIDE",
+                    "BELOW"
+                ],
+                correct: 2
+            },
+            {
+                question: "ଦୌଡ ରେ ଯିଏ ସବୁ ଠାରୁ ଆଗ ପହଞ୍ଚେ ସେ କ'ଣ ?",
+                options: [
+                    "SECOND",
+                    "THIRD",
+                    "LAST",
+                    "FIRST"
+                ],
+                correct: 3
+            },
+            {
+                question: "☁️ ଆକାଶ ଆମ ଉପରରେ ଅଛି — ସଠିକ ଶବ୍ଦ ଟି କ'ଣ ?",
+                options: [
+                    "BELOW",
+                    "INSIDE",
+                    "ABOVE",
+                    "OUTSIDE"
+                ],
+                correct: 2
+            }
+        ]
+    },
+ 
+    trueFalse: {
+        questions: [
+            {
+                question: "🔴 🔴 ଦୁଇ ଟି ଏକ ରକମ — ଏ ଦୁଇ ଟି SAME ।",
+                correct: true
+            },
+            {
+                question: "🐱 ଓ 🐶 ଦୁଇ ଟି SAME (ଏକା) ।",
+                correct: false
+            },
+            {
+                question: "🐘 ହାତୀ 🐭 ମୂଷା ଠାରୁ BIG (ବଡ) ।",
+                correct: true
+            },
+            {
+                question: "ପକ୍ଷୀ ଗଛ ତଳରେ (BELOW) ବସିଅଛି ।",
+                correct: false
+            },
+            {
+                question: "ଧାଡ଼ି ରେ ଦ୍ୱିତୀୟ ଜଣ SECOND ।",
+                correct: true
+            }
+        ]
+    },
+ 
+    fillBlanks: {
+        questions: [
+            {
+                question: "🔴 🔴 ଦୁଇ ଟି ଏକ ରକମ — ଏ ଦୁଇ ଟି ___ । (SAME / DIFFERENT)",
+                answer: "SAME"
+            },
+            {
+                question: "🍋 🍊 ଦୁଇ ଟି ଅଲଗା — ଏ ଦୁଇ ଟି ___ । (SAME / DIFFERENT)",
+                answer: "DIFFERENT"
+            },
+            {
+                question: "ବହି ଥଳି ଭିତରରେ ଅଛି — ବହି ଟି ___ ରେ ।  (INSIDE / OUTSIDE)",
+                answer: "INSIDE"
+            },
+            {
+                question: "ଆକାଶ ଆମ ___ ରେ ।  (ABOVE / BELOW)",
+                answer: "ABOVE"
+            },
+            {
+                question: "ଦୌଡ ରେ ଯିଏ ଆଗ ଆସିଲା ସେ ___ ।  (FIRST / THIRD)",
+                answer: "FIRST"
+            }
+        ]
+    },
+ 
+    matching: {
+        pairs: [
+            { left: "SAME", right: "ଏକା — 🔴 🔴 ଦୁଇ ଟି ଲାଲ ଗୋଲ ।" },
+            { left: "DIFFERENT", right: "ଭିନ୍ନ — 🐱 🐶 ବିଲେଇ ଓ କୁକୁର ।" },
+            { left: "BIG", right: "ବଡ — 🐘 ହାତୀ ବଡ ଜୀବ ।" },
+            { left: "SMALL", right: "ଛୋଟ — 🐭 ମୂଷା ଛୋଟ ଜୀବ ।" },
+            { left: "HEAVY", right: "ଭାରି — 🪨 ପଥର ଭାରି ।" },
+            { left: "LIGHT", right: "ହାଲୁକା — 🪶 ପଲକ ହାଲୁକା ।" },
+            { left: "ABOVE", right: "ଉପର — ☁️ ଆକାଶ ଆମ ଉପରରେ ।" },
+            { left: "BELOW", right: "ତଳ — ଚୌକି ଟେବୁଲ ତଳରେ ।" },
+            { left: "INSIDE", right: "ଭିତର — 📦 ବହି ଥଳି ଭିତରରେ ।" },
+            { left: "OUTSIDE", right: "ବାହାର — ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ।" },
+            { left: "ORDER", right: "କ୍ରମ — 🥇🥈🥉 ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ ।" }
+        ]
+    },
+ 
+    arrange: {
+        questions: [
+            {
+                words: ["SAME", "ଦୁଇ", "ଟି", "ଲାଲ", "ଗୋଲ", "ଏକା"],
+                correct: "ଦୁଇ ଟି ଲାଲ ଗୋଲ ଏକା — SAME"
+            },
+            {
+                words: ["BIG", "ହାତୀ", "ବଡ", "ଜୀବ"],
+                correct: "ହାତୀ ବଡ ଜୀବ — BIG"
+            },
+            {
+                words: ["INSIDE", "ବହି", "ଥଳି", "ଭିତରରେ"],
+                correct: "ବହି ଥଳି ଭିତରରେ — INSIDE"
+            },
+            {
+                words: ["ABOVE", "ଆକାଶ", "ଆମ", "ଉପରରେ"],
+                correct: "ଆକାଶ ଆମ ଉପରରେ — ABOVE"
+            },
+            {
+                words: ["FIRST", "ଯିଏ", "ଆଗ", "ଆସିଲା", "ସେ", "ପ୍ରଥମ"],
+                correct: "ଯିଏ ଆଗ ଆସିଲା ସେ ପ୍ରଥମ — FIRST"
+            }
+        ]
+    },
+ 
+    stq: {
+        questions: [
+            {
+                question: "SAME ଓ DIFFERENT ର ଓଡ଼ିଆ ଅର୍ଥ ଲେଖ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଏକ ଉଦାହରଣ ଦିଅ ।",
+                answer: "SAME = ଏକା — 🔴 🔴 ଦୁଇ ଟି ଲାଲ ଗୋଲ ଏକା ।  DIFFERENT = ଭିନ୍ନ — 🍋 🍊 ଲେମ୍ବୁ ଓ କମଳା ଭିନ୍ନ ।"
+            },
+            {
+                question: "BIG, SMALL, HEAVY, LIGHT ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
+                answer: "BIG = ବଡ — 🐘 ହାତୀ ବଡ ।  SMALL = ଛୋଟ — 🐭 ମୂଷା ଛୋଟ ।  HEAVY = ଭାରି — 🪨 ପଥର ଭାରି ।  LIGHT = ହାଲୁକା — 🪶 ପଲକ ହାଲୁକା ।"
+            },
+            {
+                question: "ABOVE, BELOW, INSIDE, OUTSIDE ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
+                answer: "ABOVE = ଉପର — ☁️ ଆକାଶ ଆମ ଉପରରେ ।  BELOW = ତଳ — ଚୌକି ଟେବୁଲ ତଳରେ ।  INSIDE = ଭିତର — ବହି ଥଳି ଭିତରରେ ।  OUTSIDE = ବାହାର — ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ।"
+            },
+            {
+                question: "ତୁମ ଶ୍ରେଣୀ ଘର ବିଷୟରେ SAME, DIFFERENT, BIG, SMALL ଶବ୍ଦ ବ୍ୟବହାର କରି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
+                answer: "ଶ୍ରେଣୀ ଘରରେ ସବୁ ବେଞ୍ଚ ଏକ ରଙ୍ଗ ର — SAME ।  ଶ୍ୟାମ ର ବ୍ୟାଗ ଓ ରାମ ର ବ୍ୟାଗ ଅଲଗା — DIFFERENT ।  ଆମ ଶ୍ରେଣୀ ଘର ବଡ — BIG ।  ମୋ ଇରେଜର ଛୋଟ — SMALL ।"
+            }
+        ]
+    }
 },
 ],
     
-summary: {
-    audio: "",
-    
-    content: {
-        introduction: "WAKE UP ମାନେ ନିଦରୁ ଉଠିବା । ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଓ ଭିନ୍ନ ଭିନ୍ନ ଢଙ୍ଗରେ ଉଠନ୍ତି । ଆସନ୍ତୁ, ଆମେ ଆମ ପରିବାରର ସମସ୍ତଙ୍କ ବିଷୟରେ ଇଂରାଜୀରେ ଜାଣିବା :",
-        sentences: [
-            {
-                heading: "ମୁଁ — I",
-                text: "I wake up early. ମୁଁ ସକାଳୁ ଉଠେ । I wake up at 6 AM. ମୁଁ ସକାଳ ୬ ଟାରେ ଉଠେ । I wake up quickly. ମୁଁ ଶୀଘ୍ର ଉଠେ । I wake up very early every day. ମୁଁ ପ୍ରତିଦିନ ବହୁତ ସକାଳୁ ଉଠେ ।"
-            },
-            {
-                heading: "ବାପା — Father",
-                text: "My father wakes up early. ମୋ ବାପା ସକାଳୁ ଉଠନ୍ତି । He wakes up at 5 AM. ସେ ସକାଳ ୫ ଟାରେ ଉଠନ୍ତି । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି । He wakes up very early every day. ସେ ପ୍ରତିଦିନ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ମା — Mother",
-                text: "My mother wakes up early. ମୋ ମା ସକାଳୁ ଉଠନ୍ତି । She wakes up at 5:30 AM. ସେ ସକାଳ ୫:୩୦ ରେ ଉଠନ୍ତି । She wakes up happily. ସେ ଖୁସିରେ ଉଠନ୍ତି । She wakes up very happily every day. ସେ ପ୍ରତିଦିନ ବହୁତ ଖୁସିରେ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ଦାଦା — Elder Brother",
-                text: "My elder brother wakes up late. ମୋ ବଡ ଭାଇ ଡେରିରେ ଉଠନ୍ତି । He wakes up at 7 AM. ସେ ସକାଳ ୭ ଟାରେ ଉଠନ୍ତି । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠନ୍ତି । He wakes up very late on Sundays. ସେ ରବିବାରରେ ବହୁତ ଦେରିରେ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ଦିଦି — Elder Sister",
-                text: "My elder sister wakes up quietly. ମୋ ଦିଦି ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି । She wakes up at 6:30 AM. ସେ ସକାଳ ୬:୩୦ ରେ ଉଠନ୍ତି । She wakes up very quietly. ସେ ବହୁତ ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି । She wakes up very quietly every morning. ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ବହୁତ ଚୁପ୍ ଚୁପ୍ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ଛୋଟ ଭାଇ — Younger Brother",
-                text: "My younger brother wakes up late. ମୋ ଛୋଟ ଭାଇ ଡେରିରେ ଉଠେ । He wakes up at 8 AM. ସେ ସକାଳ ୮ ଟାରେ ଉଠେ । He wakes up very late. ସେ ବହୁତ ଡେରିରେ ଉଠେ । He wakes up very late every day. ସେ ପ୍ରତିଦିନ ବହୁତ ଦେରିରେ ଉଠେ ।"
-            },
-            {
-                heading: "ଜେଜେ ବାପା — Grandfather",
-                text: "My grandfather wakes up the earliest. ମୋ ଜେଜେ ବାପା ସବୁଠୁ ଆଗରୁ ଉଠନ୍ତି । He wakes up at 4:30 AM. ସେ ୪:୩୦ ରେ ଉଠନ୍ତି । He wakes up very early. ସେ ବହୁତ ସକାଳୁ ଉଠନ୍ତି । He wakes up very early every single day. ସେ ପ୍ରତ୍ୟେକ ଦିନ ବହୁତ ସକାଳୁ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ଜେଜେ ମା — Grandmother",
-                text: "My grandmother wakes up slowly. ମୋ ଜେଜେ ମା ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି । She wakes up at 5 AM. ସେ ୫ ଟାରେ ଉଠନ୍ତି । She wakes up very slowly. ସେ ବହୁତ ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି । She wakes up very slowly every morning. ସେ ପ୍ରତ୍ୟେକ ସକାଳୁ ବହୁତ ଆସ୍ତେ ଆସ୍ତେ ଉଠନ୍ତି ।"
-            },
-            {
-                heading: "ଆମେ ସମସ୍ତେ — We All",
-                text: "We all wake up daily. ଆମେ ସମସ୍ତେ ପ୍ରତିଦିନ ଉଠୁ । We wake up at different times. ଆମେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠୁ । We all wake up every morning. ଆମେ ସମସ୍ତେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠୁ । We all wake up happily every morning. ଆମେ ସମସ୍ତେ ପ୍ରତ୍ୟେକ ସକାଳୁ ଖୁସିରେ ଉଠୁ ।"
-            }
-        ],
-        conclusion: "ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠନ୍ତି । ଜେଜେ ବାପା ସବୁଠୁ ଆଗରୁ ଓ ଛୋଟ ଭାଇ ସବୁଠୁ ଦେରିରେ ଉଠେ । He ଓ She ସହ WAKES ଓ I, You, We ସହ WAKE ବ୍ୟବହାର ହୁଏ — ଏହି ଏକ ନିୟମ ଜାଣିଲେ ଇଂରାଜୀ ବାକ୍ୟ ଗଢ଼ିବା ବହୁତ ସହଜ ହୋଇଯାଏ ।"
-    },
-
-    question: {
+  summary: {
         audio: "",
-        question: "ଆପଣଙ୍କ ପରିବାରରେ କିଏ କେତେବେଳେ ଓ କିପରି ଉଠନ୍ତି — WAKE UP ବ୍ୟବହାର କରି ଲେଖନ୍ତୁ ।",
-        introduction: "ଆମ ପରିବାରରେ ସମସ୍ତେ ଭିନ୍ନ ଭିନ୍ନ ସମୟରେ ଉଠନ୍ତି । ନିମ୍ନ ବିନ୍ଦୁଗୁଡ଼ିକ ଏହା ଦର୍ଶାଏ :",
-        points: [
-            "My grandfather wakes up at 4:30 AM. ଜେଜେ ବାପା ୪:୩୦ ରେ ଉଠନ୍ତି — ସେ ସବୁଠୁ ଆଗରୁ ଉଠନ୍ତି ।",
-            "My father wakes up at 5 AM every day. ବାପା ପ୍ରତିଦିନ ସକାଳ ୫ ଟାରେ ଉଠନ୍ତି ।",
-            "My mother wakes up at 5:30 AM happily. ମା ସକାଳ ୫:୩୦ ରେ ଖୁସିରେ ଉଠନ୍ତି ।",
-            "I wake up at 6 AM every morning. ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ୬ ଟାରେ ଉଠେ ।",
-            "My younger brother wakes up at 8 AM very late. ଛୋଟ ଭାଇ ବହୁତ ଡେରିରେ ସକାଳ ୮ ଟାରେ ଉଠେ ।"
-        ],
-        conclusion: "ଆମ ପରିବାରରେ ସମସ୍ତଙ୍କ ଉଠିବାର ସମୟ ଓ ଢଙ୍ଗ ଅଲଗା । He, She ସହ WAKES ଓ I, You, We ସହ WAKE — ଏହି ନିୟମ ଜାଣିଲେ ପରିବାର ବିଷୟରେ ଇଂରାଜୀ ବାକ୍ୟ ଲେଖିବା ବହୁତ ସହଜ ।"
+ 
+        content: {
+            introduction: "ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ଗୁଡ଼ିକ ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ବହୁ ଉପଯୋଗ ହୁଏ । ଆସନ୍ତୁ ଆମ ଚାରିଆଡ଼ ର ଜିନିଷ ଗୁଡ଼ିକୁ ଏ ଶବ୍ଦ ଦ୍ୱାରା ବୁଝିବା :",
+            sentences: [
+                {
+                    heading: "ଏକା — SAME",
+                    text: "ଆମ ଶ୍ରେଣୀ ଘରରେ ସବୁ ବେଞ୍ଚ ଏକ ରଙ୍ଗ ର — SAME ।  ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧଲେ SAME ।  ଦୁଇ ଟି ଲାଲ ଗୋଲ ବଲ — SAME ।  ଦୁଇ ଟି ସମାନ ଆକୃତି ର ଇଟା — SAME ।"
+                },
+                {
+                    heading: "ଭିନ୍ନ — DIFFERENT",
+                    text: "ବିଲେଇ ଓ କୁକୁର ଭିନ୍ନ ଜୀବ — DIFFERENT ।  ଲେମ୍ବୁ ଓ କମଳା ଭିନ୍ନ ଫଳ — DIFFERENT ।  ରାମ ର ବ୍ୟାଗ ଓ ଶ୍ୟାମ ର ବ୍ୟାଗ ଅଲଗା ରଙ୍ଗ ର — DIFFERENT ।  ଗୋଲ ଓ ଚୌକ ଆକୃତି ଭିନ୍ନ — DIFFERENT ।"
+                },
+                {
+                    heading: "ବଡ — BIG",
+                    text: "ହାତୀ ବଡ ଜୀବ — BIG ।  ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ — BIG ।  ବଡ ଗଛ ପ୍ରଚୁର ଛାଇ ଦିଏ — BIG ।  ଜେଜେ ବାପା ର ଗୋଡ ଆମ ଗୋଡ ଠାରୁ ବଡ — BIG ।"
+                },
+                {
+                    heading: "ଛୋଟ — SMALL",
+                    text: "ମୂଷା ଛୋଟ ଜୀବ — SMALL ।  ମୋ ଇରେଜର ଛୋଟ — SMALL ।  ଛୋଟ ଭଉଣୀ ର ହାତ ଛୋଟ — SMALL ।  ଛୋଟ ପ୍ରଜାପତି ଫୁଲ ଉପରେ ବସେ — SMALL ।"
+                },
+                {
+                    heading: "ଭାରି — HEAVY",
+                    text: "ପଥର ଭାରି — HEAVY ।  ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି — HEAVY ।  ଜଳ ଭରା ବଡ ଘଡ଼ା ଭାରି — HEAVY ।  ଲୁହା ର ଭାଙ୍ଗ ଭାରି — HEAVY ।"
+                },
+                {
+                    heading: "ହାଲୁକା — LIGHT",
+                    text: "ପକ୍ଷୀ ର ପଲକ ହାଲୁକା — LIGHT ।  ଶୁଖିଲ ପତ୍ର ହାଲୁକା — LIGHT ।  କଗଜ ର ଖଣ୍ଡ ଏ ହାଲୁକା — LIGHT ।  ଫୁ ଦଲ ଖଣ୍ଡ ହାଲୁକା — LIGHT ।"
+                },
+                {
+                    heading: "ଉପର — ABOVE",
+                    text: "ଆକାଶ ଆମ ଉପରରେ — ABOVE ।  ପକ୍ଷୀ ଗଛ ଉପରରେ ବସେ — ABOVE ।  ଟେବୁଲ ଉପରରେ ବହି ରଖାଯାଏ — ABOVE ।  ଛାତ ଉପରରେ ପଙ୍ଖା — ABOVE ।"
+                },
+                {
+                    heading: "ତଳ — BELOW",
+                    text: "ମାଟି ଆମ ପାଦ ତଳେ — BELOW ।  ଚୌକି ଟେବୁଲ ତଳରେ — BELOW ।  ସେତୁ ତଳରେ ନଈ ବୁହେ — BELOW ।  ବ୍ୟାଗ ବେଞ୍ଚ ତଳରେ — BELOW ।"
+                },
+                {
+                    heading: "ଭିତର — INSIDE",
+                    text: "ବହି ଥଳି ଭିତରରେ — INSIDE ।  ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋ — INSIDE ।  ଡବା ଭିତରରେ ମିଠା — INSIDE ।  ଘର ଭିତରରେ ଆମ ପରିବାର — INSIDE ।"
+                },
+                {
+                    heading: "ବାହାର — OUTSIDE",
+                    text: "ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ — OUTSIDE ।  ଗଛ ଘର ବାହାରରେ — OUTSIDE ।  କୁକୁର ଉଠାଣ ବାହାରରେ — OUTSIDE ।  ଖେଳ ଘର ବାହାରରେ — OUTSIDE ।"
+                },
+                {
+                    heading: "କ୍ରମ — ORDER (FIRST / SECOND / THIRD)",
+                    text: "ଦୌଡ ରେ ରାମ ପ୍ରଥମ (FIRST), ଶ୍ୟାମ ଦ୍ୱିତୀୟ (SECOND), ହରି ତୃତୀୟ (THIRD) ।  ଧାଡ଼ି ରେ 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ — ORDER ।  🥇🥈🥉 — FIRST, SECOND, THIRD ।  ଲାଇନ ରେ ଠିଆ ହେଲେ କ୍ରମ (ORDER) ମାନିବ ।"
+                }
+            ],
+            conclusion: "ଚିନ୍ତା ଶକ୍ତି ର ଏ ଏଗାର ଟି ଶବ୍ଦ — SAME, DIFFERENT, BIG, SMALL, HEAVY, LIGHT, ABOVE, BELOW, INSIDE, OUTSIDE, ORDER — ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ଖୁବ ଉପଯୋଗୀ । ଏ ଶବ୍ଦ ଜାଣିଲେ ଆମେ ଯେ କୌଣସି ଜିନିଷ ତୁଳନା, ସ୍ଥାନ ଓ କ୍ରମ ସ୍ପଷ୍ଟ ଭାବ ରେ ବୁଝି ହୁଏ ।"
+        },
+ 
+        question: {
+            audio: "",
+            question: "ତୁମ ଘର ଓ ଶ୍ରେଣୀ ଘର ରେ ଥିବା ଜିନିଷ ବିଷୟ ରେ SAME, BIG, INSIDE, ABOVE ଶବ୍ଦ ବ୍ୟବହାର କରି ଲେଖ ।",
+            introduction: "ଆମ ଚାରିଆଡ଼ ର ଜିନିଷ ଦେଖ ଓ ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ବ୍ୟବହାର କର । ନିମ୍ନ ଉଦାହରଣ ଗୁଡ଼ିକ ଦେଖ :",
+            points: [
+                "ଆମ ଶ୍ରେଣୀ ଘର ର ଦୁଇ ଟି ଚୌକି ଏକ ରଙ୍ଗ ର — SAME ।",
+                "ଆମ ବିଦ୍ୟାଳୟ ଆମ ଘର ଠାରୁ ବଡ — BIG ।",
+                "ବହି ଟି ଥଳି ଭିତରରେ ଅଛି — INSIDE ।",
+                "ପଙ୍ଖା ଆମ ଛାତ ଉପରରେ — ABOVE ।",
+                "ଦୌଡ ରେ ମୁଁ ପ୍ରଥମ — FIRST ।"
+            ],
+            conclusion: "SAME ରୁ ORDER ପର୍ଯ୍ୟନ୍ତ ଏ ଏଗାର ଟି ଶବ୍ଦ ଜାଣିଲେ ଆମ ଚାରିଆଡ଼ ର ଯେ କୌଣସି ଜିନିଷ ତୁଳନା, ସ୍ଥାନ ଓ କ୍ରମ ସହଜ ରେ ବୁଝି ହୁଏ — ଏହା ହେଉଛି ଆମ ଚିନ୍ତା ଶକ୍ତି ।"
+        }
     }
-}
+
 };
     
 let currentSentence = 0;
@@ -4767,7 +4678,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - WAKE UP ଶବ୍ଦ କୁ ବ୍ୟବହାର କରି ନିଜ ପରିବାର ସମ୍ବନ୍ଧୀୟ ଏକ ରଚନା ଲେଖ ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ଗୁଡ଼ିକ ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ କିପରି ଉପଯୋଗ ହୁଏ ବୁଝାଅ ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4975,7 +4886,7 @@ window.addEventListener('beforeunload', () => {
 // Writ Practice Functions
 function openWritPractice() {
     // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://st-practicals.pages.dev/english/class-1/";
+    const writExamURL = "https://st-practicals.pages.dev/reasoning/class-1/";
     
     const container = document.getElementById('writPracticeContainer');
     const iframe = document.getElementById('writPracticeIframe');
@@ -5103,100 +5014,107 @@ function showAnswerInBox(boxId, answerText) {
 
 const topicsData = [
     {
-        heading: "ପାଠ-1: କ୍ରିୟା ଚିହ୍ନିବା:",
+        heading: "ପାଠ-1: ଚିନ୍ତା ଶକ୍ତି କ'ଣ ?",
         audioPoints: [
             {
-                text: "👉 ପ୍ରତ୍ଯେକ ବାକ୍ୟରେ ନିଶ୍ଚିତ ଭାବେ ଏକ କ୍ରିୟା ଶବ୍ଦ ରହି ଥାଏ । କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି, ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବା, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।<br>",
-                audio: "https://audio.evidya.de/SE1T1.m4a"
+                text: "👉 ଚିନ୍ତା ଶକ୍ତି ମାନେ ଆଖ ଦ୍ୱାରା ଦେଖି, ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବା । ଯଦି ଆମ ସାମ୍ନାରେ ଦୁଇ ଟି ଗୋଲ ଏବଂ ଗୋଟେ ଚୌକ ରଖାଯାଏ ଓ ପଚରାଯାଏ — 'ଏଥି ମଧ୍ୟରୁ ଅଲଗା ଟି କେଉଁ ?' — ତେବେ ଆମ ମୁଣ୍ଡ ଚିନ୍ତା କରି ଉତ୍ତର ଦିଏ : ଚୌକ ଟି ଅଲଗା । ଏହା ହେଉଛି ଚିନ୍ତା ଶକ୍ତି । ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ସଂଖ୍ୟା, ଆକୃତି, ରଙ୍ଗ, ଜୀବ, ଓ ଦୈନନ୍ଦିନ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।<br>",
+                audio: "https://audio.evidya.de/RC1T1.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କ୍ରିୟା ର ଅର୍ଥ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ସକାଳୁ ଉଠିବା ଠାରୁ ରାତିରେ ଶୋଇବା ପର୍ଯ୍ୟନ୍ତ ଆମେ ବିଭିନ୍ନ ପ୍ରକାରର କାମ କରିଥାନ୍ତି , ଯଥା ପ୍ରଥମେ ସକାଳେ ନିଦରୁ ଉଠିବ, ତାପରେ ବିଛଣାରୁ ଉଠିବା, ତାପରେ ନିତ୍ୟକର୍ମ କରିବା, ପାଠ ପଢିବା, ଖେଳିବା, ଖାଇବା, ପିଇବା, ଇତ୍ୟାଦି ସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କଣ କହନ୍ତି ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ସକାଳୁ ନିଦରୁ ଉଠିବାକୁ ଇଂରାଜୀରେ କହନ୍ତି - Wake up ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ମୁଁ ସକାଳ 6 ଟା ରେ ଉଠେ - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉଠିବା ବା wake up ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଆପଣମାନେ ସକାଳ 6 ଟା ରେ ଯାଆନ୍ତି - ଏହି ବାକ୍ଯରେ କ୍ରିୟା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯିବା ବା go ।"
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଚିନ୍ତା ଶକ୍ତି ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି କହନ୍ତି ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 🔴 🔴 🟦 — ଏଥିରୁ ଅଲଗା ଟି କେଉଁ ଓ କାହିଁକି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🟦 ଅଲଗା, କାରଣ ଦୁଇ ଟି ଲାଲ ଗୋଲ ଅଛି ଓ ନୀଳ ଚୌକ ଟି ଭିନ୍ନ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଚିନ୍ତା ଶକ୍ତି ଆମ ଜୀବନରେ କ'ଣ ସାହାଯ୍ୟ କରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🍎 🍎 🍌 🍎 — ଅଲଗା ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🍌 ଅଲଗା, କାରଣ ଅନ୍ୟ ସବୁ 🍎 (ଆମ୍ବ) ଓ ଏ ଟି 🍌 (କଦଳୀ) ।"
         ]
     },
-
- {
-        heading: "ପାଠ-2: କର୍ତ୍ତା ଚିହ୍ନିବା:",
-        audioPoints: [
-            {
-                text: "👉 କ୍ରିୟା କୁ ଯିଏ କରେ ତାକୁ କର୍ତ୍ତା କୁହାଯାଏ । ଉଦାହରଣ ସ୍ୱରୂପ, ରାମ ଖାଏ । - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖାଇବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ରାମ । ଠିକ ସେହିପରି, ସେ ଖେଳନ୍ତି - ବାକ୍ୟରେ କ୍ରିୟା ହେଉଛି ଖେଳିବା ଏବଂ କର୍ତ୍ତା ହେଉଛି ସେ । <br>",
-                audio: "https://audio.evidya.de/SE1T2.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ଯିଏ କ୍ରିୟା କୁ କରେ, ତାକୁ କର୍ତ୍ତା କହନ୍ତି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସେମାନେ ପଢନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ଏବଂ କ୍ରିୟା କିଏ ବୁଝାଅ ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ ପ୍ରଥମେ କ୍ରିୟା କୁ ଚିହ୍ନିବା । କ୍ରିୟାର ଅର୍ଥ ହେଉଛି ହେଉଛି କାର୍ଯ୍ୟ ବା କାମ । ଏହି ବାକ୍ୟରେ ପଢିବା କାମ ହେଉଛି । ତେଣୁ କ୍ରିୟା ହେଉଛି ପଢିବା । କର୍ତ୍ତାର ଅର୍ଥ ହେଉଛି ସିଏ ଯିଏ କ୍ରିୟାକୁ କରେ । ଏଠାରେ ପଢିବା କାମ କିଏ କରୁଛି ବୋଲି ମନକୁ ପ୍ରଶ୍ନ ପଚାର । ନିଶ୍ଚିତ ଭାବେ ଉତ୍ତର ହେବ ସେମାନେ । ତେଣୁ କର୍ତ୍ତା ହେଉଛି ସେମାନେ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ହରି ଖେଳେ - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ? <br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି ହରି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ହରି ଏବଂ ରାମ ଲେଖନ୍ତି - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା ହେଉଛି - ହରି ଏବଂ ରାମ ।</span>"
-        ]
-    },
-    
-{
-    heading: "ପାଠ-3: ଏକବଚନ କର୍ତ୍ତା ଏବଂ ବହୁବଚନ କର୍ତ୍ତା :",
-    audioPoints: [
-        {
-            text: "👉 ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ଯାରେ ଏକ ବା ଜଣେ ବା ଗୋଟିଏ ହୋଇଥାଏ, ତେବେ ସେହି କର୍ତ୍ତାକୁ ଏକବଚନ କର୍ତ୍ତା କହନ୍ତି । କିନ୍ତୁ ଯଦି କର୍ତ୍ତା ଟି ସଂଖ୍ୟା ରେ ଏକ ରୁ ଅଧିକ ହୋଇଥାଏ ତେବେ ସେହି କର୍ତ୍ତା କୁ ବହୁବଚନ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ - ରାମ ଖାଏ - ବାକ୍ୟରେ ରାମ ଜଣେ ହୋଇଥିବାରୁ ରାମକୁ ଆମେ ଏକବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । କିନ୍ତୁ ରାମ ଏବଂ ହରି ଖାଆନ୍ତି - ବାକ୍ୟରେ କର୍ତ୍ତା ରାମ ଏବଂ ହରି ଦୁଇଜଣ ଅଟନ୍ତି । ତେଣୁ ଏଠାରେ \"ରାମ ଏବଂ ହରି\" କୁ ବହୁବଚନ କର୍ତ୍ତା ବୋଲି କହିବା । <br>",
-            audio: "https://audio.evidya.de/SE1T3.m4a"
-        }
-    ],
-    questions: [
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ମୁଁ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ଆମେ ଉଠୁ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆମେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ଆପଣମାନେ ଉଠନ୍ତି' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ବହୁବଚନ ଅଟେ ।</span>",
-
-        "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ଉଠେ' - ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?<br><br><span style='color: green;'>ଉତ୍ତର: ଏଠାରେ କର୍ତ୍ତା 'ସେ' ଜଣେ ବା ଏକ ହୋଇଥିବା ହେତୁ ଏହି କର୍ତ୍ତା ଟି ଏକବଚନ ଅଟେ ।</span>"
-    ]
-},
-
+ 
     {
-        heading: "ପାଠ-4: କର୍ତ୍ତା କରେ - ଏପରି ସୂଚାଉଥିବା ବାକ୍ୟ ତିଆରି କରିବା :",
+        heading: "ପାଠ-2: ଏକା ଏବଂ ଭିନ୍ନ",
         audioPoints: [
             {
-                text: "👉 କର୍ତ୍ତା କରେ - ଯଥା ରାମ ଖାଏ, ମୁଁ ଯାଏ, ତୁମେ ପଢ, ସେମାନେ ଖେଳନ୍ତି, ଇତ୍ୟାଦି - ଏପରି ବାକ୍ୟ ତିଆରି ପାଇଁ ଆମକୁ ଦୁଇଟି ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ । ନିୟମ-1 : କର୍ତ୍ତା ଯଦି I କିମ୍ବା You କିମ୍ବା ବହୁବଚନ ହୋଇଥାଏ ତେବେ, ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ନିୟମ-2: ଅନ୍ୟ କୌଣସି କର୍ତ୍ତା ପାଇଁ, ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା ।<br>",
-                audio: "https://audio.evidya.de/SE1T4.m4a"
+                text: "👉 ଦୁଇ ଟି ଜିନିଷ ଦେଖିଲେ ଯଦି ସେ ଦୁଇ ଟି ଠିକ ଏକ ରକମ ଦେଖା ଯାଏ, ତେବେ ସେ ଦୁଇ ଟି 'ଏକା' । ଯଦି ଦୁଇ ଟି ଅଲଗା ଦେଖା ଯାଏ, ତେବେ ସେ ଦୁଇ ଟି 'ଭିନ୍ନ' । ଉଦାହରଣ — ଦୁଇ ଟି ଲାଲ ଗୋଲ ବଲ ଏକା । ଏକ ଟି ଲାଲ ବଲ ଓ ଏକ ଟି ନୀଳ ବଲ ଭିନ୍ନ ।  ଚିନ୍ତା ଶକ୍ତି ଶ୍ରେଣୀ ରେ ଆମେ ଏକା ଓ ଭିନ୍ନ ଚିହ୍ନ କରି ବ୍ୟବଧାନ ବୁଝିବା ।<br>",
+                audio: "https://audio.evidya.de/RC1T2.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କର୍ତ୍ତା ଯଦି I ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ଉଠେ - I wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> କର୍ତ୍ତା ଯଦି You ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ତୁମେ ଉଠ - You wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> କର୍ତ୍ତା ଯଦି ବହୁବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେମାନେ ଉଠନ୍ତି - They wake up । ",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> କର୍ତ୍ତା ଯଦି I ଏବଂ You ବ୍ଯତୀତ ଅନ୍ୟ କୌଣସି ଏକବଚନ ହୋଇଥାଏ, ତେବେ ବାକ୍ଯର ସୂତ୍ର କଣ ହେବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବାକ୍ୟରେ ପ୍ରଥମେ ଉକ୍ତ କର୍ତ୍ତାକୁ ଲେଖିବା ଏବଂ ତାପରେ କ୍ରିୟା ସହିତ s ଲଗାଇ ଲେଖିଦେବା । ଉଦାହରଣ ସ୍ୱରୂପ, ସେ ଉଠେ - He wakes up, ରାମ ଉଠେ - Ram wakes up , ଇତ୍ୟାଦି ।"
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🔴 🔴 — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦୁଇ ଟି ଲାଲ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 🐱 🐶 — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗୋଟି ବିଲେଇ ଓ ଗୋଟି କୁକୁର — ଦୁଇ ଟି ଭିନ୍ନ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଦୁଇ ଟି ଆମ ବ୍ୟାଗ ଏକ ରଙ୍ଗ ର, ଏକ ଆକୃତି ର — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏ ଦୁଇ ଟି ଏକା ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🍋 🍊 — ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ? କାହିଁ କି ବୁଝାଅ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭିନ୍ନ, କାରଣ ଗୋଟି ଲେମ୍ବୁ ଓ ଗୋଟି କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> 🔵 🔴 🔵 — ଏ ତିନି ଟି ମଧ୍ୟରୁ ଭିନ୍ନ ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🔴 ଭିନ୍ନ, କାରଣ ଅନ୍ୟ ଦୁଇ ଟି ନୀଳ ।"
         ]
     },
-
+ 
     {
-        heading: "ପାଠ-5: ଟିକେ ବଡ ବାକ୍ୟ ତିଆରି କରିବା:",
+        heading: "ପାଠ-3: ବଡ, ଛୋଟ ଓ ଅନ୍ୟ ତୁଳନା",
         audioPoints: [
             {
-                text: "👉 କର୍ତ୍ତା କିପରି/କେତେବେଳେ ଉଠେ - ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ , ତୁମେ ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରେ ଉଠ, ଇତ୍ୟାଦି । ଏହିପରି ବାକ୍ୟ ଲେଖିବା ପାଇଁ ଆମେ ପ୍ରଥମେ କର୍ତ୍ତା (ମୁଁ କିମ୍ବା ତୁମେ କିମ୍ବା ସେ, ଇତ୍ୟାଦି) ଲେଖନ୍ତି, ତାହାପରେ କ୍ରିୟା (wake up କିମ୍ବା wakes up) ଲେଖନ୍ତି , ଏବଂ ଶେଷରେ ଅନ୍ୟ ଶବ୍ଦ ଯାହାସବୁ ରହିଗଲା (ଯଥା- ସକାଳ 6 ଟା ବେଳେ, ସୂର୍ଯ୍ୟ ଉଦୟ ସମୟରର, ଇତ୍ୟାଦି) ଲେଖନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ, ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ = I wake up at 6 AM.<br>",
-                audio: "https://audio.evidya.de/SE1T5.m4a"
+                text: "👉 ଦୁଇ ଟି ଜିନିଷ ପାଖ ଆଖ ରଖି ଦେଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯାହା ଆକାରରେ ଅଧିକ ତାହା 'ବଡ', ଯାହା ଆକାରରେ କମ ତାହା 'ଛୋଟ' । ଏ ଭାବରେ ଆମେ ତୁଳନା  ବ୍ୟବହାର କରି ଜାଣି ହୁଏ ।  ଉଦାହରଣ: ହାତୀ ବଡ — ମୂଷା ଛୋଟ । ବଡ ଗଛ — ଛୋଟ ଗଛ । ଏ ଭଳି ତୁଳନା ଦ୍ୱାରା ଆମ ଚିନ୍ତା ଶକ୍ତି ଆହୁରି ଶକ୍ତ ହୁଏ ।<br>",
+                audio: "https://audio.evidya.de/RC1T3.m4a"
             }
         ],
         questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ମୁଁ ପ୍ରତ୍ୟେକ ସକାଳୁ ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up every morning.",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ସେ ବହୁତ ସକାଳୁ ଉଠେ (ପୁଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> He wakes up very early.",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> I wake up feeling fresh.",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ସେ ୫ ଟାରେ ଉଠେ (ଝିଅ)' ଇଂରାଜୀରେ କ'ଣ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> She wakes up at 5."
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🐘 ଓ 🐭 ମଧ୍ୟରୁ କେଉଁ ଟି ବଡ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🐘 (ହାତୀ) ବଡ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ତୁମ ବ୍ୟାଗ ଓ ତୁମ ଜୋତା ମଧ୍ୟରୁ କେଉଁ ଟି ବଡ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସାଧାରଣ ତ ବ୍ୟାଗ ବଡ (ଛାତ୍ର ନିଜ ଅଭିଜ୍ଞତା ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 🌲🌱 — ଏ ଦୁଇ ଟି ଗଛ ମଧ୍ୟରୁ ଛୋଟ ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🌱 ଛୋଟ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଗୋଟିଏ ବଡ ବୃତ୍ତ ଓ ଗୋଟିଏ ଛୋଟ ବୃତ୍ତ ଏକା ଆକୃତିର — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ? (ଆଗ ପାଠ ଓ ଏ ପାଠ ଭାବ)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆକୃତି ଏକା (ଦୁଇ ଟି ବୃତ୍ତ), କିନ୍ତୁ ଆକାର ଭିନ୍ନ (ଗୋଟି ବଡ, ଗୋଟି ଛୋଟ) ।"
+        ]
+    },
+ 
+    {
+        heading: "ପାଠ-4: ଭିତର–ବାହାର ଓ ଉପର–ତଳ",
+        audioPoints: [
+            {
+                text: "👉 ଚିନ୍ତା ଶକ୍ତି ରେ ଜିନିଷ ର ସ୍ଥାନ ବୁଝିବା ବହୁ ଜରୁରୀ । 'ଭିତର' ମାନେ ଏକ ଜିନିଷ ଅନ୍ୟ ଜିନିଷ ର ଅନ୍ଦରରେ ଥିବା — ଯଥା ବଲ ଟୋକରୀ ଭିତରରେ ।  'ବାହାର' ମାନେ ଜିନିଷ ଟି ବାହ୍ୟ ଭାଗରେ ଥିବା — ଯଥା ବଲ ଟୋକରୀ ବାହାରରେ ।  'ଉପର' ମାନେ ଜିନିଷ ଟି ଉଚ୍ଚ ଅଛି — ଯଥା ଗଚ୍ଛ ଉପରରେ ପକ୍ଷୀ ।  'ତଳ' ମାନେ ଜିନିଷ ଟି ନୀଚ ଅଛି — ଯଥା ଟେବୁଲ ତଳେ ବ୍ୟାଗ । ଏ ଶବ୍ଦ ଚାରି ଟି ଶିଖିଲେ ଅନେକ ପ୍ରଶ୍ନ ର ଉତ୍ତର ଦେଇ ହୁଏ ।<br>",
+                audio: "https://audio.evidya.de/RC1T4.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ନା ବାହାରରେ ? (ଏ ଚିତ୍ରରେ ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ।)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ପକ୍ଷୀ ଗଛ ଉପରରେ ଅଛି ନା ତଳରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ପକ୍ଷୀ ଗଛ ଉପରରେ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ବ୍ୟାଗ ଟି ଏବେ କୋଉଠି ଅଛି — ଟେବୁଲ ଉପରରେ ନା ତଳରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> (ଛାତ୍ର ନିଜ ସ୍ଥିତି ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଘର ଭିତରରେ ଆମ ପରିବାର ଅଛି — 'ଭିତର' ଶବ୍ଦ ର ଅର୍ଥ ଏ ବାକ୍ୟ ରୁ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭିତର ମାନେ ଘର ର ଅନ୍ଦରରେ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> ☁️ ଆକାଶ ରେ ଅଛି — ଏ ଶବ୍ଦ ଗୁଡ଼ିକ ମଧ୍ୟରୁ ଠିକ ଟି ବାଛ: (ଉପର / ତଳ)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉପର — ☁️ ଆମ ଉପର ଆକାଶ ରେ ।"
+        ]
+    },
+ 
+    {
+        heading: "ପାଠ-5: କ୍ରମ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ",
+        audioPoints: [
+            {
+                text: "👉 ଜିନିଷ ଗୁଡ଼ିକୁ ଧାଡ଼ି ଭାବରେ ସଜ ଭଙ୍ଗ ରଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯିଏ ସବୁ ଠାରୁ ଆଗ ଅଛି ସେ 'ପ୍ରଥମ', ତା ପଛ ଜଣ 'ଦ୍ୱିତୀୟ', ଓ ତା ପଛ ଜଣ 'ତୃତୀୟ' ।  ଉଦାହରଣ: ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ରାମ ପ୍ରଥମ ଆସିଲା, ଶ୍ୟାମ ଦ୍ୱିତୀୟ, ଓ ହରି ତୃତୀୟ । ଏ ଭଳି 'କ୍ରମ' ଆମ ଜୀବନ ରେ ଖୁବ ଜରୁରୀ — ଲାଇନ ରେ ଠିଆ ହେବା, ଦିନ ର ପ୍ରୋଗ୍ରାମ ଠିକ କରିବା ଓ ଅନ୍ୟ ଅନେକ କାମ ରେ ।<br>",
+                audio: "https://audio.evidya.de/RC1T5.m4a"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🥇🥈🥉 — ପ୍ରଥମ ପୁରସ୍କାର ରଙ୍ଗ ଟି କ'ଣ ରଙ୍ଗ ର ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ପ୍ରଥମ ପୁରସ୍କାର ସୁନା ରଙ୍ଗ ର (🥇) ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଧାଡ଼ି ରେ 🍎 🍌 🍊 ଅଛି — ଦ୍ୱିତୀୟ ଜିନିଷ ଟି କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🍌 (କଦଳୀ) ଦ୍ୱିତୀୟ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ଶ୍ରେଣୀ ଘରରେ ଲାଇନ ରେ ତୁମ ସ୍ଥାନ କ'ଣ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ ନା ତୃତୀୟ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> (ଛାତ୍ର ନିଜ ଅଭିଜ୍ଞତା ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🐢🐇🐱 — ଦୌଡ ରେ 🐇 ପ୍ରଥମ ଆସିଲା, 🐱 ଦ୍ୱିତୀୟ — ତୃତୀୟ କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🐢 (କଇଁଛ) ତୃତୀୟ ।",
+ 
+            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> ସକାଳ ସ୍କୁଲ ଯିବା ପ୍ରଥମ, ଖାଇବା ଦ୍ୱିତୀୟ, ଶୋଇବା ତୃତୀୟ — ଏ 'କ୍ରମ' ଟିର ନାମ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏ ହେଉଛି ଦୈନନ୍ଦିନ ଜୀବନ ର କ୍ରମ (ଦିନ ର ରୁଟିନ) ।"
         ]
     }
 ];
+ 
 
 let currentTopicIndex = 0;
 
@@ -5941,7 +5859,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (ENGLISH) CLASS-1 : WAKE UP',
+    className: 'SPECIAL TRAINING (REASONING) CLASS-1',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -6503,161 +6421,165 @@ document.head.appendChild(printStyles);
 const revisionLessons = [
     {
         id: 1,
-        lessonAudio: "https://audio.evidya.de/SE1R1.mp3",
-        lessonText: "ପାଠ ୧: କ୍ରିୟା ଚିହ୍ନିବା — ପ୍ରତ୍ୟେକ ବାକ୍ୟରେ ନିଶ୍ଚିତ ଭାବେ ଏକ କ୍ରିୟା ଶବ୍ଦ ରହି ଥାଏ । କ୍ରିୟା ଶବ୍ଦ ର ଅର୍ଥ ହେଲା ସେହି ଶବ୍ଦ ଯାହା କୌଣସି କାମ କୁ ସୁଚାଏ । ଉଦାହରଣ ସ୍ୱରୂପ, ଉଠିବା, ଖାଇବା, ପଢିବା, ଖେଳିବା — ଏସବୁ ଗୋଟିଏ ଗୋଟିଏ କ୍ରିୟା ।",
+        lessonAudio: "https://audio.evidya.de/RC1R1.mp3",
+        lessonText: "ପାଠ ୧: ଚିନ୍ତା ଶକ୍ତି କ'ଣ ? — ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି । ଉଦାହରଣ — ଯଦି 🔴 🔴 🟦 ଦେଖିଲ ଓ ପଚରାଗଲା 'ଅଲଗା ଟି କେଉଁ ?' — ତେବେ ଉତ୍ତର ହେଲା 🟦, କାରଣ ଅନ୍ୟ ଦୁଇ ଟି ଲାଲ ଓ ଗୋଲ । ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ରଙ୍ଗ, ଆକୃତି, ଜୀବ ଓ ଦୈନନ୍ଦିନ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।",
         understandAudio: "https://audio.evidya.de/U.m4a",
         mcq: [
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "📖 'ରାମ ପଢ଼େ' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା କିଏ ?",
-                options: ["ରାମ", "ପଢ଼ିବା", "ଜାଣିନାହିଁ"],
+                q: "🧠 ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ କ'ଣ କହନ୍ତି ?",
+                options: ["ଗଣନା (Counting)", "ଚିନ୍ତା ଶକ୍ତି (Reasoning)", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଯାହା ଶବ୍ଦ କୌଣସି କାମ ସୁଚାଏ, ତାହା ହେଉଛି କ୍ରିୟା । ଏଠାରେ 'ପଢ଼ିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ 'ପଢ଼ିବା' ହେଉଛି କ୍ରିୟା ।",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଯାହା ଶବ୍ଦ କୌଣସି କାମ ସୁଚାଏ, ତାହା ହେଉଛି କ୍ରିୟା । ଏଠାରେ 'ପଢ଼ିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ 'ପଢ଼ିବା' ହେଉଛି କ୍ରିୟା ।"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି ।"
             },
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "⚽ 'ହରି ଖେଳେ' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା କିଏ ?",
-                options: ["ହରି", "ଖେଳିବା", "ଜାଣିନାହିଁ"],
+                q: "🍎 🍎 🍌 🍎 — ଏଥିରୁ ଅଲଗା ଜିନିଷ ଟି କେଉଁ ?",
+                options: ["🍎 (ଆପଲ)", "🍌 (କଦଳୀ)", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ଖେଳିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ ଏହା କ୍ରିୟା । 'ହରି' ହେଉଛି ସେ ଯିଏ ଖେଳୁଛି, ତେଣୁ ହରି ହେଉଛି କର୍ତ୍ତା ।",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଅନ୍ୟ ତିନି ଟି 🍎 (ଆପଲ), ଏଣୁ 🍌 (କଦଳୀ) ଟି ଅଲଗା । ଏହା ଚିନ୍ତା ଶକ୍ତି ର ଉଦାହରଣ ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ଖେଳିବା' ହେଉଛି ଏକ କାମ, ତେଣୁ ଏହା କ୍ରିୟା । 'ହରି' ହେଉଛି ସେ ଯିଏ ଖେଳୁଛି, ତେଣୁ ହରି ହେଉଛି କର୍ତ୍ତା ।"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଅନ୍ୟ ତିନି ଟି 🍎 (ଆପଲ), ଏଣୁ 🍌 (କଦଳୀ) ଟି ଅଲଗା । ଏହା ଚିନ୍ତା ଶକ୍ତି ର ଉଦାହରଣ ।"
             }
         ]
     },
+
     {
         id: 2,
-        lessonAudio: "https://audio.evidya.de/SE1R2.mp3",
-        lessonText: "ପାଠ ୨: କର୍ତ୍ତା ଚିହ୍ନିବା — ବାକ୍ୟରେ ଯିଏ କ୍ରିୟା କୁ କରେ, ତାକୁ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ ସ୍ୱରୂପ, 'ରାମ ଖାଏ' — ଏଠାରେ ଖାଇବା କାମ ରାମ କରୁଛି, ତେଣୁ ରାମ ହେଉଛି କର୍ତ୍ତା । 'ସେମାନେ ଖେଳନ୍ତି' — ଏଠାରେ ଖେଳିବା କାମ ସେମାନେ କରୁଛନ୍ତି, ତେଣୁ ସେମାନେ ହେଉଛି କର୍ତ୍ତା ।",
+        lessonAudio: "https://audio.evidya.de/RC1R2.mp3",
+        lessonText: "ପାଠ ୨: ଏକା ଏବଂ ଭିନ୍ନ (Same and Different) — ଦୁଇ ଟି ଜିନିଷ ଯଦି ଏକ ରକମ ଦେଖାଯାଏ, ସେ ଦୁଇ ଟି 'ଏକା' (Same) । ଯଦି ଅଲଗା ଦେଖାଯାଏ, ସେ ଦୁଇ ଟି 'ଭିନ୍ନ' (Different) । ଉଦାହରଣ — 🔴 🔴 ଦୁଇ ଟି ଏକା (Same), କାରଣ ଦୁଇ ଟି ଲାଲ ଗୋଲ । 🐱 🐶 ଦୁଇ ଟି ଭିନ୍ନ (Different), କାରଣ ଗୋଟି ବିଲେଇ ଓ ଗୋଟି କୁକୁର । 🔵 🔴 🔵 — ମଝି ଟି ଭିନ୍ନ ।",
         understandAudio: "https://audio.evidya.de/U.m4a",
         mcq: [
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "✏️ 'ହରି ଏବଂ ରାମ ଲେଖନ୍ତି' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କିଏ ?",
-                options: ["ଲେଖିବା", "ହରି ଏବଂ ରାମ", "ଜାଣିନାହିଁ"],
+                q: "🟢 🟢 — ଏ ଦୁଇ ଟି ଏକା (Same) ନା ଭିନ୍ନ (Different) ?",
+                options: ["ଭିନ୍ନ (Different)", "ଏକା (Same)", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଏଠାରେ ଲେଖିବା ଏକ କ୍ରିୟା । ଏହି ଲେଖିବା କାମ କିଏ କରୁଛି ? ହରି ଏବଂ ରାମ । ତେଣୁ ହରି ଏବଂ ରାମ ହେଉଛି କର୍ତ୍ତା ।",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦୁଇ ଟି ସବୁଜ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା (Same) ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଏଠାରେ ଲେଖିବା ଏକ ଆ ।ଏହି ଲେଖିବା କାମ କିଏ କରୁଛି ? ହରି ଏବଂ ରାମ । ତେଣୁ ହରି ଏବଂ ରାମ ହେଉଛି କର୍ତ୍ତା ।"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦୁଇ ଟି ସବୁଜ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା (Same) ।"
             },
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🏃 'ସେମାନେ ପଢ଼ନ୍ତି' — ଏହି ବାକ୍ୟରେ କ୍ରିୟା ଏବଂ କର୍ତ୍ତା ଚିହ୍ନ କର । କ୍ରିୟା କିଏ ?",
-                options: ["ସେମାନେ", "ପଢ଼ିବା", "ଜାଣିନାହିଁ"],
+                q: "🍋 🍊 — ଏ ଦୁଇ ଟି ଏକା (Same) ନା ଭିନ୍ନ (Different) ? କାହିଁ କି ?",
+                options: ["ଏକା (Same) — ଦୁଇ ଟି ଫଳ", "ଭିନ୍ନ (Different) — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ପଢ଼ିବା' ଏଠାରେ ଏକ କାମ, ତେଣୁ ଏହା ହେଉଛି କ୍ରିୟା । ଏବଂ ଏହି ପଢ଼ିବା କାମ 'ସେମାନେ' କରୁଛନ୍ତି, ତେଣୁ 'ସେମାନେ' ହେଉଛି କର୍ତ୍ତା ।",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🍋 ଲେମ୍ବୁ ଓ 🍊 କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା, ତେଣୁ ଭିନ୍ନ (Different) ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ପଢ଼ିବା' ଏଠାରେ ଏକ କାମ, ତେଣୁ ଏହା ହେଉଛି କ୍ରିୟା । ଏବଂ ଏହି ପଢ଼ିବା କାମ 'ସେମାନେ' କରୁଛନ୍ତି, ତେଣୁ 'ସେମାନେ' ହେଉଛି କର୍ତ୍ତା ।"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🍋 ଲେମ୍ବୁ ଓ 🍊 କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା, ତେଣୁ ଭିନ୍ନ (Different) ।"
             }
         ]
     },
+
     {
         id: 3,
-        lessonAudio: "https://audio.evidya.de/SE1R3.mp3",
-        lessonText: "ପାଠ ୩: ଏକବଚନ ଏବଂ ବହୁବଚନ କର୍ତ୍ତା — ଯଦି କର୍ତ୍ତା ସଂଖ୍ୟାରେ ଜଣେ ବା ଗୋଟିଏ ହୋଇଥାଏ, ତାହାକୁ ଏକବଚନ କର୍ତ୍ତା କହନ୍ତି । ଯଦି କର୍ତ୍ତା ଏକ ରୁ ଅଧିକ ହୋଇଥାଏ, ତାହାକୁ ବହୁବଚନ କର୍ତ୍ତା କହନ୍ତି । ଉଦାହରଣ — 'ରାମ ଖାଏ' ରେ ରାମ ଏକବଚନ । 'ରାମ ଏବଂ ହରି ଖାଆନ୍ତି' ରେ 'ରାମ ଏବଂ ହରି' ବହୁବଚନ ।",
+        lessonAudio: "https://audio.evidya.de/RC1R3.mp3",
+        lessonText: "ପାଠ ୩: ବଡ, ଛୋଟ ଓ ତୁଳନା (Big, Small and Comparison) — ଦୁଇ ଟି ଜିନିଷ ପାଖ ଆଖ ରଖି ଦେଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯାହା ଆକାରରେ ଅଧିକ ତାହା 'ବଡ' (Big), ଯାହା ଆକାରରେ କମ ତାହା 'ଛୋଟ' (Small) । ଉଦାହରଣ — 🐘 ହାତୀ ବଡ (Big), 🐭 ମୂଷା ଛୋଟ (Small) । 🌲 ବଡ ଗଛ, 🌱 ଛୋଟ ଗଛ । ଦୁଇ ଟି ଏକ ଆକୃତି ର ଜିନିଷ ଯଦି ଭିନ୍ନ ଆକାର ର ହୁଏ — ଆକୃତି ଏକା କିନ୍ତୁ ଆକାର ଭିନ୍ନ ।",
         understandAudio: "https://audio.evidya.de/U.m4a",
         mcq: [
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🧒 'ସେ ଉଠେ' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?",
-                options: ["ଏକବଚନ", "ବହୁବଚନ", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ସେ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହା ଏକବଚନ କର୍ତ୍ତା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ସେ' ଜଣେ ହୋଇଥିବା ହେତୁ ଏହା ଏକବଚନ କର୍ତ୍ତା ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👨‍👩‍👦 'ଆପଣମାନେ ଉଠନ୍ତି' — ଏହି ବାକ୍ୟରେ କର୍ତ୍ତା କେଉଁ ବଚନ ?",
-                options: ["ଏକବଚନ", "ବହୁବଚନ", "ଜାଣିନାହିଁ"],
+                q: "🐘 🐭 — ଏ ଦୁଇ ଟି ମଧ୍ୟରୁ ଛୋଟ (Small) ଟି କେଉଁ ?",
+                options: ["🐘 ହାତୀ", "🐭 ମୂଷା", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହା ବହୁବଚନ କର୍ତ୍ତା ।",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🐭 ମୂଷା ଛୋଟ (Small), 🐘 ହାତୀ ବଡ (Big) ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ଆପଣମାନେ' ଏକ ରୁ ଅଧିକ ହୋଇଥିବା ହେତୁ ଏହା ବହୁବଚନ କର୍ତ୍ତା ।"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🐭 ମୂଷା ଛୋଟ (Small), 🐘 ହାତୀ ବଡ (Big) ।"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "🌲 🌱 — ଦୁଇ ଟି ଗଛ, ଦୁଇ ଟି ଏକ ଆକୃତି ର — ତଥାପି ଦୁଇ ଟି ଭିନ୍ନ କାହିଁ କି ?",
+                options: ["ଦୁଇ ଟି ଭିନ୍ନ ଆକୃତି ର", "ଦୁଇ ଟି ଆକୃତି ଏକା, କିନ୍ତୁ ଆକାର ଭିନ୍ନ", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦୁଇ ଟି ଗଛ, ଆକୃତି ଏକା — କିନ୍ତୁ 🌲 ବଡ ଓ 🌱 ଛୋଟ, ଏଣୁ ଆକାର ଭିନ୍ନ ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦୁଇ ଟି ଗଛ, ଆକୃତି ଏକା — କିନ୍ତୁ 🌲 ବଡ ଓ 🌱 ଛୋଟ, ଏଣୁ ଆକାର ଭିନ୍ନ ।"
             }
         ]
     },
+
     {
         id: 4,
-        lessonAudio: "https://audio.evidya.de/SE1R4.mp3",
-        lessonText: "ପାଠ ୪: କର୍ତ୍ତା କରେ — ଏପରି ବାକ୍ୟ ତିଆରି । ନିୟମ-1: କର୍ତ୍ତା ଯଦି I, You, ବା ବହୁବଚନ ହୋଇଥାଏ — ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖ, ତାପରେ ସିଧା କ୍ରିୟା ଲେଖ । ଉଦାହରଣ — I wake up, You wake up, They wake up । ନିୟମ-2: ଅନ୍ୟ ଯେ କୌଣସି ଏକବଚନ କର୍ତ୍ତା ପାଇଁ — ପ୍ରଥମେ କର୍ତ୍ତା ଲେଖ, ତାପରେ କ୍ରିୟା ସହ s ଲଗାଇ ଲେଖ । ଉଦାହରଣ — He wakes up, Ram wakes up ।",
+        lessonAudio: "https://audio.evidya.de/RC1R4.mp3",
+        lessonText: "ପାଠ ୪: ଭିତର–ବାହାର ଓ ଉପର–ତଳ (Inside–Outside and Above–Below) — ଜିନିଷ ର ସ୍ଥାନ ବୁଝିବା ଚିନ୍ତା ଶକ୍ତି ର ଏକ ଜରୁରୀ ଅଂଶ । 'ଭିତର' (Inside) ମାନେ ଅନ୍ଦରରେ — ଯଥା ବଲ ଟୋକରୀ ଭିତରରେ । 'ବାହାର' (Outside) ମାନେ ବାହ୍ୟ ଭାଗରେ — ଯଥା ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ । 'ଉପର' (Above) ମାନେ ଉଚ୍ଚ ସ୍ଥାନ — ଯଥା ☁️ ଆକାଶ ଉପରରେ । 'ତଳ' (Below) ମାନେ ନୀଚ ସ୍ଥାନ — ଯଥା ବ୍ୟାଗ ଟେବୁଲ ତଳେ ।",
         understandAudio: "https://audio.evidya.de/U.m4a",
         mcq: [
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🧒 'ରାଜୁ ଉଠେ' — 'Raju _____ up.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
-                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — Raju ଜଣେ ଏକବଚନ କର୍ତ୍ତା, I ଓ You ନୁହଁ । ତେଣୁ କ୍ରିୟା ସହ s ଲାଗି WAKES ହବ — Raju wakes up !",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । Raju ଜଣେ ଏକବଚନ କର୍ତ୍ତା, I ଓ You ନୁହଁ । ତେଣୁ କ୍ରିୟା ସହ s ଲାଗି WAKES ହବ — Raju wakes up !"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👦👦 'ଆମ୍ଭେମାନେ ଉଠୁ' — 'We _____ up.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
-                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
+                q: "🐦 ପକ୍ଷୀ ଗଛ ଉପରରେ ବସିଛି — 'ଉପର' ଶବ୍ଦ ର ଇଂରାଜୀ କ'ଣ ?",
+                options: ["Below", "Above", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — We ଏକ ବହୁବଚନ କର୍ତ୍ତା, ତେଣୁ s ଲାଗେ ନାହିଁ — WAKE ହବ — We wake up !",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଉପର = Above । ପକ୍ଷୀ ଗଛ ଉପରରେ = The bird is above the tree ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । We ଏକ ବହୁବଚନ କର୍ତ୍ତା, ତେଣୁ s ଲାଗେ ନାହିଁ — WAKE ହବ — We wake up !"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଉପର = Above । ପକ୍ଷୀ ଗଛ ଉପରରେ = The bird is above the tree ।"
+            },
+            {
+                questionAudio: "https://audio.evidya.de/Q.m4a",
+                q: "📦 ବହି ଥଳି ଭିତରରେ ଅଛି — 'ଭିତର' ଶବ୍ଦ ର ଇଂରାଜୀ କ'ଣ ?",
+                options: ["Outside", "Inside", "ଜାଣିନାହିଁ"],
+                correct: 1,
+                correctAudio: "https://audio.evidya.de/C.m4a",
+                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
+                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଭିତର = Inside । ବହି ଥଳି ଭିତରରେ = The book is inside the bag ।",
+                wrongAudio: "https://audio.evidya.de/W.m4a",
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଭିତର = Inside । ବହି ଥଳି ଭିତରରେ = The book is inside the bag ।"
             }
         ]
     },
+
     {
         id: 5,
-        lessonAudio: "https://audio.evidya.de/SE1R5.mp3",
-        lessonText: "ପାଠ ୫: ଟିକେ ବଡ ବାକ୍ୟ ତିଆରି — ଉଦାହରଣ ସ୍ୱରୂପ, 'ମୁଁ ସକାଳ 6 ଟା ବେଳେ ଉଠେ' = I wake up at 6 AM । ଏହିପରି ବାକ୍ୟ ଲେଖିବା ପାଇଁ ପ୍ରଥମେ କର୍ତ୍ତା (I/He/She/They ଇତ୍ୟାଦି) ଲେଖ, ତାପରେ କ୍ରିୟା (wake up ବା wakes up) ଲେଖ, ଏବଂ ଶେଷରେ ଅବଶିଷ୍ଟ ଶବ୍ଦ (ଯଥା at 6 AM, every morning, feeling fresh ଇତ୍ୟାଦି) ଲେଖ ।",
+        lessonAudio: "https://audio.evidya.de/RC1R5.mp3",
+        lessonText: "ପାଠ ୫: କ୍ରମ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ (Order — First, Second, Third) — ଜିନିଷ ଗୁଡ଼ିକୁ ଧାଡ଼ି ଭାବରେ ସଜ ଭଙ୍ଗ ରଖିଲେ — ଆଗ ଟି 'ପ୍ରଥମ' (First), ତା ପଛ ଟି 'ଦ୍ୱିତୀୟ' (Second), ଓ ତା ପଛ ଟି 'ତୃତୀୟ' (Third) । ଉଦାହରଣ — ଦୌଡ ରେ 🐇 ପ୍ରଥମ (First), 🐱 ଦ୍ୱିତୀୟ (Second), 🐢 ତୃତୀୟ (Third) । ଧାଡ଼ି ରେ 🍎 🍌 🍊 — 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ ।",
         understandAudio: "https://audio.evidya.de/U.m4a",
         mcq: [
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌅 'ସେ(ଝିଅ) ବହୁତ ସକାଳୁ ଉଠେ' — ଇଂରାଜୀ ବାକ୍ୟ ଟି କ'ଣ ହବ ?",
-                options: ["He wakes up very early", "She wakes up very early", "ଜାଣିନାହିଁ"],
+                q: "🥇🥈🥉 — ଦ୍ୱିତୀୟ (Second) ପୁରସ୍କାର ଟି କ'ଣ ରଙ୍ଗ ର ?",
+                options: ["ସୁନା ରଙ୍ଗ 🥇", "ରୂପା ରଙ୍ଗ 🥈", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 'ସେ(ଝିଅ)' ପାଇଁ She ବସିବ, ତାପରେ wakes up, ଏବଂ ଶେଷରେ very early — She wakes up very early !",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ପ୍ରଥମ (First) = 🥇 ସୁନା, ଦ୍ୱିତୀୟ (Second) = 🥈 ରୂପା, ତୃତୀୟ (Third) = 🥉 ତମ୍ବା ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 'ସେ(ଝିଅ)' ପାଇଁ She ବସିବ, ତାପରେ wakes up, ଏବଂ ଶେଷରେ very early — She wakes up very early !"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ପ୍ରଥମ (First) = 🥇 ସୁନା, ଦ୍ୱିତୀୟ (Second) = 🥈 ରୂପା, ତୃତୀୟ (Third) = 🥉 ତମ୍ବା ।"
             },
             {
                 questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "💚 'ମୁଁ ତାଜା ଅନୁଭବ କରି ଉଠେ' — 'I _____ up feeling fresh.' ଶୂନ୍ୟସ୍ଥାନ ପୂରଣ କରନ୍ତୁ ।",
-                options: ["WAKES", "WAKE", "ଜାଣିନାହିଁ"],
+                q: "🍎 🍌 🍊 — ଏ ଧାଡ଼ି ରେ ତୃତୀୟ (Third) ଜିନିଷ ଟି କ'ଣ ?",
+                options: ["🍎 ଆପଲ", "🍊 କମଳା", "ଜାଣିନାହିଁ"],
                 correct: 1,
                 correctAudio: "https://audio.evidya.de/C.m4a",
                 correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
                 iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — I ସହ ସବୁ ସମୟରେ WAKE ହେବ, s ଲାଗେ ନାହିଁ — I wake up feeling fresh !",
+                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ । ଏଣୁ ତୃତୀୟ ଜିନିଷ ଟି 🍊 କମଳା ।",
                 wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । I ସହ ସବୁ ସମୟରେ WAKE ହେବ, s ଲାଗେ ନାହିଁ — I wake up feeling fresh !"
+                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ । ଏଣୁ ତୃତୀୟ ଜିନିଷ ଟି 🍊 କମଳା ।"
             }
         ]
     }
