@@ -6810,16 +6810,15 @@ function showRevisionMCQ() {
         'linear-gradient(135deg,#6b7280,#4b5563)'
     ];
 
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;overflow:hidden;">
+   setRevisionScreen(`
+    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
             
             <!-- Header badge -->
             <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
                 <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
             </div>
 
-<!-- Question text — scrollable if needed -->
-<div style="flex:1;display:flex;align-items:center;justify-content:center;overflow-y:auto;margin-bottom:12px;min-height:0;">
+<div style="margin-bottom:12px;">
     <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
         ${mcq.q}
     </p>
