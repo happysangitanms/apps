@@ -6824,51 +6824,50 @@ function showRevisionMCQ() {
     </p>
 </div>
 
-            <!-- Options: first two side by side, third full width below -->
-            <div style="flex-shrink:0;">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-                    <button onclick="rvAnswer(0)" style="
-                        padding:14px 6px;
-                        background:${optColors[0]};
-                        color:white;
-                        border:none;
-                        border-radius:10px;
-                        font-size:16px;
-                        font-weight:bold;
-                        cursor:pointer;
-                        width:100%;
-                    ">${mcq.options[0]}</button>
-
-                    <button onclick="rvAnswer(1)" style="
-                        padding:14px 6px;
-                        background:${optColors[1]};
-                        color:white;
-                        border:none;
-                        border-radius:10px;
-                        font-size:16px;
-                        font-weight:bold;
-                        cursor:pointer;
-                        width:100%;
-                    ">${mcq.options[1]}</button>
-                </div>
-
-                <button onclick="rvAnswer(2)" style="
-                    width:100%;
-                    padding:12px 6px;
-                    background:${optColors[2]};
-                    color:white;
-                    border:none;
-                    border-radius:10px;
-                    font-size:15px;
-                    font-weight:bold;
-                    cursor:pointer;
-                    display:block;
-                ">${mcq.options[2]}</button>
-            </div>
+       <div style="margin-top:10px;">
+    <select id="rvSelect" style="
+        width:100%;
+        padding:12px;
+        font-size:15px;
+        font-weight:bold;
+        border:2px solid #667eea;
+        border-radius:10px;
+        background:white;
+        color:#111;
+        cursor:pointer;
+        appearance:auto;
+    ">
+        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
+        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
+    </select>
+    <button onclick="rvSubmitAnswer()" style="
+        width:100%;
+        margin-top:8px;
+        padding:12px;
+        background:linear-gradient(135deg,#667eea,#764ba2);
+        color:white;
+        border:none;
+        border-radius:10px;
+        font-size:15px;
+        font-weight:bold;
+        cursor:pointer;
+    ">✅ ଉତ୍ତର ଦିଅନ୍ତୁ</button>
+</div>
 
         </div>
     `);
 }
+
+
+function rvSubmitAnswer() {
+    const sel = document.getElementById('rvSelect');
+    if (!sel || sel.value === '') {
+        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
+        return;
+    }
+    rvAnswer(parseInt(sel.value));
+}
+
     
 function rvAnswer(optionIndex) {
     const lesson = revisionLessons[revisionState.lessonIndex];
