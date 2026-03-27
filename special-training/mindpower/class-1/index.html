@@ -2362,11 +2362,10 @@ body > div:first-child {
 
 <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Three buttons side by side - FIXED -->
-    <div style="display: flex; justify-content: space-between; 
-                align-items: center; margin-bottom: 8px; 
-                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
-        
+  <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; width: 320px; margin-left: auto; margin-right: auto;">
+
+    <!-- Top row: 3 existing buttons -->
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px;">
         <button id="audioToggleBtn" 
             onclick="toggleMedia('audio')"
             style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
@@ -2396,8 +2395,20 @@ body > div:first-child {
                    width: 100px; height: 36px; flex-shrink: 0;">
             ଭିଡିଓ
         </button>
-
     </div>
+
+    <!-- DEBATE button - full width red toggle -->
+    <button id="debateToggleBtn"
+        onclick="toggleMedia('debate')"
+        style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+               color: white; border: none; border-radius: 8px;
+               padding: 10px 0; font-size: 13px; font-weight: bold;
+               cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+               width: 100%; height: 40px;">
+        DEBATE (ତର୍କ ବିତର୍କ)
+    </button>
+
+</div>
 
     <!-- Media Placeholder - same size as logo -->
 <div id="mediaPlaceholder" style="
@@ -2450,7 +2461,7 @@ body > div:first-child {
         <iframe
             id="videoIframe"
             src=""
-            data-src="https://www.youtube.com/embed/LUpzKuIw7_M?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+            data-src="https://www.youtube.com/embed/aB4uf3B_6Ew?playsinline=1&rel=0&modestbranding=1&autoplay=1"
             style="
                 display: block;
                 width: 100%;
@@ -2470,6 +2481,25 @@ body > div:first-child {
         </div>
     </div>
 
+<!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none;">
+    <iframe
+        id="debateIframe"
+        src=""
+        data-src="YOUR_DEBATE_YOUTUBE_URL_HERE?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+        style="
+            display: block;
+            width: 100%;
+            height: 180px;
+            border-radius: 15px;
+            border: 3px solid white;
+        "
+        allow="accelerometer; autoplay; clipboard-write; 
+               encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+    
 </div>
      
     <p class="info-text" style="
@@ -6697,23 +6727,27 @@ function toggleMedia(type) {
     const videoBtn     = document.getElementById('videoToggleBtn');
     const revBtn       = document.getElementById('revisionToggleBtn');
 
-    const resetAllBtnStyles = () => {
-        [audioBtn, videoBtn, revBtn].forEach(b => {
-            if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
-        });
-    };
+ const resetAllBtnStyles = () => {
+    [audioBtn, videoBtn, revBtn].forEach(b => {
+        if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+    });
+    const debateBtn = document.getElementById('debateToggleBtn');
+    if (debateBtn) debateBtn.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+};
 
-    const hideAll = () => {
-        audioIframe.src = '';
-        videoIframe.src = '';
-        audioDisplay.style.display = 'none';
-        videoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'none';
-        logoDisplay.style.display = 'block';
-        stopRevisionAudio();
-        revisionState.active = false;
-        resetAllBtnStyles();
-    };
+const hideAll = () => {
+    audioIframe.src = '';
+    videoIframe.src = '';
+    audioDisplay.style.display = 'none';
+    videoDisplay.style.display = 'none';
+    revisionBoard.style.display = 'none';
+    document.getElementById('debateDisplay').style.display = 'none';  // ADD THIS
+    document.getElementById('debateIframe').src = '';                  // ADD THIS
+    logoDisplay.style.display = 'block';
+    stopRevisionAudio();
+    revisionState.active = false;
+    resetAllBtnStyles();
+};
 
     if (type === 'audio') {
         if (audioDisplay.style.display === 'block') {
@@ -6753,6 +6787,18 @@ function toggleMedia(type) {
         revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
         startRevisionLesson();
     }
+
+    if (type === 'debate') {
+    if (document.getElementById('debateDisplay').style.display === 'block') {
+        hideAll();
+        return;
+    }
+    hideAll();
+    logoDisplay.style.display = 'none';
+    document.getElementById('debateDisplay').style.display = 'block';
+    document.getElementById('debateIframe').src = document.getElementById('debateIframe').dataset.src;
+    document.getElementById('debateToggleBtn').style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 }
 
 function startRevisionLesson() {
