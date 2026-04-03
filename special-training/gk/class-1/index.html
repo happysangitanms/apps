@@ -832,10 +832,6 @@ body > div:first-child {
 }
 
 
-#writPracticeContainer .assistant-iframe-wrapper {
-    height: 700px; /* or 650px, 750px - whatever increase you want */
-}
-
 .answer-section {
     text-align: justify;
     display: inline-block;
@@ -2243,7 +2239,7 @@ body > div:first-child {
         <button id="stqBtn" class="test-btn summary">ଅତି ସଂକ୍ଷିପ୍ତ ପ୍ରଶ୍ନୋତ୍ତର</button>
         <button id="summaryBtn" class="test-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
         <button id="questionBtn" class="test-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">ସଂକ୍ଷିପ୍ତ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
-        <button id="practiceBtn" class="test-btn" onclick="openWritPractice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଅଭ୍ଯାସ(Practical) ପରୀକ୍ଷା</button>
+      <button id="practiceBtn" class="test-btn" onclick="openCertificateFromExam()" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%);">🏆 ସାର୍ଟିଫିକେଟ୍</button>
         
     </div>
                              <div id="scoreDisplay" class="score-display" style="display: none;">
@@ -2334,38 +2330,84 @@ body > div:first-child {
         </div>
     </div>
 </div>
-           
-           
- <!-- Practice Container -->
-<div id="writPracticeContainer" class="assistant-container">
-    <div class="assistant-header">
-        <h3>ସମ୍ପୂର୍ଣ୍ଣ ଅଭ୍ୟାସ ପରୀକ୍ଷା</h3>
-        <button class="assistant-close-btn" onclick="closeWritPractice()">✕</button>
-    </div>
-    <div class="assistant-iframe-wrapper">
-        <div class="assistant-loading" id="writPracticeLoading">
-            <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଅଭ୍ଯାସ ପରୀକ୍ଷା ଲୋଡ୍ ହେଉଛି...</p>
-        </div>
-        <iframe 
-            id="writPracticeIframe"
-            src="" 
-            allow="clipboard-write"
-            style="display: none;">
-        </iframe>
-    </div>
-    <div class="assistant-info">
-        💡 ଏହା ଏକ ପ୍ରାକ୍ଟିକାଲ୍ ପରୀକ୍ଷା । ବିଷୟବସ୍ତୁ ସମ୍ବନ୍ଧୀୟ ବ୍ୟବହାରିକ ଜ୍ଞାନର ପରୀକ୍ଷା । 
-    </div>
-</div>               
-            <div id="testContainer"></div>
+
+
+ <div id="testContainer"></div>
 
 <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Three buttons side by side - FIXED -->
-    <div style="display: flex; justify-content: space-between; 
-                align-items: center; margin-bottom: 8px; 
-                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
+        display: inline-block;
+        padding: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 320px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
+
+    <!-- AUDIO PLAYER - Hidden by default -->
+<div id="audioDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎙️</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">ଆଲୋଚନା ଶୁଣନ୍ତୁ</p>
+    <audio id="audioPlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STGKC1A.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</div>
+        
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/0Ggj0F0V-v4?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">DEBATE ଶୁଣନ୍ତୁ</p>
+    <audio id="debatePlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STGKC1D.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    </div>
+</div>
+
+
+    <!-- Three buttons side by side - NOW BELOW the placeholder -->
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 16px;
+            width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
         
         <button id="audioToggleBtn" 
             onclick="toggleMedia('audio')"
@@ -2377,14 +2419,14 @@ body > div:first-child {
             ଆଲୋଚନା
         </button>
 
-        <button id="revisionToggleBtn"
-            onclick="toggleMedia('revision')"
+        <button id="debateToggleBtn"
+            onclick="toggleMedia('debate')"
             style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
                    color: white; border: none; border-radius: 8px;
                    padding: 8px 0; font-size: 12px; font-weight: bold;
                    cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
                    width: 100px; height: 36px; flex-shrink: 0;">
-            ରିଭିଜନ୍
+            ତର୍କ ବିତର୍କ
         </button>
 
         <button id="videoToggleBtn" 
@@ -2396,95 +2438,10 @@ body > div:first-child {
                    width: 100px; height: 36px; flex-shrink: 0;">
             ଭିଡିଓ
         </button>
-
     </div>
-
-    <!-- Media Placeholder - same size as logo -->
-<div id="mediaPlaceholder" style="
-    display: inline-block;
-    padding: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 320px;
-    position: relative;
-    overflow: hidden;
-">
-    <!-- DEFAULT: Logo Image -->
-    <div id="logoDisplay">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
-             alt="Logo" 
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
-    </div>
-
-    <!-- AUDIO PLAYER - Hidden by default -->
-    <div id="audioDisplay" style="display: none;">
-        <iframe
-            id="audioIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/IN5KhA8u9Ws?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- VIDEO PLAYER - Hidden by default -->
-    <div id="videoDisplay" style="display: none;">
-        <iframe
-            id="videoIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/RyODwNOCgXY?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- REVISION WHITEBOARD - sibling of audio/video, same level -->
-    <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden;">
-        <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden; background: white;">
-        </div>
-    </div>
-
-</div>
-     
-    <p class="info-text" style="
-        margin-top: 15px;
-        font-size: 14px;
-        color: #000000;
-        font-weight: bold;
-    "></p>
 </div>
 
-          <!-- Add this after the Mermaid button section -->
-<button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
-    🏆 ଏଠାରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିବା ...
-</button> 
-           
+
 <!-- Dropdown Menu -->
 <div class="assistant-dropdown-wrapper">
     <button id="assistantDropdownBtn" class="assistant-dropdown-btn">
@@ -2662,7 +2619,11 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-
+function openCertificateFromExam() {
+    calculateCertificateScores();
+    loadStudentDetails();
+    document.getElementById('certificateModal').classList.add('active');
+}
 
 
 // =============================================
@@ -2757,7 +2718,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2833,192 +2794,220 @@ document.addEventListener('visibilitychange', () => {
     }
 });
     }
-// ============================================
-// IMPORTANT: Add your loadSentence() and other
-// app-specific functions below this line
-// ============================================
+
 
 const wordData = {
     currentWord: 0,
     words: [
         {
+            word: "BODY",
+            odia: "ଶରୀର",
+            emoji: "🧍",
+            odiaUse: "ଆମର ଏକଟି ଶରୀର ଅଛି। ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି। ଏହି ଅଙ୍ଗଗୁଡ଼ିକ ଆମକୁ ବଞ୍ଚି ରହିବାରେ ସାହାଯ୍ୟ କରନ୍ତି।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
             word: "HEAD",
             odia: "ମୁଣ୍ଡ",
             emoji: "🗣️",
-            odiaUse: "ମୁଣ୍ଡ ଆମ ଶରୀରର ସବୁଠୁ ଉପରେ ଥାଏ । ଏଥିରେ ମସ୍ତିଷ୍କ ଥାଏ ଯାହା ଆମକୁ ଭାବିବାରେ ଓ ବୁଝିବାରେ ସାହାଯ୍ୟ କରେ ।",
+            odiaUse: "ଆମ ଶରୀରର ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଅଛି। ମୁଣ୍ଡ ଉପରେ ଚୁଟି ଅଛି। ମୁଣ୍ଡ ଭିତରେ ମସ୍ତିଷ୍କ ଅଛି।",
             audio: {
-                intro: "https://audio.evidya.de/GK1W1.m4a",
+                intro: "audio-url-here",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "HAIR",
-            odia: "ଚୁଟି",
-            emoji: "💇",
-            odiaUse: "ଚୁଟି ଆମ ମୁଣ୍ଡକୁ ଗରମ ଓ ଥଣ୍ଡାରୁ ରକ୍ଷା କରେ । ଏହା ଆମ ମୁଣ୍ଡର ଉପର ଭାଗରେ ରହିଥାଏ ।",
+            word: "FACE",
+            odia: "ମୁହଁ",
+            emoji: "😊",
+            odiaUse: "ମୁଣ୍ଡର ସାମନାରେ ମୁହଁ ଅଛି। ମୁହଁରେ ଆଖି, ନାକ ଓ ପାଟି ଅଛି। ଆଖି ଓ କାନ ଦୁଇଟି କିନ୍ତୁ ନାକ ଗୋଟିଏ।",
             audio: {
-                intro: "https://audio.evidya.de/GK1W2.m4a",
+                intro: "audio-url-here",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "EYES",
+            word: "EYE",
             odia: "ଆଖି",
-            emoji: "👀",
-            odiaUse: "ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖିପାରୁ । ଆଖି ନ ଥିଲେ ଆମେ କିଛି ଦେଖିପାରନ୍ତୁ ନାହିଁ ।",
+            emoji: "👁️",
+            odiaUse: "ଆଖି ଦୁଇଟି ଅଛି। ଆମେ ଆଖିରେ ଦେଖୁ। ଆଖି ଏକটি ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ।",
             audio: {
-                intro: "https://audio.evidya.de/GK1W3.m4a",
+                intro: "audio-url-here",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "EARS",
-            odia: "କାନ",
-            emoji: "👂",
-            odiaUse: "କାନ ଦ୍ୱାରା ଆମେ ଶୁଣିପାରୁ । ବିଭିନ୍ନ ଶବ୍ଦ ଓ କଥା ଆମେ କାନରେ ଶୁଣୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W4.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "NOSE",
-            odia: "ନାକ",
-            emoji: "👃",
-            odiaUse: "ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘିପାରୁ । ନାକ ଦ୍ୱାରା ଆମେ ଶ୍ୱାସ ମଧ୍ୟ ନେଉ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W5.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "MOUTH",
-            odia: "ପାଟି",
-            emoji: "👄",
-            odiaUse: "ପାଟି ଦ୍ୱାରା ଆମେ ଖାଉ ଓ କଥା କହୁ । ପାଟି ମାଧ୍ୟମରେ ଶରୀର ଭିତରକୁ ଖାଦ୍ୟ ଯାଇଥାଏ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W6.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "TEETH",
-            odia: "ଦାନ୍ତ",
-            emoji: "🦷",
-            odiaUse: "ଦାନ୍ତ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟ ଚୋବାଇ ଛୋଟ ଛୋଟ ଟୁକୁଡ଼ା କରୁ । ଦାନ୍ତ ପ୍ରତିଦିନ ଘଷିଲେ ପରିଷ୍କାର ରହେ ଏବଂ ବିଭିନ ରୋଗରୁ ରକ୍ଷା ମିଳେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W7.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "TONGUE",
-            odia: "ଜିଭ",
-            emoji: "👅",
-            odiaUse: "ଜିଭ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟର ସ୍ୱାଦ ଜାଣୁ । ଜିଭ କଥା କହିବାରେ ମଧ୍ୟ ସାହାଯ୍ୟ କରେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W8.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "NECK",
-            odia: "ବେକ",
-            emoji: "🧣",
-            odiaUse: "ମୁଣ୍ଡ ଓ ଶରୀରକୁ ବେକ ହିଁ ଯୋଡିଥାଏ । ବେକ ଯୋଗୁଁ ଆମେ ମୁଣ୍ଡ ବୁଲାଇ ପାରୁ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W9.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "SHOULDERS",
-            odia: "କାନ୍ଧ",
-            emoji: "💪",
-            odiaUse: "କାନ୍ଧ ଆମ ବାହୁକୁ ଶରୀର ସହ ଯୋଡ଼େ । ଭାରି ଜିନିଷ ବୋହିବା ସମୟରେ କାନ୍ଧ ସାହାଯ୍ୟ କରେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W10.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "HANDS",
+            word: "HAND",
             odia: "ହାତ",
-            emoji: "🙌",
-            odiaUse: "ହାତ ଦ୍ୱାରା ଆମେ ଜିନିଷ ଧରୁ, ଲେଖୁ ଓ କାମ କରୁ । ହାତ ଆମ ଦୈନନ୍ଦିନ ଜୀବନରେ ବହୁତ ଉପଯୋଗୀ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W11.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FINGERS",
-            odia: "ଆଙ୍ଗୁଳି",
             emoji: "🖐️",
-            odiaUse: "ଆଙ୍ଗୁଳି ଦ୍ୱାରା ଆମେ ଛୋଟ ଛୋଟ ଜିନିଷ ଧରୁ ଓ ଅନୁଭବ କରୁ । ପ୍ରତ୍ୟେକ ହାତରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଳି ଥାଏ ।",
+            odiaUse: "ଆମ ଶରୀରରେ ଦୁଇଟି ହାତ ଅଛି। ଏକ ହାତରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଠି ଅଛି। ଦୁଇ ହାତରେ ମୋଟ ଦଶଟି ଆଙ୍ଗୁଠି ଅଛି।",
             audio: {
-                intro: "https://audio.evidya.de/GK1W12.m4a",
+                intro: "audio-url-here",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         },
         {
-            word: "CHEST",
-            odia: "ଛାତି",
-            emoji: "🫁",
-            odiaUse: "ଛାତି ଭିତରେ ହୃଦୟ ଓ ଫୁସ୍‌ଫୁସ ଥାଏ । ଶ୍ୱାସ ନେବା ସମୟରେ ଛାତି ଫୁଲେ ଓ ଶ୍ୱାସ ଛାଡିବା ସମୟରେ ଛାତି ପୁଣି କମିଯାଏ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W13.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "STOMACH",
-            odia: "ପେଟ",
-            emoji: "🫃",
-            odiaUse: "ପେଟ ଭିତରେ ଖାଦ୍ୟ ହଜମ ହୁଏ । ଆମେ ଯାହା ଖାଉ ତାହା ପେଟ ଭିତରକୁ ଯାଇ ଶକ୍ତିରେ ପରିଣତ ହୁଏ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W14.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "LEGS",
-            odia: "ଗୋଡ଼",
-            emoji: "🦵",
-            odiaUse: "ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ, ଦୌଡ଼ୁ ଓ ଠିଆ ହୁଉ । ଗୋଡ଼ ଆମ ଶରୀରର ଭାର ବହନ କରେ ।",
-            audio: {
-                intro: "https://audio.evidya.de/GK1W15.m4a",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FEET",
+            word: "LEG",
             odia: "ପାଦ",
-            emoji: "🦶",
-            odiaUse: "ପାଦ ଚାଲିବା ସମୟରେ ଭୂମି ଉପରେ ଭାର ଦେଇ ଆମକୁ ସ୍ଥିର ରଖେ । ପାଦ ଆଙ୍ଗୁଳି ଦ୍ୱାରା ଆମେ ଭୂମି ଅନୁଭବ କରୁ ।",
+            emoji: "🦵",
+            odiaUse: "ଆମ ଶରୀରରେ ଦୁଇଟି ପାଦ ଅଛି। ପ୍ରତ୍ୟେକ ପାଦରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଠି ଅଛି। ପାଦ ମଧ୍ୟ ଭାଗରେ ଆଣ୍ଠୁ ଅଛି।",
             audio: {
-                intro: "https://audio.evidya.de/GK1W16.m4a",
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "HEART",
+            odia: "ହୃଦୟ",
+            emoji: "❤️",
+            odiaUse: "ହୃଦୟ ଆମ ଶରୀରର ସବୁଠୁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅଙ୍ଗ। ଏହା ଶରୀରରେ ରକ୍ତ ପଠାଏ। ହୃଦୟ ଆମକୁ ବଞ୍ଚାଏ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "BRAIN",
+            odia: "ମସ୍ତିଷ୍କ",
+            emoji: "🧠",
+            odiaUse: "ମସ୍ତିଷ୍କ ମୁଣ୍ଡ ଭିତରେ ଅଛି। ଏହା ଆମକୁ ଭାବିବାକୁ ସାହାଯ୍ୟ କରେ। ମସ୍ତିଷ୍କ ଏକ ଭିତର ଅଙ୍ଗ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "LUNGS",
+            odia: "ଫୁସ୍ଫୁସ",
+            emoji: "🫁",
+            odiaUse: "ଫୁସ୍ଫୁସ ଦୁଇଟି ଅଛି। ଏହା ଶ୍ୱାସ ନେଇ ଛାଡ଼େ। ଫୁସ୍ଫୁସ ଏକ ଭିତର ଅଙ୍ଗ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "SENSE ORGANS",
+            odia: "ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ",
+            emoji: "👃",
+            odiaUse: "ଆମ ଶରୀରରେ ପାଞ୍ଚଟି ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ ଅଛି। ଆଖି, କାନ, ନାକ, ଜିଭ ଓ ଚର୍ମ ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ। ଏହି ଅଙ୍ଗଗୁଡ଼ିକ ଆମକୁ ଦୁନିଆ ଅନୁଭବ କରାଏ।",
+            audio: {
+                intro: "audio-url-here",
                 encourage: "audio-url-here",
                 praise: "audio-url-here"
             }
         }
     ]
 };
+    
+const topicsData = [
+    {
+        heading: "Topic-1: ଆମ ଶରୀର ବିଷୟରେ ସାଧାରଣ ଜ୍ଞାନ",
+        audioPoints: [
+            {
+                text: "👉 ଆମର ଏକଟି ଶରୀର ଅଛି। ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି। ଶରୀରର ଦୁଇଟି ଭାଗ ଅଛି — ବାହାର ଅଙ୍ଗ ଓ ଭିତର ଅଙ୍ଗ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଆମ ଶରୀରରେ କ'ଣ ଅଛି?<br><br><span style='color: green;'>Answer:</span> ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି। ଏହି ଅଙ୍ଗଗୁଡ଼ିକ ଆମକୁ ବଞ୍ଚି ରହିବାରେ ସାହାଯ୍ୟ କରନ୍ତି। ଶରୀରକୁ ଇଂରାଜୀରେ BODY କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-2:</span> ଶରୀରର କଟି ଭାଗ ଅଛି?<br><br><span style='color: green;'>Answer:</span> ଶରୀରର ଦୁଇଟି ଭାଗ ଅଛି। ଗୋଟିଏ ହେଲା ବାହାର ଅଙ୍ଗ। ଆଉ ଗୋଟିଏ ହେଲା ଭିତର ଅଙ୍ଗ।",
+
+            "<span style='color: red;'>Q-3:</span> ବାହାର ଅଙ୍ଗ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଯେଉଁ ଅଙ୍ଗ ଆମେ ଆଖିରେ ଦେଖି ପାରୁ ତାହା ବାହାର ଅଙ୍ଗ। ହାତ, ପାଦ, ଆଖି, କାନ ବାହାର ଅଙ୍ଗ। ଇଂରାଜୀରେ ଏମାନଙ୍କୁ EXTERNAL BODY PARTS କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-4:</span> ଭିତର ଅଙ୍ଗ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଯେଉଁ ଅଙ୍ଗ ଆମେ ଆଖିରେ ଦେଖି ପାରୁ ନାହିଁ ତାହା ଭିତର ଅଙ୍ଗ। ହୃଦୟ ଓ ଫୁସ୍ଫୁସ ଭିତର ଅଙ୍ଗ। ଇଂରାଜୀରେ ଏମାନଙ୍କୁ INTERNAL BODY PARTS କହନ୍ତି।"
+        ]
+    },
+
+    {
+        heading: "Topic-2: ମୁଣ୍ଡ ଓ ମୁହଁର ଅଙ୍ଗ",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଶରୀରର ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଅଛି। ମୁଣ୍ଡର ସାମନାରେ ମୁହଁ ଅଛି। ମୁହଁରେ ଆଖି, କାନ, ନାକ ଓ ପାଟି ଅଛି।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ମୁଣ୍ଡ କେଉଁଠି ଅଛି?<br><br><span style='color: green;'>Answer:</span> ମୁଣ୍ଡ ଆମ ଶରୀରର ସବୁଠୁ ଉପରେ ଅଛି। ମୁଣ୍ଡ ଉପରେ ଚୁଟି ଅଛି। ମୁଣ୍ଡକୁ ଇଂରାଜୀରେ HEAD କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-2:</span> ଆଖି ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> ଆଖିରେ ଆମେ ଦେଖୁ। ଆଖି ଦୁଇଟି ଅଛି। ଆଖିକୁ ଇଂରାଜୀରେ EYE କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-3:</span> ନାକ ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> ନାକରେ ଆମେ ଶ୍ୱାସ ନିଉ। ନାକରେ ଆମେ ଗନ୍ଧ ପାଉ। ନାକ ଗୋଟିଏ ଅଛି।",
+
+            "<span style='color: red;'>Q-4:</span> ପାଟି ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> ପାଟିରେ ଆମେ ଖାଉ। ପାଟିରେ ଆମେ କଥା କହୁ। ପାଟି ଗୋଟିଏ ଅଛି।"
+        ]
+    },
+
+    {
+        heading: "Topic-3: ହାତ ଓ ପାଦ",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଶରୀରରେ ଦୁଇଟି ହାତ ଓ ଦୁଇଟି ପାଦ ଅଛି। ଏକ ହାତରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଠି ଅଛି। ଦୁଇ ହାତରେ ମୋଟ ଦଶଟି ଆଙ୍ଗୁଠି ଅଛି।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ହାତରେ କଟି ଆଙ୍ଗୁଠି ଅଛି?<br><br><span style='color: green;'>Answer:</span> ଏକ ହାତରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଠି ଅଛି। ଦୁଇ ହାତରେ ମୋଟ ଦଶଟି ଆଙ୍ଗୁଠି ଅଛି। ଆଙ୍ଗୁଠିକୁ ଇଂରାଜୀରେ FINGER କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-2:</span> କୋଣି କ'ଣ?<br><br><span style='color: green;'>Answer:</span> କୋଣି ହାତ ମଧ୍ୟ ଭାଗରେ ଅଛି। ଏହାକୁ ଇଂରାଜୀରେ ELBOW କହନ୍ତି। ଏହା ହାତ ଭାଁଜ ହେବାରେ ସାହାଯ୍ୟ କରେ।",
+
+            "<span style='color: red;'>Q-3:</span> ଆଣ୍ଠୁ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଆଣ୍ଠୁ ପାଦ ମଧ୍ୟ ଭାଗରେ ଅଛି। ଏହାକୁ ଇଂରାଜୀରେ KNEE କହନ୍ତି। ଏହା ପାଦ ଭାଁଜ ହେବାରେ ସାହାଯ୍ୟ କରେ।",
+
+            "<span style='color: red;'>Q-4:</span> କାନ୍ଧ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> କାନ୍ଧ ହାତ ଓ ଶରୀର ଯୋଡ଼ ସ୍ଥାନ। ଏହାକୁ ଇଂରାଜୀରେ SHOULDER କହନ୍ତି। ଆମ ଶରୀରରେ ଦୁଇଟି କାନ୍ଧ ଅଛି।"
+        ]
+    },
+
+    {
+        heading: "Topic-4: ଶରୀରର ଭିତର ଅଙ୍ଗ",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଶରୀର ଭିତରେ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅଙ୍ଗ ଅଛି। ହୃଦୟ ଆମ ଶରୀରର ସବୁଠୁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅଙ୍ଗ। ମସ୍ତିଷ୍କ ଆମକୁ ଭାବିବାକୁ ସାହାଯ୍ୟ କରେ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ହୃଦୟ କ'ଣ କାମ କରେ?<br><br><span style='color: green;'>Answer:</span> ହୃଦୟ ଶରୀରରେ ରକ୍ତ ପଠାଏ। ଏହା ଆମ ଶର୍ଶରର ସବୁଠୁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅଙ୍ଗ। ହୃଦୟ ଆମକୁ ବଞ୍ଚାଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ଫୁସ୍ଫୁସ କ'ଣ କାମ କରେ?<br><br><span style='color: green;'>Answer:</span> ଫୁସ୍ଫୁସ ଶ୍ୱାସ ନେଇ ଛାଡ଼େ। ଫୁସ୍ଫୁସ ଦୁଇଟି ଅଛି। ଏହା ଏକ ଭିତର ଅଙ୍ଗ।",
+
+            "<span style='color: red;'>Q-3:</span> ମସ୍ତିଷ୍କ କ'ଣ କାମ କରେ?<br><br><span style='color: green;'>Answer:</span> ମସ୍ତିଷ୍କ ଆମକୁ ଭାବିବାକୁ ସାହାଯ୍ୟ କରେ। ଏହା ମୁଣ୍ଡ ଭିତରେ ଅଛି। ଇଂରାଜୀରେ ଏହାକୁ BRAIN କହନ୍ତି।",
+
+            "<span style='color: red;'>Q-4:</span> ଆମ୍ବ (ପାକସ୍ଥଳୀ) କ'ଣ କାମ କରେ?<br><br><span style='color: green;'>Answer:</span> ଆମ୍ବରେ ଖାଦ୍ୟ ହଜମ ହୁଏ। ଏହାକୁ ଇଂରାଜୀରେ STOMACH କହନ୍ତି। ଏହା ଏକ ଭିତର ଅଙ୍ଗ।"
+        ]
+    },
+
+    {
+        heading: "Topic-5: ଆମ ଅଙ୍ଗ ଆମକୁ କ'ଣ ଦିଏ",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଶରୀରରେ ପାଞ୍ଚଟି ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ ଅଛି। ଏମାନଙ୍କୁ FIVE SENSE ORGANS କହନ୍ତି। ଆଖି, କାନ, ନାକ, ଜିଭ ଓ ଚର୍ମ ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ପାଞ୍ଚଟି ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ କ'ଣ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଆଖି, କାନ, ନାକ, ଜିଭ ଓ ଚର୍ମ ପାଞ୍ଚଟି ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ। ଏମାନଙ୍କୁ FIVE SENSE ORGANS କହନ୍ତି। ଏହି ଅଙ୍ଗଗୁଡ଼ିକ ଆମକୁ ଦୁନିଆ ଅନୁଭବ କରାଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ଜିଭ ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> ଜିଭରେ ଆମେ ସ୍ୱାଦ ଜାଣୁ। ଜିଭକୁ ଇଂରାଜୀରେ TONGUE କହନ୍ତି। ଜିଭ ଏକ ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ।",
+
+            "<span style='color: red;'>Q-3:</span> ଚର୍ମ ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> ଚର୍ମରେ ଆମେ ଛୁଇଁ ଅନୁଭବ କରୁ। ଚର୍ମକୁ ଇଂରାଜୀରେ SKIN କହନ୍ତି। ଚର୍ମ ଏକ ଇନ୍ଦ୍ରିୟ ଅଙ୍ଗ।",
+
+            "<span style='color: red;'>Q-4:</span> କାନ ଆମକୁ କ'ଣ ସାହାଯ୍ୟ କରେ?<br><br><span style='color: green;'>Answer:</span> କାନରେ ଆମେ ଶୁଣୁ। କାନ ଦୁଇଟି ଅଛି। କାନକୁ ଇଂରାଜୀରେ EAR କହନ୍ତି।"
+        ]
+    }
+];
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -3088,265 +3077,276 @@ const courseData = {
   `, 
     audio: "",
 mermaid: `graph LR
-A["🧍 ଆମ ଶରୀର<br/>ଶରୀରର ଅଙ୍ଗ"]
+A["〰️ ମଣିଷ ଅସ୍ତିତ୍ୱ<br/>ର ରହସ୍ୟ"]
 
-A --> B["ମୁଖ୍ୟ କଥା"]
-B --> C["ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି ।<br/> ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କାମ ଅଛି ।<br/> ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ ।"]
+A --> B["ମୁଖ୍ୟ ବିଷୟ"]
+B --> C["ଆମେ ଶରୀର, ବିଚାର,<br/>ବିଶ୍ୱାସ ଓ ଅନୁଭବ<br/>ବିଷୟରେ ଜାଣିବା"]
 
-A --> D["ଗୋଟିଏ ଥିବା ଅଙ୍ଗ"]
-D --> E["ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ"]
+A --> D["ଶରୀର 🔬"]
+D --> E["ଆମ ଶରୀର କୋଷରୁ ତିଆରି।<br/>କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି।<br/>ପ୍ରତ୍ୟେକ ପରମାଣୁରେ କମ୍ପନ ଅଛି।<br/>ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"]
 
-A --> F["ଦୁଇଟି ଥିବା ଅଙ୍ଗ"]
-F --> G["ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ"]
+A --> D2["ବିଚାର 💭"]
+D2 --> E2["ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ।<br/>ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ।<br/>ଭୟ ବିଚାରରେ ହାତ ଥରେ।<br/>ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।"]
 
-A --> H["ଦଶଟି ଥିବା ଅଙ୍ଗ"]
-H --> I["ହାତ ଆଙ୍ଗୁଳି (5+5=10)<br/> ଗୋଡ଼ ଆଙ୍ଗୁଳି (5+5=10)<br/> ମୋଟ ଆଙ୍ଗୁଳି = 20"]
+A --> D3["ବିଶ୍ୱାସ 🌟"]
+D3 --> E3["ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ।<br/>ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।<br/>ବିଚାର ହେଉଛି ତା'ର ଡାଳ।<br/>ବିଶ୍ୱାସ ବଦଳିଲେ ବିଚାର ବଦଳେ।"]
 
-A --> J["ଅଙ୍ଗ ଓ ତାହାର କାମ"]
-J --> K["ଆଖି → ଦେଖିବା<br/> କାନ → ଶୁଣିବା<br/> ନାକ → ଗନ୍ଧ ଶୁଙ୍ଘିବା<br/> ଜିଭ → ସ୍ୱାଦ ନେବା<br/> ପାଟି → ଖାଇବା ଓ କଥା କହିବା<br/> ଦାନ୍ତ → ଖାଦ୍ୟ ଚୋବାଇବା<br/> ହାତ → ଧରିବା ଓ ଲେଖିବା<br/> ଗୋଡ଼ → ଚାଲିବା ଓ ଦୌଡ଼ିବା"]
+A --> D4["ପୂର୍ବ ଅନୁଭବ 🌀"]
+D4 --> E4["ପୂର୍ବ ଅନୁଭବ ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ।<br/>ପୁରୁଣା ଅନୁଭବ ମନରେ ଜମି ଯାଏ।<br/>ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ।"]
 
-style A fill:#3b82f6,stroke:#1e40af,color:#fff
-style B fill:#dbeafe,stroke:#3b82f6
-style D fill:#10b981,stroke:#059669,color:#fff
-style F fill:#f59e0b,stroke:#d97706,color:#fff
-style H fill:#ec4899,stroke:#be185d,color:#fff
-style J fill:#8b5cf6,stroke:#6d28d9,color:#fff
-style C fill:#dbeafe,stroke:#3b82f6
-style E fill:#d1fae5,stroke:#10b981
-style G fill:#fef3c7,stroke:#f59e0b
-style I fill:#fce7f3,stroke:#ec4899
-style K fill:#ede9fe,stroke:#8b5cf6`,
+A --> F["ନୂଆ ଅନୁଭବ 🔄"]
+F --> G["ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ।<br/>ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ।<br/>ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"]
 
-mcq: {
-    questions: [
-        {
-            question: "ଆଖିର କାମ କ'ଣ ?",
-            options: [
-                "ଶୁଣିବା",
-                "ଗନ୍ଧ ଶୁଙ୍ଘିବା",
-                "ଦେଖିବା",
-                "ଚାଲିବା"
-            ],
-            correct: 2
-        },
-        {
-            question: "ଆମ ଶରୀରରେ ନାକ କେତୋଟି ଥାଏ ?",
-            options: [
-                "ଦୁଇଟି",
-                "ଗୋଟିଏ",
-                "ତିନୋଟି",
-                "ଚାରୋଟି"
-            ],
-            correct: 1
-        },
-        {
-            question: "ସ୍ୱାଦ ନେବା ପାଇଁ କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-            options: [
-                "ନାକ",
-                "କାନ",
-                "ଆଖି",
-                "ଜିଭ"
-            ],
-            correct: 3
-        },
-        {
-            question: "ଆମ ଦୁଇ ହାତ ଓ ଦୁଇ ଗୋଡ଼ ର ଆଙ୍ଗୁଳି ମିଶାଇ ମୋଟ କେତୋଟି ଆଙ୍ଗୁଳି ହୁଏ ?",
-            options: [
-                "10ଟି",
-                "15ଟି",
-                "20ଟି",
-                "25ଟି"
-            ],
-            correct: 2
-        },
-        {
-            question: "ଖାଦ୍ୟ ଚୋବାଇବା ପାଇଁ କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-            options: [
-                "ଜିଭ",
-                "ଦାନ୍ତ",
-                "ପାଟି",
-                "ପେଟ"
-            ],
-            correct: 1
-        }
-    ]
-},
+A --> H["ଭୟ ଓ ସଫଳତା 🏆"]
+H --> I["ଭୟ ପୁରୁଣା ଅନୁଭବରୁ ଆସେ।<br/>ସଫଳ ଅନୁଭୂତି ଭୟ ଦୂର କରେ।<br/>ସଫଳ ହେଲେ ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।"]
 
-trueFalse: {
-    questions: [
-        {
-            question: "ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ ।",
-            correct: true
-        },
-        {
-            question: "ଆମ ଶରୀରରେ ଦୁଇଟି ନାକ ଥାଏ ।",
-            correct: false
-        },
-        {
-            question: "ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ ।",
-            correct: true
-        },
-        {
-            question: "କାନ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ ।",
-            correct: false
-        },
-        {
-            question: "ଆମ ଦୁଇ ହାତରେ ମୋଟ 10ଟି ଆଙ୍ଗୁଳି ଥାଏ ।",
-            correct: true
-        }
-    ]
-},
+A --> J["ଶରୀର ଓ ମନ ସଂପର୍କ 💡"]
+J --> K["ଶରୀର ଓ ମନ ଏକ ସଙ୍ଗେ ଚଳନ୍ତି।<br/>ଭିତରର ବଦଳ ବାହାରେ ଦେଖାଯାଏ।<br/>ଶରୀର ମନର ଦର୍ପଣ।"]
 
-fillBlanks: {
-    questions: [
-        {
-            question: "ଆଖି ଦ୍ୱାରା ଆମେ ___ । (ଦେଖୁ / ଶୁଣୁ)",
-            answer: "ଦେଖୁ"
-        },
-        {
-            question: "ଗନ୍ଧ ଶୁଙ୍ଘିବା ପାଇଁ ___ ଉପଯୋଗ ହୁଏ । (ନାକ / କାନ)",
-            answer: "ନାକ"
-        },
-        {
-            question: "ଖାଦ୍ୟ ହଜମ ହୁଏ ___ ଭିତରେ । (ଛାତି / ପେଟ)",
-            answer: "ପେଟ"
-        },
-        {
-            question: "ହାତ ଦ୍ୱାରା ଆମେ ଧରୁ ଓ ___ । (ଦୌଡ଼ୁ / ଲେଖୁ)",
-            answer: "ଲେଖୁ"
-        },
-        {
-            question: "ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ___ ଥାଏ । (ପାଦ / ମୁଣ୍ଡ)",
-            answer: "ମୁଣ୍ଡ"
-        }
-    ]
-},
+A --> L["ସାରକଥା 📖"]
+L --> M["ଶରୀର ଏକ କମ୍ପନ।<br/>ବିଚାର କମ୍ପନ ସୃଷ୍ଟି କରେ।<br/>ବିଶ୍ୱାସ ବିଚାର ଦିଏ।<br/>ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ।"]
 
-matching: {
-    pairs: [
-        { left: "ଆଖି", right: "ଦେଖିବା" },
-        { left: "କାନ", right: "ଶୁଣିବା" },
-        { left: "ନାକ", right: "ଗନ୍ଧ ଶୁଙ୍ଘିବା" },
-        { left: "ଜିଭ", right: "ସ୍ୱାଦ ନେବା" },
-        { left: "ଦାନ୍ତ", right: "ଖାଦ୍ୟ ଚୋବାଇବା" },
-        { left: "ହାତ", right: "ଧରିବା ଓ ଲେଖିବା" },
-        { left: "ଗୋଡ଼", right: "ଚାଲିବା ଓ ଦୌଡ଼ିବା" },
-        { left: "ପାଟି", right: "ଖାଇବା ଓ କଥା କହିବା" },
-        { left: "ଛାତି", right: "ଶ୍ୱାସ ନେବା" },
-        { left: "ପେଟ", right: "ଖାଦ୍ୟ ହଜମ କରିବା" }
-    ]
-},
+style A fill:#0369a1,stroke:#0c4a6e,color:#fff
+style B fill:#e0f2fe,stroke:#0369a1
+style D fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D2 fill:#b45309,stroke:#78350f,color:#fff
+style D3 fill:#059669,stroke:#064e3b,color:#fff
+style D4 fill:#dc2626,stroke:#7f1d1d,color:#fff
+style F fill:#0891b2,stroke:#164e63,color:#fff
+style H fill:#16a34a,stroke:#14532d,color:#fff
+style J fill:#d97706,stroke:#92400e,color:#fff
+style L fill:#7c3aed,stroke:#4c1d95,color:#fff
+style C fill:#e0f2fe,stroke:#0369a1
+style E fill:#ede9fe,stroke:#7c3aed
+style E2 fill:#fef3c7,stroke:#b45309
+style E3 fill:#d1fae5,stroke:#059669
+style E4 fill:#fee2e2,stroke:#dc2626
+style G fill:#cffafe,stroke:#0891b2
+style I fill:#dcfce7,stroke:#16a34a
+style K fill:#fef9c3,stroke:#d97706
+style M fill:#ede9fe,stroke:#7c3aed`,
 
-arrange: {
-    questions: [
-        {
-            words: ["ଦ୍ୱାରା", "ଆଖି", "ଦେଖୁ", "ଆମେ"],
-            correct: "ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ"
-        },
-        {
-            words: ["ଉପଯୋଗ", "ଶୁଣିବା", "ପାଇଁ", "କାନ", "ହୁଏ"],
-            correct: "ଶୁଣିବା ପାଇଁ କାନ ଉପଯୋଗ ହୁଏ"
-        },
-        {
-            words: ["ଆଙ୍ଗୁଳି", "ଦଶଟି", "ହାତରେ", "ଥାଏ", "ଦୁଇ"],
-            correct: "ଦୁଇ ହାତରେ ଦଶଟି ଆଙ୍ଗୁଳି ଥାଏ"
-        },
-        {
-            words: ["ସବୁଠୁ", "ଥାଏ", "ମୁଣ୍ଡ", "ଶରୀରରେ", "ଉପରେ"],
-            correct: "ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଥାଏ"
-        },
-        {
-            words: ["ହଜମ", "ଭିତରେ", "ଖାଦ୍ୟ", "ପେଟ", "ହୁଏ"],
-            correct: "ପେଟ ଭିତରେ ଖାଦ୍ୟ ହଜମ ହୁଏ"
-        }
-    ]
-},
+    mcq: {
+        questions: [
+            {
+                question: "ଶରୀର କ'ଣ?",
+                options: [
+                    "ଶରୀର ଏକ ସ୍ଥିର ବସ୍ତୁ",
+                    "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ",
+                    "ଶରୀର କେବଳ ହାଡ଼ ଓ ମାଂସ",
+                    "ଶରୀର ଏକ ଅନୁଭୂତି"
+                ],
+                correct: 1
+            },
+            {
+                question: "ବିଚାର ଶରୀରରେ କ'ଣ ସୃଷ୍ଟି କରେ?",
+                options: [
+                    "ରକ୍ତ ସୃଷ୍ଟି କରେ",
+                    "କୋଷ ସୃଷ୍ଟି କରେ",
+                    "କମ୍ପନ ସୃଷ୍ଟି କରେ",
+                    "ଶକ୍ତି ସୃଷ୍ଟି କରେ"
+                ],
+                correct: 2
+            },
+            {
+                question: "ବିଶ୍ୱାସ ଓ ବିଚାର ମଧ୍ୟରେ ସମ୍ପର୍କ କ'ଣ?",
+                options: [
+                    "ବିଚାର ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ",
+                    "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ",
+                    "ଦୁଇଟି ଏକ ସଙ୍ଗ ସୃଷ୍ଟି ହୁଏ",
+                    "ଦୁଇଟି ଭିନ୍ନ ଭିନ୍ନ ବିଷୟ"
+                ],
+                correct: 1
+            },
+            {
+                question: "ବିଶ୍ୱାସ କ'ଣ?",
+                options: [
+                    "ଏକ ନୂଆ ଭାବନା",
+                    "ଭବିଷ୍ୟତର ସ୍ୱପ୍ନ",
+                    "ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ",
+                    "ଶରୀରର ଏକ ଅଙ୍ଗ"
+                ],
+                correct: 2
+            },
+            {
+                question: "ନୂଆ ଅନୁଭବ ଦ୍ୱାରା କ'ଣ ହୁଏ?",
+                options: [
+                    "ଶରୀର ଦୁର୍ବଳ ହୁଏ",
+                    "ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗି ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ",
+                    "ପୁରୁଣା ବିଶ୍ୱାସ ଆହୁରି ଦୃଢ଼ ହୁଏ",
+                    "ଭୟ ବଢ଼ିଯାଏ"
+                ],
+                correct: 1
+            }
+        ]
+    },
 
-stq: {
-    questions: [
-        {
-            question: "ଆମ ଶରୀରରେ କେଉଁ ଅଙ୍ଗ ଗୋଟିଏ ଥାଏ ଓ କେଉଁ ଅଙ୍ଗ ଦୁଇଟି ଥାଏ ?",
-            answer: "ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ — ଏଗୁଡ଼ିକ ଗୋଟିଏ ଥାଏ । ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ — ଏଗୁଡ଼ିକ ଦୁଇଟି ଥାଏ ।"
-        },
-        {
-            question: "ଶ୍ରବଣ, ଦର୍ଶନ, ଘ୍ରାଣ ଓ ସ୍ୱାଦ — ଏହି ଚାରୋଟି ଇନ୍ଦ୍ରିୟ ପାଇଁ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-            answer: "ଶ୍ରବଣ ପାଇଁ କାନ, ଦର୍ଶନ ପାଇଁ ଆଖି, ଘ୍ରାଣ ପାଇଁ ନାକ ଓ ସ୍ୱାଦ ପାଇଁ ଜିଭ ଉପଯୋଗ ହୁଏ ।"
-        },
-        {
-            question: "ଶରୀରର ଅଙ୍ଗ ଯତ୍ନ ନ ନେଲେ କ'ଣ ହୋଇ ପାରେ ? ଯତ୍ନ ନେବା ପାଇଁ ଦୁଇଟି ଉପାୟ ଲେଖ ।",
-            answer: "ଶରୀରର ଅଙ୍ଗ ଯତ୍ନ ନ ନେଲେ ଆମେ ଅସୁସ୍ଥ ହୋଇ ପଡ଼ିବୁ । ଯତ୍ନ ନେବା ପାଇଁ — ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା ଓ ଖାଇବା ଆଗରୁ ହାତ ଧୋଇବା ।"
-        },
-        {
-            question: "ଆଖି, କାନ, ନାକ ଓ ପାଟି — ଏଗୁଡ଼ିକ ଶରୀରର କେଉଁ ଭାଗରେ ଥାଏ ଓ ଏଗୁଡ଼ିକର କ'ଣ କ'ଣ କାମ ?",
-            answer: "ଆଖି, କାନ, ନାକ ଓ ପାଟି — ଏଗୁଡ଼ିକ ଶରୀରର ମୁଣ୍ଡ ଭାଗରେ ଥାଏ । ଆଖି ଦ୍ୱାରା ଦେଖୁ, କାନ ଦ୍ୱାରା ଶୁଣୁ, ନାକ ଦ୍ୱାରା ଗନ୍ଧ ଶୁଙ୍ଘୁ ଓ ପାଟି ଦ୍ୱାରା ଖାଉ ଓ କଥା କହୁ ।"
-        }
-    ]
-}
+    trueFalse: {
+        questions: [
+            {
+                question: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।",
+                correct: true
+            },
+            {
+                question: "ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ ନାହିଁ।",
+                correct: false
+            },
+            {
+                question: "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ।",
+                correct: true
+            },
+            {
+                question: "ନୂଆ ଅନୁଭବ ଜୀବନ ବଦଳାଇ ଦେଇ ପାରେ।",
+                correct: true
+            },
+            {
+                question: "ଭୟ ବିଚାରରେ ଶରୀରରେ କୌଣସି ପ୍ରଭାବ ପଡ଼େ ନାହିଁ।",
+                correct: false
+            }
+        ]
+    },
+
+    fillBlanks: {
+        questions: [
+            {
+                question: "ଶରୀର ଏକ ଶୁଦ୍ଧ ___। (କମ୍ପନ / ଅନୁଭବ)",
+                answer: "କମ୍ପନ"
+            },
+            {
+                question: "ବିଚାର ___ ଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ। (ବିଶ୍ୱାସ / ଶରୀର)",
+                answer: "ବିଶ୍ୱାସ"
+            },
+            {
+                question: "ବିଶ୍ୱାସ ହେଉଛି ___ ଅନୁଭବ। (ପୂର୍ବ-ସଞ୍ଚିତ / ନୂଆ)",
+                answer: "ପୂର୍ବ-ସଞ୍ଚିତ"
+            },
+            {
+                question: "ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ___ ଗଢ଼େ। (ଜୀବନ / ଶରୀର)",
+                answer: "ଜୀବନ"
+            },
+            {
+                question: "ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ___। (ବୃକ୍ଷ / ଡାଳ)",
+                answer: "ବୃକ୍ଷ"
+            }
+        ]
+    },
+
+    matching: {
+        pairs: [
+            { left: "ଶରୀର", right: "〰️ ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷରେ କମ୍ପନ ଅଛି।" },
+            { left: "ବିଚାର", right: "💭 ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।" },
+            { left: "ବିଶ୍ୱାସ", right: "🌟 ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।" },
+            { left: "ପୂର୍ବ ଅନୁଭବ", right: "🌀 ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ। ପୁରୁଣା ଅନୁଭବ ମନରେ ଜମି ଯାଏ।" },
+            { left: "ନୂଆ ଅନୁଭବ", right: "🔄 ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ।" },
+            { left: "ଭୟ", right: "😨 ପୁରୁଣା ଅନୁଭବରୁ ଜନ୍ମ ନିଏ। ଶରୀରରେ ପ୍ରଭାବ ପକାଏ।" },
+            { left: "ସଫଳତା", right: "🏆 ନୂଆ ବିଶ୍ୱାସ ଦିଏ। \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।" },
+            { left: "କୋଷ", right: "🔬 ପରମାଣୁରୁ ସୃଷ୍ଟି। ଶରୀର ଗଠନ କରେ।" },
+            { left: "ପରମାଣୁ", right: "⚛️ ଭିତରେ ଶୁଦ୍ଧ କମ୍ପନ ଅଛି। ଶରୀରର ମୂଳ ଉପାଦାନ।" }
+        ]
+    },
+
+    arrange: {
+        questions: [
+            {
+                words: ["ଶରୀର", "ଏକ", "ଶୁଦ୍ଧ", "କମ୍ପନ"],
+                correct: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"
+            },
+            {
+                words: ["ବିଚାର", "ବଦଳିଲେ", "ଶରୀର", "ବଦଳେ"],
+                correct: "ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।"
+            },
+            {
+                words: ["ବିଶ୍ୱାସ", "ହେଉଛି", "ମୂଳ", "ବୃକ୍ଷ"],
+                correct: "ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।"
+            },
+            {
+                words: ["ଆଜିର", "ଅନୁଭୂତି", "ଆଗାମୀ", "ଜୀବନ", "ଗଢ଼େ"],
+                correct: "ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
+            },
+            {
+                words: ["ନୂଆ", "ଅନୁଭବ", "ନୂଆ", "ବିଶ୍ୱାସ", "ଦିଏ"],
+                correct: "ନୂଆ ଅନୁଭବ ନୂଆ ବିଶ୍ୱାସ ଦିଏ।"
+            }
+        ]
+    },
+
+    stq: {
+        questions: [
+            {
+                question: "ଶରୀର ଓ କମ୍ପନ ମଧ୍ୟରେ ସମ୍ପର୍କ କ'ଣ?",
+                answer: "ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ପ୍ରତ୍ୟେକ ପରମାଣୁ ଭିତରେ ଶୁଦ୍ଧ କମ୍ପନ ଜାରି ରହିଛି।"
+            },
+            {
+                question: "ବିଚାର ଓ ଶରୀର ମଧ୍ୟରେ ସଂପର୍କ ଉଦାହରଣ ସହ ବୁଝାଅ।",
+                answer: "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ। ଭୟ ବିଚାରରେ ହାତ ଥରେ।"
+            },
+            {
+                question: "ବିଶ୍ୱାସ କିପରି ସୃଷ୍ଟି ହୁଏ?",
+                answer: "ବିଶ୍ୱାସ ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ ଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ ହୁଏ।"
+            },
+            {
+                question: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଶବ୍ଦ ବ୍ୟବହାର କରି ପାଞ୍ଚଟି ବାକ୍ୟ ଲେଖ।",
+                answer: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ବିଚାର ଦିଏ। ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ। ନୂଆ ଅନୁଭବ ଜୀବନ ବଦଳାଇ ଦିଏ।"
+            }
+        ]
+    }
 },
 ],
-    
+
 summary: {
     audio: "",
-    
+
     content: {
-        introduction: "ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି । ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କାମ ଅଛି ଏବଂ ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ । ଆସନ୍ତୁ, ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଓ ତାହାର କାମ ବିଷୟରେ ଜାଣିବା :",
+        introduction: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଆମ ଜୀବନର ଚାରିଟି ମୂଳ ସ୍ତମ୍ଭ। ଆସନ୍ତୁ ଏ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ ବିଷୟରେ ଜାଣିବା।",
         sentences: [
             {
-                heading: "ମୁଣ୍ଡ — HEAD",
-                text: "ମୁଣ୍ଡ ଆମ ଶରୀରର ସବୁଠୁ ଉପରେ ଥାଏ । ଏଥିରେ ମସ୍ତିଷ୍କ ଥାଏ ଯାହା ଆମକୁ ଭାବିବାରେ ଓ ବୁଝିବାରେ ସାହାଯ୍ୟ କରେ । ଆମ ଶରୀରରେ ଗୋଟିଏ ମୁଣ୍ଡ ଥାଏ ।"
+                heading: "ଶରୀର",
+                text: "ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"
             },
             {
-                heading: "ଆଖି — EYES",
-                text: "ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ । ଆଖି ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ଆଖି ଆମ ଦର୍ଶନ ଇନ୍ଦ୍ରିୟ — ଆଖି ନ ଥିଲେ ଆମେ କିଛି ଦେଖିପାରନ୍ତୁ ନାହିଁ ।"
+                heading: "ବିଚାର",
+                text: "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ। ଭୟ ବିଚାରରେ ହାତ ଥରେ।"
             },
             {
-                heading: "କାନ — EARS",
-                text: "କାନ ଦ୍ୱାରା ଆମେ ଶୁଣୁ । କାନ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ବିଭିନ୍ନ ଶବ୍ଦ ଓ କଥା ଆମେ କାନ ଦ୍ୱାରା ଶୁଣୁ ।"
+                heading: "ବିଶ୍ୱାସ",
+                text: "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ। ବିଚାର ହେଉଛି ତା'ର ଡାଳ।"
             },
             {
-                heading: "ନାକ — NOSE",
-                text: "ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ ଓ ଶ୍ୱାସ ନିଉ । ନାକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।"
+                heading: "ପୂର୍ବ ଅନୁଭବ",
+                text: "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ।"
             },
             {
-                heading: "ପାଟି — MOUTH",
-                text: "ପାଟି ଦ୍ୱାରା ଆମେ ଖାଉ ଓ କଥା କହୁ । ଖାଦ୍ୟ ଶରୀର ଭିତରକୁ ପାଟି ଦେଇ ଯାଏ । ପାଟି ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।"
+                heading: "ନୂଆ ଅନୁଭବ",
+                text: "ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
             },
             {
-                heading: "ଦାନ୍ତ — TEETH",
-                text: "ଦାନ୍ତ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟ ଚୋବାଇ ଛୋଟ ଛୋଟ ଟୁକୁଡ଼ା କରୁ । ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା ।"
+                heading: "ଭୟ ଓ ସଫଳତା",
+                text: "ଭୟ ପୁରୁଣା ଅନୁଭବରୁ ଆସେ। ସଫଳ ଅନୁଭୂତି ଭୟ ଦୂର କରେ। \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।"
             },
             {
-                heading: "ଜିଭ — TONGUE",
-                text: "ଜିଭ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟର ସ୍ୱାଦ ଜାଣୁ । ଜିଭ କଥା କହିବାରେ ମଧ୍ୟ ସାହାଯ୍ୟ କରେ । ଜିଭ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।"
+                heading: "ଶରୀର ଓ ମନ ସଂପର୍କ",
+                text: "ଶରୀର ଓ ମନ ଏକ ସଙ୍ଗେ ଚଳନ୍ତି। ଭିତରର ବଦଳ ବାହାରେ ଦେଖାଯାଏ। ଶରୀର ମନର ଦର୍ପଣ।"
             },
             {
-                heading: "ହାତ — HANDS",
-                text: "ହାତ ଦ୍ୱାରା ଆମେ ଜିନିଷ ଧରୁ, ଲେଖୁ ଓ ବିଭିନ୍ନ ପ୍ରକାର କାମ କରୁ । ହାତ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ପ୍ରତ୍ୟେକ ହାତରେ ପାଞ୍ଚଟି ଆଙ୍ଗୁଳି ଥାଏ ।"
-            },
-            {
-                heading: "ଗୋଡ଼ — LEGS",
-                text: "ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ, ଦୌଡ଼ୁ ଓ ଖେଳୁ । ଗୋଡ଼ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ଗୋଡ଼ ଆମ ଶରୀରର ଭାର ବହନ କରେ ।"
-            },
-            {
-                heading: "ପେଟ — STOMACH",
-                text: "ପେଟ ଭିତରରେ ଆମ ଖାଦ୍ୟ ହଜମ ହୁଏ । ଆମେ ଯାହା ଖାଉ ତାହା ପେଟ ଭିତରକୁ ଯାଇ ଶକ୍ତିରେ ପରିଣତ ହୁଏ । ପେଟ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।"
+                heading: "ସାରକଥା",
+                text: "ଶରୀର ଏକ କମ୍ପନ। ବିଚାର କମ୍ପନ ଦିଏ। ବିଶ୍ୱାସ ବିଚାର ଦିଏ ଓ ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ।"
             }
         ],
-        conclusion: "ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଓ ସବୁଠୁ ତଳେ ପାଦ ଥାଏ । ଗୋଟିଏ ଥିବା ଅଙ୍ଗ — ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ । ଦୁଇଟି ଥିବା ଅଙ୍ଗ — ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ । ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ନିର୍ଦ୍ଦିଷ୍ଟ କାମ ଜାଣିଲେ ଶରୀର ବିଜ୍ଞାନ ବୁଝିବା ବହୁତ ସହଜ ହୋଇଯାଏ ।"
+        conclusion: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଏକ ଶୃଙ୍ଖଳରେ ବାନ୍ଧା। ନୂଆ ଅନୁଭବ ଦ୍ୱାରା ଆମ ଜୀବନ ବଦଳାଇ ଦିଆଯାଇ ପାରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
     },
 
     question: {
         audio: "",
-        question: "ଆମ ଶରୀରର ଯେ କୌଣସି ପାଞ୍ଚଟି ଅଙ୍ଗ ବାଛ ଓ ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ନାମ ଓ ତାହାର କାମ ଲେଖ ।",
-        introduction: "ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ଜରୁରୀ । ନିମ୍ନ ବିନ୍ଦୁଗୁଡ଼ିକ ଅଙ୍ଗ ଓ ସେଗୁଡ଼ିକର କାମ ଦର୍ଶାଏ :",
+        question: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ମଧ୍ୟରେ ସଂପର୍କ ବର୍ଣ୍ଣନା କର।",
+        introduction: "ଏ ଚାରିଟି ବିଷୟ ମଧ୍ୟରେ ସଂପର୍କ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟ ଦେଖ।",
         points: [
-            "ଆଖି — ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ । ଆଖି ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ ।",
-            "କାନ — କାନ ଦ୍ୱାରା ଆମେ ଶୁଣୁ । କାନ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ ।",
-            "ନାକ — ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ ଓ ଶ୍ୱାସ ନିଉ । ନାକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।",
-            "ହାତ — ହାତ ଦ୍ୱାରା ଆମେ ଧରୁ, ଲେଖୁ ଓ ବିଭିନ୍ନ କାମ କରୁ । ହାତ ଦୁଇଟି ଥାଏ ।",
-            "ଗୋଡ଼ — ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ । ଗୋଡ଼ ଦୁଇଟି ଥାଏ ।"
+            "ଆମ ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷ ଓ ପରମାଣୁରେ କମ୍ପନ ଅଛି।",
+            "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।",
+            "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।",
+            "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ବିଶ୍ୱାସ ହୁଏ।",
+            "ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗି ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
         ],
-        conclusion: "ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ଖୁବ ଜରୁରୀ । ଅଙ୍ଗ ସୁସ୍ଥ ରଖିବା ଆମ ଦାୟିତ୍ୱ — ଦାନ୍ତ ଘଷିବା, ହାତ ଧୋଇବା ଓ ଆଖି ପରିଷ୍କାର ରଖିବା ଆଦି ଅଭ୍ୟାସ ଆମ ଶରୀରକୁ ସୁସ୍ଥ ରଖେ ।"
+        conclusion: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଏକ ଶୃଙ୍ଖଳରେ ବାନ୍ଧା। ନୂଆ ଅନୁଭବ ଦ୍ୱାରା ଆମ ବିଶ୍ୱାସ ଓ ଜୀବନ ବଦଳାଇ ଦିଆଯାଇ ପାରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
     }
 }
 };
@@ -4771,7 +4771,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଓ ତାହାର କାମ ବିଷୟରେ ଲେଖ ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ମଣିଷ ଅସ୍ତିତ୍ୱର ରହସ୍ୟ ଆଲୋଚନା କର ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4861,7 +4861,7 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-NKXA',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=RR36-TK81',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
@@ -4882,7 +4882,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://student-care.pages.dev/',
+        url: 'https://student-care.pages.dev/SC/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -4976,48 +4976,6 @@ window.addEventListener('beforeunload', () => {
     });
 });
 
-// Writ Practice Functions
-function openWritPractice() {
-    // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://st-practicals.pages.dev/gk/class-1/";
-    
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Show container
-    container.classList.add('active');
-    
-    // Set iframe source
-    iframe.src = writExamURL;
-    
-    // Show iframe and hide loading when loaded
-    iframe.onload = function() {
-        iframe.style.display = 'block';
-        loading.style.display = 'none';
-    };
-    
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWritPractice() {
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Hide container
-    container.classList.remove('active');
-    
-    // Reset iframe
-    iframe.src = '';
-    iframe.style.display = 'none';
-    loading.style.display = 'block';
-    
-    // Restore background scroll
-    document.body.style.overflow = 'auto';
-}
-
 
 
 // Global variable to store the current typing timeout
@@ -5101,107 +5059,10 @@ function showAnswerInBox(boxId, answerText) {
     typeWriter(answerBox, answerText, 40);
 }
     
- // ==========================================
-// NAVIGATION SYSTEM FOR MAIN CARD
-// ==========================================
 
-const topicsData = [
-    {
-        heading: "ପାଠ-1: ଶରୀରର ଅଙ୍ଗ",
-        audioPoints: [
-            {
-                text: "👉 ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି । ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କାମ ଅଛି । ଯଥା - ଆଖିରେ ଆମେ ଦେଖୁ, କାନରେ ଆମେ ଶୁଣୁ, ନାକରେ ଆମେ ଶୁଙ୍ଘୁ, ପାଟିରେ ଆମେ ଖାଉ ଓ କଥା କହୁ, ହାତରେ ଆମେ ଧରୁ ଓ ଲେଖୁ, ଗୋଡ଼ରେ ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ । ଏହିପରି ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ ।<br>",
-                audio: "https://audio.evidya.de/GK1T1.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆମ ଶରୀରରେ କ'ଣ ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଥାଏ । ଯଥା - ମୁଣ୍ଡ, ଆଖି, କାନ, ନାକ, ପାଟି, ହାତ, ଗୋଡ଼ ଇତ୍ୟାଦି ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଆଖିର କାମ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖିରେ ଆମେ ଦେଖୁ । ଆଖି ଆମର ଦେଖିବାର ଇନ୍ଦ୍ରିୟ ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ହାତର କାମ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ହାତରେ ଆମେ ଧରୁ, ଲେଖୁ, ଖାଉ ଓ ବିଭିନ୍ନ ପ୍ରକାର କାମ କରୁ ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଗୋଡ଼ର କାମ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗୋଡ଼ରେ ଆମେ ଚାଲୁ, ଦୌଡ଼ୁ ଓ ଖେଳୁ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-2: ଏକ ଅଙ୍ଗ ଓ ଏକାଧିକ ଅଙ୍ଗ :",
-        audioPoints: [
-            {
-                text: "👉 ଆମ ଶରୀରରେ କେତେକ ଅଙ୍ଗ ଗୋଟିଏ ଥାଏ ଏବଂ କେତେକ ଅଙ୍ଗ ଦୁଇଟି ଥାଏ । ଗୋଟିଏ ଥିବା ଅଙ୍ଗ - ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ । ଦୁଇଟି ଥିବା ଅଙ୍ଗ - ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ । ତଥା ଦଶଟି ଥିବା ଅଙ୍ଗ - ହାତ ଆଙ୍ଗୁଳି (5+5=10) ଓ ଗୋଡ଼ ଆଙ୍ଗୁଳି (5+5=10) ।<br>",
-                audio: "https://audio.evidya.de/GK1T2.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆମ ଶରୀରରେ କେଉଁ କେଉଁ ଅଙ୍ଗ ଗୋଟିଏ ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ - ଏଗୁଡ଼ିକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଆମ ଶରୀରରେ କେଉଁ କେଉଁ ଅଙ୍ଗ ଦୁଇଟି ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ - ଏଗୁଡ଼ିକ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଆମ ଶରୀରରେ ମୋଟ କେତୋଟି ଆଙ୍ଗୁଳି ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆମ ଦୁଇ ହାତରେ 10ଟି ଓ ଦୁଇ ଗୋଡ଼ ଆଙ୍ଗୁଳି ମିଶାଇ ମୋଟ 20ଟି ଆଙ୍ଗୁଳି ଅଛି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ନାକ ଆମ ଶରୀରରେ କେତୋଟି ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ନାକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-3: ଶରୀରର ଅଙ୍ଗ ଓ ସେଗୁଡ଼ିକର କାମ :",
-        audioPoints: [
-            {
-                text: "👉 ଏବେ ଆମେ ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ର କାମ ଶିଖିବା । ଆଖି → ଦେଖିବା । କାନ → ଶୁଣିବା । ନାକ → ଗନ୍ଧ ଶୁଙ୍ଘିବା । ଜିଭ → ସ୍ୱାଦ ନେବା । ଚର୍ମ (ଚମଡ଼ା) → ଛୁଇଁ ଅନୁଭବ କରିବା । ପାଟି → ଖାଇବା ଓ କଥା କହିବା । ହାତ → ଧରିବା ଓ ଲେଖିବା । ଗୋଡ଼ → ଚାଲିବା ଓ ଦୌଡ଼ିବା । ଦାନ୍ତ → ଖାଦ୍ୟ ଚୋବାଇବା ।<br>",
-                audio: "https://audio.evidya.de/GK1T3.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 'ଶୁଣିବା' ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶୁଣିବା ପାଇଁ ଆମ ଶରୀରର କାନ ଉପଯୋଗ ହୁଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ଗନ୍ଧ ଶୁଙ୍ଘିବା' ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗନ୍ଧ ଶୁଙ୍ଘିବା ପାଇଁ ଆମ ଶରୀରର ନାକ ଉପଯୋଗ ହୁଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 'ସ୍ୱାଦ ନେବା' ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସ୍ୱାଦ ନେବା ପାଇଁ ଆମ ଶରୀରର ଜିଭ ଉପଯୋଗ ହୁଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 'ଚାଲିବା ଓ ଦୌଡ଼ିବା' ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚାଲିବା ଓ ଦୌଡ଼ିବା ପାଇଁ ଆମ ଶରୀରର ଗୋଡ଼ ଉପଯୋଗ ହୁଏ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-4: ଶରୀରର ଅଙ୍ଗଗୁଡିକର ଯତ୍ନ ନେବା :",
-        audioPoints: [
-            {
-                text: "👉 ଆମ ଶରୀରର ଅଙ୍ଗଗୁଡ଼ିକ ସୁସ୍ଥ ରଖିବା ଆମ ପାଇଁ ବହୁତ ଜରୁରୀ । ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ - ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା, ଆଖି ପରିଷ୍କାର ରଖିବା, ଖୁବ ଜୋରରେ ଆଖିକୁ ଦଳିବା ନାହିଁ, ନିଜ ହାତ ସଫା ରଖିବା, ଖାଇବା ଆଗରୁ ହାତ ଧୋଇବା, ବାଦ୍ୟ ଶ୍ରବଣ ଯନ୍ତ୍ରକୁ ଅଧିକ ଶବ୍ଦ ଦେଇ ବ୍ୟବହାର ନ କରିବା, ଇତ୍ୟାଦି ।<br>",
-                audio: "https://audio.evidya.de/GK1T4.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ କ'ଣ କରିବୁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବୁ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଆଖି ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ କ'ଣ କ'ଣ ଧ୍ୟାନ ରଖିବୁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖି ପରିଷ୍କାର ରଖିବୁ ଏବଂ ଜୋରରେ ଆଖି ମୋଛିବୁ ନାହିଁ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଖାଇବା ଆଗରୁ ଆମେ କ'ଣ କରିବୁ ଓ କାହିଁକି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଖାଇବା ଆଗରୁ ଆମେ ଭଲ ଭାବେ ହାତ ଧୋଇବୁ, ଯାହାଦ୍ୱାରା ହାତରୁ ଜୀବାଣୁ ଖାଦ୍ୟ ଭିତରକୁ ଯିବ ନାହିଁ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଶରୀରର ଅଙ୍ଗ ଯତ୍ନ ନ ନେଲେ କ'ଣ ହୋଇ ପାରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶରୀରର ଅଙ୍ଗ ଯତ୍ନ ନ ନେଲେ ଆମେ ଅସୁସ୍ଥ ହୋଇ ପଡ଼ିବୁ ଏବଂ ଡ଼ାକ୍ତରଙ୍କ ପାଖକୁ ଯିବାକୁ ପଡ଼ିବ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-5: ଶରୀର ଅଙ୍ଗଗୁଡିକ ର ସ୍ଥିତି ଓ ଗୁରୁତ୍ଵ:",
-        audioPoints: [
-            {
-                text: "👉 ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଥାଏ ଏବଂ ସବୁଠୁ ତଳେ ପାଦ ଥାଏ । ଆଖି, କାନ, ନାକ, ପାଟି - ଏଗୁଡ଼ିକ ଶରୀରର ମୁଣ୍ଡ ଭାଗରେ ଥାଏ । ଶରୀରର ଅଙ୍ଗଗୁଡ଼ିକ ଠିକ୍ ଭାବରେ କାମ ନ କଲେ ଆମେ ଦେଖି ପାରିବୁ ନାହିଁ, ଶୁଣି ପାରିବୁ ନାହିଁ, ଚାଲି ପାରିବୁ ନାହିଁ — ତେଣୁ ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ ।<br>",
-                audio: "https://audio.evidya.de/GK1T5.m4a"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ କେଉଁ ଅଙ୍ଗ ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଥାଏ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଆମ ଶରୀରରେ ସବୁଠୁ ତଳେ କେଉଁ ଅଙ୍ଗ ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆମ ଶରୀରରେ ସବୁଠୁ ତଳେ ପାଦ ଥାଏ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଆଖି, କାନ, ନାକ, ପାଟି - ଏଗୁଡ଼ିକ ଶରୀରର କେଉଁ ଭାଗରେ ଥାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖି, କାନ, ନାକ, ପାଟି - ଏଗୁଡ଼ିକ ଶରୀରର ମୁଣ୍ଡ ଭାଗରେ ଥାଏ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଶରୀରର ଅଙ୍ଗଗୁଡ଼ିକ ଠିକ୍ ଭାବରେ କାମ ନ କଲେ ଆମ ଜୀବନ ଉପରେ କ'ଣ ପ୍ରଭାବ ପଡ଼େ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶରୀରର ଅଙ୍ଗଗୁଡ଼ିକ ଠିକ୍ ଭାବରେ କାମ ନ କଲେ ଆମେ ଦେଖି ପାରିବୁ ନାହିଁ, ଶୁଣି ପାରିବୁ ନାହିଁ, ଚାଲି ପାରିବୁ ନାହିଁ — ତେଣୁ ଆମ ଶରୀରର ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ ।"
-]
-    }
-];
-    
 let currentTopicIndex = 0;
 
 function loadTopic(index, autoPlay = false) {
@@ -5610,9 +5471,9 @@ function startLearning() {
     document.getElementById('topicCounterWrapper').style.display = 'flex';
     document.getElementById('topicContent').style.display = 'block';
     
-    // Load first topic
+    // Load first topic — pass TRUE to auto-start writing immediately
     currentTopicIndex = 0;
-    loadTopic(0);
+    loadTopic(0, true);  // ← change false/missing to true
 }
     
 function navigateTopic(direction) {
@@ -5945,7 +5806,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (GENERAL KNOWLEDGE) CLASS-1',
+    className: 'SPECIAL TRAINING (MIND-POWER) CLASS-1 : ମଣିଷ ଅସ୍ତିତ୍ୱର ରହସ୍ୟ',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -5958,17 +5819,7 @@ let certificateData = {
     overallPercentage: 0
 };
 
-// Open Certificate Modal
-document.getElementById('certificateBtn').addEventListener('click', function() {
-    // Calculate scores
-    calculateCertificateScores();
-    
-    // Load saved student details if available
-    loadStudentDetails();
-    
-    // Show modal
-    document.getElementById('certificateModal').classList.add('active');
-});
+
 
 // Close Certificate Modal
 function closeCertificateModal() {
@@ -6500,277 +6351,52 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
-
-
-  // ===== UNIFIED MEDIA + REVISION TOGGLE =====
-
-const revisionLessons = [
-    {
-        id: 1,
-        lessonAudio: "https://audio.evidya.de/SG1R1.mp3",
-        lessonText: "ପାଠ ୧: ଅଙ୍ଗ ଓ ତାହାର କାମ ଚିହ୍ନିବା — ଆମ ଶରୀରରେ ଅନେକ ଅଙ୍ଗ ଅଛି । ପ୍ରତ୍ୟେକ ଅଙ୍ଗର ଏକ ନିର୍ଦ୍ଦିଷ୍ଟ କାମ ଅଛି । ଉଦାହରଣ ସ୍ୱରୂପ — ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ, କାନ ଦ୍ୱାରା ଆମେ ଶୁଣୁ, ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ । ଯଦି ଆମକୁ ପ୍ରଶ୍ନ କରାଯାଏ 'ଦେଖିବା ପାଇଁ କେଉଁ ଅଙ୍ଗ ?' — ତେବେ ଆମେ 'ଆଖି' ଉତ୍ତର ଦେବୁ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👀 ଦେଖିବା ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-                options: ["କାନ", "ଆଖି", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଖି ଆମ ଦର୍ଶନ ଇନ୍ଦ୍ରିୟ । ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ । ଆଖି ନ ଥିଲେ ଆମେ କିଛି ଦେଖିପାରନ୍ତୁ ନାହିଁ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଖି ଆମ ଦର୍ଶନ ଇନ୍ଦ୍ରିୟ । ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ । କାନ ଦ୍ୱାରା ଆମେ ଶୁଣୁ, ଦେଖୁ ନାହିଁ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👃 ଗନ୍ଧ ଶୁଙ୍ଘିବା ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-                options: ["ନାକ", "ଜିଭ", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ ଓ ଶ୍ୱାସ ନିଉ । ଜିଭ ଦ୍ୱାରା ଆମେ ସ୍ୱାଦ ନିଉ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ନାକ ଦ୍ୱାରା ଆମେ ଗନ୍ଧ ଶୁଙ୍ଘୁ ଓ ଶ୍ୱାସ ନିଉ । ଜିଭ ଦ୍ୱାରା ଆମେ ସ୍ୱାଦ ନିଉ, ଗନ୍ଧ ଶୁଙ୍ଘୁ ନାହିଁ ।"
-            }
-        ]
-    },
-    {
-        id: 2,
-        lessonAudio: "https://audio.evidya.de/SG1R2.mp3",
-        lessonText: "ପାଠ ୨: ଶରୀରର ଅଙ୍ଗ ଚିହ୍ନିବା — ଆଖି, କାନ, ନାକ, ପାଟି ଏଗୁଡ଼ିକ ଶରୀରର ମୁଣ୍ଡ ଭାଗରେ ଥାଏ । ହାତ ଦ୍ୱାରା ଆମେ ଧରୁ ଓ ଲେଖୁ, ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ । ଜିଭ ଦ୍ୱାରା ଆମେ ସ୍ୱାଦ ନିଉ ଓ ଦାନ୍ତ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟ ଚୋବାଇ ଛୋଟ ଛୋଟ ଟୁକୁଡ଼ା କରୁ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👅 ସ୍ୱାଦ ନେବା ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-                options: ["ଦାନ୍ତ", "ଜିଭ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଜିଭ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟର ସ୍ୱାଦ ଜାଣୁ । ଦାନ୍ତ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟ ଚୋବାଇ ଛୋଟ ଛୋଟ ଟୁକୁଡ଼ା କରୁ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଜିଭ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟର ସ୍ୱାଦ ଜାଣୁ । ଦାନ୍ତ ଦ୍ୱାରା ଆମେ ଖାଦ୍ୟ ଚୋବାଇ ଛୋଟ ଛୋଟ ଟୁକୁଡ଼ା କରୁ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🙌 ଧରିବା ଓ ଲେଖିବା ପାଇଁ ଆମ ଶରୀରର କେଉଁ ଅଙ୍ଗ ଉପଯୋଗ ହୁଏ ?",
-                options: ["ହାତ", "ଗୋଡ଼", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ହାତ ଦ୍ୱାରା ଆମେ ଜିନିଷ ଧରୁ, ଲେଖୁ ଓ ବିଭିନ୍ନ ପ୍ରକାର କାମ କରୁ । ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ହାତ ଦ୍ୱାରା ଆମେ ଜିନିଷ ଧରୁ, ଲେଖୁ ଓ ବିଭିନ୍ନ ପ୍ରକାର କାମ କରୁ । ଗୋଡ଼ ଦ୍ୱାରା ଆମେ ଚାଲୁ ଓ ଦୌଡ଼ୁ ।"
-            }
-        ]
-    },
-    {
-        id: 3,
-        lessonAudio: "https://audio.evidya.de/SG1R3.mp3",
-        lessonText: "ପାଠ ୩: ଗୋଟିଏ ଥିବା ଅଙ୍ଗ ଓ ଦୁଇଟି ଥିବା ଅଙ୍ଗ — ଆମ ଶରୀରରେ କେତେକ ଅଙ୍ଗ ଗୋଟିଏ ଓ କେତେକ ଅଙ୍ଗ ଦୁଇଟି ଥାଏ । ଗୋଟିଏ ଥିବା ଅଙ୍ଗ — ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ । ଦୁଇଟି ଥିବା ଅଙ୍ଗ — ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🧍 ଆମ ଶରୀରରେ 'ନାକ' କେତୋଟି ଥାଏ ?",
-                options: ["ଗୋଟିଏ", "ଦୁଇଟି", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ନାକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ । ମୁଣ୍ଡ, ନାକ, ପାଟି, ଜିଭ, ବେକ, ଛାତି, ପେଟ — ଏଗୁଡ଼ିକ ଗୋଟିଏ ଗୋଟିଏ ଥାଏ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ନାକ ଆମ ଶରୀରରେ ଗୋଟିଏ ଥାଏ । ଆଖି ଓ କାନ ଦୁଇଟି ଥାଏ, ନାକ ନୁହେଁ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "👂 ଆମ ଶରୀରରେ 'କାନ' କେତୋଟି ଥାଏ ?",
-                options: ["ଗୋଟିଏ", "ଦୁଇଟି", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — କାନ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ଆଖି, କାନ, କାନ୍ଧ, ହାତ, ଗୋଡ଼, ପାଦ — ଏଗୁଡ଼ିକ ଦୁଇଟି ଦୁଇଟି ଥାଏ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । କାନ ଆମ ଶରୀରରେ ଦୁଇଟି ଥାଏ । ଆଖି, କାନ, ହାତ, ଗୋଡ଼ — ଏଗୁଡ଼ିକ ସବୁ ଦୁଇଟି ଦୁଇଟି ।"
-            }
-        ]
-    },
-    {
-        id: 4,
-        lessonAudio: "https://audio.evidya.de/SG1R4.mp3",
-        lessonText: "ପାଠ ୪: ଶରୀରର ଅଙ୍ଗଗୁଡିକର ଯତ୍ନ — ଆମ ଶରୀରର ଅଙ୍ଗଗୁଡ଼ିକ ସୁସ୍ଥ ରଖିବା ଆମ ପାଇଁ ବହୁତ ଜରୁରୀ । ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା । ଆଖି ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆଖି ପରିଷ୍କାର ରଖିବା ଓ ଜୋରରେ ଆଖି ମୋଛିବୁ ନାହିଁ । ଖାଇବା ଆଗରୁ ହାତ ଭଲ ଭାବେ ଧୋଇବା ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🦷 ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ ପ୍ରତିଦିନ କ'ଣ କରିବୁ ?",
-                options: ["ଦାନ୍ତ ଘଷିବା", "ଆଖି ଧୋଇବା", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା । ଦାନ୍ତ ଘଷିଲେ ଦାନ୍ତ ପରିଷ୍କାର ରହେ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦାନ୍ତ ସୁସ୍ଥ ରଖିବା ପାଇଁ ଆମେ ପ୍ରତିଦିନ ଦାନ୍ତ ଘଷିବା, ଆଖି ଧୋଇବା ନୁହେଁ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🙏 ଖାଇବା ଆଗରୁ ଆମେ କ'ଣ କରିବୁ ଓ କାହିଁକି ?",
-                options: ["ହାତ ଧୋଇବା, ଜୀବାଣୁ ଯିବ ନାହିଁ", "ଦାନ୍ତ ଘଷିବା, ଦାନ୍ତ ସଫା ହବ", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଖାଇବା ଆଗରୁ ଆମେ ଭଲ ଭାବେ ହାତ ଧୋଇବୁ । ଏହା ଦ୍ୱାରା ହାତରୁ ଜୀବାଣୁ ଖାଦ୍ୟ ଭିତରକୁ ଯିବ ନାହିଁ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଖାଇବା ଆଗରୁ ଆମେ ଭଲ ଭାବେ ହାତ ଧୋଇବୁ, ଯାହାଦ୍ୱାରା ହାତରୁ ଜୀବାଣୁ ଖାଦ୍ୟ ଭିତରକୁ ଯିବ ନାହିଁ ।"
-            }
-        ]
-    },
-    {
-        id: 5,
-        lessonAudio: "https://audio.evidya.de/SG1R5.mp3",
-        lessonText: "ପାଠ ୫: ଶରୀରର ଅଙ୍ଗ ଓ ତାଙ୍କ ଗୁରୁତ୍ୱ — ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଓ ସବୁଠୁ ତଳେ ପାଦ ଥାଏ । ପ୍ରତ୍ୟେକ ଅଙ୍ଗ ଆମ ଜୀବନ ପାଇଁ ବହୁତ ଜରୁରୀ । ଯଦି ଅଙ୍ଗ ଠିକ୍ ଭାବରେ କାମ ନ କରେ, ତେବେ ଆମ ଜୀବନ ଅନେକ ଅସୁବିଧାରେ ପଡ଼ିବ — ଦେଖି ପାରିବୁ ନାହିଁ, ଶୁଣି ପାରିବୁ ନାହିଁ, ଚାଲି ପାରିବୁ ନାହିଁ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🧍 ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ କେଉଁ ଅଙ୍ଗ ଥାଏ ?",
-                options: ["ପାଦ", "ମୁଣ୍ଡ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଥାଏ ଓ ସବୁଠୁ ତଳେ ପାଦ ଥାଏ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆମ ଶରୀରରେ ସବୁଠୁ ଉପରେ ମୁଣ୍ଡ ଥାଏ, ପାଦ ନୁହଁ । ପାଦ ସବୁଠୁ ତଳେ ଥାଏ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🦵 ଆଖି ଠିକ୍ ଭାବରେ କାମ ନ କଲେ ଆମ ଉପରେ କ'ଣ ପ୍ରଭାବ ପଡ଼ିବ ?",
-                options: ["ଆମେ ଦେଖି ପାରିବୁ ନାହିଁ", "ଆମେ ଶୁଣି ପାରିବୁ ନାହିଁ", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ । ଆଖି ଠିକ୍ ଭାବରେ କାମ ନ କଲେ ଆମେ ଦେଖି ପାରିବୁ ନାହିଁ । ଶୁଣି ନ ପାରିଲେ ତାହା ହେଉଛି କାନ ର ଅସୁବିଧା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଖି ଦ୍ୱାରା ଆମେ ଦେଖୁ, ତେଣୁ ଆଖି ଠିକ୍ ନ ହେଲେ ଆମେ ଦେଖି ପାରିବୁ ନାହିଁ । ଶୁଣୁ ନ ପାରିବା ହେଉଛି କାନ ର ଅସୁବିଧା ।"
-            }
-        ]
-    }
-];
-    
-let revisionState = {
-    active: false,
-    lessonIndex: 0,
-    mcqIndex: 0,
-    audio: null
-};
-
-function stopRevisionAudio() {
-    if (revisionState.audio) {
-        revisionState.audio.pause();
-        revisionState.audio = null;
-    }
-}
-
-function playRevisionAudio(url, onEnd) {
-    stopRevisionAudio();
-    if (!url || !isValidAudioUrl(url)) {
-        if (onEnd) setTimeout(onEnd, 100);
-        return;
-    }
-    revisionState.audio = new Audio(url);
-    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
-    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
-    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
-}
-
-function setRevisionScreen(html) {
-    const screen = document.getElementById('revisionScreen');
-    if (screen) {
-        screen.style.background = 'white';
-        screen.style.overflow = 'hidden';
-        screen.style.display = 'flex';
-        screen.style.flexDirection = 'column';
-        screen.style.alignItems = 'stretch';
-        screen.style.justifyContent = 'flex-start';
-        screen.style.padding = '0';
-        screen.innerHTML = html;
-    }
-}
-
-function rvTypewrite(elementId, text, speed, onDone) {
-    const el = document.getElementById(elementId);
-    if (!el) { if (onDone) onDone(); return; }
-
-    el.innerHTML = '';
-
-    const chars = Array.from(text);
-    let i = 0;
-    let current = '';
-
-    function next() {
-        if (i < chars.length) {
-            current += chars[i];
-            el.innerHTML = current;
-            i++;
-            setTimeout(next, speed || 35);
-        } else {
-            if (onDone) onDone();
-        }
-    }
-
-    next();
-}
     
 function toggleMedia(type) {
-    const logoDisplay  = document.getElementById('logoDisplay');
-    const audioDisplay = document.getElementById('audioDisplay');
-    const videoDisplay = document.getElementById('videoDisplay');
-    const revisionBoard = document.getElementById('revisionBoard');
-    const audioIframe  = document.getElementById('audioIframe');
-    const videoIframe  = document.getElementById('videoIframe');
-    const audioBtn     = document.getElementById('audioToggleBtn');
-    const videoBtn     = document.getElementById('videoToggleBtn');
-    const revBtn       = document.getElementById('revisionToggleBtn');
+    const logoDisplay   = document.getElementById('logoDisplay');
+    const audioDisplay  = document.getElementById('audioDisplay');
+    const videoDisplay  = document.getElementById('videoDisplay');
+    const debateDisplay = document.getElementById('debateDisplay');
+    const audioIframe   = document.getElementById('audioIframe');
+    const videoIframe   = document.getElementById('videoIframe');
+    const debateIframe  = document.getElementById('debateIframe');
+    const audioBtn      = document.getElementById('audioToggleBtn');
+    const videoBtn      = document.getElementById('videoToggleBtn');
+    const debateBtn     = document.getElementById('debateToggleBtn');
 
     const resetAllBtnStyles = () => {
-        [audioBtn, videoBtn, revBtn].forEach(b => {
+       [audioBtn, videoBtn, debateBtn].forEach(b => {
             if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
         });
     };
 
     const hideAll = () => {
-        audioIframe.src = '';
-        videoIframe.src = '';
-        audioDisplay.style.display = 'none';
-        videoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'none';
-        logoDisplay.style.display = 'block';
-        stopRevisionAudio();
-        revisionState.active = false;
+        videoIframe.src   = '';
+         const ap = document.getElementById('audioPlayer');
+    if (ap) { ap.pause(); ap.currentTime = 0; }
+    const dp = document.getElementById('debatePlayer');
+    if (dp) { dp.pause(); dp.currentTime = 0; }
+        audioDisplay.style.display   = 'none';
+        videoDisplay.style.display   = 'none';
+      
+        debateDisplay.style.display  = 'none';
+        logoDisplay.style.display    = 'block';
+       
         resetAllBtnStyles();
     };
 
-    if (type === 'audio') {
-        if (audioDisplay.style.display === 'block') {
-            hideAll();
-            return;
-        }
+  if (type === 'audio') {
+    if (audioDisplay.style.display === 'flex') {
         hideAll();
-        logoDisplay.style.display = 'none';
-        audioDisplay.style.display = 'block';
-        audioIframe.src = audioIframe.dataset.src;
-        audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        return;
     }
+    hideAll();
+    logoDisplay.style.display  = 'none';
+    audioDisplay.style.display = 'flex';
+    const ap = document.getElementById('audioPlayer');
+    if (ap) ap.play();
+    audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 
     if (type === 'video') {
         if (videoDisplay.style.display === 'block') {
@@ -6778,266 +6404,28 @@ function toggleMedia(type) {
             return;
         }
         hideAll();
-        logoDisplay.style.display = 'none';
+        logoDisplay.style.display  = 'none';
         videoDisplay.style.display = 'block';
         videoIframe.src = videoIframe.dataset.src;
         videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
     }
 
-    if (type === 'revision') {
-        if (revisionState.active) {
-            hideAll();
-            return;
-        }
-        hideAll();
-        logoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'block';
-        revisionState.active = true;
-        revisionState.lessonIndex = 0;
-        revisionState.mcqIndex = 0;
-        revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
-        startRevisionLesson();
-    }
-}
-
-function startRevisionLesson() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
-                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
-            </div>
-
-            <div id="rvLessonTextDiv" style="flex:1;overflow-y:auto;min-height:0;margin-bottom:6px;">
-                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
-            </div>
-
-            <div id="rvUnderstandButtons" style="display:none;flex-direction:column;gap:6px;flex-shrink:0;">
-                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
-                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
-            </div>
-        </div>
-    `);
-
-    let textDone = false;
-    let audioDone = false;
-
-    function checkBothDone() {
-        if (textDone && audioDone) {
-            const textDiv = document.getElementById('rvLessonTextDiv');
-            if (textDiv) textDiv.style.display = 'none';
-
-            const btns = document.getElementById('rvUnderstandButtons');
-            if (btns) {
-                btns.style.display = 'flex';
-                btns.style.flexDirection = 'column';
-            }
-            playRevisionAudio(lesson.understandAudio, null);
-        }
-    }
-
-    playRevisionAudio(lesson.lessonAudio, () => {
-        audioDone = true;
-        checkBothDone();
-    });
-
-    setTimeout(() => {
-        rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
-            textDone = true;
-            checkBothDone();
-        });
-    }, 300);
-}
-    
-function rvUnderstood(yes) {
-    if (!yes) {
-        startRevisionLesson();
-        return;
-    }
-    revisionState.mcqIndex = 0;
-    showRevisionMCQ();
-}
-
-function showRevisionMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const qNum = revisionState.mcqIndex + 1;
-    const total = lesson.mcq.length;
-    const current = revisionState.lessonIndex + 1;
-
-    playRevisionAudio(mcq.questionAudio, null);
-
-    const optColors = [
-        'linear-gradient(135deg,#667eea,#764ba2)',
-        'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
-        'linear-gradient(135deg,#6b7280,#4b5563)'
-    ];
-
-   setRevisionScreen(`
-    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
-            
-            <!-- Header badge -->
-            <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
-            </div>
-
-<div style="margin-bottom:12px;">
-    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
-        ${mcq.q}
-    </p>
-</div>
-
-      <div style="margin-top:10px;">
-    <select onchange="rvAnswer(parseInt(this.value))" style="
-        width:100%;
-        padding:12px;
-        font-size:15px;
-        font-weight:bold;
-        border:2px solid #667eea;
-        border-radius:10px;
-        background:white;
-        color:#111;
-        cursor:pointer;
-        appearance:auto;
-    ">
-        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
-        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
-    </select>
-</div>
-        </div>
-    `);
-}
-
-
-function rvSubmitAnswer() {
-    const sel = document.getElementById('rvSelect');
-    if (!sel || sel.value === '') {
-        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
-        return;
-    }
-    rvAnswer(parseInt(sel.value));
-}
-
-    
-function rvAnswer(optionIndex) {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const isIDontKnow = (optionIndex === mcq.options.length - 1);
-    const isCorrect = (optionIndex === mcq.correct);
-
-   if (isCorrect) {
-    playRevisionAudio(mcq.correctAudio, null);
-    
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
-    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
-    
-    // Decide what the forward button says and does
-    let forwardBtn = '';
-    if (isLastMCQ && isLastLesson) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
-    } else if (isLastMCQ) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
-    } else {
-        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
-    }
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-            <div style="font-size:34px;">🌟</div>
-            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
-            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
-                ${forwardBtn}
-            </div>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
-            // Show the forward button only after text finishes typing
-            const fwd = document.getElementById('rvForwardBtn');
-            if (fwd) fwd.style.display = 'block';
-        });
-    }, 200);
-    return;
-}
-
-    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
-    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
-    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
-    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
-    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
-
-    playRevisionAudio(feedbackAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
-            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
-                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
-            </div>
-            <div style="flex:1;overflow-y:auto;">
-              <p id="rvFeedbackText" style="
-    font-size: 13px;
-    font-weight: bold;
-    color: #111;
-    line-height: 1.6;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
-            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
-    }, 200);
-}
    
-function advanceMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    revisionState.mcqIndex++;
-    if (revisionState.mcqIndex < lesson.mcq.length) {
-        showRevisionMCQ();
-    } else {
-        showLessonCompletePrompt();
+
+  if (type === 'debate') {
+    if (debateDisplay.style.display === 'flex') {
+        hideAll();
+        return;
     }
+    hideAll();
+    logoDisplay.style.display   = 'none';
+    debateDisplay.style.display = 'flex';
+    const dp = document.getElementById('debatePlayer');
+    if (dp) dp.play();
+    debateBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 }
 
-function showLessonCompletePrompt() {
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-    const isLast = (current === total);
-
-    playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
-            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
-            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
-            ${isLast
-                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
-                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
-                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
-            }
-        </div>
-    `);
-}
-    
-function goNextLesson() {
-    revisionState.lessonIndex++;
-    revisionState.mcqIndex = 0;
-    startRevisionLesson();
-}  
-    
     
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
