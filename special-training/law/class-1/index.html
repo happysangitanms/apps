@@ -832,10 +832,6 @@ body > div:first-child {
 }
 
 
-#writPracticeContainer .assistant-iframe-wrapper {
-    height: 700px; /* or 650px, 750px - whatever increase you want */
-}
-
 .answer-section {
     text-align: justify;
     display: inline-block;
@@ -2243,7 +2239,7 @@ body > div:first-child {
         <button id="stqBtn" class="test-btn summary">ଅତି ସଂକ୍ଷିପ୍ତ ପ୍ରଶ୍ନୋତ୍ତର</button>
         <button id="summaryBtn" class="test-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
         <button id="questionBtn" class="test-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">ସଂକ୍ଷିପ୍ତ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
-        <button id="practiceBtn" class="test-btn" onclick="openWritPractice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଅଭ୍ଯାସ(Practical) ପରୀକ୍ଷା</button>
+      <button id="practiceBtn" class="test-btn" onclick="openCertificateFromExam()" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%);">🏆 ସାର୍ଟିଫିକେଟ୍</button>
         
     </div>
                              <div id="scoreDisplay" class="score-display" style="display: none;">
@@ -2334,38 +2330,84 @@ body > div:first-child {
         </div>
     </div>
 </div>
-           
-           
- <!-- Practice Container -->
-<div id="writPracticeContainer" class="assistant-container">
-    <div class="assistant-header">
-        <h3>ସମ୍ପୂର୍ଣ୍ଣ ଅଭ୍ୟାସ ପରୀକ୍ଷା</h3>
-        <button class="assistant-close-btn" onclick="closeWritPractice()">✕</button>
-    </div>
-    <div class="assistant-iframe-wrapper">
-        <div class="assistant-loading" id="writPracticeLoading">
-            <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଅଭ୍ଯାସ ପରୀକ୍ଷା ଲୋଡ୍ ହେଉଛି...</p>
-        </div>
-        <iframe 
-            id="writPracticeIframe"
-            src="" 
-            allow="clipboard-write"
-            style="display: none;">
-        </iframe>
-    </div>
-    <div class="assistant-info">
-        💡 ଏହା ଏକ ପ୍ରାକ୍ଟିକାଲ୍ ପରୀକ୍ଷା । ବିଷୟବସ୍ତୁ ସମ୍ବନ୍ଧୀୟ ବ୍ୟବହାରିକ ଜ୍ଞାନର ପରୀକ୍ଷା । 
-    </div>
-</div>               
-            <div id="testContainer"></div>
+
+
+ <div id="testContainer"></div>
 
 <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Three buttons side by side - FIXED -->
-    <div style="display: flex; justify-content: space-between; 
-                align-items: center; margin-bottom: 8px; 
-                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
+        display: inline-block;
+        padding: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 320px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
+
+    <!-- AUDIO PLAYER - Hidden by default -->
+<div id="audioDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎙️</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">ଆଲୋଚନା ଶୁଣନ୍ତୁ</p>
+    <audio id="audioPlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STLAC1A.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</div>
+        
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/IQ4nPXWm7xo?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">DEBATE ଶୁଣନ୍ତୁ</p>
+    <audio id="debatePlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STLAC1D.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    </div>
+</div>
+
+
+    <!-- Three buttons side by side - NOW BELOW the placeholder -->
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 16px;
+            width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
         
         <button id="audioToggleBtn" 
             onclick="toggleMedia('audio')"
@@ -2377,14 +2419,14 @@ body > div:first-child {
             ଆଲୋଚନା
         </button>
 
-        <button id="revisionToggleBtn"
-            onclick="toggleMedia('revision')"
+        <button id="debateToggleBtn"
+            onclick="toggleMedia('debate')"
             style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
                    color: white; border: none; border-radius: 8px;
                    padding: 8px 0; font-size: 12px; font-weight: bold;
                    cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
                    width: 100px; height: 36px; flex-shrink: 0;">
-            ରିଭିଜନ୍
+            ତର୍କ ବିତର୍କ
         </button>
 
         <button id="videoToggleBtn" 
@@ -2396,95 +2438,10 @@ body > div:first-child {
                    width: 100px; height: 36px; flex-shrink: 0;">
             ଭିଡିଓ
         </button>
-
     </div>
-
-    <!-- Media Placeholder - same size as logo -->
-<div id="mediaPlaceholder" style="
-    display: inline-block;
-    padding: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 320px;
-    position: relative;
-    overflow: hidden;
-">
-    <!-- DEFAULT: Logo Image -->
-    <div id="logoDisplay">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
-             alt="Logo" 
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
-    </div>
-
-    <!-- AUDIO PLAYER - Hidden by default -->
-    <div id="audioDisplay" style="display: none;">
-        <iframe
-            id="audioIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/K9f1KcAFalM?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- VIDEO PLAYER - Hidden by default -->
-    <div id="videoDisplay" style="display: none;">
-        <iframe
-            id="videoIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/LUpzKuIw7_M?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- REVISION WHITEBOARD - sibling of audio/video, same level -->
-    <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden;">
-        <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden; background: white;">
-        </div>
-    </div>
-
-</div>
-     
-    <p class="info-text" style="
-        margin-top: 15px;
-        font-size: 14px;
-        color: #000000;
-        font-weight: bold;
-    "></p>
 </div>
 
-          <!-- Add this after the Mermaid button section -->
-<button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
-    🏆 ଏଠାରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିବା ...
-</button> 
-           
+
 <!-- Dropdown Menu -->
 <div class="assistant-dropdown-wrapper">
     <button id="assistantDropdownBtn" class="assistant-dropdown-btn">
@@ -2662,7 +2619,11 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-
+function openCertificateFromExam() {
+    calculateCertificateScores();
+    loadStudentDetails();
+    document.getElementById('certificateModal').classList.add('active');
+}
 
 
 // =============================================
@@ -2757,7 +2718,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2842,125 +2803,133 @@ const wordData = {
             word: "LAW",
             odia: "ଆଇନ",
             emoji: "⚖️",
-            odiaUse: "ଆଇନ ମାନେ — ସରକାର ତିଆରି କରିଥିବା ନିୟମ, ଯାହା ଦେଶ ର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ । ମହିଳାଙ୍କୁ ଖରାପ ଦୃଷ୍ଟିରେ ଦେଖିବା କିମ୍ବା ଖରାପ ବ୍ୟବହାର କରିବା ଏକ ଦଣ୍ଡନୀୟ ଅପରାଧ - ଏହା ଏକ ଆଇନ । ଆଇନ ନ ମାନିଲେ ଆଇନ ରେ ଉଲ୍ଲେଖ ଥିବା ଦଣ୍ଡ ମିଳେ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            odiaUse: "ଆଇନ ଏକ ନିୟମ। ଏହା ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ। ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "RULE",
-            odia: "ନିୟମ",
-            emoji: "📋",
-            odiaUse: "ନିୟମ ମାନେ — ଯାହା ମାନି ଚଳିବାକୁ ହୁଏ । ସ୍କୁଲ କୁ ଠିକ୍ ସମୟ ରେ ଆସିବା - ଏହା ଏକ ନିୟମ । ରାସ୍ତାରେ ବାମ ପାର୍ଶ୍ଵ ରେ ଚାଲିବା - ଏହା ଏକ ନିୟମ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "CRIMINAL LAW",
+            odia: "ଫୌଜଦାରୀ ଆଇନ",
+            emoji: "🚔",
+            odiaUse: "ଚୋରି ଓ ହତ୍ୟା ଫୌଜଦାରୀ ଅପରାଧ। ଏହା ସମଗ୍ର ସମାଜ ବିରୁଦ୍ଧରେ ଅପରାଧ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ଦିଆଯାଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "COUNTRY",
-            odia: "ଦେଶ",
-            emoji: "🇮🇳",
-            odiaUse: "ଦେଶ ମାନେ — ଯେଉଁ ଭୂଖଣ୍ଡ ରେ ଆମେ ରହୁ, ଯାହାର ନିଜ ସରକାର ଓ ଆଇନ ଅଛି । ଆମ ଦେଶ ର ନାମ ଭାରତ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "CIVIL LAW",
+            odia: "ଦେୱାନୀ ଆଇନ",
+            emoji: "🏛️",
+            odiaUse: "ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବିବାଦ ସମାଧାନ କରେ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ନାହିଁ। ଅପରାଧୀ କ୍ଷତିପୂରଣ ଦେବାକୁ ବାଧ୍ୟ ହୁଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "GOVERNMENT",
-            odia: "ସରକାର",
-            emoji: "🏢",
-            odiaUse: "ସରକାର ହେଉଛି ଏକ ଆଇନ ଅନୁମୋଦିତ ସଂସ୍ଥା ଯାହା ଦେଶ ବା ରାଜ୍ଯକୁ ପରିଚାଳନା କରେ । ଏହି ସଂସ୍ଥା ନିର୍ବାଚିତ ପ୍ରତିନିଧିମାନଙ୍କ ଜରିଆରେ ପରିଚାଳିତ ହୁଏ । ଯଦି ସରକାର ଦେଶ ବା ରାଜ୍ଯକୁ ସଠିକ୍ ରୂପେ ପରିଚାଳନା ନ କରନ୍ତି, ତେବେ ନାଗରିକମାନେ ଭୋଟ ଦ୍ଵାରା ସରକାର ପରିବର୍ତ୍ତନ କରିପାରନ୍ତି ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "DEMOCRACY",
-            odia: "ଗଣତନ୍ତ୍ର",
-            emoji: "🗳️",
-            odiaUse: "ଗଣତନ୍ତ୍ର ହେଉଛି ଏକ ଶାସନ ବ୍ୟବସ୍ଥା । ଏହି ବ୍ୟବସ୍ଥା ଅନୁସାରେ ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ସରକାର ନିଜେ ବାଛନ୍ତି । ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ଦେଶ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "VOTE",
-            odia: "ଭୋଟ",
-            emoji: "☑️",
-            odiaUse: "ଭୋଟ ର ଅର୍ଥ ହେଉଛି ମତଦାନ କରିବା । ନିଜ ପସନ୍ଦ ର ନେତା ବାଛିବା ପାଇଁ ଏହି ମତ ଦାନ କରାଯାଏ । ଏହି ମତ ଅତ୍ୟନ୍ତ ଗୁପ୍ତ ଭାବେ ନିର୍ଦ୍ଧାରିତ ତାରିଖରେ, ନିର୍ଦ୍ଧାରିତ ସମୟରେ ଏବଂ ନିର୍ଦ୍ଧାରିତ ସ୍ଥାନରେ ପ୍ରଦାନ କରାଯାଏ ।  । ୧୮ ବର୍ଷ ବୟସ୍କ ପ୍ରତ୍ୟେକ ଭାରତୀୟ ଭୋଟ ଦେଇ ପାରିବେ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "CITIZEN",
-            odia: "ନାଗରିକ",
-            emoji: "🧑",
-            odiaUse: "ନାଗରିକ ର ଅର୍ଥ ହେଉଛି କୌଣସି ଦେଶ ର ସଦସ୍ୟ । ଭାରତ ରେ ଜନ୍ମ ନେଇଥିଲେ ତୁମେ ଭାରତ ର ନାଗରିକ । ନାଗରିକଙ୍କର ଭୋଟ ଦେବାର ଅଧିକାର ଅଛି ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "CONSTITUTIONAL LAW",
+            odia: "ସାମ୍ବିଧାନିକ ଆଇନ",
+            emoji: "📜",
+            odiaUse: "ଏହା ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ରକ୍ଷା କରେ। ଅନ୍ୟ ସମସ୍ତ ଆଇନ ଏହା ସହ ମେଳ ଖାଇବା ଆବଶ୍ୟକ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
             word: "CONSTITUTION",
-            odia: "ସଂବିଧାନ",
-            emoji: "📜",
-            odiaUse: "ସଂବିଧାନ ହେଉଛି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସର୍ବୋଚ୍ଚ ଆଇନ ପୁସ୍ତକ । ଏଥିରେ ସରକାରଙ୍କ ଗଠନ ପ୍ରଣାଳୀ, କ୍ଷମତାର ବଣ୍ଟନ ଏବଂ ନାଗରିକମାନଙ୍କ ମୌଳିକ ଅଧିକାର ଇତ୍ୟାଦି ଉଲ୍ଲେଖ ଥାଏ । ଅନ୍ୟ ସମସ୍ତ ଆଇନ ଏହି ପୁସ୍ତକ ଅନୁଯାୟୀ ତିଆରି ହୁଏ ଏବଂ ପରିଚାଳିତ ହୁଏ । ଭାରତ ର ସଂବିଧାନ ଆନୁଷ୍ଠାନିକ ଭାବରେ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ କାର୍ଯ୍ୟକାରୀ ହୋଇଥିଲା, ଯେଉଁଦିନ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ରୂପେ ପରିଗଣିତ ହେଲା । ଭାରତ ର ସଂବିଧାନ ଅନୁସାରେ ସଂପୂର୍ଣ୍ଣ ଦେଶ, ଏହାର ସମସ୍ତ ରାଜ୍ୟ ଏବଂ ଜନତା ପରିଚାଳିତ ହୁଅନ୍ତି । ",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            odia: "ସମ୍ବିଧାନ",
+            emoji: "🇮🇳",
+            odiaUse: "ଭାରତର ସମ୍ବିଧାନ ବିଶ୍ୱର ସବୁଠୁ ବଡ଼ ଲିଖିତ ସମ୍ବିଧାନ। ଏହା ୧୯୫୦ ମସିହା ଜାନୁଆରୀ ୨୬ ତାରିଖରେ ଲାଗୁ ହୋଇଥିଲା। ଏହା ଦେଶର ସମସ୍ତ ଆଇନର ଆଧାର।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "REPUBLIC",
-            odia: "ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର",
-            emoji: "🏛️",
-            odiaUse: "ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ହେଉଛି ଏକ ଦେଶ ଯାହାର ରାଷ୍ଟ୍ରପତି ଜନସାଧାରଣଙ୍କ ଦ୍ୱାରା ନିର୍ବାଚିତ ହୁଅନ୍ତି । ଭାରତ ର ରାଷ୍ଟ୍ରପତି ଭାରତ ର ଜନସାଧାରଣଙ୍କ ଦ୍ୱାରା ପରୋକ୍ଷ ଭାବେ ନିର୍ବାଚିତ ହୁଅନ୍ତି । ତେଣୁ ଭରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ଅଟେ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "FUNDAMENTAL RIGHTS",
+            odia: "ମୌଳିକ ଅଧିକାର",
+            emoji: "✊",
+            odiaUse: "ମୌଳିକ ଅଧିକାର ସମ୍ବିଧାନ ଦ୍ୱାରା ସୁରକ୍ଷିତ। ଏହା ପ୍ରତ୍ୟେକ ନାଗରିକ ପାଇଁ ଆବଶ୍ୟକ। ସରକାର ଏହି ଅଧିକାର କାড়ି ନ ପାରିବ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "JUSTICE",
-            odia: "ନ୍ୟାୟ",
-            emoji: "🏛️",
-            odiaUse: "ନ୍ୟାୟ ହେଉଛି ଏକ ସଠିକ ଫୈସଲା ବା ନିର୍ଣ୍ଣୟ ବା ନିରପେକ୍ଷତାର ନୀତି । ଏହା ନିଶ୍ଚିତ କରେ ଯେ ପ୍ରତ୍ୟେକ ବ୍ୟକ୍ତି ଯାହା ପାଇବାର ଯୋଗ୍ୟ ତାହା ପାଆନ୍ତି । ଆଦାଲତ ନ୍ୟାୟ ଦିଏ । ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ କାର୍ଯ୍ୟ କରେ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "CRIMINAL",
+            odia: "ଅପରାଧୀ",
+            emoji: "🚫",
+            odiaUse: "ଯିଏ ଆଇନ ଭାଙ୍ଗେ ତାକୁ ଅପରାଧୀ କୁହାଯାଏ। ଅପରାଧୀ ସମାଜ ପାଇଁ ବିପଦ। ଅପରାଧୀ ଆଇନ ଅନୁଯାୟୀ ଦଣ୍ଡ ପାଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "LEADER",
-            odia: "ନେତା",
-            emoji: "🙋",
-            odiaUse: "ନେତା ର ଅର୍ଥ ହେଉଛି ଜଣେ ବ୍ୟକ୍ତି  —  ଯିଏ ଏକ ସାଧାରଣ ଲକ୍ଷ୍ୟ ହାସଲ କରିବା ପାଇଁ ଅନ୍ୟମାନଙ୍କୁ ମାର୍ଗଦର୍ଶନ କରନ୍ତି, ପ୍ରେରଣା ଦିଅନ୍ତି ଏବଂ ପ୍ରଭାବିତ କରନ୍ତି। । ନେତା ଭଲ ହେଲେ ଗ୍ରାମ ଓ ଦେଶ ଭଲ ହୁଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "REPUBLIC DAY",
+            odia: "ସାଧାରଣତନ୍ତ୍ର ଦିବସ",
+            emoji: "🎉",
+            odiaUse: "ଜାନୁଆରୀ ୨୬ ତାରିଖ ସାଧାରଣତନ୍ତ୍ର ଦିବସ। ସେଦିନ ଭାରତର ସମ୍ବିଧାନ ଲାଗୁ ହୋଇଥିଲା। ଆମେ ଏହାକୁ ଉତ୍ସବ ଭାବେ ପାଳନ କରୁ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+        },
+        {
+            word: "CONSTITUTION DAY",
+            odia: "ସମ୍ବିଧାନ ଦିବସ",
+            emoji: "📅",
+            odiaUse: "ନଭେମ୍ବର ୨୬ ତାରିଖ ସମ୍ବିଧାନ ଦିବସ। ସେଦିନ ଭାରତର ସମ୍ବିଧାନ ଗ୍ରହଣ ହୋଇଥିଲା। ଆମେ ଏହି ଦିନ ସ୍ମରଣ କରୁ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+        },
+        {
+            word: "DR. B.R. AMBEDKAR",
+            odia: "ଡ. ବି.ଆର. ଆମ୍ବେଦକର",
+            emoji: "🎓",
+            odiaUse: "ଡ. ଆମ୍ବେଦକର ଭାରତୀୟ ସମ୍ବିଧାନର ଜନକ। ତାଙ୍କ ନେତୃତ୍ୱରେ ସମ୍ବିଧାନ ରଚନା ହୋଇଥିଲା। ସେ ଦେଶ ପାଇଁ ଏକ ମହାନ ଯୋଗଦାନ ଦେଇଛନ୍ତି।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         }
     ]
 };
+    
+const topicsData = [
+    {
+        heading: "Topic-1: ଆଇନ କ'ଣ",
+        audioPoints: [
+            {
+                text: "👉 ଆଇନ ଏକ ନିୟମ। ଦେଶର ସମସ୍ତ ମଣିଷ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ। ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ। ଆଇନ ଆମ ଅଧିକାର ରକ୍ଷା କରେ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଆଇନ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଆଇନ ଏକ ନିୟମ। ଦେଶର ସମସ୍ତ ମଣିଷ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ। ଆଇନ ଆମ ଅଧିକାର ରକ୍ଷା କରେ।",
+
+            "<span style='color: red;'>Q-2:</span> ଆଇନ ଭାଙ୍ଗିଲେ କ'ଣ ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ଯିଏ ଆଇନ ଭାଙ୍ଗେ ତାକୁ ଅପରାଧୀ କୁହାଯାଏ। ଅପରାଧୀ ଦଣ୍ଡ ପାଏ। ଆଇନ ଭାଙ୍ଗିବା ଅନ୍ୟାୟ।",
+
+            "<span style='color: red;'>Q-3:</span> ଆଇନ ନ ଥିଲେ କ'ଣ ହୋଇଥାନ୍ତା?<br><br><span style='color: green;'>Answer:</span> ଆଇନ ନ ଥିଲେ ଦୁନିଆରେ ଅଶାନ୍ତି ହୋଇଯାଆନ୍ତା। ଲୋକ ନିରାପଦ ରହି ପାରନ୍ତେ ନାହିଁ। ଅଧିକାର ରକ୍ଷା ହୋଇ ପାରନ୍ତେ ନାହିଁ।",
+
+            "<span style='color: red;'>Q-4:</span> ଆଇନ ମାନ୍ୟକାରୀ ବ୍ୟକ୍ତି କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> ଯିଏ ଆଇନ ପାଳନ କରେ ତାକୁ ଆଇନ ମାନ୍ୟକାରୀ ବ୍ୟକ୍ତି କୁହାଯାଏ। ଇଂରାଜୀରେ ଏହାକୁ LAW ABIDING PERSON କୁହନ୍ତି। ଆଇନ ମାନ୍ୟକାରୀ ବ୍ୟକ୍ତି ସମାଜ ପାଇଁ ଭଲ।"
+        ]
+    },
+
+    {
+        heading: "Topic-2: ଆଇନର ପ୍ରକାର",
+        audioPoints: [
+            {
+                text: "👉 ଆଇନ ଅନେକ ପ୍ରକାରର। ଫୌଜଦାରୀ ଆଇନ ଚୋରି ଓ ହତ୍ୟା ଆଦି ଅପରାଧ ଦେଖାଶୁଣା କରେ। ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବିବାଦ ସମାଧାନ କରେ। ସାମ୍ବିଧାନିକ ଆଇନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଫୌଜଦାରୀ ଆଇନ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଫୌଜଦାରୀ ଆଇନ ଚୋରି ଓ ହତ୍ୟା ଆଦି ଅପରାଧ ଦେଖାଶୁଣା କରେ। ଏହା ସମଗ୍ର ସମାଜ ବିରୁଦ୍ଧରେ ଅପରାଧ ବୋଲି ଗ୍ରହଣ ହୁଏ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ଦିଆଯାଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ଦେୱାନୀ ଆଇନ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବ୍ୟକ୍ତିଗତ ବିବାଦ ସମାଧାନ କରେ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ନାହିଁ। ଅପରାଧୀ କ୍ଷତିପୂରଣ ଦେବାକୁ ବାଧ୍ୟ ହୁଏ।",
+
+            "<span style='color: red;'>Q-3:</span> ଫୌଜଦାରୀ ଆଇନ ଓ ଦେୱାନୀ ଆଇନ ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଫୌଜଦାରୀ ଆଇନରେ ଜେଲ ଦଣ୍ଡ ଦିଆଯାଏ। ଦେୱାନୀ ଆଇନରେ କ୍ଷତିପୂରଣ ଦିଆଯାଏ। ଫୌଜଦାରୀ ଅପରାଧ ସମାଜ ବିରୁଦ୍ଧ।",
+
+            "<span style='color: red;'>Q-4:</span> ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ ଉଦାହରଣ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଘରମାଲିକ ଓ ଭଡ଼ାଟିଆ ବିବାଦ ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ। ଛାଡ଼ପତ୍ର ଓ ସମ୍ପତ୍ତି ବିବାଦ ମଧ୍ୟ ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ନ ଦେଇ କ୍ଷତିପୂରଣ ଦିଆଯାଏ।"
+        ]
+    },
+
+    {
+        heading: "Topic-3: ଭାରତର ସମ୍ବିଧାନ",
+        audioPoints: [
+            {
+                text: "👉 ଭାରତର ସମ୍ବିଧାନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ୧୯୪୯ ମସିହା ନଭେମ୍ବର ୨୬ ତାରିଖରେ ଗୃହୀତ ହୋଇଥିଲା। ଏହା ୧୯୫୦ ମସିହା ଜାନୁଆରୀ ୨୬ ତାରିଖରେ ଲାଗୁ ହୋଇଥିଲା। ଡ. ବି.ଆର. ଆମ୍ବେଦକର ଏହାର ଜନକ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଭାରତର ସମ୍ବିଧାନ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଭାରତର ସମ୍ବିଧାନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହାକୁ Supreme Law of India କୁହାଯାଏ। ଦେଶର ଶାସନ ବ୍ୟବସ୍ଥା ଏହା ଉପରେ ଆଧାରିତ।",
+
+            "<span style='color: red;'>Q-2:</span> ଭାରତର ସମ୍ବିଧାନ କେବେ ଲାଗୁ ହୋଇଥିଲା?<br><br><span style='color: green;'>Answer:</span> ଭାରତର ସମ୍ବିଧାନ ୧୯୫୦ ମସିହା ଜାନୁଆରୀ ୨୬ ତାରିଖରେ ଲାଗୁ ହୋଇଥିଲା। ସେହି ଦିନ ଆମେ ସାଧାରଣତନ୍ତ୍ର ଦିବସ ପାଳନ କରୁ। ଏହି ଦିନ ଭାରତ ଇତିହାସରେ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ।",
+
+            "<span style='color: red;'>Q-3:</span> ସମ୍ବିଧାନ ଦିବସ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ନଭେମ୍ବର ୨୬ ତାରିଖ ସମ୍ବିଧାନ ଦିବସ। ସେଦିନ ଭାରତର ସମ୍ବିଧାନ ଗୃହୀତ ହୋଇଥିଲା। ଆମେ ଏହି ଦିନ ସ୍ମରଣ ଓ ଉଦ୍‌ଯାପନ କରୁ।",
+
+            "<span style='color: red;'>Q-4:</span> ଭାରତୀୟ ସମ୍ବିଧାନର ଜନକ କିଏ?<br><br><span style='color: green;'>Answer:</span> ଡ. ବି.ଆର. ଆମ୍ବେଦକର ଭାରତୀୟ ସମ୍ବିଧାନର ଜନକ। ତାଙ୍କ ନେତୃତ୍ୱରେ ସମ୍ବିଧାନ ରଚନା ହୋଇଥିଲା। ଦେଶ ପ୍ରତି ତାଙ୍କ ଯୋଗଦାନ ଅତୁଳନୀୟ।"
+        ]
+    }
+];
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -3029,309 +2998,279 @@ const courseData = {
 </div>
   `, 
     audio: "",
-    mermaid: `graph LR
-A["🏛️ ନାଗରିକ ଶାସ୍ତ୍ର<br/>CIVICS"]
- 
-A --> B["ମୁଖ୍ୟ କଥା"]
-B --> C["ଆଇନ, ଗଣତନ୍ତ୍ର ଓ ସଂବିଧାନ<br/>ବିଷୟ ରେ ଆମ ନିମ୍ନଲିଖିତ<br/>ବିଷୟ ଗୁଡ଼ିକ ଜାଣିବା :"]
- 
-A --> D["LAW ⚖️"]
-D --> E["ଆଇନ ମାନେ — ସରକାର ତିଆରି କରିଥିବା ନିୟମ,<br/>ଯାହା ଦେଶ ର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ ।<br/>ମହିଳାଙ୍କୁ ଖରାପ ଦୃଷ୍ଟିରେ ଦେଖିବା କିମ୍ବା<br/>ଖରାପ ବ୍ୟବହାର କରିବା ଏକ ଦଣ୍ଡନୀୟ ଅପରାଧ ।<br/>ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ ।"]
+mermaid: `graph LR
+A["⚖️ ଆଇନ ସଚେତନତା ଶିକ୍ଷା<br/>ଆଇନ, ପ୍ରକାର ଓ ସମ୍ବିଧାନ"]
 
-A --> D2["RULE 📋"]
-D2 --> E2["ନିୟମ ମାନେ — ଯାହା ମାନି ଚଳିବାକୁ ହୁଏ ।<br/>ସ୍କୁଲ କୁ ଠିକ୍ ସମୟ ରେ ଆସିବା - ଏହା ଏକ ନିୟମ ।<br/>ରାସ୍ତାରେ ବାମ ପାର୍ଶ୍ଵ ରେ ଚାଲିବା - ଏହା ଏକ ନିୟମ ।"]
+A --> B["ମୁଖ୍ୟ ବିଷୟ"]
+B --> C["ଆଇନ କ'ଣ, ଆଇନର ପ୍ରକାର<br/>ଓ ଭାରତର ସମ୍ବିଧାନ<br/>ବିଷୟରେ ଜାଣିବା"]
 
-A --> D3["COUNTRY 🇮🇳"]
-D3 --> E3["ଦେଶ ମାନେ — ଯେଉଁ ଭୂଖଣ୍ଡ ରେ ଆମେ ରହୁ,<br/>ଯାହାର ନିଜ ସରକାର ଓ ଆଇନ ଅଛି ।<br/>ଆମ ଦେଶ ର ନାମ ଭାରତ ।"]
+A --> D["ଆଇନ କ'ଣ 📖"]
+D --> E["ଆଇନ ଏକ ନିୟମ ଯାହା<br/>ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ।<br/>ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ।<br/>ଆଇନ ଆମ ଅଧିକାର ରକ୍ଷା କରେ।<br/>ନିୟମ ଭାଙ୍ଗିଲେ ଅପରାଧୀ କୁହାଯାଏ।"]
 
-A --> D4["GOVERNMENT 🏢"]
-D4 --> E4["ସରକାର ହେଉଛି ଏକ ଆଇନ ଅନୁମୋଦିତ ସଂସ୍ଥା<br/>ଯାହା ଦେଶ ବା ରାଜ୍ଯକୁ ପରିଚାଳନା କରେ ।<br/>ନିର୍ବାଚିତ ପ୍ରତିନିଧିମାନଙ୍କ ଜରିଆରେ ପରିଚାଳିତ ହୁଏ ।<br/>ନାଗରିକମାନେ ଭୋଟ ଦ୍ଵାରା ସରକାର ପରିବର୍ତ୍ତନ କରିପାରନ୍ତି ।"]
+A --> D2["ଫୌଜଦାରୀ ଆଇନ 🔴"]
+D2 --> E2["ଅନ୍ୟକୁ କ୍ଷତି ପହଞ୍ଚାଇଲେ ଲାଗୁ ହୁଏ।<br/>ଯଥା — ଚୋରି, ମାରପିଟ, ହତ୍ୟା।<br/>ଏହା ସମଗ୍ର ସମାଜ ବିରୁଦ୍ଧ ଅପରାଧ।<br/>ଜେଲ ଦଣ୍ଡ ଓ ଜରିମାନା ହୁଏ।"]
 
-A --> F["DEMOCRACY 🗳️"]
-F --> G["ଗଣତନ୍ତ୍ର ହେଉଛି ଏକ ଶାସନ ବ୍ୟବସ୍ଥା ।<br/>ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ସରକାର ନିଜେ ବାଛନ୍ତି ।<br/>ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ଦେଶ ।"]
+A --> D3["ଦେୱାନୀ ଆଇନ 🔵"]
+D3 --> E3["ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବ୍ୟକ୍ତିଗତ ବିବାଦ।<br/>ଯଥା — ଭଡ଼ା ବିବାଦ, ଛାଡ଼ପତ୍ର,<br/>ଉତ୍ତରାଧିକାରୀ ସମ୍ପତ୍ତି।<br/>ଜେଲ ନୁହେଁ, କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।"]
 
-A --> J["VOTE ☑️"]
-J --> K["ଭୋଟ ର ଅର୍ଥ ହେଉଛି ମତଦାନ କରିବା ।<br/>ନିଜ ପସନ୍ଦ ର ନେତା ବାଛିବା ପାଇଁ ଏହି ମତ ଦାନ କରାଯାଏ ।<br/>ଏହି ମତ ଅତ୍ୟନ୍ତ ଗୁପ୍ତ ଭାବେ ନିର୍ଦ୍ଧାରିତ ତାରିଖରେ,<br/>ନିର୍ଦ୍ଧାରିତ ସ୍ଥାନରେ ପ୍ରଦାନ କରାଯାଏ ।<br/>୧୮ ବର୍ଷ ବୟସ୍କ ପ୍ରତ୍ୟେକ ଭାରତୀୟ ଭୋଟ ଦେଇ ପାରିବେ ।"]
+A --> D4["ସାମ୍ବିଧାନିକ ଆଇନ 🟢"]
+D4 --> E4["ଏହା ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ।<br/>ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ରଖେ।<br/>ସରକାରଙ୍କ କ୍ଷମତା ସ୍ପଷ୍ଟ କରେ।<br/>ଅନ୍ୟ ଆଇନ ଏହା ସହ ମେଳ ଖାଇବା ଦରକାର।"]
 
-A --> L["CITIZEN 🧑"]
-L --> M["ନାଗରିକ ର ଅର୍ଥ ହେଉଛି କୌଣସି ଦେଶ ର ସଦସ୍ୟ ।<br/>ଭାରତ ରେ ଜନ୍ମ ନେଇଥିଲେ ତୁମେ ଭାରତ ର ନାଗରିକ ।<br/>ନାଗରିକଙ୍କର ଭୋଟ ଦେବାର ଅଧିକାର ଅଛି ।"]
+A --> F["ଭାରତର ସମ୍ବିଧାନ 🇮🇳"]
+F --> G["ବିଶ୍ୱର ସବୁଠୁ ବଡ଼ ଲିଖିତ ସମ୍ବିଧାନ।<br/>୨୬ ନଭେମ୍ବର ୧୯୪୯ ରେ ଗୃହୀତ।<br/>୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ।<br/>ଡ. ଆମ୍ବେଦକର ଏହାର ଜନକ।"]
 
-A --> H["CONSTITUTION 📜"]
-H --> I["ସଂବିଧାନ ହେଉଛି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସର୍ବୋଚ୍ଚ ଆଇନ ପୁସ୍ତକ ।<br/>ଏଥିରେ ସରକାରଙ୍କ ଗଠନ ପ୍ରଣାଳୀ, କ୍ଷମତାର ବଣ୍ଟନ<br/>ଏବଂ ନାଗରିକମାନଙ୍କ ମୌଳିକ ଅଧିକାର ଉଲ୍ଲେଖ ଥାଏ ।<br/>ଭାରତ ର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ କାର୍ଯ୍ୟକାରୀ ହୋଇଥିଲା ।"]
+A --> H["ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଦିନ 📅"]
+H --> I["ନଭେମ୍ବର ୨୬ — ସମ୍ବିଧାନ ଦିବସ।<br/>ଜାନୁଆରୀ ୨୬ — ସାଧାରଣତନ୍ତ୍ର ଦିବସ।"]
 
-A --> R["REPUBLIC 🏛️"]
-R --> S["ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ହେଉଛି ଏକ ଦେଶ<br/>ଯାହାର ରାଷ୍ଟ୍ରପତି ଜନସାଧାରଣଙ୍କ ଦ୍ୱାରା ନିର୍ବାଚିତ ହୁଅନ୍ତି ।<br/>ଭାରତ ର ରାଷ୍ଟ୍ରପତି ପରୋକ୍ଷ ଭାବେ ନିର୍ବାଚିତ ହୁଅନ୍ତି ।<br/>ତେଣୁ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ଅଟେ ।"]
+A --> J["ଆଇନ ଲଙ୍ଘନ ଓ ପାଳନ 💡"]
+J --> K["ଆଇନ ଭାଙ୍ଗିଲେ ଅପରାଧୀ।<br/>ଆଇନ ମାନିଲେ LAW ABIDING PERSON।<br/>ଆଇନ ବିନା ଅଶାନ୍ତି ହୋଇଯାଆନ୍ତା।"]
 
-A --> N["JUSTICE 🏛️"]
-N --> O["ନ୍ୟାୟ ହେଉଛି ଏକ ସଠିକ ଫୈସଲା ବା ନିରପେକ୍ଷତାର ନୀତି ।<br/>ଏହା ନିଶ୍ଚିତ କରେ ଯେ ପ୍ରତ୍ୟେକ ବ୍ୟକ୍ତି<br/>ଯାହା ପାଇବାର ଯୋଗ୍ୟ ତାହା ପାଆନ୍ତି ।<br/>ଆଦାଲତ ନ୍ୟାୟ ଦିଏ । ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ କାର୍ଯ୍ୟ କରେ ।"]
+A --> L["ଉଦାହରଣ 📖"]
+L --> M["ଚୋରି = ଫୌଜଦାରୀ ଆଇନ।<br/>ଭଡ଼ା ବିବାଦ = ଦେୱାନୀ ଆଇନ।<br/>ମୌଳିକ ଅଧିକାର = ସାମ୍ବିଧାନିକ ଆଇନ।"]
 
-A --> D5["LEADER 🙋"]
-D5 --> E5["ନେତା ର ଅର୍ଥ ହେଉଛି ଜଣେ ବ୍ୟକ୍ତି —<br/>ଯିଏ ଏକ ସାଧାରଣ ଲକ୍ଷ୍ୟ ହାସଲ କରିବା ପାଇଁ<br/>ଅନ୍ୟମାନଙ୍କୁ ମାର୍ଗଦର୍ଶନ କରନ୍ତି, ପ୍ରେରଣା ଦିଅନ୍ତି ।<br/>ନେତା ଭଲ ହେଲେ ଗ୍ରାମ ଓ ଦେଶ ଭଲ ହୁଏ ।"]
+style A fill:#0369a1,stroke:#0c4a6e,color:#fff
+style B fill:#e0f2fe,stroke:#0369a1
+style D fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D2 fill:#dc2626,stroke:#7f1d1d,color:#fff
+style D3 fill:#2563eb,stroke:#1e3a8a,color:#fff
+style D4 fill:#059669,stroke:#064e3b,color:#fff
+style F fill:#b45309,stroke:#78350f,color:#fff
+style H fill:#0891b2,stroke:#164e63,color:#fff
+style J fill:#d97706,stroke:#92400e,color:#fff
+style L fill:#7c3aed,stroke:#4c1d95,color:#fff
+style C fill:#e0f2fe,stroke:#0369a1
+style E fill:#ede9fe,stroke:#7c3aed
+style E2 fill:#fee2e2,stroke:#dc2626
+style E3 fill:#dbeafe,stroke:#2563eb
+style E4 fill:#d1fae5,stroke:#059669
+style G fill:#fef3c7,stroke:#b45309
+style I fill:#cffafe,stroke:#0891b2
+style K fill:#fef9c3,stroke:#d97706
+style M fill:#ede9fe,stroke:#7c3aed`,
 
-style A fill:#3b82f6,stroke:#1e40af,color:#fff
-style B fill:#dbeafe,stroke:#3b82f6
-style D fill:#10b981,stroke:#059669,color:#fff
-style D2 fill:#10b981,stroke:#059669,color:#fff
-style D3 fill:#10b981,stroke:#059669,color:#fff
-style D4 fill:#10b981,stroke:#059669,color:#fff
-style F fill:#f59e0b,stroke:#d97706,color:#fff
-style H fill:#ef4444,stroke:#b91c1c,color:#fff
-style J fill:#ec4899,stroke:#be185d,color:#fff
-style L fill:#8b5cf6,stroke:#6d28d9,color:#fff
-style R fill:#06b6d4,stroke:#0e7490,color:#fff
-style N fill:#14b8a6,stroke:#0f766e,color:#fff
-style D5 fill:#f97316,stroke:#c2410c,color:#fff
-style C fill:#dbeafe,stroke:#3b82f6
-style E fill:#d1fae5,stroke:#10b981
-style E2 fill:#d1fae5,stroke:#10b981
-style E3 fill:#d1fae5,stroke:#10b981
-style E4 fill:#d1fae5,stroke:#10b981
-style G fill:#fef3c7,stroke:#f59e0b
-style I fill:#fee2e2,stroke:#ef4444
-style K fill:#fce7f3,stroke:#ec4899
-style M fill:#ede9fe,stroke:#8b5cf6
-style S fill:#cffafe,stroke:#06b6d4
-style O fill:#ccfbf1,stroke:#14b8a6
-style E5 fill:#ffedd5,stroke:#f97316`,
- 
     mcq: {
         questions: [
             {
-                question: "ଆଇନ ମାନେ କ'ଣ ?",
+                question: "ଆଇନ କ'ଣ?",
                 options: [
-                    "ଭୋଟ ଦେଉଥିବା ମତ",
-                    "ସରକାର ତିଆରି କରିଥିବା ନିୟମ",
-                    "ସଂବିଧାନ ଲେଖାଯିବା",
-                    "ନେତା ବାଛିବା"
+                    "ଏକ ଅଭ୍ୟାସ ଯାହା ଆମେ ଇଚ୍ଛାନୁଯାୟୀ ମାନୁ",
+                    "ଏକ ନିୟମ ଯାହା ଦେଶର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ",
+                    "ଏକ ପ୍ରଥା ଯାହା କେବଳ ବଡ଼ ଲୋକ ପାଳନ କରନ୍ତି",
+                    "ଏକ ନିୟମ ଯାହା କେବଳ ଅପରାଧୀ ପାଇଁ"
                 ],
                 correct: 1
             },
             {
-                question: "ଭାରତ ର ସଂବିଧାନ କେଉଁ ଦିନ ଲାଗୁ ହୋଇଥିଲା ?",
+                question: "ଫୌଜଦାରୀ ଆଇନ (Criminal Law) ଅନ୍ତର୍ଗତ କ'ଣ ପଡ଼େ?",
                 options: [
-                    "୧୫ ଅଗଷ୍ଟ ୧୯୪୭",
-                    "୨ ଅକ୍ଟୋବର ୧୯୪୮",
+                    "ଭଡ଼ା ବିବାଦ ଓ ଛାଡ଼ପତ୍ର",
+                    "ଚୋରି, ମାରପିଟ ଓ ହତ୍ୟା",
+                    "ଉତ୍ତରାଧିକାରୀ ସମ୍ପତ୍ତି",
+                    "ସରକାରଙ୍କ କ୍ଷମତା"
+                ],
+                correct: 1
+            },
+            {
+                question: "ଭାରତର ସମ୍ବିଧାନ କେବେ ଗୃହୀତ ହୋଇଥିଲା?",
+                options: [
                     "୨୬ ଜାନୁଆରୀ ୧୯୫୦",
-                    "୧୪ ନଭେମ୍ବର ୧୯୪୯"
+                    "୧୫ ଅଗଷ୍ଟ ୧୯୪୭",
+                    "୨୬ ନଭେମ୍ବର ୧୯୪୯",
+                    "୨ ଅକ୍ଟୋବର ୧୯୪୮"
                 ],
                 correct: 2
             },
             {
-                question: "ଭାରତ ରେ ଭୋଟ ଦେବାର ବୟସ ସୀମା କ'ଣ ?",
+                question: "ଦେୱାନୀ ଆଇନ (Civil Law) ରେ ଦୋଷୀ ବ୍ୟକ୍ତିକୁ କ'ଣ ଦିଆଯାଏ?",
                 options: [
-                    "୧୬ ବର୍ଷ",
-                    "୧୮ ବର୍ଷ",
-                    "୨୧ ବର୍ଷ",
-                    "୨୫ ବର୍ଷ"
+                    "ଜେଲ ଦଣ୍ଡ",
+                    "ଫାଶି",
+                    "କ୍ଷତିପୂରଣ",
+                    "ଦୁଇଟି ମଧ୍ୟରୁ କୋଡ଼ିଏ"
                 ],
-                correct: 1
+                correct: 2
             },
             {
-                question: "ସଂବିଧାନ ର ଜନକ କିଏ ?",
+                question: "ଭାରତୀୟ ସମ୍ବିଧାନର ଜନକ କାହାକୁ କୁହାଯାଏ?",
                 options: [
                     "ମହାତ୍ମା ଗାନ୍ଧୀ",
-                    "ଜବାହରଲାଲ ନେହେରୁ",
-                    "ସର୍ଦ୍ଦାର ପଟେଲ",
-                    "ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର"
+                    "ଜବାହରଲାଲ ନେହରୁ",
+                    "ସୁଭାଷ ଚନ୍ଦ୍ର ବୋଷ",
+                    "ଡ. ବି.ଆର. ଆମ୍ବେଦକର"
                 ],
                 correct: 3
-            },
-            {
-                question: "ଗଣତନ୍ତ୍ର ମାନେ କ'ଣ ?",
-                options: [
-                    "ରାଜା ଶାସନ କରେ",
-                    "ଆଇନ ତିଆରି କରିବା",
-                    "ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ସରକାର ନିଜେ ବାଛନ୍ତି",
-                    "ସଂବିଧାନ ଲେଖିବା"
-                ],
-                correct: 2
             }
         ]
     },
- 
+
     trueFalse: {
         questions: [
             {
-                question: "ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ ।",
+                question: "ଆଇନ ନଥିଲେ ଦୁନିଆରେ ଅଶାନ୍ତି ହୋଇଯାଆନ୍ତା।",
                 correct: true
             },
             {
-                question: "ଭାରତ ରେ କେବଳ ଧନୀ ଲୋକ ଭୋଟ ଦେଇ ପାରିବ ।",
+                question: "ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ ଦୋଷୀ ବ୍ୟକ୍ତିକୁ ଜେଲ ଦଣ୍ଡ ମିଳେ।",
                 correct: false
             },
             {
-                question: "ସଂବିଧାନ ହେଉଛି ଭାରତ ର ସବୁ ଠାରୁ ବଡ ଆଇନ ର ପୁସ୍ତକ ।",
+                question: "ଭାରତର ସମ୍ବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ ହୋଇଥିଲା।",
                 correct: true
             },
             {
-                question: "ଭାରତ ର ସଂବିଧାନ ୧୫ ଅଗଷ୍ଟ ୧୯୪୭ ରେ ଲାଗୁ ହୋଇଥିଲା ।",
+                question: "ଫୌଜଦାରୀ ଅପରାଧ କେବଳ ଜଣେ ବ୍ୟକ୍ତି ବିରୁଦ୍ଧ ଅପରାଧ।",
                 correct: false
             },
             {
-                question: "ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର ଆମ ସଂବିଧାନ ର ଜନକ ।",
+                question: "ଭାରତର ସମ୍ବିଧାନ ବିଶ୍ୱର ସବୁଠୁ ବଡ଼ ଲିଖିତ ସମ୍ବିଧାନ।",
                 correct: true
             }
         ]
     },
- 
+
     fillBlanks: {
         questions: [
             {
-                question: "ଆଇନ ମାନେ ସରକାର ତିଆରି କରିଥିବା ___ । (ନିୟମ / ଭୋଟ)",
-                answer: "ନିୟମ"
+                question: "ଆଇନ ଭାଙ୍ଗୁଥିବା ବ୍ୟକ୍ତିକୁ ___ କୁହାଯାଏ। (ଅପରାଧୀ / ନ୍ୟାୟକର୍ତ୍ତା)",
+                answer: "ଅପରାଧୀ"
             },
             {
-                question: "ଭାରତ ଏ ଟି ___ ଦେଶ । (ଗଣତାନ୍ତ୍ରିକ / ରାଜତାନ୍ତ୍ରିକ)",
-                answer: "ଗଣତାନ୍ତ୍ରିକ"
+                question: "ଭାରତର ସମ୍ବିଧାନ ___ ରେ ଗୃହୀତ ହୋଇଥିଲା। (୨୬ ନଭେମ୍ବର ୧୯୪୯ / ୨୬ ଜାନୁଆରୀ ୧୯୫୦)",
+                answer: "୨୬ ନଭେମ୍ବର ୧୯୪୯"
             },
             {
-                question: "ଭାରତ ର ସଂବିଧାନ ___ ରେ ଲାଗୁ ହୋଇଥିଲା । (୨୬ ଜାନୁଆରୀ ୧୯୫୦ / ୧୫ ଅଗଷ୍ଟ ୧୯୪୭)",
-                answer: "୨୬ ଜାନୁଆରୀ ୧୯୫୦"
+                question: "ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ ଜେଲ ନୁହେଁ, ___ ଦେବାକୁ ହୁଏ। (କ୍ଷତିପୂରଣ / ଜରିମାନା)",
+                answer: "କ୍ଷତିପୂରଣ"
             },
             {
-                question: "ସଂବିଧାନ ର ଜନକ ___ । (ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର / ମହାତ୍ମା ଗାନ୍ଧୀ)",
-                answer: "ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର"
+                question: "ସାମ୍ବିଧାନିକ ଆଇନ ଦେଶର ___ ଆଇନ। (ସର୍ବୋଚ୍ଚ / ସାଧାରଣ)",
+                answer: "ସର୍ବୋଚ୍ଚ"
             },
             {
-                question: "୧୮ ବର୍ଷ ଉପର ପ୍ରତ୍ୟେକ ଭାରତୀୟ ___ ଦେଇ ପାରିବ । (ଭୋଟ / ଦଣ୍ଡ)",
-                answer: "ଭୋଟ"
+                question: "ଜାନୁଆରୀ ୨୬ ଆମେ ___ ଭାବେ ପାଳନ କରୁ। (ସାଧାରଣତନ୍ତ୍ର ଦିବସ / ସ୍ୱାଧୀନତା ଦିବସ)",
+                answer: "ସାଧାରଣତନ୍ତ୍ର ଦିବସ"
             }
         ]
     },
- 
+
     matching: {
         pairs: [
-            { left: "LAW", right: "ଆଇନ — ⚖️ ଚୋରି କଲେ ଦଣ୍ଡ ମିଳେ ।" },
-            { left: "RULE", right: "ନିୟମ — 📋 ଇସ୍କୁଲ ରେ ସମୟ ମତ ଆସିବା ।" },
-            { left: "COUNTRY", right: "ଦେଶ — 🇮🇳 ଆମ ଦେଶ ର ନାମ ଭାରତ ।" },
-            { left: "GOVERNMENT", right: "ସରକାର — 🏢 ଭୋଟ ଜିତି ଦେଶ ଚଲାଏ ।" },
-            { left: "DEMOCRACY", right: "ଗଣତନ୍ତ୍ର — 🗳️ ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ସରକାର ବାଛନ୍ତି ।" },
-            { left: "VOTE", right: "ଭୋଟ — ☑️ ୧୮ ବର୍ଷ ଉପର ସବୁ ଦେଇ ପାରିବ ।" },
-            { left: "CITIZEN", right: "ନାଗରିକ — 🧑 ଭାରତ ରେ ଜନ୍ମ ନେଇଥିଲେ ଭାରତୀୟ ନାଗରିକ ।" },
-            { left: "CONSTITUTION", right: "ସଂବିଧାନ — 📜 ଦେଶ ର ସବୁ ଠାରୁ ବଡ ଆଇନ ର ପୁସ୍ତକ ।" },
-            { left: "REPUBLIC", right: "ଗଣରାଜ୍ୟ — 🏛️ ମୁଖ୍ୟ ଜଣ ଜନ ସାଧାରଣ ଦ୍ୱାରା ନିର୍ବାଚିତ ।" },
-            { left: "JUSTICE", right: "ନ୍ୟାୟ — ⚖️ ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ ନ୍ୟାୟ ଦିଏ ।" },
-            { left: "LEADER", right: "ନେତା — 🙋 ଭୋଟ ଜିତି ଜନ ସାଧାରଣ ଙ୍କ ହୋ ଉଠାଏ ।" }
+            { left: "ଆଇନ (LAW)", right: "📜 ଏକ ନିୟମ ଯାହା ଦେଶର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ।" },
+            { left: "ଅପରାଧୀ", right: "❌ ଯିଏ ଆଇନ ଭାଙ୍ଗେ।" },
+            { left: "LAW ABIDING PERSON", right: "✅ ଯିଏ ଆଇନ ପାଳନ କରେ।" },
+            { left: "Criminal Law", right: "🔴 ଚୋରି, ମାରପିଟ, ହତ୍ୟା ଭଳି ଅପରାଧ। ଜେଲ ଦଣ୍ଡ ମିଳେ।" },
+            { left: "Civil Law", right: "🔵 ଭଡ଼ା ବିବାଦ, ଛାଡ଼ପତ୍ର। କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।" },
+            { left: "Constitutional Law", right: "🟢 ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ରକ୍ଷା ହୁଏ।" },
+            { left: "ସମ୍ବିଧାନ ଦିବସ", right: "📅 ୨୬ ନଭେମ୍ବର — ସମ୍ବିଧାନ ଗୃହୀତ ହୋଇଥିଲା।" },
+            { left: "ସାଧାରଣତନ୍ତ୍ର ଦିବସ", right: "🇮🇳 ୨୬ ଜାନୁଆରୀ — ସମ୍ବିଧାନ ଲାଗୁ ହୋଇଥିଲା।" },
+            { left: "ଡ. ଆମ୍ବେଦକର", right: "⭐ ଭାରତୀୟ ସମ୍ବିଧାନର ଜନକ।" }
         ]
     },
- 
+
     arrange: {
         questions: [
             {
-                words: ["LAW", "ଆଇନ", "ମାନେ", "ସରକାର", "ତିଆରି", "କରିଥିବା", "ନିୟମ"],
-                correct: "ଆଇନ ମାନେ ସରକାର ତିଆରି କରିଥିବା ନିୟମ — LAW"
+                words: ["ଆଇନ", "ଆମ", "ଅଧିକାର", "ରକ୍ଷା", "କରେ"],
+                correct: "ଆଇନ ଆମ ଅଧିକାର ରକ୍ଷା କରେ।"
             },
             {
-                words: ["DEMOCRACY", "ଜନ", "ସାଧାରଣ", "ଭୋଟ", "ଦ୍ୱାରା", "ସରକାର", "ବାଛନ୍ତି"],
-                correct: "ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ସରକାର ବାଛନ୍ତି — DEMOCRACY"
+                words: ["ଆଇନ", "ଭାଙ୍ଗିଲେ", "ଅପରାଧୀ", "କୁହାଯାଏ"],
+                correct: "ଆଇନ ଭାଙ୍ଗିଲେ ଅପରାଧୀ କୁହାଯାଏ।"
             },
             {
-                words: ["CONSTITUTION", "ସଂବିଧାନ", "ଦେଶ", "ର", "ସବୁ", "ଠାରୁ", "ବଡ", "ଆଇନ"],
-                correct: "ସଂବିଧାନ ଦେଶ ର ସବୁ ଠାରୁ ବଡ ଆଇନ — CONSTITUTION"
+                words: ["ସମ୍ବିଧାନ", "ଦେଶର", "ସର୍ବୋଚ୍ଚ", "ଆଇନ"],
+                correct: "ସମ୍ବିଧାନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ।"
             },
             {
-                words: ["VOTE", "ୱ୧୮", "ବର୍ଷ", "ଉପର", "ସବୁ", "ଭୋଟ", "ଦେଇ", "ପାରିବ"],
-                correct: "୧୮ ବର୍ଷ ଉପର ସବୁ ଭୋଟ ଦେଇ ପାରିବ — VOTE"
+                words: ["ଦେୱାନୀ", "ଆଇନ", "ଅନ୍ତର୍ଗତ", "କ୍ଷତିପୂରଣ", "ଦେବାକୁ", "ହୁଏ"],
+                correct: "ଦେୱାନୀ ଆଇନ ଅନ୍ତର୍ଗତ କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।"
             },
             {
-                words: ["JUSTICE", "ଆଦାଲତ", "ସଂବିଧାନ", "ଅନୁଯାୟୀ", "ନ୍ୟାୟ", "ଦିଏ"],
-                correct: "ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ ନ୍ୟାୟ ଦିଏ — JUSTICE"
+                words: ["ଡ.", "ଆମ୍ବେଦକର", "ସମ୍ବିଧାନର", "ଜନକ"],
+                correct: "ଡ. ଆମ୍ବେଦକର ସମ୍ବିଧାନର ଜନକ।"
             }
         ]
     },
- 
+
     stq: {
         questions: [
             {
-                question: "LAW ଓ RULE ର ଓଡ଼ିଆ ଅର୍ଥ ଲେଖ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଏକ ଉଦାହରଣ ଦିଅ ।",
-                answer: "LAW = ଆଇନ — ⚖️ ଚୋରି କଲେ ପୋଲିସ ଧରେ ।  RULE = ନିୟମ — 📋 ରାସ୍ତାରେ ଲାଲ ଆଲୋ ରେ ଅଟକିବା ।"
+                question: "ଆଇନ ଆମ ଜୀବନ ପାଇଁ କାହିଁକି ଆବଶ୍ୟକ?",
+                answer: "ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ। ଆଇନ ଆମ ଅଧିକାର ରକ୍ଷା କରେ। ଆଇନ ନଥିଲେ ଦୁନିଆରେ ଅଶାନ୍ତି ହୋଇଯାଆନ୍ତା।"
             },
             {
-                question: "DEMOCRACY, VOTE, CITIZEN, GOVERNMENT ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "DEMOCRACY = ଗଣତନ୍ତ୍ର — 🗳️ ଭାରତ ଏ ଟି ଗଣତାନ୍ତ୍ରିକ ଦେଶ ।  VOTE = ଭୋଟ — ☑️ ୧୮ ବର୍ଷ ଉପର ସବୁ ଭୋଟ ଦେଇ ପାରିବ ।  CITIZEN = ନାଗରିକ — 🧑 ଭାରତ ରେ ଜନ୍ମ ନେଇଥିଲେ ଭାରତୀୟ ନାଗରିକ ।  GOVERNMENT = ସରକାର — 🏢 ଭୋଟ ଜିତି ଦେଶ ଚଲାଏ ।"
+                question: "ଫୌଜଦାରୀ ଆଇନ ଓ ଦେୱାନୀ ଆଇନ ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?",
+                answer: "ଫୌଜଦାରୀ ଆଇନ ଚୋରି, ମାରପିଟ ଭଳି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅପରାଧ ପାଇଁ ଲାଗୁ ହୁଏ ଓ ଜେଲ ଦଣ୍ଡ ମିଳେ। ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବ୍ୟକ୍ତିଗତ ବିବାଦ ପାଇଁ ଲାଗୁ ହୁଏ ଓ କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।"
             },
             {
-                question: "CONSTITUTION, REPUBLIC, JUSTICE, LEADER ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "CONSTITUTION = ସଂବିଧାନ — 📜 ଭାରତ ର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଲାଗୁ ହୋଇଥିଲା ।  REPUBLIC = ଗଣରାଜ୍ୟ — 🏛️ ଭାରତ ର ରାଷ୍ଟ୍ରପତି ଆମ ଦ୍ୱାରା ନିର୍ବାଚିତ ।  JUSTICE = ନ୍ୟାୟ — ⚖️ ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ ନ୍ୟାୟ ଦିଏ ।  LEADER = ନେତା — 🙋 ଭୋଟ ଜିତି ଜନ ସାଧାରଣ ଙ୍କ ହୋ ଉଠାଏ ।"
+                question: "ଭାରତର ସମ୍ବିଧାନ ବିଷୟରେ ପାଞ୍ଚଟି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ତଥ୍ୟ ଲେଖ।",
+                answer: "ଭାରତର ସମ୍ବିଧାନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ବିଶ୍ୱର ସବୁଠୁ ବଡ଼ ଲିଖିତ ସମ୍ବିଧାନ। ୨୬ ନଭେମ୍ବର ୧୯୪୯ ରେ ଗୃହୀତ ହୋଇଥିଲା। ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ ହୋଇଥିଲା। ଡ. ବି.ଆର. ଆମ୍ବେଦକର ଏହାର ଜନକ।"
             },
             {
-                question: "ଆଇନ ଓ ଗଣତନ୍ତ୍ର ଆମ ଜୀବନ ରେ କ'ଣ ଉପକାର କରେ — LAW, DEMOCRACY, VOTE, JUSTICE ଶବ୍ଦ ବ୍ୟବହାର କରି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-                answer: "ଆଇନ ଆମ ଘର, ଜମି ଓ ଜୀବନ ରକ୍ଷା କରେ — LAW ।  ଗଣତନ୍ତ୍ର ରେ ଧନୀ ଗରିବ ସମସ୍ତ ଙ୍କ ଭୋଟ ସମାନ — DEMOCRACY ।  ଭୋଟ ଦ୍ୱାରା ଆମ ନେତା ଆମେ ବାଛୁ — VOTE ।  ଆଦାଲତ ସଠିକ ନ୍ୟାୟ ଦିଏ — JUSTICE ।"
+                question: "ସାମ୍ବିଧାନିକ ଆଇନ (Constitutional Law) ଅନ୍ୟ ଆଇନ ଅପେକ୍ଷା ଭିନ୍ନ କାହିଁକି?",
+                answer: "ସାମ୍ବିଧାନିକ ଆଇନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ଓ ସରକାରଙ୍କ କ୍ଷମତା ବିଷୟରେ ସ୍ପଷ୍ଟ ସୂଚନା ଦିଏ। ଯେ କୌଣସି ଆଇନ ସମ୍ବିଧାନ ବିରୁଦ୍ଧ ଗଲେ ତାହା ଅବୈଧ ଘୋଷିତ ହୁଏ।"
             }
         ]
     }
 },
 ],
- 
-  summary: {
-        audio: "",
- 
-        content: {
-            introduction: "ନାଗରିକ ଶାସ୍ତ୍ର ର ଶବ୍ଦ ଗୁଡ଼ିକ ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ବହୁ ଉପଯୋଗ ହୁଏ । ଆସନ୍ତୁ ଆଇନ, ଗଣତନ୍ତ୍ର ଓ ସଂବିଧାନ ବିଷୟ ରେ ଜାଣିବା :",
-            sentences: [
-                {
-                    heading: "ଆଇନ — LAW",
-                    text: "ଆଇନ ମାନେ ସରକାର ତିଆରି କରିଥିବା ନିୟମ, ଯାହା ଦେଶ ର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ ।  ଚୋରି ନ କରିବା ଏକ ଆଇନ ।  ଆଇନ ଆଛି ବୋଲି ଆମ ଘର, ଜମି ଓ ଜୀବନ ସୁରକ୍ଷିତ ।  ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ ।"
-                },
-                {
-                    heading: "ନିୟମ — RULE",
-                    text: "ନିୟମ ମାନେ ଯାହା ମାନି ଚଳିବାକୁ ହୁଏ ।  ଇସ୍କୁଲ ରେ ସମୟ ମତ ଆସିବା ଏ ଟି ନିୟମ ।  ରାସ୍ତାରେ ଲାଲ ଆଲୋ ରେ ଅଟକିବା ଏ ଟି ନିୟମ ।  ନିୟମ ମାନିଲେ ସବୁ ଠିକ ଚଲେ ।"
-                },
-                {
-                    heading: "ଦେଶ — COUNTRY",
-                    text: "ଦେଶ ମାନେ ଯେଉଁ ଭୂଖଣ୍ଡ ରେ ଆମେ ରହୁ, ଯାହାର ନିଜ ସରକାର ଓ ଆଇନ ଅଛି ।  ଆମ ଦେଶ ର ନାମ ଭାରତ ।  ଭାରତ ଏ ଟି ବଡ ଓ ବିବିଧ ଦେଶ ।  ଆମ ଦେଶ ଆମ ଗର୍ବ ।"
-                },
-                {
-                    heading: "ସରକାର — GOVERNMENT",
-                    text: "ସରକାର ମାନେ ଯେଉଁ ଦଳ ଭୋଟ ଜିତି ଦେଶ ଚଲାଏ ଓ ଆଇନ ତିଆରି କରେ ।  ଭାରତ ରେ ଆମ ଭୋଟ ଦ୍ୱାରା ସରକାର ଗଠନ ହୁଏ ।  ସରକାର ଇସ୍କୁଲ, ରାସ୍ତା, ଆସ୍ପତାଲ ତିଆରି କରେ ।  ଭଲ ସରକାର ଭଲ ଦେଶ ଗଡ଼ି ଦିଏ ।"
-                },
-                {
-                    heading: "ଗଣତନ୍ତ୍ର — DEMOCRACY",
-                    text: "ଗଣତନ୍ତ୍ର ମାନେ ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ସରକାର ନିଜେ ବାଛନ୍ତି ।  ଭାରତ ଏ ଟି ଗଣତାନ୍ତ୍ରିକ ଦେଶ ।  ଗଣତନ୍ତ୍ର ରେ ସବୁ ଙ୍କ ଭୋଟ ଦେବାର ଅଧିକାର ସମାନ ।  ଧନୀ ଗରିବ ସବୁ ଙ୍କ ଭୋଟ ଏକ ।"
-                },
-                {
-                    heading: "ଭୋଟ — VOTE",
-                    text: "ଭୋଟ ମାନେ ନିଜ ପସନ୍ଦ ର ନେତା ବାଛିବା ପାଇଁ ଦେଉଥିବା ଗୁପ୍ତ ମତ ।  ୧୮ ବର୍ଷ ଉପର ପ୍ରତ୍ୟେକ ଭାରତୀୟ ଭୋଟ ଦେଇ ପାରିବ ।  ଭୋଟ ଦ୍ୱାରା ଯିଏ ଜିତେ ସେ ସରକାର ଗଠନ କରେ ।  ଭୋଟ ଏ ଟି ଆମ ଅଧିକାର ।"
-                },
-                {
-                    heading: "ନାଗରିକ — CITIZEN",
-                    text: "ନାଗରିକ ମାନେ ଯେ ଏ ଦେଶ ର ସଦସ୍ୟ ।  ଭାରତ ରେ ଜନ୍ମ ନେଇଥିଲେ ତୁମେ ଭାରତ ର ନାଗରିକ ।  ନାଗରିକ ଙ୍କ ଭୋଟ ଦେବାର ଅଧିକାର ଅଛି ।  ପ୍ରତ୍ୟେକ ନାଗରିକ ଦେଶ ର ଆଇନ ମାନିବ ।"
-                },
-                {
-                    heading: "ସଂବିଧାନ — CONSTITUTION",
-                    text: "ସଂବିଧାନ ହେଉଛି ଭାରତ ର ସବୁ ଠାରୁ ବଡ ଆଇନ ର ପୁସ୍ତକ ।  ଦେଶ ର ଅନ୍ୟ ସମସ୍ତ ଆଇନ ଏ ପୁସ୍ତକ ଅନୁଯାୟୀ ଚଲେ ।  ଭାରତ ର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ ହୋଇଥିଲା ।  ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର ସଂବିଧାନ ର ଜନକ ।"
-                },
-                {
-                    heading: "ଗଣରାଜ୍ୟ — REPUBLIC",
-                    text: "ଗଣରାଜ୍ୟ ମାନେ ଯେଉଁ ଦେଶ ର ମୁଖ୍ୟ ଜଣ ରାଜା ନୁହଁ, ଜନ ସାଧାରଣ ଦ୍ୱାରା ନିର୍ବାଚିତ ।  ଭାରତ ର ରାଷ୍ଟ୍ରପତି ଆମ ଦ୍ୱାରା ନିର୍ବାଚିତ ।  ୨୬ ଜାନୁଆରୀ ଆମ ଗଣତନ୍ତ୍ର ଦିବସ ।  ଭାରତ ଏ ଟି ଗଣରାଜ୍ୟ ।"
-                },
-                {
-                    heading: "ନ୍ୟାୟ — JUSTICE",
-                    text: "ନ୍ୟାୟ ମାନେ ଯାହା ଠିକ ତାହା ଠିକ, ଯାହା ଭୁଲ ତାହା ଭୁଲ — ଏ ଭଳି ସଠିକ ଫୈସଲା ।  ଆଦାଲତ ସଂବିଧାନ ଅନୁଯାୟୀ ନ୍ୟାୟ ଦିଏ ।  ନ୍ୟାୟ ମିଳିଲେ ଦେଶ ରେ ଶାନ୍ତି ଥାଏ ।  ନ୍ୟାୟ ପ୍ରତ୍ୟେକ ନାଗରିକ ର ଅଧିକାର ।"
-                },
-                {
-                    heading: "ନେତା — LEADER",
-                    text: "ନେତା ମାନେ ଯିଏ ଜନ ସାଧାରଣ ଙ୍କ ଭୋଟ ଜିତି ସେମାନଙ୍କ ହୋ ର ଉଠାଏ ।  ନେତା ଭଲ ହେଲେ ଗ୍ରାମ ଓ ଦେଶ ଭଲ ହୁଏ ।  ଆମେ ଭୋଟ ଦ୍ୱାରା ଭଲ ନେତା ବାଛିବ ।  ଭଲ ନେତା ଦେଶ ର ବିକାଶ କରେ ।"
-                }
-            ],
-            conclusion: "ନାଗରିକ ଶାସ୍ତ୍ର ର ଏ ଏଗାର ଟି ଶବ୍ଦ — LAW, RULE, COUNTRY, GOVERNMENT, DEMOCRACY, VOTE, CITIZEN, CONSTITUTION, REPUBLIC, JUSTICE, LEADER — ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ଖୁବ ଉପଯୋଗୀ । ଏ ଶବ୍ଦ ଜାଣିଲେ ଆମ ଦେଶ ର ଆଇନ, ଗଣତନ୍ତ୍ର ଓ ଶାସନ ବ୍ୟବସ୍ଥା ସ୍ପଷ୍ଟ ଭାବ ରେ ବୁଝି ହୁଏ ।"
-        },
- 
-        question: {
-            audio: "",
-            question: "ତୁମ ଗ୍ରାମ ଓ ଦେଶ ର ବିଷୟ ରେ LAW, DEMOCRACY, CONSTITUTION, VOTE ଶବ୍ଦ ବ୍ୟବହାର କରି ଲେଖ ।",
-            introduction: "ଆମ ଚାରିଆଡ଼ ର ଆଇନ ଓ ସରକାର ବିଷୟ ଦେଖ ଓ ନାଗରିକ ଶାସ୍ତ୍ର ର ଶବ୍ଦ ବ୍ୟବହାର କର । ନିମ୍ନ ଉଦାହରଣ ଗୁଡ଼ିକ ଦେଖ :",
-            points: [
-                "ରାସ୍ତାରେ ଲାଲ ଆଲୋ ରେ ଅଟକିବା ଏ ଟି LAW (ଆଇନ) ।",
-                "ଭାରତ ଏ ଟି ଗଣତାନ୍ତ୍ରିକ ଦେଶ — DEMOCRACY ।",
-                "ଭାରତ ର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଲାଗୁ ହୋଇଥିଲା — CONSTITUTION ।",
-                "୧୮ ବର୍ଷ ଉପର ସବୁ ଭାରତୀୟ ଭୋଟ ଦେଇ ପାରିବ — VOTE ।",
-                "ଡ. ଭୀମ ରାଓ ଆମ୍ବେଦ୍କର ଆମ ସଂବିଧାନ ର ଜନକ — CONSTITUTION ।"
-            ],
-            conclusion: "LAW ରୁ LEADER ପର୍ଯ୍ୟନ୍ତ ଏ ଏଗାର ଟି ଶବ୍ଦ ଜାଣିଲେ ଆମ ଦେଶ ର ଆଇନ, ଗଣତନ୍ତ୍ର ଓ ଶାସନ ବ୍ୟବସ୍ଥା ସହଜ ରେ ବୁଝି ହୁଏ — ଏହା ହେଉଛି ଆମ ନାଗରିକ ଶାସ୍ତ୍ର ।"
-        }
-    }
 
+summary: {
+    audio: "",
+
+    content: {
+        introduction: "ଆଇନ ସଚେତନତା ଆମ ଜୀବନ ପାଇଁ ଖୁବ ଆବଶ୍ୟକ। ଆଇନ ଜାଣିଲେ ଆମେ ଆମ ଅଧିକାର ରକ୍ଷା କରିପାରିବା ଓ ଭଲ ନାଗରିକ ହୋଇ ପାରିବା।",
+        sentences: [
+            {
+                heading: "ଆଇନ କ'ଣ",
+                text: "ଆଇନ ଏକ ନିୟମ ଯାହା ଦେଶର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ। ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ ଓ ଆମ ଅଧିକାର ରକ୍ଷା କରେ। ଆଇନ ନଥିଲେ ଦୁନିଆରେ ଅଶାନ୍ତି ହୋଇଯାଆନ୍ତା।"
+            },
+            {
+                heading: "ଅପରାଧୀ ଓ ଆଇନ ମାନ୍ୟକାରୀ",
+                text: "ଯିଏ ଆଇନ ଭାଙ୍ଗେ ତାକୁ ଅପରାଧୀ କୁହାଯାଏ। ଯିଏ ଆଇନ ମାନେ ତାକୁ LAW ABIDING PERSON ବୋଲି କୁହାଯାଏ। ଆମେ ସଦାବେଳେ ଆଇନ ମାନ୍ୟକାରୀ ହେବା ଉଚିତ।"
+            },
+            {
+                heading: "ଫୌଜଦାରୀ ଆଇନ",
+                text: "ଯେତେବେଳେ କେହି ଅନ୍ୟ ଜଣଙ୍କୁ କ୍ଷତି ପହଞ୍ଚାଏ ଯେପରି ଚୋରି, ମାରପିଟ ବା ହତ୍ୟା, ତାହା ଫୌଜଦାରୀ ଆଇନ ଅନ୍ତର୍ଗତ। ଏହା ସମଗ୍ର ସମାଜ ବିରୁଦ୍ଧ ଅପରାଧ ଭାବେ ଗ୍ରହଣ କରାଯାଏ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ଓ ଜରିମାନା ମଧ୍ୟ ହୁଏ।"
+            },
+            {
+                heading: "ଦେୱାନୀ ଆଇନ",
+                text: "ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବ୍ୟକ୍ତିଗତ ଅଧିକାର ବିବାଦ ପାଇଁ ଲାଗୁ ହୁଏ। ଭଡ଼ା ବିବାଦ, ଛାଡ଼ପତ୍ର ଓ ଉତ୍ତରାଧିକାରୀ ସମ୍ପତ୍ତି ଏହାର ଉଦାହରଣ। ଏଥିରେ ଜେଲ ନୁହେଁ, କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।"
+            },
+            {
+                heading: "ସାମ୍ବିଧାନିକ ଆଇନ",
+                text: "ସାମ୍ବିଧାନିକ ଆଇନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ଓ ସରକାରଙ୍କ କ୍ଷମତା ବିଷୟରେ ସ୍ପଷ୍ଟ ସୂଚନା ଦିଏ। ଯଦି କୌଣସି ଆଇନ ସମ୍ବିଧାନ ବିରୁଦ୍ଧ ଯାଏ, ତାହା ଅବୈଧ ଘୋଷିତ ହୁଏ।"
+            },
+            {
+                heading: "ଭାରତର ସମ୍ବିଧାନ",
+                text: "ଭାରତର ସମ୍ବିଧାନ ବିଶ୍ୱର ସବୁଠୁ ବଡ଼ ଲିଖିତ ସମ୍ବିଧାନ। ଏହା ୨୬ ନଭେମ୍ବର ୧୯୪୯ ରେ ଗୃହୀତ ଓ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ ହୋଇଥିଲା। ଡ. ବି.ଆର. ଆମ୍ବେଦକରଙ୍କୁ ଏହାର ଜନକ ବୋଲି କୁହାଯାଏ।"
+            },
+            {
+                heading: "ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଦିନ",
+                text: "ନଭେମ୍ବର ୨୬ ଆମେ ସମ୍ବିଧାନ ଦିବସ ଭାବେ ପାଳନ କରୁ। ଜାନୁଆରୀ ୨୬ ଆମେ ସାଧାରଣତନ୍ତ୍ର ଦିବସ ଭାବେ ପାଳନ କରୁ। ଏହି ଦୁଇଟି ଦିନ ଭାରତ ପାଇଁ ଅତ୍ୟନ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ।"
+            },
+            {
+                heading: "ଆଇନର ଗୁରୁତ୍ୱ",
+                text: "ଆଇନ ଆମ ଅଧିକାର ଓ ସ୍ୱାଧୀନତା ରକ୍ଷା କରେ। ଆଇନ ସମାଜରେ ଶାନ୍ତି ଓ ବ୍ୟବସ୍ଥା ବଜାୟ ରଖେ। ସଚ୍ଚା ନାଗରିକ ସଦା ଆଇନ ମାନ୍ୟ କରନ୍ତି।"
+            }
+        ],
+        conclusion: "ଆଇନ ସଚେତନତା ପ୍ରତ୍ୟେକ ନାଗରିକ ପାଇଁ ଆବଶ୍ୟକ। ଆଇନ ତିନି ପ୍ରକାର — ଫୌଜଦାରୀ, ଦେୱାନୀ ଓ ସାମ୍ବିଧାନିକ। ଭାରତର ସମ୍ବିଧାନ ଆମ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ ଓ ଏହା ଆମ ଗର୍ବ।"
+    },
+
+    question: {
+        audio: "",
+        question: "ଆଇନ ସଚେତନତା ବିଷୟରେ ଓ ଭାରତର ସମ୍ବିଧାନ ବିଷୟରେ ବର୍ଣ୍ଣନା କର।",
+        introduction: "ଆଇନ ଓ ଭାରତର ସମ୍ବିଧାନ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟଗୁଡ଼ିକ ଦେଖ।",
+        points: [
+            "ଆଇନ ଏକ ନିୟମ ଯାହା ଦେଶର ସମସ୍ତ ମଣିଷ ମାନିବାକୁ ବାଧ୍ୟ। ଆଇନ ଆମକୁ ସୁରକ୍ଷିତ ରଖେ ଓ ଅଧିକାର ରକ୍ଷା କରେ।",
+            "ଫୌଜଦାରୀ ଆଇନ ଚୋରି, ମାରପିଟ ଭଳି ଅପରାଧ ପାଇଁ। ଏଥିରେ ଜେଲ ଦଣ୍ଡ ଓ ଜରିମାନା ହୁଏ।",
+            "ଦେୱାନୀ ଆଇନ ଦୁଇ ପକ୍ଷ ମଧ୍ୟରେ ବ୍ୟକ୍ତିଗତ ବିବାଦ ପାଇଁ। ଏଥିରେ ଜେଲ ନୁହେଁ, କ୍ଷତିପୂରଣ ଦେବାକୁ ହୁଏ।",
+            "ସାମ୍ବିଧାନିକ ଆଇନ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ। ଏହା ନାଗରିକଙ୍କ ମୌଳିକ ଅଧିକାର ରକ୍ଷା କରେ।",
+            "ଭାରତର ସମ୍ବିଧାନ ୨୬ ନଭେମ୍ବର ୧୯୪୯ ରେ ଗୃହୀତ ଓ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ରେ ଲାଗୁ ହୋଇଥିଲା। ଡ. ଆମ୍ବେଦକର ଏହାର ଜନକ।"
+        ],
+        conclusion: "ଆଇନ ଓ ସମ୍ବିଧାନ ଜ୍ଞାନ ପ୍ରତ୍ୟେକ ଛାତ୍ରଙ୍କ ପାଇଁ ଅତ୍ୟନ୍ତ ଜରୁରୀ। ଆଇନ ତିନି ପ୍ରକାର ଓ ପ୍ରତ୍ୟେକ ଭିନ୍ନ ଉଦ୍ଦେଶ୍ୟ ପୂରଣ କରେ। ଭାରତର ସମ୍ବିଧାନ ଆମ ଦେଶର ସର୍ବୋଚ୍ଚ ଓ ଗର୍ବର ଆଇନ।"
+    }
+}
 };
     
 let currentSentence = 0;
@@ -4754,7 +4693,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ବ୍ୟବହୃତ ହେଉଥିବା ଆଇନ ସମ୍ବନ୍ଧୀୟ ଶବ୍ଦ ଗୁଡ଼ିକର ଅର୍ଥ ବୁଝାଅ ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଆଇନ ସଚେତନତା — ଆଇନ, ଏହାର ପ୍ରକାର ଓ ଭାରତର ସମ୍ବିଧାନ ବିଷୟରେ ଆଲୋଚନା କର ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4844,7 +4783,7 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-41Z6',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=RR36-TK81',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
@@ -4865,7 +4804,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://student-care.pages.dev/',
+        url: 'https://student-care.pages.dev/SC/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -4959,48 +4898,6 @@ window.addEventListener('beforeunload', () => {
     });
 });
 
-// Writ Practice Functions
-function openWritPractice() {
-    // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://st-practicals.pages.dev/law/class-1/";
-    
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Show container
-    container.classList.add('active');
-    
-    // Set iframe source
-    iframe.src = writExamURL;
-    
-    // Show iframe and hide loading when loaded
-    iframe.onload = function() {
-        iframe.style.display = 'block';
-        loading.style.display = 'none';
-    };
-    
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWritPractice() {
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Hide container
-    container.classList.remove('active');
-    
-    // Reset iframe
-    iframe.src = '';
-    iframe.style.display = 'none';
-    loading.style.display = 'block';
-    
-    // Restore background scroll
-    document.body.style.overflow = 'auto';
-}
-
 
 
 // Global variable to store the current typing timeout
@@ -5086,178 +4983,7 @@ function showAnswerInBox(boxId, answerText) {
     
 
 
-const topicsData = [
-    {
-        heading: "ପାଠ-1: ଶାସନ ବ୍ୟବସ୍ଥା କାହିଁକି?",
-        audioPoints: [
-            {
-                text: "👉 ଦେଶରେ ଯଦି କୌଣସି ନିୟମ ନ ଥାଏ, ତେବେ ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେବ । ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ — ଏଥିପାଇଁ ଶାସନ ବ୍ୟବସ୍ଥା ଦରକାର ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଶାସନ ବ୍ୟବସ୍ଥା କାହିଁକି ଦରକାର ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦେଶରେ ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ — ଏଥିପାଇଁ ଶାସନ ବ୍ୟବସ୍ଥା ଦରକାର ।",
 
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଶାସନ ବ୍ୟବସ୍ଥା ନ ଥିଲେ କ'ଣ ହୋଇଥା'ନ୍ତା ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶାସନ ବ୍ୟବସ୍ଥା ନ ଥିଲେ ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେଉଥା'ନ୍ତେ ଏବଂ ଦେଶରେ ଅଶାନ୍ତି ରହୁଥା'ନ୍ତା ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଶାସନ ବ୍ୟବସ୍ଥା ଦ୍ୱାରା ଦେଶର ଲୋକ କ'ଣ ପାଆନ୍ତି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶାସନ ବ୍ୟବସ୍ଥା ଦ୍ୱାରା ଦେଶର ଲୋକ ସୁରକ୍ଷା, ନ୍ୟାୟ ଓ ଭଲ ଜୀବନ ପାଆନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଶାସନ ବ୍ୟବସ୍ଥା ଦ୍ୱାରା ଦୁର୍ବଳ ଲୋକ ଉପକୃତ ହୁଅନ୍ତି କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ହଁ, ଶାସନ ବ୍ୟବସ୍ଥା ଦ୍ୱାରା ଦୁର୍ବଳ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତି ଓ ନ୍ୟାୟ ପାଆନ୍ତି ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-2: ଶାସନ ବ୍ୟବସ୍ଥା କେତେ ପ୍ରକାର?",
-        audioPoints: [
-            {
-                text: "👉 ଶାସନ ବ୍ୟବସ୍ଥା ମୁଖ୍ୟତଃ ଦୁଇ ପ୍ରକାର । ପ୍ରଥମ ହେଲା ରାଜତନ୍ତ୍ର — ଯେଉଁଠି ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ । ଦ୍ୱିତୀୟ ହେଲା ଗଣତନ୍ତ୍ର — ଯେଉଁଠି ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ବାଛନ୍ତି ଓ ଆଇନ ଦ୍ୱାରା ଦେଶ ଚଳେ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-       questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଶାସନ ବ୍ୟବସ୍ଥା କେତେ ପ୍ରକାର ଓ କ'ଣ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଶାସନ ବ୍ୟବସ୍ଥା ମୁଖ୍ୟତଃ ଦୁଇ ପ୍ରକାର — ରାଜତନ୍ତ୍ର ଓ ଗଣତନ୍ତ୍ର ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ରାଜତନ୍ତ୍ର ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ରାଜତନ୍ତ୍ର ମାନେ — ଯେଉଁ ଶାସନ ବ୍ୟବସ୍ଥାରେ ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଗଣତନ୍ତ୍ର ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗଣତନ୍ତ୍ର ମାନେ — ଯେଉଁ ଶାସନ ବ୍ୟବସ୍ଥାରେ ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ରାଜତନ୍ତ୍ର ଓ ଗଣତନ୍ତ୍ର ମଧ୍ୟରେ ମୁଖ୍ୟ ପାର୍ଥକ୍ୟ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ରାଜତନ୍ତ୍ରରେ ଜଣେ ରାଜା ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ । ଗଣତନ୍ତ୍ରରେ ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-3: ଆମ ଦେଶରେ କେଉଁ ପ୍ରକାର ଶାସନ ବ୍ୟବସ୍ଥା ଚାଲିଛି?",
-        audioPoints: [
-            {
-                text: "👉 ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର । ଏଠି କୌଣସି ରାଜା ନାହାଁନ୍ତି । ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ପ୍ରତିନିଧି ବାଛନ୍ତି । ସେହି ପ୍ରତିନିଧିମାନେ ଆଇନ ତିଆରି କରନ୍ତି ଓ ଦେଶ ଚଳାନ୍ତି । ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ହୋଇଥିବାରୁ ଆମେ ପ୍ରତି ବର୍ଷ ୨୬ ଜାନୁଆରୀ ଦିନ ଗଣତନ୍ତ୍ର ଦିବସ ପାଳନ କରୁ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଭାରତରେ କେଉଁ ପ୍ରକାର ଶାସନ ବ୍ୟବସ୍ଥା ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର — ଏଠି ଗଣତନ୍ତ୍ର ଶାସନ ବ୍ୟବସ୍ଥା ଅଛି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଭାରତରେ ଶାସନ କିଏ ଚଳାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭାରତରେ ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ପ୍ରତିନିଧି ବାଛନ୍ତି — ସେହି ପ୍ରତିନିଧିମାନେ ଆଇନ ତିଆରି କରି ଦେଶ ଚଳାନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଆମେ ୨୬ ଜାନୁଆରୀ ଦିନ କ'ଣ ପାଳନ କରୁ ଓ କାହିଁକି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆମେ ୨୬ ଜାନୁଆରୀ ଦିନ ଗଣତନ୍ତ୍ର ଦିବସ ପାଳନ କରୁ, କାରଣ ସେଦିନ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ରୂପେ ଘୋଷିତ ହୋଇଥିଲା ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଭାରତରେ ରାଜା ଅଛନ୍ତି କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ନାହିଁ, ଭାରତରେ କୌଣସି ରାଜା ନାହାଁନ୍ତି । ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର — ଏଠି ଜନ ସାଧାରଣ ହିଁ ପ୍ରକୃତ ଶାସକ ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-4: ଗଣତନ୍ତ୍ରରେ କିଏ କାହାକୁ ଶାସନ କରେ?",
-        audioPoints: [
-            {
-                text: "👉 ଗଣତନ୍ତ୍ରରେ କୌଣସି ଏକ ବ୍ୟକ୍ତି ଶାସନ କରନ୍ତି ନାହିଁ । ଏଠି ଆଇନ ଶାସନ କରେ । ଆଇନ ଆଗରେ ଧନୀ, ଗରିବ, ନେତା, ଅଧିକାରୀ — ସମସ୍ତେ ସମାନ । ଆଇନ ଯାହା କହେ, ସମସ୍ତ ଲୋକ ତାହା ମାନିବାକୁ ବାଧ୍ୟ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-       questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଗଣତନ୍ତ୍ରରେ କିଏ ଶାସନ କରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗଣତନ୍ତ୍ରରେ ଆଇନ ଶାସନ କରେ — କୌଣସି ଏକ ବ୍ୟକ୍ତି ଶାସନ କରନ୍ତି ନାହିଁ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଆଇନ ଆଗରେ ଧନୀ ଓ ଗରିବ ସମାନ କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ହଁ, ଆଇନ ଆଗରେ ଧନୀ, ଗରିବ, ନେତା, ଅଧିକାରୀ — ସମସ୍ତେ ସମାନ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଆଇନ କିଏ ମାନିବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦେଶର ସମସ୍ତ ଲୋକ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଗଣତନ୍ତ୍ରରେ ନେତା ଆଇନ ଠାରୁ ବଡ଼ କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ନାହିଁ, ଗଣତନ୍ତ୍ରରେ ନେତା ଆଇନ ଠାରୁ ବଡ଼ ନୁହଁନ୍ତି — ଆଇନ ଆଗରେ ନେତା ଓ ସାଧାରଣ ଲୋକ ସମସ୍ତେ ସମାନ ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-5: ଆଇନ କେଉଁ ଆଧାରରେ ବନେ?",
-        audioPoints: [
-            {
-                text: "👉 ଦେଶର ସବୁ ଆଇନ ସଂବିଧାନ ଆଧାରରେ ବନେ । ସଂବିଧାନ ହେଉଛି ସବୁ ଆଇନର ମୂଳ — ଏହାକୁ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ ବୋଲି କୁହାଯାଏ । କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ । ଭାରତର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଦିନ ଲାଗୁ ହୋଇଥିଲା ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆଇନ କେଉଁ ଆଧାରରେ ବନେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦେଶର ସବୁ ଆଇନ ସଂବିଧାନ ଆଧାରରେ ବନେ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ସଂବିଧାନ ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସଂବିଧାନ ହେଉଛି ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ — ଏଥିରେ ଦେଶ ଚଳାଇବାର ସମସ୍ତ ନିୟମ ଲେଖା ଥାଏ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଭାରତର ସଂବିଧାନ କେବେ ଲାଗୁ ହୋଇଥିଲା ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭାରତର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଦିନ ଲାଗୁ ହୋଇଥିଲା ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ସଂବିଧାନ ବିରୁଦ୍ଧ ଆଇନ ହୋଇ ପାରିବ କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ନାହିଁ, କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-6: ଆଇନ କିଏ ବନାଏ?",
-        audioPoints: [
-            {
-                text: "👉 ଦେଶରେ ଆଇନ ବନାଇବା ପାଇଁ ଦୁଇଟି ସଂସ୍ଥା ଅଛି । ସଂସଦ ସମଗ୍ର ଦେଶ ପାଇଁ କେନ୍ଦ୍ର ଆଇନ ବନାଏ । ବିଧାନସଭା ରାଜ୍ୟ ପାଇଁ ରାଜ୍ୟ ଆଇନ ବନାଏ । ଯେଉଁ ପ୍ରତିନିଧି ସଂସଦରେ ଆଇନ ବନାନ୍ତି, ସେମାନଙ୍କୁ ସାଂସଦ (MP) କୁହାଯାଏ । ଯେଉଁ ପ୍ରତିନିଧି ବିଧାନସଭାରେ ଆଇନ ବନାନ୍ତି, ସେମାନଙ୍କୁ ବିଧାୟକ (MLA) କୁହାଯାଏ । ଜନ ସାଧାରଣ ପ୍ରତି ୫ ବର୍ଷରେ ଭୋଟ ଦ୍ୱାରା ଏହି ପ୍ରତିନିଧି ବାଛନ୍ତି ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ସମଗ୍ର ଦେଶ ପାଇଁ ଆଇନ ବନାଇବା ପାଇଁ କେଉଁ ସଂସ୍ଥା ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସମଗ୍ର ଦେଶ ପାଇଁ ଆଇନ ବନାଇବା ପାଇଁ ସଂସଦ ଅଛି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାଇବା ପାଇଁ କେଉଁ ସଂସ୍ଥା ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାଇବା ପାଇଁ ବିଧାନସଭା ଅଛି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> MP ଓ MLA ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> MP ମାନେ ସାଂସଦ — ଯିଏ ସଂସଦରେ ଦେଶ ପାଇଁ ଆଇନ ବନାନ୍ତି । MLA ମାନେ ବିଧାୟକ — ଯିଏ ବିଧାନସଭାରେ ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଜନ ସାଧାରଣ କେତେ ବର୍ଷରେ ଥରେ ଭୋଟ ଦେଇ ପ୍ରତିନିଧି ବାଛନ୍ତି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜନ ସାଧାରଣ ପ୍ରତି ୫ ବର୍ଷରେ ଥରେ ଭୋଟ ଦେଇ ନିଜ ପ୍ରତିନିଧି ବାଛନ୍ତି ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-7: ଆଇନକୁ କିଏ କାର୍ଯ୍ୟକାରୀ କରେ?",
-        audioPoints: [
-            {
-                text: "👉 ଆଇନ ତିଆରି ହେଲେ ଯଥେଷ୍ଟ ନୁହଁ — ତାହା ଚଳାଇବାକୁ ହୁଏ । ସଂସଦ ତିଆରି କରିଥିବା କେନ୍ଦ୍ର ଆଇନ କେନ୍ଦ୍ର ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି । ବିଧାନସଭା ତିଆରି କରିଥିବା ରାଜ୍ୟ ଆଇନ ରାଜ୍ୟ ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି । ଯେଉଁ ଅଧିକାରୀମାନେ ସରକାର ହୈ ଆଇନ ଲାଗୁ କରାନ୍ତି, ସେମାନଙ୍କୁ ଲୋକ ସେବକ (Public Servant) କୁହାଯାଏ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> କେନ୍ଦ୍ର ଆଇନ କିଏ କାର୍ଯ୍ୟକାରୀ କରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସଂସଦ ତିଆରି କରିଥିବା କେନ୍ଦ୍ର ଆଇନ କେନ୍ଦ୍ର ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ରାଜ୍ୟ ଆଇନ କିଏ କାର୍ଯ୍ୟକାରୀ କରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବିଧାନସଭା ତିଆରି କରିଥିବା ରାଜ୍ୟ ଆଇନ ରାଜ୍ୟ ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଲୋକ ସେବକ ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସରକାର ହୈ ଆଇନ ଲାଗୁ କରୁଥିବା ଅଧିକାରୀମାନଙ୍କୁ ଲୋକ ସେବକ (Public Servant) କୁହାଯାଏ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଆଇନ ତିଆରି ହେଲେ ଆଉ କ'ଣ କରିବାକୁ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଇନ ତିଆରି ହେଲେ ଯଥେଷ୍ଟ ନୁହଁ — ସରକାର ତାହାକୁ ଦୈନନ୍ଦିନ ଜୀବନରେ ଲାଗୁ କରିବାକୁ ହୁଏ ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-8: ଆଇନକୁ କିଏ ମାନେ?",
-        audioPoints: [
-            {
-                text: "👉 ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ — ସାଧାରଣ ଲୋକ, ସରକାରୀ ଅଧିକାରୀ, ନେତା ସମସ୍ତେ । ଜଣେ ନାଗରିକ ଭାବେ ଆମକୁ ଦୁଇ ପ୍ରକାର ଆଇନ ମାନିବାକୁ ହୁଏ — ଗୋଟିଏ ହେଉଛି କେନ୍ଦ୍ର ଆଇନ ଓ ଅନ୍ୟଟି ହେଉଛି ରାଜ୍ୟ ଆଇନ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆଇନ କିଏ ମାନିବ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ — ସାଧାରଣ ଲୋକ, ଅଧିକାରୀ, ନେତା — ସମସ୍ତେ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଜଣେ ନାଗରିକ ଭାବେ ଆମକୁ କେତେ ପ୍ରକାର ଆଇନ ମାନିବାକୁ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜଣେ ନାଗରିକ ଭାବେ ଆମକୁ ଦୁଇ ପ୍ରକାର ଆଇନ ମାନିବାକୁ ହୁଏ — କେନ୍ଦ୍ର ଆଇନ ଓ ରାଜ୍ୟ ଆଇନ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଆଇନ ନ ମାନିଲେ କ'ଣ ହୁଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ — ଜୋରିମାନା ବା ଜେଲ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଜଣେ ନେତା ଆଇନ ନ ମାନିଲେ ତାଙ୍କୁ ଦଣ୍ଡ ମିଳିବ କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ହଁ, ଆଇନ ଆଗରେ ସମସ୍ତେ ସମାନ — ନେତା ଆଇନ ନ ମାନିଲେ ତାଙ୍କୁ ବି ଦଣ୍ଡ ମିଳିବ ।"
-]
-    },
-
-    {
-        heading: "ପାଠ-9: ଆଇନ ବନାଇବାରେ ଭୁଲ ହେଲେ, କାର୍ଯ୍ୟକାରୀ କରାଇବାରେ ଭୁଲ ହେଲେ, କିମ୍ବା ପାଳନ କରିବାରେ ଭୁଲ ହେଲେ କ'ଣ ହୁଏ?",
-        audioPoints: [
-            {
-                text: "👉 ଯଦି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ତିଆରି ହୁଏ, ଯଦି ସରକାର ଆଇନ ଠିକ ଭାବେ ଚଳାନ୍ତି ନାହିଁ, ଅଥବା ଯଦି କେହି ଆଇନ ଭାଙ୍ଗନ୍ତି — ତେବେ ବିଚାର ବ୍ୟବସ୍ଥା (Judiciary) ନ୍ୟାୟ ଦିଏ । ବିଚାର ବ୍ୟବସ୍ଥା ତିନି ସ୍ତରରେ କାମ କରେ । ଜିଲ୍ଲା ସ୍ତରରେ ଜିଲ୍ଲା ଆଦାଲତ, ରାଜ୍ୟ ସ୍ତରରେ ହାଇ କୋର୍ଟ, ଏବଂ ଦେଶ ସ୍ତରରେ ସୁପ୍ରିମ କୋର୍ଟ । ସୁପ୍ରିମ କୋର୍ଟ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ — ଏହାର ନିର୍ଣ୍ଣୟ ଚୂଡ଼ାନ୍ତ, ସରକାର ବି ଏହା ମାନିବାକୁ ବାଧ୍ୟ ।<br>",
-                audio: "audio-url-here"
-            }
-        ],
-        questions: [
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଆଇନ ଭଙ୍ଗ ହେଲେ ବା ଅନ୍ୟାୟ ହେଲେ କ'ଣ କରାଯାଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଇନ ଭଙ୍ଗ ହେଲେ ବା ଅନ୍ୟାୟ ହେଲେ ବିଚାର ବ୍ୟବସ୍ଥା (Judiciary) ନ୍ୟାୟ ଦିଏ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ବିଚାର ବ୍ୟବସ୍ଥା କେତେ ସ୍ତରରେ କାମ କରେ ଓ ସେଗୁଡ଼ିକ କ'ଣ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବିଚାର ବ୍ୟବସ୍ଥା ତିନି ସ୍ତରରେ କାମ କରେ — ଜିଲ୍ଲା ଆଦାଲତ, ହାଇ କୋର୍ଟ ଓ ସୁପ୍ରିମ କୋର୍ଟ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଜିଲ୍ଲା ଆଦାଲତ, ହାଇ କୋର୍ଟ ଓ ସୁପ୍ରିମ କୋର୍ଟ କେଉଁ କେଉଁ ସ୍ତରରେ କାମ କରନ୍ତି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଜିଲ୍ଲା ଆଦାଲତ ଜିଲ୍ଲା ସ୍ତରରେ, ହାଇ କୋର୍ଟ ରାଜ୍ୟ ସ୍ତରରେ ଓ ସୁପ୍ରିମ କୋର୍ଟ ସମଗ୍ର ଦେଶ ସ୍ତରରେ କାମ କରେ ।",
-
-    "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ କ'ଣ ଓ ଏହାର ନିର୍ଣ୍ଣୟ ସରକାର ମାନିବାକୁ ବାଧ୍ୟ କି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ ହେଉଛି ସୁପ୍ରିମ କୋର୍ଟ । ହଁ, ଏହାର ନିର୍ଣ୍ଣୟ ଚୂଡ଼ାନ୍ତ — ସରକାର ବି ଏହା ମାନିବାକୁ ବାଧ୍ୟ ।"
-]
-    }
-];
 
 let currentTopicIndex = 0;
 
@@ -5667,9 +5393,9 @@ function startLearning() {
     document.getElementById('topicCounterWrapper').style.display = 'flex';
     document.getElementById('topicContent').style.display = 'block';
     
-    // Load first topic
+    // Load first topic — pass TRUE to auto-start writing immediately
     currentTopicIndex = 0;
-    loadTopic(0);
+    loadTopic(0, true);  // ← change false/missing to true
 }
     
 function navigateTopic(direction) {
@@ -6002,7 +5728,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (LEGAL AWARENESS) CLASS-1',
+    className: 'SPECIAL TRAINING (LEGAL AWARENESS) CLASS-1 : ଆଇନ୍ ର ଅର୍ଥ ଏବଂ ପ୍ରକାର',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -6015,17 +5741,7 @@ let certificateData = {
     overallPercentage: 0
 };
 
-// Open Certificate Modal
-document.getElementById('certificateBtn').addEventListener('click', function() {
-    // Calculate scores
-    calculateCertificateScores();
-    
-    // Load saved student details if available
-    loadStudentDetails();
-    
-    // Show modal
-    document.getElementById('certificateModal').classList.add('active');
-});
+
 
 // Close Certificate Modal
 function closeCertificateModal() {
@@ -6557,413 +6273,52 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
-
-
-  // ===== UNIFIED MEDIA + REVISION TOGGLE =====
-
-const revisionLessons = [
-    {
-        id: 1,
-        lessonAudio: "https://audio.evidya.de/SL1R1.mp3",
-        lessonText: "ପାଠ ୧: ଶାସନ ବ୍ୟବସ୍ଥା କାହିଁକି ? — ଦେଶରେ ଯଦି କୌଣସି ନିୟମ ନ ଥାଏ, ତେବେ ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେବ । ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ — ଏଥିପାଇଁ ଶାସନ ବ୍ୟବସ୍ଥା ଦରକାର । ଶାସନ ବ୍ୟବସ୍ଥା ଦ୍ୱାରା ଦୁର୍ବଳ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତି ଓ ନ୍ୟାୟ ପାଆନ୍ତି ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "🏛️ ଶାସନ ବ୍ୟବସ୍ଥା କାହିଁକି ଦରକାର ?",
-                options: ["ଧନୀ ଲୋକ ଦେଶ ଚଲାନ୍ତୁ ବୋଲି", "ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ ବୋଲି", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ — ଏଥିପାଇଁ ଶାସନ ବ୍ୟବସ୍ଥା ଦରକାର ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ସମସ୍ତ ଲୋକ ସୁରକ୍ଷିତ ରହନ୍ତୁ, ନ୍ୟାୟ ପାଆନ୍ତୁ ଓ ଭଲ ଭାବେ ବଞ୍ଚନ୍ତୁ — ଏଥିପାଇଁ ଶାସନ ବ୍ୟବସ୍ଥା ଦରକାର ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "ଶାସନ ବ୍ୟବସ୍ଥା ନ ଥିଲେ କ'ଣ ହୋଇଥା'ନ୍ତା ?",
-                options: ["ଦେଶ ଆହୁରି ଭଲ ହୋଇଥା'ନ୍ତା", "ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେଉଥା'ନ୍ତେ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଶାସନ ବ୍ୟବସ୍ଥା ନ ଥିଲେ ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେଉଥା'ନ୍ତେ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଶାସନ ବ୍ୟବସ୍ଥା ନ ଥିଲେ ବଳବାନ ଲୋକ ଦୁର୍ବଳ ଲୋକକୁ ଦବାଇ ଦେଉଥା'ନ୍ତେ ।"
-            }
-        ]
-    },
-
-    {
-        id: 2,
-        lessonAudio: "https://audio.evidya.de/SL1R2.mp3",
-        lessonText: "ପାଠ ୨: ଶାସନ ବ୍ୟବସ୍ଥା କେତେ ପ୍ରକାର ? — ଶାସନ ବ୍ୟବସ୍ଥା ମୁଖ୍ୟତଃ ଦୁଇ ପ୍ରକାର । ପ୍ରଥମ ହେଲା ରାଜତନ୍ତ୍ର — ଯେଉଁଠି ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ । ଦ୍ୱିତୀୟ ହେଲା ଗଣତନ୍ତ୍ର — ଯେଉଁଠି ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି । ରାଜତନ୍ତ୍ରରେ ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ — ଗଣତନ୍ତ୍ରରେ ଜନ ସାଧାରଣ ହିଁ ସବୁଠୁ ଶକ୍ତିଶାଳୀ ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "👑 ରାଜତନ୍ତ୍ର ମାନେ କ'ଣ ?",
-                options: ["ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ", "ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନେତା ବାଛନ୍ତି", "ଜାଣିନାହିଁ"],
-                correct: 0,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ରାଜତନ୍ତ୍ରରେ ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ରାଜତନ୍ତ୍ରରେ ଜଣେ ରାଜା ବା ରାଣୀ ଶାସନ କରନ୍ତି, ଜନ ସାଧାରଣଙ୍କ ମତ ନିଆ ଯାଏ ନାହିଁ ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "🗳️ ଗଣତନ୍ତ୍ର ମାନେ କ'ଣ ?",
-                options: ["ରାଜା ଦେଶ ଚଲାଏ", "ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଗଣତନ୍ତ୍ର ମାନେ ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଗଣତନ୍ତ୍ର ମାନେ ଜନ ସାଧାରଣ ନିଜ ନେତା ନିଜେ ଭୋଟ ଦ୍ୱାରା ବାଛନ୍ତି ।"
-            }
-        ]
-    },
-
-    {
-        id: 3,
-        lessonAudio: "https://audio.evidya.de/SL1R3.mp3",
-        lessonText: "ପାଠ ୩: ଆମ ଦେଶରେ କେଉଁ ପ୍ରକାର ଶାସନ ବ୍ୟବସ୍ଥା ଚାଲିଛି ? — ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର । ଏଠି କୌଣସି ରାଜା ନାହାଁନ୍ତି । ଜନ ସାଧାରଣ ଭୋଟ ଦ୍ୱାରା ନିଜ ପ୍ରତିନିଧି ବାଛନ୍ତି ଓ ସେହି ପ୍ରତିନିଧିମାନେ ଆଇନ ତିଆରି କରି ଦେଶ ଚଳାନ୍ତି । ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଦିନ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ରୂପେ ଘୋଷିତ ହୋଇଥିଲା — ସେଥିପାଇଁ ଆମେ ସେ ଦିନ ଗଣତନ୍ତ୍ର ଦିବସ ପାଳୁ ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "🇮🇳 ଭାରତରେ କେଉଁ ପ୍ରକାର ଶାସନ ବ୍ୟବସ୍ଥା ଅଛି ?",
-                options: ["ରାଜତନ୍ତ୍ର", "ଗଣତନ୍ତ୍ର", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "📅 ଆମେ ଗଣତନ୍ତ୍ର ଦିବସ କେଉଁ ଦିନ ପାଳୁ ?",
-                options: ["୧୫ ଅଗଷ୍ଟ", "୨୬ ଜାନୁଆରୀ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ୨୬ ଜାନୁଆରୀ ଦିନ ଗଣତନ୍ତ୍ର ଦିବସ ପାଳୁ, କାରଣ ସେଦିନ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ରୂପେ ଘୋଷିତ ହୋଇଥିଲା ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ୨୬ ଜାନୁଆରୀ ଦିନ ଗଣତନ୍ତ୍ର ଦିବସ ପାଳୁ, କାରଣ ସେଦିନ ଭାରତ ଏକ ଗଣତାନ୍ତ୍ରିକ ରାଷ୍ଟ୍ର ରୂପେ ଘୋଷିତ ହୋଇଥିଲା ।"
-            }
-        ]
-    },
-
-    {
-        id: 4,
-        lessonAudio: "https://audio.evidya.de/SL1R4.mp3",
-        lessonText: "ପାଠ ୪: ଗଣତନ୍ତ୍ରରେ କିଏ କାହାକୁ ଶାସନ କରେ ? — ଗଣତନ୍ତ୍ରରେ କୌଣସି ଏକ ବ୍ୟକ୍ତି ଶାସନ କରନ୍ତି ନାହିଁ । ଏଠି ଆଇନ ଶାସନ କରେ । ଆଇନ ଆଗରେ ଧନୀ, ଗରିବ, ନେତା, ଅଧିକାରୀ — ସମସ୍ତେ ସମାନ । ଆଇନ ଯାହା କହେ, ସମସ୍ତ ଲୋକ ତାହା ମାନିବାକୁ ବାଧ୍ୟ । ନେତା ବି ଆଇନ ଠାରୁ ବଡ ନୁହଁନ୍ତି ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "⚖️ ଗଣତନ୍ତ୍ରରେ କିଏ ଶାସନ କରେ ?",
-                options: ["ଜଣେ ଶକ୍ତିଶାଳୀ ନେତା", "ଆଇନ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଗଣତନ୍ତ୍ରରେ ଆଇନ ଶାସନ କରେ, କୌଣସି ଏକ ବ୍ୟକ୍ତି ନୁହଁନ୍ତି ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଗଣତନ୍ତ୍ରରେ ଆଇନ ଶାସନ କରେ, କୌଣସି ଏକ ବ୍ୟକ୍ତି ନୁହଁନ୍ତି ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "ଆଇନ ଆଗରେ ଧନୀ ଓ ଗରିବ ସମାନ କି ?",
-                options: ["ନାହିଁ, ଧନୀ ଲୋକ ଉପରେ ଆଇନ ଲାଗୁ ହୁଏ ନାହିଁ", "ହଁ, ଆଇନ ଆଗରେ ସମସ୍ତେ ସମାନ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଇନ ଆଗରେ ଧନୀ, ଗରିବ, ନେତା, ଅଧିକାରୀ ସମସ୍ତେ ସମାନ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଇନ ଆଗରେ ଧନୀ, ଗରିବ, ନେତା, ଅଧିକାରୀ ସମସ୍ତେ ସମାନ ।"
-            }
-        ]
-    },
-
-    {
-        id: 5,
-        lessonAudio: "https://audio.evidya.de/SL1R5.mp3",
-        lessonText: "ପାଠ ୫: ଆଇନ କେଉଁ ଆଧାରରେ ବନେ ? — ଦେଶର ସବୁ ଆଇନ ସଂବିଧାନ ଆଧାରରେ ବନେ । ସଂବିଧାନ ହେଉଛି ଦେଶର ସର୍ବୋଚ୍ଚ ଆଇନ — ଏଥିରେ ଦେଶ ଚଳାଇବାର ସମସ୍ତ ନିୟମ ଲେଖା ଥାଏ । କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ । ଭାରତର ସଂବିଧାନ ୨୬ ଜାନୁଆରୀ ୧୯୫୦ ଦିନ ଲାଗୁ ହୋଇଥିଲା ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "📜 ଦେଶର ସବୁ ଆଇନ କେଉଁ ଆଧାରରେ ବନେ ?",
-                options: ["ନେତାଙ୍କ ଇଚ୍ଛା ଅନୁସାରେ", "ସଂବିଧାନ ଆଧାରରେ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦେଶର ସବୁ ଆଇନ ସଂବିଧାନ ଆଧାରରେ ବନେ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦେଶର ସବୁ ଆଇନ ସଂବିଧାନ ଆଧାରରେ ବନେ ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "ସଂବିଧାନ ବିରୁଦ୍ଧ ଆଇନ ହୋଇ ପାରିବ କି ?",
-                options: ["ହଁ, ହୋଇ ପାରିବ", "ନାହିଁ, କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । କୌଣସି ଆଇନ ସଂବିଧାନ ବିରୁଦ୍ଧ ହୋଇ ପାରିବ ନାହିଁ ।"
-            }
-        ]
-    },
-
-    {
-        id: 6,
-        lessonAudio: "https://audio.evidya.de/SL1R6.mp3",
-        lessonText: "ପାଠ ୬: ଆଇନ କିଏ ବନାଏ ? — ଦେଶରେ ଆଇନ ବନାଇବା ପାଇଁ ଦୁଇଟି ସଂସ୍ଥା ଅଛି । ସଂସଦ ସମଗ୍ର ଦେଶ ପାଇଁ କେନ୍ଦ୍ର ଆଇନ ବନାଏ । ବିଧାନସଭା ରାଜ୍ୟ ପାଇଁ ରାଜ୍ୟ ଆଇନ ବନାଏ । ସଂସଦ ର ସଦସ୍ୟ ଙ୍କୁ ସାଂସଦ (MP) ଓ ବିଧାନସଭା ର ସଦସ୍ୟ ଙ୍କୁ ବିଧାୟକ (MLA) କୁହାଯାଏ । ଜନ ସାଧାରଣ ପ୍ରତି ୫ ବର୍ଷ ରେ ଭୋଟ ଦ୍ୱାରା ଏହି ପ୍ରତିନିଧି ବାଛନ୍ତି ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "🏢 ସମଗ୍ର ଦେଶ ପାଇଁ ଆଇନ ବନାଇବା ପାଇଁ କେଉଁ ସଂସ୍ଥା ଅଛି ?",
-                options: ["ବିଧାନସଭା", "ସଂସଦ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ସଂସଦ ସମଗ୍ର ଦେଶ ପାଇଁ କେନ୍ଦ୍ର ଆଇନ ବନାଏ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ସଂସଦ ସମଗ୍ର ଦେଶ ପାଇଁ କେନ୍ଦ୍ର ଆଇନ ବନାଏ ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "🙋 MLA ମାନେ କ'ଣ ଓ ସେ କ'ଣ କରନ୍ତି ?",
-                options: ["ସାଂସଦ — ସଂସଦ ରେ ଦେଶ ପାଇଁ ଆଇନ ବନାନ୍ତି", "ବିଧାୟକ — ବିଧାନସଭା ରେ ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାନ୍ତି", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — MLA ମାନେ ବିଧାୟକ । ସେ ବିଧାନସଭାରେ ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାନ୍ତି ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । MLA ମାନେ ବିଧାୟକ । ସେ ବିଧାନସଭାରେ ରାଜ୍ୟ ପାଇଁ ଆଇନ ବନାନ୍ତି ।"
-            }
-        ]
-    },
-
-    {
-        id: 7,
-        lessonAudio: "https://audio.evidya.de/SL1R7.mp3",
-        lessonText: "ପାଠ ୭: ଆଇନକୁ କିଏ କାର୍ଯ୍ୟକାରୀ କରେ ? — ଆଇନ ତିଆରି ହେଲେ ଯଥେଷ୍ଟ ନୁହଁ — ତାହା ଦୈନନ୍ଦିନ ଜୀବନ ରେ ଚଳାଇବାକୁ ହୁଏ । ସଂସଦ ତିଆରି କରିଥିବା କେନ୍ଦ୍ର ଆଇନ କେନ୍ଦ୍ର ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି । ବିଧାନସଭା ତିଆରି କରିଥିବା ରାଜ୍ୟ ଆଇନ ରାଜ୍ୟ ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି । ଆଇନ ଲାଗୁ କରୁଥିବା ଅଧିକାରୀ ମାନଙ୍କୁ ଲୋକ ସେବକ (Public Servant) କୁହାଯାଏ ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "🏛️ କେନ୍ଦ୍ର ଆଇନ କିଏ କାର୍ଯ୍ୟକାରୀ କରେ ?",
-                options: ["ରାଜ୍ୟ ସରକାର", "କେନ୍ଦ୍ର ସରକାର", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ସଂସଦ ତିଆରି କରିଥିବା କେନ୍ଦ୍ର ଆଇନ କେନ୍ଦ୍ର ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ସଂସଦ ତିଆରି କରିଥିବା କେନ୍ଦ୍ର ଆଇନ କେନ୍ଦ୍ର ସରକାର କାର୍ଯ୍ୟକାରୀ କରନ୍ତି ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "👨‍💼 ଲୋକ ସେବକ (Public Servant) ମାନେ କ'ଣ ?",
-                options: ["ଯେଉଁ ନେତା ଭୋଟ ଲୋଡ଼ନ୍ତି", "ସରକାର ହୈ ଆଇନ ଲାଗୁ କରୁଥିବା ଅଧିକାରୀ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ସରକାର ହୈ ଆଇନ ଲାଗୁ କରୁଥିବା ଅଧିକାରୀ ମାନଙ୍କୁ ଲୋକ ସେବକ କୁହାଯାଏ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ସରକାର ହୈ ଆଇନ ଲାଗୁ କରୁଥିବା ଅଧିକାରୀ ମାନଙ୍କୁ ଲୋକ ସେବକ କୁହାଯାଏ ।"
-            }
-        ]
-    },
-
-    {
-        id: 8,
-        lessonAudio: "https://audio.evidya.de/SL1R8.mp3",
-        lessonText: "ପାଠ ୮: ଆଇନକୁ କିଏ ମାନେ ? — ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ — ସାଧାରଣ ଲୋକ, ଅଧିକାରୀ, ନେତା ସମସ୍ତେ । ଜଣେ ନାଗରିକ ଭାବେ ଆମକୁ ଦୁଇ ପ୍ରକାର ଆଇନ ମାନିବାକୁ ହୁଏ — କେନ୍ଦ୍ର ଆଇନ ଓ ରାଜ୍ୟ ଆଇନ । ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ — ଜୋରିମାନା ବା ଜେଲ । ନେତା ଆଇନ ନ ମାନିଲେ ତାଙ୍କୁ ବି ଦଣ୍ଡ ମିଳିବ ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "🧑 ଆଇନ କିଏ ମାନିବ ?",
-                options: ["ଶୁଧୁ ସାଧାରଣ ଲୋକ", "ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ — ସାଧାରଣ ଲୋକ, ଅଧିକାରୀ, ନେତା ସମସ୍ତେ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ — ସାଧାରଣ ଲୋକ, ଅଧିକାରୀ, ନେତା ସମସ୍ତେ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦେଶର ପ୍ରତ୍ୟେକ ନାଗରିକ ଆଇନ ମାନିବାକୁ ବାଧ୍ୟ — ସାଧାରଣ ଲୋକ, ଅଧିକାରୀ, ନେତା ସମସ୍ତେ ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "ଆଇନ ନ ମାନିଲେ କ'ଣ ହୁଏ ?",
-                options: ["କିଛି ହୁଏ ନାହିଁ", "ଦଣ୍ଡ ମିଳେ — ଜୋରିମାନା ବା ଜେଲ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ — ଜୋରିମାନା ବା ଜେଲ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଇନ ନ ମାନିଲେ ଦଣ୍ଡ ମିଳେ — ଜୋରିମାନା ବା ଜେଲ ।"
-            }
-        ]
-    },
-
-    {
-        id: 9,
-        lessonAudio: "https://audio.evidya.de/SL1R9.mp3",
-        lessonText: "ପାଠ ୯: ଆଇନ ବନାଇବାରେ, କାର୍ଯ୍ୟକାରୀ କରାଇବାରେ ବା ପାଳନ କରିବାରେ ଭୁଲ ହେଲେ କ'ଣ ହୁଏ ? — ଏହି ତିନୋଟି ଅବସ୍ଥାରେ ବିଚାର ବ୍ୟବସ୍ଥା (Judiciary) ନ୍ୟାୟ ଦିଏ । ବିଚାର ବ୍ୟବସ୍ଥା ତିନି ସ୍ତରରେ କାମ କରେ — ଜିଲ୍ଲା ସ୍ତରରେ ଜିଲ୍ଲା ଆଦାଲତ, ରାଜ୍ୟ ସ୍ତରରେ ହାଇ କୋର୍ଟ, ଓ ଦେଶ ସ୍ତରରେ ସୁପ୍ରିମ କୋର୍ଟ । ସୁପ୍ରିମ କୋର୍ଟ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ — ଏହାର ନିର୍ଣ୍ଣୟ ଚୂଡ଼ାନ୍ତ, ସରକାର ବି ଏହା ମାନିବାକୁ ବାଧ୍ୟ ।",
-        understandAudio: "audio-url-here",
-        mcq: [
-            {
-                questionAudio: "audio-url-here",
-                q: "⚖️ ଆଇନ ଭଙ୍ଗ ହେଲେ ବା ଅନ୍ୟାୟ ହେଲେ କ'ଣ କରାଯାଏ ?",
-                options: ["ଚୁପ ରହିବ", "ବିଚାର ବ୍ୟବସ୍ଥା (Judiciary) ନ୍ୟାୟ ଦିଏ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଇନ ଭଙ୍ଗ ହେଲେ ବା ଅନ୍ୟାୟ ହେଲେ ବିଚାର ବ୍ୟବସ୍ଥା ନ୍ୟାୟ ଦିଏ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଇନ ଭଙ୍ଗ ହେଲେ ବା ଅନ୍ୟାୟ ହେଲେ ବିଚାର ବ୍ୟବସ୍ଥା ନ୍ୟାୟ ଦିଏ ।"
-            },
-            {
-                questionAudio: "audio-url-here",
-                q: "🏛️ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ କ'ଣ ?",
-                options: ["ହାଇ କୋର୍ଟ", "ସୁପ୍ରିମ କୋର୍ଟ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "audio-url-here",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "audio-url-here",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ସୁପ୍ରିମ କୋର୍ଟ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ — ଏହାର ନିର୍ଣ୍ଣୟ ଚୂଡ଼ାନ୍ତ ।",
-                wrongAudio: "audio-url-here",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ସୁପ୍ରିମ କୋର୍ଟ ଦେଶର ସର୍ବୋଚ୍ଚ ଆଦାଲତ — ଏହାର ନିର୍ଣ୍ଣୟ ଚୂଡ଼ାନ୍ତ ।"
-            }
-        ]
-    }
-];
-    
-let revisionState = {
-    active: false,
-    lessonIndex: 0,
-    mcqIndex: 0,
-    audio: null
-};
-
-function stopRevisionAudio() {
-    if (revisionState.audio) {
-        revisionState.audio.pause();
-        revisionState.audio = null;
-    }
-}
-
-function playRevisionAudio(url, onEnd) {
-    stopRevisionAudio();
-    if (!url || !isValidAudioUrl(url)) {
-        if (onEnd) setTimeout(onEnd, 100);
-        return;
-    }
-    revisionState.audio = new Audio(url);
-    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
-    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
-    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
-}
-
-function setRevisionScreen(html) {
-    const screen = document.getElementById('revisionScreen');
-    if (screen) {
-        screen.style.background = 'white';
-        screen.style.overflow = 'hidden';
-        screen.style.display = 'flex';
-        screen.style.flexDirection = 'column';
-        screen.style.alignItems = 'stretch';
-        screen.style.justifyContent = 'flex-start';
-        screen.style.padding = '0';
-        screen.innerHTML = html;
-    }
-}
-
-function rvTypewrite(elementId, text, speed, onDone) {
-    const el = document.getElementById(elementId);
-    if (!el) { if (onDone) onDone(); return; }
-
-    el.innerHTML = '';
-
-    const chars = Array.from(text);
-    let i = 0;
-    let current = '';
-
-    function next() {
-        if (i < chars.length) {
-            current += chars[i];
-            el.innerHTML = current;
-            i++;
-            setTimeout(next, speed || 35);
-        } else {
-            if (onDone) onDone();
-        }
-    }
-
-    next();
-}
     
 function toggleMedia(type) {
-    const logoDisplay  = document.getElementById('logoDisplay');
-    const audioDisplay = document.getElementById('audioDisplay');
-    const videoDisplay = document.getElementById('videoDisplay');
-    const revisionBoard = document.getElementById('revisionBoard');
-    const audioIframe  = document.getElementById('audioIframe');
-    const videoIframe  = document.getElementById('videoIframe');
-    const audioBtn     = document.getElementById('audioToggleBtn');
-    const videoBtn     = document.getElementById('videoToggleBtn');
-    const revBtn       = document.getElementById('revisionToggleBtn');
+    const logoDisplay   = document.getElementById('logoDisplay');
+    const audioDisplay  = document.getElementById('audioDisplay');
+    const videoDisplay  = document.getElementById('videoDisplay');
+    const debateDisplay = document.getElementById('debateDisplay');
+    const audioIframe   = document.getElementById('audioIframe');
+    const videoIframe   = document.getElementById('videoIframe');
+    const debateIframe  = document.getElementById('debateIframe');
+    const audioBtn      = document.getElementById('audioToggleBtn');
+    const videoBtn      = document.getElementById('videoToggleBtn');
+    const debateBtn     = document.getElementById('debateToggleBtn');
 
     const resetAllBtnStyles = () => {
-        [audioBtn, videoBtn, revBtn].forEach(b => {
+       [audioBtn, videoBtn, debateBtn].forEach(b => {
             if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
         });
     };
 
     const hideAll = () => {
-        audioIframe.src = '';
-        videoIframe.src = '';
-        audioDisplay.style.display = 'none';
-        videoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'none';
-        logoDisplay.style.display = 'block';
-        stopRevisionAudio();
-        revisionState.active = false;
+        videoIframe.src   = '';
+         const ap = document.getElementById('audioPlayer');
+    if (ap) { ap.pause(); ap.currentTime = 0; }
+    const dp = document.getElementById('debatePlayer');
+    if (dp) { dp.pause(); dp.currentTime = 0; }
+        audioDisplay.style.display   = 'none';
+        videoDisplay.style.display   = 'none';
+      
+        debateDisplay.style.display  = 'none';
+        logoDisplay.style.display    = 'block';
+       
         resetAllBtnStyles();
     };
 
-    if (type === 'audio') {
-        if (audioDisplay.style.display === 'block') {
-            hideAll();
-            return;
-        }
+  if (type === 'audio') {
+    if (audioDisplay.style.display === 'flex') {
         hideAll();
-        logoDisplay.style.display = 'none';
-        audioDisplay.style.display = 'block';
-        audioIframe.src = audioIframe.dataset.src;
-        audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        return;
     }
+    hideAll();
+    logoDisplay.style.display  = 'none';
+    audioDisplay.style.display = 'flex';
+    const ap = document.getElementById('audioPlayer');
+    if (ap) ap.play();
+    audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 
     if (type === 'video') {
         if (videoDisplay.style.display === 'block') {
@@ -6971,266 +6326,28 @@ function toggleMedia(type) {
             return;
         }
         hideAll();
-        logoDisplay.style.display = 'none';
+        logoDisplay.style.display  = 'none';
         videoDisplay.style.display = 'block';
         videoIframe.src = videoIframe.dataset.src;
         videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
     }
 
-    if (type === 'revision') {
-        if (revisionState.active) {
-            hideAll();
-            return;
-        }
-        hideAll();
-        logoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'block';
-        revisionState.active = true;
-        revisionState.lessonIndex = 0;
-        revisionState.mcqIndex = 0;
-        revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
-        startRevisionLesson();
-    }
-}
-
-function startRevisionLesson() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
-                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
-            </div>
-
-            <div id="rvLessonTextDiv" style="flex:1;overflow-y:auto;min-height:0;margin-bottom:6px;">
-                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
-            </div>
-
-            <div id="rvUnderstandButtons" style="display:none;flex-direction:column;gap:6px;flex-shrink:0;">
-                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
-                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
-            </div>
-        </div>
-    `);
-
-    let textDone = false;
-    let audioDone = false;
-
-    function checkBothDone() {
-        if (textDone && audioDone) {
-            const textDiv = document.getElementById('rvLessonTextDiv');
-            if (textDiv) textDiv.style.display = 'none';
-
-            const btns = document.getElementById('rvUnderstandButtons');
-            if (btns) {
-                btns.style.display = 'flex';
-                btns.style.flexDirection = 'column';
-            }
-            playRevisionAudio(lesson.understandAudio, null);
-        }
-    }
-
-    playRevisionAudio(lesson.lessonAudio, () => {
-        audioDone = true;
-        checkBothDone();
-    });
-
-    setTimeout(() => {
-        rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
-            textDone = true;
-            checkBothDone();
-        });
-    }, 300);
-}
-    
-function rvUnderstood(yes) {
-    if (!yes) {
-        startRevisionLesson();
-        return;
-    }
-    revisionState.mcqIndex = 0;
-    showRevisionMCQ();
-}
-
-function showRevisionMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const qNum = revisionState.mcqIndex + 1;
-    const total = lesson.mcq.length;
-    const current = revisionState.lessonIndex + 1;
-
-    playRevisionAudio(mcq.questionAudio, null);
-
-    const optColors = [
-        'linear-gradient(135deg,#667eea,#764ba2)',
-        'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
-        'linear-gradient(135deg,#6b7280,#4b5563)'
-    ];
-
-   setRevisionScreen(`
-    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
-            
-            <!-- Header badge -->
-            <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
-            </div>
-
-<div style="margin-bottom:12px;">
-    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
-        ${mcq.q}
-    </p>
-</div>
-
-      <div style="margin-top:10px;">
-    <select onchange="rvAnswer(parseInt(this.value))" style="
-        width:100%;
-        padding:12px;
-        font-size:15px;
-        font-weight:bold;
-        border:2px solid #667eea;
-        border-radius:10px;
-        background:white;
-        color:#111;
-        cursor:pointer;
-        appearance:auto;
-    ">
-        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
-        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
-    </select>
-</div>
-        </div>
-    `);
-}
-
-
-function rvSubmitAnswer() {
-    const sel = document.getElementById('rvSelect');
-    if (!sel || sel.value === '') {
-        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
-        return;
-    }
-    rvAnswer(parseInt(sel.value));
-}
-
-    
-function rvAnswer(optionIndex) {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const isIDontKnow = (optionIndex === mcq.options.length - 1);
-    const isCorrect = (optionIndex === mcq.correct);
-
-   if (isCorrect) {
-    playRevisionAudio(mcq.correctAudio, null);
-    
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
-    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
-    
-    // Decide what the forward button says and does
-    let forwardBtn = '';
-    if (isLastMCQ && isLastLesson) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
-    } else if (isLastMCQ) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
-    } else {
-        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
-    }
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-            <div style="font-size:34px;">🌟</div>
-            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
-            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
-                ${forwardBtn}
-            </div>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
-            // Show the forward button only after text finishes typing
-            const fwd = document.getElementById('rvForwardBtn');
-            if (fwd) fwd.style.display = 'block';
-        });
-    }, 200);
-    return;
-}
-
-    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
-    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
-    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
-    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
-    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
-
-    playRevisionAudio(feedbackAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
-            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
-                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
-            </div>
-            <div style="flex:1;overflow-y:auto;">
-              <p id="rvFeedbackText" style="
-    font-size: 13px;
-    font-weight: bold;
-    color: #111;
-    line-height: 1.6;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
-            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
-    }, 200);
-}
    
-function advanceMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    revisionState.mcqIndex++;
-    if (revisionState.mcqIndex < lesson.mcq.length) {
-        showRevisionMCQ();
-    } else {
-        showLessonCompletePrompt();
+
+  if (type === 'debate') {
+    if (debateDisplay.style.display === 'flex') {
+        hideAll();
+        return;
     }
+    hideAll();
+    logoDisplay.style.display   = 'none';
+    debateDisplay.style.display = 'flex';
+    const dp = document.getElementById('debatePlayer');
+    if (dp) dp.play();
+    debateBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 }
 
-function showLessonCompletePrompt() {
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-    const isLast = (current === total);
-
-    playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
-            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
-            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
-            ${isLast
-                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
-                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
-                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
-            }
-        </div>
-    `);
-}
-    
-function goNextLesson() {
-    revisionState.lessonIndex++;
-    revisionState.mcqIndex = 0;
-    startRevisionLesson();
-}  
-    
     
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
