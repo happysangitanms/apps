@@ -832,10 +832,6 @@ body > div:first-child {
 }
 
 
-#writPracticeContainer .assistant-iframe-wrapper {
-    height: 700px; /* or 650px, 750px - whatever increase you want */
-}
-
 .answer-section {
     text-align: justify;
     display: inline-block;
@@ -2243,7 +2239,7 @@ body > div:first-child {
         <button id="stqBtn" class="test-btn summary">ଅତି ସଂକ୍ଷିପ୍ତ ପ୍ରଶ୍ନୋତ୍ତର</button>
         <button id="summaryBtn" class="test-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
         <button id="questionBtn" class="test-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">ସଂକ୍ଷିପ୍ତ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
-        <button id="practiceBtn" class="test-btn" onclick="openWritPractice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଅଭ୍ଯାସ(Practical) ପରୀକ୍ଷା</button>
+      <button id="practiceBtn" class="test-btn" onclick="openCertificateFromExam()" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%);">🏆 ସାର୍ଟିଫିକେଟ୍</button>
         
     </div>
                              <div id="scoreDisplay" class="score-display" style="display: none;">
@@ -2334,38 +2330,84 @@ body > div:first-child {
         </div>
     </div>
 </div>
-           
-           
- <!-- Practice Container -->
-<div id="writPracticeContainer" class="assistant-container">
-    <div class="assistant-header">
-        <h3>ସମ୍ପୂର୍ଣ୍ଣ ଅଭ୍ୟାସ ପରୀକ୍ଷା</h3>
-        <button class="assistant-close-btn" onclick="closeWritPractice()">✕</button>
-    </div>
-    <div class="assistant-iframe-wrapper">
-        <div class="assistant-loading" id="writPracticeLoading">
-            <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଅଭ୍ଯାସ ପରୀକ୍ଷା ଲୋଡ୍ ହେଉଛି...</p>
-        </div>
-        <iframe 
-            id="writPracticeIframe"
-            src="" 
-            allow="clipboard-write"
-            style="display: none;">
-        </iframe>
-    </div>
-    <div class="assistant-info">
-        💡 ଏହା ଏକ ପ୍ରାକ୍ଟିକାଲ୍ ପରୀକ୍ଷା । ବିଷୟବସ୍ତୁ ସମ୍ବନ୍ଧୀୟ ବ୍ୟବହାରିକ ଜ୍ଞାନର ପରୀକ୍ଷା । 
-    </div>
-</div>               
-            <div id="testContainer"></div>
+
+
+ <div id="testContainer"></div>
 
 <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Three buttons side by side - FIXED -->
-    <div style="display: flex; justify-content: space-between; 
-                align-items: center; margin-bottom: 8px; 
-                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
+        display: inline-block;
+        padding: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 320px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
+
+    <!-- AUDIO PLAYER - Hidden by default -->
+<div id="audioDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎙️</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">ଆଲୋଚନା ଶୁଣନ୍ତୁ</p>
+    <audio id="audioPlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STREC1A.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</div>
+        
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/bv3WSnhLCS8?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">DEBATE ଶୁଣନ୍ତୁ</p>
+    <audio id="debatePlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STREC1D.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    </div>
+</div>
+
+
+    <!-- Three buttons side by side - NOW BELOW the placeholder -->
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 16px;
+            width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
         
         <button id="audioToggleBtn" 
             onclick="toggleMedia('audio')"
@@ -2377,14 +2419,14 @@ body > div:first-child {
             ଆଲୋଚନା
         </button>
 
-        <button id="revisionToggleBtn"
-            onclick="toggleMedia('revision')"
+        <button id="debateToggleBtn"
+            onclick="toggleMedia('debate')"
             style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
                    color: white; border: none; border-radius: 8px;
                    padding: 8px 0; font-size: 12px; font-weight: bold;
                    cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
                    width: 100px; height: 36px; flex-shrink: 0;">
-            ରିଭିଜନ୍
+            ତର୍କ ବିତର୍କ
         </button>
 
         <button id="videoToggleBtn" 
@@ -2396,95 +2438,10 @@ body > div:first-child {
                    width: 100px; height: 36px; flex-shrink: 0;">
             ଭିଡିଓ
         </button>
-
     </div>
-
-    <!-- Media Placeholder - same size as logo -->
-<div id="mediaPlaceholder" style="
-    display: inline-block;
-    padding: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 320px;
-    position: relative;
-    overflow: hidden;
-">
-    <!-- DEFAULT: Logo Image -->
-    <div id="logoDisplay">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
-             alt="Logo" 
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
-    </div>
-
-    <!-- AUDIO PLAYER - Hidden by default -->
-    <div id="audioDisplay" style="display: none;">
-        <iframe
-            id="audioIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/hsBknWzG2lk?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- VIDEO PLAYER - Hidden by default -->
-    <div id="videoDisplay" style="display: none;">
-        <iframe
-            id="videoIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/SdixKeFws_o?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- REVISION WHITEBOARD - sibling of audio/video, same level -->
-    <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden;">
-        <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden; background: white;">
-        </div>
-    </div>
-
-</div>
-     
-    <p class="info-text" style="
-        margin-top: 15px;
-        font-size: 14px;
-        color: #000000;
-        font-weight: bold;
-    "></p>
 </div>
 
-          <!-- Add this after the Mermaid button section -->
-<button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
-    🏆 ଏଠାରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିବା ...
-</button> 
-           
+
 <!-- Dropdown Menu -->
 <div class="assistant-dropdown-wrapper">
     <button id="assistantDropdownBtn" class="assistant-dropdown-btn">
@@ -2662,7 +2619,11 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-
+function openCertificateFromExam() {
+    calculateCertificateScores();
+    loadStudentDetails();
+    document.getElementById('certificateModal').classList.add('active');
+}
 
 
 // =============================================
@@ -2757,7 +2718,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2833,137 +2794,180 @@ document.addEventListener('visibilitychange', () => {
     }
 });
     }
-// ============================================
-// IMPORTANT: Add your loadSentence() and other
-// app-specific functions below this line
-// ============================================
+
 
 const wordData = {
     currentWord: 0,
     words: [
         {
-            word: "SAME",
-            odia: "ଏକା",
-            emoji: "🟰",
-            odiaUse: "ଏକା ମାନେ — ଦୁଇଟି ଜିନିଷ ଦେଖିବାରେ, ଆକୃତିରେ ବା ରଙ୍ଗରେ ଏକ ରକମ । ଦୁଇଟି ଲାଲ ଗୋଲ ବଲ ଏକା ଦେଖାଯାଏ । ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧିଲେ ସେ ଦୁଇ ଜଣ ଏକା ଦେଖାଯାଆନ୍ତି ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "REASONING",
+            odia: "ଚିନ୍ତା ଶକ୍ତି",
+            emoji: "🧠",
+            odiaUse: "ରିଜନିଂ ମାନେ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଭାବି ଭାବି ଉତ୍ତର ଦେବାକୁ ରିଜନିଂ କହନ୍ତି। ରିଜନିଂ ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "DIFFERENT",
-            odia: "ଭିନ୍ନ",
-            emoji: "🔀",
-            odiaUse: "ଭିନ୍ନ ମାନେ — ଦୁଇଟି ଜିନିଷ ଏକ ରକମ ନୁହେଁ, ଅଲଗା । ଏକ ରଙ୍ଗିନ ବଲ ଓ ଏକ ଚୌକ ବାକ୍ସ ଭିନ୍ନ ଆକୃତିର । ଆମ ଘଡି ଓ ଆମ ବ୍ୟାଗ ଭିନ୍ନ ଜିନିଷ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "PATTERN",
+            odia: "ଧାଞ୍ଚା",
+            emoji: "🔁",
+            odiaUse: "ପ୍ୟାଟର୍ନ ମାନେ ଗୋଟିଏ ନିୟମ ଅନୁସାରେ ଚାଲୁଥିବା କ୍ରମ। ସେ ନିୟମ ଖୋଜି ପରବର୍ତ୍ତୀ ଜିନିଷ କହିବାକୁ ହୁଏ। ଯଥା — ୨, ୪, ୬, ୮ ପରେ ୧୦ ଆସିବ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "BIG",
-            odia: "ବଡ",
-            emoji: "🐘",
-            odiaUse: "ବଡ ମାନେ — ଆକାରରେ ଯାହା ଅଧିକ । ହାତୀ ଏକ ବଡ ଜୀବ । ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "ODD ONE OUT",
+            odia: "ଅଲଗା ଜିନିଷ",
+            emoji: "🔍",
+            odiaUse: "ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ ଗୋଟିଏ ଅଲଗା ଥାଏ। ସେ ଅଲଗା ଜିନିଷଟିକୁ ଖୋଜିବାକୁ ହୁଏ। ଯଥା — APPLE, BANANA, GRAPES ଫଳ, CARROT ପରିବା।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "SMALL",
-            odia: "ଛୋଟ",
-            emoji: "🐜",
-            odiaUse: "ଛୋଟ ମାନେ — ଆକାରରେ ଯାହା କମ । ପିମ୍ପୁଡ଼ି ଏକ ଛୋଟ ଜୀବ । ବଲ୍ ଟି ଆମ ବ୍ୟାଗ ଠାରୁ ଛୋଟ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "ANALOGY",
+            odia: "ସମ୍ପର୍କ",
+            emoji: "🔗",
+            odiaUse: "ଆନାଲୋଜି ମାନେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝିବା। ଗୋଟିଏ ସମ୍ପର୍କ ଦେଖି ଅନ୍ୟ ଉତ୍ତର ଦେବାକୁ ହୁଏ। ଯଥା — COW ର ଛୁଆ CALF, DOG ର ଛୁଆ PUPPY।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "HEAVY",
-            odia: "ଭାରି",
-            emoji: "🪨",
-            odiaUse: "ଭାରି ମାନେ — ଉଠାଇବାରେ ଯାହା ଅଧିକ ଭାର ଲାଗେ । ପଥର ଭାରି ଜିନିଷ । ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି, ସହଜରେ ଉଠାଯାଏ ନାହିଁ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "SEQUENCING",
+            odia: "କ୍ରମ ସଜାଇବା",
+            emoji: "📋",
+            odiaUse: "ସିକ୍ୱେନ୍ସିଂ ମାନେ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା। ସ୍ୱାଭାବିକ କ୍ରମ ଅନୁସାରେ ସଜାଅ। ଯଥା — MORNING, AFTERNOON, EVENING, NIGHT।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "LIGHT",
-            odia: "ହାଲୁକା",
-            emoji: "🪶",
-            odiaUse: "ହାଲୁକା ମାନେ — ଉଠାଇବାରେ ଯାହା ଭାର କମ । ପକ୍ଷୀ ର ପାଲକ ହାଲୁକା । ଏକ ଖଣ୍ଡ ଶୁଖିଲ ପତ୍ର ଉଠାଇଲେ ଆମେ ଅନୁଭବ କରୁ ଏ ଜିନିଷ ହାଲୁକା ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            word: "CLASSIFICATION",
+            odia: "ଗୋଷ୍ଠୀ ଭାଗ",
+            emoji: "🗂️",
+            odiaUse: "କ୍ଲାସିଫିକେଶନ ମାନେ ଜିନିଷଗୁଡ଼ିକୁ ଦଳ ଦଳ ଭାଗ କରିବା। ଏକ ପ୍ରକାରର ଜିନିଷ ଏକ ଦଳରେ ରଖାଯାଏ। ଯଥା — ଫଳ ଏକ ଦଳ, ପ୍ରାଣୀ ଅନ୍ୟ ଏକ ଦଳ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         },
         {
-            word: "ABOVE",
-            odia: "ଉପର",
-            emoji: "⬆️",
-            odiaUse: "ଉପର ମାନେ — ଯାହା ଅଧିକ ଉଚ୍ଚ ସ୍ଥାନରେ ଅଛି । ଆକାଶ ଆମ ଉପରରେ ଅଛି । ଟେବୁଲ ଉପରରେ ଆମ ବହି ରଖାଯାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "BELOW",
-            odia: "ତଳ",
-            emoji: "⬇️",
-            odiaUse: "ତଳ ମାନେ — ଯାହା ନୀଚ ସ୍ଥାନରେ ଅଛି । ମାଟି ଆମ ପାଦ ତଳେ ଅଛି । ଚୌକି ଟେବୁଲ ତଳରେ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "INSIDE",
-            odia: "ଭିତର",
-            emoji: "📦",
-            odiaUse: "ଭିତର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ଭିତରେ । ବହି ଥଳି ଭିତରରେ ଅଛି । ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋକ ଅଛି ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "OUTSIDE",
-            odia: "ବାହାର",
-            emoji: "🚪",
-            odiaUse: "ବାହାର ମାନେ — କୌଣସି ଜିନିଷ ବା ସ୍ଥାନ ର ବାହ୍ୟ ଅଂଶରେ । ଗଛ ଘର ବାହାରେ ଅଛି । ଆମ ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରେ ରହେ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "ORDER",
+            word: "SEQUENCE",
             odia: "କ୍ରମ",
-            emoji: "1️⃣2️⃣3️⃣",
-            odiaUse: "କ୍ରମ ମାନେ — ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ ଭାବରେ ଗୋଟିଏ ପଛରେ ଆଉ ଗୋଟିଏ କରି ସଜାଇ ରଖିବା । ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ଯିଏ ଆଗ ପହଞ୍ଚେ ସେ ପ୍ରଥମ, ତା ପଛ ଜଣ ଦ୍ୱିତୀୟ । ଦୋକାନରେ ସଂଖ୍ୟା ଅନୁଯାୟୀ ଲାଇନ ରେ ଠିଆ ହୁଅ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
+            emoji: "➡️",
+            odiaUse: "ସିକ୍ୱେନ୍ସ ମାନେ ଗୋଟିଏ ନିର୍ଦ୍ଦିଷ୍ଟ କ୍ରମ। ଜୀବନ କ୍ରମ ହେଉଛି — BABY, BOY, YOUNG MAN, OLD MAN। ଋତୁ କ୍ରମ ହେଉଛି — SPRING, SUMMER, AUTUMN, WINTER।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+        },
+        {
+            word: "RULE",
+            odia: "ନିୟମ",
+            emoji: "📏",
+            odiaUse: "ପ୍ରତ୍ୟେକ ପ୍ୟାଟର୍ନ ରେ ଗୋଟିଏ ନିୟମ ଥାଏ। ସେ ନିୟମ ଖୋଜି ଉତ୍ତର ଦେବାକୁ ହୁଏ। ନିୟମ ବୁଝିଲେ ଉତ୍ତର ସହଜ ହୁଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+        },
+        {
+            word: "CATEGORY",
+            odia: "ବର୍ଗ",
+            emoji: "🏷️",
+            odiaUse: "ଏକ ପ୍ରକାରର ଜିନିଷ ଗୋଟିଏ ବର୍ଗରେ ପଡ଼େ। ଯଥା — COW, TIGER, ELEPHANT ସବୁ ପ୍ରାଣୀ ବର୍ଗ। CHAIR ଫର୍ଣ୍ଣିଚର ବର୍ଗ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+        },
+        {
+            word: "DIFFERENCE",
+            odia: "ପାର୍ଥକ୍ୟ",
+            emoji: "⚡",
+            odiaUse: "ଓଡ ଓ‌ୱ‌ନ ଆଉ‌ଟ ରେ ଗୋଟିଏ ଜିନିଷ ଅଲଗା ଥାଏ। ସେ ପାର୍ଥକ୍ୟ ଖୋଜି ଉତ୍ତର ଦେବାକୁ ହୁଏ। ପାର୍ଥକ୍ୟ ବୁଝିଲେ ରିଜନିଂ ସହଜ ହୁଏ।",
+            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
         }
     ]
 };
+    
+const topicsData = [
+    {
+        heading: "Topic-1: ରିଜନିଂ କ'ଣ",
+        audioPoints: [
+            {
+                text: "👉 ରିଜନିଂ ମାନେ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଭାବି ଭାବି ଉତ୍ତର ଦେବାକୁ ରିଜନିଂ କହନ୍ତି। ରିଜନିଂ ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ରିଜନିଂ ମାନେ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ରିଜନିଂ ମାନେ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଭାବି ଭାବି ଉତ୍ତର ଦେବାକୁ ରିଜନିଂ କହନ୍ତି। ରିଜନିଂ ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ରିଜନିଂ ଶିଖିଲେ କ'ଣ ଲାଭ?<br><br><span style='color: green;'>Answer:</span> ରିଜନିଂ ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ। ପିଲାମାନଙ୍କ ଚିନ୍ତା ଶକ୍ତି ବଢ଼େ। ଠିକ୍ ଉତ୍ତର ସହଜରେ ଖୋଜି ହୁଏ।",
+
+            "<span style='color: red;'>Q-3:</span> ରିଜନିଂ କେତେ ପ୍ରକାରର?<br><br><span style='color: green;'>Answer:</span> ରିଜନିଂ ଅନେକ ପ୍ରକାରର ହୁଏ। ଯଥା — PATTERN, ODD ONE OUT, ANALOGY, SEQUENCING, CLASSIFICATION। ଏହି ସବୁ ଚିନ୍ତା ଶକ୍ତି ପରୀକ୍ଷା କରେ।",
+
+            "<span style='color: red;'>Q-4:</span> ରିଜନିଂ ପ୍ରଶ୍ନ କିପରି ସମାଧାନ କରିବ?<br><br><span style='color: green;'>Answer:</span> ପ୍ରଶ୍ନ ଦେଖି ଭଲ ଭାବରେ ଭାବିବ। ଜିନିଷ ଗୁଡ଼ିକ ମଧ୍ୟରେ ସମ୍ପର୍କ ଖୋଜିବ। ସଠିକ ନିୟମ ଜାଣିଲେ ଉତ୍ତର ଦେବ।"
+        ]
+    },
+
+    {
+        heading: "Topic-2: ODD ONE OUT — ଅଲଗା ଜିନିଷ ଖୋଜ",
+        audioPoints: [
+            {
+                text: "👉 ଏଠାରେ ଚାରୋଟି ଜିନିଷ ଦିଆଯାଏ। ସେଥିରୁ ଗୋଟିଏ ଅଲଗା ଥାଏ। ସେ ଅଲଗା ଜିନିଷଟିକୁ ଖୋଜିବାକୁ ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ODD ONE OUT ମାନେ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ODD ONE OUT ମାନେ ଅଲଗା ଜିନିଷ ଖୋଜିବା। ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ ଗୋଟିଏ ଅଲଗା ଥାଏ। ସେ ଅଲଗା ଜିନିଷଟିକୁ ଖୋଜିବାକୁ ହୁଏ।",
+
+            "<span style='color: red;'>Q-2:</span> APPLE, BANANA, GRAPES, CARROT — ଅଲଗା କେଉଁଟି?<br><br><span style='color: green;'>Answer:</span> CARROT ଅଲଗା। APPLE, BANANA, GRAPES ସବୁ ଫଳ। CARROT ହେଉଛି ପରିବା।",
+
+            "<span style='color: red;'>Q-3:</span> COW, TIGER, ELEPHANT, CHAIR — ଅଲଗା କେଉଁଟି?<br><br><span style='color: green;'>Answer:</span> CHAIR ଅଲଗା। COW, TIGER, ELEPHANT ସବୁ ପ୍ରାଣୀ। CHAIR ହେଉଛି ଆସବାବ।",
+
+            "<span style='color: red;'>Q-4:</span> DOG, CAT, FISH, BOOK — ଅଲଗା କେଉଁଟି?<br><br><span style='color: green;'>Answer:</span> BOOK ଅଲଗା। DOG, CAT, FISH ସବୁ ପ୍ରାଣୀ। BOOK ଜୀବ ନୁହେଁ।"
+        ]
+    },
+
+    {
+        heading: "Topic-3: PATTERN — ଧାଞ୍ଚା ଚିହ୍ନ",
+        audioPoints: [
+            {
+                text: "👉 ପ୍ୟାଟର୍ନ ରେ ଗୋଟିଏ ନିୟମ ଥାଏ। ସେ ନିୟମ ଅନୁସାରେ ଜିନିଷ ଗୁଡ଼ିକ ଚାଲେ। ସେ ନିୟମ ଖୋଜି ଉତ୍ତର ଦେବାକୁ ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> PATTERN ମାନେ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> PATTERN ମାନେ ଧାଞ୍ଚା ଚିହ୍ନିବା। ଗୋଟିଏ ନିୟମ ଅନୁସାରେ ଚାଲୁଥିବା କ୍ରମ। ସେ ନିୟମ ଖୋଜି ଉତ୍ତର ଦେବାକୁ ହୁଏ।",
+
+            "<span style='color: red;'>Q-2:</span> 2, 4, 6, 8 — ପରବର୍ତ୍ତୀ ସଂଖ୍ୟା କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ପ୍ରତିଥର 2 ଯୋଡ଼ା ହୁଏ। ତେଣୁ ଉତ୍ତର 10। ଏହା ସଂଖ୍ୟା ପ୍ୟାଟର୍ନ।",
+
+            "<span style='color: red;'>Q-3:</span> A, C, E, G — ପରବର୍ତ୍ତୀ ଅକ୍ଷର କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଏଠାରେ ଏକଟି ଛାଡ଼ି ଏକଟି ଅକ୍ଷର ନିଆଯାଉଛି। ତେଣୁ ଉତ୍ତର I। ଏହା ଅକ୍ଷର ପ୍ୟାଟର୍ନ।",
+
+            "<span style='color: red;'>Q-4:</span> 🔴🔵🔴🔵 — ପରବର୍ତ୍ତୀ ଆକୃତି କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଲାଲ ଓ ନୀଳ ପାଳି ପାଳି ଆସୁଛି। ତେଣୁ ଉତ୍ତର 🔴। ଏହା ଆକୃତି ପ୍ୟାଟର୍ନ।"
+        ]
+    },
+
+    {
+        heading: "Topic-4: ANALOGY — ସମ୍ପର୍କ ବୁଝ",
+        audioPoints: [
+            {
+                text: "👉 ANALOGY ମାନେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝିବା। ଗୋଟିଏ ସମ୍ପର୍କ ଦେଖି ଅନ୍ୟ ଉତ୍ତର ଦେବାକୁ ହୁଏ। ସମ୍ପର୍କ ବୁଝିଲେ ଉତ୍ତର ସହଜ ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ANALOGY ମାନେ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ANALOGY ମାନେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝିବା। ଗୋଟିଏ ସମ୍ପର୍କ ଦେଖି ଅନ୍ୟ ଉତ୍ତର ଦିଆଯାଏ। ଏହା ରିଜନିଂ ର ଗୁରୁତ୍ୱପୂର୍ଣ ଭାଗ।",
+
+            "<span style='color: red;'>Q-2:</span> COW ର ଛୁଆ CALF — DOG ର ଛୁଆ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> COW ର ଛୁଆ CALF। ସେହିପରି DOG ର ଛୁଆ PUPPY। ଏଠାରେ ସମ୍ପର୍କ ହେଉଛି ଜୀବ ଓ ତାର ଛୁଆ।",
+
+            "<span style='color: red;'>Q-3:</span> ଦେଖିବାକୁ EYE — ଶୁଣିବାକୁ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଦେଖିବାକୁ EYE ବ୍ୟବହାର ହୁଏ। ଶୁଣିବାକୁ EAR ବ୍ୟବହାର ହୁଏ। ଏଠାରେ ସମ୍ପର୍କ ହେଉଛି ଇନ୍ଦ୍ରିୟ ଓ ତାର କାର୍ଯ୍ୟ।",
+
+            "<span style='color: red;'>Q-4:</span> BOY ର ଝିଅ ରୂପ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> BOY ମାନେ ପୁଅ। GIRL ମାନେ ଝିଅ। ଏଠାରେ ସମ୍ପର୍କ ହେଉଛି ଲିଙ୍ଗ ଭିତ୍ତିକ।"
+        ]
+    },
+
+    {
+        heading: "Topic-5: SEQUENCING — କ୍ରମ ଠିକ୍ କର",
+        audioPoints: [
+            {
+                text: "👉 SEQUENCING ମାନେ ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା। ପ୍ରତ୍ୟେକ ସିକ୍ୱେନ୍ସ ରେ ଗୋଟିଏ ସ୍ୱାଭାବିକ କ୍ରମ ଥାଏ। ସେ କ୍ରମ ଅନୁସାରେ ସଜାଅ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> SEQUENCING ମାନେ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> SEQUENCING ମାନେ ଜିନିଷ ଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା। ଏଥିରେ ଗୋଟିଏ ସ୍ୱାଭାବିକ କ୍ରମ ଥାଏ। ସେ କ୍ରମ ଅନୁସାରେ ଉତ୍ତର ଦେବାକୁ ହୁଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ଦିନର ଠିକ୍ କ୍ରମ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଦିନ MORNING ରୁ ଆରମ୍ଭ ହୁଏ। ତାପରେ AFTERNOON, EVENING ଆସେ। ଶେଷରେ NIGHT ଆସେ।",
+
+            "<span style='color: red;'>Q-3:</span> ଜୀବନ କ୍ରମ ଠିକ୍ ଭାବରେ ସଜାଅ — BOY, OLD MAN, BABY, YOUNG MAN<br><br><span style='color: green;'>Answer:</span> ଜୀବନ BABY ରୁ ଆରମ୍ଭ ହୁଏ। ତାପରେ BOY, YOUNG MAN ଆସେ। ଶେଷରେ OLD MAN ହୁଏ।",
+
+            "<span style='color: red;'>Q-4:</span> ANT, ELEPHANT, MOUSE, DOG — ଛୋଟରୁ ବଡ଼ ଅନୁସାରେ ସଜାଅ<br><br><span style='color: green;'>Answer:</span> ANT ସବୁଠୁ ଛୋଟ। ତାପରେ MOUSE, DOG ଆସେ। ELEPHANT ସବୁଠୁ ବଡ଼।"
+        ]
+    }
+];
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -3032,284 +3036,275 @@ const courseData = {
 </div>
   `, 
     audio: "",
-    mermaid: `graph LR
-A["🧠 ଚିନ୍ତା ଶକ୍ତି<br/>REASONING"]
- 
-A --> B["ନିୟମ"]
-B --> C["ଯଦି ଆମେ ଜିନିଷ ଦେଖି ଚିନ୍ତା କରୁ,<br/>ତେବେ ନିମ୍ନଲିଖିତ ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ :"]
- 
-A --> D["ନିୟମ-1"]
-D --> E["ଯଦି ଦୁଇ ଟି ଜିନିଷ ଏକ ରକମ ଦେଖାଯାଏ,<br/>ତେବେ SAME (ଏକା) ।<br/>ଯଥା — 🔴 🔴 ଦୁଇ ଟି ଏକା ।"]
- 
-A --> F["ନିୟମ-2"]
-F --> G["ଯଦି ଦୁଇ ଟି ଜିନିଷ ଅଲଗା ଦେଖାଯାଏ,<br/>ତେବେ DIFFERENT (ଭିନ୍ନ) ।<br/>ଯଥା — 🐱 🐶 ଭିନ୍ନ ।"]
- 
-A --> H["ନିୟମ-3"]
-H --> I["ଯଦି ଆକାରରେ ଅଧିକ ଥାଏ,<br/>ତେବେ BIG (ବଡ) ।<br/>ଯଥା — 🐘 ହାତୀ ବଡ ।"]
- 
-A --> J["ନିୟମ-4"]
-J --> K["ଯଦି ଆକାରରେ କମ ଥାଏ,<br/>ତେବେ SMALL (ଛୋଟ) ।<br/>ଯଥା — 🐭 ମୂଷା ଛୋଟ ।"]
- 
-A --> L["ନିୟମ-5"]
-L --> M["ଜିନିଷ ର ସ୍ଥାନ ଅନୁଯାୟୀ<br/>INSIDE/OUTSIDE/ABOVE/BELOW<br/>ଶବ୍ଦ ବ୍ୟବହାର ହୁଏ ।"]
- 
-A --> N["ନିୟମ-6"]
-N --> O["ଧାଡ଼ି ଅନୁଯାୟୀ ସ୍ଥାନ —<br/>FIRST, SECOND, THIRD (କ୍ରମ) ।<br/>ଯଥା — 🥇🥈🥉 ।"]
- 
-style A fill:#3b82f6,stroke:#1e40af,color:#fff
-style B fill:#dbeafe,stroke:#3b82f6
-style D fill:#10b981,stroke:#059669,color:#fff
-style F fill:#f59e0b,stroke:#d97706,color:#fff
-style H fill:#ef4444,stroke:#b91c1c,color:#fff
-style J fill:#ec4899,stroke:#be185d,color:#fff
-style L fill:#8b5cf6,stroke:#6d28d9,color:#fff
-style N fill:#14b8a6,stroke:#0f766e,color:#fff
-style C fill:#dbeafe,stroke:#3b82f6
-style E fill:#d1fae5,stroke:#10b981
-style G fill:#fef3c7,stroke:#f59e0b
-style I fill:#fee2e2,stroke:#ef4444
-style K fill:#fce7f3,stroke:#ec4899
-style M fill:#ede9fe,stroke:#8b5cf6
-style O fill:#ccfbf1,stroke:#14b8a6`,
- 
+mermaid: `graph LR
+A["📊 ରିଜନିଂ<br/>ଚିନ୍ତା ଶକ୍ତି ପରୀକ୍ଷା"]
+
+A --> B["ମୁଖ୍ୟ ବିଷୟ"]
+B --> C["ଆମେ ରିଜନିଂର<br/>ବିଭିନ୍ନ ପ୍ରକାର<br/>ବିଷୟରେ ଜାଣିବା"]
+
+A --> D["ରିଜନିଂ କ'ଣ 📖"]
+D --> E["ରିଜନିଂ ମାନେ ମସ୍ତିଷ୍କ<br/>ବ୍ୟବହାର କରି ଠିକ୍<br/>ଉତ୍ତର ଖୋଜିବା।<br/>ଭାବି ଭାବି ଉତ୍ତର<br/>ଦେବାକୁ ରିଜନିଂ କୁହାଯାଏ।"]
+
+A --> D2["ଅଡ୍ ଓ‌ନ ଆଉଟ୍ 🔍"]
+D2 --> E2["ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ<br/>ଗୋଟିଏ ଅଲଗା ଜିନିଷ<br/>ଖୋଜିବାକୁ ହୁଏ।<br/>ଯାହା ଅନ୍ୟ ତିନୋଟି ସହ<br/>ମିଳେ ନାହିଁ ତାହା ଉତ୍ତର।"]
+
+A --> D3["ପ୍ୟାଟର୍ ⭐"]
+D3 --> E3["ଏଠାରେ ଗୋଟିଏ କ୍ରମ ଦିଆଯାଏ।<br/>ସେ କ୍ରମ ଦେଖି ପରବର୍ତ୍ତୀ<br/>ଜିନିଷ କ'ଣ ହେବ<br/>ତାହା କହିବାକୁ ହୁଏ।<br/>ପ୍ରତ୍ୟେକ ପ୍ୟାଟର୍ ଏ ଗୋଟିଏ ନିୟମ ଥାଏ।"]
+
+A --> D4["ଆ‍ନ୍ୟ ଲୋଜି 🔗"]
+D4 --> E4["ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ<br/>ସମ୍ପର୍କ ବୁଝି ଉତ୍ତର ଦେବା।<br/>ଯେପରି ଗାଈ : ବଛୁରା<br/>ସେହିପରି କୁକୁର : ଛୁଆ।"]
+
+A --> F["ସିକ୍ୱେ‍ନ୍ସିଂ 🔄"]
+F --> G["ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ<br/>ଠିକ୍ କ୍ରମରେ ସଜାଇବା।<br/>ଆକାର, ସମୟ ବା ଜୀବନ<br/>କ୍ରମ ଅନୁସାରେ ସଜାଅ।"]
+
+A --> H["କ୍ଲାସିଫିକେ‌ସ‌ନ 🌱"]
+H --> I["ଜିନିଷଗୁଡ଼ିକୁ ଗୋଷ୍ଠୀ ଭାଗ<br/>କରିବାକୁ ହୁଏ।<br/>ଫଳ, ପ୍ରାଣୀ, ରଙ୍ଗ — ଏଭଳି<br/>ଗୋଷ୍ଠୀ ଅନୁସାରେ ଭାଗ।"]
+
+A --> J["ରିଜନିଂ ଉଦାହରଣ 💡"]
+J --> K["ଆପଲ, ବ‍ନାନ‍ ଗ୍ରେ‍ପ୍ — ଫଳ।<br/>କ୍ୟାରଟ ଅଲଗା — ପରିବା।<br/>ଏହା ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ।"]
+
+A --> L["ରିଜନିଂ ର ଲାଭ 📖"]
+L --> M["ରିଜନିଂ ଶିଖିଲେ<br/>ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।<br/>ଠିକ୍ ଉତ୍ତର ଖୋଜିବା<br/>ସହଜ ହୁଏ।"]
+
+style A fill:#0369a1,stroke:#0c4a6e,color:#fff
+style B fill:#e0f2fe,stroke:#0369a1
+style D fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D2 fill:#b45309,stroke:#78350f,color:#fff
+style D3 fill:#059669,stroke:#064e3b,color:#fff
+style D4 fill:#dc2626,stroke:#7f1d1d,color:#fff
+style F fill:#0891b2,stroke:#164e63,color:#fff
+style H fill:#16a34a,stroke:#14532d,color:#fff
+style J fill:#d97706,stroke:#92400e,color:#fff
+style L fill:#7c3aed,stroke:#4c1d95,color:#fff
+style C fill:#e0f2fe,stroke:#0369a1
+style E fill:#ede9fe,stroke:#7c3aed
+style E2 fill:#fef3c7,stroke:#b45309
+style E3 fill:#d1fae5,stroke:#059669
+style E4 fill:#fee2e2,stroke:#dc2626
+style G fill:#cffafe,stroke:#0891b2
+style I fill:#dcfce7,stroke:#16a34a
+style K fill:#fef9c3,stroke:#d97706
+style M fill:#ede9fe,stroke:#7c3aed`,
+
     mcq: {
         questions: [
             {
-                question: "ଦୁଇ ଟି ଜିନିଷ ଏକ ରକମ ଦେଖାଗଲେ ଆମେ କ'ଣ କହୁ ?",
+                question: "ରିଜନିଂ ମାନେ କ'ଣ?",
                 options: [
-                    "DIFFERENT",
-                    "BIG",
-                    "SAME",
-                    "ORDER"
+                    "ଗଣିତ ହିସାବ କରିବା",
+                    "ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା",
+                    "ଛବି ଆଙ୍କିବା",
+                    "ଗୀତ ଗାଇବା"
+                ],
+                correct: 1
+            },
+            {
+                question: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ କ'ଣ କରିବାକୁ ହୁଏ?",
+                options: [
+                    "ସବୁଠୁ ବଡ଼ ଜିନିଷ ଖୋଜିବା",
+                    "ସବୁଠୁ ଛୋଟ ଜିନିଷ ଖୋଜିବା",
+                    "ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ ଅଲଗା ଜିନିଷଟି ଖୋଜିବା",
+                    "ସବୁ ଜିନିଷ ଗଣିବା"
                 ],
                 correct: 2
             },
             {
-                question: "🐘 ହାତୀ ଓ 🐭 ମୂଷା — ହାତୀ ଟି କ'ଣ ?",
+                question: "ପ୍ୟାଟର୍ ଚିହ୍ନିବାରେ ସବୁଠୁ ଜରୁରୀ କ'ଣ?",
                 options: [
-                    "SMALL",
-                    "LIGHT",
-                    "BELOW",
-                    "BIG"
+                    "ସୁନ୍ଦର ଅକ୍ଷରରେ ଲେଖିବା",
+                    "ଗୋଟିଏ ନିୟମ ଖୋଜି ତାକୁ ଅନୁସରଣ କରିବା",
+                    "ଶିକ୍ଷକଙ୍କୁ ପ୍ରଶ୍ନ କରିବା",
+                    "ବହି ଦେଖି ଉତ୍ତର ଲେଖିବା"
                 ],
-                correct: 3
+                correct: 1
             },
             {
-                question: "ବଲ୍ ଟି ଟୋକେଇ ଭିତରରେ ଅଛି — ସଠିକ ଇଂରାଜୀ ଶବ୍ଦ ଟି କ'ଣ ?",
+                question: "ଆ‍ନ୍ୟ ଲୋଜି ରେ କ'ଣ ବୁଝିବାକୁ ହୁଏ?",
                 options: [
-                    "OUTSIDE",
-                    "ABOVE",
-                    "INSIDE",
-                    "BELOW"
+                    "ଜିନିଷଗୁଡ଼ିକୁ ଗଣିବା",
+                    "ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ",
+                    "ଜିନିଷଗୁଡ଼ିକୁ ରଙ୍ଗ ଦ୍ୱାରା ଚିହ୍ନିବା",
+                    "ସବୁ ଜିନିଷ ଏକ ସ୍ଥାନରେ ରଖିବା"
                 ],
-                correct: 2
+                correct: 1
             },
             {
-                question: "ଦୌଡ ରେ ଯିଏ ସବୁ ଠାରୁ ଆଗ ପହଞ୍ଚେ ସେ କ'ଣ ?",
+                question: "ସିକ୍ୱେ‍ନ୍ସିଂ ରେ କ'ଣ କରାଯାଏ?",
                 options: [
-                    "SECOND",
-                    "THIRD",
-                    "LAST",
-                    "FIRST"
-                ],
-                correct: 3
-            },
-            {
-                question: "☁️ ଆକାଶ ଆମ ଉପରରେ ଅଛି — ସଠିକ ଶବ୍ଦ ଟି କ'ଣ ?",
-                options: [
-                    "BELOW",
-                    "INSIDE",
-                    "ABOVE",
-                    "OUTSIDE"
+                    "ଜିନିଷ ଆଙ୍କିବା",
+                    "ଜିନିଷ ଗଣିବା",
+                    "ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା",
+                    "ଅଲଗା ଜିନିଷ ଖୋଜିବା"
                 ],
                 correct: 2
             }
         ]
     },
- 
+
     trueFalse: {
         questions: [
             {
-                question: "🔴 🔴 ଦୁଇ ଟି ଏକ ରକମ — ଏ ଦୁଇ ଟି SAME ।",
+                question: "ରିଜନିଂ ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।",
                 correct: true
             },
             {
-                question: "🐱 ଓ 🐶 ଦୁଇ ଟି SAME (ଏକା) ।",
+                question: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ ପାଞ୍ଚଟି ଜିନିଷ ଦିଆଯାଏ।",
                 correct: false
             },
             {
-                question: "🐘 ହାତୀ 🐭 ମୂଷା ଠାରୁ BIG (ବଡ) ।",
+                question: "ପ୍ୟାଟର୍ ରେ ଗୋଟିଏ ନିୟମ ଥାଏ।",
                 correct: true
             },
             {
-                question: "ପକ୍ଷୀ ଗଛ ତଳରେ (BELOW) ବସିଅଛି ।",
+                question: "ଆ‍ନ୍ୟ ଲୋଜି ମାନେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝି ଉତ୍ତର ଦେବା।",
+                correct: true
+            },
+            {
+                question: "ସିକ୍ୱେ‍ନ୍ସିଂ ରେ ଜିନିଷଗୁଡ଼ିକୁ ଉଲ୍ଟା କ୍ରମରେ ସଜାଇବାକୁ ହୁଏ।",
                 correct: false
-            },
-            {
-                question: "ଧାଡ଼ି ରେ ଦ୍ୱିତୀୟ ଜଣ SECOND ।",
-                correct: true
             }
         ]
     },
- 
+
     fillBlanks: {
         questions: [
             {
-                question: "🔴 🔴 ଦୁଇ ଟି ଏକ ରକମ — ଏ ଦୁଇ ଟି ___ । (SAME / DIFFERENT)",
-                answer: "SAME"
+                question: "ରିଜନିଂ ଶିଖିଲେ ପିଲାମାନଙ୍କ ମସ୍ତିଷ୍କ ___ ହୁଏ। (ତୀକ୍ଷ୍ଣ / ଦୁର୍ବଳ)",
+                answer: "ତୀକ୍ଷ୍ଣ"
             },
             {
-                question: "🍋 🍊 ଦୁଇ ଟି ଅଲଗା — ଏ ଦୁଇ ଟି ___ । (SAME / DIFFERENT)",
-                answer: "DIFFERENT"
+                question: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ ___ ଟି ଜିନିଷ ଦିଆଯାଏ। (ଚାରୋ / ଦୁଇ)",
+                answer: "ଚାରୋ"
             },
             {
-                question: "ବହି ଥଳି ଭିତରରେ ଅଛି — ବହି ଟି ___ ରେ ।  (INSIDE / OUTSIDE)",
-                answer: "INSIDE"
+                question: "ଆ‍ନ୍ୟ ଲୋଜି ମାନେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ___ ବୁଝିବା। (ସମ୍ପର୍କ / ରଙ୍ଗ)",
+                answer: "ସମ୍ପର୍କ"
             },
             {
-                question: "ଆକାଶ ଆମ ___ ରେ ।  (ABOVE / BELOW)",
-                answer: "ABOVE"
+                question: "ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ ___ ରେ ସଜାଇବାକୁ ସିକ୍ୱେ‍ନ୍ସିଂ କୁହାଯାଏ। (କ୍ରମ / ରଙ୍ଗ)",
+                answer: "କ୍ରମ"
             },
             {
-                question: "ଦୌଡ ରେ ଯିଏ ଆଗ ଆସିଲା ସେ ___ ।  (FIRST / THIRD)",
-                answer: "FIRST"
+                question: "ପ୍ୟାଟର୍ ଚିହ୍ନିବାକୁ ଗୋଟିଏ ___ ଖୋଜିବାକୁ ହୁଏ। (ନିୟମ / ଛବି)",
+                answer: "ନିୟମ"
             }
         ]
     },
- 
+
     matching: {
         pairs: [
-            { left: "SAME", right: "ଏକା — 🔴 🔴 ଦୁଇ ଟି ଲାଲ ଗୋଲ ।" },
-            { left: "DIFFERENT", right: "ଭିନ୍ନ — 🐱 🐶 ବିଲେଇ ଓ କୁକୁର ।" },
-            { left: "BIG", right: "ବଡ — 🐘 ହାତୀ ବଡ ଜୀବ ।" },
-            { left: "SMALL", right: "ଛୋଟ — 🐭 ମୂଷା ଛୋଟ ଜୀବ ।" },
-            { left: "HEAVY", right: "ଭାରି — 🪨 ପଥର ଭାରି ।" },
-            { left: "LIGHT", right: "ହାଲୁକା — 🪶 ପଲକ ହାଲୁକା ।" },
-            { left: "ABOVE", right: "ଉପର — ☁️ ଆକାଶ ଆମ ଉପରରେ ।" },
-            { left: "BELOW", right: "ତଳ — ଚୌକି ଟେବୁଲ ତଳରେ ।" },
-            { left: "INSIDE", right: "ଭିତର — 📦 ବହି ଥଳି ଭିତରରେ ।" },
-            { left: "OUTSIDE", right: "ବାହାର — ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ।" },
-            { left: "ORDER", right: "କ୍ରମ — 🥇🥈🥉 ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ ।" }
+            { left: "ରିଜନିଂ", right: "🧠 ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା।" },
+            { left: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍", right: "🔍 ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ ଅଲଗା ଜିନିଷ ଖୋଜିବା।" },
+            { left: "ପ୍ୟାଟର୍", right: "🔢 ଗୋଟିଏ ନିୟମ ଖୋଜି ପରବର୍ତ୍ତୀ ଜିନିଷ ଖୋଜିବା।" },
+            { left: "ଆ‍ନ୍ୟ ଲୋଜି", right: "🔗 ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝି ଉତ୍ତର ଦେବା।" },
+            { left: "ସିକ୍ୱେ‍ନ୍ସିଂ", right: "📋 ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା।" },
+            { left: "କ୍ଲାସିଫିକେ‌ସ‌ନ", right: "🗂️ ଜିନିଷଗୁଡ଼ିକୁ ଗୋଷ୍ଠୀ ଅନୁସାରେ ଭାଗ କରିବା।" },
+            { left: "ଗାଈ — ବଛୁରା", right: "🐄 ଏହା ଆ‍ନ୍ୟ ଲୋଜିର ଏକ ଉଦାହରଣ।" },
+            { left: "ମର୍ଣ୍ଣିଂ, ଆଫ୍ଟ‍ରନ‍ ଇଭ‍ନ‍ ନ‍ଟ", right: "🌞 ଏହା ଦିନର ସିକ୍ୱେ‍ନ୍ସ ଉଦାହରଣ।" },
+            { left: "ଲାଲ ନୀଳ ଲାଲ ନୀଳ", right: "🔴 ଏହା ଆକୃତି ପ୍ୟାଟର୍ ଉଦାହରଣ।" }
         ]
     },
- 
+
     arrange: {
         questions: [
             {
-                words: ["SAME", "ଦୁଇ", "ଟି", "ଲାଲ", "ଗୋଲ", "ଏକା"],
-                correct: "ଦୁଇ ଟି ଲାଲ ଗୋଲ ଏକା — SAME"
+                words: ["ରିଜନିଂ", "ମାନେ", "ଠିକ୍", "ଉତ୍ତର", "ଖୋଜିବା"],
+                correct: "ରିଜନିଂ ମାନେ ଠିକ୍ ଉତ୍ତର ଖୋଜିବା।"
             },
             {
-                words: ["BIG", "ହାତୀ", "ବଡ", "ଜୀବ"],
-                correct: "ହାତୀ ବଡ ଜୀବ — BIG"
+                words: ["ପ୍ୟାଟର୍", "ରେ", "ଗୋଟିଏ", "ନିୟମ", "ଥାଏ"],
+                correct: "ପ୍ୟାଟର୍ ରେ ଗୋଟିଏ ନିୟମ ଥାଏ।"
             },
             {
-                words: ["INSIDE", "ବହି", "ଥଳି", "ଭିତରରେ"],
-                correct: "ବହି ଥଳି ଭିତରରେ — INSIDE"
+                words: ["ଅଡ୍", "ଓ‌ନ", "ଆଉଟ୍", "ରେ", "ଅଲଗା", "ଜିନିଷ", "ଖୋଜ"],
+                correct: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ ଅଲଗା ଜିନିଷ ଖୋଜ।"
             },
             {
-                words: ["ABOVE", "ଆକାଶ", "ଆମ", "ଉପରରେ"],
-                correct: "ଆକାଶ ଆମ ଉପରରେ — ABOVE"
+                words: ["ଆ‍ନ୍ୟ ଲୋଜି", "ରେ", "ସମ୍ପର୍କ", "ବୁଝ"],
+                correct: "ଆ‍ନ୍ୟ ଲୋଜି ରେ ସମ୍ପର୍କ ବୁଝ।"
             },
             {
-                words: ["FIRST", "ଯିଏ", "ଆଗ", "ଆସିଲା", "ସେ", "ପ୍ରଥମ"],
-                correct: "ଯିଏ ଆଗ ଆସିଲା ସେ ପ୍ରଥମ — FIRST"
+                words: ["ସିକ୍ୱେ‍ନ୍ସିଂ", "ରେ", "ଠିକ୍", "କ୍ରମ", "ଅନୁସାରେ", "ସଜାଅ"],
+                correct: "ସିକ୍ୱେ‍ନ୍ସିଂ ରେ ଠିକ୍ କ୍ରମ ଅନୁସାରେ ସଜାଅ।"
             }
         ]
     },
- 
+
     stq: {
         questions: [
             {
-                question: "SAME ଓ DIFFERENT ର ଓଡ଼ିଆ ଅର୍ଥ ଲେଖ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଏକ ଉଦାହରଣ ଦିଅ ।",
-                answer: "SAME = ଏକା — 🔴 🔴 ଦୁଇ ଟି ଲାଲ ଗୋଲ ଏକା ।  DIFFERENT = ଭିନ୍ନ — 🍋 🍊 ଲେମ୍ବୁ ଓ କମଳା ଭିନ୍ନ ।"
+                question: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ବିଷୟରେ ଉଦାହରଣ ଦେଇ ବୁଝାଅ।",
+                answer: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ ଚାରୋଟି ଜିନିଷ ଦିଆଯାଏ। ସେଥିରୁ ଯାହା ଅଲଗା ଥାଏ ତାହା ଖୋଜିବାକୁ ହୁଏ। ଯଥା — ଆପଲ, ବ‍ନାନ‍, ଗ୍ରେ‍ପ୍, କ୍ୟାରଟ। ଏଠାରେ କ୍ୟାରଟ ଅଲଗା, କାରଣ ଅନ୍ୟ ତିନୋଟି ଫଳ ଓ କ୍ୟାରଟ ପରିବା।"
             },
             {
-                question: "BIG, SMALL, HEAVY, LIGHT ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "BIG = ବଡ — 🐘 ହାତୀ ବଡ ।  SMALL = ଛୋଟ — 🐭 ମୂଷା ଛୋଟ ।  HEAVY = ଭାରି — 🪨 ପଥର ଭାରି ।  LIGHT = ହାଲୁକା — 🪶 ପଲକ ହାଲୁକା ।"
+                question: "ସଂଖ୍ୟା ପ୍ୟାଟର୍ ଓ ଅକ୍ଷର ପ୍ୟାଟର୍ ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?",
+                answer: "ସଂଖ୍ୟା ପ୍ୟାଟର୍ ରେ ଅଙ୍କ ବ୍ୟବହାର ହୁଏ, ଯଥା ୨, ୪, ୬, ୮। ଅକ୍ଷର ପ୍ୟାଟର୍ ରେ ଇଂରାଜୀ ଅକ୍ଷର ବ୍ୟବହାର ହୁଏ, ଯଥା A, C, E, G। ଉଭୟ ପ୍ୟାଟର୍ ରେ ଗୋଟିଏ ନିୟମ ଅନୁସାରେ ଚଲେ।"
             },
             {
-                question: "ABOVE, BELOW, INSIDE, OUTSIDE ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "ABOVE = ଉପର — ☁️ ଆକାଶ ଆମ ଉପରରେ ।  BELOW = ତଳ — ଚୌକି ଟେବୁଲ ତଳରେ ।  INSIDE = ଭିତର — ବହି ଥଳି ଭିତରରେ ।  OUTSIDE = ବାହାର — ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ ।"
+                question: "ଆ‍ନ୍ୟ ଲୋଜି ର ତିନୋଟି ଉଦାହରଣ ଲେଖ।",
+                answer: "ଗାଈ ର ଛୁଆ ବଛୁରା, ସେହିପରି କୁକୁର ର ଛୁଆ ପପ‍। ଦିନ ବେଳେ ସୂର୍ଯ୍ୟ, ସେହିପରି ରାତି ବେଳେ ଚନ୍ଦ୍ର। ଲେଖିବାକୁ ପେ‍ନ, ସେହିପରି କାଟିବାକୁ କ‍ଣ‍ "
             },
             {
-                question: "ତୁମ ଶ୍ରେଣୀ ଘର ବିଷୟରେ SAME, DIFFERENT, BIG, SMALL ଶବ୍ଦ ବ୍ୟବହାର କରି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-                answer: "ଶ୍ରେଣୀ ଘରରେ ସବୁ ବେଞ୍ଚ ଏକ ରଙ୍ଗ ର — SAME ।  ଶ୍ୟାମ ର ବ୍ୟାଗ ଓ ରାମ ର ବ୍ୟାଗ ଅଲଗା — DIFFERENT ।  ଆମ ଶ୍ରେଣୀ ଘର ବଡ — BIG ।  ମୋ ଇରେଜର ଛୋଟ — SMALL ।"
+                question: "ସିକ୍ୱେ‍ନ୍ସିଂ ବୁଝାଇ ଦୁଇଟି ଉଦାହରଣ ଲେଖ।",
+                answer: "ସିକ୍ୱେ‍ନ୍ସିଂ ମାନେ ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବା। ଦିନ ଅନୁସାରେ — ମର୍ଣ୍ଣିଂ, ଆଫ୍ଟ‍ ର ନ‍ ଇଭ‍ ନ‍ ନ‍ ଟ। ଜୀବନ ଅନୁସାରେ — ବେ‍ ବି, ବ‍ ୟ, ୟ‍ ଙ ‍ ମ‍ ୟ‍ ଁ, ଓ‍ ଲ‍ ଡ ‍ ମ‍ ୟ‍ ଁ।"
             }
         ]
     }
 },
 ],
-    
-  summary: {
-        audio: "",
- 
-        content: {
-            introduction: "ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ଗୁଡ଼ିକ ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ବହୁ ଉପଯୋଗ ହୁଏ । ଆସନ୍ତୁ ଆମ ଚାରିଆଡ଼ ର ଜିନିଷ ଗୁଡ଼ିକୁ ଏ ଶବ୍ଦ ଦ୍ୱାରା ବୁଝିବା :",
-            sentences: [
-                {
-                    heading: "ଏକା — SAME",
-                    text: "ଆମ ଶ୍ରେଣୀ ଘରରେ ସବୁ ବେଞ୍ଚ ଏକ ରଙ୍ଗ ର — SAME ।  ଦୁଇ ଭଉଣୀ ଏକ ରକମ ପୋଷାକ ପିନ୍ଧଲେ SAME ।  ଦୁଇ ଟି ଲାଲ ଗୋଲ ବଲ — SAME ।  ଦୁଇ ଟି ସମାନ ଆକୃତି ର ଇଟା — SAME ।"
-                },
-                {
-                    heading: "ଭିନ୍ନ — DIFFERENT",
-                    text: "ବିଲେଇ ଓ କୁକୁର ଭିନ୍ନ ଜୀବ — DIFFERENT ।  ଲେମ୍ବୁ ଓ କମଳା ଭିନ୍ନ ଫଳ — DIFFERENT ।  ରାମ ର ବ୍ୟାଗ ଓ ଶ୍ୟାମ ର ବ୍ୟାଗ ଅଲଗା ରଙ୍ଗ ର — DIFFERENT ।  ଗୋଲ ଓ ଚୌକ ଆକୃତି ଭିନ୍ନ — DIFFERENT ।"
-                },
-                {
-                    heading: "ବଡ — BIG",
-                    text: "ହାତୀ ବଡ ଜୀବ — BIG ।  ବିଦ୍ୟାଳୟ ଘର ଆମ ଘର ଠାରୁ ବଡ — BIG ।  ବଡ ଗଛ ପ୍ରଚୁର ଛାଇ ଦିଏ — BIG ।  ଜେଜେ ବାପା ର ଗୋଡ ଆମ ଗୋଡ ଠାରୁ ବଡ — BIG ।"
-                },
-                {
-                    heading: "ଛୋଟ — SMALL",
-                    text: "ମୂଷା ଛୋଟ ଜୀବ — SMALL ।  ମୋ ଇରେଜର ଛୋଟ — SMALL ।  ଛୋଟ ଭଉଣୀ ର ହାତ ଛୋଟ — SMALL ।  ଛୋଟ ପ୍ରଜାପତି ଫୁଲ ଉପରେ ବସେ — SMALL ।"
-                },
-                {
-                    heading: "ଭାରି — HEAVY",
-                    text: "ପଥର ଭାରି — HEAVY ।  ଆମ ଘରର ଆଲ୍ମୀରା ଭାରି — HEAVY ।  ଜଳ ଭରା ବଡ ଘଡ଼ା ଭାରି — HEAVY ।  ଲୁହା ର ଭାଙ୍ଗ ଭାରି — HEAVY ।"
-                },
-                {
-                    heading: "ହାଲୁକା — LIGHT",
-                    text: "ପକ୍ଷୀ ର ପଲକ ହାଲୁକା — LIGHT ।  ଶୁଖିଲ ପତ୍ର ହାଲୁକା — LIGHT ।  କଗଜ ର ଖଣ୍ଡ ଏ ହାଲୁକା — LIGHT ।  ଫୁ ଦଲ ଖଣ୍ଡ ହାଲୁକା — LIGHT ।"
-                },
-                {
-                    heading: "ଉପର — ABOVE",
-                    text: "ଆକାଶ ଆମ ଉପରରେ — ABOVE ।  ପକ୍ଷୀ ଗଛ ଉପରରେ ବସେ — ABOVE ।  ଟେବୁଲ ଉପରରେ ବହି ରଖାଯାଏ — ABOVE ।  ଛାତ ଉପରରେ ପଙ୍ଖା — ABOVE ।"
-                },
-                {
-                    heading: "ତଳ — BELOW",
-                    text: "ମାଟି ଆମ ପାଦ ତଳେ — BELOW ।  ଚୌକି ଟେବୁଲ ତଳରେ — BELOW ।  ସେତୁ ତଳରେ ନଈ ବୁହେ — BELOW ।  ବ୍ୟାଗ ବେଞ୍ଚ ତଳରେ — BELOW ।"
-                },
-                {
-                    heading: "ଭିତର — INSIDE",
-                    text: "ବହି ଥଳି ଭିତରରେ — INSIDE ।  ଆମ ଶ୍ରେଣୀ ଘର ଭିତରରେ ଆଲୋ — INSIDE ।  ଡବା ଭିତରରେ ମିଠା — INSIDE ।  ଘର ଭିତରରେ ଆମ ପରିବାର — INSIDE ।"
-                },
-                {
-                    heading: "ବାହାର — OUTSIDE",
-                    text: "ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ — OUTSIDE ।  ଗଛ ଘର ବାହାରରେ — OUTSIDE ।  କୁକୁର ଉଠାଣ ବାହାରରେ — OUTSIDE ।  ଖେଳ ଘର ବାହାରରେ — OUTSIDE ।"
-                },
-                {
-                    heading: "କ୍ରମ — ORDER (FIRST / SECOND / THIRD)",
-                    text: "ଦୌଡ ରେ ରାମ ପ୍ରଥମ (FIRST), ଶ୍ୟାମ ଦ୍ୱିତୀୟ (SECOND), ହରି ତୃତୀୟ (THIRD) ।  ଧାଡ଼ି ରେ 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ — ORDER ।  🥇🥈🥉 — FIRST, SECOND, THIRD ।  ଲାଇନ ରେ ଠିଆ ହେଲେ କ୍ରମ (ORDER) ମାନିବ ।"
-                }
-            ],
-            conclusion: "ଚିନ୍ତା ଶକ୍ତି ର ଏ ଏଗାର ଟି ଶବ୍ଦ — SAME, DIFFERENT, BIG, SMALL, HEAVY, LIGHT, ABOVE, BELOW, INSIDE, OUTSIDE, ORDER — ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ ଖୁବ ଉପଯୋଗୀ । ଏ ଶବ୍ଦ ଜାଣିଲେ ଆମେ ଯେ କୌଣସି ଜିନିଷ ତୁଳନା, ସ୍ଥାନ ଓ କ୍ରମ ସ୍ପଷ୍ଟ ଭାବ ରେ ବୁଝି ହୁଏ ।"
-        },
- 
-        question: {
-            audio: "",
-            question: "ତୁମ ଘର ଓ ଶ୍ରେଣୀ ଘର ରେ ଥିବା ଜିନିଷ ବିଷୟ ରେ SAME, BIG, INSIDE, ABOVE ଶବ୍ଦ ବ୍ୟବହାର କରି ଲେଖ ।",
-            introduction: "ଆମ ଚାରିଆଡ଼ ର ଜିନିଷ ଦେଖ ଓ ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ବ୍ୟବହାର କର । ନିମ୍ନ ଉଦାହରଣ ଗୁଡ଼ିକ ଦେଖ :",
-            points: [
-                "ଆମ ଶ୍ରେଣୀ ଘର ର ଦୁଇ ଟି ଚୌକି ଏକ ରଙ୍ଗ ର — SAME ।",
-                "ଆମ ବିଦ୍ୟାଳୟ ଆମ ଘର ଠାରୁ ବଡ — BIG ।",
-                "ବହି ଟି ଥଳି ଭିତରରେ ଅଛି — INSIDE ।",
-                "ପଙ୍ଖା ଆମ ଛାତ ଉପରରେ — ABOVE ।",
-                "ଦୌଡ ରେ ମୁଁ ପ୍ରଥମ — FIRST ।"
-            ],
-            conclusion: "SAME ରୁ ORDER ପର୍ଯ୍ୟନ୍ତ ଏ ଏଗାର ଟି ଶବ୍ଦ ଜାଣିଲେ ଆମ ଚାରିଆଡ଼ ର ଯେ କୌଣସି ଜିନିଷ ତୁଳନା, ସ୍ଥାନ ଓ କ୍ରମ ସହଜ ରେ ବୁଝି ହୁଏ — ଏହା ହେଉଛି ଆମ ଚିନ୍ତା ଶକ୍ତି ।"
-        }
-    }
 
+summary: {
+    audio: "",
+
+    content: {
+        introduction: "ରିଜନିଂ ମାନେ ଆମ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଆସନ୍ତୁ ରିଜନିଂ ର ସବୁ ପ୍ରକାର ବିଷୟରେ ଜାଣିବା।",
+        sentences: [
+            {
+                heading: "ରିଜନିଂ କ'ଣ",
+                text: "ରିଜନିଂ ମାନେ ହେଉଛି ଆମ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଭାବି ଭାବି ଉତ୍ତର ଦେଲେ ତାହାକୁ ରିଜନିଂ କୁହାଯାଏ। ରିଜନିଂ ଶିଖିଲେ ପିଲାମାନଙ୍କ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।"
+            },
+            {
+                heading: "ଅଡ୍ ଓ‌ନ ଆଉଟ୍",
+                text: "ଏଠାରେ ଚାରୋଟି ଜିନିଷ ଦିଆଯାଏ। ସେଥିରୁ ଅଲଗା ଜିନିଷଟିକୁ ଖୋଜିବାକୁ ହୁଏ। ଯଥା — ଆପଲ, ବ‍ ନ‍ ାନ‍ ା, ଗ୍ରେ‍ ପ‍ ସ‍, କ୍ୟାରଟ — ଏଠାରେ କ୍ୟାରଟ ଅଲଗା, କାରଣ ଏହା ପରିବା।"
+            },
+            {
+                heading: "ପ୍ୟାଟର୍",
+                text: "ଏଠାରେ ଗୋଟିଏ କ୍ରମ ଦିଆଯାଏ ଓ ପରବର୍ତ୍ତୀ ଜିନିଷ ଖୋଜିବାକୁ ହୁଏ। ସଂଖ୍ୟା, ଅକ୍ଷର ଓ ଆକୃତି ପ୍ୟାଟର୍ ହୁଏ। ପ୍ରତ୍ୟେକ ପ୍ୟାଟର୍ ଏ ଗୋଟିଏ ନିୟମ ଥାଏ।"
+            },
+            {
+                heading: "ଆ‍ନ୍ୟ ଲୋଜି",
+                text: "ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝି ଉତ୍ତର ଦିଆଯାଏ। ଯଥା — ଗାଈ ର ଛୁଆ ବଛୁରା, ସେହିପରି କୁକୁର ର ଛୁଆ ପ‍ ପ‍। ଦ୍ୱିଆ ମଧ୍ୟରେ ଥିବା ସମ୍ପର୍କ ବୁଝ।"
+            },
+            {
+                heading: "ସିକ୍ୱେ‍ନ୍ସିଂ",
+                text: "ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ଠିକ୍ କ୍ରମରେ ସଜାଇବାକୁ ହୁଏ। ଆକାର, ସମୟ ବା ଜୀବନ କ୍ରମ ଅନୁସାରେ ସଜାଅ। ଯଥା ଛୋଟ ପ୍ରାଣୀ ଠୁ ବଡ଼ ପ୍ରାଣୀ ଅନୁସାରେ ।"
+            },
+            {
+                heading: "କ୍ଲାସିଫିକେ‌ସ‌ନ",
+                text: "ଜିନିଷଗୁଡ଼ିକୁ ଗୋଷ୍ଠୀ ଅନୁସାରେ ଭାଗ କରାଯାଏ। ଫଳ, ପ୍ରାଣୀ, ରଙ୍ଗ, ପରିବା — ଏଭଳି ଗୋଷ୍ଠୀ ତିଆରି ହୁଏ। ଏକ ଗୋଷ୍ଠୀ ର ସବୁ ଜିନିଷ ଏକ ରକମ ଗୁଣ ଥାଏ।"
+            },
+            {
+                heading: "ରିଜନିଂ ର ଲାଭ",
+                text: "ରିଜନିଂ ଶିଖିଲେ ଚିନ୍ତା ଶକ୍ତି ବଢ଼େ। ପ୍ରଶ୍ନ ଦ୍ରୁତ ବୁଝି ଉତ୍ତର ଦେଇ ହୁଏ। ପ୍ରତ୍ୟେକ ପ୍ରତିଯୋଗିତାମୂଳକ ପରୀକ୍ଷାରେ ରିଜନିଂ ଥାଏ।"
+            }
+        ],
+        conclusion: "ରିଜନିଂ ର ପ୍ରତ୍ୟେକ ପ୍ରକାର ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ଅଡ୍ ଓ‌ନ ଆଉଟ୍, ପ୍ୟାଟର୍, ଆ‍ନ୍ୟ ଲୋଜି, ସିକ୍ୱେ‍ନ୍ସିଂ ଓ କ୍ଲାସିଫିକେ‌ସ‌ନ ଭଲ ଭାବରେ ଅଭ୍ୟାସ କଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।"
+    },
+
+    question: {
+        audio: "",
+        question: "ରିଜନିଂ ର ବିଭିନ୍ନ ପ୍ରକାର ବର୍ଣ୍ଣନା କର।",
+        introduction: "ରିଜନିଂ ର ବିଭିନ୍ନ ପ୍ରକାର ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟଗୁଡ଼ିକ ଦେଖ।",
+        points: [
+            "ରିଜନିଂ ମାନେ ମସ୍ତିଷ୍କ ବ୍ୟବହାର କରି ଠିକ୍ ଉତ୍ତର ଖୋଜିବା। ଏହା ଶିଖିଲେ ମସ୍ତିଷ୍କ ତୀକ୍ଷ୍ଣ ହୁଏ।",
+            "ଅଡ୍ ଓ‌ନ ଆଉଟ୍ ରେ ଚାରୋଟି ଜିନିଷ ମଧ୍ୟରୁ ଅଲଗା ଜିନିଷ ଖୋଜିବାକୁ ହୁଏ।",
+            "ପ୍ୟାଟର୍ ରେ ଗୋଟିଏ ନିୟମ ଦେଖି ପରବର୍ତ୍ତୀ ଜିନିଷ ଅନୁମାନ କରାଯାଏ।",
+            "ଆ‍ନ୍ୟ ଲୋଜି ରେ ଦୁଇଟି ଜିନିଷ ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝି ଉତ୍ତର ଦିଆଯାଏ।",
+            "ସିକ୍ୱେ‍ନ୍ସିଂ ରେ ଅବ୍ୟବସ୍ଥିତ ଜିନିଷଗୁଡ଼ିକୁ ସ୍ୱାଭାବିକ କ୍ରମ ଅନୁସାରେ ସଜାଇବାକୁ ହୁଏ।"
+        ],
+        conclusion: "ରିଜନିଂ ଅନେକ ପ୍ରକାରର। ପ୍ରତ୍ୟେକ ପ୍ରକାର ଅଭ୍ୟାସ କଲେ ଚିନ୍ତା ଶକ୍ତି ବଢ଼େ ଓ ପ୍ରତିଯୋଗିତାମୂଳକ ପରୀକ୍ଷାରେ ଭଲ ଫଳ ମିଳେ।"
+    }
+}
 };
     
 let currentSentence = 0;
@@ -4732,7 +4727,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଚିନ୍ତା ଶକ୍ତି ର ଶବ୍ଦ ଗୁଡ଼ିକ ଆମ ଦୈନନ୍ଦିନ ଜୀବନ ରେ କିପରି ଉପଯୋଗ ହୁଏ ବୁଝାଅ ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ରିଜନିଂ ର ବିଭିନ୍ନ ପ୍ରକାର ଆଲୋଚନା କର ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4822,7 +4817,7 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-41Z6',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=RR36-TK81',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
@@ -4843,7 +4838,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://student-care.pages.dev/',
+        url: 'https://student-care.pages.dev/SC/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -4937,48 +4932,6 @@ window.addEventListener('beforeunload', () => {
     });
 });
 
-// Writ Practice Functions
-function openWritPractice() {
-    // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://st-practicals.pages.dev/reasoning/class-1/";
-    
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Show container
-    container.classList.add('active');
-    
-    // Set iframe source
-    iframe.src = writExamURL;
-    
-    // Show iframe and hide loading when loaded
-    iframe.onload = function() {
-        iframe.style.display = 'block';
-        loading.style.display = 'none';
-    };
-    
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWritPractice() {
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Hide container
-    container.classList.remove('active');
-    
-    // Reset iframe
-    iframe.src = '';
-    iframe.style.display = 'none';
-    loading.style.display = 'block';
-    
-    // Restore background scroll
-    document.body.style.overflow = 'auto';
-}
-
 
 
 // Global variable to store the current typing timeout
@@ -5062,113 +5015,9 @@ function showAnswerInBox(boxId, answerText) {
     typeWriter(answerBox, answerText, 40);
 }
     
- // ==========================================
-// NAVIGATION SYSTEM FOR MAIN CARD
-// ==========================================
 
-const topicsData = [
-    {
-        heading: "ପାଠ-1: ଚିନ୍ତା ଶକ୍ତି କ'ଣ ?",
-        audioPoints: [
-            {
-                text: "👉 ଚିନ୍ତା ଶକ୍ତି ମାନେ ଆଖ ଦ୍ୱାରା ଦେଖି, ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବା । ଯଦି ଆମ ସାମ୍ନାରେ ଦୁଇ ଟି ଗୋଲ ଏବଂ ଗୋଟେ ଚୌକ ରଖାଯାଏ ଓ ପଚରାଯାଏ — 'ଏଥି ମଧ୍ୟରୁ ଅଲଗା ଟି କେଉଁ ?' — ତେବେ ଆମ ମୁଣ୍ଡ ଚିନ୍ତା କରି ଉତ୍ତର ଦିଏ : ଚୌକ ଟି ଅଲଗା । ଏହା ହେଉଛି ଚିନ୍ତା ଶକ୍ତି । ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ସଂଖ୍ୟା, ଆକୃତି, ରଙ୍ଗ, ଜୀବ, ଓ ଦୈନନ୍ଦିନ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।<br>",
-                audio: "https://audio.evidya.de/RC1T1.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଚିନ୍ତା ଶକ୍ତି ମାନେ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି କହନ୍ତି ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 🔴 🔴 🟦 — ଏଥିରୁ ଅଲଗା ଟି କେଉଁ ଓ କାହିଁକି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🟦 ଅଲଗା, କାରଣ ଦୁଇ ଟି ଲାଲ ଗୋଲ ଅଛି ଓ ନୀଳ ଚୌକ ଟି ଭିନ୍ନ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଚିନ୍ତା ଶକ୍ତି ଆମ ଜୀବନରେ କ'ଣ ସାହାଯ୍ୟ କରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🍎 🍎 🍌 🍎 — ଅଲଗା ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🍌 ଅଲଗା, କାରଣ ଅନ୍ୟ ସବୁ 🍎 (ଆମ୍ବ) ଓ ଏ ଟି 🍌 (କଦଳୀ) ।"
-        ]
-    },
- 
-    {
-        heading: "ପାଠ-2: ଏକା ଏବଂ ଭିନ୍ନ",
-        audioPoints: [
-            {
-                text: "👉 ଦୁଇ ଟି ଜିନିଷ ଦେଖିଲେ ଯଦି ସେ ଦୁଇ ଟି ଠିକ ଏକ ରକମ ଦେଖା ଯାଏ, ତେବେ ସେ ଦୁଇ ଟି 'ଏକା' । ଯଦି ଦୁଇ ଟି ଅଲଗା ଦେଖା ଯାଏ, ତେବେ ସେ ଦୁଇ ଟି 'ଭିନ୍ନ' । ଉଦାହରଣ — ଦୁଇ ଟି ଲାଲ ଗୋଲ ବଲ ଏକା । ଏକ ଟି ଲାଲ ବଲ ଓ ଏକ ଟି ନୀଳ ବଲ ଭିନ୍ନ ।  ଚିନ୍ତା ଶକ୍ତି ଶ୍ରେଣୀ ରେ ଆମେ ଏକା ଓ ଭିନ୍ନ ଚିହ୍ନ କରି ବ୍ୟବଧାନ ବୁଝିବା ।<br>",
-                audio: "https://audio.evidya.de/RC1T2.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🔴 🔴 — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଦୁଇ ଟି ଲାଲ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 🐱 🐶 — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଗୋଟି ବିଲେଇ ଓ ଗୋଟି କୁକୁର — ଦୁଇ ଟି ଭିନ୍ନ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ଦୁଇ ଟି ଆମ ବ୍ୟାଗ ଏକ ରଙ୍ଗ ର, ଏକ ଆକୃତି ର — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏ ଦୁଇ ଟି ଏକା ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🍋 🍊 — ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ? କାହିଁ କି ବୁଝାଅ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭିନ୍ନ, କାରଣ ଗୋଟି ଲେମ୍ବୁ ଓ ଗୋଟି କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> 🔵 🔴 🔵 — ଏ ତିନି ଟି ମଧ୍ୟରୁ ଭିନ୍ନ ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🔴 ଭିନ୍ନ, କାରଣ ଅନ୍ୟ ଦୁଇ ଟି ନୀଳ ।"
-        ]
-    },
- 
-    {
-        heading: "ପାଠ-3: ବଡ, ଛୋଟ ଓ ଅନ୍ୟ ତୁଳନା",
-        audioPoints: [
-            {
-                text: "👉 ଦୁଇ ଟି ଜିନିଷ ପାଖ ଆଖ ରଖି ଦେଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯାହା ଆକାରରେ ଅଧିକ ତାହା 'ବଡ', ଯାହା ଆକାରରେ କମ ତାହା 'ଛୋଟ' । ଏ ଭାବରେ ଆମେ ତୁଳନା  ବ୍ୟବହାର କରି ଜାଣି ହୁଏ ।  ଉଦାହରଣ: ହାତୀ ବଡ — ମୂଷା ଛୋଟ । ବଡ ଗଛ — ଛୋଟ ଗଛ । ଏ ଭଳି ତୁଳନା ଦ୍ୱାରା ଆମ ଚିନ୍ତା ଶକ୍ତି ଆହୁରି ଶକ୍ତ ହୁଏ ।<br>",
-                audio: "https://audio.evidya.de/RC1T3.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🐘 ଓ 🐭 ମଧ୍ୟରୁ କେଉଁ ଟି ବଡ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🐘 (ହାତୀ) ବଡ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ତୁମ ବ୍ୟାଗ ଓ ତୁମ ଜୋତା ମଧ୍ୟରୁ କେଉଁ ଟି ବଡ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସାଧାରଣ ତ ବ୍ୟାଗ ବଡ (ଛାତ୍ର ନିଜ ଅଭିଜ୍ଞତା ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> 🌲🌱 — ଏ ଦୁଇ ଟି ଗଛ ମଧ୍ୟରୁ ଛୋଟ ଟି କେଉଁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🌱 ଛୋଟ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଗୋଟିଏ ବଡ ବୃତ୍ତ ଓ ଗୋଟିଏ ଛୋଟ ବୃତ୍ତ ଏକା ଆକୃତିର — ଏ ଦୁଇ ଟି ଏକା ନା ଭିନ୍ନ ? (ଆଗ ପାଠ ଓ ଏ ପାଠ ଭାବ)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆକୃତି ଏକା (ଦୁଇ ଟି ବୃତ୍ତ), କିନ୍ତୁ ଆକାର ଭିନ୍ନ (ଗୋଟି ବଡ, ଗୋଟି ଛୋଟ) ।"
-        ]
-    },
- 
-    {
-        heading: "ପାଠ-4: ଭିତର–ବାହାର ଓ ଉପର–ତଳ",
-        audioPoints: [
-            {
-                text: "👉 ଚିନ୍ତା ଶକ୍ତି ରେ ଜିନିଷ ର ସ୍ଥାନ ବୁଝିବା ବହୁ ଜରୁରୀ । 'ଭିତର' ମାନେ ଏକ ଜିନିଷ ଅନ୍ୟ ଜିନିଷ ର ଅନ୍ଦରରେ ଥିବା — ଯଥା ବଲ ଟୋକରୀ ଭିତରରେ ।  'ବାହାର' ମାନେ ଜିନିଷ ଟି ବାହ୍ୟ ଭାଗରେ ଥିବା — ଯଥା ବଲ ଟୋକରୀ ବାହାରରେ ।  'ଉପର' ମାନେ ଜିନିଷ ଟି ଉଚ୍ଚ ଅଛି — ଯଥା ଗଚ୍ଛ ଉପରରେ ପକ୍ଷୀ ।  'ତଳ' ମାନେ ଜିନିଷ ଟି ନୀଚ ଅଛି — ଯଥା ଟେବୁଲ ତଳେ ବ୍ୟାଗ । ଏ ଶବ୍ଦ ଚାରି ଟି ଶିଖିଲେ ଅନେକ ପ୍ରଶ୍ନ ର ଉତ୍ତର ଦେଇ ହୁଏ ।<br>",
-                audio: "https://audio.evidya.de/RC1T4.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ନା ବାହାରରେ ? (ଏ ଚିତ୍ରରେ ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ।)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ବଲ ଟୋକରୀ ଭିତରରେ ଅଛି ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ପକ୍ଷୀ ଗଛ ଉପରରେ ଅଛି ନା ତଳରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ପକ୍ଷୀ ଗଛ ଉପରରେ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ବ୍ୟାଗ ଟି ଏବେ କୋଉଠି ଅଛି — ଟେବୁଲ ଉପରରେ ନା ତଳରେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> (ଛାତ୍ର ନିଜ ସ୍ଥିତି ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଘର ଭିତରରେ ଆମ ପରିବାର ଅଛି — 'ଭିତର' ଶବ୍ଦ ର ଅର୍ଥ ଏ ବାକ୍ୟ ରୁ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଭିତର ମାନେ ଘର ର ଅନ୍ଦରରେ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> ☁️ ଆକାଶ ରେ ଅଛି — ଏ ଶବ୍ଦ ଗୁଡ଼ିକ ମଧ୍ୟରୁ ଠିକ ଟି ବାଛ: (ଉପର / ତଳ)<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଉପର — ☁️ ଆମ ଉପର ଆକାଶ ରେ ।"
-        ]
-    },
- 
-    {
-        heading: "ପାଠ-5: କ୍ରମ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ",
-        audioPoints: [
-            {
-                text: "👉 ଜିନିଷ ଗୁଡ଼ିକୁ ଧାଡ଼ି ଭାବରେ ସଜ ଭଙ୍ଗ ରଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯିଏ ସବୁ ଠାରୁ ଆଗ ଅଛି ସେ 'ପ୍ରଥମ', ତା ପଛ ଜଣ 'ଦ୍ୱିତୀୟ', ଓ ତା ପଛ ଜଣ 'ତୃତୀୟ' ।  ଉଦାହରଣ: ଦୌଡ ପ୍ରତିଯୋଗିତାରେ ରାମ ପ୍ରଥମ ଆସିଲା, ଶ୍ୟାମ ଦ୍ୱିତୀୟ, ଓ ହରି ତୃତୀୟ । ଏ ଭଳି 'କ୍ରମ' ଆମ ଜୀବନ ରେ ଖୁବ ଜରୁରୀ — ଲାଇନ ରେ ଠିଆ ହେବା, ଦିନ ର ପ୍ରୋଗ୍ରାମ ଠିକ କରିବା ଓ ଅନ୍ୟ ଅନେକ କାମ ରେ ।<br>",
-                audio: "https://audio.evidya.de/RC1T5.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 🥇🥈🥉 — ପ୍ରଥମ ପୁରସ୍କାର ରଙ୍ଗ ଟି କ'ଣ ରଙ୍ଗ ର ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ପ୍ରଥମ ପୁରସ୍କାର ସୁନା ରଙ୍ଗ ର (🥇) ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> ଧାଡ଼ି ରେ 🍎 🍌 🍊 ଅଛି — ଦ୍ୱିତୀୟ ଜିନିଷ ଟି କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🍌 (କଦଳୀ) ଦ୍ୱିତୀୟ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ଶ୍ରେଣୀ ଘରରେ ଲାଇନ ରେ ତୁମ ସ୍ଥାନ କ'ଣ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ ନା ତୃତୀୟ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> (ଛାତ୍ର ନିଜ ଅଭିଜ୍ଞତା ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ) ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 🐢🐇🐱 — ଦୌଡ ରେ 🐇 ପ୍ରଥମ ଆସିଲା, 🐱 ଦ୍ୱିତୀୟ — ତୃତୀୟ କିଏ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 🐢 (କଇଁଛ) ତୃତୀୟ ।",
- 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-5:</span> ସକାଳ ସ୍କୁଲ ଯିବା ପ୍ରଥମ, ଖାଇବା ଦ୍ୱିତୀୟ, ଶୋଇବା ତୃତୀୟ — ଏ 'କ୍ରମ' ଟିର ନାମ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏ ହେଉଛି ଦୈନନ୍ଦିନ ଜୀବନ ର କ୍ରମ (ଦିନ ର ରୁଟିନ) ।"
-        ]
-    }
-];
- 
+
+
 
 let currentTopicIndex = 0;
 
@@ -5578,9 +5427,9 @@ function startLearning() {
     document.getElementById('topicCounterWrapper').style.display = 'flex';
     document.getElementById('topicContent').style.display = 'block';
     
-    // Load first topic
+    // Load first topic — pass TRUE to auto-start writing immediately
     currentTopicIndex = 0;
-    loadTopic(0);
+    loadTopic(0, true);  // ← change false/missing to true
 }
     
 function navigateTopic(direction) {
@@ -5913,7 +5762,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (REASONING) CLASS-1',
+    className: 'SPECIAL TRAINING (REASONING) CLASS-1 : ରିଜନିଂ ର ଅର୍ଥ ଏବଂ ପ୍ରକାର',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -5926,17 +5775,7 @@ let certificateData = {
     overallPercentage: 0
 };
 
-// Open Certificate Modal
-document.getElementById('certificateBtn').addEventListener('click', function() {
-    // Calculate scores
-    calculateCertificateScores();
-    
-    // Load saved student details if available
-    loadStudentDetails();
-    
-    // Show modal
-    document.getElementById('certificateModal').classList.add('active');
-});
+
 
 // Close Certificate Modal
 function closeCertificateModal() {
@@ -6468,281 +6307,52 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
-
-
-  // ===== UNIFIED MEDIA + REVISION TOGGLE =====
-
-const revisionLessons = [
-    {
-        id: 1,
-        lessonAudio: "https://audio.evidya.de/SR1R1.mp3",
-        lessonText: "ପାଠ ୧: ଚିନ୍ତା ଶକ୍ତି କ'ଣ ? — ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି । ଉଦାହରଣ — ଯଦି 🔴 🔴 🟦 ଦେଖିଲ ଓ ପଚରାଗଲା 'ଅଲଗା ଟି କେଉଁ ?' — ତେବେ ଉତ୍ତର ହେଲା 🟦, କାରଣ ଅନ୍ୟ ଦୁଇ ଟି ଲାଲ ଓ ଗୋଲ । ଚିନ୍ତା ଶକ୍ତି ଦ୍ୱାରା ଆମେ ରଙ୍ଗ, ଆକୃତି, ଜୀବ ଓ ଦୈନନ୍ଦିନ ଜୀବନ ର ଅନେକ ସମସ୍ୟା ସହଜରେ ସମାଧାନ କରି ପାରୁ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🧠 ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ କ'ଣ କହନ୍ତି ?",
-                options: ["ଗଣନା (Counting)", "ଚିନ୍ତା ଶକ୍ତି (Reasoning)", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଆଖ ଦ୍ୱାରା ଦେଖି ଓ ମୁଣ୍ଡ ଦ୍ୱାରା ଭାବି ଠିକ ଉତ୍ତର ବାହାର କରିବାକୁ ଚିନ୍ତା ଶକ୍ତି (Reasoning) କହନ୍ତି ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🍎 🍎 🍌 🍎 — ଏଥିରୁ ଅଲଗା ଜିନିଷ ଟି କେଉଁ ?",
-                options: ["🍎 (ଆପଲ)", "🍌 (କଦଳୀ)", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଅନ୍ୟ ତିନି ଟି 🍎 (ଆପଲ), ଏଣୁ 🍌 (କଦଳୀ) ଟି ଅଲଗା । ଏହା ଚିନ୍ତା ଶକ୍ତି ର ଉଦାହରଣ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଅନ୍ୟ ତିନି ଟି 🍎 (ଆପଲ), ଏଣୁ 🍌 (କଦଳୀ) ଟି ଅଲଗା । ଏହା ଚିନ୍ତା ଶକ୍ତି ର ଉଦାହରଣ ।"
-            }
-        ]
-    },
-
-    {
-        id: 2,
-        lessonAudio: "https://audio.evidya.de/SR1R2.mp3",
-        lessonText: "ପାଠ ୨: ଏକା ଏବଂ ଭିନ୍ନ (Same and Different) — ଦୁଇ ଟି ଜିନିଷ ଯଦି ଏକ ରକମ ଦେଖାଯାଏ, ସେ ଦୁଇ ଟି 'ଏକା' (Same) । ଯଦି ଅଲଗା ଦେଖାଯାଏ, ସେ ଦୁଇ ଟି 'ଭିନ୍ନ' (Different) । ଉଦାହରଣ — 🔴 🔴 ଦୁଇ ଟି ଏକା (Same), କାରଣ ଦୁଇ ଟି ଲାଲ ଗୋଲ । 🐱 🐶 ଦୁଇ ଟି ଭିନ୍ନ (Different), କାରଣ ଗୋଟି ବିଲେଇ ଓ ଗୋଟି କୁକୁର । 🔵 🔴 🔵 — ମଝି ଟି ଭିନ୍ନ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🟢 🟢 — ଏ ଦୁଇ ଟି ଏକା (Same) ନା ଭିନ୍ନ (Different) ?",
-                options: ["ଭିନ୍ନ (Different)", "ଏକା (Same)", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦୁଇ ଟି ସବୁଜ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା (Same) ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦୁଇ ଟି ସବୁଜ ଗୋଲ, ଏଣୁ ଦୁଇ ଟି ଏକା (Same) ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🍋 🍊 — ଏ ଦୁଇ ଟି ଏକା (Same) ନା ଭିନ୍ନ (Different) ? କାହିଁ କି ?",
-                options: ["ଏକା (Same) — ଦୁଇ ଟି ଫଳ", "ଭିନ୍ନ (Different) — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🍋 ଲେମ୍ବୁ ଓ 🍊 କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା, ତେଣୁ ଭିନ୍ନ (Different) ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🍋 ଲେମ୍ବୁ ଓ 🍊 କମଳା — ରଙ୍ଗ ଓ ଜିନିଷ ଅଲଗା, ତେଣୁ ଭିନ୍ନ (Different) ।"
-            }
-        ]
-    },
-
-    {
-        id: 3,
-        lessonAudio: "https://audio.evidya.de/SR1R3.mp3",
-        lessonText: "ପାଠ ୩: ବଡ, ଛୋଟ ଓ ତୁଳନା (Big, Small and Comparison) — ଦୁଇ ଟି ଜିନିଷ ପାଖ ଆଖ ରଖି ଦେଖିଲେ ଆମେ ଜାଣି ପାରୁ — ଯାହା ଆକାରରେ ଅଧିକ ତାହା 'ବଡ' (Big), ଯାହା ଆକାରରେ କମ ତାହା 'ଛୋଟ' (Small) । ଉଦାହରଣ — 🐘 ହାତୀ ବଡ (Big), 🐭 ମୂଷା ଛୋଟ (Small) । 🌲 ବଡ ଗଛ, 🌱 ଛୋଟ ଗଛ । ଦୁଇ ଟି ଏକ ଆକୃତି ର ଜିନିଷ ଯଦି ଭିନ୍ନ ଆକାର ର ହୁଏ — ଆକୃତି ଏକା କିନ୍ତୁ ଆକାର ଭିନ୍ନ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🐘 🐭 — ଏ ଦୁଇ ଟି ମଧ୍ୟରୁ ଛୋଟ (Small) ଟି କେଉଁ ?",
-                options: ["🐘 ହାତୀ", "🐭 ମୂଷା", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🐭 ମୂଷା ଛୋଟ (Small), 🐘 ହାତୀ ବଡ (Big) ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🐭 ମୂଷା ଛୋଟ (Small), 🐘 ହାତୀ ବଡ (Big) ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌲 🌱 — ଦୁଇ ଟି ଗଛ, ଦୁଇ ଟି ଏକ ଆକୃତି ର — ତଥାପି ଦୁଇ ଟି ଭିନ୍ନ କାହିଁ କି ?",
-                options: ["ଦୁଇ ଟି ଭିନ୍ନ ଆକୃତି ର", "ଦୁଇ ଟି ଆକୃତି ଏକା, କିନ୍ତୁ ଆକାର ଭିନ୍ନ", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଦୁଇ ଟି ଗଛ, ଆକୃତି ଏକା — କିନ୍ତୁ 🌲 ବଡ ଓ 🌱 ଛୋଟ, ଏଣୁ ଆକାର ଭିନ୍ନ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦୁଇ ଟି ଗଛ, ଆକୃତି ଏକା — କିନ୍ତୁ 🌲 ବଡ ଓ 🌱 ଛୋଟ, ଏଣୁ ଆକାର ଭିନ୍ନ ।"
-            }
-        ]
-    },
-
-    {
-        id: 4,
-        lessonAudio: "https://audio.evidya.de/SR1R4.mp3",
-        lessonText: "ପାଠ ୪: ଭିତର–ବାହାର ଓ ଉପର–ତଳ (Inside–Outside and Above–Below) — ଜିନିଷ ର ସ୍ଥାନ ବୁଝିବା ଚିନ୍ତା ଶକ୍ତି ର ଏକ ଜରୁରୀ ଅଂଶ । 'ଭିତର' (Inside) ମାନେ ଅନ୍ଦରରେ — ଯଥା ବଲ ଟୋକରୀ ଭିତରରେ । 'ବାହାର' (Outside) ମାନେ ବାହ୍ୟ ଭାଗରେ — ଯଥା ଜୋତା ଶ୍ରେଣୀ ଘର ବାହାରରେ । 'ଉପର' (Above) ମାନେ ଉଚ୍ଚ ସ୍ଥାନ — ଯଥା ☁️ ଆକାଶ ଉପରରେ । 'ତଳ' (Below) ମାନେ ନୀଚ ସ୍ଥାନ — ଯଥା ବ୍ୟାଗ ଟେବୁଲ ତଳେ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🐦 ପକ୍ଷୀ ଗଛ ଉପରରେ ବସିଛି — 'ଉପର' ଶବ୍ଦ ର ଇଂରାଜୀ କ'ଣ ?",
-                options: ["Below", "Above", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଉପର = Above । ପକ୍ଷୀ ଗଛ ଉପରରେ = The bird is above the tree ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଉପର = Above । ପକ୍ଷୀ ଗଛ ଉପରରେ = The bird is above the tree ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "📦 ବହି ଥଳି ଭିତରରେ ଅଛି — 'ଭିତର' ଶବ୍ଦ ର ଇଂରାଜୀ କ'ଣ ?",
-                options: ["Outside", "Inside", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ଭିତର = Inside । ବହି ଥଳି ଭିତରରେ = The book is inside the bag ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଭିତର = Inside । ବହି ଥଳି ଭିତରରେ = The book is inside the bag ।"
-            }
-        ]
-    },
-
-    {
-        id: 5,
-        lessonAudio: "https://audio.evidya.de/SR1R5.mp3",
-        lessonText: "ପାଠ ୫: କ୍ରମ — ପ୍ରଥମ, ଦ୍ୱିତୀୟ, ତୃତୀୟ (Order — First, Second, Third) — ଜିନିଷ ଗୁଡ଼ିକୁ ଧାଡ଼ି ଭାବରେ ସଜ ଭଙ୍ଗ ରଖିଲେ — ଆଗ ଟି 'ପ୍ରଥମ' (First), ତା ପଛ ଟି 'ଦ୍ୱିତୀୟ' (Second), ଓ ତା ପଛ ଟି 'ତୃତୀୟ' (Third) । ଉଦାହରଣ — ଦୌଡ ରେ 🐇 ପ୍ରଥମ (First), 🐱 ଦ୍ୱିତୀୟ (Second), 🐢 ତୃତୀୟ (Third) । ଧାଡ଼ି ରେ 🍎 🍌 🍊 — 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🥇🥈🥉 — ଦ୍ୱିତୀୟ (Second) ପୁରସ୍କାର ଟି କ'ଣ ରଙ୍ଗ ର ?",
-                options: ["ସୁନା ରଙ୍ଗ 🥇", "ରୂପା ରଙ୍ଗ 🥈", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — ପ୍ରଥମ (First) = 🥇 ସୁନା, ଦ୍ୱିତୀୟ (Second) = 🥈 ରୂପା, ତୃତୀୟ (Third) = 🥉 ତମ୍ବା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ପ୍ରଥମ (First) = 🥇 ସୁନା, ଦ୍ୱିତୀୟ (Second) = 🥈 ରୂପା, ତୃତୀୟ (Third) = 🥉 ତମ୍ବା ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🍎 🍌 🍊 — ଏ ଧାଡ଼ି ରେ ତୃତୀୟ (Third) ଜିନିଷ ଟି କ'ଣ ?",
-                options: ["🍎 ଆପଲ", "🍊 କମଳା", "ଜାଣିନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେରଖନ୍ତୁ — 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ । ଏଣୁ ତୃତୀୟ ଜିନିଷ ଟି 🍊 କମଳା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 🍎 ପ୍ରଥମ, 🍌 ଦ୍ୱିତୀୟ, 🍊 ତୃତୀୟ । ଏଣୁ ତୃତୀୟ ଜିନିଷ ଟି 🍊 କମଳା ।"
-            }
-        ]
-    }
-];
-    
-let revisionState = {
-    active: false,
-    lessonIndex: 0,
-    mcqIndex: 0,
-    audio: null
-};
-
-function stopRevisionAudio() {
-    if (revisionState.audio) {
-        revisionState.audio.pause();
-        revisionState.audio = null;
-    }
-}
-
-function playRevisionAudio(url, onEnd) {
-    stopRevisionAudio();
-    if (!url || !isValidAudioUrl(url)) {
-        if (onEnd) setTimeout(onEnd, 100);
-        return;
-    }
-    revisionState.audio = new Audio(url);
-    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
-    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
-    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
-}
-
-function setRevisionScreen(html) {
-    const screen = document.getElementById('revisionScreen');
-    if (screen) {
-        screen.style.background = 'white';
-        screen.style.overflow = 'hidden';
-        screen.style.display = 'flex';
-        screen.style.flexDirection = 'column';
-        screen.style.alignItems = 'stretch';
-        screen.style.justifyContent = 'flex-start';
-        screen.style.padding = '0';
-        screen.innerHTML = html;
-    }
-}
-
-function rvTypewrite(elementId, text, speed, onDone) {
-    const el = document.getElementById(elementId);
-    if (!el) { if (onDone) onDone(); return; }
-
-    el.innerHTML = '';
-
-    const chars = Array.from(text);
-    let i = 0;
-    let current = '';
-
-    function next() {
-        if (i < chars.length) {
-            current += chars[i];
-            el.innerHTML = current;
-            i++;
-            setTimeout(next, speed || 35);
-        } else {
-            if (onDone) onDone();
-        }
-    }
-
-    next();
-}
     
 function toggleMedia(type) {
-    const logoDisplay  = document.getElementById('logoDisplay');
-    const audioDisplay = document.getElementById('audioDisplay');
-    const videoDisplay = document.getElementById('videoDisplay');
-    const revisionBoard = document.getElementById('revisionBoard');
-    const audioIframe  = document.getElementById('audioIframe');
-    const videoIframe  = document.getElementById('videoIframe');
-    const audioBtn     = document.getElementById('audioToggleBtn');
-    const videoBtn     = document.getElementById('videoToggleBtn');
-    const revBtn       = document.getElementById('revisionToggleBtn');
+    const logoDisplay   = document.getElementById('logoDisplay');
+    const audioDisplay  = document.getElementById('audioDisplay');
+    const videoDisplay  = document.getElementById('videoDisplay');
+    const debateDisplay = document.getElementById('debateDisplay');
+    const audioIframe   = document.getElementById('audioIframe');
+    const videoIframe   = document.getElementById('videoIframe');
+    const debateIframe  = document.getElementById('debateIframe');
+    const audioBtn      = document.getElementById('audioToggleBtn');
+    const videoBtn      = document.getElementById('videoToggleBtn');
+    const debateBtn     = document.getElementById('debateToggleBtn');
 
     const resetAllBtnStyles = () => {
-        [audioBtn, videoBtn, revBtn].forEach(b => {
+       [audioBtn, videoBtn, debateBtn].forEach(b => {
             if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
         });
     };
 
     const hideAll = () => {
-        audioIframe.src = '';
-        videoIframe.src = '';
-        audioDisplay.style.display = 'none';
-        videoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'none';
-        logoDisplay.style.display = 'block';
-        stopRevisionAudio();
-        revisionState.active = false;
+        videoIframe.src   = '';
+         const ap = document.getElementById('audioPlayer');
+    if (ap) { ap.pause(); ap.currentTime = 0; }
+    const dp = document.getElementById('debatePlayer');
+    if (dp) { dp.pause(); dp.currentTime = 0; }
+        audioDisplay.style.display   = 'none';
+        videoDisplay.style.display   = 'none';
+      
+        debateDisplay.style.display  = 'none';
+        logoDisplay.style.display    = 'block';
+       
         resetAllBtnStyles();
     };
 
-    if (type === 'audio') {
-        if (audioDisplay.style.display === 'block') {
-            hideAll();
-            return;
-        }
+  if (type === 'audio') {
+    if (audioDisplay.style.display === 'flex') {
         hideAll();
-        logoDisplay.style.display = 'none';
-        audioDisplay.style.display = 'block';
-        audioIframe.src = audioIframe.dataset.src;
-        audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        return;
     }
+    hideAll();
+    logoDisplay.style.display  = 'none';
+    audioDisplay.style.display = 'flex';
+    const ap = document.getElementById('audioPlayer');
+    if (ap) ap.play();
+    audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 
     if (type === 'video') {
         if (videoDisplay.style.display === 'block') {
@@ -6750,266 +6360,28 @@ function toggleMedia(type) {
             return;
         }
         hideAll();
-        logoDisplay.style.display = 'none';
+        logoDisplay.style.display  = 'none';
         videoDisplay.style.display = 'block';
         videoIframe.src = videoIframe.dataset.src;
         videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
     }
 
-    if (type === 'revision') {
-        if (revisionState.active) {
-            hideAll();
-            return;
-        }
-        hideAll();
-        logoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'block';
-        revisionState.active = true;
-        revisionState.lessonIndex = 0;
-        revisionState.mcqIndex = 0;
-        revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
-        startRevisionLesson();
-    }
-}
-
-function startRevisionLesson() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
-                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
-            </div>
-
-            <div id="rvLessonTextDiv" style="flex:1;overflow-y:auto;min-height:0;margin-bottom:6px;">
-                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
-            </div>
-
-            <div id="rvUnderstandButtons" style="display:none;flex-direction:column;gap:6px;flex-shrink:0;">
-                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
-                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
-            </div>
-        </div>
-    `);
-
-    let textDone = false;
-    let audioDone = false;
-
-    function checkBothDone() {
-        if (textDone && audioDone) {
-            const textDiv = document.getElementById('rvLessonTextDiv');
-            if (textDiv) textDiv.style.display = 'none';
-
-            const btns = document.getElementById('rvUnderstandButtons');
-            if (btns) {
-                btns.style.display = 'flex';
-                btns.style.flexDirection = 'column';
-            }
-            playRevisionAudio(lesson.understandAudio, null);
-        }
-    }
-
-    playRevisionAudio(lesson.lessonAudio, () => {
-        audioDone = true;
-        checkBothDone();
-    });
-
-    setTimeout(() => {
-        rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
-            textDone = true;
-            checkBothDone();
-        });
-    }, 300);
-}
-    
-function rvUnderstood(yes) {
-    if (!yes) {
-        startRevisionLesson();
-        return;
-    }
-    revisionState.mcqIndex = 0;
-    showRevisionMCQ();
-}
-
-function showRevisionMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const qNum = revisionState.mcqIndex + 1;
-    const total = lesson.mcq.length;
-    const current = revisionState.lessonIndex + 1;
-
-    playRevisionAudio(mcq.questionAudio, null);
-
-    const optColors = [
-        'linear-gradient(135deg,#667eea,#764ba2)',
-        'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
-        'linear-gradient(135deg,#6b7280,#4b5563)'
-    ];
-
-   setRevisionScreen(`
-    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
-            
-            <!-- Header badge -->
-            <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
-            </div>
-
-<div style="margin-bottom:12px;">
-    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
-        ${mcq.q}
-    </p>
-</div>
-
-      <div style="margin-top:10px;">
-    <select onchange="rvAnswer(parseInt(this.value))" style="
-        width:100%;
-        padding:12px;
-        font-size:15px;
-        font-weight:bold;
-        border:2px solid #667eea;
-        border-radius:10px;
-        background:white;
-        color:#111;
-        cursor:pointer;
-        appearance:auto;
-    ">
-        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
-        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
-    </select>
-</div>
-        </div>
-    `);
-}
-
-
-function rvSubmitAnswer() {
-    const sel = document.getElementById('rvSelect');
-    if (!sel || sel.value === '') {
-        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
-        return;
-    }
-    rvAnswer(parseInt(sel.value));
-}
-
-    
-function rvAnswer(optionIndex) {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const isIDontKnow = (optionIndex === mcq.options.length - 1);
-    const isCorrect = (optionIndex === mcq.correct);
-
-   if (isCorrect) {
-    playRevisionAudio(mcq.correctAudio, null);
-    
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
-    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
-    
-    // Decide what the forward button says and does
-    let forwardBtn = '';
-    if (isLastMCQ && isLastLesson) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
-    } else if (isLastMCQ) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
-    } else {
-        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
-    }
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-            <div style="font-size:34px;">🌟</div>
-            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
-            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
-                ${forwardBtn}
-            </div>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
-            // Show the forward button only after text finishes typing
-            const fwd = document.getElementById('rvForwardBtn');
-            if (fwd) fwd.style.display = 'block';
-        });
-    }, 200);
-    return;
-}
-
-    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
-    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
-    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
-    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
-    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
-
-    playRevisionAudio(feedbackAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
-            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
-                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
-            </div>
-            <div style="flex:1;overflow-y:auto;">
-              <p id="rvFeedbackText" style="
-    font-size: 13px;
-    font-weight: bold;
-    color: #111;
-    line-height: 1.6;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
-            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
-    }, 200);
-}
    
-function advanceMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    revisionState.mcqIndex++;
-    if (revisionState.mcqIndex < lesson.mcq.length) {
-        showRevisionMCQ();
-    } else {
-        showLessonCompletePrompt();
+
+  if (type === 'debate') {
+    if (debateDisplay.style.display === 'flex') {
+        hideAll();
+        return;
     }
+    hideAll();
+    logoDisplay.style.display   = 'none';
+    debateDisplay.style.display = 'flex';
+    const dp = document.getElementById('debatePlayer');
+    if (dp) dp.play();
+    debateBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 }
 
-function showLessonCompletePrompt() {
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-    const isLast = (current === total);
-
-    playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
-            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
-            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
-            ${isLast
-                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
-                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
-                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
-            }
-        </div>
-    `);
-}
-    
-function goNextLesson() {
-    revisionState.lessonIndex++;
-    revisionState.mcqIndex = 0;
-    startRevisionLesson();
-}  
-    
     
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
