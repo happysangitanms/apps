@@ -832,10 +832,6 @@ body > div:first-child {
 }
 
 
-#writPracticeContainer .assistant-iframe-wrapper {
-    height: 700px; /* or 650px, 750px - whatever increase you want */
-}
-
 .answer-section {
     text-align: justify;
     display: inline-block;
@@ -2243,7 +2239,7 @@ body > div:first-child {
         <button id="stqBtn" class="test-btn summary">ଅତି ସଂକ୍ଷିପ୍ତ ପ୍ରଶ୍ନୋତ୍ତର</button>
         <button id="summaryBtn" class="test-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
         <button id="questionBtn" class="test-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">ସଂକ୍ଷିପ୍ତ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
-        <button id="practiceBtn" class="test-btn" onclick="openWritPractice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଅଭ୍ଯାସ(Practical) ପରୀକ୍ଷା</button>
+      <button id="practiceBtn" class="test-btn" onclick="openCertificateFromExam()" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%);">🏆 ସାର୍ଟିଫିକେଟ୍</button>
         
     </div>
                              <div id="scoreDisplay" class="score-display" style="display: none;">
@@ -2334,38 +2330,84 @@ body > div:first-child {
         </div>
     </div>
 </div>
-           
-           
- <!-- Practice Container -->
-<div id="writPracticeContainer" class="assistant-container">
-    <div class="assistant-header">
-        <h3>ସମ୍ପୂର୍ଣ୍ଣ ଅଭ୍ୟାସ ପରୀକ୍ଷା</h3>
-        <button class="assistant-close-btn" onclick="closeWritPractice()">✕</button>
-    </div>
-    <div class="assistant-iframe-wrapper">
-        <div class="assistant-loading" id="writPracticeLoading">
-            <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଅଭ୍ଯାସ ପରୀକ୍ଷା ଲୋଡ୍ ହେଉଛି...</p>
-        </div>
-        <iframe 
-            id="writPracticeIframe"
-            src="" 
-            allow="clipboard-write"
-            style="display: none;">
-        </iframe>
-    </div>
-    <div class="assistant-info">
-        💡 ଏହା ଏକ ପ୍ରାକ୍ଟିକାଲ୍ ପରୀକ୍ଷା । ବିଷୟବସ୍ତୁ ସମ୍ବନ୍ଧୀୟ ବ୍ୟବହାରିକ ଜ୍ଞାନର ପରୀକ୍ଷା । 
-    </div>
-</div>               
-            <div id="testContainer"></div>
+
+
+ <div id="testContainer"></div>
 
 <div style="margin-top: 0px; padding: 0 12px; text-align: center;">
 
-    <!-- Three buttons side by side - FIXED -->
-    <div style="display: flex; justify-content: space-between; 
-                align-items: center; margin-bottom: 8px; 
-                width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
+        display: inline-block;
+        padding: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 320px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
+
+    <!-- AUDIO PLAYER - Hidden by default -->
+<div id="audioDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎙️</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">ଆଲୋଚନା ଶୁଣନ୍ତୁ</p>
+    <audio id="audioPlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STMAC1A.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</div>
+        
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/EGP-MoteFpE?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">DEBATE ଶୁଣନ୍ତୁ</p>
+    <audio id="debatePlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STMAC1D.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    </div>
+</div>
+
+
+    <!-- Three buttons side by side - NOW BELOW the placeholder -->
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 16px;
+            width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
         
         <button id="audioToggleBtn" 
             onclick="toggleMedia('audio')"
@@ -2377,14 +2419,14 @@ body > div:first-child {
             ଆଲୋଚନା
         </button>
 
-        <button id="revisionToggleBtn"
-            onclick="toggleMedia('revision')"
+        <button id="debateToggleBtn"
+            onclick="toggleMedia('debate')"
             style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
                    color: white; border: none; border-radius: 8px;
                    padding: 8px 0; font-size: 12px; font-weight: bold;
                    cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
                    width: 100px; height: 36px; flex-shrink: 0;">
-            ରିଭିଜନ୍
+            ତର୍କ ବିତର୍କ
         </button>
 
         <button id="videoToggleBtn" 
@@ -2396,95 +2438,10 @@ body > div:first-child {
                    width: 100px; height: 36px; flex-shrink: 0;">
             ଭିଡିଓ
         </button>
-
     </div>
-
-    <!-- Media Placeholder - same size as logo -->
-<div id="mediaPlaceholder" style="
-    display: inline-block;
-    padding: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 320px;
-    position: relative;
-    overflow: hidden;
-">
-    <!-- DEFAULT: Logo Image -->
-    <div id="logoDisplay">
-        <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
-             alt="Logo" 
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
-    </div>
-
-    <!-- AUDIO PLAYER - Hidden by default -->
-    <div id="audioDisplay" style="display: none;">
-        <iframe
-            id="audioIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/9-kwaHBx-MQ?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- VIDEO PLAYER - Hidden by default -->
-    <div id="videoDisplay" style="display: none;">
-        <iframe
-            id="videoIframe"
-            src=""
-            data-src="https://www.youtube.com/embed/vHHm6_gw6_0?playsinline=1&rel=0&modestbranding=1&autoplay=1"
-            style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                border: 3px solid white;
-            "
-            allow="accelerometer; autoplay; clipboard-write; 
-                   encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- REVISION WHITEBOARD - sibling of audio/video, same level -->
-    <div id="revisionBoard" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: white; overflow: hidden;">
-        <div id="revisionScreen" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box; overflow: hidden; background: white;">
-        </div>
-    </div>
-
-</div>
-     
-    <p class="info-text" style="
-        margin-top: 15px;
-        font-size: 14px;
-        color: #000000;
-        font-weight: bold;
-    "></p>
 </div>
 
-          <!-- Add this after the Mermaid button section -->
-<button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
-    🏆 ଏଠାରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିବା ...
-</button> 
-           
+
 <!-- Dropdown Menu -->
 <div class="assistant-dropdown-wrapper">
     <button id="assistantDropdownBtn" class="assistant-dropdown-btn">
@@ -2662,7 +2619,11 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-
+function openCertificateFromExam() {
+    calculateCertificateScores();
+    loadStudentDetails();
+    document.getElementById('certificateModal').classList.add('active');
+}
 
 
 // =============================================
@@ -2757,7 +2718,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ Special Training କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2833,23 +2794,16 @@ document.addEventListener('visibilitychange', () => {
     }
 });
     }
-// ============================================
-// IMPORTANT: Add your loadSentence() and other
-// app-specific functions below this line
-// ============================================
 
-// ==========================================
-// MATH CLASS 1 — numberData (like wordData)
-// ==========================================
 
 const wordData = {
     currentWord: 0,
     words: [
         {
-            word: "ZERO",
-            odia: "ଶୂନ୍ୟ",
-            emoji: "0️⃣",
-            odiaUse: "ଖାଲି ବା କିଛି ନ ଥିବା । ଯଦି ତୁମ ଥାଳିରେ କୌଣସି ଭାତ ନାହିଁ, ତେବେ ଥାଳିରେ ଶୂନ୍ୟ ଭାତ ଅଛି । ଯଦି ତୁମ ପକେଟ୍‌ରେ କୌଣସି ଟଙ୍କା ନାହିଁ, ତେବେ ତୁମ ପକେଟ୍‌ରେ ଶୂନ୍ୟ ଟଙ୍କା ଅଛି ।",
+            word: "MATHEMATICS",
+            odia: "ଗଣିତ",
+            emoji: "🔢",
+            odiaUse: "ଗଣିତ ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ। ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ। ଗଣିତ ଶିଖିଲେ ଜୀବନ ସହଜ ହୁଏ।",
             audio: {
                 intro: "audio-url-here",
                 encourage: "audio-url-here",
@@ -2857,10 +2811,10 @@ const wordData = {
             }
         },
         {
-            word: "ONE",
-            odia: "ଏକ",
-            emoji: "1️⃣",
-            odiaUse: "ଗୋଟିଏ । ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ଅଛି ଯିଏ ଆମକୁ ଆଲୋକ ଦିଏ । ଏକ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ସାନ ସଂଖ୍ୟା 1 ହୋଇଥାଏ ।",
+            word: "NUMBER",
+            odia: "ସଂଖ୍ୟା",
+            emoji: "🔣",
+            odiaUse: "ସଂଖ୍ୟାକୁ ଇଂରାଜୀରେ NUMBER କହନ୍ତି। ସଂଖ୍ୟା ଦ୍ୱାରା ଆମେ ଜିନିଷ ଗଣୁ। ୧ ରୁ ୧୦ ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା ଗଣିତର ଆଧାର।",
             audio: {
                 intro: "audio-url-here",
                 encourage: "audio-url-here",
@@ -2868,98 +2822,87 @@ const wordData = {
             }
         },
         {
-            word: "TWO",
-            odia: "ଦୁଇ",
-            emoji: "2️⃣",
-            odiaUse: "ଦୁଇଟା । ଆମ ଶରୀରରେ ଦୁଇଟା ଆଖି ଅଛି ଯାହାଦ୍ୱାରା ଆମେ ଦେଖୁ । ସାଇକେଲ୍‌ରେ ଦୁଇଟା ଚକ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "THREE",
-            odia: "ତିନି",
-            emoji: "3️⃣",
-            odiaUse: "ତିନି ଟା । ଟ୍ରାଫିକ ସିଗ୍ନାଲ୍‌ରେ ତିନିଟା ରଙ୍ଗ ଅଛି — ଲାଲ, ହଳଦିଆ ଏବଂ ସବୁଜ । ଏକ ତ୍ରିଭୁଜ ଆକୃତିରେ ତିନିଟା କୋଣ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FOUR",
-            odia: "ଚାରି",
-            emoji: "4️⃣",
-            odiaUse: "ଚାରି ଟା । ଗାଡ଼ିରେ ଚାରିଟା ଚକ ଥାଏ । ଏକ ଚୌକ ଆକୃତିରେ ଚାରିଟା ବାହୁ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "FIVE",
-            odia: "ପାଞ୍ଚ",
-            emoji: "5️⃣",
-            odiaUse: "ପାଞ୍ଚ ଟା । ଆମ ଗୋଟିଏ ହାତରେ ପାଞ୍ଚଟା ଆଙ୍ଗୁଠି ଥାଏ । ଏକ ସପ୍ତାହରେ ପାଞ୍ଚ ଟା ବିଦ୍ୟାଳୟ ଦିନ ଅଛି ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "SIX",
-            odia: "ଛଅ",
-            emoji: "6️⃣",
-            odiaUse: "ଛଅ ଟା । ଏକ ମହୁ ଛତାରେ ଛଅ ଟା କୋଣ ବିଶିଷ୍ଟ ଘର ଥାଏ । ପୋକ ଜୀବ ଗୁଡ଼ିକର ଛଅଟା ଗୋଡ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "SEVEN",
-            odia: "ସାତ",
-            emoji: "7️⃣",
-            odiaUse: "ସାତ ଟା । ଏକ ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଅଛି । ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ ଥାଏ ।",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "EIGHT",
-            odia: "ଆଠ",
-            emoji: "8️⃣",
-            odiaUse: "ଆଠ ଟା । ଅକ୍ଟୋପସ୍‌ ଜୀବର ଆଠ ଟା ହାତ ଥାଏ । ",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "NINE",
-            odia: "ନଅ",
-            emoji: "9️⃣",
-            odiaUse: "ନଅ ଟା । ଏକ ଅଙ୍କ ବିଶିଷ୍ଟ ସବୁଠାରୁ ବଡ ସଂଖ୍ୟା 9 ହୋଇଥାଏ । ",
-            audio: {
-                intro: "audio-url-here",
-                encourage: "audio-url-here",
-                praise: "audio-url-here"
-            }
-        },
-        {
-            word: "TEN",
-            odia: "ଦଶ",
+            word: "DIGIT",
+            odia: "ଅଙ୍କ",
             emoji: "🔟",
-            odiaUse: "ଦଶ ଟା । ଆମ ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ଅଛି । ଦଶ ପଇସା ମିଶାଇ ଗୋଟିଏ ଆଣା ହୁଏ ।",
+            odiaUse: "ମୋଟ ଦଶଟି DIGIT ଅଛି। DIGIT ଗୁଡ଼ିକ ହେଲା ୦ ରୁ ୯। ଏହି ଦଶଟି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "COUNTING",
+            odia: "ଗଣନା",
+            emoji: "🧮",
+            odiaUse: "ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଗଣନାକୁ ଇଂରାଜୀରେ COUNTING କହନ୍ତି। ଆଙ୍ଗୁଠି ଦ୍ୱାରା ଆମେ ଗଣନା କରୁ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "ADDITION",
+            odia: "ଯୋଗ",
+            emoji: "➕",
+            odiaUse: "ଦୁଇଟି ସଂଖ୍ୟା ମିଶାଇଲେ ଯୋଗ ହୁଏ। ଯୋଗ ଚିହ୍ନ ହେଲା +। ୨ + ୩ = ୫ ଏହା ଯୋଗର ଉଦାହରଣ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "SUBTRACTION",
+            odia: "ବିୟୋଗ",
+            emoji: "➖",
+            odiaUse: "ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ। ବିୟୋଗ ଚିହ୍ନ ହେଲା -। ୫ - ୨ = ୩ ଏହା ବିୟୋଗର ଉଦାହରଣ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "PLUS",
+            odia: "ଯୋଗ ଚିହ୍ନ",
+            emoji: "✚",
+            odiaUse: "+ ଚିହ୍ନକୁ PLUS କହନ୍ତି। PLUS ଦ୍ୱାରା ଦୁଇଟି ସଂଖ୍ୟା ଯୋଗ ହୁଏ। ONE PLUS ONE EQUALS TWO।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "MINUS",
+            odia: "ବିୟୋଗ ଚିହ୍ନ",
+            emoji: "➖",
+            odiaUse: "- ଚିହ୍ନକୁ MINUS କହନ୍ତି। MINUS ଦ୍ୱାରା ଗୋଟିଏ ସଂଖ୍ୟା ବାଦ ଯାଏ। FIVE MINUS TWO EQUALS THREE।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "EQUALS",
+            odia: "ସମାନ",
+            emoji: "🟰",
+            odiaUse: "= ଚିହ୍ନକୁ EQUALS କହନ୍ତି। EQUALS ଚିହ୍ନ ଫଳ ଦେଖାଏ। ୨ + ୩ = ୫ ରେ = ହେଉଛି EQUALS।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "SHAPES",
+            odia: "ଆକୃତି",
+            emoji: "🔷",
+            odiaUse: "ଆକୃତିକୁ ଇଂରାଜୀରେ SHAPES କହନ୍ତି। ବୃତ୍ତ, ଚତୁର୍ଭୁଜ ଇତ୍ୟାଦି ଆକୃତି। ଗଣିତରେ ଆକୃତି ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ।",
             audio: {
                 intro: "audio-url-here",
                 encourage: "audio-url-here",
@@ -2968,8 +2911,103 @@ const wordData = {
         }
     ]
 };
+    
+const topicsData = [
+    {
+        heading: "Topic-1: ଗଣିତ କ'ଣ",
+        audioPoints: [
+            {
+                text: "👉 ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା। ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ। ଗଣିତ ଶିଖିଲେ ଜୀବନର ସମସ୍ୟା ସମାଧାନ ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଗଣିତ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା। ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ। ଗଣିତ ଶିଖିଲେ ଜୀବନ ସହଜ ହୁଏ।",
 
+            "<span style='color: red;'>Q-2:</span> ଆମେ କେଉଁ ସମୟରେ ଗଣିତ ବ୍ୟବହାର କରୁ?<br><br><span style='color: green;'>Answer:</span> ଆମେ ଆଙ୍ଗୁଠି ଗଣିଲେ ଗଣିତ ବ୍ୟବହାର ହୁଏ। ଦୋକାନରୁ ଜିନିଷ କିଣିଲେ ଗଣିତ ବ୍ୟବହାର ହୁଏ। ସମୟ ଦେଖିଲେ ଗଣିତ ବ୍ୟବହାର ହୁଏ।",
 
+            "<span style='color: red;'>Q-3:</span> ଗଣିତରେ କେଉଁ କେଉଁ ବିଷୟ ଅଛି?<br><br><span style='color: green;'>Answer:</span> ଗଣିତରେ ସଂଖ୍ୟା ଓ ଗଣନା ଅଛି। ଗଣିତରେ ଯୋଗ ଓ ବିୟୋଗ ଅଛି। ଗଣିତରେ ଆକୃତି ମଧ୍ୟ ଅଛି।",
+
+            "<span style='color: red;'>Q-4:</span> ଗଣିତ ଶିଖିଲେ କ'ଣ ଲାଭ?<br><br><span style='color: green;'>Answer:</span> ଗଣିତ ଶିଖିଲେ ଜୀବନର ସମସ୍ୟା ସମାଧାନ ହୁଏ। ଗଣିତ ଶିଖିଲେ ହିସାବ ରଖିବା ସହଜ ହୁଏ। ଗଣିତ ଶିଖିଲେ ଆମେ ଚତୁର ହୁଉ।"
+        ]
+    },
+
+    {
+        heading: "Topic-2: ସଂଖ୍ୟା",
+        audioPoints: [
+            {
+                text: "👉 ସଂଖ୍ୟାକୁ ଇଂରାଜୀରେ NUMBER କହନ୍ତି। ମୋଟ ଦଶଟି DIGIT ଅଛି। ଏହି ଦଶଟି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ସଂଖ୍ୟା କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ସଂଖ୍ୟାକୁ ଇଂରାଜୀରେ NUMBER କହନ୍ତି। ସଂଖ୍ୟା ଦ୍ୱାରା ଆମେ ଜିନିଷ ଗଣୁ। ୧ ରୁ ୧୦ ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା ଗଣିତର ଆଧାର।",
+
+            "<span style='color: red;'>Q-2:</span> DIGIT କ'ଣ?<br><br><span style='color: green;'>Answer:</span> DIGIT ମାନେ ଅଙ୍କ। ୦ ରୁ ୯ ପର୍ଯ୍ୟନ୍ତ ଦଶଟି DIGIT ଅଛି। ଏହି ଦଶଟି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।",
+
+            "<span style='color: red;'>Q-3:</span> ୫ କୁ ଇଂରାଜୀରେ କ'ଣ କହନ୍ତି?<br><br><span style='color: green;'>Answer:</span> ୫ କୁ ଇଂରାଜୀରେ FIVE କହନ୍ତି। ଓଡ଼ିଆରେ ଏହାକୁ ପାଞ୍ଚ କୁହାଯାଏ। ୫ ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସଂଖ୍ୟା।",
+
+            "<span style='color: red;'>Q-4:</span> ୧ ରୁ ୧୦ ମଧ୍ୟରେ ଥିବା ସଂଖ୍ୟାଗୁଡ଼ିକ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ୧, ୨, ୩, ୪, ୫ ହେଉଛି ପ୍ରଥମ ପାଞ୍ଚଟି ସଂଖ୍ୟା। ୬, ୭, ୮, ୯, ୧୦ ହେଉଛି ପରବର୍ତ୍ତୀ ପାଞ୍ଚଟି ସଂଖ୍ୟା। ଏହି ଦଶଟି ସଂଖ୍ୟା ଗଣିତର ଆଧାର।"
+        ]
+    },
+
+    {
+        heading: "Topic-3: ଗଣନା",
+        audioPoints: [
+            {
+                text: "👉 ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଗଣନାକୁ ଇଂରାଜୀରେ COUNTING କହନ୍ତି। ଜିନିଷ ଦେଖି ଆମେ ଗଣନା କରୁ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଗଣନା କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଗଣନାକୁ ଇଂରାଜୀରେ COUNTING କହନ୍ତି। ଆଙ୍ଗୁଠି ଦ୍ୱାରା ଆମେ ଗଣନା କରୁ।",
+
+            "<span style='color: red;'>Q-2:</span> 🍎🍎🍎🍎 = କେତୋଟି ଆପଲ?<br><br><span style='color: green;'>Answer:</span> ଚାରିଟି ଆପଲ ଅଛି। ଇଂରାଜୀରେ ଏହାକୁ FOUR କହନ୍ତି। ସଂଖ୍ୟାରେ ଏହା ୪।",
+
+            "<span style='color: red;'>Q-3:</span> 🌟🌟🌟🌟🌟 = କେତୋଟି ତାରା?<br><br><span style='color: green;'>Answer:</span> ପାଞ୍ଚଟି ତାରା ଅଛି। ଇଂରାଜୀରେ ଏହାକୁ FIVE କହନ୍ତି। ସଂଖ୍ୟାରେ ଏହା ୫।",
+
+            "<span style='color: red;'>Q-4:</span> ଗଣନା ଶିଖିଲେ କ'ଣ ଲାଭ?<br><br><span style='color: green;'>Answer:</span> ଗଣନା ଶିଖିଲେ ଜିନିଷ ଗଣିବା ସହଜ ହୁଏ। ଗଣନା ଶିଖିଲେ ହିସାବ ରଖିବା ଭଲ ହୁଏ। ଗଣନା ଗଣିତର ଆଧାର।"
+        ]
+    },
+
+    {
+        heading: "Topic-4: ଯୋଗ",
+        audioPoints: [
+            {
+                text: "👉 ଦୁଇଟି ସଂଖ୍ୟା ଏକାଠି ମିଶାଇଲେ ଯୋଗ ହୁଏ। ଯୋଗ ଚିହ୍ନ ହେଲା +। ୨ + ୩ = ୫ ଏହା ଯୋଗର ଉଦାହରଣ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଯୋଗ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଦୁଇଟି ସଂଖ୍ୟା ଏକାଠି ମିଶାଇଲେ ଯୋଗ ହୁଏ। ଯୋଗକୁ ଇଂରାଜୀରେ ADDITION କହନ୍ତି। ଯୋଗ ଚିହ୍ନ ହେଲା +।",
+
+            "<span style='color: red;'>Q-2:</span> + ଚିହ୍ନକୁ କ'ଣ କହନ୍ତି?<br><br><span style='color: green;'>Answer:</span> + ଚିହ୍ନକୁ PLUS କହନ୍ତି। ଏହା ଦୁଇଟି ସଂଖ୍ୟା ଯୋଗ କରେ। PLUS ଚିହ୍ନ ଯୋଗର ଚିହ୍ନ।",
+
+            "<span style='color: red;'>Q-3:</span> ୩ + ୪ = କେତେ?<br><br><span style='color: green;'>Answer:</span> ୩ + ୪ = ୭। THREE PLUS FOUR EQUALS SEVEN। ଏହା ଯୋଗର ଉଦାହରଣ।",
+
+            "<span style='color: red;'>Q-4:</span> ୫ + ୫ = କେତେ?<br><br><span style='color: green;'>Answer:</span> ୫ + ୫ = ୧୦। FIVE PLUS FIVE EQUALS TEN। ଏହା ଯୋଗର ଉଦାହରଣ।"
+        ]
+    },
+
+    {
+        heading: "Topic-5: ବିୟୋଗ",
+        audioPoints: [
+            {
+                text: "👉 ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ। ବିୟୋଗ ଚିହ୍ନ ହେଲା -। ୫ - ୨ = ୩ ଏହା ବିୟୋଗର ଉଦାହରଣ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ବିୟୋଗ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ। ବିୟୋଗକୁ ଇଂରାଜୀରେ SUBTRACTION କହନ୍ତି। ବିୟୋଗ ଚିହ୍ନ ହେଲା -।",
+
+            "<span style='color: red;'>Q-2:</span> - ଚିହ୍ନକୁ କ'ଣ କହନ୍ତି?<br><br><span style='color: green;'>Answer:</span> - ଚିହ୍ନକୁ MINUS କହନ୍ତି। ଏହା ଗୋଟିଏ ସଂଖ୍ୟା ବାଦ ଦିଏ। MINUS ଚିହ୍ନ ବିୟୋଗର ଚିହ୍ନ।",
+
+            "<span style='color: red;'>Q-3:</span> ୮ - ୩ = କେତେ?<br><br><span style='color: green;'>Answer:</span> ୮ - ୩ = ୫। EIGHT MINUS THREE EQUALS FIVE। ଏହା ବିୟୋଗର ଉଦାହରଣ।",
+
+            "<span style='color: red;'>Q-4:</span> ୧୦ - ୫ = କେତେ?<br><br><span style='color: green;'>Answer:</span> ୧୦ - ୫ = ୫। TEN MINUS FIVE EQUALS FIVE। ଏହା ବିୟୋଗର ଉଦାହରଣ।"
+        ]
+    }
+];
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -3038,97 +3076,112 @@ const courseData = {
 </div>
   `, 
     audio: "",
-    mermaid: `graph LR
-A["🔢 ସଂଖ୍ୟା<br/>NUMBERS"]
+mermaid: `graph LR
+A["🔢 ଗଣିତ<br/>ଅର୍ଥ ଓ ପରିଚୟ"]
 
-A --> B["ନିୟମ"]
-B --> C["ଯଦି ଆମେ ଜିନିଷ ଗଣୁ କିମ୍ବା ପରିମାଣ ପ୍ରକାଶ କରୁ,<br/>ତେବେ ନିମ୍ନଲିଖିତ ନିୟମ ପାଳନ କରିବାକୁ ହୁଏ :"]
+A --> B["ମୁଖ୍ୟ ବିଷୟ"]
+B --> C["ଆମେ ଗଣିତର ଅର୍ଥ<br/>ସଂଖ୍ୟା ଓ ଗଣନା<br/>ଯୋଗ ଓ ବିୟୋଗ<br/>ବିଷୟରେ ଜାଣିବା"]
 
-A --> D["ନିୟମ-1"]
-D --> E["ଯଦି ଜିନିଷ ଗୋଟିଏ ଥାଏ,<br/>ତେବେ ONE ବ୍ୟବହାର ହୁଏ ।<br/>ଯଥା — ଗୋଟିଏ ସୂର୍ଯ୍ୟ, ଗୋଟିଏ ନାକ ।"]
+A --> D["ଗଣିତ କ'ଣ 📖"]
+D --> E["ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା।<br/>ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ।<br/>ଗଣିତ ଶିଖିଲେ ଜୀବନ ସହଜ ହୁଏ।"]
 
-A --> F["ନିୟମ-2"]
-F --> G["ଯଦି ଜିନିଷ ଦୁଇ ବା ଅଧିକ ଥାଏ,<br/>ତେବେ TWO, THREE... ଆଦି ବ୍ୟବହାର ହୁଏ ।<br/>ଯଥା — ଦୁଇ ଆଖି, ତିନି ବହି ।"]
+A --> D2["ସଂଖ୍ୟା ଓ DIGIT 🔣"]
+D2 --> E2["ମୋଟ ଦଶଟି DIGIT ଅଛି।<br/>DIGIT ଗୁଡ଼ିକ ହେଲା ୦ ରୁ ୯।<br/>ଏହି ଦଶଟି DIGIT ଦ୍ୱାରା<br/>ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।"]
 
-A --> H["ନିୟମ-3"]
-H --> I["ଯଦି କିଛି ନ ଥାଏ,<br/>ତେବେ ZERO ବ୍ୟବହାର ହୁଏ ।<br/>ଯଥା — ଶୂନ୍ୟ ଟା ଆପଲ, ଶୂନ୍ୟ ଟା ପେନ୍ସିଲ ।"]
+A --> D3["ଗଣନା ⭐"]
+D3 --> E3["ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା।<br/>ଜିନିଷ ଦେଖି ଆମେ ଗଣନା କରୁ।<br/>ଗଣନା ଗଣିତର ଆଧାର।"]
 
-A --> J["ଉଦାହରଣ-1"]
-J --> K["ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ।<br/>ONE — କାରଣ ସୂର୍ଯ୍ୟ ଗୋଟିଏ ।"]
+A --> D4["ଯୋଗ ➕"]
+D4 --> E4["ଦୁଇଟି ସଂଖ୍ୟା ମିଶାଇଲେ ଯୋଗ ହୁଏ।<br/>ଯୋଗ ଚିହ୍ନ ହେଲା +।<br/>୨ + ୩ = ୫ ଏହା ଯୋଗର ଉଦାହରଣ।"]
 
-A --> L["ଉଦାହରଣ-2"]
-L --> M["ମୋ ଦୁଇ ଆଖି ।<br/>TWO — କାରଣ ଆଖି ଦୁଇଟା ।"]
+A --> D5["ବିୟୋଗ ➖"]
+D5 --> E5["ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ<br/>ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ।<br/>ବିୟୋଗ ଚିହ୍ନ ହେଲା -।<br/>୫ - ୨ = ୩ ଏହା ବିୟୋଗର ଉଦାହରଣ।"]
 
-A --> N["ଉଦାହରଣ-3"]
-N --> O["ସପ୍ତାହରେ ସାତ ଦିନ ।<br/>SEVEN — କାରଣ ଦିନ ସାତଟା ।"]
+A --> F["PLUS ଓ MINUS 🔄"]
+F --> G["+ ଚିହ୍ନକୁ PLUS କହନ୍ତି।<br/>- ଚିହ୍ନକୁ MINUS କହନ୍ତି।<br/>= ଚିହ୍ନକୁ EQUALS କହନ୍ତି।"]
 
-style A fill:#3b82f6,stroke:#1e40af,color:#fff
-style B fill:#dbeafe,stroke:#3b82f6
-style D fill:#10b981,stroke:#059669,color:#fff
-style F fill:#f59e0b,stroke:#d97706,color:#fff
-style H fill:#ef4444,stroke:#b91c1c,color:#fff
-style J fill:#ec4899,stroke:#be185d,color:#fff
-style L fill:#8b5cf6,stroke:#6d28d9,color:#fff
-style N fill:#14b8a6,stroke:#0f766e,color:#fff
-style C fill:#dbeafe,stroke:#3b82f6
-style E fill:#d1fae5,stroke:#10b981
-style G fill:#fef3c7,stroke:#f59e0b
-style I fill:#fee2e2,stroke:#ef4444
-style K fill:#fce7f3,stroke:#ec4899
-style M fill:#ede9fe,stroke:#8b5cf6
-style O fill:#ccfbf1,stroke:#14b8a6`,
+A --> H["ଗଣିତର ଉଦାହରଣ 🌱"]
+H --> I["🍎🍎 + 🍎🍎🍎 = 🍎🍎🍎🍎🍎<br/>ଏହା ୨ + ୩ = ୫ ର ଉଦାହରଣ।<br/>ଜିନିଷ ଦ୍ୱାରା ଗଣିତ ବୁଝ।"]
+
+A --> J["ଗଣିତର ମହତ୍ୱ 💡"]
+J --> K["ଗଣିତ ଆଙ୍ଗୁଠି ଗଣିବାରେ ଦରକାର।<br/>ଦୋକାନରେ ହିସାବ ପାଇଁ ଦରକାର।<br/>ଜୀବନର ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ ଉପଯୋଗୀ।"]
+
+A --> L["୧ ରୁ ୧୦ ସଂଖ୍ୟା 📖"]
+L --> M["ONE ରୁ TEN ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା।<br/>ଏହି ଦଶଟି ସଂଖ୍ୟା ଗଣିତର ଆଧାର।<br/>ଏହି ସଂଖ୍ୟା ଭଲ ଭାବେ ଶିଖ।"]
+
+style A fill:#0369a1,stroke:#0c4a6e,color:#fff
+style B fill:#e0f2fe,stroke:#0369a1
+style D fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D2 fill:#b45309,stroke:#78350f,color:#fff
+style D3 fill:#059669,stroke:#064e3b,color:#fff
+style D4 fill:#dc2626,stroke:#7f1d1d,color:#fff
+style D5 fill:#0891b2,stroke:#164e63,color:#fff
+style F fill:#7c3aed,stroke:#4c1d95,color:#fff
+style H fill:#16a34a,stroke:#14532d,color:#fff
+style J fill:#d97706,stroke:#92400e,color:#fff
+style L fill:#db2777,stroke:#831843,color:#fff
+style C fill:#e0f2fe,stroke:#0369a1
+style E fill:#ede9fe,stroke:#7c3aed
+style E2 fill:#fef3c7,stroke:#b45309
+style E3 fill:#d1fae5,stroke:#059669
+style E4 fill:#fee2e2,stroke:#dc2626
+style E5 fill:#cffafe,stroke:#0891b2
+style G fill:#ede9fe,stroke:#7c3aed
+style I fill:#dcfce7,stroke:#16a34a
+style K fill:#fef9c3,stroke:#d97706
+style M fill:#fce7f3,stroke:#db2777`,
 
     mcq: {
         questions: [
             {
-                question: "ଗୋଟିଏ ଜିନିଷ ଥିଲେ କେଉଁ ସଂଖ୍ୟା ଶବ୍ଦ ବ୍ୟବହାର ହୁଏ?",
+                question: "ଗଣିତ କ'ଣ?",
                 options: [
-                    "ZERO",
-                    "TWO",
-                    "ONE",
-                    "TEN"
+                    "ଏହା କେବଳ ଚିତ୍ର ଆଙ୍କିବା",
+                    "ଏହା ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବାର ବିଷୟ",
+                    "ଏହା କେବଳ ଓଡ଼ିଆ ଭାଷା ଶିଖିବା",
+                    "ଏହା କେବଳ ଗୀତ ଗାଇବା"
+                ],
+                correct: 1
+            },
+            {
+                question: "ମୋଟ କେତୋଟି DIGIT ଅଛି?",
+                options: [
+                    "ପାଞ୍ଚଟି",
+                    "ଆଠଟି",
+                    "ଦଶଟି",
+                    "ବାରଟି"
                 ],
                 correct: 2
             },
             {
-                question: "ଆଖି ଦୁଇଟା ଥାଏ — ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ?",
+                question: "ଯୋଗ ଚିହ୍ନ କ'ଣ?",
                 options: [
-                    "ONE",
-                    "THREE",
-                    "TWO",
-                    "FOUR"
+                    "-",
+                    "+",
+                    "=",
+                    "×"
+                ],
+                correct: 1
+            },
+            {
+                question: "+ ଚିହ୍ନକୁ ଇଂରାଜୀରେ କ'ଣ କହନ୍ତି?",
+                options: [
+                    "MINUS",
+                    "EQUALS",
+                    "PLUS",
+                    "DIGIT"
                 ],
                 correct: 2
             },
             {
-                question: "ସପ୍ତାହରେ ସାତ ଦିନ — ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ?",
+                question: "୫ - ୨ = କେତେ?",
                 options: [
-                    "SIX",
-                    "EIGHT",
-                    "NINE",
-                    "SEVEN"
+                    "୬",
+                    "୩",
+                    "୭",
+                    "୪"
                 ],
-                correct: 3
-            },
-            {
-                question: "ମୋ ଥାଳିରେ କୌଣସି ଭାତ ନାହିଁ — ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ?",
-                options: [
-                    "ONE",
-                    "TEN",
-                    "ZERO",
-                    "FIVE"
-                ],
-                correct: 2
-            },
-            {
-                question: "ଗାଡ଼ିରେ ଚାରୋଟି ଚକ ଅଛି — ସଂଖ୍ୟା ଶବ୍ଦ କ'ଣ?",
-                options: [
-                    "THREE",
-                    "FIVE",
-                    "FOUR",
-                    "SIX"
-                ],
-                correct: 2
+                correct: 1
             }
         ]
     },
@@ -3136,24 +3189,24 @@ style O fill:#ccfbf1,stroke:#14b8a6`,
     trueFalse: {
         questions: [
             {
-                question: "ଦୁଇ ଆଖି ପାଇଁ TWO ବ୍ୟବହାର ହୁଏ ।",
+                question: "ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା।",
                 correct: true
             },
             {
-                question: "ଗୋଟିଏ ସୂର୍ଯ୍ୟ ପାଇଁ TWO ବ୍ୟବହାର ହୁଏ ।",
+                question: "DIGIT ସଂଖ୍ୟା ମୋଟ ବାରଟି।",
                 correct: false
             },
             {
-                question: "ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ।",
+                question: "ଯୋଗ ଚିହ୍ନ ହେଲା +।",
                 correct: true
             },
             {
-                question: "ସପ୍ତାହରେ ଆଠ ଟା ଦିନ ଥାଏ ।",
+                question: "୫ + ୫ = ୧୦।",
+                correct: true
+            },
+            {
+                question: "- ଚିହ୍ନକୁ PLUS କହନ୍ତି।",
                 correct: false
-            },
-            {
-                question: "କିଛି ନ ଥିଲେ ZERO ବ୍ୟବହାର ହୁଏ ।",
-                correct: true
             }
         ]
     },
@@ -3161,65 +3214,63 @@ style O fill:#ccfbf1,stroke:#14b8a6`,
     fillBlanks: {
         questions: [
             {
-                question: "ଆକାଶରେ ___ ଟା ସୂର୍ଯ୍ୟ ଅଛି । (ONE / TWO)",
-                answer: "ONE"
+                question: "ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ___ ଶିଖିବା। (ହିସାବ / ଚିତ୍ର)",
+                answer: "ହିସାବ"
             },
             {
-                question: "ଗୋଟିଏ ହାତରେ ___ ଟା ଆଙ୍ଗୁଠି ।  (FIVE / SIX)",
-                answer: "FIVE"
+                question: "ମୋଟ ___ ଟି DIGIT ଅଛି। (ଦଶ / ବାର)",
+                answer: "ଦଶ"
             },
             {
-                question: "ସପ୍ତାହରେ ___ ଟା ଦିନ । (SIX / SEVEN)",
-                answer: "SEVEN"
+                question: "ଯୋଗ ଚିହ୍ନ ___ କୁ PLUS କହନ୍ତି। (+ / -)",
+                answer: "+"
             },
             {
-                question: "ମୋ ଥାଳିରେ ଆମ୍ବ ନାହିଁ — ___ ଟା ଆମ୍ବ । (ZERO / ONE)",
-                answer: "ZERO"
+                question: "ବିୟୋଗ ଚିହ୍ନ ___ କୁ MINUS କହନ୍ତି। (- / +)",
+                answer: "-"
             },
             {
-                question: "ଇନ୍ଦ୍ରଧନୁରେ ___ ଟା ରଙ୍ଗ । (SIX / SEVEN)",
-                answer: "SEVEN"
+                question: "୨ + ୩ = ___। (୫ / ୬)",
+                answer: "୫"
             }
         ]
     },
 
     matching: {
         pairs: [
-            { left: "ZERO", right: "ଶୂନ୍ୟ — ମୋ ଥାଳିରେ ଶୂନ୍ୟ ଟା ଭାତ ।" },
-            { left: "ONE", right: "ଏକ — ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ।" },
-            { left: "TWO", right: "ଦୁଇ — ମୋ ଦୁଇ ଟା ଆଖି ।" },
-            { left: "THREE", right: "ତିନି — ଟ୍ରାଫିକ ଲାଇଟ୍‌ରେ ତିନି ଟା ରଙ୍ଗ ।" },
-            { left: "FOUR", right: "ଚାରି — ଗାଡ଼ିରେ ଚାରୋଟି ଚକ ।" },
-            { left: "FIVE", right: "ପାଞ୍ଚ — ଗୋଟିଏ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି ।" },
-            { left: "SIX", right: "ଛଅ — ପୋକ ଜୀବ ର ଛଅ ଟା ଗୋଡ ।" },
-            { left: "SEVEN", right: "ସାତ — ସପ୍ତାହରେ ସାତ ଟା ଦିନ ।" },
-            { left: "EIGHT", right: "ଆଠ — ଅକ୍ଟୋପସ୍‌ ର ଆଠ ଟା ହାତ ।" },
-            { left: "NINE", right: "ନଅ — ଶ୍ରେଣୀ ଘରରେ ନଅ ଜଣ ଛାତ୍ର ।" },
-            { left: "TEN", right: "ଦଶ — ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ।" }
+            { left: "ଗଣିତ", right: "🔢 ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବାର ବିଷୟ।" },
+            { left: "DIGIT", right: "🔣 ୦ ରୁ ୯ ପର୍ଯ୍ୟନ୍ତ ଦଶଟି ଅଙ୍କ।" },
+            { left: "COUNTING", right: "🧮 ଜିନିଷ ଗଣିବା।" },
+            { left: "ADDITION", right: "➕ ଦୁଇଟି ସଂଖ୍ୟା ଏକାଠି ମିଶାଇବା।" },
+            { left: "SUBTRACTION", right: "➖ ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେବା।" },
+            { left: "PLUS", right: "✚ ଯୋଗ ଚିହ୍ନ +।" },
+            { left: "MINUS", right: "➖ ବିୟୋଗ ଚିହ୍ନ -।" },
+            { left: "EQUALS", right: "🟰 ଫଳ ଦେଖାଉଥିବା ଚିହ୍ନ =।" },
+            { left: "TEN", right: "🔟 ୧୦ ର ଇଂରାଜୀ ନାମ।" }
         ]
     },
 
     arrange: {
         questions: [
             {
-                words: ["ONE", "ଆକାଶରେ", "ସୂର୍ଯ୍ୟ", "ଗୋଟିଏ"],
-                correct: "ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ — ONE"
+                words: ["ଗଣିତ", "ମାନେ", "ସଂଖ୍ୟା", "ଶିଖିବା"],
+                correct: "ଗଣିତ ମାନେ ସଂଖ୍ୟା ଶିଖିବା।"
             },
             {
-                words: ["TWO", "ମୋର", "ଆଖି", "ଦୁଇଟା"],
-                correct: "ମୋର ଦୁଇଟା ଆଖି — TWO"
+                words: ["ଦଶଟି", "DIGIT", "ଦ୍ୱାରା", "ସବୁ", "ସଂଖ୍ୟା", "ତିଆରି", "ହୁଏ"],
+                correct: "ଦଶଟି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।"
             },
             {
-                words: ["SEVEN", "ସପ୍ତାହରେ", "ଦିନ", "ସାତଟା"],
-                correct: "ସପ୍ତାହରେ ସାତଟା ଦିନ — SEVEN"
+                words: ["ଦୁଇଟି", "ସଂଖ୍ୟା", "ମିଶାଇଲେ", "ଯୋଗ", "ହୁଏ"],
+                correct: "ଦୁଇଟି ସଂଖ୍ୟା ମିଶାଇଲେ ଯୋଗ ହୁଏ।"
             },
             {
-                words: ["TEN", "ଦଶଟା", "ଦୁଇ", "ହାତରେ", "ଆଙ୍ଗୁଠି"],
-                correct: "ଦୁଇ ହାତରେ ଦଶଟା ଆଙ୍ଗୁଠି — TEN"
+                words: ["ଯୋଗ", "ଚିହ୍ନ", "ହେଲା", "+"],
+                correct: "ଯୋଗ ଚିହ୍ନ ହେଲା +।"
             },
             {
-                words: ["FOUR", "ଗାଡ଼ିରେ", "ଚାରୋଟି", "ଚକ"],
-                correct: "ଗାଡ଼ିରେ ଚାରୋଟି ଚକ — FOUR"
+                words: ["ଗଣିତ", "ଜୀବନ", "ସହଜ", "କରେ"],
+                correct: "ଗଣିତ ଜୀବନ ସହଜ କରେ।"
             }
         ]
     },
@@ -3227,94 +3278,82 @@ style O fill:#ccfbf1,stroke:#14b8a6`,
     stq: {
         questions: [
             {
-                question: "ZERO, ONE, TWO ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ଉଦାହରଣ ଦିଅ ।",
-                answer: "ZERO = ଶୂନ୍ୟ — ମୋ ଥାଳିରେ ଶୂନ୍ୟ ଟା ଭାତ ।  ONE = ଏକ — ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ ।  TWO = ଦୁଇ — ମୋ ଦୁଇ ଟା ଆଖି ।"
+                question: "DIGIT ଓ NUMBER ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?",
+                answer: "DIGIT ହେଲା ୦ ରୁ ୯ ପର୍ଯ୍ୟନ୍ତ ଦଶଟି ଅଙ୍କ। NUMBER ହେଲା ଏହି DIGIT ଦ୍ୱାରା ତିଆରି ସଂଖ୍ୟା। ଯେମିତି ୧୦, ୧୦୦ ଇତ୍ୟାଦି NUMBER।"
             },
             {
-                question: "THREE ରୁ SIX ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା ଶବ୍ଦ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "THREE = ତିନି — ଟ୍ରାଫିକ ଲାଇଟ୍‌ରେ ତିନୋଟି ରଙ୍ଗ ।  FOUR = ଚାରି — ଗାଡ଼ିରେ ଚାରୋଟି ଚକ ।  FIVE = ପାଞ୍ଚ — ଗୋଟିଏ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି ।  SIX = ଛଅ — ପୋକ ଜୀବ ର ଛଅ ଟା ଗୋଡ ।"
+                question: "ଯୋଗ ଓ ବିୟୋଗ ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?",
+                answer: "ଯୋଗ ମାନେ ଦୁଇଟି ସଂଖ୍ୟା ଏକାଠି ମିଶାଇବା। ବିୟୋଗ ମାନେ ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେବା। ଯୋଗ ଚିହ୍ନ + ଓ ବିୟୋଗ ଚିହ୍ନ -।"
             },
             {
-                question: "SEVEN ରୁ TEN ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା ଶବ୍ଦ ଓ ପ୍ରତ୍ୟେକ ପାଇଁ ଉଦାହରଣ ଦିଅ ।",
-                answer: "SEVEN = ସାତ — ସପ୍ତାହରେ ସାତ ଟା ଦିନ ।  EIGHT = ଆଠ — ଅକ୍ଟୋପସ୍‌ ର ଆଠ ଟା ହାତ ।  NINE = ନଅ — ଶ୍ରେଣୀ ଘରରେ ନଅ ଜଣ ଛାତ୍ର ।  TEN = ଦଶ — ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ।"
+                question: "ଗଣନା କ'ଣ ଓ ଆମେ କିପରି ଗଣନା କରୁ?",
+                answer: "ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଆମେ ଜିନିଷ ଦେଖି ଗଣନା କରୁ। ଆଙ୍ଗୁଠି ଦ୍ୱାରା ଗଣନା କରିବା ସହଜ।"
             },
             {
-                question: "ତୁମ ଶ୍ରେଣୀ ଘର ବିଷୟରେ ସଂଖ୍ୟା ଶବ୍ଦ ବ୍ୟବହାର କରି ୪ ଟି ବାକ୍ୟ ଲେଖ ।",
-                answer: "ଶ୍ରେଣୀ ଘରରେ ଗୋଟିଏ ବ୍ଲାକ୍‌ବୋର୍ଡ — ONE ।  ଶ୍ରେଣୀ ଘରରେ ଦୁଇ ଟା ଦରଜା — TWO ।  ମୋ ବ୍ୟାଗ୍‌ରେ ପାଞ୍ଚ ଟା ବହି — FIVE ।  ଶ୍ରେଣୀ ଘରରେ ଦଶ ଜଣ ଛାତ୍ର — TEN ।"
+                question: "ଗଣିତ ଶବ୍ଦ ବ୍ୟବହାର କରି ଜୀବନ ବିଷୟରେ ପାଞ୍ଚଟି ବାକ୍ୟ ଲେଖ।",
+                answer: "ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ। ଦୋକାନରୁ ଜିନିଷ କିଣିଲେ ଗଣିତ ଦରକାର। ସମୟ ଦେଖିଲେ ଗଣିତ ଦରକାର। ଆଙ୍ଗୁଠି ଗଣିଲେ ଗଣିତ ଦରକାର। ଗଣିତ ଶିଖିଲେ ଜୀବନ ସୁନ୍ଦର ହୁଏ।"
             }
         ]
     }
 },
 ],
-    
+
 summary: {
+    audio: "",
+
+    content: {
+        introduction: "ଗଣିତ ଆମ ଜୀବନ ପାଇଁ ଖୁବ ଆବଶ୍ୟକ। ଆସନ୍ତୁ ଏହି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ ବିଷୟରେ ଜାଣିବା।",
+        sentences: [
+            {
+                heading: "ଗଣିତ କ'ଣ",
+                text: "ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା। ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ। ଗଣିତ ଶିଖିଲେ ଜୀବନ ସହଜ ହୁଏ।"
+            },
+            {
+                heading: "ସଂଖ୍ୟା ଓ DIGIT",
+                text: "ସଂଖ୍ୟାକୁ ଇଂରାଜୀରେ NUMBER କହନ୍ତି। ମୋଟ ଦଶଟି DIGIT ଅଛି। ଏହି ଦଶଟି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।"
+            },
+            {
+                heading: "ଗଣନା",
+                text: "ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଗଣନାକୁ ଇଂରାଜୀରେ COUNTING କହନ୍ତି। ଜିନିଷ ଦେଖି ଆମେ ଗଣନା କରୁ।"
+            },
+            {
+                heading: "ଯୋଗ",
+                text: "ଦୁଇଟି ସଂଖ୍ୟା ଏକାଠି ମିଶାଇଲେ ଯୋଗ ହୁଏ। ଯୋଗ ଚିହ୍ନ ହେଲା +। + ଚିହ୍ନକୁ PLUS କହନ୍ତି।"
+            },
+            {
+                heading: "ବିୟୋଗ",
+                text: "ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ। ବିୟୋଗ ଚିହ୍ନ ହେଲା -। - ଚିହ୍ନକୁ MINUS କହନ୍ତି।"
+            },
+            {
+                heading: "PLUS ଓ MINUS",
+                text: "+ ଚିହ୍ନକୁ PLUS କହନ୍ତି। - ଚିହ୍ନକୁ MINUS କହନ୍ତି। = ଚିହ୍ନକୁ EQUALS କହନ୍ତି।"
+            },
+            {
+                heading: "ଗଣିତର ମହତ୍ୱ",
+                text: "ଗଣିତ ଆଙ୍ଗୁଠି ଗଣିବାରେ ଦରକାର। ଦୋକାନରେ ହିସାବ ପାଇଁ ଦରକାର। ଜୀବନର ପ୍ରତ୍ୟେକ କ୍ଷେତ୍ରରେ ଗଣିତ ଉପଯୋଗୀ।"
+            },
+            {
+                heading: "ଗଣିତର ଉଦାହରଣ",
+                text: "🍎🍎 + 🍎🍎🍎 = 🍎🍎🍎🍎🍎 ଏହା ୨ + ୩ = ୫ ର ଉଦାହରଣ। ଜିନିଷ ଦ୍ୱାରା ଗଣିତ ଶିଖିବା ସହଜ।"
+            }
+        ],
+        conclusion: "ଗଣିତ ପ୍ରତ୍ୟେକ ଛାତ୍ରଙ୍କ ପାଇଁ ଖୁବ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ସଂଖ୍ୟା, ଗଣନା, ଯୋଗ ଓ ବିୟୋଗ ହେଉଛି ଗଣିତର ମୂଳ ବିଷୟ। ଗଣିତ ଆମ ଜୀବନ ଉନ୍ନତ କରେ।"
+    },
+
+    question: {
         audio: "",
-
-        content: {
-            introduction: "ସଂଖ୍ୟା ଶବ୍ଦ ଆମ ଦୈନନ୍ଦିନ ଜୀବନରେ ବହୁ ଉପଯୋଗ ହୁଏ । ଆସନ୍ତୁ ଆମ ପରିବାରର ଜିନିଷ ଗୁଡ଼ିକୁ ସଂଖ୍ୟା ଶବ୍ଦ ଦ୍ୱାରା ଗଣିବା :",
-            sentences: [
-                {
-                    heading: "ଶୂନ୍ୟ — ZERO",
-                    text: "ଆଜି ମୋ ପାଖରେ ଶୂନ୍ୟ ଟା ଟଫି — ZERO ।  ଟୋକରୀରେ ଶୂନ୍ୟ ଟା ଆମ୍ବ — ZERO ।  ଛୋଟ ଭାଇ ପାଖରେ ଶୂନ୍ୟ ଟା ପେନ୍ସିଲ ବଳିଲା — ZERO ।  ଏ ସପ୍ତାହରେ ଆମର ଶୂନ୍ୟ ଟା ଛୁଟି — ZERO ।"
-                },
-                {
-                    heading: "ଏକ — ONE",
-                    text: "ଆକାଶରେ ଗୋଟିଏ ସୂର୍ଯ୍ୟ — ONE ।  ମୋ ମା ପାଖରେ ଗୋଟିଏ ସୁନା ଆଙ୍ଟି — ONE ।  ଆମ ରୋଷେଇ ଘରରେ ଗୋଟିଏ ଦରଜା — ONE ।  ଜେଜେ ବାପା ଏକ ଲାଠି ବ୍ୟବହାର କରନ୍ତି — ONE ।"
-                },
-                {
-                    heading: "ଦୁଇ — TWO",
-                    text: "ମୋ ଦୁଇ ଟା ଆଖି — TWO ।  ବାପା ପାଖରେ ଦୁଇ ଟା ସାଇକେଲ — TWO ।  ମୋ ଘରରେ ଦୁଇ ଟା ଝରକା — TWO ।  ଦିଦି ପାଖରେ ଦୁଇ ଟା ଗଳ୍ପ ବହି — TWO ।"
-                },
-                {
-                    heading: "ତିନି — THREE",
-                    text: "ଟ୍ରାଫିକ ଲାଇଟ୍‌ରେ ତିନୋଟି ରଙ୍ଗ — THREE ।  ମୋ ବାକ୍ସରେ ତିନୋଟି ପେନ୍ସିଲ — THREE ।  ମା ମୋ ପାଇଁ ତିନୋଟି ରୁଟି ତିଆରି କଲେ — THREE ।  ଆମ ଉଠାଣରେ ତିନୋଟି ବିଲେଇ — THREE ।"
-                },
-                {
-                    heading: "ଚାରି — FOUR",
-                    text: "ଆମ ଗାଡ଼ିରେ ଚାରୋଟି ଚକ — FOUR ।  ବାପା ପାଖରେ ଚାରୋଟି ସାର୍ଟ — FOUR ।  ଆମ ବୈଠକ ଘରରେ ଚାରୋଟି ଚୌକି — FOUR ।  ଆଜି ମୋ ପାଖରେ ଚାରୋଟି ରଙ୍ଗ ପେନ୍ସିଲ — FOUR ।"
-                },
-                {
-                    heading: "ପାଞ୍ଚ — FIVE",
-                    text: "ଗୋଟିଏ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି — FIVE ।  ମୋ ମା ପାଖରେ ପାଞ୍ଚ ଟା ଶାଢ଼ି — FIVE ।  ଆମ ଛାତ ଉପରେ ପାଞ୍ଚ ଟା ପକ୍ଷୀ — FIVE ।  ମୋ ବ୍ୟାଗ୍‌ରେ ପାଞ୍ଚ ଟା ବହି — FIVE ।"
-                },
-                {
-                    heading: "ଛଅ — SIX",
-                    text: "ଆମ ରୋଷେଇ ଘରରେ ଛଅ ଟା ଅଣ୍ଡା — SIX ।  ଦାଦା ପାଖରେ ଛଅ ଜଣ ବନ୍ଧୁ — SIX ।  ବଗିଚାରେ ଛଅ ଟା ଫୁଲ — SIX ।  ପୋକ ଜୀବ ର ଛଅ ଟା ଗୋଡ — SIX ।"
-                },
-                {
-                    heading: "ସାତ — SEVEN",
-                    text: "ସପ୍ତାହରେ ସାତ ଟା ଦିନ — SEVEN ।  ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ — SEVEN ।  ଜେଜେ ମା ର ସାତ ଜଣ ନାତି ନାତୁଣୀ — SEVEN ।  ଆଜି ରାତି ସାତ ଟା ତାରା ଦେଖୁଛି — SEVEN ।"
-                },
-                {
-                    heading: "ଆଠ — EIGHT",
-                    text: "ଅକ୍ଟୋପସ୍‌ ର ଆଠ ଟା ହାତ — EIGHT ।  ମୋ ବାକ୍ସରେ ଆଠ ଟା ରଙ୍ଗ ପେନ୍ସିଲ — EIGHT ।  ବାପା ପ୍ରତିଦିନ ଆଠ ଘଣ୍ଟା କାମ କରନ୍ତି — EIGHT ।  ଗଛ ଉପରେ ଆଠ ଟା ପକ୍ଷୀ — EIGHT ।"
-                },
-                {
-                    heading: "ନଅ — NINE",
-                    text: "ମୋ ସାରରେ ନଅ ଜଣ ଛାତ୍ର — NINE ।  ଜେଜେ ମା ପାଖରେ ନଅ ଟା ଚୂଡ଼ି — NINE ।  ବଗିଚାରେ ନଅ ଟା ଫୁଲ — NINE ।  ଦାଦା ପାଖରେ ନଅ ଟା ବହି — NINE ।"
-                },
-                {
-                    heading: "ଦଶ — TEN",
-                    text: "ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି — TEN ।  ବାପା ଆଲମାରୀରେ ଦଶ ଟା ବହି — TEN ।  ଆମ ଗଳିରେ ଦଶ ଟା ଘର — TEN ।  ଏ ମାସରେ ଆମର ଦଶ ଟା ଛୁଟି — TEN ।"
-                }
-            ],
-            conclusion: "ଆମ ପରିବାରରେ ସମସ୍ତ ଜିନିଷ ଗଣିବା ପାଇଁ ZERO ରୁ TEN ପର୍ଯ୍ୟନ୍ତ ସଂଖ୍ୟା ଶବ୍ଦ ଉପଯୋଗ ହୁଏ । ZERO ମାନେ କିଛି ନ ଥିବା, ONE ମାନେ ଗୋଟିଏ, TWO ରୁ TEN ପର୍ଯ୍ୟନ୍ତ ଅଧିକ ଗଣନା — ଏହି ସଂଖ୍ୟା ଜ୍ଞାନ ଆମ ଦୈନନ୍ଦିନ ଜୀବନରେ ବହୁ କାମ ଆସେ ।"
-        },
-
-        question: {
-            audio: "",
-            question: "ତୁମ ଘରର ଜିନିଷ ଗଣି ZERO ରୁ TEN ସଂଖ୍ୟା ଶବ୍ଦ ବ୍ୟବହାର କରି ଲେଖ ।",
-            introduction: "ଆମ ଘରରେ ଅନେକ ଜିନିଷ ଅଛି । ନିମ୍ନ ଉଦାହରଣ ଗୁଡ଼ିକ ଦେଖ :",
-            points: [
-                "ମୋ ଘରରେ ଗୋଟିଏ ପଙ୍ଖା — ONE ।",
-                "ବୈଠକ ଘରରେ ଦୁଇ ଟା ଝରକା — TWO ।",
-                "ମୋ ମା ପାଖରେ ପାଞ୍ଚ ଟା ଶାଢ଼ି — FIVE ।",
-                "ସପ୍ତାହରେ ସାତ ଟା ଦିନ — SEVEN ।",
-                "ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି — TEN ।"
-            ],
-            conclusion: "ଆମ ଘରର ଜିନିଷ ଗଣୁ । ZERO ରୁ TEN — ଏହି ଏଗାର ଟା ସଂଖ୍ୟା ଶବ୍ଦ ଜାଣିଲେ ଆମ ଚାରିଆଡ଼ର ଯେ କୌଣସି ଜିନିଷ ସହଜରେ ଗଣି ହୁଏ ।"
-        }
+        question: "ଗଣିତର ଅର୍ଥ ଓ ବିଭିନ୍ନ ବିଷୟ ବର୍ଣ୍ଣନା କର।",
+        introduction: "ଗଣିତ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟଗୁଡ଼ିକ ଦେଖ।",
+        points: [
+            "ଗଣିତ ମାନେ ସଂଖ୍ୟା ଓ ହିସାବ ଶିଖିବା। ଆମେ ପ୍ରତିଦିନ ଗଣିତ ବ୍ୟବହାର କରୁ।",
+            "ମୋଟ ଦଶଟି DIGIT ଅଛି। ଏହି DIGIT ଦ୍ୱାରା ସବୁ ସଂଖ୍ୟା ତିଆରି ହୁଏ।",
+            "ଗଣନା ମାନେ ଜିନିଷ ଗଣିବା। ଜିନିଷ ଦେଖି ଆମେ ଗଣନା ଶିଖୁ।",
+            "ଦୁଇଟି ସଂଖ୍ୟା ମିଶାଇଲେ ଯୋଗ ହୁଏ। ଯୋଗ ଚିହ୍ନ ହେଲା +।",
+            "ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଆଉ ଗୋଟିଏ ବାଦ ଦେଲେ ବିୟୋଗ ହୁଏ। ବିୟୋଗ ଚିହ୍ନ ହେଲା -।"
+        ],
+        conclusion: "ଗଣିତ ପ୍ରତ୍ୟେକ ଛାତ୍ରଙ୍କ ପାଇଁ ଜାଣିବା ଦରକାର। ସଂଖ୍ୟା, ଗଣନା, ଯୋଗ ଓ ବିୟୋଗ ଚାରୋଟି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ। ଗଣିତ ଶିଖିଲେ ଜୀବନ ଅଧିକ ସୁନ୍ଦର ହୁଏ।"
     }
+}
 };
     
 let currentSentence = 0;
@@ -4737,7 +4776,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଦୈନନ୍ଦିନ ଜୀବନରେ ତୁମେ ଦେଖୁଥିବା ଜିନିଷ ଗୁଡ଼ିକୁ ସଂଖ୍ୟା ଶବ୍ଦ ଦ୍ୱାରା ଲେଖ । </h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଗଣିତର ଅର୍ଥ ଓ ମହତ୍ତ୍ଵ ଆଲୋଚନା କର।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -4827,7 +4866,7 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-KPOC',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=RR36-TK81',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
@@ -4848,7 +4887,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://student-care.pages.dev/',
+        url: 'https://student-care.pages.dev/SC/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -4942,48 +4981,6 @@ window.addEventListener('beforeunload', () => {
     });
 });
 
-// Writ Practice Functions
-function openWritPractice() {
-    // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://st-practicals.pages.dev/math/class-1/";
-    
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Show container
-    container.classList.add('active');
-    
-    // Set iframe source
-    iframe.src = writExamURL;
-    
-    // Show iframe and hide loading when loaded
-    iframe.onload = function() {
-        iframe.style.display = 'block';
-        loading.style.display = 'none';
-    };
-    
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWritPractice() {
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Hide container
-    container.classList.remove('active');
-    
-    // Reset iframe
-    iframe.src = '';
-    iframe.style.display = 'none';
-    loading.style.display = 'block';
-    
-    // Restore background scroll
-    document.body.style.overflow = 'auto';
-}
-
 
 
 // Global variable to store the current typing timeout
@@ -5067,108 +5064,10 @@ function showAnswerInBox(boxId, answerText) {
     typeWriter(answerBox, answerText, 40);
 }
     
- // ==========================================
-// NAVIGATION SYSTEM FOR MAIN CARD
-// ==========================================
 
-const topicsData = [
-    {
-        heading: "ପାଠ-1: ସଂଖ୍ୟା କ'ଣ ?",
-        audioPoints: [
-            {
-                text: "👉 ଆମ ଚାରିଆଡ଼େ ଅନେକ ଜିନିଷ ଅଛି — ଗଛ, ଫୁଲ, ପୁସ୍ତକ, ଛାତ୍ର, ପକ୍ଷୀ । ଏହି ଜିନିଷ ଗୁଡ଼ିକୁ ଗଣିବା ପାଇଁ ଆମେ ଯାହା ବ୍ୟବହାର କରୁ ତାହାକୁ ସଂଖ୍ୟା କହନ୍ତି । ଯଥା — ଗୋଟିଏ ଗଛ, ଦୁଇ ଟା ଫୁଲ, ତିନି ଟା ବହି, ଚାରି ଟା ପକ୍ଷୀ । ଏହି ଗୋଟିଏ, ଦୁଇ, ତିନି, ଚାରି — ଏଗୁଡ଼ିକ ହେଉଛି ସଂଖ୍ୟା । ସଂଖ୍ୟା ନ ଥିଲେ ଆମେ ଜାଣି ପାରନ୍ତୁ ନାହିଁ ଯେ ଆମ ପାଖରେ କେତୋଟି ଜିନିଷ ଅଛି ।<br>",
-                audio: "https://audio.evidya.de/SM1T1.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ସଂଖ୍ୟା କ'ଣ ପାଇଁ ଦରକାର ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚାରିଆଡ଼ରେ ଥିବା ଜିନିଷ ଗଣିବା ପାଇଁ ସଂଖ୍ୟା ଦରକାର । ସଂଖ୍ୟା ନ ଥିଲେ ଆମେ ଜାଣି ପାରନ୍ତୁ ନାହିଁ ଯେ କେତୋଟି ଅଛି ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 'ତିନି ଟା ବହି' — ଏଠାରେ 'ତିନି' ଟି କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 'ତିନି' ଟି ଏକ ସଂଖ୍ୟା ।",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ଶ୍ରେଣୀ ଘରରେ କ'ଣ କ'ଣ ଜିନିଷ ଗଣି ହୁଏ ? ଦୁଇ ଟା ଉଦାହରଣ ଦିଅ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯଥା — ପାଞ୍ଚ ଟା ବେଞ୍ଚ, ଦଶ ଜଣ ଛାତ୍ର । (ଛାତ୍ର ନିଜ ଶ୍ରେଣୀ ଅନୁଯାୟୀ ଉତ୍ତର ଦେବ ।)",
 
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ସପ୍ତାହରେ କେତୋଟି ଦିନ ଥାଏ ? ସେ ସଂଖ୍ୟାଟି ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ସପ୍ତାହରେ ସାତ ଟି ଦିନ ଥାଏ । ସଂଖ୍ୟା — 7 ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-2: ଗଣିବା — ୧ ରୁ ୧୦",
-        audioPoints: [
-            {
-                text: "👉 ଗଣିବା ମାନେ ଜିନିଷ ଗୁଡ଼ିକୁ ଏକ ଏକ କରି ସଂଖ୍ୟା ଦ୍ୱାରା ଚିହ୍ନିତ କରିବା । ଆମେ 1 ରୁ ଆରମ୍ଭ କରି 10 ପର୍ଯ୍ୟନ୍ତ ଗଣୁ — 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 । ଓଡ଼ିଆରେ — ଏକ, ଦୁଇ, ତିନି, ଚାରି, ପାଞ୍ଚ, ଛଅ, ସାତ, ଆଠ, ନଅ, ଦଶ । ଗଣିବା ଜାଣିଲେ ଆମେ ଜାଣିପାରୁ ଆମ ପାଖରେ ଠିକ୍ କେତୋଟି ଜିନିଷ ଅଛି ।<br>",
-                audio: "https://audio.evidya.de/SM1T2.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 1 ରୁ 5 ପର୍ଯ୍ୟନ୍ତ ଓଡ଼ିଆ ସଂଖ୍ୟା ଶବ୍ଦ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଏକ, ଦୁଇ, ତିନି, ଚାରି, ପାଞ୍ଚ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 6 ରୁ 10 ପର୍ଯ୍ୟନ୍ତ ଓଡ଼ିଆ ସଂଖ୍ୟା ଶବ୍ଦ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଛଅ, ସାତ, ଆଠ, ନଅ, ଦଶ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ତୁମ ବ୍ୟାଗ ରେ ୪ ଟା ବହି ଅଛି — ସଂଖ୍ୟାଟି ଓଡ଼ିଆ ଶବ୍ଦରେ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଚାରି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଆଠ ସଂଖ୍ୟାଟି ଅଙ୍କ ରେ ଲେଖ ।<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଆଠ = 8 ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-3: ଅଧିକ ଏବଂ କମ",
-        audioPoints: [
-            {
-                text: "👉 ଯଦି ଦୁଇ ଟି ସଂଖ୍ୟାକୁ ଏକ ସଙ୍ଗେ ରଖି ତୁଳନା କରାଯାଏ, ତେବେ ଆମେ ଜାଣି ପାରୁ ଯେ କେଉଁ ଟି ଅଧିକ ଏବଂ କେଉଁ ଟି କମ । ଯଦି ଗୋଟିଏ ଟୋକରୀ ରେ 3 ଟା ଆମ୍ବ ଏବଂ ଅନ୍ୟ ଟୋକରୀ ରେ 7 ଟା ଆମ୍ବ ଥାଏ — ତେବେ 7 ଅଧିକ ଏବଂ 3 କମ । ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ, ଛୋଟ ସଂଖ୍ୟା ମାନେ କମ । ଏହି ତୁଳନା ଜ୍ଞାନ ଆମ ଦୈନନ୍ଦିନ ଜୀବନରେ ବହୁ କାମ ଆସେ — ଯଥା ଦୋକାନ, ଖେଳ, ଭୋଜନ ।<br>",
-                audio: "https://audio.evidya.de/SM1T3.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 5 ଏବଂ 8 ମଧ୍ୟରୁ କେଉଁ ଟି ଅଧିକ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 8 ଟି ଅଧିକ, କାରଣ 8 > 5 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 3 ଏବଂ 9 ମଧ୍ୟରୁ କେଉଁ ଟି କମ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 3 ଟି କମ, କାରଣ 3 < 9 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ରାମ ପାଖରେ 6 ଟା ଚକଲେଟ, ହରି ପାଖରେ 4 ଟା ଚକଲେଟ — କାହା ପାଖରେ ଅଧିକ ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ରାମ ପାଖରେ ଅଧିକ ଅଛି, କାରଣ 6 > 4 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଦୁଇ ଟି ସଂଖ୍ୟା ମଧ୍ୟରୁ ଯେଉଁ ଟି ଛୋଟ ତାହାକୁ ଆମେ କ'ଣ କହୁ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯେଉଁ ଟି ଛୋଟ ସଂଖ୍ୟା, ତାହାକୁ ଆମେ 'କମ' କହୁ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-4: ଯୋଗ ର ଅର୍ଥ",
-        audioPoints: [
-            {
-                text: "👉 ଯଦି ଦୁଇ ଟି ବା ଅଧିକ ସଂଖ୍ୟାକୁ ଏକ ସଙ୍ଗ ମିଳାଇ ଦିଆଯାଏ, ତେବେ ଆହୁରି ବଡ ଏକ ସଂଖ୍ୟା ମିଳେ — ଏହାକୁ ଯୋଗ କହନ୍ତି । ଯୋଗ ର ଚିହ୍ନ ହେଉଛି (+) । ଉଦାହରଣ — ତୁମ ପାଖରେ 2 ଟା ଆମ୍ବ ଅଛି, ମୁଁ ଆଉ 3 ଟା ଦେଲି — ଏବେ ତୁମ ପାଖରେ ମୋଟ 5 ଟା ଆମ୍ବ ହେଲା । ଏହା ହେଉଛି 2 + 3 = 5 । ଯୋଗ କଲେ ସଂଖ୍ୟା ବଢ଼େ, କମେ ନାହିଁ ।<br>",
-                audio: "https://audio.evidya.de/SM1T4.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> ଯୋଗ ର ଚିହ୍ନ କ'ଣ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯୋଗ ର ଚିହ୍ନ ହେଉଛି + ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 2 + 3 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 2 + 3 = 5 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ସୀତା ପାଖରେ 4 ଟା ଫୁଲ ଅଛି, ଗୀତା ଆଉ 3 ଟା ଦେଲା — ଏବେ ସୀତା ପାଖରେ ମୋଟ କେତୋଟି ଫୁଲ ଅଛି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 4 + 3 = 7 । ସୀତା ପାଖରେ ଏବେ 7 ଟା ଫୁଲ ଅଛି ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> ଯୋଗ କଲେ ସଂଖ୍ୟା ବଢ଼େ ନା କମେ ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> ଯୋଗ କଲେ ସଂଖ୍ୟା ସବୁ ସମୟ ବଢ଼େ ।"
-        ]
-    },
-
-    {
-        heading: "ପାଠ-5: ଛୋଟ ଛୋଟ ଯୋଗ ଅଙ୍କ — ୧ ରୁ ୧୦",
-        audioPoints: [
-            {
-                text: "👉 ଏବେ ଆମେ 1 ରୁ 10 ସଂଖ୍ୟା ଭିତରେ ଛୋଟ ଛୋଟ ଯୋଗ ଅଙ୍କ ଅଭ୍ୟାସ କରିବା । ଯୋଗ ମାନେ ଦୁଇ ଟା ସଂଖ୍ୟାକୁ ମିଳାଇ ଦେବା । ଉଦାହରଣ: 1+2=3, 2+4=6, 3+3=6, 4+6=10 । ସହଜ ଉପାୟ — ଆଙ୍ଗୁଠିରେ ଗଣ, ନଦୁଆ ବା ଗୋଟି ଗୋଟି ଜିନିଷ ଧରି ଗଣ, ତେବେ ଉତ୍ତର ଠିକ୍ ଆସିବ । ଅଭ୍ୟାସ ଯେତେ ଅଧିକ, ଗଣନା ସେତେ ଶୀଘ୍ର ।<br>",
-                audio: "https://audio.evidya.de/SM1T5.m4a"
-            }
-        ],
-        questions: [
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-1:</span> 3 + 4 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 3 + 4 = 7 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-2:</span> 2 + 6 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 2 + 6 = 8 ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-3:</span> ରାମ ର 5 ଟି ବିସ୍କୁଟ ଅଛି, ଆଉ 5 ଟି ପାଇଲା — ମୋଟ କେତୋଟି ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 5 + 5 = 10 ଟି ବିସ୍କୁଟ ।",
-
-            "<span style='color: red;'>ପ୍ରଶ୍ନ-4:</span> 1 + 9 = ? ଏବଂ 4 + 4 = ?<br><br><span style='color: green;'>ଉତ୍ତର:</span> 1 + 9 = 10 ଏବଂ 4 + 4 = 8 ।"
-
-        ]
-    }
-];
-    
 let currentTopicIndex = 0;
 
 function loadTopic(index, autoPlay = false) {
@@ -5577,9 +5476,9 @@ function startLearning() {
     document.getElementById('topicCounterWrapper').style.display = 'flex';
     document.getElementById('topicContent').style.display = 'block';
     
-    // Load first topic
+    // Load first topic — pass TRUE to auto-start writing immediately
     currentTopicIndex = 0;
-    loadTopic(0);
+    loadTopic(0, true);  // ← change false/missing to true
 }
     
 function navigateTopic(direction) {
@@ -5912,7 +5811,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (MATHEMATICS) CLASS-1',
+    className: 'SPECIAL TRAINING (MATHEMATICS) CLASS-1 : ଗଣିତ ପରିଚୟ',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -5925,17 +5824,7 @@ let certificateData = {
     overallPercentage: 0
 };
 
-// Open Certificate Modal
-document.getElementById('certificateBtn').addEventListener('click', function() {
-    // Calculate scores
-    calculateCertificateScores();
-    
-    // Load saved student details if available
-    loadStudentDetails();
-    
-    // Show modal
-    document.getElementById('certificateModal').classList.add('active');
-});
+
 
 // Close Certificate Modal
 function closeCertificateModal() {
@@ -6467,341 +6356,52 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
-
-
-  // ===== UNIFIED MEDIA + REVISION TOGGLE =====
-
-const revisionLessons = [
-    {
-        id: 1,
-        lessonAudio: "https://audio.evidya.de/SM1R1.mp3",
-        lessonText: "ପାଠ ୧: ସଂଖ୍ୟା କ'ଣ ? — ଆମ ଚାରିଆଡ଼େ ଅନେକ ଜିନିଷ ଅଛି — ଗଛ, ଫୁଲ, ପୁସ୍ତକ, ଛାତ୍ର, ପକ୍ଷୀ । ଏହି ଜିନିଷ ଗୁଡ଼ିକୁ ଗଣିବା ପାଇଁ ଆମେ ଯାହା ବ୍ୟବହାର କରୁ ତାହାକୁ ସଂଖ୍ୟା କହନ୍ତି । ଯଥା — ଗୋଟିଏ ଗଛ, ଦୁଇ ଟା ଫୁଲ, ତିନି ଟା ବହି, ଚାରି ଟା ପକ୍ଷୀ । ଏହି ଗୋଟିଏ, ଦୁଇ, ତିନି, ଚାରି — ଏଗୁଡ଼ିକ ହେଉଛି ସଂଖ୍ୟା । ସଂଖ୍ୟା ନ ଥିଲେ ଆମେ ଜାଣି ପାରନ୍ତୁ ନାହିଁ ଯେ ଆମ ପାଖରେ କେତୋଟି ଜିନିଷ ଅଛି ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌳 ଆମ ଚାରିଆଡ଼ର ଜିନିଷ ଗଣିବା ପାଇଁ ଆମେ କ'ଣ ବ୍ୟବହାର କରୁ ?",
-                options: ["ସଂଖ୍ୟା", "ରଙ୍ଗ", "ଜାଣି ନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଚାରିଆଡ଼ର ଜିନିଷ ଗଣିବା ପାଇଁ ଆମେ ସଂଖ୍ୟା ବ୍ୟବହାର କରୁ । ଯଥା — ଗୋଟିଏ ଗଛ, ଦୁଇ ଟା ଫୁଲ, ତିନି ଟା ବହି ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଚାରିଆଡ଼ର ଜିନିଷ ଗଣିବା ପାଇଁ ଆମେ ସଂଖ୍ୟା ବ୍ୟବହାର କରୁ । ଯଥା — ଗୋଟିଏ ଗଛ, ଦୁଇ ଟା ଫୁଲ, ତିନି ଟା ବହି ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "7️⃣ SEVEN ର ଓଡ଼ିଆ ଅର୍ଥ ଓ ଅଙ୍କ କ'ଣ ?",
-                options: ["ଛଅ = 6", "ସାତ = 7", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — SEVEN = ସାତ = 7 । ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଥାଏ । ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । SEVEN = ସାତ = 7 । ସପ୍ତାହରେ ସାତ ଟା ଦିନ ଥାଏ । ଇନ୍ଦ୍ରଧନୁରେ ସାତ ଟା ରଙ୍ଗ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "0️⃣ ଯଦି ମୋ ଥାଳିରେ କୌଣସି ଭାତ ନାହିଁ — ସଂଖ୍ୟା ଶବ୍ଦ ଟି କ'ଣ ?",
-                options: ["ONE", "ZERO", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — କିଛି ନ ଥିଲେ ZERO ବ୍ୟବହାର ହୁଏ । ZERO = ଶୂନ୍ୟ = 0 । ଖାଲି ବା କିଛି ନ ଥିବା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । କିଛି ନ ଥିଲେ ZERO ବ୍ୟବହାର ହୁଏ । ZERO = ଶୂନ୍ୟ = 0 । ଖାଲି ବା କିଛି ନ ଥିବା ।"
-            }
-        ]
-    },
-
-    {
-        id: 2,
-        lessonAudio: "https://audio.evidya.de/SM1R2.mp3",
-        lessonText: "ପାଠ ୨: ଗଣିବା — ୧ ରୁ ୧୦ — ଗଣିବା ମାନେ ଜିନିଷ ଗୁଡ଼ିକୁ ଏକ ଏକ କରି ସଂଖ୍ୟା ଦ୍ୱାରା ଚିହ୍ନିତ କରିବା । ଆମେ 1 ରୁ ଆରମ୍ଭ କରି 10 ପର୍ଯ୍ୟନ୍ତ ଗଣୁ । ଓଡ଼ିଆରେ — ଏକ, ଦୁଇ, ତିନି, ଚାରି, ପାଞ୍ଚ, ଛଅ, ସାତ, ଆଠ, ନଅ, ଦଶ । ଗଣିବା ଜାଣିଲେ ଆମେ ଜାଣି ପାରୁ ଆମ ପାଖରେ ଠିକ୍ କେତୋଟି ଜିନିଷ ଅଛି ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "✋ ଆମ ଗୋଟିଏ ହାତରେ କେତୋଟି ଆଙ୍ଗୁଠି ଥାଏ ? ସଂଖ୍ୟା ଶବ୍ଦ ଟି କ'ଣ ?",
-                options: ["ଚାରି = FOUR", "ପାଞ୍ଚ = FIVE", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଗୋଟିଏ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି ଥାଏ । ପାଞ୍ଚ = FIVE = 5 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଗୋଟିଏ ହାତରେ ପାଞ୍ଚ ଟା ଆଙ୍ଗୁଠି ଥାଏ । ପାଞ୍ଚ = FIVE = 5 ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "📚 ଦୁଇ ହାତ ମିଶାଇ ମୋଟ କେତୋଟି ଆଙ୍ଗୁଠି ହୁଏ ? ସଂଖ୍ୟା ଶବ୍ଦ ଟି କ'ଣ ?",
-                options: ["ନଅ = NINE", "ଦଶ = TEN", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି ।  ଦଶ = TEN = 10 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଦୁଇ ହାତ ମିଶାଇ ଦଶ ଟା ଆଙ୍ଗୁଠି । ଦଶ = TEN = 10 ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🐙 ଅକ୍ଟୋପସ୍ ର ଆଠ ଟା ହାତ — ସଂଖ୍ୟା ଶବ୍ଦ ଟି କ'ଣ ?",
-                options: ["ସାତ = SEVEN", "ଆଠ = EIGHT", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଅକ୍ଟୋପସ୍ ର ଆଠ ଟା ହାତ ଥାଏ । ଆଠ = EIGHT = 8 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଅକ୍ଟୋପସ୍ ର ଆଠ ଟା ହାତ ଥାଏ । ଆଠ = EIGHT = 8 ।"
-            }
-        ]
-    },
-
-    {
-        id: 3,
-        lessonAudio: "https://audio.evidya.de/SM1R3.mp3",
-        lessonText: "ପାଠ ୩: ଅଧିକ ଏବଂ କମ — ଦୁଇ ଟି ସଂଖ୍ୟାକୁ ତୁଳନା କଲେ ଆମେ ଜାଣି ପାରୁ କେଉଁ ଟି ଅଧିକ ଏବଂ କେଉଁ ଟି କମ । ନିୟମ ସରଳ — ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ, ଛୋଟ ସଂଖ୍ୟା ମାନେ କମ । ଉଦାହରଣ — ରାମ ପାଖରେ 6 ଟା ଚକଲେଟ, ହରି ପାଖରେ 4 ଟା ଚକଲେଟ — ରାମ ପାଖରେ ଅଧିକ, ହରି ପାଖରେ କମ । ଏହି ତୁଳନା ଜ୍ଞାନ ଆମ ଦୈନନ୍ଦିନ ଜୀବନରେ ବହୁ କାମ ଆସେ ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🍋 4 ଏବଂ 9 ମଧ୍ୟରୁ କେଉଁ ଟି ଅଧିକ ?",
-                options: ["4", "9", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ । 9 ହେଉଛି 4 ଠାରୁ ବଡ, ତେଣୁ 9 ଅଧିକ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ । 9 ହେଉଛି 4 ଠାରୁ ବଡ, ତେଣୁ 9 ଅଧିକ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🥭 ରାମ ପାଖରେ 6 ଟା ଆମ୍ବ, ହରି ପାଖରେ 2 ଟା ଆମ୍ବ — କାହା ପାଖରେ କମ ?",
-                options: ["ରାମ ପାଖରେ", "ହରି ପାଖରେ", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଛୋଟ ସଂଖ୍ୟା ମାନେ କମ । ହରି ପାଖରେ 2 ଟା, ଯାହା 6 ଠାରୁ ଛୋଟ — ତେଣୁ ହରି ପାଖରେ କମ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଛୋଟ ସଂଖ୍ୟା ମାନେ କମ । ହରି ପାଖରେ 2 ଟା, ଯାହା 6 ଠାରୁ ଛୋଟ — ତେଣୁ ହରି ପାଖରେ କମ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌸 ସୀତା ପାଖରେ 3 ଟା ଫୁଲ, ଗୀତା ପାଖରେ 8 ଟା ଫୁଲ — ଦୁହିଁ ମଧ୍ୟରୁ ଯାହা ଅଧିକ ଫୁଲ ସେ କିଏ ?",
-                options: ["ସୀତା", "ଗୀତା", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ । ଗୀତା ପାଖରେ 8 ଟା, ଯାହା 3 ଠାରୁ ବଡ — ତେଣୁ ଗୀତା ପାଖରେ ଅଧିକ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ବଡ ସଂଖ୍ୟା ମାନେ ଅଧିକ । ଗୀତା ପାଖରେ 8 ଟା, ଯାହା 3 ଠାରୁ ବଡ — ତେଣୁ ଗୀତା ପାଖରେ ଅଧିକ ।"
-            }
-        ]
-    },
-
-    {
-        id: 4,
-        lessonAudio: "https://audio.evidya.de/SM1R4.mp3",
-        lessonText: "ପାଠ ୪: ଯୋଗ ର ଅର୍ଥ — ଦୁଇ ଟି ବା ଅଧିକ ସଂଖ୍ୟାକୁ ଏକ ସଙ୍ଗ ମିଳାଇ ଦେଲେ ଆହୁରି ବଡ ଏକ ସଂଖ୍ୟା ମିଳେ — ଏହାକୁ ଯୋଗ କହନ୍ତି । ଯୋଗ ର ଚିହ୍ନ ହେଉଛି + । ଯୋଗ କଲେ ସଂଖ୍ୟା ସବୁ ସମୟ ବଢ଼େ, କମେ ନାହିଁ । ଉଦାହରଣ — ତୁମ ପାଖରେ 2 ଟା ଆମ୍ବ ଅଛି, ମୁଁ ଆଉ 3 ଟା ଦେଲି — ଏବେ ମୋଟ 5 ଟା ହେଲା — ଏହା ହେଉଛି 2 + 3 = 5 ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "➕ ଯୋଗ ର ଚିହ୍ନ କ'ଣ ?",
-                options: ["− ", "+ ", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଯୋଗ ର ଚିହ୍ନ ହେଉଛି + । ଉଦାହରଣ — 2 + 3 = 5 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଯୋଗ ର ଚିହ୍ନ ହେଉଛି + । ଉଦାହରଣ — 2 + 3 = 5 ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌸 ସୀତା ପାଖରେ 4 ଟା ଫୁଲ ଅଛି, ଗୀତା ଆଉ 3 ଟା ଦେଲା — ଏବେ ମୋଟ କେତୋଟି ଫୁଲ ହେଲା ?",
-                options: ["6", "7", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — 4 + 3 = 7 । ଦୁଇ ଟି ସଂଖ୍ୟା ମିଳାଇ ଦେଲେ ଯୋଗ ହୁଏ ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 4 + 3 = 7 । ଦୁଇ ଟି ସଂଖ୍ୟା ମିଳାଇ ଦେଲେ ଯୋଗ ହୁଏ ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "📐 ଯୋଗ କଲେ ସଂଖ୍ୟା କ'ଣ ହୁଏ ?",
-                options: ["କମ ହୁଏ", "ବଢ଼େ", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — ଯୋଗ କଲେ ସଂଖ୍ୟା ସବୁ ସମୟ ବଢ଼େ । ଉଦାହରଣ — 1 + 1 = 2, 5 + 5 = 10 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । ଯୋଗ କଲେ ସଂଖ୍ୟା ସବୁ ସମୟ ବଢ଼େ । ଉଦାହରଣ — 1 + 1 = 2, 5 + 5 = 10 ।"
-            }
-        ]
-    },
-
-    {
-        id: 5,
-        lessonAudio: "https://audio.evidya.de/SM1R5.mp3",
-        lessonText: "ପାଠ ୫: ଛୋଟ ଛୋଟ ଯୋଗ ଅଙ୍କ — ୧ ରୁ ୧୦ — ଏବେ ଆମେ 1 ରୁ 10 ଭିତରେ ଛୋଟ ଛୋଟ ଯୋଗ ଅଙ୍କ ଅଭ୍ୟାସ କରିବା । ଯୋଗ ମାନେ ଦୁଇ ଟା ସଂଖ୍ୟାକୁ ମିଳାଇ ଦେବା । ଉଦାହରଣ — 1+2=3, 2+4=6, 3+3=6, 4+6=10 । ସହଜ ଉପାୟ — ଆଙ୍ଗୁଠିରେ ଗଣ, ଗୋଟି ଗୋଟି ଜିନିଷ ଧରି ଗଣ — ଉତ୍ତର ଠିକ ଆସିବ । ଅଭ୍ୟାସ ଯେତେ ଅଧିକ, ଗଣନା ସେତେ ଶୀଘ୍ର ।",
-        understandAudio: "https://audio.evidya.de/U.m4a",
-        mcq: [
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🔢 3 + 4 = ?",
-                options: ["6", "7", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — 3 + 4 = 7 । 3 ଟା ଆଙ୍ଗୁଠି ଧର, ଆଉ 4 ଟା ଯୋଡ — ମୋଟ 7 ଟା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 3 + 4 = 7 । 3 ଟା ଆଙ୍ଗୁଠି ଧର, ଆଉ 4 ଟା ଯୋଡ — ମୋଟ 7 ଟା ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🍪 ରାମ ର 5 ଟି ବିସ୍କୁଟ ଅଛି, ଆଉ 5 ଟି ପାଇଲା — 5 + 5 = ?",
-                options: ["9", "10", "ଜାଣି ନାହିଁ"],
-                correct: 1,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — 5 + 5 = 10 । ଦୁଇ ହାତ ର ସବୁ ଆଙ୍ଗୁଠି ଗଣ — ମୋଟ 10 ଟା ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 5 + 5 = 10 । ଦୁଇ ହାତ ର ସବୁ ଆଙ୍ଗୁଠି ଗଣ — ମୋଟ 10 ଟା ।"
-            },
-            {
-                questionAudio: "https://audio.evidya.de/Q.m4a",
-                q: "🌟 1 + 9 = ?",
-                options: ["10", "11", "ଜାଣି ନାହିଁ"],
-                correct: 0,
-                correctAudio: "https://audio.evidya.de/C.m4a",
-                correctText: "🎉 ସାବାସ୍ ! ଏହା ସଠିକ ଉତ୍ତର । ଆପଣ ବହୁତ ଭଲ ପଢ଼ୁଛନ୍ତି ।",
-                iDontKnowAudio: "https://audio.evidya.de/D.m4a",
-                iDontKnowText: "💡 ଦୟାକରି ମନେ ରଖନ୍ତୁ — 1 + 9 = 10 । ଆଙ୍ଗୁଠିରେ ଗଣ — 1 ଟା ଧର, ଆଉ 9 ଟା ଯୋଡ — ମୋଟ 10 ।",
-                wrongAudio: "https://audio.evidya.de/W.m4a",
-                wrongText: "😊 ଏହା ଭୁଲ ଉତ୍ତର । 1 + 9 = 10 । ଆଙ୍ଗୁଠିରେ ଗଣ — 1 ଟା ଧର, ଆଉ 9 ଟା ଯୋଡ — ମୋଟ 10 ।"
-            }
-        ]
-    }
-];
-    
-let revisionState = {
-    active: false,
-    lessonIndex: 0,
-    mcqIndex: 0,
-    audio: null
-};
-
-function stopRevisionAudio() {
-    if (revisionState.audio) {
-        revisionState.audio.pause();
-        revisionState.audio = null;
-    }
-}
-
-function playRevisionAudio(url, onEnd) {
-    stopRevisionAudio();
-    if (!url || !isValidAudioUrl(url)) {
-        if (onEnd) setTimeout(onEnd, 100);
-        return;
-    }
-    revisionState.audio = new Audio(url);
-    revisionState.audio.onended = () => { if (onEnd) onEnd(); };
-    revisionState.audio.onerror = () => { if (onEnd) onEnd(); };
-    revisionState.audio.play().catch(() => { if (onEnd) onEnd(); });
-}
-
-function setRevisionScreen(html) {
-    const screen = document.getElementById('revisionScreen');
-    if (screen) {
-        screen.style.background = 'white';
-        screen.style.overflow = 'hidden';
-        screen.style.display = 'flex';
-        screen.style.flexDirection = 'column';
-        screen.style.alignItems = 'stretch';
-        screen.style.justifyContent = 'flex-start';
-        screen.style.padding = '0';
-        screen.innerHTML = html;
-    }
-}
-
-function rvTypewrite(elementId, text, speed, onDone) {
-    const el = document.getElementById(elementId);
-    if (!el) { if (onDone) onDone(); return; }
-
-    el.innerHTML = '';
-
-    const chars = Array.from(text);
-    let i = 0;
-    let current = '';
-
-    function next() {
-        if (i < chars.length) {
-            current += chars[i];
-            el.innerHTML = current;
-            i++;
-            setTimeout(next, speed || 35);
-        } else {
-            if (onDone) onDone();
-        }
-    }
-
-    next();
-}
     
 function toggleMedia(type) {
-    const logoDisplay  = document.getElementById('logoDisplay');
-    const audioDisplay = document.getElementById('audioDisplay');
-    const videoDisplay = document.getElementById('videoDisplay');
-    const revisionBoard = document.getElementById('revisionBoard');
-    const audioIframe  = document.getElementById('audioIframe');
-    const videoIframe  = document.getElementById('videoIframe');
-    const audioBtn     = document.getElementById('audioToggleBtn');
-    const videoBtn     = document.getElementById('videoToggleBtn');
-    const revBtn       = document.getElementById('revisionToggleBtn');
+    const logoDisplay   = document.getElementById('logoDisplay');
+    const audioDisplay  = document.getElementById('audioDisplay');
+    const videoDisplay  = document.getElementById('videoDisplay');
+    const debateDisplay = document.getElementById('debateDisplay');
+    const audioIframe   = document.getElementById('audioIframe');
+    const videoIframe   = document.getElementById('videoIframe');
+    const debateIframe  = document.getElementById('debateIframe');
+    const audioBtn      = document.getElementById('audioToggleBtn');
+    const videoBtn      = document.getElementById('videoToggleBtn');
+    const debateBtn     = document.getElementById('debateToggleBtn');
 
     const resetAllBtnStyles = () => {
-        [audioBtn, videoBtn, revBtn].forEach(b => {
+       [audioBtn, videoBtn, debateBtn].forEach(b => {
             if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
         });
     };
 
     const hideAll = () => {
-        audioIframe.src = '';
-        videoIframe.src = '';
-        audioDisplay.style.display = 'none';
-        videoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'none';
-        logoDisplay.style.display = 'block';
-        stopRevisionAudio();
-        revisionState.active = false;
+        videoIframe.src   = '';
+         const ap = document.getElementById('audioPlayer');
+    if (ap) { ap.pause(); ap.currentTime = 0; }
+    const dp = document.getElementById('debatePlayer');
+    if (dp) { dp.pause(); dp.currentTime = 0; }
+        audioDisplay.style.display   = 'none';
+        videoDisplay.style.display   = 'none';
+      
+        debateDisplay.style.display  = 'none';
+        logoDisplay.style.display    = 'block';
+       
         resetAllBtnStyles();
     };
 
-    if (type === 'audio') {
-        if (audioDisplay.style.display === 'block') {
-            hideAll();
-            return;
-        }
+  if (type === 'audio') {
+    if (audioDisplay.style.display === 'flex') {
         hideAll();
-        logoDisplay.style.display = 'none';
-        audioDisplay.style.display = 'block';
-        audioIframe.src = audioIframe.dataset.src;
-        audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+        return;
     }
+    hideAll();
+    logoDisplay.style.display  = 'none';
+    audioDisplay.style.display = 'flex';
+    const ap = document.getElementById('audioPlayer');
+    if (ap) ap.play();
+    audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 
     if (type === 'video') {
         if (videoDisplay.style.display === 'block') {
@@ -6809,266 +6409,28 @@ function toggleMedia(type) {
             return;
         }
         hideAll();
-        logoDisplay.style.display = 'none';
+        logoDisplay.style.display  = 'none';
         videoDisplay.style.display = 'block';
         videoIframe.src = videoIframe.dataset.src;
         videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
     }
 
-    if (type === 'revision') {
-        if (revisionState.active) {
-            hideAll();
-            return;
-        }
-        hideAll();
-        logoDisplay.style.display = 'none';
-        revisionBoard.style.display = 'block';
-        revisionState.active = true;
-        revisionState.lessonIndex = 0;
-        revisionState.mcqIndex = 0;
-        revBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
-        startRevisionLesson();
-    }
-}
-
-function startRevisionLesson() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:8px;box-sizing:border-box;overflow:hidden;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#1d4ed8;padding:3px 8px;border-radius:10px;">ପାଠ ${current}/${total}</span>
-                <button onclick="toggleMedia('revision')" style="background:#dc2626;color:white;border:none;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-weight:bold;">✕</button>
-            </div>
-
-            <div id="rvLessonTextDiv" style="flex:1;overflow-y:auto;min-height:0;margin-bottom:6px;">
-                <p id="rvLessonText" style="font-size:15px;font-weight:bold;color:#111;line-height:1.7;margin:0;width:100%;display:block;text-align:justify;"></p>
-            </div>
-
-            <div id="rvUnderstandButtons" style="display:none;flex-direction:column;gap:6px;flex-shrink:0;">
-                <p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ଆପଣ ବୁଝିଲେ କି?</p>
-                <button onclick="rvUnderstood(true)" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✅ ହଁ, ବୁଝିଲି</button>
-                <button onclick="rvUnderstood(false)" style="width:100%;padding:9px;background:linear-gradient(135deg,#f59e0b,#d97706);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🔄 ପୁଣି ଦେଖାଅ</button>
-            </div>
-        </div>
-    `);
-
-    let textDone = false;
-    let audioDone = false;
-
-    function checkBothDone() {
-        if (textDone && audioDone) {
-            const textDiv = document.getElementById('rvLessonTextDiv');
-            if (textDiv) textDiv.style.display = 'none';
-
-            const btns = document.getElementById('rvUnderstandButtons');
-            if (btns) {
-                btns.style.display = 'flex';
-                btns.style.flexDirection = 'column';
-            }
-            playRevisionAudio(lesson.understandAudio, null);
-        }
-    }
-
-    playRevisionAudio(lesson.lessonAudio, () => {
-        audioDone = true;
-        checkBothDone();
-    });
-
-    setTimeout(() => {
-        rvTypewrite('rvLessonText', lesson.lessonText, 30, () => {
-            textDone = true;
-            checkBothDone();
-        });
-    }, 300);
-}
-    
-function rvUnderstood(yes) {
-    if (!yes) {
-        startRevisionLesson();
-        return;
-    }
-    revisionState.mcqIndex = 0;
-    showRevisionMCQ();
-}
-
-function showRevisionMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const qNum = revisionState.mcqIndex + 1;
-    const total = lesson.mcq.length;
-    const current = revisionState.lessonIndex + 1;
-
-    playRevisionAudio(mcq.questionAudio, null);
-
-    const optColors = [
-        'linear-gradient(135deg,#667eea,#764ba2)',
-        'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
-        'linear-gradient(135deg,#6b7280,#4b5563)'
-    ];
-
-   setRevisionScreen(`
-    <div style="width:100%;display:flex;flex-direction:column;background:white;padding:10px;box-sizing:border-box;">
-            
-            <!-- Header badge -->
-            <div style="display:flex;justify-content:center;margin-bottom:10px;flex-shrink:0;">
-                <span style="font-size:12px;font-weight:bold;color:white;background:#667eea;padding:3px 10px;border-radius:10px;">ପ୍ରଶ୍ନ ${qNum}/${total} — ପାଠ ${current}</span>
-            </div>
-
-<div style="margin-bottom:12px;">
-    <p style="font-size:15px;font-weight:bold;color:#111;text-align:center;line-height:1.6;margin:0;padding:4px;">
-        ${mcq.q}
-    </p>
-</div>
-
-      <div style="margin-top:10px;">
-    <select onchange="rvAnswer(parseInt(this.value))" style="
-        width:100%;
-        padding:12px;
-        font-size:15px;
-        font-weight:bold;
-        border:2px solid #667eea;
-        border-radius:10px;
-        background:white;
-        color:#111;
-        cursor:pointer;
-        appearance:auto;
-    ">
-        <option value="" disabled selected>-- ଉତ୍ତର ବାଛନ୍ତୁ --</option>
-        ${mcq.options.map((opt, i) => `<option value="${i}">${opt}</option>`).join('')}
-    </select>
-</div>
-        </div>
-    `);
-}
-
-
-function rvSubmitAnswer() {
-    const sel = document.getElementById('rvSelect');
-    if (!sel || sel.value === '') {
-        alert('ଦୟାକରି ଏକ ଉତ୍ତର ବାଛନ୍ତୁ');
-        return;
-    }
-    rvAnswer(parseInt(sel.value));
-}
-
-    
-function rvAnswer(optionIndex) {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const mcq = lesson.mcq[revisionState.mcqIndex];
-    const isIDontKnow = (optionIndex === mcq.options.length - 1);
-    const isCorrect = (optionIndex === mcq.correct);
-
-   if (isCorrect) {
-    playRevisionAudio(mcq.correctAudio, null);
-    
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    const isLastMCQ = (revisionState.mcqIndex + 1 >= lesson.mcq.length);
-    const isLastLesson = (revisionState.lessonIndex + 1 >= revisionLessons.length);
-    
-    // Decide what the forward button says and does
-    let forwardBtn = '';
-    if (isLastMCQ && isLastLesson) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">🏆 ଫଳାଫଳ ଦେଖନ୍ତୁ</button>`;
-    } else if (isLastMCQ) {
-        forwardBtn = `<button onclick="showLessonCompletePrompt()" style="width:100%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପାଠକୁ ଯାଆନ୍ତୁ</button>`;
-    } else {
-        forwardBtn = `<button onclick="advanceMCQ()" style="width:100%;padding:9px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପରବର୍ତ୍ତୀ ପ୍ରଶ୍ନ</button>`;
-    }
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:6px;">
-            <div style="font-size:34px;">🌟</div>
-            <p id="rvCorrectText" style="font-size:15px;font-weight:bold;color:#059669;line-height:1.5;margin:0;width:100%;display:block;text-align:justify;"></p>
-            <div id="rvForwardBtn" style="width:100%;display:none;margin-top:4px;">
-                ${forwardBtn}
-            </div>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvCorrectText', mcq.correctText, 30, () => {
-            // Show the forward button only after text finishes typing
-            const fwd = document.getElementById('rvForwardBtn');
-            if (fwd) fwd.style.display = 'block';
-        });
-    }, 200);
-    return;
-}
-
-    const feedbackText = isIDontKnow ? mcq.iDontKnowText : mcq.wrongText;
-    const feedbackAudio = isIDontKnow ? mcq.iDontKnowAudio : mcq.wrongAudio;
-    const headerColor = isIDontKnow ? '#1d4ed8' : '#dc2626';
-    const headerBg = isIDontKnow ? '#dbeafe' : '#fee2e2';
-    const headerLabel = isIDontKnow ? '💡 ଉତ୍ତର ଦେଖନ୍ତୁ:' : '❌ ଭୁଲ ହେଲା:';
-
-    playRevisionAudio(feedbackAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;background:white;padding:7px;box-sizing:border-box;overflow:hidden;">
-            <div style="background:${headerBg};border-radius:6px;padding:4px 8px;margin-bottom:5px;flex-shrink:0;">
-                <span style="font-size:13px;font-weight:bold;color:${headerColor};">${headerLabel}</span>
-            </div>
-            <div style="flex:1;overflow-y:auto;">
-              <p id="rvFeedbackText" style="
-    font-size: 13px;
-    font-weight: bold;
-    color: #111;
-    line-height: 1.6;
-    margin: 0;
-    width: 100%;
-    display: block;
-    text-align: justify;
-"></p>
-            <button onclick="showRevisionMCQ()" style="width:100%;padding:8px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;flex-shrink:0;margin-top:5px;">🔄 ପୁଣି ଚେଷ୍ଟା</button>
-        </div>
-    `);
-
-    setTimeout(() => {
-        rvTypewrite('rvFeedbackText', feedbackText, 30, null);
-    }, 200);
-}
    
-function advanceMCQ() {
-    const lesson = revisionLessons[revisionState.lessonIndex];
-    revisionState.mcqIndex++;
-    if (revisionState.mcqIndex < lesson.mcq.length) {
-        showRevisionMCQ();
-    } else {
-        showLessonCompletePrompt();
+
+  if (type === 'debate') {
+    if (debateDisplay.style.display === 'flex') {
+        hideAll();
+        return;
     }
+    hideAll();
+    logoDisplay.style.display   = 'none';
+    debateDisplay.style.display = 'flex';
+    const dp = document.getElementById('debatePlayer');
+    if (dp) dp.play();
+    debateBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
 }
 
-function showLessonCompletePrompt() {
-    const current = revisionState.lessonIndex + 1;
-    const total = revisionLessons.length;
-    const isLast = (current === total);
-
-    playRevisionAudio(revisionLessons[revisionState.lessonIndex].understandAudio, null);
-
-    setRevisionScreen(`
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;padding:10px;box-sizing:border-box;gap:7px;">
-            <div style="font-size:30px;">${isLast ? '🏆' : '🎉'}</div>
-            <p style="font-size:15px;font-weight:bold;color:#059669;text-align:center;margin:0;">ପାଠ ${current} ସଫଳ!</p>
-            ${isLast
-                ? `<p style="font-size:14px;font-weight:bold;color:#1d4ed8;text-align:center;margin:0;">ସମସ୍ତ ରିଭିଜନ୍ ସମ୍ପୂର୍ଣ୍ଣ!</p>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:9px;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">✕ ବନ୍ଦ କରନ୍ତୁ</button>`
-                : `<p style="font-size:13px;color:#555;text-align:center;margin:0;">ଆଗକୁ ଯିବେ?</p>
-                   <button onclick="goNextLesson()" style="width:92%;padding:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);color:white;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;">➡️ ପାଠ ${current + 1} ଆରମ୍ଭ</button>
-                   <button onclick="toggleMedia('revision')" style="width:92%;padding:7px;background:linear-gradient(135deg,#6b7280,#4b5563);color:white;border:none;border-radius:8px;font-size:13px;font-weight:bold;cursor:pointer;">⏸ ପରେ ଜାରି ରଖିବ</button>`
-            }
-        </div>
-    `);
-}
-    
-function goNextLesson() {
-    revisionState.lessonIndex++;
-    revisionState.mcqIndex = 0;
-    startRevisionLesson();
-}  
-    
     
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
