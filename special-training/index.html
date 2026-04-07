@@ -141,6 +141,8 @@
         .subject-card[data-subject="math"]   { background: linear-gradient(135deg, #d4a574 0%, #8b6914 100%); }
         .subject-card[data-subject="mindpower"]  { background: linear-gradient(135deg, #4a148c 0%, #311b92 100%); }
         .subject-card[data-subject="reasoning"]    { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
+        .subject-card[data-subject="spelling"]  { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+        .subject-card[data-subject="grammar"]   { background: linear-gradient(135deg, #059669 0%, #065f46 100%); }
 
 
         .subject-name  { font-size: 1.15em; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
@@ -311,7 +313,9 @@ const subjects = {
     gk:   { name: 'ସାଧାରଣ ଜ୍ଞାନ',           odia: 'General Knowledge' },
     reasoning:    { name: 'ବିଚାର ଶକ୍ତିର ବିକାଶ',         odia: 'Reasoning' },
     law:    { name: 'ଆଇନ ସଚେତନତା',         odia: 'Legal Awareness' },
-    mindpower:  { name: 'ମାନସିକ ଶକ୍ତିର ବିକାଶ',             odia: 'Mind Power' }
+   mindpower:  { name: 'ମାନସିକ ଶକ୍ତିର ବିକାଶ',             odia: 'Mind Power' },
+spelling:   { name: 'ଇଂରାଜୀ ବନାନ',                      odia: 'English Spelling' },
+grammar:    { name: 'ଇଂରାଜୀ ବ୍ୟାକରଣ',                   odia: 'English Grammar' }
     
 };
 
@@ -374,7 +378,18 @@ const classes = {
         { num: 1, title: 'ଏକା-ଅଲଗା, ସାନ-ବଡ, ଉପର-ତଳ, ଭିତର-ବାହାର', url: './reasoning/class-1/' },
         // ── ADD MORE EDU CLASSES HERE ──
         // { num: 2, title: 'Your title', url: './EDU/class-2/' },
-    ]
+    ],
+
+spelling: [
+    // { num: 1, title: 'Your title', url: './spelling/class-1/' },
+],
+
+grammar: [
+    // { num: 1, title: 'Your title', url: './grammar/class-1/' },
+]
+
+
+    
 };
 
 /* ═══════════════════════════════════════════════════════
