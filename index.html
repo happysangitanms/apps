@@ -278,10 +278,13 @@ footer { background:var(--navy); border-radius:20px; padding:26px 20px 22px; mar
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
-  background: #000;
+  background: #0f2548;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  box-shadow:
+    0 0 0 2px rgba(200,150,42,0.4),
+    0 16px 48px rgba(200,150,42,0.2),
+    0 8px 24px rgba(0,0,0,0.5);
   margin: 16px auto 0;
   max-width: 360px;
 }
@@ -291,19 +294,31 @@ footer { background:var(--navy); border-radius:20px; padding:26px 20px 22px; mar
 }
 .yt-placeholder {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);
+  background: linear-gradient(135deg, #1a3a6e 0%, #0f2548 50%, #c8962a22 100%);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 16px; cursor: pointer;
+  border: 2px solid rgba(200, 150, 42, 0.45);
+  border-radius: 16px;
 }
 .play-ring {
-  width: 72px; height: 72px;
-  background: rgba(200, 150, 42, 0.85);
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #c8962a, #e4b84a);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 30px; color: #07111f;
-  box-shadow: 0 0 0 10px rgba(200,150,42,0.2), 0 0 0 20px rgba(200,150,42,0.08);
-  transition: transform .2s, box-shadow .2s;
+  font-size: 32px; color: #07111f;
+  box-shadow:
+    0 0 0 12px rgba(200,150,42,0.18),
+    0 0 0 24px rgba(200,150,42,0.08),
+    0 8px 32px rgba(200,150,42,0.5);
+  transition: transform .25s, box-shadow .25s;
+}
+.yt-placeholder:hover .play-ring {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 14px rgba(200,150,42,0.25),
+    0 0 0 28px rgba(200,150,42,0.1),
+    0 12px 40px rgba(200,150,42,0.65);
 }
 .yt-placeholder:hover .play-ring {
   transform: scale(1.1);
