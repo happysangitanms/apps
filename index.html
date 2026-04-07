@@ -81,14 +81,7 @@ header {
 }
 .website-btn:active { transform:scale(0.97); background:rgba(200,150,42,0.28); }
 
-.welcome-gif {
-  margin:16px auto 0;
-  width:100%; max-width:300px;
-  border-radius:16px; overflow:hidden;
-  border:2px solid rgba(200,150,42,0.45);
-  box-shadow:0 12px 40px rgba(0,0,0,0.45);
-}
-.welcome-gif img { display:block; width:100%; height:auto; }
+
 
 .choose-heading {
   font-size: clamp(1.05em,4.5vw,1.3em);
@@ -281,53 +274,39 @@ footer { background:var(--navy); border-radius:20px; padding:26px 20px 22px; mar
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @supports (padding:max(0px)) { .page { padding-bottom:max(90px,env(safe-area-inset-bottom)); } }
 
-  /* Welcome video play button */
-#welcome-wrap {
-  position: relative;
-}
-#play-btn-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(7, 17, 31, 0.45);
-  border-radius: 16px;
-}
-#play-btn {
-  background: linear-gradient(135deg, var(--gold), var(--gold-lt));
-  color: #07111f;
-  border: none;
-  border-radius: 50px;
-  padding: 12px 28px;
-  font-family: 'Noto Sans Oriya', sans-serif;
-  font-size: clamp(0.95em, 4vw, 1.1em);
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 6px 24px rgba(200, 150, 42, 0.5);
-  letter-spacing: 0.03em;
-  transition: transform 0.18s, box-shadow 0.18s;
-}
-#play-btn:active {
-  transform: scale(0.96);
-  box-shadow: 0 3px 12px rgba(200, 150, 42, 0.4);
-}
-#welcome-iframe-wrap {
-  display: none;
+.video-wrap {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
-  height: 0;
+  background: #000;
   border-radius: 16px;
   overflow: hidden;
-  border: 2px solid rgba(200, 150, 42, 0.45);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  margin: 16px auto 0;
+  max-width: 360px;
 }
-#welcome-iframe-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: 0;
+.video-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; border: none;
+}
+.yt-placeholder {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px; cursor: pointer;
+}
+.play-ring {
+  width: 72px; height: 72px;
+  background: rgba(200, 150, 42, 0.85);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; color: #07111f;
+  box-shadow: 0 0 0 10px rgba(200,150,42,0.2), 0 0 0 20px rgba(200,150,42,0.08);
+  transition: transform .2s, box-shadow .2s;
+}
+.yt-placeholder:hover .play-ring {
+  transform: scale(1.1);
 }
 </style>
 </head>
@@ -342,15 +321,15 @@ footer { background:var(--navy); border-radius:20px; padding:26px 20px 22px; mar
   <a href="https://evidya.pages.dev/" target="_blank" rel="noopener noreferrer" class="website-btn">
     🌹 ଆମ୍ଭ ୱେବ୍-ସାଇଟ୍ →
   </a>
-  <div class="welcome-gif" id="welcome-wrap">
-  <img id="welcome-img" src="https://raw.githubusercontent.com/happysangitanms/assets/main/welcome%20image.gif" alt="Welcome">
-  <div id="play-btn-overlay" style="display:none;">
-    <button id="play-btn" onclick="loadWelcomeVideo()">
-      ▶ ଆମ ସେବା ସମ୍ବନ୍ଧୀୟ ସମସ୍ତ ତଥ୍ୟ ଜାଣିବା ପାଇଁ ଦୟାକରି ଏହି ଭିଡିଓ ଦେଖନ୍ତୁ ।  
-    </button>
+  <div class="video-wrap" id="ytWrap" style="border-radius:16px; overflow:hidden; margin:16px auto 0; max-width:360px; box-shadow:0 12px 40px rgba(0,0,0,0.45);">
+  <div class="yt-placeholder" onclick="loadYT()">
+    <div class="play-ring">▶</div>
+    <p style="color:rgba(255,255,255,0.75); font-size:13px; text-align:center; padding:0 20px; line-height:1.7;">
+      ଆମ ସେବା ସମ୍ବନ୍ଧୀୟ ସମସ୍ତ ତଥ୍ୟ ଜାଣିବା ପାଇଁ ଦୟାକରି ଏହି ଭିଡିଓ ଦେଖନ୍ତୁ ।
+    </p>
   </div>
 </div>
-  <p class="choose-heading">🌹 <span>ଦୟାକରି ଆବଶ୍ୟକୀୟ ଆପ୍ ବାଛନ୍ତୁ:</span> 🌹</p>
+  <p class="choose-heading">🌹 <span> ଦୟାକରି ନିମ୍ନପ୍ରଦତ୍ତ କ୍ଲାସ୍ ଗୁଡିକ ମଧ୍ୟରୁ ଆପଣଙ୍କ କ୍ଲାସ୍ ବାଛି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ । </span> 🌹</p>
 </header>
 
 <div class="sections">
@@ -842,40 +821,12 @@ DYNA.forEach(d => {
   document.body.appendChild(div);
 });
 
-  // ── Welcome GIF → Play Button → Video ──────────────────────
-
-// After 2 seconds, show the ▶ Tap to Play button over the GIF
-setTimeout(function () {
-  const overlay = document.getElementById('play-btn-overlay');
-  if (overlay) overlay.style.display = 'flex';
-}, 3000);
-
-// When user taps the play button — swap GIF for YouTube iframe
-function loadWelcomeVideo() {
-  const wrap      = document.getElementById('welcome-wrap');
-  const img       = document.getElementById('welcome-img');
-  const overlay   = document.getElementById('play-btn-overlay');
-
-  // Hide the GIF and overlay button
-  if (img)     img.style.display     = 'none';
-  if (overlay) overlay.style.display = 'none';
-
-  // Create and show the iframe wrapper
-  const iframeWrap = document.createElement('div');
-  iframeWrap.id = 'welcome-iframe-wrap';
-  iframeWrap.style.display = 'block';
-  iframeWrap.innerHTML = `
-    <iframe
-      src="https://www.youtube.com/embed/hSvBQq1jE6Y?autoplay=1&rel=0&modestbranding=1"
-      title="Welcome Video"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write;
-             encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  `;
-  wrap.appendChild(iframeWrap);
+function loadYT() {
+  var videoId = 'hSvBQq1jE6Y'; // ← your existing welcome video ID
+  var wrap = document.getElementById('ytWrap');
+  wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" title="Welcome Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>';
 }
+
 
 // Inject video blocks into the three static modals
 initStaticModalVideos();
