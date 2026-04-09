@@ -2116,7 +2116,7 @@ body > div:first-child {
         <div id="loginError" class="login-error"></div>
 
             <!-- Know Your Roll Number Button -->
-        <button onclick="window.open('https://evidya-admin.pages.dev//', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
+        <button onclick="window.open('https://evidya-admin.pages.dev/special/', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
             📋 ଆପଣଙ୍କ ରୋଲ୍ ନମ୍ବର ଜାଣିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । 
         </button>  
 
@@ -2641,7 +2641,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/happysangitanms/assets/main/fallback%20audio.m4a";
-const CLASS_NAME = "";
+const CLASS_NAME = "special";
 
 function getDeviceId() {
     let deviceId = localStorage.getItem('deviceId_evidya');
@@ -2718,7 +2718,7 @@ document.getElementById('loginBtn').addEventListener('click', async function() {
         welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
         welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
             + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
-            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ  TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
             + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
         document.body.appendChild(welcomeOverlay);
 
@@ -2795,398 +2795,218 @@ document.addEventListener('visibilitychange', () => {
 });
     }
 
+
 const wordData = {
     currentWord: 0,
     words: [
-        // ======= ALL ODIA LETTERS WITH SPELLING =======
         {
-            word: "ka",
-            odia: "କ",
-            emoji: "🔤",
-            odiaUse: "କ = k+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "NOUN",
+            odia: "ନାମ ଶବ୍ଦ",
+            emoji: "🏷️",
+            odiaUse: "Noun ମାନେ ନାମ ଶବ୍ଦ। ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ Noun କୁହାଯାଏ। Ram, School, Book — ଏଗୁଡ଼ିକ ସବୁ Noun।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "kha",
-            odia: "ଖ",
-            emoji: "🔤",
-            odiaUse: "ଖ = kh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "PERSON",
+            odia: "ମଣିଷ / ବ୍ୟକ୍ତି",
+            emoji: "👤",
+            odiaUse: "Person ମାନେ ମଣିଷ ବା ବ୍ୟକ୍ତି। Ram, Sita, Teacher — ଏଗୁଡ଼ିକ Person Noun। ମଣିଷର ନାମ Noun ଅଟେ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "ga",
-            odia: "ଗ",
-            emoji: "🔤",
-            odiaUse: "ଗ = g+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "PLACE",
+            odia: "ସ୍ଥାନ",
+            emoji: "📍",
+            odiaUse: "Place ମାନେ ସ୍ଥାନ। School, Home, Market — ଏଗୁଡ଼ିକ Place Noun। ସ୍ଥାନର ନାମ Noun ଅଟେ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "gha",
-            odia: "ଘ",
-            emoji: "🔤",
-            odiaUse: "ଘ = gh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "THING",
+            odia: "ବସ୍ତୁ",
+            emoji: "📦",
+            odiaUse: "Thing ମାନେ ବସ୍ତୁ। Book, Pen, Bag — ଏଗୁଡ଼ିକ Thing Noun। ବସ୍ତୁର ନାମ Noun ଅଟେ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "cha",
-            odia: "ଚ",
-            emoji: "🔤",
-            odiaUse: "ଚ = ch+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "SINGULAR",
+            odia: "ଏକବଚନ",
+            emoji: "1️⃣",
+            odiaUse: "Singular ମାନେ ଏକବଚନ। ଗୋଟିଏ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଇଲେ Singular ହୁଏ। One cat, One book — ଏଗୁଡ଼ିକ Singular।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "chha",
-            odia: "ଛ",
-            emoji: "🔤",
-            odiaUse: "ଛ = chh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "PLURAL",
+            odia: "ବହୁବଚନ",
+            emoji: "2️⃣",
+            odiaUse: "Plural ମାନେ ବହୁବଚନ। ଏକରୁ ଅଧିକ ବସ୍ତୁ ବୁଝାଇଲେ Plural ହୁଏ। Cats, Books — ଏଗୁଡ଼ିକ Plural। Singular ଶେଷରେ S ଯୋଡ଼ିଲେ Plural ହୁଏ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "ja",
-            odia: "ଜ",
-            emoji: "🔤",
-            odiaUse: "ଜ = j+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "PRONOUN",
+            odia: "ସର୍ବନାମ",
+            emoji: "👥",
+            odiaUse: "Pronoun ମାନେ ସର୍ବନାମ। Noun ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ Pronoun କୁହାଯାଏ। He, She, It, They — ଏଗୁଡ଼ିକ Pronoun।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "jha",
-            odia: "ଝ",
-            emoji: "🔤",
-            odiaUse: "ଝ = jh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        
-        {
-            word: "ta",
-            odia: "ଟ",
-            emoji: "🔤",
-            odiaUse: "ଟ = t+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "VERB",
+            odia: "କ୍ରିୟା ଶବ୍ଦ",
+            emoji: "🏃",
+            odiaUse: "Verb ମାନେ କ୍ରିୟା ଶବ୍ଦ। କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Verb କୁହାଯାଏ। Run, Eat, Sleep — ଏଗୁଡ଼ିକ Verb।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "tha",
-            odia: "ଠ",
-            emoji: "🔤",
-            odiaUse: "ଠ = th+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "ADJECTIVE",
+            odia: "ବର୍ଣ୍ଣନା ଶବ୍ଦ",
+            emoji: "🌈",
+            odiaUse: "Adjective ମାନେ ବର୍ଣ୍ଣନା ଶବ୍ଦ। Noun ର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Adjective କୁହାଯାଏ। Big, Small, Red — ଏଗୁଡ଼ିକ Adjective।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         },
         {
-            word: "da",
-            odia: "ଡ",
-            emoji: "🔤",
-            odiaUse: "ଡ = d+a 
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "dha",
-            odia: "ଢ",
-            emoji: "🔤",
-            odiaUse: "ଢ = dh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "na",
-            odia: "ଣ",
-            emoji: "🔤",
-            odiaUse: "ଣ = n+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ta",
-            odia: "ତ",
-            emoji: "🔤",
-            odiaUse: "ତ = t+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "tha",
-            odia: "ଥ",
-            emoji: "🔤",
-            odiaUse: "ଥ = th+a = tha",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "da",
-            odia: "ଦ",
-            emoji: "🔤",
-            odiaUse: "ଦ = d+a = da",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "dha",
-            odia: "ଧ",
-            emoji: "🔤",
-            odiaUse: "ଧ = dh+a
-        },
-        {
-            word: "na",
-            odia: "ନ",
-            emoji: "🔤",
-            odiaUse: "ନ = n+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "pa",
-            odia: "ପ",
-            emoji: "🔤",
-            odiaUse: "ପ = p+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "pha",
-            odia: "ଫ",
-            emoji: "🔤",
-            odiaUse: "ଫ = ph+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ba",
-            odia: "ବ",
-            emoji: "🔤",
-            odiaUse: "ବ = b+a = ba। ବ ଲେଖିବାକୁ ଶିଖ। ba, ba, ba — ଜୋରରେ ପଢ଼।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "bha",
-            odia: "ଭ",
-            emoji: "🔤",
-            odiaUse: "ଭ = bh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ma",
-            odia: "ମ",
-            emoji: "🔤",
-            odiaUse: "ମ = m+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ya",
-            odia: "ଯ",
-            emoji: "🔤",
-            odiaUse: "ଯ = y+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ra",
-            odia: "ର",
-            emoji: "🔤",
-            odiaUse: "ର = r+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "la",
-            odia: "ଳ",
-            emoji: "🔤",
-            odiaUse: "ଳ = l+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "wa",
-            odia: "ଵ",
-            emoji: "🔤",
-            odiaUse: "ଵ = w+a ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "sha",
-            odia: "ଶ",
-            emoji: "🔤",
-            odiaUse: "ଶ = sh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "sha",
-            odia: "ଷ",
-            emoji: "🔤",
-            odiaUse: "ଷ = sh+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "sa",
-            odia: "ସ",
-            emoji: "🔤",
-            odiaUse: "ସ = s+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "ha",
-            odia: "ହ",
-            emoji: "🔤",
-            odiaUse: "ହ = h+a",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-
-        {
-            word: "akha",
-            odia: "ଅଖ",
-            emoji: "👁️",
-            odiaUse: "ଅଖ = a + kha = akha। ଅ=a, ଖ=kha । ଏକ ସଙ୍ଗରେ ଲେଖ — akha ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "rakha",
-            odia: "ରଖ",
-            emoji: "🤲",
-            odiaUse: "ରଖ = ra + kha = rakha । ର=ra, ଖ=kha । ଏକ ସଙ୍ଗରେ ଲେଖ — rakha ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "chaka",
-            odia: "ଚକ",
-            emoji: "🔵",
-            odiaUse: "ଚକ = cha + ka = chaka । ଚ=cha, କ=ka । ଏକ ସଙ୍ଗରେ ଲେଖ — chaka ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "chhaka",
-            odia: "ଛକ",
-            emoji: "🚦",
-            odiaUse: "ଛକ = chha + ka = chhaka । ଛ=chha, କ=ka । ଏକ ସଙ୍ଗରେ ଲେଖ — chhaka ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "nala",
-            odia: "ନଳ",
-            emoji: "🚿",
-            odiaUse: "ନଳ = na + la = nala । ନ=na, ଳ=la । ଏକ ସଙ୍ଗରେ ଲେଖ — nala ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "gada",
-            odia: "ଗଡ",
-            emoji: "🏔️",
-            odiaUse: "ଗଡ = ga + da = gada । ଗ=ga, ଡ=da । ଏକ ସଙ୍ଗରେ ଲେଖ — gada । ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "mana",
-            odia: "ମନ",
-            emoji: "🧠",
-            odiaUse: "ମନ = ma + na = mana । ମ=ma, ନ=na । ଏକ ସଙ୍ଗରେ ଲେଖ — mana ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "jala",
-            odia: "ଜଳ",
-            emoji: "💧",
-            odiaUse: "ଜଳ = ja + la = jala । ଜ=ja, ଳ=la । ଏକ ସଙ୍ଗରେ ଲେଖ — jala ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-
-        {
-            word: "arakha",
-            odia: "ଅରଖ",
-            emoji: "🌿",
-            odiaUse: "ଅରଖ = a + ra + kha = arakha । ଅ=a, ର=ra, ଖ=kha । ଏକ ସଙ୍ଗରେ ଲେଖ — arakha।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "shagada",
-            odia: "ଶଗଡ",
-            emoji: "🛒",
-            odiaUse: "ଶଗଡ = sha + ga + da = shagada । ଶ=sha, ଗ=ga, ଡ=da । ଏକ ସଙ୍ଗରେ ଲେଖ — shagada । ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "sadaka",
-            odia: "ସଡକ",
-            emoji: "🛣️",
-            odiaUse: "ସଡକ = sa + da + ka = sadaka । ସ=sa, ଡ=da, କ=ka । ଏକ ସଙ୍ଗରେ ଲେଖ — sadaka । ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "nagara",
-            odia: "ନଗର",
-            emoji: "🏙️",
-            odiaUse: "ନଗର = na + ga + ra = nagara । ନ=na, ଗ=ga, ର=ra । ଏକ ସଙ୍ଗରେ ଲେଖ — nagara । ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "bahana",
-            odia: "ବହନ",
-            emoji: "🚚",
-            odiaUse: "ବହନ = ba + ha + na = bahana । ବ=ba, ହ=ha, ନ=na । ଏକ ସଙ୍ଗରେ ଲେଖ — bahana । ",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
-        },
-        {
-            word: "pachaka",
-            odia: "ପଚକ",
-            emoji: "🍳",
-            odiaUse: "ପଚକ = pa + cha + ka = pachaka । ପ=pa, ଚ=cha, କ=ka । ଏକ ସଙ୍ଗରେ ଲେଖ — pachaka ।",
-            audio: { intro: "audio-url-here", encourage: "audio-url-here", praise: "audio-url-here" }
+            word: "SENTENCE",
+            odia: "ବାକ୍ୟ",
+            emoji: "📝",
+            odiaUse: "Sentence ମାନେ ବାକ୍ୟ। ଅର୍ଥ ସମ୍ପୂର୍ଣ୍ଣ କରୁଥିବା ଶବ୍ଦ ସମୂହକୁ Sentence କୁହାଯାଏ। The cat is big — ଏହା ଏକ Sentence।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
         }
     ]
 };
     
 const topicsData = [
-
-    // =====================
-    // TOPIC 1: ALL LETTERS
-    // =====================
     {
-        heading: "Topic-1: ଅ (a) ର ସମସ୍ତ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ",
+        heading: "Topic-1: Noun (ନାମ ଶବ୍ଦ)",
         audioPoints: [
             {
-                text: "👉 ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣରେ ଅ (a) ସ୍ୱର ଲୁଚି ରହିଛି। ତେଣୁ କ = ka, ଖ = kha, ଗ = ga। ଏହି ଅ ବର୍ଗ ଶିଖିଲେ ପ୍ରତ୍ୟେକ ଅକ୍ଷର ଉଚ୍ଚାରଣ ଜଣାଯିବ।",
+                text: "👉 ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ Noun କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ। Noun ତିନି ପ୍ରକାର — Person, Place ଓ Thing। Ram, School, Book — ଏଗୁଡ଼ିକ ସବୁ Noun।",
                 audio: "audio-url-here"
             }
         ],
         questions: [
-            "<span style='color: red;'>Q-1:</span> କ ର ଇଂରାଜୀ ଲେଖା କ'ଣ? ଭାଙ୍ଗି ଲେଖ।<br><br><span style='color: green;'>Answer:</span> କ = ka । k + a = ka । କ ଅକ୍ଷରରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି। ତେଣୁ ka ଲେଖାଯାଏ।",
+            "<span style='color: red;'>Q-1:</span> Noun କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ Noun କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ। Ram, School, Book — ଏଗୁଡ଼ିକ ସବୁ Noun।",
 
-            "<span style='color: red;'>Q-2:</span> ଖ ର ଇଂରାଜୀ ଲେଖା କ'ଣ? ଭାଙ୍ଗି ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଖ = kha । kh + a = kha । ଖ ଅକ୍ଷରରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି। ତେଣୁ kha ଲେଖାଯାଏ।",
+            "<span style='color: red;'>Q-2:</span> Noun କେତେ ପ୍ରକାର ଓ କ'ଣ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> Noun ତିନି ପ୍ରକାର। ପ୍ରଥମ Person — ମଣିଷର ନାମ। ଦ୍ୱିତୀୟ Place — ସ୍ଥାନର ନାମ। ତୃତୀୟ Thing — ବସ୍ତୁର ନାମ।",
 
-            "<span style='color: red;'>Q-3:</span> ଚ ଓ ଛ ର ଫରକ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଚ = cha । ଛ = chha । ଛ ରେ h ଅଧିକ ଅଛି। ଜୋରରେ ଫୁ ଫୁ ଶ୍ୱାସ ଛାଡ଼ି ଛ କୁହ।",
+            "<span style='color: red;'>Q-3:</span> Person Noun ର ଉଦାହରଣ ଦିଅ।<br><br><span style='color: green;'>Answer:</span> Ram, Sita, Teacher, Mother — ଏଗୁଡ଼ିକ Person Noun। ଏଗୁଡ଼ିକ ମଣିଷର ନାମ। ମଣିଷର ଯେକୌଣସି ନାମ Person Noun ଅଟେ।",
 
-            "<span style='color: red;'>Q-4:</span> ଟ ଓ ତ ର ଫରକ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଟ = ta (hard)। ତ = ta (soft) । ଟ ଜିଭ ଉପର ତାଲୁ ଛୁଏ । ତ ଜିଭ ଦାନ୍ତ ପଛ ଛୁଏ। ଉଚ୍ଚାରଣ ଭିନ୍ନ।"
+            "<span style='color: red;'>Q-4:</span> Place Noun ଓ Thing Noun ର ଦୁଇଟି ଲେଖା ଉଦାହରଣ ଦିଅ।<br><br><span style='color: green;'>Answer:</span> Place Noun — School, Market। Thing Noun — Book, Pen। ସ୍ଥାନର ନାମ Place Noun ଓ ବସ୍ତୁର ନାମ Thing Noun ଅଟେ।"
         ]
     },
 
-    // =====================
-    // TOPIC 2: TWO LETTER WORDS
-    // =====================
     {
-        heading: "Topic-2: ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ — Two Letter Words",
+        heading: "Topic-2: Singular ଓ Plural (ଏକବଚନ ଓ ବହୁବଚନ)",
         audioPoints: [
             {
-                text: "👉 ଦୁଇଟି ଅକ୍ଷର ଏକ ସଙ୍ଗରେ ମିଶିଲେ ଶବ୍ଦ ତିଆରି ହୁଏ। ଅଖ = a + kha = akha । ରଖ = ra + kha = rakha । ଚକ = cha + ka = chaka । ଛକ = chha + ka = chhaka । ପ୍ରତ୍ୟେକ ଅକ୍ଷର ଭାଙ୍ଗି ଭାଙ୍ଗି ପଢ଼।",
+                text: "👉 ଗୋଟିଏ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଇଲେ Singular କୁହାଯାଏ। ଏକରୁ ଅଧିକ ବୁଝାଇଲେ Plural କୁହାଯାଏ। Singular ଶେଷରେ S ଯୋଡ଼ିଲେ Plural ହୁଏ। Cat — Cats, Book — Books, Pen — Pens।",
                 audio: "audio-url-here"
             }
         ],
         questions: [
-            "<span style='color: red;'>Q-1:</span> ଅଖ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଅଖ = a + kha = akha। ଅ=a, ଖ=kha। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ akha ହୁଏ।",
+            "<span style='color: red;'>Q-1:</span> Singular କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> ଗୋଟିଏ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଇଲେ Singular କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ଏକବଚନ କୁହାଯାଏ। One cat, One book — ଏଗୁଡ଼ିକ Singular।",
 
-            "<span style='color: red;'>Q-2:</span> ରଖ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ରଖ = ra + kha = rakha। ର=ra, ଖ=kha। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ rakha ହୁଏ।",
+            "<span style='color: red;'>Q-2:</span> Plural କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> ଏକରୁ ଅଧିକ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଇଲେ Plural କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ବହୁବଚନ କୁହାଯାଏ। Cats, Books — ଏଗୁଡ଼ିକ Plural।",
 
-            "<span style='color: red;'>Q-3:</span> ଚକ ଓ ଛକ ର ଫରକ ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଚକ = cha + ka = chaka। ଛକ = chha + ka = chhaka। ଛ ରେ ଅଧିକ h ଅଛି। ଉଚ୍ଚାରଣ ଓ ଲେଖା ଭିନ୍ନ।",
+            "<span style='color: red;'>Q-3:</span> Singular କୁ Plural କିପରି କରାଯାଏ?<br><br><span style='color: green;'>Answer:</span> Singular ଶେଷରେ S ଯୋଡ଼ିଲେ Plural ହୁଏ। Cat + S = Cats। Book + S = Books। Pen + S = Pens।",
 
-            "<span style='color: red;'>Q-4:</span> ଜଳ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଜଳ = ja + la = jala। ଜ=ja, ଳ=la। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ jala ହୁଏ। ଜଳ ମାନେ water।"
+            "<span style='color: red;'>Q-4:</span> ନିମ୍ନଲିଖିତ Singular ଶବ୍ଦ ଗୁଡ଼ିକୁ Plural କର — Dog, Bag, Tree।<br><br><span style='color: green;'>Answer:</span> Dog + S = Dogs। Bag + S = Bags। Tree + S = Trees। ଶେଷରେ S ଯୋଡ଼ିଲେ Plural ହୁଏ।"
         ]
     },
 
-    // =====================
-    // TOPIC 3: THREE LETTER WORDS
-    // =====================
     {
-        heading: "Topic-3: ତିନି ଅକ୍ଷର ଶବ୍ଦ — Three Letter Words",
+        heading: "Topic-3: Pronoun (ସର୍ବନାମ) — He, She, It, They",
         audioPoints: [
             {
-                text: "👉 ତିନୋଟି ଅକ୍ଷର ଏକ ସଙ୍ଗରେ ମିଶିଲେ ବଡ଼ ଶବ୍ଦ ତିଆରି ହୁଏ। ଅରଖ = a + ra + kha = arakha । ଶଗଡ = sha + ga + da = shagada । ସଡକ = sa + da + ka = sadaka । ନଗର = na + ga + ra = nagara । ଧୀରେ ଧୀରେ ଭାଙ୍ଗି ପଢ଼।",
+                text: "👉 Noun ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ Pronoun କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ସର୍ବନାମ କୁହାଯାଏ। ପୁଅ ପାଇଁ He। ଝିଅ ପାଇଁ She। ବସ୍ତୁ ବା ପ୍ରାଣୀ ପାଇଁ It। ଏକରୁ ଅଧିକ ପାଇଁ They।",
                 audio: "audio-url-here"
             }
         ],
         questions: [
-            "<span style='color: red;'>Q-1:</span> ଅରଖ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଅରଖ = a + ra + kha = arakha। ଅ=a, ର=ra, ଖ=kha। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ arakha ହୁଏ।",
+            "<span style='color: red;'>Q-1:</span> Pronoun କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> Noun ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ Pronoun କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ସର୍ବନାମ କୁହାଯାଏ। He, She, It, They — ଏଗୁଡ଼ିକ Pronoun।",
 
-            "<span style='color: red;'>Q-2:</span> ଶଗଡ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ଶଗଡ = sha + ga + da = shagada। ଶ=sha, ଗ=ga, ଡ=da। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ shagada ହୁଏ।",
+            "<span style='color: red;'>Q-2:</span> He, She, It ଓ They କେତେବେଳେ ବ୍ୟବହାର ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ପୁଅ ପାଇଁ He ବ୍ୟବହାର ହୁଏ। ଝିଅ ପାଇଁ She ବ୍ୟବହାର ହୁଏ। ବସ୍ତୁ ବା ପ୍ରାଣୀ ପାଇଁ It ବ୍ୟବହାର ହୁଏ। ଏକରୁ ଅଧିକ ପାଇଁ They ବ୍ୟବହାର ହୁଏ।",
 
-            "<span style='color: red;'>Q-3:</span> ସଡକ ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ସଡକ = sa + da + ka = sadaka। ସ=sa, ଡ=da, କ=ka। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ sadaka ହୁଏ।",
+            "<span style='color: red;'>Q-3:</span> Ram is a boy — ଏଠାରେ Ram ବଦଳରେ କ'ଣ ବ୍ୟବହାର ହେବ?<br><br><span style='color: green;'>Answer:</span> Ram ଜଣେ ପୁଅ। ତେଣୁ Ram ବଦଳରେ He ବ୍ୟବହାର ହେବ। He is a boy — ଏହା ସଠିକ ବାକ୍ୟ।",
 
-            "<span style='color: red;'>Q-4:</span> ନଗର ଶବ୍ଦ ଭାଙ୍ଗି ଇଂରାଜୀରେ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> ନଗର = na + ga + ra = nagara। ନ=na, ଗ=ga, ର=ra। ଏକ ସଙ୍ଗ ଯୋଗ କଲେ nagara ହୁଏ।"
+            "<span style='color: red;'>Q-4:</span> Sita is a girl — ଏଠାରେ Sita ବଦଳରେ କ'ଣ ବ୍ୟବହାର ହେବ?<br><br><span style='color: green;'>Answer:</span> Sita ଜଣେ ଝିଅ। ତେଣୁ Sita ବଦଳରେ She ବ୍ୟବହାର ହେବ। She is a girl — ଏହା ସଠିକ ବାକ୍ୟ।"
+        ]
+    },
+
+    {
+        heading: "Topic-4: Verb (କ୍ରିୟା ଶବ୍ଦ)",
+        audioPoints: [
+            {
+                text: "👉 କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Verb କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ। Run, Eat, Sleep, Write, Read — ଏଗୁଡ଼ିକ ସବୁ Verb। ପ୍ରତ୍ୟେକ ବାକ୍ୟରେ ଗୋଟିଏ Verb ଥାଏ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> Verb କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Verb କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ। Run, Eat, Sleep — ଏଗୁଡ଼ିକ Verb।",
+
+            "<span style='color: red;'>Q-2:</span> ନିମ୍ନଲିଖିତ ବାକ୍ୟରୁ Verb ଚିହ୍ନ — The dog runs fast।<br><br><span style='color: green;'>Answer:</span> The dog runs fast — ଏଠାରେ Runs ହେଉଛି Verb। Runs ଏଠାରେ କୁକୁରର କାମ ବୁଝାଉଛି। ଯେଉଁ ଶବ୍ଦ କାମ ବୁଝାଏ ତାହା Verb।",
+
+            "<span style='color: red;'>Q-3:</span> ପାଞ୍ଚଟି Verb ଶବ୍ଦ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> Run — ଦୌଡ଼। Eat — ଖା। Sleep — ଶୁଅ। Write — ଲେଖ। Read — ପଢ଼। ଏଗୁଡ଼ିକ ସବୁ Verb।",
+
+            "<span style='color: red;'>Q-4:</span> Verb ବ୍ୟବହାର କରି ଦୁଇଟି ବାକ୍ୟ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> The boy runs — ପୁଅଟି ଦୌଡ଼ୁଛି। The girl reads — ଝିଅଟି ପଢ଼ୁଛି। ଏହି ଦୁଇଟି ବାକ୍ୟରେ Runs ଓ Reads ହେଉଛି Verb।"
+        ]
+    },
+
+    {
+        heading: "Topic-5: Adjective (ବର୍ଣ୍ଣନା ଶବ୍ଦ)",
+        audioPoints: [
+            {
+                text: "👉 Noun ର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Adjective କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ। Big, Small, Red, Good, Hot — ଏଗୁଡ଼ିକ Adjective। Adjective Noun ଆଗରେ ବସେ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> Adjective କାହାକୁ କୁହାଯାଏ?<br><br><span style='color: green;'>Answer:</span> Noun ର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ Adjective କୁହାଯାଏ। ଓଡ଼ିଆରେ ଏହାକୁ ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ। Big, Small, Red — ଏଗୁଡ଼ିକ Adjective।",
+
+            "<span style='color: red;'>Q-2:</span> ନିମ୍ନଲିଖିତ ବାକ୍ୟରୁ Adjective ଚିହ୍ନ — The big dog runs fast।<br><br><span style='color: green;'>Answer:</span> The big dog runs fast — ଏଠାରେ Big ହେଉଛି Adjective। Big ଶବ୍ଦ Dog ର ଗୁଣ ବୁଝାଉଛି। Adjective ସବୁବେଳେ Noun ଆଗରେ ବସେ।",
+
+            "<span style='color: red;'>Q-3:</span> ପାଞ୍ଚଟି Adjective ଶବ୍ଦ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> Big — ବଡ଼। Small — ଛୋଟ। Red — ଲାଲ। Good — ଭଲ। Hot — ଗରମ। ଏଗୁଡ଼ିକ ସବୁ Adjective।",
+
+            "<span style='color: red;'>Q-4:</span> Adjective ବ୍ୟବହାର କରି ଦୁଇଟି ବାକ୍ୟ ଲେଖ।<br><br><span style='color: green;'>Answer:</span> The red apple is sweet — ଲାଲ ଆପଲ ମିଠା। The small cat is cute — ଛୋଟ ବିଲେଇ ସୁନ୍ଦର। ଏହି ଦୁଇଟି ବାକ୍ୟରେ Red ଓ Small ହେଉଛି Adjective।"
         ]
     }
-
 ];
     
 const courseData = {
@@ -3257,262 +3077,278 @@ const courseData = {
   `, 
     audio: "",
 mermaid: `graph LR
-A["📊 ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ<br/>ଅ ବର୍ଗ ଓ ଶବ୍ଦ ଗଠନ"]
+A["📚 ଇଂରାଜୀ ବ୍ୟାକରଣ<br/>ପ୍ରଥମ ଶ୍ରେଣୀ"]
+
 A --> B["ମୁଖ୍ୟ ବିଷୟ"]
-B --> C["ଆମେ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ,<br/>ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ ଓ<br/>ତିନି ଅକ୍ଷର ଶବ୍ଦ ଶିଖିବା"]
-A --> D["ଅ ବର୍ଗ ବ୍ୟଞ୍ଜନ 📖"]
-D --> E["ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନରେ<br/>ଅ ସ୍ୱର ଲୁଚି ରହିଛି।<br/>କ = ka, ଖ = kha, ଗ = ga।<br/>ଚ = cha, ଛ = chha।<br/>ଟ = ta, ତ = ta (ଭିନ୍ନ ଉଚ୍ଚାରଣ)।"]
-A --> D2["ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ 🔤"]
-D2 --> E2["ଦୁଇଟି ଅକ୍ଷର ମିଶିଲେ ଶବ୍ଦ ହୁଏ।<br/>ଅଖ = a + kha = akha।<br/>ରଖ = ra + kha = rakha।<br/>ଚକ = cha + ka = chaka।<br/>ଜଳ = ja + la = jala।"]
-A --> D3["ତିନି ଅକ୍ଷର ଶବ୍ଦ ⭐"]
-D3 --> E3["ତିନୋଟି ଅକ୍ଷର ମିଶିଲେ ବଡ଼ ଶବ୍ଦ ହୁଏ।<br/>ଅରଖ = a + ra + kha।<br/>ଶଗଡ = sha + ga + da।<br/>ସଡକ = sa + da + ka।<br/>ନଗର = na + ga + ra।"]
-A --> D4["ବ୍ୟଞ୍ଜନ ଉଚ୍ଚାରଣ ଭେଦ 🌍"]
-D4 --> E4["ଚ ଓ ଛ ଭିନ୍ନ। ଛ ରେ ଅଧିକ ଶ୍ୱାସ।<br/>ଟ ଓ ତ ଭିନ୍ନ। ଟ ଜୋରରେ।<br/>ଡ ଓ ଦ ଭିନ୍ନ। ଡ ଜୋରରେ।<br/>ଣ ଓ ନ ଭିନ୍ନ। ଉଚ୍ଚାରଣ ଠାଇ ଭିନ୍ନ।"]
-A --> F["ଅକ୍ଷର ଭାଙ୍ଗିବା ନିୟମ 🔄"]
-F --> G["ପ୍ରତ୍ୟେକ ଅକ୍ଷରକୁ ଭାଙ୍ଗି ଲେଖ।<br/>ଯୋଗ କଲେ ଶବ୍ଦ ହୁଏ।<br/>ଭାଙ୍ଗ — ଯୋଡ଼ — ପଢ଼।"]
-A --> H["ବ୍ୟଞ୍ଜନ ଓ ସ୍ୱର ସଂଯୋଗ 🌱"]
-H --> I["ଅ ସ୍ୱର ପ୍ରତ୍ୟେକ ବ୍ୟଞ୍ଜନ ସଙ୍ଗରେ ଅଛି।<br/>ତେଣୁ ka, kha, ga, gha।<br/>ସ୍ୱର ବଦଳିଲେ ଉଚ୍ଚାରଣ ବଦଳେ।"]
-A --> J["ଶବ୍ଦ ଗଠନ ମହତ୍ୱ 💡"]
-J --> K["ଅକ୍ଷର ଜାଣିଲେ ଶବ୍ଦ ପଢ଼ି ହୁଏ।<br/>ଶବ୍ଦ ଜାଣିଲେ ବାକ୍ୟ ଲେଖି ହୁଏ।<br/>ଏହା ଓଡ଼ିଆ ଶିକ୍ଷାର ଆଧାର।"]
-A --> L["ଉଦାହରଣ ଶବ୍ଦ 📖"]
-L --> M["ନଳ = na + la (ଦୁଇ ଅକ୍ଷର)।<br/>ମନ = ma + na (ଦୁଇ ଅକ୍ଷର)।<br/>ବହନ = ba + ha + na (ତିନି ଅକ୍ଷର)।<br/>ନଗର = na + ga + ra (ତିନି ଅକ୍ଷର)।"]
+B --> C["ଆମେ ଇଂରାଜୀ ବ୍ୟାକରଣର<br/>ମୂଳ ବିଷୟ ଗୁଡ଼ିକ<br/>ଶିଖିବା"]
+
+A --> D["ନାମ ଶବ୍ଦ 🏷️"]
+D --> E["ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର<br/>ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ।<br/>ରାମ, ବିଦ୍ୟାଳୟ, ବହି —<br/>ଏଗୁଡ଼ିକ ନାମ ଶବ୍ଦ।"]
+
+A --> D2["ଏକବଚନ ଓ ବହୁବଚନ 🔢"]
+D2 --> E2["ଗୋଟିଏ ବସ୍ତୁ ବୁଝାଇଲେ<br/>ଏକବଚନ ହୁଏ।<br/>ଏକରୁ ଅଧିକ ବୁଝାଇଲେ<br/>ବହୁବଚନ ହୁଏ।<br/>ଶେଷରେ S ଯୋଡ଼ିଲେ<br/>ବହୁବଚନ ହୁଏ।"]
+
+A --> D3["ସର୍ବନାମ 👥"]
+D3 --> E3["ନାମ ଶବ୍ଦ ବଦଳରେ<br/>ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ<br/>ସର୍ବନାମ କୁହାଯାଏ।<br/>ପୁଅ ପାଇଁ He।<br/>ଝିଅ ପାଇଁ She।<br/>ବସ୍ତୁ ପାଇଁ It।<br/>ଅଧିକ ପାଇଁ They।"]
+
+A --> D4["କ୍ରିୟା ଶବ୍ଦ 🏃"]
+D4 --> E4["କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ<br/>କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ।<br/>ଦୌଡ଼, ଖା, ଶୁଅ —<br/>ଏଗୁଡ଼ିକ କ୍ରିୟା ଶବ୍ଦ।"]
+
+A --> D5["ବର୍ଣ୍ଣନା ଶବ୍ଦ 🌈"]
+D5 --> E5["ନାମ ଶବ୍ଦର ଗୁଣ<br/>ବୁଝାଉଥିବା ଶବ୍ଦକୁ<br/>ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ।<br/>ବଡ଼, ଛୋଟ, ଲାଲ —<br/>ଏଗୁଡ଼ିକ ବର୍ଣ୍ଣନା ଶବ୍ଦ।"]
+
+A --> F["ନାମ ଶବ୍ଦର ପ୍ରକାର 🔄"]
+F --> G["ବ୍ୟକ୍ତି ନାମ ଶବ୍ଦ —<br/>ମଣିଷର ନାମ।<br/>ସ୍ଥାନ ନାମ ଶବ୍ଦ —<br/>ସ୍ଥାନର ନାମ।<br/>ବସ୍ତୁ ନାମ ଶବ୍ଦ —<br/>ବସ୍ତୁର ନାମ।"]
+
+A --> H["ଏକବଚନ ଓ ବହୁବଚନ ଉଦାହରଣ 📖"]
+H --> I["ବିଲେଇ — ବିଲେଇ ମାନେ।<br/>ବହି — ବହି ଗୁଡ଼ିକ।<br/>କଲମ — କଲମ ଗୁଡ଼ିକ।<br/>ଶେଷରେ S ଯୋଡ଼ିଲେ<br/>ବହୁବଚନ ହୁଏ।"]
+
+A --> J["ବ୍ୟାକରଣର ମହତ୍ୱ 💡"]
+J --> K["ଇଂରାଜୀ ଭଲ ଲେଖିବା ପାଇଁ<br/>ବ୍ୟାକରଣ ଦରକାର।<br/>ସଠିକ ବାକ୍ୟ ଗଢ଼ିବା ପାଇଁ<br/>ବ୍ୟାକରଣ ଆବଶ୍ୟକ।"]
+
+A --> L["ବାକ୍ୟ ଉଦାହରଣ 📝"]
+L --> M["ରାମ ଦୌଡ଼ୁଛି —<br/>ରାମ ନାମ ଶବ୍ଦ,<br/>ଦୌଡ଼ ହେଉଛି କ୍ରିୟା ଶବ୍ଦ।<br/>ବଡ଼ ବିଲେଇ —<br/>ବଡ଼ ହେଉଛି ବର୍ଣ୍ଣନା ଶବ୍ଦ।"]
+
 style A fill:#0369a1,stroke:#0c4a6e,color:#fff
 style B fill:#e0f2fe,stroke:#0369a1
 style D fill:#7c3aed,stroke:#4c1d95,color:#fff
 style D2 fill:#b45309,stroke:#78350f,color:#fff
 style D3 fill:#059669,stroke:#064e3b,color:#fff
 style D4 fill:#dc2626,stroke:#7f1d1d,color:#fff
-style F fill:#0891b2,stroke:#164e63,color:#fff
-style H fill:#16a34a,stroke:#14532d,color:#fff
-style J fill:#d97706,stroke:#92400e,color:#fff
-style L fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D5 fill:#0891b2,stroke:#164e63,color:#fff
+style F fill:#16a34a,stroke:#14532d,color:#fff
+style H fill:#d97706,stroke:#92400e,color:#fff
+style J fill:#7c3aed,stroke:#4c1d95,color:#fff
+style L fill:#059669,stroke:#064e3b,color:#fff
 style C fill:#e0f2fe,stroke:#0369a1
 style E fill:#ede9fe,stroke:#7c3aed
 style E2 fill:#fef3c7,stroke:#b45309
 style E3 fill:#d1fae5,stroke:#059669
 style E4 fill:#fee2e2,stroke:#dc2626
-style G fill:#cffafe,stroke:#0891b2
-style I fill:#dcfce7,stroke:#16a34a
-style K fill:#fef9c3,stroke:#d97706
-style M fill:#ede9fe,stroke:#7c3aed`,
-mcq: {
-    questions: [
-        {
-            question: "ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣରେ କେଉଁ ସ୍ୱର ଲୁଚି ରହିଛି?",
-            options: [
-                "ଇ (i)",
-                "ଉ (u)",
-                "ଅ (a)",
-                "ଆ (aa)"
-            ],
-            correct: 2
-        },
-        {
-            question: "ଚକ ଶବ୍ଦଟି ଇଂରାଜୀରେ କିପରି ଲେଖାଯାଏ?",
-            options: [
-                "chhaka",
-                "chaka",
-                "chka",
-                "chaa-ka"
-            ],
-            correct: 1
-        },
-        {
-            question: "ଜଳ ଶବ୍ଦ ଭାଙ୍ଗିଲେ କ'ଣ ହୁଏ?",
-            options: [
-                "ja + la = jala",
-                "ja + ra = jara",
-                "jha + la = jhala",
-                "ja + la + a = jalaa"
-            ],
-            correct: 0
-        },
-        {
-            question: "ନଗର ଶବ୍ଦରେ କେତୋଟି ଅକ୍ଷର ଅଛି?",
-            options: [
-                "ଦୁଇଟି",
-                "ଚାରୋଟି",
-                "ତିନୋଟି",
-                "ପାଞ୍ଚଟି"
-            ],
-            correct: 2
-        },
-        {
-            question: "ଛ ଓ ଚ ମଧ୍ୟରେ ପ୍ରଧାନ ଫରକ କ'ଣ?",
-            options: [
-                "ଛ ରେ ଅଧିକ ଶ୍ୱାସ ଛାଡ଼ି ଉଚ୍ଚାରଣ ହୁଏ",
-                "ଛ ଓ ଚ ସମାନ",
-                "ଚ ରେ h ଅଧିକ ଅଛି",
-                "ଛ ର ଉଚ୍ଚାରଣ ନରମ"
-            ],
-            correct: 0
-        }
-    ]
-},
+style E5 fill:#cffafe,stroke:#0891b2
+style G fill:#dcfce7,stroke:#16a34a
+style I fill:#fef9c3,stroke:#d97706
+style K fill:#ede9fe,stroke:#7c3aed
+style M fill:#d1fae5,stroke:#059669`,
 
-trueFalse: {
-    questions: [
-        {
-            question: "ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି।",
-            correct: true
-        },
-        {
-            question: "ଟ ଓ ତ ର ଉଚ୍ଚାରଣ ସମାନ।",
-            correct: false
-        },
-        {
-            question: "ଅଖ ଶବ୍ଦ ଦୁଇ ଅକ୍ଷରରେ ତିଆରି।",
-            correct: true
-        },
-        {
-            question: "ନଗର ଶବ୍ଦ ଦୁଇ ଅକ୍ଷରରେ ତିଆରି।",
-            correct: false
-        },
-        {
-            question: "ଶଗଡ = sha + ga + da = shagada।",
-            correct: true
-        }
-    ]
-},
+    mcq: {
+        questions: [
+            {
+                question: "ନାମ ଶବ୍ଦ କାହାକୁ କୁହାଯାଏ?",
+                options: [
+                    "କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ",
+                    "ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ",
+                    "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ",
+                    "ନାମ ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ"
+                ],
+                correct: 2
+            },
+            {
+                question: "Singular ଶବ୍ଦକୁ Plural କିପରି କରାଯାଏ?",
+                options: [
+                    "ଆଗରେ S ଯୋଡ଼ିଲେ",
+                    "ଶେଷରେ S ଯୋଡ଼ିଲେ",
+                    "ମଝିରେ S ଯୋଡ଼ିଲେ",
+                    "ଶବ୍ଦ ବଦଳାଇ ଦେଲେ"
+                ],
+                correct: 1
+            },
+            {
+                question: "ପୁଅ ପାଇଁ କେଉଁ ସର୍ବନାମ ବ୍ୟବହାର ହୁଏ?",
+                options: [
+                    "She",
+                    "It",
+                    "They",
+                    "He"
+                ],
+                correct: 3
+            },
+            {
+                question: "Run, Eat, Sleep — ଏଗୁଡ଼ିକ କ'ଣ?",
+                options: [
+                    "ନାମ ଶବ୍ଦ",
+                    "ବର୍ଣ୍ଣନା ଶବ୍ଦ",
+                    "କ୍ରିୟା ଶବ୍ଦ",
+                    "ସର୍ବନାମ"
+                ],
+                correct: 2
+            },
+            {
+                question: "Big, Small, Red — ଏଗୁଡ଼ିକ କ'ଣ?",
+                options: [
+                    "ନାମ ଶବ୍ଦ",
+                    "କ୍ରିୟା ଶବ୍ଦ",
+                    "ସର୍ବନାମ",
+                    "ବର୍ଣ୍ଣନା ଶବ୍ଦ"
+                ],
+                correct: 3
+            }
+        ]
+    },
 
-fillBlanks: {
-    questions: [
-        {
-            question: "କ = ___ + a = ka। (k / kh)",
-            answer: "k"
-        },
-        {
-            question: "ଛ = chh + a = ___। (chha / cha)",
-            answer: "chha"
-        },
-        {
-            question: "ଜଳ = ja + ___ = jala। (la / ra)",
-            answer: "la"
-        },
-        {
-            question: "ସଡକ = sa + da + ___ = sadaka। (ka / ga)",
-            answer: "ka"
-        },
-        {
-            question: "ବହନ = ba + ha + ___ = bahana। (na / ma)",
-            answer: "na"
-        }
-    ]
-},
+    trueFalse: {
+        questions: [
+            {
+                question: "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ।",
+                correct: true
+            },
+            {
+                question: "ଝିଅ ପାଇଁ He ବ୍ୟବହାର ହୁଏ।",
+                correct: false
+            },
+            {
+                question: "Singular ଶେଷରେ S ଯୋଡ଼ିଲେ Plural ହୁଏ।",
+                correct: true
+            },
+            {
+                question: "Run, Eat, Sleep ଏଗୁଡ଼ିକ ବର୍ଣ୍ଣନା ଶବ୍ଦ।",
+                correct: false
+            },
+            {
+                question: "ନାମ ଶବ୍ଦ ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ ସର୍ବନାମ କୁହାଯାଏ।",
+                correct: true
+            }
+        ]
+    },
 
-matching: {
-    pairs: [
-        { left: "କ", right: "🔤 k + a = ka" },
-        { left: "ଛ", right: "💨 chh + a = chha (ଅଧିକ ଶ୍ୱାସ ଛାଡ଼ି)" },
-        { left: "ଅଖ", right: "👁️ a + kha = akha (ଦୁଇ ଅକ୍ଷର)" },
-        { left: "ଜଳ", right: "💧 ja + la = jala (ଅର୍ଥ — water)" },
-        { left: "ନଗର", right: "🏙️ na + ga + ra = nagara (ତିନି ଅକ୍ଷର)" },
-        { left: "ଶଗଡ", right: "🛒 sha + ga + da = shagada" },
-        { left: "ଟ", right: "🔊 t + a = ta (ଜୋରରେ, ଜିଭ ଉପର ତାଲୁ ଛୁଏ)" },
-        { left: "ତ", right: "🔉 t + a = ta (ନରମ, ଜିଭ ଦାନ୍ତ ପଛ ଛୁଏ)" },
-        { left: "ବହନ", right: "🚚 ba + ha + na = bahana (ତିନି ଅକ୍ଷର)" }
-    ]
-},
+    fillBlanks: {
+        questions: [
+            {
+                question: "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ___ କୁହାଯାଏ। (ନାମ ଶବ୍ଦ / କ୍ରିୟା ଶବ୍ଦ)",
+                answer: "ନାମ ଶବ୍ଦ"
+            },
+            {
+                question: "ଗୋଟିଏ ବସ୍ତୁ ବୁଝାଇଲେ ___ ହୁଏ। (ଏକବଚନ / ବହୁବଚନ)",
+                answer: "ଏକବଚନ"
+            },
+            {
+                question: "ପୁଅ ପାଇଁ ___ ସର୍ବନାମ ବ୍ୟବହାର ହୁଏ। (He / She)",
+                answer: "He"
+            },
+            {
+                question: "କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ ___ କୁହାଯାଏ। (କ୍ରିୟା ଶବ୍ଦ / ବର୍ଣ୍ଣନା ଶବ୍ଦ)",
+                answer: "କ୍ରିୟା ଶବ୍ଦ"
+            },
+            {
+                question: "ନାମ ଶବ୍ଦର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ ___ କୁହାଯାଏ। (ବର୍ଣ୍ଣନା ଶବ୍ଦ / ସର୍ବନାମ)",
+                answer: "ବର୍ଣ୍ଣନା ଶବ୍ଦ"
+            }
+        ]
+    },
 
-arrange: {
-    questions: [
-        {
-            words: ["ଅ", "ସ୍ୱର", "ବ୍ୟଞ୍ଜନ", "ରେ", "ଲୁଚି", "ରହିଛି"],
-            correct: "ବ୍ୟଞ୍ଜନ ରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି।"
-        },
-        {
-            words: ["ଚକ", "cha", "+", "ka", "=", "chaka"],
-            correct: "ଚକ = cha + ka = chaka।"
-        },
-        {
-            words: ["ନଗର", "ତିନି", "ଅକ୍ଷରରେ", "ତିଆରି"],
-            correct: "ନଗର ତିନି ଅକ୍ଷରରେ ତିଆରି।"
-        },
-        {
-            words: ["ଭାଙ୍ଗ", "ଯୋଡ଼", "ପଢ଼"],
-            correct: "ଭାଙ୍ଗ — ଯୋଡ଼ — ପଢ଼।"
-        },
-        {
-            words: ["ଜଳ", "ମାନେ", "water"],
-            correct: "ଜଳ ମାନେ water।"
-        }
-    ]
-},
+    matching: {
+        pairs: [
+            { left: "ନାମ ଶବ୍ଦ", right: "🏷️ ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମ। ରାମ, ବିଦ୍ୟାଳୟ, ବହି।" },
+            { left: "ଏକବଚନ", right: "1️⃣ ଗୋଟିଏ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଏ। One cat, One book।" },
+            { left: "ବହୁବଚନ", right: "2️⃣ ଏକରୁ ଅଧିକ ବୁଝାଏ। Cats, Books।" },
+            { left: "He", right: "👦 ପୁଅ ପାଇଁ ବ୍ୟବହାର ହେଉଥିବା ସର୍ବନାମ।" },
+            { left: "She", right: "👧 ଝିଅ ପାଇଁ ବ୍ୟବହାର ହେଉଥିବା ସର୍ବନାମ।" },
+            { left: "It", right: "📦 ବସ୍ତୁ ବା ପ୍ରାଣୀ ପାଇଁ ବ୍ୟବହାର ହେଉଥିବା ସର୍ବନାମ।" },
+            { left: "They", right: "👥 ଏକରୁ ଅଧିକ ପାଇଁ ବ୍ୟବହାର ହେଉଥିବା ସର୍ବନାମ।" },
+            { left: "କ୍ରିୟା ଶବ୍ଦ", right: "🏃 କାମ ବୁଝାଉଥିବା ଶବ୍ଦ। Run, Eat, Sleep।" },
+            { left: "ବର୍ଣ୍ଣନା ଶବ୍ଦ", right: "🌈 ନାମ ଶବ୍ଦର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦ। Big, Small, Red।" }
+        ]
+    },
 
-stq: {
-    questions: [
-        {
-            question: "ଚ ଓ ଛ ର ଫରକ ଉଦାହରଣ ସହ ଲେଖ।",
-            answer: "ଚ = cha। ଛ = chha। ଛ ରେ ଅଧିକ h ଅଛି ଓ ଅଧିକ ଶ୍ୱାସ ଛାଡ଼ି ଉଚ୍ଚାରଣ ହୁଏ। ଉଦାହରଣ — ଚକ = chaka, ଛକ = chhaka।"
-        },
-        {
-            question: "ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ ଭାଙ୍ଗି ଲେଖ। ଯେ କୌଣସି ତିନୋଟି ଶବ୍ଦ।",
-            answer: "ଅଖ = a + kha = akha। ରଖ = ra + kha = rakha। ମନ = ma + na = mana। ପ୍ରତ୍ୟେକ ଅକ୍ଷର ଭାଙ୍ଗି ଯୋଡ଼ିଲେ ଶବ୍ଦ ହୁଏ।"
-        },
-        {
-            question: "ଟ ଓ ତ ର ଉଚ୍ଚାରଣ ଫରକ ବୁଝାଅ।",
-            answer: "ଟ ଜୋରରେ ଉଚ୍ଚାରଣ ହୁଏ। ଜିଭ ଉପର ତାଲୁ ଛୁଏ। ତ ନରମ ଉଚ୍ଚାରଣ। ଜିଭ ଦାନ୍ତ ପଛ ଛୁଏ। ଦୁଇଟି ଭିନ୍ନ ବ୍ୟଞ୍ଜନ।"
-        },
-        {
-            question: "ତିନି ଅକ୍ଷର ଶବ୍ଦ ବ୍ୟବହାର କରି ପାଞ୍ଚଟି ବାକ୍ୟ ଲେଖ।",
-            answer: "ନଗର ବଡ଼। ସଡକ ଲମ୍ବା। ବହନ ଭାରୀ। ଶଗଡ ଯାଏ। ଅରଖ ଭଲ।"
-        }
-    ]
-}
+    arrange: {
+        questions: [
+            {
+                words: ["ମଣିଷ", "ସ୍ଥାନ", "ଓ", "ବସ୍ତୁର", "ନାମକୁ", "ନାମ", "ଶବ୍ଦ", "କୁହାଯାଏ"],
+                correct: "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ।"
+            },
+            {
+                words: ["ଶେଷରେ", "S", "ଯୋଡ଼ିଲେ", "ବହୁବଚନ", "ହୁଏ"],
+                correct: "ଶେଷରେ S ଯୋଡ଼ିଲେ ବହୁବଚନ ହୁଏ।"
+            },
+            {
+                words: ["ପୁଅ", "ପାଇଁ", "He", "ବ୍ୟବହାର", "ହୁଏ"],
+                correct: "ପୁଅ ପାଇଁ He ବ୍ୟବହାର ହୁଏ।"
+            },
+            {
+                words: ["କାମ", "ବୁଝାଉଥିବା", "ଶବ୍ଦକୁ", "କ୍ରିୟା", "ଶବ୍ଦ", "କୁହାଯାଏ"],
+                correct: "କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ।"
+            },
+            {
+                words: ["ନାମ", "ଶବ୍ଦର", "ଗୁଣ", "ବୁଝାଉଥିବା", "ଶବ୍ଦକୁ", "ବର୍ଣ୍ଣନା", "ଶବ୍ଦ", "କୁହାଯାଏ"],
+                correct: "ନାମ ଶବ୍ଦର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ।"
+            }
+        ]
+    },
 
+    stq: {
+        questions: [
+            {
+                question: "ନାମ ଶବ୍ଦ କ'ଣ? ଉଦାହରଣ ଦିଅ।",
+                answer: "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ। ନାମ ଶବ୍ଦ ତିନି ପ୍ରକାର — ବ୍ୟକ୍ତି, ସ୍ଥାନ ଓ ବସ୍ତୁ। ରାମ, ବିଦ୍ୟାଳୟ, ବହି — ଏଗୁଡ଼ିକ ନାମ ଶବ୍ଦ।"
+            },
+            {
+                question: "ଏକବଚନ ଓ ବହୁବଚନ ମଧ୍ୟରେ ପାର୍ଥକ୍ୟ କ'ଣ?",
+                answer: "ଗୋଟିଏ ବସ୍ତୁ ବା ବ୍ୟକ୍ତି ବୁଝାଇଲେ ଏକବଚନ ହୁଏ। ଏକରୁ ଅଧିକ ବୁଝାଇଲେ ବହୁବଚନ ହୁଏ। ଶେଷରେ S ଯୋଡ଼ିଲେ ଏକବଚନ ବହୁବଚନ ହୁଏ।"
+            },
+            {
+                question: "He, She, It ଓ They କେତେବେଳେ ବ୍ୟବହାର ହୁଏ?",
+                answer: "ପୁଅ ପାଇଁ He ବ୍ୟବହାର ହୁଏ। ଝିଅ ପାଇଁ She ବ୍ୟବହାର ହୁଏ। ବସ୍ତୁ ବା ପ୍ରାଣୀ ପାଇଁ It ବ୍ୟବହାର ହୁଏ। ଏକରୁ ଅଧିକ ପାଇଁ They ବ୍ୟବହାର ହୁଏ।"
+            },
+            {
+                question: "କ୍ରିୟା ଶବ୍ଦ ଓ ବର୍ଣ୍ଣନା ଶବ୍ଦ ବ୍ୟବହାର କରି ଦୁଇଟି ବାକ୍ୟ ଲେଖ।",
+                answer: "The big dog runs fast — ବଡ଼ କୁକୁର ଦ୍ରୁତ ଦୌଡ଼ୁଛି। The small cat eats fish — ଛୋଟ ବିଲେଇ ମାଛ ଖାଉଛି। ଏଠାରେ Big ଓ Small ବର୍ଣ୍ଣନା ଶବ୍ଦ। Runs ଓ Eats କ୍ରିୟା ଶବ୍ଦ।"
+            }
+        ]
+    }
 },
 ],
-    
-summary: {
-audio: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ ଓ ଶବ୍ଦ ଗଠନ ବିଷୟରେ ସାରାଂଶ ଲେଖ।",
-content: {
-    introduction: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ଓ ଶବ୍ଦ ଗଠନ ଶିଖିବା ଭାଷା ଜ୍ଞାନ ପାଇଁ ଖୁବ ଜରୁରୀ। ଆସନ୍ତୁ ଏହି ତିନୋଟି ବିଷୟ ବ୍ୟାପାରରେ ଜାଣିବା।",
-    sentences: [
-        {
-            heading: "ଅ ବର୍ଗ ବ୍ୟଞ୍ଜନ",
-            text: "ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି। ତେଣୁ କ = ka, ଖ = kha, ଗ = ga। ଏହି ଅ ବର୍ଗ ଶିଖିଲେ ପ୍ରତ୍ୟେକ ଅକ୍ଷର ଉଚ୍ଚାରଣ ଜଣାଯିବ।"
-        },
-        {
-            heading: "ଉଚ୍ଚାରଣ ଭେଦ",
-            text: "ଚ ଓ ଛ ଉଚ୍ଚାରଣ ଭିନ୍ନ। ଛ ରେ ଅଧିକ ଶ୍ୱାସ ଛାଡ଼ି ଉଚ୍ଚାରଣ ହୁଏ। ଟ ଓ ତ ଭିନ୍ନ — ଟ ଜୋରରେ, ତ ନରମ। ଏହି ଭେଦ ମନେ ରଖ।"
-        },
-        {
-            heading: "ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ",
-            text: "ଦୁଇଟି ଅକ୍ଷର ଏକ ସଙ୍ଗରେ ମିଶିଲେ ଶବ୍ଦ ତିଆରି ହୁଏ। ଅଖ = a + kha = akha। ରଖ = ra + kha = rakha। ଚକ = cha + ka = chaka। ଜଳ = ja + la = jala।"
-        },
-        {
-            heading: "ତିନି ଅକ୍ଷର ଶବ୍ଦ",
-            text: "ତିନୋଟି ଅକ୍ଷର ଏକ ସଙ୍ଗରେ ମିଶିଲେ ବଡ଼ ଶବ୍ଦ ତିଆରି ହୁଏ। ଅରଖ = a + ra + kha = arakha। ନଗର = na + ga + ra = nagara। ସଡକ = sa + da + ka = sadaka।"
-        },
-        {
-            heading: "ଅକ୍ଷର ଭାଙ୍ଗିବା ନିୟମ",
-            text: "ଯେ କୌଣସି ଶବ୍ଦ ପ୍ରଥମେ ଭାଙ୍ଗ। ତାପରେ ଇଂରାଜୀରେ ଲେଖ। ଶେଷରେ ଯୋଡ଼। ଭାଙ୍ଗ — ଯୋଡ଼ — ପଢ଼ ଏହି ତିନୋଟି ପଦକ୍ଷେପ।"
-        },
-        {
-            heading: "ଶବ୍ଦ ଗଠନ ମହତ୍ୱ",
-            text: "ଅକ୍ଷର ଜାଣିଲେ ଶବ୍ଦ ପଢ଼ି ହୁଏ। ଶବ୍ଦ ଜାଣିଲେ ବାକ୍ୟ ଲେଖି ହୁଏ। ଏହା ଓଡ଼ିଆ ଭାଷା ଶିକ୍ଷାର ଆଧାର।"
-        },
-        {
-            heading: "ଉଦାହରଣ ଶବ୍ଦ",
-            text: "ମନ = ma + na (ଅର୍ଥ — mind)। ଜଳ = ja + la (ଅର୍ଥ — water)। ବହନ = ba + ha + na (ଅର୍ଥ — carry)। ନଗର = na + ga + ra (ଅର୍ଥ — city)।"
-        }
-    ],
-    conclusion: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ ଓ ଶବ୍ଦ ଗଠନ ଜ୍ଞାନ ପ୍ରତ୍ୟେକ ଛାତ୍ରଙ୍କ ପାଇଁ ଜରୁରୀ। ଅ ବର୍ଗ, ଦୁଇ ଅକ୍ଷର ଶବ୍ଦ ଓ ତିନି ଅକ୍ଷର ଶବ୍ଦ — ଏହି ତିନୋଟି ଭଲ ଭାବେ ଶିଖ। ଭାଙ୍ଗ, ଯୋଡ଼ ଓ ପଢ଼ — ଏହି ଅଭ୍ୟାସ ଜାରି ରଖ।"
-},
 
-question: {
-    audio: "",
-    question: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣ ଓ ଶବ୍ଦ ଗଠନ ବିଷୟରେ ବର୍ଣ୍ଣନା କର।",
-    introduction: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ଓ ଶବ୍ଦ ଗଠନ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟଗୁଡ଼ିକ ଦେଖ।",
-    points: [
-        "ପ୍ରତ୍ୟେକ ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ବର୍ଣ୍ଣରେ ଅ ସ୍ୱର ଲୁଚି ରହିଛି। ତେଣୁ କ = ka, ଖ = kha, ଗ = ga ଲେଖାଯାଏ।",
-        "ଚ ଓ ଛ ଭିନ୍ନ ଉଚ୍ଚାରଣ। ଟ ଓ ତ ଭିନ୍ନ ଉଚ୍ଚାରଣ। ଏହି ଭେଦ ଓଡ଼ିଆ ଭାଷାର ବିଶେଷତ୍ୱ।",
-        "ଦୁଇ ଅକ୍ଷର ମିଶିଲେ ଶବ୍ଦ ହୁଏ। ଯଥା — ଅଖ, ରଖ, ଚକ, ଜଳ, ମନ, ନଳ।",
-        "ତିନି ଅକ୍ଷର ମିଶିଲେ ବଡ଼ ଶବ୍ଦ ହୁଏ। ଯଥା — ଅରଖ, ଶଗଡ, ସଡକ, ନଗର, ବହନ।",
-        "ଭାଙ୍ଗ — ଯୋଡ଼ — ପଢ଼ ଏହି ତିନୋଟି ପଦକ୍ଷେପ ଅଭ୍ୟାସ କଲେ ଯେ କୌଣସି ଶବ୍ଦ ଲେଖି ହୁଏ।"
-    ],
-    conclusion: "ଓଡ଼ିଆ ବ୍ୟଞ୍ଜନ ଓ ଶବ୍ଦ ଗଠନ ଜ୍ଞାନ ଭାଷା ଦକ୍ଷତାର ଆଧାର। ଅ ବର୍ଗ ଶିଖିଲେ ସମସ୍ତ ଅକ୍ଷର ଉଚ୍ଚାରଣ ଜଣାଯିବ। ଦୁଇ ଓ ତିନି ଅକ୍ଷର ଶବ୍ଦ ଅଭ୍ୟାସ କଲେ ଓଡ଼ିଆ ଲେଖା ସହଜ ହୁଏ।"
-}
+summary: {
+    audio: "ଇଂରାଜୀ ବ୍ୟାକରଣର ମୂଳ ବିଷୟ ଗୁଡ଼ିକ ଆଲୋଚନା କର।",
+
+    content: {
+        introduction: "ଇଂରାଜୀ ବ୍ୟାକରଣ ଆମ ଜୀବନ ପାଇଁ ଖୁବ ଆବଶ୍ୟକ। ଇଂରାଜୀ ଭଲ ଲେଖିବା ଓ ବୋଲିବା ପାଇଁ ବ୍ୟାକରଣ ଜାଣିବା ଦରକାର।",
+        sentences: [
+            {
+                heading: "ନାମ ଶବ୍ଦ",
+                text: "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ। ନାମ ଶବ୍ଦ ତିନି ପ୍ରକାର। ରାମ, ବିଦ୍ୟାଳୟ, ବହି — ଏଗୁଡ଼ିକ ନାମ ଶବ୍ଦ।"
+            },
+            {
+                heading: "ଏକବଚନ ଓ ବହୁବଚନ",
+                text: "ଗୋଟିଏ ବସ୍ତୁ ବୁଝାଇଲେ ଏକବଚନ ହୁଏ। ଏକରୁ ଅଧିକ ବୁଝାଇଲେ ବହୁବଚନ ହୁଏ। ଶେଷରେ S ଯୋଡ଼ିଲେ ଏକବଚନ ବହୁବଚନ ହୁଏ।"
+            },
+            {
+                heading: "ସର୍ବନାମ",
+                text: "ନାମ ଶବ୍ଦ ବଦଳରେ ବ୍ୟବହାର ହେଉଥିବା ଶବ୍ଦକୁ ସର୍ବନାମ କୁହାଯାଏ। ପୁଅ ପାଇଁ He। ଝିଅ ପାଇଁ She। ବସ୍ତୁ ପାଇଁ It। ଅଧିକ ପାଇଁ They।"
+            },
+            {
+                heading: "କ୍ରିୟା ଶବ୍ଦ",
+                text: "କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ। Run, Eat, Sleep — ଏଗୁଡ଼ିକ କ୍ରିୟା ଶବ୍ଦ। ପ୍ରତ୍ୟେକ ବାକ୍ୟରେ ଗୋଟିଏ କ୍ରିୟା ଶବ୍ଦ ଥାଏ।"
+            },
+            {
+                heading: "ବର୍ଣ୍ଣନା ଶବ୍ଦ",
+                text: "ନାମ ଶବ୍ଦର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ। Big, Small, Red — ଏଗୁଡ଼ିକ ବର୍ଣ୍ଣନା ଶବ୍ଦ। ବର୍ଣ୍ଣନା ଶବ୍ଦ ନାମ ଶବ୍ଦ ଆଗରେ ବସେ।"
+            },
+            {
+                heading: "ବ୍ୟାକରଣର ମହତ୍ୱ",
+                text: "ଇଂରାଜୀ ଭଲ ଲେଖିବା ପାଇଁ ବ୍ୟାକରଣ ଦରକାର। ସଠିକ ବାକ୍ୟ ଗଢ଼ିବା ପାଇଁ ବ୍ୟାକରଣ ଆବଶ୍ୟକ। ବ୍ୟାକରଣ ଜ୍ଞାନ ଇଂରାଜୀ ଶିଖିବାରେ ସାହାଯ୍ୟ କରେ।"
+            },
+            {
+                heading: "ବାକ୍ୟ ଉଦାହରଣ",
+                text: "The big dog runs — ଏଠାରେ Dog ନାମ ଶବ୍ଦ, Big ବର୍ଣ୍ଣନା ଶବ୍ଦ, Runs କ୍ରିୟା ଶବ୍ଦ। He is a boy — ଏଠାରେ He ସର୍ବନାମ। ଏଗୁଡ଼ିକ ସରଳ ବ୍ୟାକରଣ ଉଦାହରଣ।"
+            }
+        ],
+        conclusion: "ଇଂରାଜୀ ବ୍ୟାକରଣର ମୂଳ ବିଷୟ ଗୁଡ଼ିକ ଜାଣିବା ଖୁବ ଜରୁରି। ନାମ ଶବ୍ଦ, ସର୍ବନାମ, କ୍ରିୟା ଶବ୍ଦ ଓ ବର୍ଣ୍ଣନା ଶବ୍ଦ — ଏଗୁଡ଼ିକ ହେଉଛି ଇଂରାଜୀ ବ୍ୟାକରଣର ଆଧାର। ଏଗୁଡ଼ିକ ଭଲ ଭାବେ ଶିଖିଲେ ଇଂରାଜୀ ବାକ୍ୟ ସହଜରେ ଲେଖି ହେବ।"
+    },
+
+    question: {
+        audio: "",
+        question: "ଇଂରାଜୀ ବ୍ୟାକରଣର ମୂଳ ବିଷୟ ଗୁଡ଼ିକ ବର୍ଣ୍ଣନା କର।",
+        introduction: "ଇଂରାଜୀ ବ୍ୟାକରଣ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟଗୁଡ଼ିକ ଦେଖ।",
+        points: [
+            "ମଣିଷ, ସ୍ଥାନ ଓ ବସ୍ତୁର ନାମକୁ ନାମ ଶବ୍ଦ କୁହାଯାଏ। ରାମ, ବିଦ୍ୟାଳୟ, ବହି — ଏଗୁଡ଼ିକ ନାମ ଶବ୍ଦ।",
+            "ଗୋଟିଏ ବସ୍ତୁ ବୁଝାଇଲେ ଏକବଚନ। ଅଧିକ ବୁଝାଇଲେ ବହୁବଚନ। ଶେଷରେ S ଯୋଡ଼ିଲେ ବହୁବଚନ ହୁଏ।",
+            "ନାମ ଶବ୍ଦ ବଦଳରେ ସର୍ବନାମ ବ୍ୟବହାର ହୁଏ। ପୁଅ ପାଇଁ He, ଝିଅ ପାଇଁ She, ବସ୍ତୁ ପାଇଁ It, ଅଧିକ ପାଇଁ They।",
+            "କାମ ବୁଝାଉଥିବା ଶବ୍ଦକୁ କ୍ରିୟା ଶବ୍ଦ କୁହାଯାଏ। Run, Eat, Sleep — ଏଗୁଡ଼ିକ କ୍ରିୟା ଶବ୍ଦ।",
+            "ନାମ ଶବ୍ଦର ଗୁଣ ବୁଝାଉଥିବା ଶବ୍ଦକୁ ବର୍ଣ୍ଣନା ଶବ୍ଦ କୁହାଯାଏ। Big, Small, Red — ଏଗୁଡ଼ିକ ବର୍ଣ୍ଣନା ଶବ୍ଦ।"
+        ],
+        conclusion: "ଇଂରାଜୀ ବ୍ୟାକରଣର ମୂଳ ବିଷୟ ଗୁଡ଼ିକ ଜାଣିବା ପ୍ରତ୍ୟେକ ଛାତ୍ରଙ୍କ ପାଇଁ ଜରୁରି। ନାମ ଶବ୍ଦ, ସର୍ବନାମ, କ୍ରିୟା ଶବ୍ଦ ଓ ବର୍ଣ୍ଣନା ଶବ୍ଦ — ଏଗୁଡ଼ିକ ଭଲ ଭାବେ ଅଭ୍ୟାସ କଲେ ଇଂରାଜୀ ସହଜ ହୁଏ।"
+    }
 }
 };
     
@@ -4936,7 +4772,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ଦୁଇ ଅକ୍ଷର ଇଂରାଜୀ ଶବ୍ଦ AT, AN, IN, IS, IT, ON, OR, AS, UP, US ବିଷୟରେ ଆଲୋଚନା କର ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ପରିବାରର ସମସ୍ତଙ୍କ WAKING UP ବିଷୟରେ ଲେଖ ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -5971,7 +5807,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'SPECIAL TRAINING (ENGLISH SPELLING) CLASS-1',
+    className: 'SPECIAL TRAINING (ENGLISH GRAMMAR) CLASS-1',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
