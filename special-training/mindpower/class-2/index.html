@@ -832,10 +832,6 @@ body > div:first-child {
 }
 
 
-#writPracticeContainer .assistant-iframe-wrapper {
-    height: 700px; /* or 650px, 750px - whatever increase you want */
-}
-
 .answer-section {
     text-align: justify;
     display: inline-block;
@@ -2089,6 +2085,8 @@ body > div:first-child {
     font-weight: bold;
 }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <script>
     mermaid.initialize({ startOnLoad: false, theme: 'default' });
@@ -2097,28 +2095,52 @@ body > div:first-child {
 <body>
 <div style="background: #ff9800; padding: 8px; color: white; font-weight: bold; position: fixed; top: 0; left: 0; right: 0; z-index: 99999; overflow: hidden; margin: 0;">
     <marquee behavior="scroll" direction="left" style="margin: 0;">
-        © 2025 • This is the property of Odisha e-Guru,Mayurbhanj,Odisha • For Educational Use Only • Copying & Distribution Prohibited • All Rights Reserved
+        © 2026 • This is the property of E-Vidya Academy, Bhadrak, Odisha • For Educational Use Only • Copying & Distribution Prohibited • All Rights Reserved
     </marquee>
 </div>
  
 <div id="loginScreen" class="login-screen">
     <div class="login-container">
-        <h1 class="welcome-title" style="text-align: center;">ଓଡିଶା ଇ-ଗୁରୁ ଦ୍ଵାରା ପ୍ରସ୍ତୁତ</h1>
+      <h1 class="welcome-title" style="text-align: center; font-size: clamp(1.2rem, 4vw, 1.6rem);">
+    ଇ-ବିଦ୍ୟା ଏକାଡେମି ଦ୍ଵାରା ପ୍ରସ୍ତୁତ
+</h1>
        <p class="welcome-subtitle" style="text-align: center;"><b>🌹ଏହି ସ୍ଵତନ୍ତ୍ର ମଞ୍ଚରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ🌹</b></p>  
         
      <input type="tel" id="rollNumberInput" placeholder="ଦୟାକରି ଏଠାରେ ଆପଣଙ୍କ ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ..." class="login-input" inputmode="numeric" pattern="[0-9]*">
         
         <div class="consent-box">
             <input type="checkbox" id="consentCheck">
-            <label for="consentCheck">I agree to device tracking, usage monitoring, audio playback, internet access, data storage, and all <a href="https://sites.google.com/view/eguruodishastp/terms-and-conditions" target="_blank">terms & conditions</a> of Odisha e-Guru.</label>
+            <label for="consentCheck">I agree to device tracking, usage monitoring, audio playback, internet access, data storage, and all <a href="https://e-vidya-legal-policies.pages.dev/" target="_blank">terms & conditions</a> of E-Vidya Academy.</label>
         </div>
        <button id="loginBtn" class="login-btn">ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।</button>
         <div id="loginError" class="login-error"></div>
 
             <!-- Know Your Roll Number Button -->
-        <button onclick="window.open('https://llb-registration.pages.dev/stelm/', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
+        <button onclick="window.open('https://evidya-admin.pages.dev/special/', '_blank')" class="roll-number-btn" style="background-color: #FF6B6B; margin-top: 10px; padding: 12px; font-size: 14px; border: none; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: bold;">
             📋 ଆପଣଙ୍କ ରୋଲ୍ ନମ୍ବର ଜାଣିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । 
         </button>  
+
+        <div style="text-align: center; margin-top: 12px;">
+    <a href="https://evidya-admin.pages.dev/payment/" target="_blank" rel="noopener noreferrer"
+       style="
+           display: inline-block;
+           padding: 12px 28px;
+           background: linear-gradient(135deg, #c8962a, #e4b84a);
+           color: #0a1628;
+           font-family: 'Noto Sans Oriya', sans-serif;
+           font-size: clamp(0.8rem, 3.5vw, 1rem);
+           font-weight: 700;
+           text-decoration: none;
+           border-radius: 50px;
+           box-shadow: 0 6px 20px rgba(200,150,42,0.35);
+           transition: transform 0.2s, box-shadow 0.2s;
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 26px rgba(200,150,42,0.45)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(200,150,42,0.35)'"
+    >
+        🌹 ପେମେଣ୍ଟ କରିବା ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । →
+    </a>
+</div>
         
         <!-- Small Round Image Container -->
         <div class="image-container" style="
@@ -2132,7 +2154,7 @@ body > div:first-child {
                 border-radius: 50%;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             ">
-                <img src="https://github.com/eguruOdisha/BNSS/raw/main/bot%20image-1.gif" 
+                <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/bot%20image-2.gif" 
                      alt="AI Assistant" 
                      class="assistant-image"
                      style="
@@ -2153,6 +2175,29 @@ body > div:first-child {
                 📚 ଶିକ୍ଷାରେ ଡିଜିଟାଲ ଯୁଗର ଆରମ୍ଭ – ଆପଣଙ୍କ ସହିତ ।
             </p>
         </div>
+
+       <div style="text-align: center; margin-top: 12px;">
+    <a href="https://evidya-admin.pages.dev/contact/" target="_blank" rel="noopener noreferrer"
+       style="
+           display: inline-block;
+           padding: 12px 28px;
+           background: linear-gradient(135deg, #1e3a8a, #2563eb);
+           color: #ffffff;
+           font-family: 'Noto Sans Oriya', sans-serif;
+           font-size: clamp(0.8rem, 3.5vw, 1rem);
+           font-weight: 700;
+           text-decoration: none;
+           border-radius: 50px;
+           box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+           transition: transform 0.2s, box-shadow 0.2s;
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 26px rgba(37,99,235,0.55)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(37,99,235,0.35)'"
+    >
+        🌹 ଆମ୍ଭ ସହିତ ଯୋଗାଯୋଗ ପାଇଁ ଏଠାରେ କ୍ଲିକ୍ କରନ୍ତୁ । →
+    </a>
+</div>
+        
     </div>
 </div>
     <div class="container">
@@ -2194,14 +2239,13 @@ body > div:first-child {
         <button id="stqBtn" class="test-btn summary">ଅତି ସଂକ୍ଷିପ୍ତ ପ୍ରଶ୍ନୋତ୍ତର</button>
         <button id="summaryBtn" class="test-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
         <button id="questionBtn" class="test-btn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">ସଂକ୍ଷିପ୍ତ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ</button>
-        <button id="practiceBtn" class="test-btn" onclick="openWritPractice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">ଅଭ୍ଯାସ(Practical) ପରୀକ୍ଷା</button>
+      <button id="practiceBtn" class="test-btn" onclick="openCertificateFromExam()" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%);">🏆 ସାର୍ଟିଫିକେଟ୍</button>
         
     </div>
                              <div id="scoreDisplay" class="score-display" style="display: none;">
               ଆପଣଙ୍କ ସମୁଦାୟ ମାର୍କ୍: <span id="totalScore">0</span> / <span id="maxScore">0</span>
             </div>  
 </div>
-
 
 
 <!-- Word Learning Container -->
@@ -2212,17 +2256,22 @@ body > div:first-child {
         <button onclick="closeWordLearning()" style="position: fixed; top: 65px; right: 20px; background: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; z-index: 10001; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">✕</button>
         
       <!-- ===== WORD INFORMATION CARD ===== -->
-        <div id="wordInfoCard" style="background: white; border-radius: 20px; padding: 15px; margin-bottom: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); position: relative; z-index: 100;">
-            
-            <!-- Word Display -->
-            <h2 style="text-align: center; color: #667eea; font-size: 42px; margin: 8px 0; font-weight: bold; font-family: Arial Black, sans-serif;" id="wordDisplay">CAT</h2>
-            
-            <!-- EMOJI - Centered -->
-            <div style="text-align: center; margin: 15px 0;">
-                <div style="font-size: 100px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); width: 150px; height: 150px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); border: 3px solid #667eea;" id="wordEmojiContainer">
-                    🐱
-                </div>
+<div id="wordInfoCard" style="background: white; border-radius: 20px; padding: 15px; margin-bottom: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); position: relative; z-index: 100;">
+    
+    <!-- EMOJI (20%) + WORD (80%) - SIDE BY SIDE -->
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <!-- Emoji Container - 20% width, smaller size -->
+        <div style="flex: 0 0 20%; display: flex; justify-content: center;">
+            <div style="font-size: 40px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 12px rgba(0,0,0,0.25); border: 2px solid #667eea;" id="wordEmojiContainer">
+                🐱
             </div>
+        </div>
+        
+<!-- Word Display - 80% width -->
+<div style="flex: 1; min-width: 0;">
+    <h2 style="text-align: left; color: #e53935; font-size: clamp(16px, 4vw, 28px); margin: 0; font-weight: 1200; font-family: Arial Black, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2;" id="wordDisplay">CAT</h2>
+</div>
+        </div>
             
             <!-- Odia Meaning - Full Width -->
             <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 10px; border-radius: 10px; border-left: 4px solid #2196F3; margin-bottom: 10px;">
@@ -2230,7 +2279,7 @@ body > div:first-child {
                 <p id="wordOdia" style="margin: 5px 0 0 0; font-size: 18px; color: #000; font-weight: 600;">ବିଲେଇ</p>
             </div>
             
-           <!-- Odia Usage - Full Width -->
+            <!-- Odia Usage - Full Width -->
             <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 10px; border-radius: 10px; border-left: 4px solid #9c27b0; margin-bottom: 10px;">
                 <strong style="color: #6a1b9a; font-size: 13px;">ବ୍ୟବହାର:</strong>
                <p id="wordUse" 
@@ -2261,9 +2310,6 @@ body > div:first-child {
         
         <!-- ===== WRITING CANVAS ===== -->
         <div style="position: relative; margin-bottom: 20px;">
-            
-            <!-- Faded Guide Word (Background) -->
-            <div id="wordGuide" style="font-size: 100px; color: rgba(255,255,255,0.1); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: bold; pointer-events: none; font-family: Arial Black, sans-serif; z-index: 1;">CAT</div>
            
             <!-- Drawing Canvas -->
             <canvas id="wordCanvas" width="1200" height="500" style="border: 5px solid #8b4513; background: #1a2332; display: block; margin: 0 auto; width: 100%; max-height: 400px; touch-action: none; border-radius: 15px; position: relative; z-index: 10; box-shadow: 0 5px 20px rgba(0,0,0,0.4);"></canvas>
@@ -2284,73 +2330,118 @@ body > div:first-child {
         </div>
     </div>
 </div>
-           
-           
- <!-- Practice Container -->
-<div id="writPracticeContainer" class="assistant-container">
-    <div class="assistant-header">
-        <h3>ସମ୍ପୂର୍ଣ୍ଣ ଅଭ୍ୟାସ ପରୀକ୍ଷା</h3>
-        <button class="assistant-close-btn" onclick="closeWritPractice()">✕</button>
-    </div>
-    <div class="assistant-iframe-wrapper">
-        <div class="assistant-loading" id="writPracticeLoading">
-            <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଅଭ୍ଯାସ ପରୀକ୍ଷା ଲୋଡ୍ ହେଉଛି...</p>
-        </div>
-        <iframe 
-            id="writPracticeIframe"
-            src="" 
-            allow="clipboard-write"
-            style="display: none;">
-        </iframe>
-    </div>
-    <div class="assistant-info">
-        💡 ଏହା ଏକ ପ୍ରାକ୍ଟିକାଲ୍ ପରୀକ୍ଷା । ବିଷୟବସ୍ତୁ ସମ୍ବନ୍ଧୀୟ ବ୍ୟବହାରିକ ଜ୍ଞାନର ପରୀକ୍ଷା । 
-    </div>
-</div>               
-            <div id="testContainer"></div>
 
-     <div class="image-container" style="
-    margin-top: 0px;
-    text-align: center;
-">
-    <div style="
+
+ <div id="testContainer"></div>
+
+<div style="margin-top: 0px; padding: 0 12px; text-align: center;">
+
+    <!-- Media Placeholder - same size as logo -->
+    <div id="mediaPlaceholder" style="
         display: inline-block;
-        padding: 8px;
+        padding: 10px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         width: 320px;
+        position: relative;
+        overflow: hidden;
     ">
-        <img src="https://raw.githubusercontent.com/eguruOdisha/ASSETS/main/logo.jpg" 
-             alt="Odisha E-Guru Logo" 
-             class="assistant-image"
-             style="
-                display: block;
-                width: 100%;
-                height: 180px;
-                border-radius: 15px;
-                object-fit: contain;
-                background: white;
-                border: 3px solid white;
-                padding: 5px;
-             ">
-    </div>
-    <p class="info-text" style="
-        margin-top: 15px;
-        font-size: 14px;
-        color: #000000;
-        font-weight: bold;
-    ">
-    </p>
-</div>       
-              
+        <!-- DEFAULT: Logo Image -->
+        <div id="logoDisplay">
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="Logo" 
+                 style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    object-fit: contain;
+                    background: white;
+                    border: 3px solid white;
+                    padding: 5px;
+                 ">
+        </div>
 
-          <!-- Add this after the Mermaid button section -->
-<button id="certificateBtn" class="web-link-btn" style="background: linear-gradient(135deg, #0d5e3a 0%, #064d2f 100%); margin-bottom: 12px;">
-    🏆 ଏଠାରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିବା ...
-</button> 
-           
+    <!-- AUDIO PLAYER - Hidden by default -->
+<div id="audioDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎙️</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">ଆଲୋଚନା ଶୁଣନ୍ତୁ</p>
+    <audio id="audioPlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STMPC1A.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</div>
+        
+        <!-- VIDEO PLAYER - Hidden by default -->
+        <div id="videoDisplay" style="display: none;">
+            <iframe
+                id="videoIframe"
+                src=""
+                data-src="https://www.youtube.com/embed/_LIHmERcrKk?playsinline=1&rel=0&modestbranding=1&autoplay=1"
+                style="
+                    display: block;
+                    width: 100%;
+                    height: 180px;
+                    border-radius: 15px;
+                    border: 3px solid white;
+                "
+                allow="accelerometer; autoplay; clipboard-write; 
+                       encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- DEBATE PLAYER - Hidden by default -->
+<div id="debateDisplay" style="display: none; width: 100%; height: 180px; border-radius: 15px; border: 3px solid white; background: #1a1a2e; align-items: center; justify-content: center; flex-direction: column; padding: 15px; box-sizing: border-box;">
+    <div style="font-size: 40px; margin-bottom: 10px;">🎤</div>
+    <p style="color: white; font-size: 13px; font-weight: bold; margin-bottom: 12px; text-align: center;">DEBATE ଶୁଣନ୍ତୁ</p>
+    <audio id="debatePlayer" controls controlsList="nodownload" style="width: 100%; border-radius: 8px;">
+        <source src="https://audio.evidya.de/STMPC1D.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    </div>
+</div>
+
+
+    <!-- Three buttons side by side - NOW BELOW the placeholder -->
+ <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 16px;
+            width: 320px; gap: 4px; margin-left: auto; margin-right: auto;">
+        
+        <button id="audioToggleBtn" 
+            onclick="toggleMedia('audio')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଆଲୋଚନା
+        </button>
+
+        <button id="debateToggleBtn"
+            onclick="toggleMedia('debate')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ତର୍କ ବିତର୍କ
+        </button>
+
+        <button id="videoToggleBtn" 
+            onclick="toggleMedia('video')"
+            style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+                   color: white; border: none; border-radius: 8px;
+                   padding: 8px 0; font-size: 12px; font-weight: bold;
+                   cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+                   width: 100px; height: 36px; flex-shrink: 0;">
+            ଭିଡିଓ
+        </button>
+    </div>
+</div>
+
+
 <!-- Dropdown Menu -->
 <div class="assistant-dropdown-wrapper">
     <button id="assistantDropdownBtn" class="assistant-dropdown-btn">
@@ -2387,7 +2478,7 @@ body > div:first-child {
         <div class="dropdown-item" data-assistant="eGuruAssistant">
             <span class="item-icon">👨‍🏫</span>
             <div class="item-content">
-                <div class="item-title">ଇ-ଗୁରୁ ସହାୟକ</div>
+                <div class="item-title">ଇ-ବିଦ୍ୟା ସହାୟକ</div>
                 <div class="item-desc">କୌଣସି ପାଠ ବୁଝିପାରୁନଥିଲେ ଏଠାରେ ଶିକ୍ଷକଙ୍କ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ</div>
             </div>
         </div>
@@ -2450,16 +2541,15 @@ body > div:first-child {
     </div>
 </div>
  
-<!-- E-Guru Assistant Container -->
 <div id="eGuruContainer" class="assistant-container">
     <div class="assistant-header">
-        <h3>👨‍🏫 ଇ-ଗୁରୁ ସହାୟକ - Teacher Connect</h3>
+        <h3>👨‍🏫 ଇ-ବିଦ୍ୟା ସହାୟକ - Teacher Connect</h3>
         <button class="assistant-close-btn" onclick="closeAssistant('eGuruContainer')">✕</button>
     </div>
     <div class="assistant-iframe-wrapper">
         <div class="assistant-loading" id="eGuruLoading">
             <div class="assistant-loading-spinner"></div>
-            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଇ-ଗୁରୁ ସହାୟକ ଲୋଡ୍ ହେଉଛି...</p>
+            <p>ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଇ-ବିଦ୍ୟା ସହାୟକ ଲୋଡ୍ ହେଉଛି...</p>
         </div>
         <iframe id="eGuruIframe" allow="microphone; camera; clipboard-write"></iframe>
     </div>
@@ -2482,7 +2572,7 @@ body > div:first-child {
             <!-- Privacy Notice -->
             <div class="privacy-notice">
                 <strong>🔒 ଗୋପନୀୟତା ସୂଚନା (Privacy Notice):</strong><br>
-                ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ସୂଚନା କେବଳ ଆପଣଙ୍କ ବ୍ରାଉଜରରେ ସଂରକ୍ଷିତ ରହିବ ଏବଂ କେବଳ ସାର୍ଟିଫିକେଟ୍ ପ୍ରସ୍ତୁତି ପାଇଁ ବ୍ୟବହୃତ ହେବ । ଓଡିଶା ଇ-ଗୁରୁ ଏହି ତଥ୍ୟ ସଂଗ୍ରହ କରେ ନାହିଁ ଏବଂ ତଥ୍ୟ ସମ୍ବନ୍ଧୀୟ କୌଣସି ସମସ୍ୟା ପାଇଁ ଦାୟୀ ନୁହେଁ ।<br><br>
+                ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ସୂଚନା କେବଳ ଆପଣଙ୍କ ବ୍ରାଉଜରରେ ସଂରକ୍ଷିତ ରହିବ ଏବଂ କେବଳ ସାର୍ଟିଫିକେଟ୍ ପ୍ରସ୍ତୁତି ପାଇଁ ବ୍ୟବହୃତ ହେବ । ଇ-ବିଦ୍ୟା ଏକାଡେମି ଏହି ତଥ୍ୟ ସଂଗ୍ରହ କରେ ନାହିଁ ଏବଂ ତଥ୍ୟ ସମ୍ବନ୍ଧୀୟ କୌଣସି ସମସ୍ୟା ପାଇଁ ଦାୟୀ ନୁହେଁ ।<br><br>
                 <strong>Your personal information will be stored only in your browser's local storage and used solely for certificate generation. Odisha e-Guru does not collect this data and is not responsible for any data-related issues.</strong>
             </div>
             
@@ -2504,7 +2594,7 @@ body > div:first-child {
                 </div>
                 
                 <button class="generate-btn" onclick="generateCertificate()">
-                    🎓 ସାର୍ଟିଫିକେଟ୍ ତିଆରି କରନ୍ତୁ (Generate Certificate)
+                    ସାର୍ଟିଫିକେଟ୍ ତିଆରି କରନ୍ତୁ (Generate Certificate)
                 </button>
             </div>
             
@@ -2529,271 +2619,395 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-// Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_u6_uYODM3Oeq5-k6EoJH9C03RnFNdzg7NGTKs7IRBGVs4M-joLWpqRi5tTkz5NO_tw/exec';
-    // Fallback audio URL for when primary audio is not found
-const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/eguruOdisha/AUDIO-PSC-XII/main/New%20recording%208.amr";
-
-// CRITICAL: This must match CLASS_SHEET_NAME in your registration script
-const CLASS_NAME = "stelm";  
+function openCertificateFromExam() {
+    calculateCertificateScores();
+    loadStudentDetails();
+    document.getElementById('certificateModal').classList.add('active');
+}
 
 
-// Generate unique device ID based on browser fingerprint
+// =============================================
+// FIREBASE CONFIGURATION - e-Vidya Academy
+// =============================================
+const firebaseConfig = {
+    apiKey: "AIzaSyA3-rvQJ1g9K-1l8-_PXX8IffG8W4qU7AE",
+    authDomain: "evidya-academy.firebaseapp.com",
+    projectId: "evidya-academy",
+    storageBucket: "evidya-academy.firebasestorage.app",
+    messagingSenderId: "86172698431",
+    appId: "1:86172698431:web:eb3bd5b2887cda88eb358a"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const FALLBACK_AUDIO_URL = "https://raw.githubusercontent.com/happysangitanms/assets/main/fallback%20audio.m4a";
+const CLASS_NAME = "special";
+
 function getDeviceId() {
-    let deviceId = localStorage.getItem('deviceId');
+    let deviceId = localStorage.getItem('deviceId_evidya');
     if (!deviceId) {
-        const nav = navigator;
-        const screen = window.screen;
-        const fingerprint = [
-            nav.userAgent,
-            nav.language,
-            screen.colorDepth,
-            screen.width + 'x' + screen.height,
-            new Date().getTimezoneOffset(),
-            !!window.sessionStorage,
-            !!window.localStorage
-        ].join('|');
-        
-        let hash = 0;
-        for (let i = 0; i < fingerprint.length; i++) {
-            const char = fingerprint.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash;
-        }
-        
-        deviceId = 'DEV_' + Math.abs(hash).toString(36);
-        localStorage.setItem('deviceId', deviceId);
+        deviceId = 'DEV_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('deviceId_evidya', deviceId);
     }
     return deviceId;
 }
 
-// Session tracking
 let sessionData = {
     rollNumber: null,
     deviceId: getDeviceId(),
-    className: CLASS_NAME,  // ADD THIS
-    loginTime: null,
-    logoutTime: null,
-    lastActivity: null
+    className: CLASS_NAME,
+    loginTime: null
 };
 
-// Login handler
 document.getElementById('loginBtn').addEventListener('click', async function() {
     const rollNumber = document.getElementById('rollNumberInput').value.trim();
     const consent = document.getElementById('consentCheck').checked;
     const errorDiv = document.getElementById('loginError');
-    
     errorDiv.textContent = '';
-    
+
     if (!rollNumber) {
         errorDiv.textContent = 'ଦୟାକରି ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ ।';
         return;
     }
-    
     if (!consent) {
         errorDiv.textContent = 'ଦୟାକରି ସର୍ତ୍ତାବଳୀରେ ସହମତି ଜଣାଇବା ପାଇଁ ଛୋଟ ଚେକ୍-ବାକ୍ସ ରେ କ୍ଲିକ୍ କରନ୍ତୁ ।';
         return;
     }
-    
+
     this.disabled = true;
-    this.innerHTML = '⏳ ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ... ଆପଣଙ୍କର ପରିଚୟପତ୍ର ଯାଞ୍ଚ କରାଯାଉଛି । ଏଥିରେ କିଛି ସମୟ ଲାଗିପାରେ (ପ୍ରାୟ 10 ସେକେଣ୍ଡ)...';
-    
+    this.innerHTML = '⏳ ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ...';
+
     try {
-        // SINGLE optimized call
-        const result = await fetch(
-            `${GOOGLE_SCRIPT_URL}?action=verify&rollNumber=${rollNumber}&deviceId=${sessionData.deviceId}&className=${CLASS_NAME}`
-        ).then(r => r.json());
-        
-        if (result.success) {
-            // Show interface IMMEDIATELY
+        const docRef = db.collection('students').doc(rollNumber);
+        const doc = await docRef.get();
+
+        if (!doc.exists) {
+            errorDiv.textContent = 'ରୋଲ୍ ନମ୍ବର ମିଳିଲା ନାହିଁ । ଦୟାକରି ସଠିକ୍ ରୋଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        const data = doc.data();
+
+        if (data.className !== CLASS_NAME) {
+            errorDiv.textContent = 'ଏହି ରୋଲ୍ ନମ୍ବର ଏହି କ୍ଲାସ୍ ପାଇଁ ନୁହେଁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        if (data.status === 'BLOCKED') {
+            errorDiv.textContent = 'ଆପଣଙ୍କ ଆକ୍ସେସ୍ ବ୍ଲକ୍ ହୋଇଛି । ଶିକ୍ଷକଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        const currentDevice = sessionData.deviceId;
+        if (data.deviceId && data.deviceId !== '' && data.deviceId !== currentDevice) {
+            errorDiv.textContent = 'ଏହି ରୋଲ୍ ନମ୍ବର ଅନ୍ୟ ଡିଭାଇସ୍ ରେ ବ୍ୟବହୃତ ହୋଇଛି । ଆପଣ ଏହାକୁ ଏଠାରୁ ଖୋଲି ପାରିବେ ନାହିଁ ।';
+            this.disabled = false;
+            this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
+            return;
+        }
+
+        // SUCCESS - show welcome message
+        const studentName = data.name || rollNumber;
+        const welcomeOverlay = document.createElement('div');
+        welcomeOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;text-align:center;padding:20px;';
+        welcomeOverlay.innerHTML = '<div style="color:white;font-size:28px;margin-bottom:15px;">🌹</div>'
+            + '<div style="color:white;font-size:22px;font-weight:bold;">ଆପଣଙ୍କୁ ସ୍ୱାଗତ, ' + studentName + '!</div>'
+            + '<div style="color:rgba(255,255,255,0.85);font-size:16px;margin-top:12px;">ଆପଣ SPECIAL TRAINING କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରିଛନ୍ତି ।</div>'
+            + '<div style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px;">(ଏବେ ଆପଣଙ୍କ ପାଠ ସାମଗ୍ରୀ ଲୋଡ୍ ହେଉଛି)</div>';
+        document.body.appendChild(welcomeOverlay);
+
+        const updateData = {
+            lastActivity: new Date().toISOString(),
+            totalSessions: firebase.firestore.FieldValue.increment(1)
+        };
+        if (!data.deviceId || data.deviceId === '') {
+            updateData.deviceId = currentDevice;
+            updateData.firstLogin = new Date().toISOString();
+        }
+        docRef.update(updateData).catch(e => console.log('Update error:', e));
+
+        sessionData.rollNumber = rollNumber;
+        sessionData.loginTime = new Date();
+        docRef.update({ lastLogin: new Date().toISOString() }).catch(e => console.log(e));
+
+        setTimeout(() => {
+            welcomeOverlay.remove();
             document.getElementById('loginScreen').style.display = 'none';
             document.querySelector('.container').classList.add('authenticated');
-            
-            // Load content in background
-            setTimeout(() => {
-                sessionData.rollNumber = rollNumber;
-                sessionData.loginTime = new Date();
-                loadSentence(0);
-                startActivityTracking();
-            }, 100);
-            
-            // Send login tracking in background (non-blocking)
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'login',
-                    rollNumber,
-                    deviceId: sessionData.deviceId,
-                    className: CLASS_NAME,
-                    timestamp: new Date().toISOString()
-                })
-            });
-        } else {
-            errorDiv.textContent = result.message || 'Login failed';
-        }
+            loadSentence(0);
+            startActivityTracking();
+        }, 2400);
+
     } catch (error) {
-        errorDiv.textContent = 'Connection error. Please retry.';
+        errorDiv.textContent = 'ସଂଯୋଗ ସମସ୍ୟା । ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ ।';
         console.error('Login error:', error);
+        this.disabled = false;
+        this.innerHTML = 'ଉପରୋକ୍ତ ଛୋଟ ବାକ୍ସରେ କ୍ଲିକ୍ କରିସାରିବା ପରେ ଏଠାରେ କ୍ଲିକ୍ କରି କ୍ଲାସ୍-ରୁମ୍ ରେ ପ୍ରବେଶ କରନ୍ତୁ ।';
     }
-    
-    this.disabled = false;
-    this.textContent = 'Enter';
 });
 
-// Activity tracking
 function startActivityTracking() {
     ['click', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-        document.addEventListener(event, () => {
-            sessionData.lastActivity = new Date();
-        });
+        document.addEventListener(event, () => { sessionData.lastActivity = new Date(); });
     });
-    
-    setInterval(sendHeartbeat, 120000);
-    window.addEventListener('beforeunload', handleLogout);
-}
-
-async function sendHeartbeat() {
-    try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'heartbeat',
-                rollNumber: sessionData.rollNumber,
-                deviceId: sessionData.deviceId,
-                className: CLASS_NAME,  // ADD THIS
-                timestamp: new Date().toISOString()
-            })
+    setInterval(() => {
+        if (sessionData.rollNumber) {
+            db.collection('students').doc(sessionData.rollNumber).update({
+                lastActivity: new Date().toISOString()
+            }).catch(e => console.log('Heartbeat error:', e));
+        }
+    }, 120000);
+window.addEventListener('beforeunload', () => {
+    if (sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        // Use sendBeacon for reliable logout tracking
+        const data = JSON.stringify({
+            rollNumber: sessionData.rollNumber,
+            duration: duration,
+            logoutTime: logoutTime
         });
-    } catch (error) {
-        console.error('Heartbeat error:', error);
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Logout error:', e));
     }
-}
+});
 
-async function handleLogout() {
-    sessionData.logoutTime = new Date();
-    const duration = Math.floor((sessionData.logoutTime - sessionData.loginTime) / 1000);
-    
-    try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            keepalive: true,
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'logout',
-                rollNumber: sessionData.rollNumber,
-                deviceId: sessionData.deviceId,
-                className: CLASS_NAME,  // ADD THIS
-                timestamp: new Date().toISOString(),
-                duration: duration
-            })
-        });
-    } catch (error) {
-        console.error('Logout error:', error);
+// Also save logout when page becomes hidden (mobile browsers)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && sessionData.rollNumber && sessionData.loginTime) {
+        const duration = Math.floor((new Date() - sessionData.loginTime) / 1000);
+        const logoutTime = new Date().toISOString();
+        db.collection('students').doc(sessionData.rollNumber).update({
+            totalDuration: firebase.firestore.FieldValue.increment(duration),
+            lastActivity: logoutTime,
+            lastLogout: logoutTime
+        }).catch(e => console.log('Visibility logout error:', e));
     }
-}
+});
+    }
+
 
 const wordData = {
     currentWord: 0,
     words: [
         {
-            word: "୧ (1)",
-            odia: "ଏକ(One)",
-            emoji: "1️⃣",
-            odiaUse: "ଗୋଟିଏ ଆପଲ୍ = 1",
+            word: "VIBRATION",
+            odia: "କମ୍ପନ",
+            emoji: "〰️",
+            odiaUse: "ଆମ ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷରେ କମ୍ପନ ଜାରି ରହିଛି। ବିଚାର ବଦଳିଲେ ଶରୀରର କମ୍ପନ ବଦଳିଯାଏ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number1.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number1_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number1_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "୨ (2)",
-            odia: "ଦୁଇ(Two)",
-            emoji: "2️⃣",
-            odiaUse: "ଦୁଇଟି ଆଖି = 2",
+            word: "CELL",
+            odia: "କୋଷ",
+            emoji: "🔬",
+            odiaUse: "ଆମ ଶରୀର କୋଷରୁ ତିଆରି। ପ୍ରତ୍ୟେକ କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ପ୍ରତ୍ୟେକ କୋଷରେ କମ୍ପନ ଅଛି।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number2.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number2_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number2_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "୩ (3)",
-            odia: "ତିନି(Three)",
-            emoji: "3️⃣",
-            odiaUse: "ତିନୋଟି ଫୁଲ = 3",
+            word: "THOUGHT",
+            odia: "ବିଚାର",
+            emoji: "💭",
+            odiaUse: "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଭୟ ବିଚାରରେ ହାତ ଥରେ। ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number3.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number3_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number3_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "୪ (4)",
-            odia: "ଚାରି(Four)",
-            emoji: "4️⃣",
-            odiaUse: "ଚାରିଟି ପାଦ = 4",
+            word: "BELIEF",
+            odia: "ବିଶ୍ୱାସ",
+            emoji: "🌟",
+            odiaUse: "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ। ବିଚାର ହେଉଛି ତା'ର ଡାଳ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number4.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number4_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number4_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "୫ (5)",
-            odia: "ପାଞ୍ଚ(Five)",
-            emoji: "5️⃣",
-            odiaUse: "ପାଞ୍ଚଟି ଆଙ୍ଗୁଠି = 5",
+            word: "EXPERIENCE",
+            odia: "ଅନୁଭବ",
+            emoji: "🌀",
+            odiaUse: "ଅନୁଭବ ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ନୂଆ ଅନୁଭବ ନୂଆ ବିଶ୍ୱାସ ଦିଏ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number5.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number5_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/number5_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "+",
-            odia: "ଯୋଗ(Plus)",
-            emoji: "➕",
-            odiaUse: "2 + 1 = 3<br>ଦୁଇ ଯୋଗ ଏକ ହେଲା ତିନି",
+            word: "ATOM",
+            odia: "ପରମାଣୁ",
+            emoji: "⚛️",
+            odiaUse: "କୋଷ ପରମାଣୁରୁ ତିଆରି। ପରମାଣୁ ଭିତରେ କମ୍ପନ ଜାରି ରହିଛି। ପରମାଣୁ ହେଉଛି ଶରୀରର ମୂଳ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/plus.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/plus_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/plus_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "-",
-            odia: "ବିୟୋଗ(Minus)",
-            emoji: "➖",
-            odiaUse: "3 - 1 = 2<br>ତିନିରୁ ଏକ ବାଦ୍ ଦେଲେ ଦୁଇ",
+            word: "FEAR",
+            odia: "ଭୟ",
+            emoji: "😨",
+            odiaUse: "ଭୟ ଏକ ବିଚାର। ଭୟ ଶରୀରରେ ପ୍ରଭାବ ପକାଏ। ପୁରୁଣା ଅନୁଭବରୁ ଭୟ ଜନ୍ମ ନିଏ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/minus.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/minus_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/minus_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         },
         {
-            word: "=",
-            odia: "ସମାନ(Equal)",
-            emoji: "🟰",
-            odiaUse: "2 + 2 = 4<br>ଦୁଇ ଯୋଗ ଦୁଇ ସମାନ ଚାରି",
+            word: "CHANGE",
+            odia: "ପରିବର୍ତ୍ତନ",
+            emoji: "🔄",
+            odiaUse: "ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ। ନୂଆ ଅନୁଭବ ବିଶ୍ୱାସ ବଦଳାଏ। ଗୋଟିଏ ଅନୁଭୂତି ଜୀବନ ବଦଳାଇ ଦେଇପାରେ।",
             audio: {
-                intro: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/equals.m4a",
-                encourage: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/equals_encourage.m4a",
-                praise: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/equals_praise.m4a"
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "EXISTENCE",
+            odia: "ଅସ୍ତିତ୍ୱ",
+            emoji: "🌌",
+            odiaUse: "ମଣିଷ ଅସ୍ତିତ୍ୱ ଏକ ରହସ୍ୟ। ଶରୀର, ବିଚାର ଓ ବିଶ୍ୱାସ ଅସ୍ତିତ୍ୱର ଭାଗ। ଅନୁଭବ ଅସ୍ତିତ୍ୱକୁ ଗଢ଼ିଥାଏ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
+            }
+        },
+        {
+            word: "SUCCESS",
+            odia: "ସଫଳତା",
+            emoji: "🏆",
+            odiaUse: "ସଫଳ ଅନୁଭୂତି ନୂଆ ବିଶ୍ୱାସ ଦିଏ। ସଫଳତା ଭୟକୁ ଦୂର କରେ। ସଫଳ ହେଲେ \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।",
+            audio: {
+                intro: "audio-url-here",
+                encourage: "audio-url-here",
+                praise: "audio-url-here"
             }
         }
     ]
 };
+    
+const topicsData = [
+    {
+        heading: "ପାଠ-୧: ଶରୀର",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ପ୍ରତ୍ୟେକ ପରମାଣୁ ଭିତରେ କମ୍ପନ ଜାରି ରହିଛି।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ଆମ ଶରୀର କାହାରୁ ତିଆରି?<br><br><span style='color: green;'>Answer:</span> ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ପ୍ରତ୍ୟେକ ପରମାଣୁ ଭିତରେ କମ୍ପନ ଅଛି।",
+
+            "<span style='color: red;'>Q-2:</span> ଶରୀରରେ କ'ଣ ଜାରି ରହିଛି?<br><br><span style='color: green;'>Answer:</span> ଶରୀରର ପ୍ରତ୍ୟେକ କୋଷରେ କମ୍ପନ ଜାରି ରହିଛି। ଏ କମ୍ପନ ଅନବରତ ଚାଲୁ ରହେ। ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।",
+
+            "<span style='color: red;'>Q-3:</span> ପରମାଣୁ ଭିତରେ କ'ଣ ଅଛି?<br><br><span style='color: green;'>Answer:</span> ପରମାଣୁ ଭିତରେ ଏକ ଶୁଦ୍ଧ କମ୍ପନ ଅଛି। ଏ କମ୍ପନ ଅନବରତ ଜାରି ରହୁଛି। ଏହା ଶରୀରର ମୂଳ ଶକ୍ତି।",
+
+            "<span style='color: red;'>Q-4:</span> ଶରୀରକୁ ଆମେ କ'ଣ ବୋଲି ଜାଣିବା?<br><br><span style='color: green;'>Answer:</span> ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷ ଏ କମ୍ପନ ଧାରଣ କରେ। ଆମ ଶରୀର ଅନବରତ ଭାବେ ତିଆରି ହୋଇଚାଲିଛି।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-୨: ବିଚାର — କମ୍ପନ ସୃଷ୍ଟି କରେ",
+        audioPoints: [
+            {
+                text: "👉 ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଭିତରର ବିଚାର ବଦଳିଲେ ଶରୀରର କମ୍ପନ ବଦଳିଯାଏ। ଭୟ ବିଚାରରେ ହାତ ଥରେ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ବିଚାର ଶରୀରରେ କ'ଣ ସୃଷ୍ଟି କରେ?<br><br><span style='color: green;'>Answer:</span> ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଚାର ବଦଳିଲେ ଶରୀରର କମ୍ପନ ବଦଳିଯାଏ। ବିଚାର ଓ ଶରୀର ଏକ ସଙ୍ଗେ ଚଳନ୍ତି।",
+
+            "<span style='color: red;'>Q-2:</span> ଖୁସି ବିଚାରର ଶରୀରରେ କ'ଣ ପ୍ରଭାବ ପଡ଼େ?<br><br><span style='color: green;'>Answer:</span> ଖୁସି ବିଚାର ଆସିଲେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ। ଗାଲ ଲାଲ ହୁଏ। ଶରୀରରେ ଉଷ୍ମ ଅନୁଭୂତି ହୁଏ।",
+
+            "<span style='color: red;'>Q-3:</span> ଭୟ ବିଚାରର ଶରୀରରେ କ'ଣ ପ୍ରଭାବ ପଡ଼େ?<br><br><span style='color: green;'>Answer:</span> ଭୟ ବିଚାର ଆସିଲେ ହାତ ଥରେ। ପେଟ ଗୁଡ଼େ। ଶରୀରରେ ଅସ୍ଥିରତା ଜନ୍ମ ନିଏ।",
+
+            "<span style='color: red;'>Q-4:</span> ବିଚାର ବଦଳିଲେ କ'ଣ ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ। ଶରୀରର କମ୍ପନ ବଦଳିଯାଏ। ବିଚାର ଶରୀରର ନିୟନ୍ତ୍ରକ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-୩: ବିଶ୍ୱାସ — ବିଚାର ସୃଷ୍ଟି କରେ",
+        audioPoints: [
+            {
+                text: "👉 ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ। ବିଚାର ହେଉଛି ତା'ର ଡାଳ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ବିଚାର କାହାରଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ବିଚାର ବିଶ୍ୱାସ ଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ। ଆମ ଭିତରେ ଥିବା ବିଶ୍ୱାସ ବିଚାର ଜନ୍ମ ଦିଏ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।",
+
+            "<span style='color: red;'>Q-2:</span> ଖରାପ ବ୍ୟକ୍ତି ଆସୁଛି ଜାଣିଲେ ମନରେ କ'ଣ ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ଖରାପ ବ୍ୟକ୍ତି ପ୍ରତି ଆମ ବିଶ୍ୱାସ ଖରାପ। ସେ ଆସୁଛି ଜାଣିଲେ ଖରାପ ବିଚାର ଆସେ। ଏ ବିଚାର ବିଶ୍ୱାସରୁ ଜନ୍ମ ନିଏ।",
+
+            "<span style='color: red;'>Q-3:</span> ଭଲ ବ୍ୟକ୍ତି ଆସୁଛି ଜାଣିଲେ ମନରେ କ'ଣ ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ଭଲ ବ୍ୟକ୍ତି ପ୍ରତି ଆମ ବିଶ୍ୱାସ ଭଲ। ସେ ଆସୁଛି ଜାଣିଲେ ଭଲ ବିଚାର ଆସେ। ଭଲ ବିଶ୍ୱାସ ଭଲ ବିଚାର ଦିଏ।",
+
+            "<span style='color: red;'>Q-4:</span> ବିଶ୍ୱାସ ଓ ବିଚାର ମଧ୍ୟରେ ସମ୍ପର୍କ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ଯେପରି ବିଚାର ସେପରି ହୁଏ। ବିଶ୍ୱାସ ବଦଳିଲେ ବିଚାର ବଦଳେ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-୪: ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ",
+        audioPoints: [
+            {
+                text: "👉 ଆମ ଭିତରର ବିଶ୍ୱାସ ପୂର୍ବ ଅନୁଭବ ଦ୍ୱାରା ସୃଷ୍ଟି। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ବିଶ୍ୱାସ କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ ହୁଏ।",
+
+            "<span style='color: red;'>Q-2:</span> ଛୋଟ ବେଳୁ ଖରାପ କଥା ଶୁଣିଲେ ପରେ କ'ଣ ହୁଏ?<br><br><span style='color: green;'>Answer:</span> ଛୋଟ ବେଳୁ ଖରାପ କଥା ଶୁଣିଲେ ଭିତରେ ଖରାପ ବିଶ୍ୱାସ ଜମେ। ବଡ଼ ହୋଇ ନୂଆ କାମ ଆରମ୍ଭ କଲେ ଭୟ ଆସେ। ସେ ଭୟ ପୁରୁଣା ଅନୁଭବରୁ ଆସେ।",
+
+            "<span style='color: red;'>Q-3:</span> \"ମୁଁ ପାରିବି ନାହିଁ\" ଏ ଭୟ କୋଉଠୁ ଆସେ?<br><br><span style='color: green;'>Answer:</span> ଏ ଭୟ ଛୋଟ ବେଳର ଅନୁଭବରୁ ଆସେ। ସେ ଅନୁଭବ ବିଶ୍ୱାସ ଭାବରେ ମନ ଭିତରେ ଜମି ଯାଏ। ଲୋକ ଜାଣିଶୁଣି ଏ ଭୟ ଆଣେ ନାହିଁ।",
+
+            "<span style='color: red;'>Q-4:</span> ପୂର୍ବ ଅନୁଭବ ଭବିଷ୍ୟତ ଉପରେ କ'ଣ ପ୍ରଭାବ ପକାଏ?<br><br><span style='color: green;'>Answer:</span> ପୂର୍ବ ଅନୁଭବ ବିଶ୍ୱାସ ଭାବରେ ମନରେ ରହେ। ଏ ବିଶ୍ୱାସ ଆଗାମୀ ବିଚାର ସୃଷ୍ଟି କରେ। ଆଗାମୀ ବିଚାର ଜୀବନ ଗଢ଼େ।"
+        ]
+    },
+
+    {
+        heading: "ପାଠ-୫: ବର୍ତ୍ତମାନର ଅନୁଭବ ବିଶ୍ୱାସ ବଦଳାଏ",
+        audioPoints: [
+            {
+                text: "👉 ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।",
+                audio: "audio-url-here"
+            }
+        ],
+        questions: [
+            "<span style='color: red;'>Q-1:</span> ବର୍ତ୍ତମାନର ଅନୁଭବ କ'ଣ କରେ?<br><br><span style='color: green;'>Answer:</span> ବର୍ତ୍ତମାନର ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।",
+
+            "<span style='color: red;'>Q-2:</span> ଭଲ ଶିକ୍ଷକ ଜୀବନ ବଦଳାଇ ଦେଇ ପାରନ୍ତି କି?<br><br><span style='color: green;'>Answer:</span> ଭଲ ଶିକ୍ଷକ ସୁଯୋଗ ଦେଇ ପାରନ୍ତି। ସୁଯୋଗ ଦ୍ୱାରା ସଫଳ ଅନୁଭୂତି ମିଳେ। ଏ ଅନୁଭୂତି ଜୀବନ ବଦଳାଇ ଦିଏ।",
+
+            "<span style='color: red;'>Q-3:</span> \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ କିପରି ଜନ୍ମ ନିଏ?<br><br><span style='color: green;'>Answer:</span> ଚେଷ୍ଟା କଲେ ସଫଳ ହୁଏ। ସଫଳ ଅନୁଭୂତି ନୂଆ ବିଶ୍ୱାସ ଦିଏ। \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।",
+
+            "<span style='color: red;'>Q-4:</span> ଏ ପାଠର ସାରକଥା କ'ଣ?<br><br><span style='color: green;'>Answer:</span> ଶରୀର କମ୍ପନ ଦ୍ୱାରା ଗଢ଼ା। ବିଚାର ବିଶ୍ୱାସ ଦ୍ୱାରା ସୃଷ୍ଟି। ବିଶ୍ୱାସ ପୂର୍ବ ଅନୁଭବ ଦ୍ୱାରା ଗଢ଼ା ଏବଂ ନୂଆ ଅନୁଭବ ଦ୍ୱାରା ବଦଳେ।"
+        ]
+    }
+];
     
 const courseData = {
             teacherImage: "https://via.placeholder.com/400x300/667eea/ffffff?text=Teacher",
@@ -2824,7 +3038,7 @@ const courseData = {
 <div id="welcomeBlackboard" class="word-display">
     <span class="word-display-text">
         <span class="answer-section" id="welcomeExplanation">
-            🌹ଓଡିଶା ଇ-ଗୁରୁ ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।
+            🌹ଇ-ବିଦ୍ୟା ଏକାଡେମି ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।
         </span>
     </span>
 </div>
@@ -2863,273 +3077,276 @@ const courseData = {
   `, 
     audio: "",
 mermaid: `graph LR
-    A["WAKE UP<br/>ଜାଗ୍ରତ ହେବା"]
-    
-    A --> B["ଅର୍ଥ"]
-    B --> C["ଶୋଇବାରୁ ଉଠି<br/>ଆଖି ଖୋଲିବା"]
-    
-    A --> D["ରୂପ"]
-    D --> E["wake up<br/>woke up<br/>woken up"]
-    
-    A --> F["ସମାନ ଶବ୍ଦ"]
-    F --> G["ARISE<br/>ଉଠିବା"]
-    
-    A --> H["ବିପରୀତ ଶବ୍ଦ"]
-    H --> I["SLEEP<br/>ଶୋଇବା"]
-    
-    J["GET UP<br/>ଉଠିବା"]
-    
-    J --> K["ଅର୍ଥ"]
-    K --> L["ବିଛଣା କିମ୍ବା<br/>ଚେୟାରରୁ<br/>ଠିଆ ହେବା"]
-    
-    J --> M["ରୂପ"]
-    M --> N["get up<br/>got up<br/>got up"]
-    
-    J --> O["ସମାନ ଶବ୍ଦ"]
-    O --> P["RISE<br/>ଉଠିବା"]
-    
-    J --> Q["ବିପରୀତ ଶବ୍ଦ"]
-    Q --> R["LIE DOWN<br/>ଶୋଇପଡ଼ିବା"]
-    
-    S["OPEN<br/>ଖୋଲିବା"]
-    
-    S --> T["ଅର୍ଥ"]
-    T --> U["ବନ୍ଦ ଥିବା କିଛି<br/>ଖୋଲିବା"]
-    
-    S --> V["ରୂପ"]
-    V --> W["open<br/>opened<br/>opened"]
-    
-    S --> X["ସମାନ ଶବ୍ଦ"]
-    X --> Y["UNLOCK<br/>ତାଲା ଖୋଲିବା"]
-    
-    S --> Z["ବିପରୀତ ଶବ୍ଦ"]
-    Z --> AA["CLOSE<br/>ବନ୍ଦ କରିବା"]
-    
-    style A fill:#3b82f6,stroke:#1e40af,color:#fff
-    style J fill:#10b981,stroke:#059669,color:#fff
-    style S fill:#f59e0b,stroke:#d97706,color:#fff
-    
-    style B fill:#dbeafe,stroke:#3b82f6
-    style D fill:#dbeafe,stroke:#3b82f6
-    style F fill:#dbeafe,stroke:#3b82f6
-    style H fill:#dbeafe,stroke:#3b82f6
-    
-    style K fill:#d1fae5,stroke:#10b981
-    style M fill:#d1fae5,stroke:#10b981
-    style O fill:#d1fae5,stroke:#10b981
-    style Q fill:#d1fae5,stroke:#10b981
-    
-    style T fill:#fef3c7,stroke:#f59e0b
-    style V fill:#fef3c7,stroke:#f59e0b
-    style X fill:#fef3c7,stroke:#f59e0b
-    style Z fill:#fef3c7,stroke:#f59e0b`,
+A["〰️ ମଣିଷ ଅସ୍ତିତ୍ୱ<br/>ର ରହସ୍ୟ"]
+
+A --> B["ମୁଖ୍ୟ ବିଷୟ"]
+B --> C["ଆମେ ଶରୀର, ବିଚାର,<br/>ବିଶ୍ୱାସ ଓ ଅନୁଭବ<br/>ବିଷୟରେ ଜାଣିବା"]
+
+A --> D["ଶରୀର 🔬"]
+D --> E["ଆମ ଶରୀର କୋଷରୁ ତିଆରି।<br/>କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି।<br/>ପ୍ରତ୍ୟେକ ପରମାଣୁରେ କମ୍ପନ ଅଛି।<br/>ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"]
+
+A --> D2["ବିଚାର 💭"]
+D2 --> E2["ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ।<br/>ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ।<br/>ଭୟ ବିଚାରରେ ହାତ ଥରେ।<br/>ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।"]
+
+A --> D3["ବିଶ୍ୱାସ 🌟"]
+D3 --> E3["ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ।<br/>ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।<br/>ବିଚାର ହେଉଛି ତା'ର ଡାଳ।<br/>ବିଶ୍ୱାସ ବଦଳିଲେ ବିଚାର ବଦଳେ।"]
+
+A --> D4["ପୂର୍ବ ଅନୁଭବ 🌀"]
+D4 --> E4["ପୂର୍ବ ଅନୁଭବ ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ।<br/>ପୁରୁଣା ଅନୁଭବ ମନରେ ଜମି ଯାଏ।<br/>ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ।"]
+
+A --> F["ନୂଆ ଅନୁଭବ 🔄"]
+F --> G["ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ।<br/>ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ।<br/>ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"]
+
+A --> H["ଭୟ ଓ ସଫଳତା 🏆"]
+H --> I["ଭୟ ପୁରୁଣା ଅନୁଭବରୁ ଆସେ।<br/>ସଫଳ ଅନୁଭୂତି ଭୟ ଦୂର କରେ।<br/>ସଫଳ ହେଲେ ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।"]
+
+A --> J["ଶରୀର ଓ ମନ ସଂପର୍କ 💡"]
+J --> K["ଶରୀର ଓ ମନ ଏକ ସଙ୍ଗେ ଚଳନ୍ତି।<br/>ଭିତରର ବଦଳ ବାହାରେ ଦେଖାଯାଏ।<br/>ଶରୀର ମନର ଦର୍ପଣ।"]
+
+A --> L["ସାରକଥା 📖"]
+L --> M["ଶରୀର ଏକ କମ୍ପନ।<br/>ବିଚାର କମ୍ପନ ସୃଷ୍ଟି କରେ।<br/>ବିଶ୍ୱାସ ବିଚାର ଦିଏ।<br/>ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ।"]
+
+style A fill:#0369a1,stroke:#0c4a6e,color:#fff
+style B fill:#e0f2fe,stroke:#0369a1
+style D fill:#7c3aed,stroke:#4c1d95,color:#fff
+style D2 fill:#b45309,stroke:#78350f,color:#fff
+style D3 fill:#059669,stroke:#064e3b,color:#fff
+style D4 fill:#dc2626,stroke:#7f1d1d,color:#fff
+style F fill:#0891b2,stroke:#164e63,color:#fff
+style H fill:#16a34a,stroke:#14532d,color:#fff
+style J fill:#d97706,stroke:#92400e,color:#fff
+style L fill:#7c3aed,stroke:#4c1d95,color:#fff
+style C fill:#e0f2fe,stroke:#0369a1
+style E fill:#ede9fe,stroke:#7c3aed
+style E2 fill:#fef3c7,stroke:#b45309
+style E3 fill:#d1fae5,stroke:#059669
+style E4 fill:#fee2e2,stroke:#dc2626
+style G fill:#cffafe,stroke:#0891b2
+style I fill:#dcfce7,stroke:#16a34a
+style K fill:#fef9c3,stroke:#d97706
+style M fill:#ede9fe,stroke:#7c3aed`,
 
     mcq: {
         questions: [
             {
-                question: "WAKE UP ର ଅର୍ଥ କ'ଣ?",
+                question: "ଶରୀର କ'ଣ?",
                 options: [
-                    "ଶୋଇପଡ଼ିବା",
-                    "ଶୋଇବାରୁ ଉଠି ଆଖି ଖୋଲିବା",
-                    "ଖାଇବା",
-                    "ବସିବା"
+                    "ଶରୀର ଏକ ସ୍ଥିର ବସ୍ତୁ",
+                    "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ",
+                    "ଶରୀର କେବଳ ହାଡ଼ ଓ ମାଂସ",
+                    "ଶରୀର ଏକ ଅନୁଭୂତି"
                 ],
                 correct: 1
             },
             {
-                question: "GET UP ର V2 (ଦ୍ୱିତୀୟ ରୂପ) କ'ଣ?",
+                question: "ବିଚାର ଶରୀରରେ କ'ଣ ସୃଷ୍ଟି କରେ?",
                 options: [
-                    "get up",
-                    "getting up",
-                    "got up",
-                    "gets up"
+                    "ରକ୍ତ ସୃଷ୍ଟି କରେ",
+                    "କୋଷ ସୃଷ୍ଟି କରେ",
+                    "କମ୍ପନ ସୃଷ୍ଟି କରେ",
+                    "ଶକ୍ତି ସୃଷ୍ଟି କରେ"
                 ],
                 correct: 2
             },
             {
-                question: "OPEN ର ବିପରୀତ ଶବ୍ଦ କ'ଣ?",
+                question: "ବିଶ୍ୱାସ ଓ ବିଚାର ମଧ୍ୟରେ ସମ୍ପର୍କ କ'ଣ?",
                 options: [
-                    "UNLOCK",
-                    "CLOSE",
-                    "LOCK",
-                    "SHUT"
+                    "ବିଚାର ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ",
+                    "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ",
+                    "ଦୁଇଟି ଏକ ସଙ୍ଗ ସୃଷ୍ଟି ହୁଏ",
+                    "ଦୁଇଟି ଭିନ୍ନ ଭିନ୍ନ ବିଷୟ"
                 ],
                 correct: 1
             },
             {
-                question: "ARISE କେଉଁ କ୍ରିୟାର ସମାନାର୍ଥକ?",
+                question: "ବିଶ୍ୱାସ କ'ଣ?",
                 options: [
-                    "OPEN",
-                    "CLOSE",
-                    "WAKE UP",
-                    "SLEEP"
+                    "ଏକ ନୂଆ ଭାବନା",
+                    "ଭବିଷ୍ୟତର ସ୍ୱପ୍ନ",
+                    "ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ",
+                    "ଶରୀରର ଏକ ଅଙ୍ଗ"
                 ],
                 correct: 2
             },
             {
-                question: "LIE DOWN କେଉଁ କ୍ରିୟାର ବିପରୀତ?",
+                question: "ନୂଆ ଅନୁଭବ ଦ୍ୱାରା କ'ଣ ହୁଏ?",
                 options: [
-                    "WAKE UP",
-                    "GET UP",
-                    "OPEN",
-                    "SLEEP"
+                    "ଶରୀର ଦୁର୍ବଳ ହୁଏ",
+                    "ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗି ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ",
+                    "ପୁରୁଣା ବିଶ୍ୱାସ ଆହୁରି ଦୃଢ଼ ହୁଏ",
+                    "ଭୟ ବଢ଼ିଯାଏ"
                 ],
                 correct: 1
             }
         ]
     },
-    
+
     trueFalse: {
         questions: [
             {
-                question: "WAKE UP ଅର୍ଥ ହେଉଛି ଶୋଇବାରୁ ଉଠି ଆଖି ଖୋଲିବା।",
+                question: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।",
                 correct: true
             },
             {
-                question: "GET UP ର V3 ହେଉଛି getting up।",
+                question: "ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ ନାହିଁ।",
                 correct: false
             },
             {
-                question: "OPEN ର ସମାନାର୍ଥକ ଶବ୍ଦ ହେଉଛି UNLOCK।",
+                question: "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ।",
                 correct: true
             },
             {
-                question: "RISE ହେଉଛି GET UP ର ବିପରୀତ ଶବ୍ଦ।",
+                question: "ନୂଆ ଅନୁଭବ ଜୀବନ ବଦଳାଇ ଦେଇ ପାରେ।",
+                correct: true
+            },
+            {
+                question: "ଭୟ ବିଚାରରେ ଶରୀରରେ କୌଣସି ପ୍ରଭାବ ପଡ଼େ ନାହିଁ।",
                 correct: false
-            },
-            {
-                question: "SLEEP ହେଉଛି WAKE UP ର ବିପରୀତ ଶବ୍ଦ।",
-                correct: true
             }
         ]
     },
-    
+
     fillBlanks: {
         questions: [
             {
-                question: "WAKE UP ଅର୍ଥ ହେଉଛି ଶୋଇବାରୁ ଉଠି ___ ଖୋଲିବା।",
-                answer: "ଆଖି"
+                question: "ଶରୀର ଏକ ଶୁଦ୍ଧ ___। (କମ୍ପନ / ଅନୁଭବ)",
+                answer: "କମ୍ପନ"
             },
             {
-                question: "GET UP ର ସମାନାର୍ଥକ ଶବ୍ଦ ହେଉଛି ___।",
-                answer: "RISE"
+                question: "ବିଚାର ___ ଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ। (ବିଶ୍ୱାସ / ଶରୀର)",
+                answer: "ବିଶ୍ୱାସ"
             },
             {
-                question: "OPEN ର ବିପରୀତ ଶବ୍ଦ ହେଉଛି ___।",
-                answer: "CLOSE"
+                question: "ବିଶ୍ୱାସ ହେଉଛି ___ ଅନୁଭବ। (ପୂର୍ବ-ସଞ୍ଚିତ / ନୂଆ)",
+                answer: "ପୂର୍ବ-ସଞ୍ଚିତ"
             },
             {
-                question: "WAKE UP ର V4 ହେଉଛି ___।",
-                answer: "waking up"
+                question: "ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ___ ଗଢ଼େ। (ଜୀବନ / ଶରୀର)",
+                answer: "ଜୀବନ"
             },
             {
-                question: "GET UP ର Noun form ହେଉଛି ___।",
-                answer: "GETTING UP"
+                question: "ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ___। (ବୃକ୍ଷ / ଡାଳ)",
+                answer: "ବୃକ୍ଷ"
             }
         ]
     },
-    
+
     matching: {
         pairs: [
-            { left: "WAKE UP", right: "ଜାଗ୍ରତ ହେବା" },
-            { left: "GET UP", right: "ଉଠିବା" },
-            { left: "OPEN", right: "ଖୋଲିବା" },
-            { left: "ARISE", right: "WAKE UP ର synonym" },
-            { left: "RISE", right: "GET UP ର synonym" },
-            { left: "UNLOCK", right: "OPEN ର synonym" },
-            { left: "SLEEP", right: "WAKE UP ର opposite" },
-            { left: "LIE DOWN", right: "GET UP ର opposite" },
-            { left: "CLOSE", right: "OPEN ର opposite" },
-            { left: "OPENING", right: "OPEN ର Noun form" }
+            { left: "ଶରୀର", right: "〰️ ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷରେ କମ୍ପନ ଅଛି।" },
+            { left: "ବିଚାର", right: "💭 ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।" },
+            { left: "ବିଶ୍ୱାସ", right: "🌟 ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।" },
+            { left: "ପୂର୍ବ ଅନୁଭବ", right: "🌀 ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ। ପୁରୁଣା ଅନୁଭବ ମନରେ ଜମି ଯାଏ।" },
+            { left: "ନୂଆ ଅନୁଭବ", right: "🔄 ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି ହୁଏ।" },
+            { left: "ଭୟ", right: "😨 ପୁରୁଣା ଅନୁଭବରୁ ଜନ୍ମ ନିଏ। ଶରୀରରେ ପ୍ରଭାବ ପକାଏ।" },
+            { left: "ସଫଳତା", right: "🏆 ନୂଆ ବିଶ୍ୱାସ ଦିଏ। \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।" },
+            { left: "କୋଷ", right: "🔬 ପରମାଣୁରୁ ସୃଷ୍ଟି। ଶରୀର ଗଠନ କରେ।" },
+            { left: "ପରମାଣୁ", right: "⚛️ ଭିତରେ ଶୁଦ୍ଧ କମ୍ପନ ଅଛି। ଶରୀରର ମୂଳ ଉପାଦାନ।" }
         ]
     },
-    
+
     arrange: {
         questions: [
             {
-                words: ["I", "wake", "up", "early"],
-                correct: "I wake up early"
+                words: ["ଶରୀର", "ଏକ", "ଶୁଦ୍ଧ", "କମ୍ପନ"],
+                correct: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"
             },
             {
-                words: ["I", "get", "up", "quickly"],
-                correct: "I get up quickly"
+                words: ["ବିଚାର", "ବଦଳିଲେ", "ଶରୀର", "ବଦଳେ"],
+                correct: "ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।"
             },
             {
-                words: ["I", "open", "the", "door"],
-                correct: "I open the door"
+                words: ["ବିଶ୍ୱାସ", "ହେଉଛି", "ମୂଳ", "ବୃକ୍ଷ"],
+                correct: "ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।"
             },
             {
-                words: ["I", "arise", "at", "dawn"],
-                correct: "I arise at dawn"
+                words: ["ଆଜିର", "ଅନୁଭୂତି", "ଆଗାମୀ", "ଜୀବନ", "ଗଢ଼େ"],
+                correct: "ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
             },
             {
-                words: ["I", "close", "the", "window"],
-                correct: "I close the window"
+                words: ["ନୂଆ", "ଅନୁଭବ", "ନୂଆ", "ବିଶ୍ୱାସ", "ଦିଏ"],
+                correct: "ନୂଆ ଅନୁଭବ ନୂଆ ବିଶ୍ୱାସ ଦିଏ।"
             }
         ]
     },
-    
+
     stq: {
         questions: [
             {
-                question: "WAKE UP ର ଅର୍ଥ କ'ଣ?",
-                answer: "WAKE UP ଅର୍ଥ ହେଉଛି ଶୋଇବାରୁ ଉଠି ଆଖି ଖୋଲିବା। ଏହା ଏକ ବାକ୍ୟ-କ୍ରିୟା ଅଟେ। ବାକ୍ୟ: I wake up at 6 AM. WAKE UP ର ପାଞ୍ଚଟି ରୂପ ଅଛି।"
+                question: "ଶରୀର ଓ କମ୍ପନ ମଧ୍ୟରେ ସମ୍ପର୍କ କ'ଣ?",
+                answer: "ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ପ୍ରତ୍ୟେକ ପରମାଣୁ ଭିତରେ ଶୁଦ୍ଧ କମ୍ପନ ଜାରି ରହିଛି।"
             },
             {
-                question: "GET UP ର ଅର୍ଥ କ'ଣ?",
-                answer: "GET UP ଅର୍ଥ ହେଉଛି ଶଯ୍ୟା କିମ୍ବା ଚେୟାରରୁ ଠିଆ ହେବା। ଏହା ଏକ ବାକ୍ୟ-କ୍ରିୟା ଅଟେ। ବାକ୍ୟ: I get up quickly. GET UP ର ସମାନାର୍ଥକ ହେଉଛି RISE।"
+                question: "ବିଚାର ଓ ଶରୀର ମଧ୍ୟରେ ସଂପର୍କ ଉଦାହରଣ ସହ ବୁଝାଅ।",
+                answer: "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ। ଭୟ ବିଚାରରେ ହାତ ଥରେ।"
             },
             {
-                question: "OPEN ର ଅର୍ଥ କ'ଣ?",
-                answer: "OPEN ଅର୍ଥ ହେଉଛି ବନ୍ଦ ଥିବା କିଛି ଖୋଲିବା। ଏହା ଏକ କ୍ରିୟା ଅଟେ। ବାକ୍ୟ: I open the door. OPEN ର ବିପରୀତ ଶବ୍ଦ ହେଉଛି CLOSE।"
+                question: "ବିଶ୍ୱାସ କିପରି ସୃଷ୍ଟି ହୁଏ?",
+                answer: "ବିଶ୍ୱାସ ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ ଦ୍ୱାରା ସୃଷ୍ଟି ହୁଏ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ ହୁଏ।"
             },
             {
-                question: "WAKE UP, GET UP ଏବଂ OPEN ର ବିପରୀତ ଶବ୍ଦ କ'ଣ?",
-                answer: "WAKE UP ର ବିପରୀତ ହେଉଛି SLEEP। GET UP ର ବିପରୀତ ହେଉଛି LIE DOWN। OPEN ର ବିପରୀତ ହେଉଛି CLOSE। ଏସବୁ ଶବ୍ଦ ବିପରୀତ ଅର୍ଥ ପ୍ରକାଶ କରେ।"
-            },
-            {
-                question: "WAKE UP, GET UP ଏବଂ OPEN ର Noun form କ'ଣ?",
-                answer: "WAKE UP ର Noun form ହେଉଛି WAKING। GET UP ର Noun form ହେଉଛି GETTING UP। OPEN ର Noun form ହେଉଛି OPENING। ଏସବୁ ବିଶେଷ୍ୟ ଅଟନ୍ତି।"
+                question: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଶବ୍ଦ ବ୍ୟବହାର କରି ପାଞ୍ଚଟି ବାକ୍ୟ ଲେଖ।",
+                answer: "ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ବିଚାର ଦିଏ। ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ। ନୂଆ ଅନୁଭବ ଜୀବନ ବଦଳାଇ ଦିଏ।"
             }
         ]
     }
-
 },
 ],
-    
+
 summary: {
     audio: "",
-    
-content: {
-        introduction: "ଦୈନନ୍ଦିନ କାର୍ଯ୍ୟକଳାପରେ ବ୍ୟବହୃତ ମୁଖ୍ୟ କ୍ରିୟାପଦଗୁଡ଼ିକ ଅତ୍ୟନ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ଏଗୁଡ଼ିକ ଆମର ପ୍ରାତଃକାଳୀନ କ୍ରିୟାକଳାପକୁ ପ୍ରକାଶ କରେ। ନିମ୍ନଲିଖିତ ବିନ୍ଦୁଗୁଡ଼ିକ ଏହାର ଅର୍ଥ ଏବଂ ବ୍ୟବହାରକୁ ସ୍ପଷ୍ଟ କରେ:",
+
+    content: {
+        introduction: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଆମ ଜୀବନର ଚାରିଟି ମୂଳ ସ୍ତମ୍ଭ। ଆସନ୍ତୁ ଏ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ବିଷୟ ବିଷୟରେ ଜାଣିବା।",
         sentences: [
             {
-                heading: "WAKE UP (ଜାଗ୍ରତ ହେବା)",
-                text: "WAKE UP ହେଉଛି ଏକ ବାକ୍ୟ-କ୍ରିୟା ଯାହା ଶୋଇବାରୁ ଉଠି ଆଖି ଖୋଲିବା ଅର୍ଥ ପ୍ରକାଶ କରେ। ଏହାର ତିନୋଟି ରୂପ ହେଉଛି wake up, woke up, woken up ଏବଂ V4: waking up, V5: wakes up। ଏହାର Noun ରୂପ waking up / awakening - ଜାଗରଣ, ଯାହାର ବ୍ୟବହାର: The waking up was difficult today. (ଆଜି ଜାଗରଣ କଷ୍ଟକର ଥିଲା ।) ଏହାର ସମାନାର୍ଥକ ଶବ୍ଦ ହେଉଛି ARISE (ଉଠିବା)। ଏହାର ବିପରୀତ ଶବ୍ଦ ହେଉଛି SLEEP (ଶୋଇବା)।"
+                heading: "ଶରୀର",
+                text: "ଆମ ଶରୀର କୋଷରୁ ତିଆରି। କୋଷ ପରମାଣୁରୁ ସୃଷ୍ଟି। ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ।"
             },
             {
-                heading: "GET UP (ଉଠିବା)",
-                text: "GET UP ହେଉଛି ଏକ ବାକ୍ୟ-କ୍ରିୟା ଯାହା ଶଯ୍ୟା କିମ୍ବା ଚେୟାରରୁ ଠିଆ ହେବା ଅର୍ଥ ପ୍ରକାଶ କରେ। ଏହାର ତିନୋଟି ରୂପ ହେଉଛି get up, got up, got up ଏବଂ V4: getting up, V5: gets up। ଏହାର Noun ରୂପ getting up - ଉଠିବା, ଯାହାର ବ୍ୟବହାର: Getting up early is healthy. (ଶୀଘ୍ର ଉଠିବା ସ୍ୱାସ୍ଥ୍ୟକର ଅଟେ ।) ଏହାର ସମାନାର୍ଥକ ଶବ୍ଦ ହେଉଛି RISE (ଉଠିବା)। ଏହାର ବିପରୀତ ଶବ୍ଦ ହେଉଛି LIE DOWN (ଶୋଇପଡ଼ିବା)।"
+                heading: "ବିଚାର",
+                text: "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ଖୁସି ବିଚାରରେ ହୃଦୟ ଦ୍ରୁତ ଚାଲେ। ଭୟ ବିଚାରରେ ହାତ ଥରେ।"
             },
             {
-                heading: "OPEN (ଖୋଲିବା)",
-                text: "OPEN ହେଉଛି ଏକ କ୍ରିୟା ଯାହା ବନ୍ଦ ଥିବା କିଛି ଖୋଲିବା ଅର୍ଥ ପ୍ରକାଶ କରେ। ଏହାର ତିନୋଟି ରୂପ ହେଉଛି open, opened, opened ଏବଂ V4: opening, V5: opens। ଏହାର Noun ରୂପ opening - ଖୋଲିବା/ଖୋଲା ସ୍ଥାନ, ଯାହାର ବ୍ୟବହାର: The opening of the shop is at 9 AM. (ଦୋକାନର ଖୋଲିବା ସକାଳ 9 ଟାରେ ।) ଏହାର ସମାନାର୍ଥକ ଶବ୍ଦ ହେଉଛି UNLOCK (ଖୋଲିବା)। ଏହାର ବିପରୀତ ଶବ୍ଦ ହେଉଛି CLOSE (ବନ୍ଦ କରିବା)।"
+                heading: "ବିଶ୍ୱାସ",
+                text: "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ। ବିଚାର ହେଉଛି ତା'ର ଡାଳ।"
+            },
+            {
+                heading: "ପୂର୍ବ ଅନୁଭବ",
+                text: "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ଯାଏ। ଏ ଜମା ଅନୁଭବ ହିଁ ବିଶ୍ୱାସ।"
+            },
+            {
+                heading: "ନୂଆ ଅନୁଭବ",
+                text: "ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗେ। ନୂଆ ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
+            },
+            {
+                heading: "ଭୟ ଓ ସଫଳତା",
+                text: "ଭୟ ପୁରୁଣା ଅନୁଭବରୁ ଆସେ। ସଫଳ ଅନୁଭୂତି ଭୟ ଦୂର କରେ। \"ମୁଁ ପାରିବି\" ବୋଲି ବିଶ୍ୱାସ ଜନ୍ମ ନିଏ।"
+            },
+            {
+                heading: "ଶରୀର ଓ ମନ ସଂପର୍କ",
+                text: "ଶରୀର ଓ ମନ ଏକ ସଙ୍ଗେ ଚଳନ୍ତି। ଭିତରର ବଦଳ ବାହାରେ ଦେଖାଯାଏ। ଶରୀର ମନର ଦର୍ପଣ।"
+            },
+            {
+                heading: "ସାରକଥା",
+                text: "ଶରୀର ଏକ କମ୍ପନ। ବିଚାର କମ୍ପନ ଦିଏ। ବିଶ୍ୱାସ ବିଚାର ଦିଏ ଓ ଅନୁଭବ ବିଶ୍ୱାସ ଗଢ଼େ।"
             }
         ],
-        conclusion: "ଏହି ତିନୋଟି କ୍ରିୟାପଦ ଦୈନନ୍ଦିନ ଜୀବନରେ ଅତ୍ୟନ୍ତ ଉପଯୋଗୀ। ଏଗୁଡ଼ିକର ସଠିକ ବ୍ୟବହାର ଇଂରାଜୀ ଭାଷାରେ ଦକ୍ଷତା ବୃଦ୍ଧି କରେ। ପ୍ରତ୍ୟେକ କ୍ରିୟାର ସମାନାର୍ଥକ ଏବଂ ବିପରୀତ ଶବ୍ଦ ଜାଣିବା ଆବଶ୍ୟକ।"
+        conclusion: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଏକ ଶୃଙ୍ଖଳରେ ବାନ୍ଧା। ନୂଆ ଅନୁଭବ ଦ୍ୱାରା ଆମ ଜୀବନ ବଦଳାଇ ଦିଆଯାଇ ପାରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
     },
-    
+
     question: {
         audio: "",
-        question: "WAKE UP, GET UP ଏବଂ OPEN କ୍ରିୟାପଦଗୁଡ଼ିକର ଅର୍ଥ, ରୂପ ଏବଂ ବ୍ୟବହାର ସଂକ୍ଷେପରେ ବର୍ଣ୍ଣନା କର ।",
-        introduction: "ଦୈନନ୍ଦିନ କାର୍ଯ୍ୟକଳାପରେ ବ୍ୟବହୃତ କ୍ରିୟାପଦଗୁଡ଼ିକ ଅତ୍ୟନ୍ତ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ଏଗୁଡ଼ିକ ଆମର ପ୍ରାତଃକାଳୀନ କାର୍ଯ୍ୟକୁ ସଠିକ୍ ଭାବରେ ପ୍ରକାଶ କରେ। ନିମ୍ନଲିଖିତ ବିନ୍ଦୁଗୁଡ଼ିକ ଏହାର ବିସ୍ତୃତ ବ୍ୟାଖ୍ୟା ପ୍ରଦାନ କରେ:",
+        question: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ମଧ୍ୟରେ ସଂପର୍କ ବର୍ଣ୍ଣନା କର।",
+        introduction: "ଏ ଚାରିଟି ବିଷୟ ମଧ୍ୟରେ ସଂପର୍କ ବୁଝିବା ପାଇଁ ନିମ୍ନ ବିଷୟ ଦେଖ।",
         points: [
-            "WAKE UP ଏକ ବାକ୍ୟ-କ୍ରିୟା ଯାହାର ଅର୍ଥ ଶୋଇବାରୁ ଉଠି ଆଖି ଖୋଲିବା, ରୂପ wake up, woke up, woken up, V4: waking up, V5: wakes up, Noun: waking up/awakening-ଜାଗରଣ, ସମାନାର୍ଥକ ARISE ଏବଂ ବିପରୀତ SLEEP ଅଟେ।",
-            "GET UP ଏକ ବାକ୍ୟ-କ୍ରିୟା ଯାହାର ଅର୍ଥ ଶଯ୍ୟା କିମ୍ବା ଚେୟାରରୁ ଠିଆ ହେବା, ରୂପ get up, got up, got up, V4: getting up, V5: gets up, Noun: getting up-ଉଠିବା, ସମାନାର୍ଥକ RISE ଏବଂ ବିପରୀତ LIE DOWN ଅଟେ।",
-            "OPEN ଏକ କ୍ରିୟା ଯାହାର ଅର୍ଥ ବନ୍ଦ ଥିବା କିଛି ଖୋଲିବା, ରୂପ open, opened, opened, V4: opening, V5: opens, Noun: opening-ଖୋଲିବା/ଖୋଲା ସ୍ଥାନ, ସମାନାର୍ଥକ UNLOCK ଏବଂ ବିପରୀତ CLOSE ଅଟେ।",
-            "ଏହି କ୍ରିୟାପଦଗୁଡ଼ିକ ଦୈନନ୍ଦିନ ଜୀବନରେ ଅପରିହାର୍ଯ୍ୟ। ଏଗୁଡ଼ିକର ସଠିକ ବ୍ୟବହାର ଇଂରାଜୀ ଭାଷା ଶିକ୍ଷଣରେ ସାହାଯ୍ୟ କରେ। ପ୍ରତ୍ୟେକ କ୍ରିୟାର ବିଭିନ୍ନ ରୂପ ଏବଂ ଅର୍ଥ ମନେ ରଖିବା ଅତ୍ୟନ୍ତ ଆବଶ୍ୟକ।"
+            "ଆମ ଶରୀର ଏକ ଶୁଦ୍ଧ କମ୍ପନ। ପ୍ରତ୍ୟେକ କୋଷ ଓ ପରମାଣୁରେ କମ୍ପନ ଅଛି।",
+            "ବିଚାର ଶରୀରରେ କମ୍ପନ ସୃଷ୍ଟି କରେ। ବିଚାର ବଦଳିଲେ ଶରୀର ବଦଳେ।",
+            "ବିଶ୍ୱାସ ବିଚାର ସୃଷ୍ଟି କରେ। ବିଶ୍ୱାସ ହେଉଛି ମୂଳ ବୃକ୍ଷ।",
+            "ବିଶ୍ୱାସ ହେଉଛି ପୂର୍ବ-ସଞ୍ଚିତ ଅନୁଭବ। ପୁରୁଣା ଅନୁଭବ ମନ ଭିତରେ ଜମି ବିଶ୍ୱାସ ହୁଏ।",
+            "ନୂଆ ଅନୁଭବ ପୁରୁଣା ବିଶ୍ୱାସ ଭାଙ୍ଗି ନୂଆ ବିଶ୍ୱାସ ସୃଷ୍ଟି କରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
         ],
-        conclusion: "ଏହି କ୍ରିୟାପଦଗୁଡ଼ିକ ଦୈନନ୍ଦିନ ଜୀବନରେ ଅପରିହାର୍ଯ୍ୟ। ଏଗୁଡ଼ିକର ସଠିକ ବ୍ୟବହାର ଇଂରାଜୀ ଭାଷା ଶିକ୍ଷଣରେ ସାହାଯ୍ୟ କରେ। ପ୍ରତ୍ୟେକ କ୍ରିୟାର ବିଭିନ୍ନ ରୂପ ଏବଂ ଅର୍ଥ ମନେ ରଖିବା ଅତ୍ୟନ୍ତ ଆବଶ୍ୟକ।"
+        conclusion: "ଶରୀର, ବିଚାର, ବିଶ୍ୱାସ ଓ ଅନୁଭବ ଏକ ଶୃଙ୍ଖଳରେ ବାନ୍ଧା। ନୂଆ ଅନୁଭବ ଦ୍ୱାରା ଆମ ବିଶ୍ୱାସ ଓ ଜୀବନ ବଦଳାଇ ଦିଆଯାଇ ପାରେ। ଆଜିର ଅନୁଭୂତି ଆଗାମୀ ଜୀବନ ଗଢ଼େ।"
     }
 }
 };
@@ -3528,389 +3745,21 @@ function appendPointToExplanation(pointText, onComplete) {
         }, 200);
         
         typingTimeout = null;
-      // Scroll into view
+        
+        // Scroll into view
         if (typingDiv) {
             typingDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         
-        // ✨ NEW: Show interactive game if available
-        const currentTopic = topicsData[currentTopicIndex];
-        const currentPoint = sequentialAudioState.currentPointIndex;
-        
-        if (currentTopic && currentTopic.audioPoints[currentPoint]) {
-            const interactive = currentTopic.audioPoints[currentPoint].interactive;
-            if (interactive) {
-                setTimeout(() => {
-                    showInteractiveGame(interactive, explanationDiv);
-                }, 500);
-            }
-        }
-        
-        // Call completion callback
+        // ✅ CALL COMPLETION CALLBACK
         if (onComplete) onComplete();
     }
-// ==========================================
-// INTERACTIVE GAMES SYSTEM
-// ==========================================
-
-function showInteractiveGame(interactive, container) {
-    if (!interactive || !container) return;
     
-    const gameDiv = document.createElement('div');
-    gameDiv.className = 'interactive-game-box';
-    gameDiv.style.cssText = `
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 20px;
-        border-radius: 15px;
-        margin: 15px 0;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    `;
-    
-    // Game instruction
-    if (interactive.instruction) {
-        const instruction = document.createElement('div');
-        instruction.style.cssText = 'color: white; font-size: 16px; margin-bottom: 15px; font-weight: bold;';
-        instruction.textContent = interactive.instruction;
-        gameDiv.appendChild(instruction);
-    }
-    
-    // Route to correct game type
-    switch(interactive.type) {
-        case 'count-game':
-            createCountGame(gameDiv, interactive);
-            break;
-        case 'tap-count':
-            createTapCountGame(gameDiv, interactive);
-            break;
-        case 'quiz':
-            createQuizGame(gameDiv, interactive);
-            break;
-        case 'drag-match':
-            createDragMatchGame(gameDiv, interactive);
-            break;
-        default:
-            gameDiv.innerHTML += '<p style="color: white;">Game type not implemented yet</p>';
-    }
-    
-    container.appendChild(gameDiv);
+    // ✅ START IMMEDIATELY
+    moveHandToCursor();
+    setTimeout(typeNextChar, 50);
 }
-
-// COUNT GAME: Count objects and click answer
-function createCountGame(container, config) {
-    const gameArea = document.createElement('div');
-    gameArea.style.cssText = 'margin: 20px 0;';
-    
-    // Show objects to count
-    const objectsDiv = document.createElement('div');
-    objectsDiv.style.cssText = 'font-size: 60px; margin: 20px 0;';
-    
-    for (let i = 0; i < config.count; i++) {
-        const obj = document.createElement('span');
-        obj.textContent = config.image;
-        obj.style.cssText = 'display: inline-block; margin: 10px; animation: bounce 1s ease;';
-        objectsDiv.appendChild(obj);
-    }
-    
-    gameArea.appendChild(objectsDiv);
-    
-    // Answer buttons
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.style.cssText = 'display: flex; gap: 10px; justify-content: center;';
-    
-    for (let i = 1; i <= 5; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        btn.style.cssText = `
-            padding: 15px 25px;
-            font-size: 24px;
-            background: white;
-            border: 3px solid #667eea;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        `;
-        
-        btn.onclick = () => {
-            if (i === config.count) {
-                btn.style.background = '#4CAF50';
-                btn.style.color = 'white';
-                showReward(container, config.reward || '⭐');
-                setTimeout(() => gameArea.remove(), 2000);
-            } else {
-                btn.style.background = '#f44336';
-                btn.style.color = 'white';
-                setTimeout(() => {
-                    btn.style.background = 'white';
-                    btn.style.color = 'black';
-                }, 500);
-            }
-        };
-        
-        buttonsDiv.appendChild(btn);
-    }
-    
-    gameArea.appendChild(buttonsDiv);
-    container.appendChild(gameArea);
-}
-
-// TAP COUNT GAME: Tap emoji multiple times
-function createTapCountGame(container, config) {
-    const gameArea = document.createElement('div');
-    gameArea.style.cssText = 'margin: 20px 0;';
-    
-    let tapCount = 0;
-    
-    // Counter display
-    const counter = document.createElement('div');
-    counter.style.cssText = 'color: white; font-size: 32px; margin: 15px 0; font-weight: bold;';
-    counter.textContent = `${tapCount} / ${config.targetCount}`;
-    gameArea.appendChild(counter);
-    
-    // Tap button
-    const tapBtn = document.createElement('button');
-    tapBtn.textContent = config.emoji;
-    tapBtn.style.cssText = `
-        font-size: 80px;
-        background: white;
-        border: none;
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        transition: transform 0.1s;
-    `;
-    
-    tapBtn.onclick = () => {
-        tapCount++;
-        counter.textContent = `${tapCount} / ${config.targetCount}`;
-        
-        // Animate
-        tapBtn.style.transform = 'scale(0.9)';
-        setTimeout(() => tapBtn.style.transform = 'scale(1)', 100);
-        
-        // Check completion
-        if (tapCount === config.targetCount) {
-            tapBtn.style.background = '#4CAF50';
-            showReward(container, config.reward || '⭐');
-            tapBtn.disabled = true;
-            setTimeout(() => gameArea.remove(), 2000);
-        }
-    };
-    
-    gameArea.appendChild(tapBtn);
-    container.appendChild(gameArea);
-}
-
-// QUIZ GAME: Multiple choice
-function createQuizGame(container, config) {
-    const gameArea = document.createElement('div');
-    gameArea.style.cssText = 'margin: 20px 0;';
-    
-    // Question
-    const question = document.createElement('div');
-    question.style.cssText = 'color: white; font-size: 32px; margin: 20px 0; font-weight: bold;';
-    question.textContent = config.question;
-    gameArea.appendChild(question);
-    
-    // Options
-    const optionsDiv = document.createElement('div');
-    optionsDiv.style.cssText = 'display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;';
-    
-    config.options.forEach(option => {
-        const btn = document.createElement('button');
-        btn.textContent = option;
-        btn.style.cssText = `
-            padding: 20px 30px;
-            font-size: 28px;
-            background: white;
-            border: 3px solid #667eea;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            min-width: 80px;
-        `;
-        
-        btn.onclick = () => {
-            if (option === config.correct) {
-                btn.style.background = '#4CAF50';
-                btn.style.color = 'white';
-                
-                // Show success message
-                const success = document.createElement('div');
-                success.style.cssText = 'color: #ffeb3b; font-size: 24px; margin-top: 15px; font-weight: bold;';
-                success.textContent = config.successMessage || '✅ ସଠିକ୍!';
-                gameArea.appendChild(success);
-                
-                showReward(container, config.reward || '⭐');
-                
-                // Disable all buttons
-                optionsDiv.querySelectorAll('button').forEach(b => b.disabled = true);
-                
-                setTimeout(() => gameArea.remove(), 3000);
-            } else {
-                btn.style.background = '#f44336';
-                btn.style.color = 'white';
-                setTimeout(() => {
-                    btn.style.background = 'white';
-                    btn.style.color = 'black';
-                }, 500);
-            }
-        };
-        
-        optionsDiv.appendChild(btn);
-    });
-    
-    gameArea.appendChild(optionsDiv);
-    container.appendChild(gameArea);
-}
-
-// DRAG MATCH GAME: Drag item to correct target
-function createDragMatchGame(container, config) {
-    const gameArea = document.createElement('div');
-    gameArea.style.cssText = 'margin: 20px 0;';
-    
-    // Items to drag
-    const itemsDiv = document.createElement('div');
-    itemsDiv.style.cssText = 'display: flex; gap: 15px; justify-content: center; margin: 20px 0;';
-    
-    config.items.forEach(item => {
-        const itemEl = document.createElement('div');
-        itemEl.textContent = item;
-        itemEl.draggable = true;
-        itemEl.style.cssText = `
-            font-size: 50px;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            cursor: move;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        `;
-        
-        itemEl.ondragstart = (e) => {
-            e.dataTransfer.setData('text', item);
-        };
-        
-        itemsDiv.appendChild(itemEl);
-    });
-    
-    gameArea.appendChild(itemsDiv);
-    
-    // Drop zone
-    const dropZone = document.createElement('div');
-    dropZone.style.cssText = `
-        border: 3px dashed white;
-        border-radius: 15px;
-        padding: 30px;
-        margin: 20px auto;
-        width: 200px;
-        height: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 48px;
-        font-weight: bold;
-    `;
-    dropZone.textContent = config.target;
-    
-    dropZone.ondragover = (e) => {
-        e.preventDefault();
-        dropZone.style.background = 'rgba(255,255,255,0.2)';
-    };
-    
-    dropZone.ondragleave = () => {
-        dropZone.style.background = 'transparent';
-    };
-    
-    dropZone.ondrop = (e) => {
-        e.preventDefault();
-        const droppedItem = e.dataTransfer.getData('text');
-        
-        if (droppedItem === config.correctItem) {
-            dropZone.style.background = '#4CAF50';
-            dropZone.textContent = droppedItem;
-            showReward(container, '⭐');
-            setTimeout(() => gameArea.remove(), 2000);
-        } else {
-            dropZone.style.background = '#f44336';
-            setTimeout(() => {
-                dropZone.style.background = 'transparent';
-                dropZone.textContent = config.target;
-            }, 500);
-        }
-    };
-    
-    gameArea.appendChild(dropZone);
-    container.appendChild(gameArea);
-}
-
-// SHOW REWARD: Stars, confetti, etc.
-function showReward(container, reward) {
-    const rewardDiv = document.createElement('div');
-    rewardDiv.style.cssText = `
-        font-size: 48px;
-        margin: 15px 0;
-        animation: bounceIn 0.5s ease;
-    `;
-    rewardDiv.textContent = reward;
-    container.appendChild(rewardDiv);
-    
-    // Optional: Create confetti effect
-    createMiniConfetti(container);
-}
-
-// MINI CONFETTI EFFECT
-function createMiniConfetti(container) {
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
-    
-    for (let i = 0; i < 15; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.cssText = `
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: ${colors[Math.floor(Math.random() * colors.length)]};
-            top: 50%;
-            left: 50%;
-            animation: confettiFall 1s ease-out forwards;
-            transform: translate(-50%, -50%) rotate(${Math.random() * 360}deg);
-        `;
-        container.style.position = 'relative';
-        container.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 1000);
-    }
-}
-
-// ADD CSS ANIMATIONS
-const gameStyles = document.createElement('style');
-gameStyles.textContent = `
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes bounceIn {
-        0% { transform: scale(0); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-    }
-    
-    @keyframes confettiFall {
-        to {
-            transform: translate(
-                ${Math.random() * 200 - 100}px,
-                ${Math.random() * 200}px
-            ) rotate(${Math.random() * 720}deg);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(gameStyles);
-
-    
+   
 function updateAudioButtonState(state, currentPoint = 0, totalPoints = 0) {
     const counterWrapper = document.querySelector('.topic-counter-wrapper');
     if (!counterWrapper) return;
@@ -3980,7 +3829,7 @@ function createAudioButton(audioUrl, containerId = null) {
             btn.dataset.initialized = 'true';
         }
     }, 100);
-    
+     
     return buttonHtml;
 }
 
@@ -4922,7 +4771,7 @@ function createSummaryTest() {
     
     let html = `<div class="summary-content active">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - WAKE UP, GET UP ଏବଂ OPEN କ୍ରିୟାପଦଗୁଡ଼ିକର ଅର୍ଥ, ରୂପ ଏବଂ ବ୍ୟବହାର ସଂକ୍ଷେପରେ ବର୍ଣ୍ଣନା କର ।</h2>
+            <h2 style="color: #667eea; margin: 0;">📚 ଦୀର୍ଘ ଉତ୍ତରମୂଳକ ପ୍ରଶ୍ନ - ମଣିଷ ଅସ୍ତିତ୍ୱର ରହସ୍ୟ ଆଲୋଚନା କର ।</h2>
             ${summaryAudioButton}
         </div>
         
@@ -5012,14 +4861,14 @@ const assistantConfig = {
         container: 'assistantContainer',
         iframe: 'assistantIframe',
         loading: 'assistantLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-CYFH',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=RR36-TK81',
         loadedFlag: 'assistantLoaded'
     },
     passageAssistant: {
         container: 'passageContainer',
         iframe: 'passageIframe',
         loading: 'passageLoading',
-        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-OCQS',
+        url: 'https://student.schoolai.com/dot/spaces/join?code=AWSM-PFYK',
         loadedFlag: 'passageLoaded'
     },
     translator: {
@@ -5033,7 +4882,7 @@ const assistantConfig = {
         container: 'eGuruContainer',
         iframe: 'eGuruIframe',
         loading: 'eGuruLoading',
-        url: 'https://students-doubt-clearer.pages.dev/management/',
+        url: 'https://student-care.pages.dev/SC/',
         loadedFlag: 'eGuruLoaded'
     }
 };
@@ -5127,48 +4976,6 @@ window.addEventListener('beforeunload', () => {
     });
 });
 
-// Writ Practice Functions
-function openWritPractice() {
-    // REPLACE THIS URL WITH YOUR GITHUB PAGES URL
-    const writExamURL = "https://basic-english-practical.pages.dev/unit-2/class-1/";
-    
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Show container
-    container.classList.add('active');
-    
-    // Set iframe source
-    iframe.src = writExamURL;
-    
-    // Show iframe and hide loading when loaded
-    iframe.onload = function() {
-        iframe.style.display = 'block';
-        loading.style.display = 'none';
-    };
-    
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWritPractice() {
-    const container = document.getElementById('writPracticeContainer');
-    const iframe = document.getElementById('writPracticeIframe');
-    const loading = document.getElementById('writPracticeLoading');
-    
-    // Hide container
-    container.classList.remove('active');
-    
-    // Reset iframe
-    iframe.src = '';
-    iframe.style.display = 'none';
-    loading.style.display = 'block';
-    
-    // Restore background scroll
-    document.body.style.overflow = 'auto';
-}
-
 
 
 // Global variable to store the current typing timeout
@@ -5251,312 +5058,10 @@ function showAnswerInBox(boxId, answerText) {
     const answerBox = document.getElementById(boxId);
     typeWriter(answerBox, answerText, 40);
 }
+    
 
-const topicsData = [
-    {
-        heading: "🔢 ସଂଖ୍ୟା",
-        level: 1,
-        xp: 50,
-        
-        audioPoints: [
-            {
-                text: "👉 ସଂଖ୍ୟା ହେଉଛି ଗଣନା କରିବାର ଉପାୟ ।<br>ଆମେ ବସ୍ତୁ ଗଣନା କରିବା ପାଇଁ ସଂଖ୍ୟା ବ୍ୟବହାର କରୁ ।<br>ଉଦାହରଣ: 1, 2, 3, 4, 5<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/intro1.m4a",
-                interactive: {
-                    type: "tap-count",
-                    emoji: "⭐",
-                    targetCount: 5,
-                    instruction: "5 ଟି ତାରକା ଗଣନା କରିବା ପାଇଁ ଟ୍ୟାପ୍ କର!",
-                    sound: "sparkle",
-                    reward: "⭐⭐"
-                }
-            },
-            {
-                text: "👉 ସଂଖ୍ୟା କେଉଁଠି ଦେଖୁ?<br>✓ ଘଣ୍ଟାରେ (Clock)<br>✓ କ୍ୟାଲେଣ୍ଡରରେ (Calendar)<br>✓ ଟଙ୍କା ଗଣନା କରିବାରେ (Money)<br>✓ ଆମ ଚାରିପାଖରେ ସବୁଆଡ଼େ!<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/intro2.m4a",
-                interactive: {
-                    type: "find-numbers",
-                    items: ["🕐", "📅", "💰", "📱"],
-                    instruction: "ସଂଖ୍ୟା ବ୍ୟବହାର କରୁଥିବା ସବୁ ବସ୍ତୁ ଖୋଜ!",
-                    reward: "⭐⭐⭐"
-                }
-            },
-            {
-                text: "👉 ଚାଲ ସଂଖ୍ୟା 1 ରୁ 5 ଶିଖିବା:<br>1️⃣ ଏକ (One)<br>2️⃣ ଦୁଇ (Two)<br>3️⃣ ତିନି (Three)<br>4️⃣ ଚାରି (Four)<br>5️⃣ ପାଞ୍ଚ (Five)<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/intro3.m4a",
-                interactive: {
-                    type: "quiz",
-                    question: "କେଉଁଟି '3' (ତିନି)?",
-                    options: ["🍎", "🍎🍎", "🍎🍎🍎", "🍎🍎🍎🍎"],
-                    correct: "🍎🍎🍎",
-                    successMessage: "ଅତ୍ୟନ୍ତ ସୁନ୍ଦର! 🎊",
-                    reward: "⭐⭐⭐"
-                }
-            }
-        ],
-        
-        questions: [
-            {
-                question: "ସଂଖ୍ୟା କ'ଣ?",
-                answer: "ସଂଖ୍ୟା ହେଉଛି ବସ୍ତୁ ଗଣନା କରିବାର ଉପାୟ । ଆମେ ଏହାକୁ ପ୍ରତିଦିନ ବ୍ୟବହାର କରୁ ।",
-                interactive: {
-                    type: "drag-match",
-                    items: ["🍎🍎🍎", "🌟🌟", "⚽"],
-                    targets: ["3", "2", "1"],
-                    instruction: "ସଂଖ୍ୟା ସହିତ ମିଳାଅ!"
-                }
-            },
-            {
-                question: "ସଂଖ୍ୟା କେଉଁଠି ଦେଖୁ?",
-                answer: "ଆମେ ସଂଖ୍ୟା ଘଣ୍ଟାରେ, କ୍ୟାଲେଣ୍ଡରରେ, ଟଙ୍କା ଗଣନାରେ ଦେଖୁ ।",
-                interactive: {
-                    type: "select-all",
-                    question: "କେଉଁଠି ସଂଖ୍ୟା ଅଛି?",
-                    options: ["🕐", "🌈", "📅", "💰", "🎨"],
-                    correct: ["🕐", "📅", "💰"]
-                }
-            },
-            {
-                question: "ପ୍ରଥମ 5 ସଂଖ୍ୟା କ'ଣ?",
-                answer: "1, 2, 3, 4, 5 - ଏକ, ଦୁଇ, ତିନି, ଚାରି, ପାଞ୍ଚ ।",
-                interactive: {
-                    type: "sequence",
-                    items: ["3", "1", "5", "2", "4"],
-                    correctOrder: ["1", "2", "3", "4", "5"],
-                    instruction: "ସଂଖ୍ୟାଗୁଡ଼ିକୁ କ୍ରମରେ ସଜାଅ!"
-                }
-            },
-            {
-                question: "ସଂଖ୍ୟା କାହିଁକି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ?",
-                answer: "ବିନା ସଂଖ୍ୟାରେ ଆମେ ଗଣନା, ସମୟ ଜାଣିବା, କିଣାବିକା କରି ପାରିବୁ ନାହିଁ ।",
-                interactive: {
-                    type: "scenarios",
-                    scenarios: [
-                        { icon: "🛒", text: "କିଣିବା", needsNumbers: true },
-                        { icon: "🕐", text: "ସମୟ", needsNumbers: true },
-                        { icon: "🎨", text: "ରଙ୍ଗ", needsNumbers: false }
-                    ],
-                    instruction: "କେଉଁଠି ସଂଖ୍ୟା ଦରକାର?"
-                }
-            }
-        ],
-        
-        completion: {
-            stars: 3,
-            badge: "🏆",
-            message: "ବାହ୍! ତୁମେ Number Champion!",
-            confetti: true,
-            nextLevel: 2,
-            totalXP: 150
-        }
-    },
-    
-    {
-        heading: "➕ Addition - ଯୋଗ",
-        level: 2,
-        xp: 75,
-        
-        audioPoints: [
-            {
-                text: "👉 ଯୋଗ ମାନେ ମିଶାଇବା!<br>ଯେତେବେଳେ ଆମେ ଦୁଇଟି ସଂଖ୍ୟା ମିଶାଉ, ଆମେ ଯୋଗ (+) ବ୍ୟବହାର କରୁ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/add1.m4a",
-                interactive: {
-                    type: "visual-addition",
-                    emoji: "🍎",
-                    equation: "1 + 1 = ?",
-                    animation: "merge",
-                    instruction: "ଦେଖ କିପରି ମିଶେ!",
-                    reward: "⭐⭐"
-                }
-            },
-            {
-                text: "👉 ଉଦାହରଣ ଦେଖ:<br>🍎 + 🍎 = 🍎🍎<br>1 + 1 = 2<br><br>ଦୁଇଟି ଜିନିଷ ମିଶିଲେ ଦୁଇ ହୁଏ!<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/add2.m4a",
-                interactive: {
-                    type: "count-game",
-                    image: "🍎",
-                    count: 2,
-                    animation: "bounce",
-                    instruction: "1 + 1 = କେତେ?",
-                    reward: "⭐⭐"
-                }
-            },
-            {
-                text: "👉 ଆହୁରି ଉଦାହରଣ:<br>2 + 1 = 3<br>🍎🍎 + 🍎 = 🍎🍎🍎<br><br>3 + 2 = 5<br>🌟🌟🌟 + 🌟🌟 = 🌟🌟🌟🌟🌟<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/add3.m4a",
-                interactive: {
-                    type: "quiz",
-                    question: "2 + 3 = ?",
-                    options: ["4", "5", "6"],
-                    correct: "5",
-                    visual: "🌟🌟 + 🌟🌟🌟",
-                    successMessage: "ଏକଦମ୍ ସଠିକ୍! 🎉",
-                    reward: "⭐⭐⭐"
-                }
-            }
-        ],
-        
-        questions: [
-            {
-                question: "ଯୋଗ କ'ଣ?",
-                answer: "ଯୋଗ ମାନେ ଦୁଇ କିମ୍ବା ଅଧିକ ସଂଖ୍ୟାକୁ ମିଶାଇବା । ଆମେ + ଚିହ୍ନ ବ୍ୟବହାର କରୁ ।",
-                interactive: {
-                    type: "drag-combine",
-                    leftItems: ["🍎🍎"],
-                    rightItems: ["🍎"],
-                    instruction: "ମିଶାଅ ଏବଂ ଗଣନା କର!",
-                    expectedAnswer: 3
-                }
-            },
-            {
-                question: "2 + 3 = ?",
-                answer: "2 + 3 = 5 । ଦୁଇ ଯୋଗ ତିନି ହେଲା ପାଞ୍ଚ ।",
-                interactive: {
-                    type: "number-builder",
-                    equation: "2 + 3",
-                    options: ["1", "2", "3", "4", "5", "6"],
-                    correct: "5",
-                    visual: true
-                }
-            },
-            {
-                question: "ଯୋଗ ଚିହ୍ନ କେଉଁଟି?",
-                answer: "+ (ପ୍ଲସ୍) ହେଉଛି ଯୋଗ ଚିହ୍ନ ।",
-                interactive: {
-                    type: "symbol-match",
-                    symbols: ["+", "-", "×", "÷"],
-                    question: "ଯୋଗ ପାଇଁ କେଉଁ ଚିହ୍ନ?",
-                    correct: "+"
-                }
-            },
-            {
-                question: "1 + 1 + 1 = ?",
-                answer: "1 + 1 + 1 = 3 । ତିନୋଟି ଏକ ମିଶିଲେ ତିନି ହୁଏ ।",
-                interactive: {
-                    type: "tap-count",
-                    emoji: "⭐",
-                    targetCount: 3,
-                    instruction: "ଗୋଟିଏ ଗୋଟିଏ କରି ଯୋଗ କର!",
-                    showEquation: "1 + 1 + 1",
-                    reward: "⭐⭐⭐"
-                }
-            }
-        ],
-        
-        completion: {
-            stars: 3,
-            badge: "🎯",
-            message: "ଶାନ୍ଦାର! ତୁମେ Addition Expert!",
-            confetti: true,
-            nextLevel: 3,
-            totalXP: 225
-        }
-    },
-    
-    {
-        heading: "➖ Subtraction - ବିୟୋଗ",
-        level: 3,
-        xp: 75,
-        
-        audioPoints: [
-            {
-                text: "👉 ବିୟୋଗ ମାନେ ବାଦ୍ ଦେବା!<br>ଯେତେବେଳେ କିଛି ଚାଲିଯାଏ, ଆମେ ବିୟୋଗ (-) ବ୍ୟବହାର କରୁ ।<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/sub1.m4a",
-                interactive: {
-                    type: "visual-subtraction",
-                    emoji: "🍎",
-                    equation: "3 - 1 = ?",
-                    animation: "fadeout",
-                    instruction: "ଦେଖ କିପରି ଚାଲିଯାଏ!",
-                    reward: "⭐⭐"
-                }
-            },
-            {
-                text: "👉 ଉଦାହରଣ ଦେଖ:<br>🍎🍎 - 🍎 = 🍎<br>2 - 1 = 1<br><br>ଦୁଇଟିରୁ ଗୋଟିଏ ବାଦ୍ ଦେଲେ ଗୋଟିଏ ବାକି ରହେ!<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/sub2.m4a",
-                interactive: {
-                    type: "remove-game",
-                    emoji: "🍎",
-                    startCount: 2,
-                    removeCount: 1,
-                    instruction: "ଗୋଟିଏ ଆପଲ୍ କାଢ଼!",
-                    animation: "slide-out",
-                    reward: "⭐⭐"
-                }
-            },
-            {
-                text: "👉 ଆହୁରି ଉଦାହରଣ:<br>5 - 2 = 3<br>🌟🌟🌟🌟🌟 - 🌟🌟 = 🌟🌟🌟<br><br>3 - 3 = 0<br>ସବୁ ବାଦ୍ ଦେଲେ କିଛି ବାକି ରହେ ନାହିଁ!<br>",
-                audio: "https://raw.githubusercontent.com/eguruOdisha/AUDIO-MATH-BASIC/main/sub3.m4a",
-                interactive: {
-                    type: "quiz",
-                    question: "5 - 2 = ?",
-                    options: ["2", "3", "4"],
-                    correct: "3",
-                    visual: "🌟🌟🌟🌟🌟 - 🌟🌟",
-                    successMessage: "ବହୁତ ଭଲ! 🎊",
-                    reward: "⭐⭐⭐"
-                }
-            }
-        ],
-        
-        questions: [
-            {
-                question: "ବିୟୋଗ କ'ଣ?",
-                answer: "ବିୟୋଗ ମାନେ ଗୋଟିଏ ସଂଖ୍ୟାରୁ ଅନ୍ୟଟି ବାଦ୍ ଦେବା । ଆମେ - ଚିହ୍ନ ବ୍ୟବହାର କରୁ ।",
-                interactive: {
-                    type: "drag-remove",
-                    startItems: ["🍎", "🍎", "🍎", "🍎"],
-                    removeCount: 1,
-                    instruction: "ଗୋଟିଏ ବାଦ୍ ଦିଅ!",
-                    expectedAnswer: 3
-                }
-            },
-            {
-                question: "5 - 2 = ?",
-                answer: "5 - 2 = 3 । ପାଞ୍ଚରୁ ଦୁଇ ବାଦ୍ ଦେଲେ ତିନି ବାକି ରହେ ।",
-                interactive: {
-                    type: "number-builder",
-                    equation: "5 - 2",
-                    options: ["1", "2", "3", "4", "5"],
-                    correct: "3",
-                    visual: true,
-                    mode: "subtraction"
-                }
-            },
-            {
-                question: "ବିୟୋଗ ଚିହ୍ନ କେଉଁଟି?",
-                answer: "- (ମାଇନସ୍) ହେଉଛି ବିୟୋଗ ଚିହ୍ନ ।",
-                interactive: {
-                    type: "symbol-match",
-                    symbols: ["+", "-", "×", "÷"],
-                    question: "ବିୟୋଗ ପାଇଁ କେଉଁ ଚିହ୍ନ?",
-                    correct: "-"
-                }
-            },
-            {
-                question: "4 - 4 = ?",
-                answer: "4 - 4 = 0 । ଚାରିରୁ ଚାରି ବାଦ୍ ଦେଲେ କିଛି ବାକି ରହେ ନାହିଁ ।",
-                interactive: {
-                    type: "remove-all",
-                    emoji: "⚽",
-                    startCount: 4,
-                    instruction: "ସବୁ ବାଦ୍ ଦିଅ!",
-                    animation: "poof",
-                    reward: "⭐⭐⭐"
-                }
-            }
-        ],
-        
-        completion: {
-            stars: 3,
-            badge: "🌟",
-            message: "ଅସାଧାରଣ! ତୁମେ Subtraction Master!",
-            confetti: true,
-            nextLevel: 4,
-            totalXP: 300
-        }
-    }
-];
+
+
 
 let currentTopicIndex = 0;
 
@@ -5966,9 +5471,9 @@ function startLearning() {
     document.getElementById('topicCounterWrapper').style.display = 'flex';
     document.getElementById('topicContent').style.display = 'block';
     
-    // Load first topic
+    // Load first topic — pass TRUE to auto-start writing immediately
     currentTopicIndex = 0;
-    loadTopic(0);
+    loadTopic(0, true);  // ← change false/missing to true
 }
     
 function navigateTopic(direction) {
@@ -6059,7 +5564,7 @@ function showWordCard() {
     document.getElementById('wordUse').innerHTML = word.odiaUse;
     document.getElementById('wordEmojiContainer').textContent = word.emoji;
     document.getElementById('wordTitle').textContent = `ନିମ୍ନ ବାକ୍ସରେ ${word.word} ଲେଖନ୍ତୁ:`;
-    document.getElementById('wordGuide').textContent = word.word;
+    
     document.getElementById('wordCounter').textContent = `Word ${wordData.currentWord + 1} of ${wordData.words.length}`;
     
     // Clear canvas
@@ -6301,7 +5806,7 @@ let certificateData = {
     examDate: '',
     examDay: '',
     examTime: '',
-    className: 'English Word Class-1',
+    className: 'SPECIAL TRAINING (MIND-POWER) CLASS-1 : ମଣିଷ ଅସ୍ତିତ୍ୱର ରହସ୍ୟ',
     scores: {
         mcq: { scored: 0, total: 0, percentage: 0 },
         tf: { scored: 0, total: 0, percentage: 0 },
@@ -6314,17 +5819,7 @@ let certificateData = {
     overallPercentage: 0
 };
 
-// Open Certificate Modal
-document.getElementById('certificateBtn').addEventListener('click', function() {
-    // Calculate scores
-    calculateCertificateScores();
-    
-    // Load saved student details if available
-    loadStudentDetails();
-    
-    // Show modal
-    document.getElementById('certificateModal').classList.add('active');
-});
+
 
 // Close Certificate Modal
 function closeCertificateModal() {
@@ -6449,8 +5944,8 @@ function generateCertificate() {
     // Generate certificate HTML - ODIA ONLY, A4 OPTIMIZED
     const certificateHTML = `
         <div class="cert-logo">
-            <img src="https://raw.githubusercontent.com/eguruOdisha/ASSETS/main/logo.jpg" 
-                 alt="Odisha E-Guru" 
+            <img src="https://raw.githubusercontent.com/happysangitanms/assets/main/LOGO-1.jpeg" 
+                 alt="E-Vidya Academy" 
                  onerror="this.style.display='none'">
         </div>
         
@@ -6543,9 +6038,9 @@ function generateCertificate() {
     </div>
     
     <div class="cert-branding">
-        <strong>ଓଡିଶା ଇ-ଗୁରୁ</strong>
-        <small>Digital Education Platform • Mayurbhanj, Odisha</small>
-        <small>© 2025 Odisha e-Guru • For Educational Use Only</small>
+        <strong>ଇ-ବିଦ୍ୟା ଏକାଡେମି</strong>
+        <small>Digital Education Platform • Bhadrak, Odisha</small>
+        <small>© 2026 E-Vidya Academy • For Educational Use Only</small>
     </div>
 </div>
         
@@ -6856,6 +6351,82 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
+    
+function toggleMedia(type) {
+    const logoDisplay   = document.getElementById('logoDisplay');
+    const audioDisplay  = document.getElementById('audioDisplay');
+    const videoDisplay  = document.getElementById('videoDisplay');
+    const debateDisplay = document.getElementById('debateDisplay');
+    const audioIframe   = document.getElementById('audioIframe');
+    const videoIframe   = document.getElementById('videoIframe');
+    const debateIframe  = document.getElementById('debateIframe');
+    const audioBtn      = document.getElementById('audioToggleBtn');
+    const videoBtn      = document.getElementById('videoToggleBtn');
+    const debateBtn     = document.getElementById('debateToggleBtn');
+
+    const resetAllBtnStyles = () => {
+       [audioBtn, videoBtn, debateBtn].forEach(b => {
+            if (b) b.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+        });
+    };
+
+    const hideAll = () => {
+        videoIframe.src   = '';
+         const ap = document.getElementById('audioPlayer');
+    if (ap) { ap.pause(); ap.currentTime = 0; }
+    const dp = document.getElementById('debatePlayer');
+    if (dp) { dp.pause(); dp.currentTime = 0; }
+        audioDisplay.style.display   = 'none';
+        videoDisplay.style.display   = 'none';
+      
+        debateDisplay.style.display  = 'none';
+        logoDisplay.style.display    = 'block';
+       
+        resetAllBtnStyles();
+    };
+
+  if (type === 'audio') {
+    if (audioDisplay.style.display === 'flex') {
+        hideAll();
+        return;
+    }
+    hideAll();
+    logoDisplay.style.display  = 'none';
+    audioDisplay.style.display = 'flex';
+    const ap = document.getElementById('audioPlayer');
+    if (ap) ap.play();
+    audioBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
+
+    if (type === 'video') {
+        if (videoDisplay.style.display === 'block') {
+            hideAll();
+            return;
+        }
+        hideAll();
+        logoDisplay.style.display  = 'none';
+        videoDisplay.style.display = 'block';
+        videoIframe.src = videoIframe.dataset.src;
+        videoBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+    }
+
+   
+
+  if (type === 'debate') {
+    if (debateDisplay.style.display === 'flex') {
+        hideAll();
+        return;
+    }
+    hideAll();
+    logoDisplay.style.display   = 'none';
+    debateDisplay.style.display = 'flex';
+    const dp = document.getElementById('debatePlayer');
+    if (dp) dp.play();
+    debateBtn.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)';
+}
+}
+
+    
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', function() {
     const savedRoll = localStorage.getItem('userRollNumber');
@@ -6872,7 +6443,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
     
 // Initialize welcome screen with handwriting animation
     setTimeout(() => {
-        const welcomeText = "🌹ଓଡିଶା ଇ-ଗୁରୁ ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।";
+        const welcomeText = "🌹ଇ-ବିଦ୍ୟା ଏକାଡେମି ଦ୍ଵାରା ପ୍ରସ୍ତୁତ🌹<br>ଏହି ସ୍ଵତନ୍ତ୍ର କ୍ଲାସ୍ ରେ ଆପଣଙ୍କୁ ସ୍ଵାଗତ ।";
         const welcomeDiv = document.getElementById('welcomeExplanation');
         if (welcomeDiv) {
             triggerHandwritingForWelcome(welcomeText);
